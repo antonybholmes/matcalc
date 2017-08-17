@@ -11,7 +11,7 @@
 	<setting name="matcalc.import.file.skip.matches" value="#,@,$" />
 	
 	<setting name="matcalc.help.type" value="web" />
-	<setting name="matcalc.help.url" value="https://bitbucket.org/lab_rdf/matcalc/wiki" />
+	<setting name="matcalc.help.url" value="https://github.com/lab-rdf/matcalc/wiki" />
 	
 	<setting name="matcalc.import.help.url" value="https://bitbucket.org/lab_rdf/matcalc/wiki/Import"/>
 	<setting name="matcalc.groups.help.url" value="https://bitbucket.org/lab_rdf/matcalc/wiki/Groups"/>
