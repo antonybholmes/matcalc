@@ -15,19 +15,21 @@
  */
 package edu.columbia.rdf.matcalc.figure.graph2d;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.ModernPlotCanvas;
+import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
-import org.jebtk.graphplot.figure.GridLocation;
-import org.jebtk.graphplot.figure.MovableLayer;
+import org.jebtk.graphplot.figure.FigurePanel;
 import org.jebtk.graphplot.figure.SubFigure;
-import org.jebtk.graphplot.figure.ZModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.MatrixOperations;
 import org.jebtk.modern.UI;
@@ -69,6 +71,8 @@ public class Graph2dWindow extends FigureWindow {
 	/** The m matrices. */
 	private List<AnnotationMatrix> mMatrices = 
 			new ArrayList<AnnotationMatrix>();
+
+	private FigurePanel mFigurePanel;
 
 	/**
 	 * The class ColorMapEvents.
@@ -174,15 +178,15 @@ public class Graph2dWindow extends FigureWindow {
 
 			@Override
 			public void changed(ChangeEvent e) {
-				//mFigure.getCurrentSubFigure().getCurrentAxes().setStyle(mStyleModel.get());
-
-				for (int z : mFigure.getSubFigureZModel()) {
-					mFigure
-					.getSubFigureZModel()
-					.getAtZ(z)
-					.getCurrentAxes()
-					.setStyle(mStyleModel.get());
-				}
+				mFigure.setStyle(mStyleModel.get());
+				
+//				for (int z : mFigure.getSubFigureZModel()) {
+//					mFigure
+//					.getSubFigureZModel()
+//					.getChild(z)
+//					.getCurrentAxes()
+//					.setStyle(mStyleModel.get());
+//				}
 			}});
 		
 		getRibbon().getToolbar("Plot").add(new LegendRibbonSection(getRibbon(), mFigure.getCurrentSubFigure().getCurrentAxes().getLegend()));
@@ -207,26 +211,27 @@ public class Graph2dWindow extends FigureWindow {
 
 		//ZoomCanvas zoomCanvas = new ZoomCanvas(mFigure);
 
-		mFigure.setZoomModel(mZoomModel);
+		mFigurePanel = new FigurePanel(mFigure);
+		
+		mFigurePanel.setZoomModel(mZoomModel);
 
 		//BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-		ModernScrollPane scrollPane = new ModernScrollPane(mFigure)
+		ModernScrollPane scrollPane = new ModernScrollPane(mFigurePanel)
 				.setScrollBarLocation(ScrollBarLocation.FLOATING)
 				.setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
 
 		ModernPanel panel = new ModernPanel(scrollPane, ModernWidget.BORDER);
 
-		mContentPane.getModel().setCenterTab(panel);
+		setCard(panel);
 	}
 
 	/**
 	 * Adds the history pane to the layout if it is not already showing.
 	 */
 	private void addFormatPane() {
-		if (!mContentPane.getModel().getRightTabs().containsTab("Format")) {
-			mContentPane.getModel().getRightTabs().addTab(new SizableContentPane("Format", 
-				new CloseableHTab("Format", mFormatPane, mContentPane), 320, 320, 600));
+		if (!getTabsPane().getModel().getRightTabs().containsTab("Format")) {
+			getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 320, 320, 600);
 		}
 	}
 	
@@ -236,18 +241,9 @@ public class Graph2dWindow extends FigureWindow {
 	 * @return the graph 2 d window
 	 */
 	public Graph2dWindow removeFormatPane() {
-		mContentPane.getModel().getRightTabs().removeTab("Format");
+		getTabsPane().getModel().getRightTabs().removeTab("Format");
 		
 		return this;
-	}
-
-	/**
-	 * Gets the canvas.
-	 *
-	 * @return the canvas
-	 */
-	public ModernPlotCanvas getCanvas() {
-		return mFigure;
 	}
 
 	/**
@@ -257,13 +253,12 @@ public class Graph2dWindow extends FigureWindow {
 		// First cache the original matrices since we are going to normalize
 		// them
 		if (mMatrices.size() == 0) {
-			for (int z : mFigure.getSubFigureZModel()) {
-				mMatrices.add(mFigure
-						.getSubFigureZModel()
-						.getAtZ(z)
-						.getCurrentAxes()
-						.getCurrentPlot()
-						.getMatrix());
+			for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
+				AnnotationMatrix m = subFigure.getCurrentAxes().getCurrentPlot().getMatrix();
+				
+				if (m != null) {
+					mMatrices.add(m);
+				}
 			}
 		}
 
@@ -273,8 +268,8 @@ public class Graph2dWindow extends FigureWindow {
 
 		// Cycle through the matrices
 
-		for (int z : mFigure.getSubFigureZModel()) {
-			AnnotationMatrix m = mMatrices.get(c);
+		for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
+			AnnotationMatrix m = subFigure.getCurrentAxes().getCurrentPlot().getMatrix();
 
 			if (m == null) {
 				continue;
@@ -330,8 +325,6 @@ public class Graph2dWindow extends FigureWindow {
 
 			// new MinMaxBoundedMatrixView(zMatrix, min, max);
 
-			SubFigure subFigure = mFigure.getSubFigureZModel().getAtZ(z);
-
 			subFigure.setMatrix(m);
 			subFigure.setColorMap(mColorMapModel.get());
 
@@ -347,98 +340,22 @@ public class Graph2dWindow extends FigureWindow {
 	 * Update sizes.
 	 */
 	private void updateSizes() {
-		MovableLayer a = mSizeModel.get();
+		PlotBox a = mSizeModel.get();
 
-		for (int z : mFigure.getSubFigureZModel()) {
-			SubFigure subFigure = mFigure.getSubFigureZModel().getAtZ(z);
-
-			//subFigure.setInternalPlotSize(a.getInternalPlotSize());
-			//subFigure.setMargins(a.getMargins());
-
-			ZModel<MovableLayer> axesModel = 
-					subFigure.getGridLocations().get(GridLocation.CENTER);
-
-			for (int za : axesModel) {
-				MovableLayer layer = axesModel.getAtZ(za);
-
-				layer.setInternalPlotSize(a.getInternalPlotSize());
-
-				//layer.setMargins(a.getMargins());
-
-				//if (layer instanceof Axes) {
-				//	Axes axes = (Axes)layer;
-
-				//	layer.setInternalPlotSize(a.getInternalPlotSize());
-				//layer.set
-				//axes.setMargins(a.getMargins());
-				//}
-
+		Deque<PlotBox> stack = new ArrayDeque<PlotBox>(100);
+		
+		stack.push(mFigure);
+		
+		while (!stack.isEmpty()) {
+			PlotBox p = stack.pop();
+			
+			if (p instanceof Axes) {
+				((Axes)p).setInternalPlotSize(a.getPreferredSize());
 			}
-
-			//for (int za : subFigure.getAxesZModel()) {
-			//	Axes axes = subFigure.getAxesZModel().getAtZ(za);
-
-			//axes.updateInternalPlotSize(a.getInternalPlotSize());
-			//axes.getMargins().updateMargins(a.getMargins());
-
-			//
-			// Auto adjust properties depending on size
-			//
-
-			/*
-				AnnotationMatrix m = axes.getCurrentPlot().getMatrix();
-
-				boolean fullView = axes.getInternalPlotSize().getW() >= m.getColumnCount() * PlotFactory.DEFAULT_HEATMAP_SIZE;
-
-				Axis axis = axes.getXAxis();
-
-				axis.setLimits(0, m.getColumnCount(), 1);
-				axis.getTicks().setTicks(Linspace.evenlySpaced(0.5, m.getColumnCount() - 0.5, 1));
-				axis.getTicks().getMajorTicks().setLabels(m.getColumnNames());
-				axis.getTicks().getMajorTicks().setRotation(-Mathematics.HALF_PI);
-				axis.getTicks().getMajorTicks().getLineStyle().setVisible(true);
-				axis.getTicks().getMajorTicks().getFontStyle().setVisible(true);
-				axis.getTicks().getMinorTicks().getLineStyle().setVisible(false);
-				axis.getTitle().getFontStyle().setVisible(false);
-				axis.getLineStyle().setVisible(false);
-				axis.getGrid().setVisible(fullView);
-				axis.setVisible(fullView);
-				//PlotFactory.autoSetXLabelMargin(axes);
-
-				// If the height of the heatmap is less than the ideal height,
-				// turn off labels and the grid.
-
-				fullView = axes.getInternalPlotSize().getH() >= m.getRowCount() * PlotFactory.DEFAULT_HEATMAP_SIZE;
-
-				axis = axes.getY1Axis();
-
-				axis.setLimits(0, m.getRowCount(), 1);
-				axis.setVisible(false);
-				axis.getGrid().setVisible(false);
-				//axis.getTicks().setTicks(Linspace.evenlySpaced(0.5, m.getRowCount() - 0.5, 1));
-				//axis.getTicks().getMajorTicks().setLabels(m.getRowNames());
-				//axis.getTicks().getMajorTicks().getLineStyle().setVisible(false);
-				//axis.getTicks().getMajorTicks().getFontStyle().setVisible(false);
-				//axis.getTicks().getMinorTicks().getLineStyle().setVisible(false);
-				//axis.getTitle().getFontStyle().setVisible(false);
-				//autoSetY1LabelMargin(axes);
-
-				axis = axes.getY2Axis();
-
-				axis.setLimits(0, m.getRowCount(), 1);
-				axis.getTicks().setTicks(Linspace.evenlySpaced(0.5, m.getRowCount() - 0.5, 1));
-				axis.getTicks().getMajorTicks().setLabels(m.getRowNames());
-				axis.getTicks().getMajorTicks().getLineStyle().setVisible(true);
-				axis.getTicks().getMajorTicks().getFontStyle().setVisible(true);
-				axis.getTicks().getMinorTicks().getLineStyle().setVisible(false);
-				axis.getTitle().getFontStyle().setVisible(false);
-				axis.getGrid().setVisible(fullView);
-				axis.setVisible(fullView);
-				//PlotFactory.autoSetY2LabelMargin(axes);
-			 */
-			//}
-
-			//subFigure.refresh();
+			
+			for (PlotBox c : p) {
+				stack.push(c);
+			}
 		}
 
 		//mFigure.refresh();
@@ -458,5 +375,10 @@ public class Graph2dWindow extends FigureWindow {
 	 */
 	public ColorNormalizationModel getColorNormalizationModel() {
 		return mColorModel;
+	}
+
+	@Override
+	public ModernPlotCanvas getCanvas() {
+		return mFigurePanel;
 	}
 }

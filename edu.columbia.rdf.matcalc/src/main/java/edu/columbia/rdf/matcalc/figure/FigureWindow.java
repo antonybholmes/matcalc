@@ -32,8 +32,6 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.clipboard.ClipboardRibbonSection;
 import org.jebtk.modern.contentpane.CloseableHTab;
-import org.jebtk.modern.contentpane.ModernHContentPane;
-import org.jebtk.modern.contentpane.SizableContentPane;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -100,15 +98,6 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	protected MatrixGroupModel mGroupsModel = 
 			new MatrixGroupModel();
 
-
-	//protected MultiPlotCanvas mCanvas = new MultiPlotCanvas();
-
-	/**
-	 * The content pane.
-	 */
-	protected ModernHContentPane mContentPane = 
-			new ModernHContentPane();
-
 	/**
 	 * The member format pane.
 	 */
@@ -124,7 +113,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	protected Graph2dStyleModel mStyleModel = new Graph2dStyleModel();
 
 	/** The m window. */
-	protected ModernWindow mWindow;
+	protected ModernRibbonWindow mWindow;
 
 	/** The m scale model. */
 	protected ScaleModel mScaleModel = new ScaleModel();
@@ -199,7 +188,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 *
 	 * @param window the window
 	 */
-	public FigureWindow(ModernWindow window) {
+	public FigureWindow(ModernRibbonWindow window) {
 		this(window, null, true);
 	}
 
@@ -210,7 +199,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * @param figure the figure
 	 * @param allowStyle the allow style
 	 */
-	public FigureWindow(ModernWindow window, Figure figure, boolean allowStyle) {
+	public FigureWindow(ModernRibbonWindow window, Figure figure, boolean allowStyle) {
 		super(window.getAppInfo());
 
 		mWindow = window;
@@ -290,8 +279,6 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * @see org.abh.lib.ui.modern.window.ModernWindow#createUi()
 	 */
 	public void createUi() {
-		setBody(mContentPane);
-		
 		mStatusBar.addRight(new ModernStatusZoomSlider(mZoomModel));
 	}
 
@@ -331,12 +318,12 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * Adds the history pane to the layout if it is not already showing.
 	 */
 	private void addFormatPane() {
-		if (mContentPane.getModel().getRightTabs().containsTab("Format")) {
+		if (getTabsPane().getModel().getRightTabs().containsTab("Format")) {
 			return;
 		}
 
-		mContentPane.getModel().getRightTabs().addTab(new SizableContentPane("Format", 
-				new CloseableHTab("Format", mFormatPane, mContentPane), 300, 200, 500));
+		getTabsPane().addRightTab("Format", 
+				new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
 	}
 
 	/**

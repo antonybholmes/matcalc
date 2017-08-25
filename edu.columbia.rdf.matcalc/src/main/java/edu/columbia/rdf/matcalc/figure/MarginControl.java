@@ -22,9 +22,9 @@ import java.text.ParseException;
 import javax.swing.Box;
 
 import org.jebtk.core.event.ChangeEvent;
-import org.jebtk.graphplot.figure.MovableLayer;
+import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.properties.MarginProperties;
-import org.jebtk.modern.graphics.ModernCanvasListener;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
@@ -67,7 +67,7 @@ public class MarginControl extends VBox implements KeyListener {
 	private ModernTextField mFieldRight = new ModernNumericalTextField();
 
 	/** The m layer. */
-	private MovableLayer mLayer;
+	private PlotBox mLayer;
 
 	/**
 	 * Instantiates a new margin control.
@@ -75,8 +75,7 @@ public class MarginControl extends VBox implements KeyListener {
 	 * @param parent the parent
 	 * @param layer the layer
 	 */
-	public MarginControl(ModernWindow parent,
-			MovableLayer layer) {
+	public MarginControl(ModernWindow parent, PlotBox layer) {
 
 		mLayer = layer;
 		
@@ -124,36 +123,18 @@ public class MarginControl extends VBox implements KeyListener {
 		mFieldRight.setText(margins.getRight());
 		mFieldRight.addKeyListener(this);
 		
-		layer.addCanvasListener(new ModernCanvasListener() {
-
+		layer.addChangeListener(new ChangeListener() {
 			@Override
-			public void canvasChanged(ChangeEvent e) {
+			public void changed(ChangeEvent e) {
 				update();
-			}
-
-			@Override
-			public void redrawCanvas(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void canvasScrolled(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void canvasResized(ChangeEvent e) {
-				update();
-			}
-			
-			private void update() {
-				mFieldTop.setText(mLayer.getMargins().getTop());
-				mFieldLeft.setText(mLayer.getMargins().getLeft());
-				mFieldBottom.setText(mLayer.getMargins().getBottom());
-				mFieldRight.setText(mLayer.getMargins().getRight());
 			}});
+	}
+	
+	private void update() {
+		mFieldTop.setText(mLayer.getMargins().getTop());
+		mFieldLeft.setText(mLayer.getMargins().getLeft());
+		mFieldBottom.setText(mLayer.getMargins().getBottom());
+		mFieldRight.setText(mLayer.getMargins().getRight());
 	}
 
 	/**

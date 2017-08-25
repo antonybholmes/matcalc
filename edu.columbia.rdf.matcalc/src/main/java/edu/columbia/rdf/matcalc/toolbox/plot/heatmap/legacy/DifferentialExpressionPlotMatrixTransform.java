@@ -22,7 +22,7 @@ import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.modern.window.ModernWindow;
+import org.jebtk.modern.window.ModernRibbonWindow;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -51,7 +51,7 @@ public abstract class DifferentialExpressionPlotMatrixTransform extends HeatMapP
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public DifferentialExpressionPlotMatrixTransform(ModernWindow parent,
+	public DifferentialExpressionPlotMatrixTransform(ModernRibbonWindow parent,
 			String name,
 			AnnotationMatrix inputMatrix,
 			XYSeriesModel groups,

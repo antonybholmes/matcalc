@@ -21,6 +21,7 @@ import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -98,7 +99,7 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public HeatMapPlotMatrixTransform(ModernWindow parent,
+	public HeatMapPlotMatrixTransform(ModernRibbonWindow parent,
 			String name,
 			AnnotationMatrix inputMatrix, 
 			XYSeriesModel groups,
@@ -120,7 +121,7 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
 	 */
 	@Override
 	public ModernWindow createWindow() {
-		return new HeatMapPlotWindow(mParent,
+		return new HeatMapPlotWindow((ModernRibbonWindow)mParent,
 				mMatrix,
 				mGroups,
 				mRowGroups,

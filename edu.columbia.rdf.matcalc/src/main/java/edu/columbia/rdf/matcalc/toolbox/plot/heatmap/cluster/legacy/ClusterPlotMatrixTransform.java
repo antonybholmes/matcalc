@@ -85,7 +85,7 @@ public class ClusterPlotMatrixTransform extends HeatMapPlotMatrixTransform {
 	 */
 	@Override
 	public ClusterPlotWindow createWindow() {
-		return new ClusterPlotWindow(mParent,
+		return new ClusterPlotWindow((ModernRibbonWindow) mParent,
 				mMatrix,
 					mGroups,
 					mRowGroups,

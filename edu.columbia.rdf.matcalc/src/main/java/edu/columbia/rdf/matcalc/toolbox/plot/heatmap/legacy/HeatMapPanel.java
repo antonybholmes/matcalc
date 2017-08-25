@@ -38,6 +38,7 @@ import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.AnnotatableMatrix;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.collapsepane.AbstractCollapsePane;
@@ -52,6 +53,7 @@ import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarLocation;
 import org.jebtk.modern.tabs.TabsModel;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
+import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.zoom.ZoomModel;
 
@@ -203,6 +205,9 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 
 	/** The m column cluster. */
 	protected Cluster mColumnCluster;
+
+
+	private ModernRibbonWindow mParent;
 	
 
 	/**
@@ -221,7 +226,7 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 	 * @param contentModel the content model
 	 * @param properties the properties
 	 */
-	public HeatMapPanel(ModernWindow parent,
+	public HeatMapPanel(ModernRibbonWindow parent,
 			AnnotationMatrix matrix,
 			XYSeriesModel groupsModel,
 			XYSeriesModel rowGroupsModel,
@@ -267,7 +272,7 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 	 * @param contentModel the content model
 	 * @param properties the properties
 	 */
-	public HeatMapPanel(ModernWindow parent,
+	public HeatMapPanel(ModernRibbonWindow parent,
 			AnnotationMatrix matrix,
 			Cluster rowCluster,
 			Cluster columnCluster,
@@ -281,6 +286,7 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 			ScaleModel scaleModel,
 			TabsModel contentModel,
 			Properties properties) {
+		mParent = parent;
 		mContent = contentModel;
 
 		mRowCluster = rowCluster;
@@ -764,7 +770,9 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 
 		//panel.setBorder(ModernPanel.BORDER);
 
-		mContent.setCenterTab(new ModernPanel(scrollPane, BORDER)); //new CenterTab(new ModernPanel(scrollPane, ModernWidget.BORDER)));
+		//mContent.setCenterTab(new ModernPanel(scrollPane, BORDER)); //new CenterTab(new ModernPanel(scrollPane, ModernWidget.BORDER)));
+	
+		mParent.setCard(scrollPane);
 	}
 
 	/* (non-Javadoc)

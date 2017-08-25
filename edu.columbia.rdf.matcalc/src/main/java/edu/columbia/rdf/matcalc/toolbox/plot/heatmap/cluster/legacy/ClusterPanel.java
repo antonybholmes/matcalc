@@ -30,7 +30,7 @@ import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.graphics.colormap.ColorMapModel;
 import org.jebtk.modern.tabs.TabsModel;
-import org.jebtk.modern.window.ModernWindow;
+import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.zoom.ZoomModel;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
@@ -65,7 +65,7 @@ public class ClusterPanel extends HeatMapPanel {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public ClusterPanel(ModernWindow window,
+	public ClusterPanel(ModernRibbonWindow window,
 			AnnotationMatrix matrix,
 			XYSeriesModel groups,
 			XYSeriesModel rowGroups,

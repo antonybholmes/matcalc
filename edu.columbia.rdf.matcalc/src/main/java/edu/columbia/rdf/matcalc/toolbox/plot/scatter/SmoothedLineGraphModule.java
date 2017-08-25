@@ -23,7 +23,8 @@ import org.jebtk.core.cli.CommandLineArg;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.ColorCycle;
 import org.jebtk.graphplot.PlotFactory;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
+import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
@@ -51,7 +52,7 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
 	/**
 	 * The member axes.
 	 */
-	private Axes2D mAxes;
+	private Axes mAxes;
 
 	/* (non-Javadoc)
 	 * @see org.abh.lib.NameProperty#getName()

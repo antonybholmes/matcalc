@@ -18,14 +18,15 @@ package edu.columbia.rdf.matcalc.figure.graph2d;
 import javax.swing.JComponent;
 
 import org.jebtk.core.event.ChangeEvent;
+import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.GridLocation;
 import org.jebtk.graphplot.figure.Layer;
-import org.jebtk.graphplot.figure.MovableLayer;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.SubFigure;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.collapsepane.AbstractCollapsePane;
 import org.jebtk.modern.collapsepane.ModernSubCollapsePane;
 import org.jebtk.modern.graphics.ModernCanvasListener;
@@ -68,28 +69,10 @@ public class AxesControlPanel extends FormatPlotPane {
 
 		refresh();
 
-		figure.getSubFigureZModel().addCanvasListener(new ModernCanvasListener() {
-
+		figure.addChangeListener(new ChangeListener() {
 			@Override
-			public void canvasChanged(ChangeEvent e) {
+			public void changed(ChangeEvent e) {
 				refresh();
-			}
-
-			@Override
-			public void redrawCanvas(ChangeEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void canvasScrolled(ChangeEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void canvasResized(ChangeEvent e) {
-				//refresh();
 			}});
 	}
 
@@ -105,72 +88,55 @@ public class AxesControlPanel extends FormatPlotPane {
 
 		AbstractCollapsePane figuresCollapsePane = new ModernSubCollapsePane();
 
-		for (int fz : mFigure.getSubFigureZModel()) {
-			SubFigure subFigure = mFigure.getSubFigureZModel().getAtZ(fz);
-
+		for (SubFigure subFigure : mFigure.getSubFigures()) {
 			AbstractCollapsePane axesCollapsePane = new ModernSubCollapsePane();
 
-			for (GridLocation l : subFigure.getGridLocations()) {
-				for (int z : subFigure.getGridLocations().get(l)) {
-					Layer layer = subFigure.getGridLocations().get(l).getAtZ(z);
+			for (Axes axes : subFigure.getAllAxes()) {
 
-					if (layer instanceof Axes) {
-						Axes axes = (Axes)layer;
+				//TabsModel axisTabsModel = new TabsModel();
 
-						//TabsModel axisTabsModel = new TabsModel();
+				//
+				// Axes
+				//
 
-						//
-						// Axes
-						//
-						
-						AbstractCollapsePane axisCollapsePane = 
-								new ModernSubCollapsePane();
+				AbstractCollapsePane axisCollapsePane = 
+						new ModernSubCollapsePane();
 
-						c = new AxesControl(mParent, axes);
-						axisCollapsePane.addTab("Options", c, true);
+				c = new AxesControl(mParent, axes);
+				axisCollapsePane.addTab("Options", c, true);
 
-						c = new AxisControl(mParent, axes.getX1Axis(), true);
-						axisCollapsePane.addTab("X Axis", c, true);
+				c = new AxisControl(mParent, axes.getX1Axis(), true);
+				axisCollapsePane.addTab("X Axis", c, true);
 
-						//c = new AxisControl(mParent, axes.getX2Axis(), true);
-						//axisCollapsePane.addTab("X Axis 2", c);
+				//c = new AxisControl(mParent, axes.getX2Axis(), true);
+				//axisCollapsePane.addTab("X Axis 2", c);
 
-						c = new AxisControl(mParent, axes.getY1Axis(), true);
-						axisCollapsePane.addTab("Y Axis", c, true);
+				c = new AxisControl(mParent, axes.getY1Axis(), true);
+				axisCollapsePane.addTab("Y Axis", c, true);
 
-						//c = new AxisControl(mParent, axes.getY2Axis(), true);
-						//axisCollapsePane.addTab("Y Axis 2", c);
-						
+				//c = new AxisControl(mParent, axes.getY2Axis(), true);
+				//axisCollapsePane.addTab("Y Axis 2", c);
 
-						//TabsModel plotsTabsModel = new TabsModel();
-						AbstractCollapsePane plotsCollapsePane = 
-								new ModernSubCollapsePane();
 
-						for (GridLocation bl : axes.getPlotZModel()) {
-							for (int pz : axes.getPlotZModel().get(bl)) {
-								MovableLayer al = axes.getPlotZModel().get(bl).getAtZ(pz);
+				//TabsModel plotsTabsModel = new TabsModel();
+				AbstractCollapsePane plotsCollapsePane = 
+						new ModernSubCollapsePane();
 
-								if (al instanceof Plot) {
-									Plot plot = (Plot)al;
-
-									plotsCollapsePane.addTab(plot.getName(), 
-											new PlotControl(mParent, plot));
-								}
-							}
-						}
-						
-						axisCollapsePane.addTab("Plots", plotsCollapsePane, true);
-						
-						axesCollapsePane.addTab(axes.getName(), axisCollapsePane, true);
-					}
+				for (Plot plot : axes.getPlots()) {
+					plotsCollapsePane.addTab(plot.getName(), 
+									new PlotControl(mParent, plot));
 				}
+
+				axisCollapsePane.addTab("Plots", plotsCollapsePane, true);
+
+				axesCollapsePane.addTab(axes.getName(), axisCollapsePane, true);
 			}
-			
+
 			figuresCollapsePane.addTab(subFigure.getName(), axesCollapsePane, true);
 		}
-		
+
 		figuresCollapsePane.setExpanded(true);
-		
+
 		//figuresCollapsePane.setBorder(RIGHT_BORDER);
 		ModernScrollPane scrollPane = new ModernScrollPane(figuresCollapsePane);
 		scrollPane.setScrollBarPolicy(ScrollBarPolicy.NEVER, 

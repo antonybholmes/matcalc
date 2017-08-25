@@ -22,7 +22,7 @@ import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.modern.window.ModernWindow;
+import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressionPlotWindow;
 
@@ -52,7 +52,7 @@ public class TTestPlotWindow extends DifferentialExpressionPlotWindow  {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public TTestPlotWindow(ModernWindow window,
+	public TTestPlotWindow(ModernRibbonWindow window,
 			AnnotationMatrix matrix,
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,

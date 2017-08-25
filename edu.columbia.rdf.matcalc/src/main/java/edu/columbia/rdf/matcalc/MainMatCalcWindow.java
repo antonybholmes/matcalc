@@ -743,18 +743,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			} catch (TranscoderException e1) {
 				e1.printStackTrace();
 			}
-		} else if (e.getMessage().equals("Columns")) {
-			try {
-				openColumnGroups();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else if (e.getMessage().equals("Rows")) {
-			try {
-				openRowGroups();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
 		} else if (e.getMessage().equals("Groups Pane")) {
 			//addGroupsPane();
 		} else if (e.getMessage().equals("History Pane")) {
@@ -1533,8 +1521,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		mRowGroupsPanel = new RowGroupTreePanel(this);
 
 		TabsModel groupTabsModel = new TabsModel();
-		groupTabsModel.addTab("Rows", mRowGroupsPanel);
-		groupTabsModel.addTab("Columns", mColumnGroupsPanel);
+		groupTabsModel.addTab("ROWS", mRowGroupsPanel);
+		groupTabsModel.addTab("COLUMNS", mColumnGroupsPanel);
 
 
 		mGroupPanel = new SegmentTabsPanel(groupTabsModel, 80, 20);

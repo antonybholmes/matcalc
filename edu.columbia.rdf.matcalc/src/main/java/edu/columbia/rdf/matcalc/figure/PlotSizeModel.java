@@ -16,13 +16,13 @@
 package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.core.model.ItemModel;
-import org.jebtk.graphplot.figure.MovableLayer;
+import org.jebtk.graphplot.plotbox.PlotBox;
 
 // TODO: Auto-generated Javadoc
 /**
  * The class Graph2dStyleModel.
  */
-public class PlotSizeModel extends ItemModel<MovableLayer> {
+public class PlotSizeModel extends ItemModel<PlotBox> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

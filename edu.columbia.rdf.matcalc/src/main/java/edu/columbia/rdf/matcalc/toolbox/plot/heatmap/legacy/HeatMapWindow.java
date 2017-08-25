@@ -24,9 +24,8 @@ import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.contentpane.CloseableHTab;
-import org.jebtk.modern.contentpane.SizableContentPane;
 import org.jebtk.modern.graphics.colormap.ColorMap;
-import org.jebtk.modern.window.ModernWindow;
+import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.figure.FigureWindow;
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
@@ -82,7 +81,7 @@ public abstract class HeatMapWindow extends FigureWindow {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public HeatMapWindow(ModernWindow window,
+	public HeatMapWindow(ModernRibbonWindow window,
 			AnnotationMatrix matrix, 
 			XYSeriesModel groups,
 			XYSeriesModel rowGroups,
@@ -118,9 +117,8 @@ public abstract class HeatMapWindow extends FigureWindow {
 	public void setFormatPane(FormatPlotPane formatPane) {
 		mFormatPane = formatPane;
 
-		mContentPane.getModel().getRightTabs().clear();
-		mContentPane.getModel().getRightTabs().addTab(new SizableContentPane("Format", 
-					new CloseableHTab("Format", mFormatPane, mContentPane), 300, 200, 500));
+		getTabsPane().getModel().getRightTabs().clear();
+		getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
 		
 		mFormatPane.update();
 	}

@@ -22,7 +22,7 @@ import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.modern.window.ModernWindow;
+import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 
@@ -60,7 +60,7 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow  {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public DifferentialExpressionPlotWindow(ModernWindow window,
+	public DifferentialExpressionPlotWindow(ModernRibbonWindow window,
 			String name,
 			AnnotationMatrix matrix,
 			XYSeriesModel groups,
@@ -113,7 +113,7 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow  {
 				mColorMapModel,
 				mColorModel, 
 				mScaleModel,
-				mContentPane.getModel(),
+				getTabsPane().getModel(),
 				mCountGroups,
 				mHistory,
 				mProperties);

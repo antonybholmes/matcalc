@@ -22,7 +22,7 @@ import org.jebtk.modern.combobox.ModernComboBox;
 /**
  * The class FigureCombo.
  */
-public class FigureCombo extends ModernComboBox {
+public class SubFigureCombo extends ModernComboBox {
 
 	/**
 	 * The constant serialVersionUID.
@@ -34,8 +34,8 @@ public class FigureCombo extends ModernComboBox {
 	 *
 	 * @param figure the figure
 	 */
-	public FigureCombo(Figure figure) {
-		for (String name : figure.getSubFigureZModel().getNames()) {
+	public SubFigureCombo(Figure figure) {
+		for (String name : figure.getNames()) {
 			addMenuItem(name);
 		}
 	}

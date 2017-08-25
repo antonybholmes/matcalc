@@ -25,6 +25,7 @@ import org.jebtk.core.geom.IntDim;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.ColorBar;
 import org.jebtk.graphplot.ModernPlotCanvas;
+import org.jebtk.graphplot.PlotElement;
 import org.jebtk.graphplot.figure.heatmap.legacy.BottomColumnLabelPlotElement;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelPosition;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelProperties;
@@ -45,7 +46,6 @@ import org.jebtk.graphplot.figure.heatmap.legacy.expression.GroupColorBarPlotEle
 import org.jebtk.graphplot.figure.heatmap.legacy.expression.GroupLabelPlotElement;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.plotbox.PlotBox;
-import org.jebtk.graphplot.plotbox.PlotBoxCanvas;
 import org.jebtk.graphplot.plotbox.PlotBoxColumn;
 import org.jebtk.graphplot.plotbox.PlotBoxEmpty;
 import org.jebtk.graphplot.plotbox.PlotBoxRow;
@@ -149,7 +149,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 
 		mPlotBox = new PlotBoxRow();
 
-		ModernPlotCanvas element;
+		PlotElement element;
 
 		PlotBox columnBox;
 
@@ -175,7 +175,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 					10, 
 					aspectRatio,
 					rowLabelProperties.color);
-			rowLabelsBox.addChild(new PlotBoxCanvas(element));
+			rowLabelsBox.addChild(element);
 
 
 			rowLabelsBox.addChild(emptyHBox);
@@ -186,7 +186,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 					aspectRatio, 
 					rowLabelProperties.color);
 			
-			rowLabelsBox.addChild(new PlotBoxCanvas(element));
+			rowLabelsBox.addChild(element);
 		}
 
 		element = new RowLabelsPlotElement(matrix, 
@@ -194,7 +194,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 				aspectRatio,
 				CHAR_WIDTH);
 
-		rowLabelsBox.addChild(new PlotBoxCanvas(element));
+		rowLabelsBox.addChild(element);
 
 		if (rowLabelProperties.showFeatures && 
 				rowLabelProperties.position == RowLabelPosition.LEFT 
@@ -206,7 +206,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 					100, 
 					aspectRatio, 
 					rowLabelProperties.color);
-			rowLabelsBox.addChild(new PlotBoxCanvas(element));
+			rowLabelsBox.addChild(element);
 
 			rowLabelsBox.addChild(emptyHBox);
 
@@ -214,14 +214,13 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 					10, 
 					aspectRatio,
 					rowLabelProperties.color);
-			rowLabelsBox.addChild(new PlotBoxCanvas(element));
+			rowLabelsBox.addChild(element);
 		}
 
 
 
 		
-		PlotBox rowLabelsSpaceBox = 
-				new PlotBoxEmpty(rowLabelsBox.getCanvasSize().getW(), 0);
+		PlotBox rowLabelsSpaceBox = new PlotBoxEmpty(rowLabelsBox.getPreferredSize().height, 0);
 
 		//
 		// Vertical labels
@@ -249,7 +248,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 					maxChars);
 		}
 
-		PlotBox columnLabelsBox = new PlotBoxCanvas(element);
+		PlotBox columnLabelsBox = element;
 
 		if (groupProperties.show && groups.getCount() > 0) {
 			columnBox = new PlotBoxColumn();
@@ -270,7 +269,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 					aspectRatio,
 					groups, 
 					groupProperties);
-			columnBox.addChild(new PlotBoxCanvas(element));
+			columnBox.addChild(element);
 
 			mPlotBox.addChild(columnBox);
 
@@ -297,7 +296,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 			}
 
 			element = new GroupColorBarPlotElement(matrix, aspectRatio, groups, groupProperties);
-			columnBox.addChild(new PlotBoxCanvas(element));
+			columnBox.addChild(element);
 			mPlotBox.addChild(columnBox);
 
 			mPlotBox.addChild(emptyVBox);
@@ -350,7 +349,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 		// normalized matrix, regardless of how the user
 		// manipulated the matrix before
 
-		columnBox.addChild(new PlotBoxCanvas(heatMapElement));
+		columnBox.addChild(heatMapElement);
 
 
 		if (rowLabelProperties.show && 
@@ -391,11 +390,10 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 
 		if ((boolean)properties.getProperty("plot.show-legend")) {
 			element = new GroupsLegendPlotElement(matrix, aspectRatio, LEGEND_WIDTH, groups);
-			rowBox.addChild(new PlotBoxCanvas(element));
+			rowBox.addChild(element);
 			rowBox.addChild(emptyVBox);
-			element = new ColorBar(colorMap, min, max);
-			element.setCanvasSize(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT);
-			rowBox.addChild(new PlotBoxCanvas(element));
+			element = new ColorBar(colorMap, min, max, new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
+			rowBox.addChild(element);
 
 			rowLabelsBox.addChild(emptyVBox);
 		}
@@ -405,7 +403,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 				aspectRatio, 
 				400);
 		
-		rowBox.addChild(new PlotBoxCanvas(element));
+		rowBox.addChild(element);
 
 		columnBox.addChild(rowBox);
 
@@ -416,16 +414,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 	 * @see edu.columbia.rdf.lib.bioinformatics.plot.ModernPlotCanvas#plot(java.awt.Graphics2D, org.abh.common.ui.ui.graphics.DrawingContext)
 	 */
 	@Override
-	public void plot(Graphics2D g2, DrawingContext context) {
-		mPlotBox.plot(g2, context);
+	public void plot(Graphics2D g2, DrawingContext context, Object... params) {
+		mPlotBox.plot(g2, context, params);
 	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.graphics.ModernCanvas#getCanvasSize()
-	 */
-	@Override
-	public IntDim getCanvasSize() {
-		return mPlotBox.getCanvasSize();
-	}
-
 }

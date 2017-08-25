@@ -21,9 +21,9 @@ import java.io.IOException;
 import org.jebtk.graphplot.PlotFactory;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
-import org.jebtk.graphplot.figure.FigureLayoutGrid;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalization;
+import org.jebtk.graphplot.plotbox.PlotBoxGridLayout;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -104,7 +104,7 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
 	private void plot() throws IOException {
 		Figure figure = new Figure();
 		
-		figure.setLayout(new FigureLayoutGrid(1, mParent.getMatrices().size()));
+		figure.setLayout(new PlotBoxGridLayout(1, mParent.getMatrices().size()));
 
 		int c = 0;
 		

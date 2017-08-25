@@ -22,6 +22,7 @@ import java.text.ParseException;
 import javax.swing.Box;
 
 import org.jebtk.core.event.ChangeEvent;
+import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.modern.graphics.ModernCanvasListener;
 import org.jebtk.modern.panel.HExBox;
@@ -84,30 +85,16 @@ public class SizeControl extends VBox implements KeyListener {
 		mFieldHeight.setText(axes.getInternalPlotSize().getH());
 		mFieldHeight.addKeyListener(this);
 		
-		axes.addCanvasListener(new ModernCanvasListener() {
-
+		axes.addChangeListener(new ChangeListener() {
 			@Override
-			public void canvasChanged(ChangeEvent e) {
-				
-			}
-
-			@Override
-			public void redrawCanvas(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void canvasScrolled(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void canvasResized(ChangeEvent e) {
-				mFieldWidth.setText(mAxes.getInternalPlotSize().getW());
-				mFieldHeight.setText(mAxes.getInternalPlotSize().getH());
+			public void changed(ChangeEvent e) {
+				resize();
 			}});
+	}
+	
+	private void resize() {
+		mFieldWidth.setText(mAxes.getInternalPlotSize().getW());
+		mFieldHeight.setText(mAxes.getInternalPlotSize().getH());
 	}
 
 	/**

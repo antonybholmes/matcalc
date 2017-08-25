@@ -98,7 +98,7 @@ public abstract class VennCanvas extends ModernPlotCanvas {
 	/* (non-Javadoc)
 	 * @see org.graphplot.ModernPlotCanvas#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext)
 	 */
-	public void plot(Graphics2D g2, DrawingContext context) {
+	public void plot(Graphics2D g2, DrawingContext context, Object... params) {
 		aaPlot(g2, context);
 	}
 	

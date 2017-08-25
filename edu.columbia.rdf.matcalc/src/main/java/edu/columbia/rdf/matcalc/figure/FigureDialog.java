@@ -56,7 +56,7 @@ public class FigureDialog extends ModernDialogTaskWindow {
 	/**
 	 * The member fig combo.
 	 */
-	private FigureCombo mFigCombo; // = new FigureCombo();
+	private SubFigureCombo mFigCombo; // = new FigureCombo();
 	
 	/**
 	 * Instantiates a new figure dialog.

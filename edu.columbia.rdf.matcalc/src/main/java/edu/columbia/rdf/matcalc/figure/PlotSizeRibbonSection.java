@@ -127,8 +127,8 @@ public class PlotSizeRibbonSection extends RibbonSection {
 	 * Refresh.
 	 */
 	private void refresh() {
-		mWField.setValue(mModel.get().getInternalPlotSize().getW());
-		mHField.setValue(mModel.get().getInternalPlotSize().getH());
+		mWField.setValue(mModel.get().getPreferredSize().width);
+		mHField.setValue(mModel.get().getPreferredSize().height);
 	}
 
 	/**

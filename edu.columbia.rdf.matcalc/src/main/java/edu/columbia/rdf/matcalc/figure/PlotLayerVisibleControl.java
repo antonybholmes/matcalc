@@ -16,11 +16,11 @@
 package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.core.event.ChangeEvent;
-import org.jebtk.graphplot.figure.PlotLayer;
+import org.jebtk.core.event.ChangeListener;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.graphics.ModernCanvasListener;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.window.ModernWindow;
@@ -28,7 +28,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class AxisVisibleControl.
  */
-public class PlotLayerVisibleControl extends HBox implements ModernClickListener, ModernCanvasListener {
+public class PlotLayerVisibleControl extends HBox implements ModernClickListener, ChangeListener {
 	
 	/**
 	 * The constant serialVersionUID.
@@ -43,7 +43,7 @@ public class PlotLayerVisibleControl extends HBox implements ModernClickListener
 	/**
 	 * The member axis.
 	 */
-	private PlotLayer mLayer;
+	private PlotBox mLayer;
 	
 	
 	/**
@@ -53,7 +53,7 @@ public class PlotLayerVisibleControl extends HBox implements ModernClickListener
 	 * @param layer the layer
 	 */
 	public PlotLayerVisibleControl(ModernWindow parent,
-			PlotLayer layer) {
+			PlotBox layer) {
 		mLayer = layer;
 		
 		mCheckBox = new ModernCheckSwitch(layer.getName());
@@ -64,7 +64,7 @@ public class PlotLayerVisibleControl extends HBox implements ModernClickListener
 		
 		mCheckBox.addClickListener(this);
 		
-		mLayer.addCanvasListener(this);
+		mLayer.addChangeListener(this);
 	}
 	
 
@@ -85,43 +85,8 @@ public class PlotLayerVisibleControl extends HBox implements ModernClickListener
 		mLayer.setVisible(mCheckBox.isSelected());
 	}
 
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.graphics.ModernCanvasListener#canvasChanged(org.abh.common.event.ChangeEvent)
-	 */
 	@Override
-	public void canvasChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.graphics.ModernCanvasListener#redrawCanvas(org.abh.common.event.ChangeEvent)
-	 */
-	@Override
-	public void redrawCanvas(ChangeEvent e) {
+	public void changed(ChangeEvent e) {
 		mCheckBox.setSelected(mLayer.getVisible());
 	}
-
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.graphics.ModernCanvasListener#canvasScrolled(org.abh.common.event.ChangeEvent)
-	 */
-	@Override
-	public void canvasScrolled(ChangeEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.graphics.ModernCanvasListener#canvasResized(org.abh.common.event.ChangeEvent)
-	 */
-	@Override
-	public void canvasResized(ChangeEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

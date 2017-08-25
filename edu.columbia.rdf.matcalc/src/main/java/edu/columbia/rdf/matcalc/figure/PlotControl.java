@@ -54,7 +54,7 @@ public class PlotControl extends ModernSubCollapsePane {
 		
 		addTab("Options", box);
 
-		if (plot.getPlotLayers().getLayerCount() > 0) {
+		if (plot.getChildCount() > 0) {
 			addTab("Layers", new PlotLayersVisibleControl(parent, plot));
 		}
 

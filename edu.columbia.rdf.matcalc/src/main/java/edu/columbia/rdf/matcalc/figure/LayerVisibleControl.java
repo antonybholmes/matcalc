@@ -16,7 +16,9 @@
 package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.core.event.ChangeEvent;
+import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.Layer;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -45,7 +47,7 @@ public class LayerVisibleControl extends HBox implements ModernClickListener {
 	/**
 	 * The member axis.
 	 */
-	private Layer mLayer;
+	private PlotBox mLayer;
 	
 	
 	/**
@@ -54,8 +56,7 @@ public class LayerVisibleControl extends HBox implements ModernClickListener {
 	 * @param parent the parent
 	 * @param layer the layer
 	 */
-	public LayerVisibleControl(ModernWindow parent,
-			Layer layer) {
+	public LayerVisibleControl(ModernWindow parent, PlotBox layer) {
 		mLayer = layer;
 		
 		mCheckBox = new ModernCheckBox("Show");
@@ -67,29 +68,10 @@ public class LayerVisibleControl extends HBox implements ModernClickListener {
 		
 		mCheckBox.addClickListener(this);
 		
-		layer.addCanvasListener(new ModernCanvasListener() {
-
+		layer.addChangeListener(new ChangeListener() {
 			@Override
-			public void canvasChanged(ChangeEvent e) {
+			public void changed(ChangeEvent e) {
 				mCheckBox.setSelected(mLayer.getVisible());
-			}
-
-			@Override
-			public void redrawCanvas(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void canvasScrolled(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void canvasResized(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
 			}});
 	}
 	

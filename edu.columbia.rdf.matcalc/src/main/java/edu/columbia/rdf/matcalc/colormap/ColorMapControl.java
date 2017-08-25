@@ -18,6 +18,7 @@ package edu.columbia.rdf.matcalc.colormap;
 import javax.swing.Box;
 
 import org.jebtk.core.event.ChangeEvent;
+import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -32,7 +33,7 @@ import org.jebtk.modern.window.ModernWindow;
  * The class LineStyleControl.
  */
 public class ColorMapControl extends HBox {
-	
+
 	/**
 	 * The constant serialVersionUID.
 	 */
@@ -54,44 +55,25 @@ public class ColorMapControl extends HBox {
 	 */
 	public ColorMapControl(ModernWindow parent, Plot plot) {
 		mPlot = plot;
-		
+
 		mColorMapButton = new ColorMapButton(parent, plot.getColorMap());
-		
+
 		add(new ModernAutoSizeLabel("Color map"));
 		add(Box.createHorizontalGlue());
 		add(ModernPanel.createHGap());
 		add(mColorMapButton);
 		//setBorder(ModernWidget.BORDER);
-		
+
 		mColorMapButton.addClickListener(new ModernClickListener() {
 			@Override
 			public void clicked(ModernClickEvent e) {
 				mPlot.setColorMap(mColorMapButton.getSelectedColorMap());
 			}});
-		
-		mPlot.addCanvasListener(new ModernCanvasListener() {
 
+		plot.addChangeListener(new ChangeListener() {
 			@Override
-			public void canvasChanged(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void redrawCanvas(ChangeEvent e) {
+			public void changed(ChangeEvent e) {
 				mColorMapButton.setSelectedColorMap(mPlot.getColorMap());
-			}
-
-			@Override
-			public void canvasScrolled(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void canvasResized(ChangeEvent e) {
-				// TODO Auto-generated method stub
-				
 			}});
 	}
 }

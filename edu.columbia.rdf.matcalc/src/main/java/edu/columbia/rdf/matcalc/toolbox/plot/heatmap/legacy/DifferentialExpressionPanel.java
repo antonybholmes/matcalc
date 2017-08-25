@@ -31,7 +31,7 @@ import org.jebtk.math.matrix.MatrixOperations;
 import org.jebtk.math.statistics.Statistics;
 import org.jebtk.modern.graphics.colormap.ColorMapModel;
 import org.jebtk.modern.tabs.TabsModel;
-import org.jebtk.modern.window.ModernWindow;
+import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.zoom.ZoomModel;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
@@ -67,7 +67,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public DifferentialExpressionPanel(ModernWindow parent,
+	public DifferentialExpressionPanel(ModernRibbonWindow parent,
 			AnnotationMatrix matrix,
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,

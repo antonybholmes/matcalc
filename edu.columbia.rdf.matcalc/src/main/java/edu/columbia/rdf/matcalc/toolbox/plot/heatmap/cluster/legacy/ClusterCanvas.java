@@ -46,7 +46,6 @@ import org.jebtk.graphplot.figure.heatmap.legacy.clustering.RowHTreeRightPlotEle
 import org.jebtk.graphplot.figure.heatmap.legacy.expression.GroupColorBarPlotElement;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.plotbox.PlotBox;
-import org.jebtk.graphplot.plotbox.PlotBoxCanvas;
 import org.jebtk.graphplot.plotbox.PlotBoxColumn;
 import org.jebtk.graphplot.plotbox.PlotBoxEmpty;
 import org.jebtk.graphplot.plotbox.PlotBoxRow;
@@ -228,7 +227,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 						aspectRatio,
 						rowLabelProperties.color);
 				
-				rowLabelsBox.addChild(new PlotBoxCanvas(element));
+				rowLabelsBox.addChild(element);
 
 				rowLabelsBox.addChild(emptyHBox);
 
@@ -238,7 +237,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 						aspectRatio, 
 						rowLabelProperties.color);
 
-				rowLabelsBox.addChild(new PlotBoxCanvas(element));
+				rowLabelsBox.addChild(element);
 			}
 
 
@@ -257,7 +256,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 					CHAR_WIDTH);
 			//}
 
-			rowLabelsBox.addChild(new PlotBoxCanvas(element));
+			rowLabelsBox.addChild(element);
 
 			if (rowLabelProperties.showFeatures &&
 					rowLabelProperties.position == RowLabelPosition.LEFT && 
@@ -270,7 +269,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 						aspectRatio, 
 						rowLabelProperties.color);
 				
-				rowLabelsBox.addChild(new PlotBoxCanvas(element));
+				rowLabelsBox.addChild(element);
 
 				rowLabelsBox.addChild(emptyHBox);
 
@@ -278,12 +277,12 @@ public class ClusterCanvas extends ModernPlotCanvas {
 						10, 
 						aspectRatio,
 						rowLabelProperties.color);
-				rowLabelsBox.addChild(new PlotBoxCanvas(element));
+				rowLabelsBox.addChild(element);
 			}
 		}
 	
 		PlotBox rowLabelsSpaceBox = 
-				new PlotBoxEmpty(rowLabelsBox.getCanvasSize().getW(), 0);
+				new PlotBoxEmpty(rowLabelsBox.getPreferredSize().width, 0);
 
 		if (columnLabelProperties.position == ColumnLabelPosition.TOP) {
 			element = new TopColumnLabelPlotElement(matrix,
@@ -301,7 +300,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 					maxChars);
 		}
 
-		PlotBox columnLabelsBox = new PlotBoxCanvas(element);
+		PlotBox columnLabelsBox = element;
 
 		// Now we build the plot
 
@@ -329,7 +328,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 						columnCluster,
 						properties);
 				//canvas.setCanvasSize(new Dimension(-1, columnClusterHeight));
-				columnBox.addChild(new PlotBoxCanvas(element));
+				columnBox.addChild(element);
 			}
 
 			mPlotBox.addChild(columnBox);
@@ -374,7 +373,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 					groupProperties);
 			//}
 
-			columnBox.addChild(new PlotBoxCanvas(element));
+			columnBox.addChild(element);
 			mPlotBox.addChild(columnBox);
 
 			mPlotBox.addChild(emptyVBox);
@@ -434,7 +433,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 								rowCluster,
 								properties.getAsColor("plot.tree.hoz.color"));
 						//canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
-						columnBox.addChild(new PlotBoxCanvas(element));
+						columnBox.addChild(element);
 
 						columnBox.addChild(emptyHBox);
 					}
@@ -449,7 +448,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 			((HeatMapPlotElement)element).setBorderColor(properties.getAsColor("plot.border-color"));
 
 
-			columnBox.addChild(new PlotBoxCanvas(element));
+			columnBox.addChild(element);
 
 			if (rowLabelProperties.show) {
 				if (rowLabelProperties.position == RowLabelPosition.RIGHT) {
@@ -467,7 +466,7 @@ public class ClusterCanvas extends ModernPlotCanvas {
 								rowCluster,
 								properties.getAsColor("plot.tree.hoz.color"));
 						//canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
-						columnBox.addChild(new PlotBoxCanvas(element));
+						columnBox.addChild(element);
 
 						//columnBox.addChild(emptyHBox);
 					}
@@ -525,11 +524,10 @@ public class ClusterCanvas extends ModernPlotCanvas {
 						groups);
 			}
 
-			rowBox.addChild(new PlotBoxCanvas(element));
+			rowBox.addChild(element);
 			rowBox.addChild(emptyVBox);
-			element = new ColorBar(colorMap, min, max);
-			element.setCanvasSize(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT);
-			rowBox.addChild(new PlotBoxCanvas(element));
+			element = new ColorBar(colorMap, min, max, new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
+			rowBox.addChild(element);
 
 			rowLabelsBox.addChild(emptyVBox);
 		}
@@ -538,21 +536,21 @@ public class ClusterCanvas extends ModernPlotCanvas {
 				history, 
 				aspectRatio, 
 				400);
-		rowBox.addChild(new PlotBoxCanvas(element));
+		rowBox.addChild(element);
 
 		columnBox.addChild(rowBox);
 
 		mPlotBox.addChild(columnBox);
 		
-		setPreferredSize(IntDim.toDimension(mPlotBox.getCanvasSize()));
+		setPreferredSize(mPlotBox.getPreferredSize());
 	}
 
 	/* (non-Javadoc)
 	 * @see org.abh.lib.plot.ModernPlotCanvas#plot(java.awt.Graphics2D, org.abh.lib.ui.modern.graphics.DrawingContext)
 	 */
 	@Override
-	public void plot(Graphics2D g2, DrawingContext context) {
-		mPlotBox.plot(g2, context);
+	public void plot(Graphics2D g2, DrawingContext context, Object... params) {
+		mPlotBox.plot(g2, context, params);
 	}
 
 	/* (non-Javadoc)

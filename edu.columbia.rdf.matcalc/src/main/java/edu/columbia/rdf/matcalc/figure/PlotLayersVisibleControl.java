@@ -28,6 +28,7 @@
 package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.graphplot.figure.Plot;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
@@ -51,8 +52,8 @@ public class PlotLayersVisibleControl extends VBox {
 	 * @param plot the plot
 	 */
 	public PlotLayersVisibleControl(ModernWindow parent, Plot plot) {
-		for (int z : plot.getPlotLayers()) {
-			add(new PlotLayerVisibleControl(parent, plot.getPlotLayers().getAtZ(z)));
+		for (PlotBox child : plot) {
+			add(new PlotLayerVisibleControl(parent, child));
 		}
 		
 		setBorder(ModernWidget.BORDER);
