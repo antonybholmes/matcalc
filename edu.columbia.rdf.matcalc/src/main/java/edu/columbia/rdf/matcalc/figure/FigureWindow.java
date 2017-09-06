@@ -113,7 +113,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	protected Graph2dStyleModel mStyleModel = new Graph2dStyleModel();
 
 	/** The m window. */
-	protected ModernRibbonWindow mWindow;
+	protected ModernWindow mWindow;
 
 	/** The m scale model. */
 	protected ScaleModel mScaleModel = new ScaleModel();
@@ -188,7 +188,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 *
 	 * @param window the window
 	 */
-	public FigureWindow(ModernRibbonWindow window) {
+	public FigureWindow(ModernWindow window) {
 		this(window, null, true);
 	}
 
@@ -199,7 +199,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * @param figure the figure
 	 * @param allowStyle the allow style
 	 */
-	public FigureWindow(ModernRibbonWindow window, Figure figure, boolean allowStyle) {
+	public FigureWindow(ModernWindow window, Figure figure, boolean allowStyle) {
 		super(window.getAppInfo());
 
 		mWindow = window;

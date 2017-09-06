@@ -95,11 +95,11 @@ public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernCli
 	 * @param plot the plot
 	 */
 	private void boxWhiskerPlot(AnnotationMatrix m, boolean plot) {
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure graph = figure.getCurrentSubFigure();
+		SubFigure graph = figure.currentSubFigure();
 
-		Axes axes = graph.getCurrentAxes();
+		Axes axes = graph.currentAxes();
 
 		XYSeriesGroup allSeries = new XYSeriesGroup("Box Whisker");
 

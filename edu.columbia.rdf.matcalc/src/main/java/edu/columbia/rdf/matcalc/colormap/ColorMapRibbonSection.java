@@ -21,12 +21,12 @@ package edu.columbia.rdf.matcalc.colormap;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.button.CheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 import org.jebtk.modern.graphics.colormap.ColorMapModel;
-import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
@@ -62,8 +62,11 @@ public class ColorMapRibbonSection extends RibbonSection {
 	//private CheckBox mInvertButton = 
 	//		new ModernCheckBox("Invert");
 	
-	private RibbonLargeButton mInvertButton = 
-			new RibbonLargeButton("Invert", UIService.getInstance().loadIcon("invert", 24));
+	//private RibbonLargeButton mInvertButton = 
+	//		new RibbonLargeButton("Invert", UIService.getInstance().loadIcon("invert", 24));
+	
+	private CheckBox mInvertButton = new ModernCheckSwitch("Invert");
+	
 	
 	/** The m scale spinner. */
 	private ModernCompactSpinner mScaleSpinner;

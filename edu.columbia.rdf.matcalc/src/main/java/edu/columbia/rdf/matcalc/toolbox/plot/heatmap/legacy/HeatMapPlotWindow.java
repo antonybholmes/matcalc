@@ -21,7 +21,7 @@ import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.modern.window.ModernRibbonWindow;
+import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 
@@ -53,7 +53,7 @@ public class HeatMapPlotWindow extends HeatMapWindow  {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public HeatMapPlotWindow(ModernRibbonWindow window,
+	public HeatMapPlotWindow(ModernWindow window,
 			AnnotationMatrix matrix,
 			XYSeriesModel groups,
 			XYSeriesModel rowGroups,
@@ -82,7 +82,7 @@ public class HeatMapPlotWindow extends HeatMapWindow  {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public HeatMapPlotWindow(ModernRibbonWindow window,
+	public HeatMapPlotWindow(ModernWindow window,
 			String name,
 			AnnotationMatrix matrix,
 			XYSeriesModel groups,

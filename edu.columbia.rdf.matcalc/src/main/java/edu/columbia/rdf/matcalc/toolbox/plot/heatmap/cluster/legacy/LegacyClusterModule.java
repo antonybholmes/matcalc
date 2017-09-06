@@ -336,8 +336,6 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 		window.setVisible(true);
 		 */
 
-		System.err.println("Cluster " + clusterRows + " " + clusterColumns + " " + m3.getColumnCount());
-
 		List<String> history = window.getTransformationHistory();
 		
 		//for (int i = 0; i < m3.getColumnCount(); ++i) {

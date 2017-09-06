@@ -37,9 +37,9 @@ import javax.swing.KeyStroke;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.core.Plugin;
 import org.jebtk.core.PluginService;
 import org.jebtk.core.collections.ArrayListCreator;
@@ -108,6 +108,7 @@ import org.xml.sax.SAXException;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 import edu.columbia.rdf.matcalc.groups.ColumnGroupTreePanel;
 import edu.columbia.rdf.matcalc.groups.RowGroupTreePanel;
+import edu.columbia.rdf.matcalc.toolbox.FileModule;
 import edu.columbia.rdf.matcalc.toolbox.Module;
 
 // TODO: Auto-generated Javadoc
@@ -205,17 +206,17 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	private List<GuiFileExtFilter> mOpenFileFilters =
 			new ArrayList<GuiFileExtFilter>();
 
-	/** The m open file module map. */
-	private Map<String, List<Module>> mOpenFileModuleMap =
-			DefaultHashMap.create(new ArrayListCreator<Module>());
+	/** Modules associated with opening files with a given extension. */
+	private Map<String, List<FileModule>> mOpenFileModuleMap =
+			DefaultHashMap.create(new ArrayListCreator<FileModule>());
 
 	/** The m save file filters. */
 	private List<GuiFileExtFilter> mSaveFileFilters =
 			new ArrayList<GuiFileExtFilter>();
 
 	/** The m save file module map. */
-	private Map<String, List<Module>> mSaveFileModuleMap =
-			DefaultHashMap.create(new ArrayListCreator<Module>());
+	private Map<String, List<FileModule>> mSaveFileModuleMap =
+			DefaultHashMap.create(new ArrayListCreator<FileModule>());
 
 
 	//private ModernScrollPane mTableScrollPane;
@@ -528,22 +529,35 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		for (Module module : mModules) {
 			module.init(this);
 
-			for (GuiFileExtFilter filter : module.getOpenFileFilters()) {
-				mOpenFileFilters.add(filter);
-
-				// Track what this module can 
-				for (String ext : filter.getExtensions()) {
-					mOpenFileModuleMap.get(ext).add(module);
-				}
+			addFileModule(module);
+			
+			for (FileModule fileModule : module) {
+				addFileModule(fileModule);
 			}
+		}
+	}
+	
+	/**
+	 * Register modules that deal with opening and saving files.
+	 * 
+	 * @param module		A file module.
+	 */
+	private void addFileModule(FileModule module) {
+		for (GuiFileExtFilter filter : module.getOpenFileFilters()) {
+			mOpenFileFilters.add(filter);
 
-			for (GuiFileExtFilter filter : module.getSaveFileFilters()) {
-				mSaveFileFilters.add(filter);
+			// Track what this module can 
+			for (String ext : filter.getExtensions()) {
+				mOpenFileModuleMap.get(ext).add(module);
+			}
+		}
 
-				// Track what this module can 
-				for (String ext : filter.getExtensions()) {
-					mSaveFileModuleMap.get(ext).add(module);
-				}
+		for (GuiFileExtFilter filter : module.getSaveFileFilters()) {
+			mSaveFileFilters.add(filter);
+
+			// Track what this module can 
+			for (String ext : filter.getExtensions()) {
+				mSaveFileModuleMap.get(ext).add(module);
 			}
 		}
 	}
@@ -1111,7 +1125,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 			String ext = PathUtils.getFileExt(file);
 
-			for (Module module : mOpenFileModuleMap.get(ext)) {
+			for (FileModule module : mOpenFileModuleMap.get(ext)) {
 				AnnotationMatrix m = module.openFile(this, 
 						file, 
 						hasHeader,
@@ -1287,7 +1301,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 			String ext = PathUtils.getFileExt(file);
 
-			for (Module module : mOpenFileModuleMap.get(ext)) {
+			for (FileModule module : mOpenFileModuleMap.get(ext)) {
 				AnnotationMatrix m = module.autoOpenFile(this, 
 						file, 
 						hasHeader,
@@ -1797,7 +1811,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		boolean status = false;
 
-		for (Module module : mSaveFileModuleMap.get(ext)) {
+		for (FileModule module : mSaveFileModuleMap.get(ext)) {
 			status |= module.saveFile(this, 
 					file, 
 					matrix);

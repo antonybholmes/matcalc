@@ -128,7 +128,7 @@ public class Graph2dWindow extends FigureWindow {
 	 */
 	public Graph2dWindow(MainMatCalcWindow window,
 			SubFigure subFigure) {
-		this(window, new Figure(subFigure));
+		this(window, Figure.createFigure().addSubFigure(subFigure));
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class Graph2dWindow extends FigureWindow {
 	 * Setup.
 	 */
 	private void setup() {
-		mSizeModel.set(mFigure.getCurrentSubFigure().getCurrentAxes());
+		mSizeModel.set(mFigure.currentSubFigure().currentAxes());
 
 		mFormatPane = new AxesControlPanel(this, mFigure);
 
@@ -178,6 +178,7 @@ public class Graph2dWindow extends FigureWindow {
 
 			@Override
 			public void changed(ChangeEvent e) {
+				System.err.println("graph 2d");
 				mFigure.setStyle(mStyleModel.get());
 				
 //				for (int z : mFigure.getSubFigureZModel()) {
@@ -189,7 +190,7 @@ public class Graph2dWindow extends FigureWindow {
 //				}
 			}});
 		
-		getRibbon().getToolbar("Plot").add(new LegendRibbonSection(getRibbon(), mFigure.getCurrentSubFigure().getCurrentAxes().getLegend()));
+		getRibbon().getToolbar("Plot").add(new LegendRibbonSection(getRibbon(), mFigure.currentSubFigure().currentAxes().getLegend()));
 		getRibbon().getToolbar("Layout").add(new PlotSizeRibbonSection(getRibbon(), mSizeModel));
 		getRibbon().getToolbar("Layout").add(new MarginsRibbonSection(getRibbon(), mSizeModel));
 		
@@ -254,7 +255,7 @@ public class Graph2dWindow extends FigureWindow {
 		// them
 		if (mMatrices.size() == 0) {
 			for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
-				AnnotationMatrix m = subFigure.getCurrentAxes().getCurrentPlot().getMatrix();
+				AnnotationMatrix m = subFigure.currentAxes().currentPlot().getMatrix();
 				
 				if (m != null) {
 					mMatrices.add(m);
@@ -269,7 +270,7 @@ public class Graph2dWindow extends FigureWindow {
 		// Cycle through the matrices
 
 		for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
-			AnnotationMatrix m = subFigure.getCurrentAxes().getCurrentPlot().getMatrix();
+			AnnotationMatrix m = subFigure.currentAxes().currentPlot().getMatrix();
 
 			if (m == null) {
 				continue;
@@ -350,7 +351,7 @@ public class Graph2dWindow extends FigureWindow {
 			PlotBox p = stack.pop();
 			
 			if (p instanceof Axes) {
-				((Axes)p).setInternalPlotSize(a.getPreferredSize());
+				((Axes)p).setInternalSize(a.getPreferredSize());
 			}
 			
 			for (PlotBox c : p) {

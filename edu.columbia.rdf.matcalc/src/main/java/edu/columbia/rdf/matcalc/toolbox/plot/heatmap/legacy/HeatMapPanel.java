@@ -180,11 +180,6 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 	protected ColorMapModel mColorMapModel;
 
 
-	/**
-	 * The member content.
-	 */
-	private TabsModel mContent;
-
 	/** The m scale model. */
 	protected ScaleModel mScaleModel;
 
@@ -287,7 +282,7 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 			TabsModel contentModel,
 			Properties properties) {
 		mParent = parent;
-		mContent = contentModel;
+		//mContent = contentModel;
 
 		mRowCluster = rowCluster;
 		mColumnCluster = columnCluster;
@@ -772,6 +767,9 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 
 		//mContent.setCenterTab(new ModernPanel(scrollPane, BORDER)); //new CenterTab(new ModernPanel(scrollPane, ModernWidget.BORDER)));
 	
+		System.err.println("heat map " + mParent);
+		
+		
 		mParent.setCard(scrollPane);
 	}
 

@@ -69,11 +69,13 @@ public class AxesControlPanel extends FormatPlotPane {
 
 		refresh();
 
+		/*
 		figure.addChangeListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent e) {
 				refresh();
 			}});
+		*/
 	}
 
 	/**

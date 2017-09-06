@@ -77,12 +77,12 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
 	private void createPlot() {
 		AnnotationMatrix m = mParent.getCurrentMatrix();
 
-		Figure figure = new Figure();
+		Figure figure = Figure.createFigure();
 
-		SubFigure graph = figure.getCurrentSubFigure();
+		SubFigure graph = figure.currentSubFigure();
 
 
-		Axes axes = graph.getCurrentAxes();
+		Axes axes = graph.currentAxes();
 
 		ColorCycle colorCycle = new ColorCycle();
 

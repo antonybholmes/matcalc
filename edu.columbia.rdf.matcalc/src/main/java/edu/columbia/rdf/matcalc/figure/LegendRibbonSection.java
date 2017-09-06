@@ -18,16 +18,16 @@ package edu.columbia.rdf.matcalc.figure;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.properties.LegendProperties;
+import org.jebtk.modern.button.CheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.ribbon.Ribbon;
-import org.jebtk.modern.ribbon.RibbonLargeCheckButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 
 
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
  *
@@ -49,16 +49,16 @@ public class LegendRibbonSection extends RibbonSection {
 	/**
 	 * The show legend button.
 	 */
-	private RibbonLargeCheckButton mShowButton = 
-			new RibbonLargeCheckButton("Show");
+	private CheckBox mShowButton = 
+			new ModernCheckSwitch("Show");
 	
 	/** The m show border button. */
-	private RibbonLargeCheckButton mShowBorderButton = 
-			new RibbonLargeCheckButton("Border");
+	private CheckBox mShowBorderButton = 
+			new ModernCheckSwitch("Border");
 	
 	/** The m show background button. */
-	private RibbonLargeCheckButton mShowBackgroundButton = 
-			new RibbonLargeCheckButton("Background");
+	private CheckBox mShowBackgroundButton = 
+			new ModernCheckSwitch("Background");
 
 	/**
 	 * The legend position picker.

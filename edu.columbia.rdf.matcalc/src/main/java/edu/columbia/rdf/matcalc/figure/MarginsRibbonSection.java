@@ -160,7 +160,7 @@ public class MarginsRibbonSection extends RibbonSection {
 		int b = mBField.getIntValue();
 		int r = mRField.getIntValue();
 		
-		Axes axes = new Axes();
+		Axes axes = Axes.createAxes();
 		
 		axes.setMargins(t, l, b, r);
 		

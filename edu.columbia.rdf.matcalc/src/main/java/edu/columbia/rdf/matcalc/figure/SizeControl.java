@@ -73,7 +73,7 @@ public class SizeControl extends VBox implements KeyListener {
 		box.add(new ModernTextBorderPanel(mFieldWidth, ModernWidget.SMALL_SIZE));
 		add(box);
 		add(ModernPanel.createVGap());
-		mFieldWidth.setText(axes.getInternalPlotSize().getW());
+		mFieldWidth.setText(axes.getInternalSize().getW());
 		mFieldWidth.addKeyListener(this);
 
 		// left
@@ -82,7 +82,7 @@ public class SizeControl extends VBox implements KeyListener {
 		box.add(new ModernTextBorderPanel(mFieldHeight, ModernWidget.SMALL_SIZE));
 		add(box);
 		add(ModernPanel.createVGap());
-		mFieldHeight.setText(axes.getInternalPlotSize().getH());
+		mFieldHeight.setText(axes.getInternalSize().getH());
 		mFieldHeight.addKeyListener(this);
 		
 		axes.addChangeListener(new ChangeListener() {
@@ -93,8 +93,8 @@ public class SizeControl extends VBox implements KeyListener {
 	}
 	
 	private void resize() {
-		mFieldWidth.setText(mAxes.getInternalPlotSize().getW());
-		mFieldHeight.setText(mAxes.getInternalPlotSize().getH());
+		mFieldWidth.setText(mAxes.getInternalSize().getW());
+		mFieldHeight.setText(mAxes.getInternalSize().getH());
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class SizeControl extends VBox implements KeyListener {
 	 * @throws ParseException the parse exception
 	 */
 	private void setSize() throws ParseException {
-		mAxes.setInternalPlotSize(mFieldWidth.getAsInt(), 
+		mAxes.setInternalSize(mFieldWidth.getAsInt(), 
 				mFieldHeight.getAsInt());
 	}
 

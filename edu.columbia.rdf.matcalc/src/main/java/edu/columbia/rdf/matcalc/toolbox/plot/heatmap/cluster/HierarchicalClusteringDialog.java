@@ -25,6 +25,7 @@ import org.jebtk.math.cluster.SingleLinkage;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickListener;
@@ -63,23 +64,23 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 	 * The cluster columns check.
 	 */
 	private CheckBox clusterColumnsCheck = 
-			new ModernCheckBox("Cluster columns", true);
+			new ModernCheckSwitch("Cluster columns", true);
 
 	/**
 	 * The cluster rows check.
 	 */
 	private CheckBox clusterRowsCheck = 
-			new ModernCheckBox("Cluster rows");
+			new ModernCheckSwitch("Cluster rows");
 	
 	/** The m check optimal leaf order. */
 	private CheckBox mCheckOptimalLeafOrder = 
-			new ModernCheckBox("Optimal leaf order", true);
+			new ModernCheckSwitch("Optimal leaf order", true);
 
 	/**
 	 * The member check plot.
 	 */
 	private CheckBox mCheckPlot = 
-			new ModernCheckBox(PlotConstants.MENU_SHOW_HEATMAP, true);
+			new ModernCheckSwitch(PlotConstants.MENU_SHOW_HEATMAP, true);
 
 	
 	/**
@@ -110,7 +111,7 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 		
 		mDistanceCombo.setSelectedIndex(3);
 
-		setSize(400, 320);
+		setSize(480, 320);
 		
 		UI.centerWindowToScreen(this);
 	}

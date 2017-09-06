@@ -17,13 +17,11 @@ package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
-import org.jebtk.graphplot.figure.Layer;
 import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.button.CheckBox;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.graphics.ModernCanvasListener;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.window.ModernWindow;
@@ -59,13 +57,12 @@ public class LayerVisibleControl extends HBox implements ModernClickListener {
 	public LayerVisibleControl(ModernWindow parent, PlotBox layer) {
 		mLayer = layer;
 		
-		mCheckBox = new ModernCheckBox("Show");
+		mCheckBox = new ModernCheckSwitch("Show");
 		mCheckBox.setSelected(layer.getVisible());
 		
 		add(mCheckBox);
 		add(ModernPanel.createHGap());
 
-		
 		mCheckBox.addClickListener(this);
 		
 		layer.addChangeListener(new ChangeListener() {

@@ -23,7 +23,7 @@ import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.modern.window.ModernRibbonWindow;
+import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapWindow;
@@ -76,7 +76,7 @@ public class ClusterPlotWindow extends HeatMapWindow  {
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public ClusterPlotWindow(ModernRibbonWindow window,
+	public ClusterPlotWindow(ModernWindow window,
 			AnnotationMatrix matrix,
 			XYSeriesModel groups,
 			XYSeriesModel rowGroups,
@@ -101,7 +101,7 @@ public class ClusterPlotWindow extends HeatMapWindow  {
 	 * @return the format plot pane
 	 */
 	public FormatPlotPane createFormatPane() {
-		return new ClusterPanel(mWindow,
+		return new ClusterPanel(this,
 				mMatrix,
 				mGroups,
 				mRowGroups,

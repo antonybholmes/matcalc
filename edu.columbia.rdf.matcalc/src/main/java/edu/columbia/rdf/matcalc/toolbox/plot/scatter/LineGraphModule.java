@@ -108,11 +108,11 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
 	private void createPlot() {
 		AnnotationMatrix m = mParent.getCurrentMatrix();
 		
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure subFigure = figure.getCurrentSubFigure();
+		SubFigure subFigure = figure.currentSubFigure();
 		
-		mAxes = subFigure.getCurrentAxes();
+		mAxes = subFigure.currentAxes();
 		
 		ColorCycle colorCycle = new ColorCycle();
 		

@@ -244,13 +244,13 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
 		
 		Box box2 = HBox.create();
 		box2.add(new ModernAutoSizeLabel("Name", 100));
-		box2.add(new ModernTextBorderPanel(mNameField, 400));
+		box2.add(new ModernTextBorderPanel(mNameField, 300));
 		box.add(box2);
 		box.add(UI.createVGap(5));
 		box2 = HBox.create();
 		box2.add(new ModernAutoSizeLabel("Search", 100));
 		
-		UI.setSize(mSearchField, 400, ModernWidget.WIDGET_HEIGHT);
+		UI.setSize(mSearchField, 300, ModernWidget.WIDGET_HEIGHT);
 		box2.add(mSearchField); //new ModernTextBorderPanel(mSearchField, 400));
 		box2.add(UI.createHGap(5));
 		box2.add(mLoadButton);

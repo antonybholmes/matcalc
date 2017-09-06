@@ -15,15 +15,11 @@
  */
 package edu.columbia.rdf.matcalc.toolbox;
 
-import java.io.IOException;
-import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-import org.jebtk.core.NameProperty;
-import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.help.GuiAppInfo;
-import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
@@ -34,14 +30,25 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * access the current matrix and add new matrices to the work flow as well
  * as provide
  */
-public interface Module extends NameProperty {
+public abstract class Module extends FileModule implements Iterable<FileModule> {
+	
+	private List<FileModule> mFileModules = new ArrayList<FileModule>();
+	
+	public void registerFileModule(FileModule module) {
+		mFileModules.add(module);
+	}
+	
+	@Override
+	public Iterator<FileModule> iterator() {
+		return mFileModules.iterator();
+	}
 	
 	/**
 	 * Gets the module info.
 	 *
 	 * @return the module info
 	 */
-	public GuiAppInfo getModuleInfo();
+	public abstract GuiAppInfo getModuleInfo();
 	
 	/**
 	 * Each module is given access to the app so that it can manipulate
@@ -49,87 +56,12 @@ public interface Module extends NameProperty {
 	 *
 	 * @param window the window
 	 */
-	public void init(MainMatCalcWindow window);
+	public abstract void init(MainMatCalcWindow window);
 	
 	/**
 	 * Should run itself.
 	 *
 	 * @param args the args
 	 */
-	public void run(String... args);
-	
-	/**
-	 * If this module can open a certain file type, return an ext filter
-	 * so that this module is registered for the files with a given set
-	 * of extensions. There can only be one module associated with a file
-	 * extension. Modules are loaded in order, so if there are two modules
-	 * registered for a given file type, the second will ultimately be
-	 * bound to that file type.
-	 * 
-	 * @return		A file filter or null if the module does not open 
-	 * 				a file.
-	 */
-	public Set<GuiFileExtFilter> getOpenFileFilters();
-	
-	
-	/**
-	 * Open a file prompting user for options.
-	 * 
-	 * @param window
-	 * @param file
-	 * @param hasHeader
-	 * @param skipMatches
-	 * @param rowAnnotations
-	 * @param delimiter
-	 * @return
-	 * @throws IOException
-	 */
-	public AnnotationMatrix openFile(final MainMatCalcWindow window,
-			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
-			int rowAnnotations,
-			String delimiter) throws IOException;
-	
-	/**
-	 * Open a file without prompting user for options.
-	 * 
-	 * @param window
-	 * @param file
-	 * @param hasHeader
-	 * @param skipMatches
-	 * @param rowAnnotations
-	 * @param delimiter
-	 * @return
-	 * @throws IOException
-	 */
-	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
-			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
-			int rowAnnotations,
-			String delimiter) throws IOException;
-	
-	/**
-	 * Gets the save file filter.
-	 *
-	 * @return the save file filter
-	 */
-	//public GuiFileExtFilter getSaveFileFilter();
-	
-	public Set<GuiFileExtFilter> getSaveFileFilters();
-
-	/**
-	 * Save file.
-	 *
-	 * @param window the window
-	 * @param file the file
-	 * @param m the m
-	 * @return true if the file was saved or false otherwise.
-	 * 
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public boolean saveFile(final MainMatCalcWindow window,
-			final Path file, 
-			final AnnotationMatrix m) throws IOException;
+	public abstract void run(String... args);
 }

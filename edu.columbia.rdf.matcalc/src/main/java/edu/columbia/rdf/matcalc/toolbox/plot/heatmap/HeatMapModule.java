@@ -102,7 +102,7 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void plot() throws IOException {
-		Figure figure = new Figure();
+		Figure figure = Figure.createFigure();
 		
 		figure.setLayout(new PlotBoxGridLayout(1, mParent.getMatrices().size()));
 
@@ -119,7 +119,7 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
 			//subFigure.getAxesZModel().get(BorderLocation.S).addZ(new SubFigureVFiller(100));
 			
 			
-			Axes axes = subFigure.getCurrentAxes();
+			Axes axes = subFigure.currentAxes();
 
 			PlotFactory.createHeatMap(m, subFigure, axes, mParent.getGroups());
 
@@ -129,7 +129,7 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
 			axes.getTitle().setText(m.getName()).setVisible(false);
 			
 			// Cycle through color maps to make plots
-			axes.getCurrentPlot().setColorMap(MAPS[c % MAPS.length]);
+			axes.currentPlot().setColorMap(MAPS[c % MAPS.length]);
 			
 			++c;
 		}

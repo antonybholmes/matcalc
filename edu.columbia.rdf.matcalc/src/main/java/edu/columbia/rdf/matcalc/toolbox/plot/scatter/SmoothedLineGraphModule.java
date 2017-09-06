@@ -127,11 +127,11 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
 			return;
 		}
 		
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure subFigure = figure.getCurrentSubFigure();
+		SubFigure subFigure = figure.currentSubFigure();
 		
-		mAxes = subFigure.getCurrentAxes();
+		mAxes = subFigure.currentAxes();
 		
 		mAxes.setMargins(100);
 		

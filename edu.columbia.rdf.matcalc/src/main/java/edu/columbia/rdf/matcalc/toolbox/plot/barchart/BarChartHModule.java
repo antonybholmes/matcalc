@@ -82,9 +82,9 @@ public class BarChartHModule extends CalcModule implements ModernClickListener {
 
 		XYSeriesGroup groups = mParent.getGroups();
 
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure graph = figure.getCurrentSubFigure();
+		SubFigure graph = figure.currentSubFigure();
 
 		Axes axes = graph.newAxes();
 

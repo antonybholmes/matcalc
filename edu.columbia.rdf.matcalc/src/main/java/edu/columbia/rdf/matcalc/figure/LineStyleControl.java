@@ -24,7 +24,7 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.properties.LineProperties;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.color.ColorSwatchButton;
@@ -93,7 +93,7 @@ public class LineStyleControl extends HBox implements ModernClickListener {
 
 		mLineStyle = lineStyle;
 		
-		mCheckBox = new ModernCheckBox(name);
+		mCheckBox = new ModernCheckSwitch(name);
 		mCheckBox.setSelected(lineStyle.getVisible());
 		
 		mColorButton = new ColorSwatchButton(parent, lineStyle.getColor());
@@ -131,21 +131,6 @@ public class LineStyleControl extends HBox implements ModernClickListener {
 					e1.printStackTrace();
 				}
 			}});
-		
-		/*
-		mTextWidth.addKeyListener(new KeyAdapter() {
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					try {
-						setStroke();
-					} catch (ParseException e1) {
-						e1.printStackTrace();
-					}
-				}
-			}});
-			*/
 	}
 	
 	/**
@@ -154,10 +139,12 @@ public class LineStyleControl extends HBox implements ModernClickListener {
 	 * @throws ParseException the parse exception
 	 */
 	public void setStroke() throws ParseException {
-		mLineStyle.setColor(mColorButton.getSelectedColor());
-		mLineStyle.setVisible(mCheckBox.isSelected());
-		mLineStyle.setStroke(mStrokeButton.getSelectedStroke(), 
+		mLineStyle.updateColor(mColorButton.getSelectedColor());
+		
+		mLineStyle.updateStroke(mStrokeButton.getSelectedStroke(), 
 				mTextWidth.getIntValue());
+		
+		mLineStyle.setVisible(mCheckBox.isSelected());
 	}
 
 	/* (non-Javadoc)
@@ -165,6 +152,8 @@ public class LineStyleControl extends HBox implements ModernClickListener {
 	 */
 	@Override
 	public void clicked(ModernClickEvent e) {
+		System.err.println("line click");
+		
 		try {
 			setStroke();
 		} catch (ParseException e1) {

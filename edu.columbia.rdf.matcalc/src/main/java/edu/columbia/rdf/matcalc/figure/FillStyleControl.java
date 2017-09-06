@@ -24,7 +24,7 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.properties.FillPattern;
 import org.jebtk.graphplot.figure.properties.FillProperties;
 import org.jebtk.modern.button.CheckBox;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.color.ColorSwatchButton;
@@ -119,7 +119,7 @@ public class FillStyleControl extends HBox implements ModernClickListener {
 			FillProperties fill) {
 		mFillStyle = fill;
 		
-		mCheckBox = new ModernCheckBox(name);
+		mCheckBox = new ModernCheckSwitch(name);
 		mCheckBox.setSelected(fill.getVisible());
 		
 		mColorButton = new ColorSwatchButton(parent, fill.getColor());
@@ -168,7 +168,7 @@ public class FillStyleControl extends HBox implements ModernClickListener {
 	 */
 	@Override
 	public void clicked(ModernClickEvent e) {
-		mFillStyle.setColor(getSelectedColor());
+		mFillStyle.updateColor(getSelectedColor());
 		mFillStyle.setVisible(isSelected());
 	}
 

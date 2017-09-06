@@ -78,11 +78,11 @@ public class HistogramModule extends CalcModule implements ModernClickListener {
 	private void createPlot() {
 		AnnotationMatrix m = mParent.getCurrentMatrix();
 
-		Figure figure = new Figure();
+		Figure figure = Figure.createFigure();
 
-		SubFigure subFigure = figure.getCurrentSubFigure();
+		SubFigure subFigure = figure.currentSubFigure();
 		
-		Axes axes = subFigure.getCurrentAxes();
+		Axes axes = subFigure.currentAxes();
 
 		HistBin[] hist = Statistics.histogram(m.columnAsDouble(0), 1);
 

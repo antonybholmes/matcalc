@@ -19,7 +19,7 @@ import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.properties.VisibleProperties;
 import org.jebtk.modern.button.CheckBox;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.HBox;
@@ -54,7 +54,7 @@ public class VisibleControl extends HBox implements ModernClickListener {
 	 * @param vp the vp
 	 */
 	public VisibleControl(ModernWindow parent, VisibleProperties vp) {
-		mCheckBox = new ModernCheckBox("Show");
+		mCheckBox = new ModernCheckSwitch("Show");
 		
 		add(mCheckBox);
 		//setBorder(ModernWidget.BORDER);

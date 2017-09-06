@@ -156,9 +156,9 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
 		}
 		 */
 
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure subFigure = figure.getCurrentSubFigure();
+		SubFigure subFigure = figure.currentSubFigure();
 
 		PlotFactory.createClusterHeatMap(m, subFigure, mParent.getGroups(), rowCluster, columnCluster);
 

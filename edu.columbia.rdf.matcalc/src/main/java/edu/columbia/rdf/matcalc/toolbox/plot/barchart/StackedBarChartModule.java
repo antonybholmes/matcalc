@@ -80,13 +80,13 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
 	private void createBarChart() {
 		AnnotationMatrix m = mParent.getCurrentMatrix();
 
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure graph = figure.getCurrentSubFigure();
+		SubFigure graph = figure.currentSubFigure();
 		
 		XYSeriesGroup groups = mParent.getRowGroups();
 
-		Axes axes = graph.getCurrentAxes();
+		Axes axes = graph.currentAxes();
 
 		ColorCycle colorCycle = new ColorCycle();
 		

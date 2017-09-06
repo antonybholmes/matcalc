@@ -291,11 +291,11 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		// Create plot
 		//
 
-		Figure figure = new Figure();
+		Figure figure = Figure.createFigure();
 
-		SubFigure subFigure = figure.getCurrentSubFigure();
+		SubFigure subFigure = figure.currentSubFigure();
 
-		Axes axes = subFigure.getCurrentAxes();
+		Axes axes = subFigure.currentAxes();
 
 		XYSeries notSigSeries = new XYSeries("Non-significant");
 		XYSeries foldUpSeries = new XYSeries("Up Significant");

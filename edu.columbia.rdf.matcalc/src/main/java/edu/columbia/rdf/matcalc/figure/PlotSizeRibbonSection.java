@@ -138,9 +138,9 @@ public class PlotSizeRibbonSection extends RibbonSection {
 		int w = mWField.getIntValue();
 		int h = mHField.getIntValue();
 
-		Axes axes = new Axes();
+		Axes axes = Axes.createAxes();
 		
-		axes.setInternalPlotSize(w, h);
+		axes.setInternalSize(w, h);
 
 		mModel.set(axes);
 	}

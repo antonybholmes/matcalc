@@ -15,19 +15,13 @@
  */
 package edu.columbia.rdf.matcalc.toolbox;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.help.GuiAppInfo;
-import org.jebtk.modern.io.GuiFileExtFilter;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -37,7 +31,7 @@ import edu.columbia.rdf.matcalc.MatCalcInfo;
 /**
  * The class CalcModule.
  */
-public abstract class CalcModule implements Module {
+public abstract class CalcModule extends Module {
 
 	/**
 	 * The constant LOAD_MATRIX_MESSAGE.
@@ -48,14 +42,6 @@ public abstract class CalcModule implements Module {
 	/** The Constant DEFAULT_INFO. */
 	private static final GuiAppInfo DEFAULT_INFO = 
 			new MatCalcInfo();
-	
-	/** The m open file filters. */
-	private Set<GuiFileExtFilter> mOpenFileFilters =
-			new TreeSet<GuiFileExtFilter>();
-	
-	/** The m save file filters. */
-	private Set<GuiFileExtFilter> mSaveFileFilters =
-			new TreeSet<GuiFileExtFilter>();
 
 	/* (non-Javadoc)
 	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#getModuleInfo()
@@ -79,74 +65,6 @@ public abstract class CalcModule implements Module {
 	@Override
 	public void run(String... args) {
 		// Do nothing
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.Module#getOpenFileFilters()
-	 */
-	@Override
-	public Set<GuiFileExtFilter> getOpenFileFilters() {
-		return mOpenFileFilters;	
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.Module#getSaveFileFilters()
-	 */
-	@Override
-	public Set<GuiFileExtFilter> getSaveFileFilters() {
-		return mSaveFileFilters;	
-	}
-	
-	/**
-	 * Register file type.
-	 *
-	 * @param filter the filter
-	 */
-	public void registerFileOpenType(GuiFileExtFilter filter) {
-		mOpenFileFilters.add(filter);
-	}
-	
-	/**
-	 * Register file save type.
-	 *
-	 * @param filter the filter
-	 */
-	public void registerFileSaveType(GuiFileExtFilter filter) {
-		mSaveFileFilters.add(filter);
-	}
-	
-	
-	@Override
-	public AnnotationMatrix openFile(final MainMatCalcWindow window,
-			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
-			int rowAnnotations,
-			String delimiter) throws IOException {
-		return autoOpenFile(window, file, hasHeader, skipMatches, rowAnnotations, delimiter);	
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.Module#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
-	 */
-	@Override
-	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
-			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
-			int rowAnnotations,
-			String delimiter) throws IOException {
-		return null;	
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.Module#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.AnnotationMatrix)
-	 */
-	@Override
-	public boolean saveFile(final MainMatCalcWindow window,
-			final Path file, 
-			final AnnotationMatrix m) throws IOException {
-		return false;
 	}
 	
 	/**

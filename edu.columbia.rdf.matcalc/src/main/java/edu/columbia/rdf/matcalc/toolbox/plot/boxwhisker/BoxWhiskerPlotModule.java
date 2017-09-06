@@ -98,11 +98,11 @@ public class BoxWhiskerPlotModule extends CalcModule implements ModernClickListe
 	private void boxWhiskerPlot(AnnotationMatrix m, boolean plot) {
 		//Graph2dWindow window = mParent.createNewPlotWindow();
 		
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 		
-		SubFigure graph = figure.getCurrentSubFigure();
+		SubFigure graph = figure.currentSubFigure();
 
-		Axes axes = graph.getCurrentAxes();
+		Axes axes = graph.currentAxes();
 		
 		
 		

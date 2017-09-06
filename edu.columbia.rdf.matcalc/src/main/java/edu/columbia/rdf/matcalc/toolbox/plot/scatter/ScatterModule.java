@@ -77,12 +77,12 @@ public class ScatterModule extends CalcModule implements ModernClickListener {
 	private void createScatter() {
 		AnnotationMatrix m = mParent.getCurrentMatrix();
 
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure subFigure = figure.getCurrentSubFigure();
+		SubFigure subFigure = figure.currentSubFigure();
 
 
-		Axes axes = subFigure.getCurrentAxes();
+		Axes axes = subFigure.currentAxes();
 		
 		axes.setMargins(100);
 

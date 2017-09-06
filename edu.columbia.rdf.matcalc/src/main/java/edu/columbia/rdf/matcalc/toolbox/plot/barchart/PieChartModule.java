@@ -80,11 +80,11 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
 	private void createBarChart() {
 		AnnotationMatrix m = mParent.getCurrentMatrix();
 		
-		Figure figure = new Figure(); //window.getFigure();
+		Figure figure = Figure.createFigure(); //window.getFigure();
 
-		SubFigure subFigure = figure.getCurrentSubFigure();
+		SubFigure subFigure = figure.currentSubFigure();
 		
-		Axes axes = subFigure.getCurrentAxes();
+		Axes axes = subFigure.currentAxes();
 		
 		XYSeriesGroup allSeries = new XYSeriesGroup("Pie Chart");
 		
