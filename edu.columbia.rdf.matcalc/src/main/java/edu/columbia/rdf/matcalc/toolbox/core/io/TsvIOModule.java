@@ -17,6 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 
 import org.jebtk.math.matrix.AnnotationMatrix;
@@ -62,21 +63,21 @@ public class TsvIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
 
-		if (hasHeader) {
-			return new MixedMatrixParser(hasHeader, 
-					skipMatches, 
+		if (headers > 0) {
+			return new MixedMatrixParser(true, 
+					skipLines, 
 					rowAnnotations, 
 					delimiter).parse(file);
 		} else {
-			return new DynamicMatrixParser(hasHeader, 
-					skipMatches, 
+			return new DynamicMatrixParser(skipLines, 
 					rowAnnotations, 
-					delimiter).parse(file); //return AnnotationMatrix.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
+					delimiter)
+					.parse(file); //return AnnotationMatrix.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
 		}
 	}
 

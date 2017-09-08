@@ -17,6 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -62,16 +63,16 @@ public class XlsxIOModule extends XlIOModule  {
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
 		try {
 			//return Excel.convertXlsxToMatrix(file, 
 			//		hasHeader, 
 			//		rowAnnotations);
 			return ExcelMatrix.xlsxAsMatrix(file, 
-					hasHeader, 
+					headers > 0, 
 					rowAnnotations);
 		} catch (InvalidFormatException e) {
 			throw new IOException(e.getMessage());

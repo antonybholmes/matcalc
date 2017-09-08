@@ -52,5 +52,9 @@ public class LegendControl extends VBox {
 		add(ModernPanel.createVGap());
 				
 		add(new LegendFillPlotControl(parent, legend));
+		
+		add(ModernPanel.createVGap());
+		
+		add(new InsideControl(parent, legend));
 	}
 }

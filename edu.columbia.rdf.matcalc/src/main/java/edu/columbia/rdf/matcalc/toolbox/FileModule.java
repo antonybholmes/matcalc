@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -57,16 +57,16 @@ public abstract class FileModule implements NameProperty {
 	 */
 	public AnnotationMatrix openFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
 		return autoOpenFile(window, 
 				file, 
-				hasHeader, 
-				skipMatches, 
+				headers, 
 				rowAnnotations, 
-				delimiter);
+				delimiter,
+				skipLines);
 	}
 	
 	/**
@@ -74,19 +74,19 @@ public abstract class FileModule implements NameProperty {
 	 * 
 	 * @param window
 	 * @param file
-	 * @param hasHeader
-	 * @param skipMatches
+	 * @param headers			How many lines represent a header.
 	 * @param rowAnnotations
 	 * @param delimiter
+	 * @param skipLines			Skip lines beginning with
 	 * @return
 	 * @throws IOException
 	 */
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
 		return null;
 	}
 	

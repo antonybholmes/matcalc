@@ -15,14 +15,14 @@
  */
 package edu.columbia.rdf.matcalc.figure;
 
-import org.jebtk.graphplot.figure.properties.LegendPosition;
+import org.jebtk.graphplot.figure.GridLocation;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.widget.ModernWidget;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class LegendPositionCombo.
+ * The Class GridLocationCombo.
  */
 public class LegendPositionCombo extends ModernComboBox {
 
@@ -34,15 +34,15 @@ public class LegendPositionCombo extends ModernComboBox {
 	 * Instantiates a new legend position combo.
 	 */
 	public LegendPositionCombo() {
-		addScrollMenuItem("Top Left");
-		addScrollMenuItem("Top Middle");
-		addScrollMenuItem("Top Right");
-		addScrollMenuItem("Center Left");
+		addScrollMenuItem("NW");
+		addScrollMenuItem("N");
+		addScrollMenuItem("NE");
+		addScrollMenuItem("W");
 		addScrollMenuItem("Center");
-		addScrollMenuItem("Center Right");
-		addScrollMenuItem("Bottom Left");
-		addScrollMenuItem("Bottom Middle");
-		addScrollMenuItem("Bottom Right");
+		addScrollMenuItem("E");
+		addScrollMenuItem("SW");
+		addScrollMenuItem("S");
+		addScrollMenuItem("SE");
 		
 		UI.setSize(this, ModernWidget.BIG_SIZE);
 	}
@@ -52,38 +52,36 @@ public class LegendPositionCombo extends ModernComboBox {
 	 *
 	 * @param p the new position
 	 */
-	public void setPosition(LegendPosition p) {
+	public void setPosition(GridLocation p) {
 		// Change the position, but do not trigger click event
 		switch(p) {
-		case TOP_LEFT:
+		case NW:
 			changeSelectedIndex(0);
 			break;
-		case TOP_MIDDLE:
+		case N:
 			changeSelectedIndex(1);
 			break;
-		case TOP_RIGHT:
+		case NE:
 			changeSelectedIndex(2);
 			break;
-		case CENTER_LEFT:
+		case W:
 			changeSelectedIndex(3);
 			break;
-		case CENTER:
-			changeSelectedIndex(4);
-			break;
-		case CENTER_RIGHT:
+		case E:
 			changeSelectedIndex(5);
 			break;
-		case BOTTOM_LEFT:
+		case SW:
 			changeSelectedIndex(6);
 			break;
-		case BOTTOM_MIDDLE:
+		case S:
 			changeSelectedIndex(7);
 			break;
-		case BOTTOM_RIGHT:
+		case SE:
 			changeSelectedIndex(8);
 			break;
 		default:
-			changeSelectedIndex(2);
+			// Center
+			changeSelectedIndex(4);
 			break;
 		}
 	}
@@ -93,28 +91,26 @@ public class LegendPositionCombo extends ModernComboBox {
 	 *
 	 * @return the position
 	 */
-	public LegendPosition getPosition() {
+	public GridLocation getPosition() {
 		switch (getSelectedIndex()) {
 		case 0:
-			return LegendPosition.TOP_LEFT;
+			return GridLocation.NW;
 		case 1:
-			return LegendPosition.TOP_MIDDLE;
+			return GridLocation.N;
 		case 2:
-			return LegendPosition.TOP_RIGHT;
+			return GridLocation.NE;
 		case 3:
-			return LegendPosition.CENTER_LEFT;
-		case 4:
-			return LegendPosition.CENTER;
+			return GridLocation.W;
 		case 5:
-			return LegendPosition.CENTER_RIGHT;
+			return GridLocation.E;
 		case 6:
-			return LegendPosition.BOTTOM_LEFT;
+			return GridLocation.SW;
 		case 7:
-			return LegendPosition.BOTTOM_MIDDLE;
+			return GridLocation.S;
 		case 8:
-			return LegendPosition.BOTTOM_RIGHT;
+			return GridLocation.SE;
 		default:
-			return LegendPosition.TOP_RIGHT;
+			return GridLocation.CENTER;
 		}
 	}
 }

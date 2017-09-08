@@ -178,7 +178,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	 *
 	 * @return the skip matches
 	 */
-	public List<String> getSkipMatches() {
+	public List<String> getSkipLines() {
 		return Splitter.onComma().text(mFieldSkip.getText());
 	}
 	

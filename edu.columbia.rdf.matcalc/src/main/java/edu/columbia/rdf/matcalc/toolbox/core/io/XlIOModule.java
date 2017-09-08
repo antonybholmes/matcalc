@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Collection;
 
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.AnnotationMatrix;
@@ -41,10 +41,10 @@ public abstract class XlIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix openFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
 		ImportDialog dialog = 
 				new ImportDialog(window, 0, true, TextUtils.TAB_DELIMITER);
 
@@ -54,14 +54,14 @@ public abstract class XlIOModule extends IOModule  {
 			return null;
 		}
 
-		hasHeader = dialog.getHasHeader();
+		headers = dialog.getHasHeader() ? 1 : 0;
 		rowAnnotations = dialog.getRowAnnotations();
 
 		return super.openFile(window, 
 				file, 
-				hasHeader, 
-				skipMatches, 
+				headers, 
 				rowAnnotations, 
-				delimiter);
+				delimiter,
+				skipLines);
 	}
 }

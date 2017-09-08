@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.figure;
 
 import java.awt.Font;
 import java.awt.font.TextAttribute;
-import java.text.ParseException;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -135,11 +134,7 @@ public class FontControl extends VBox {
 		mFontSizesCombo.addClickListener(new ModernClickListener() {
 			@Override
 			public void clicked(ModernClickEvent e) {
-				try {
-					mProperties.setFontSize(TextUtils.parseInt(mFontSizesCombo.getText()));
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
+				mProperties.setFontSize(TextUtils.parseInt(mFontSizesCombo.getText()));
 			}});
 
 		mBoldButton.addClickListener(new ModernClickListener() {

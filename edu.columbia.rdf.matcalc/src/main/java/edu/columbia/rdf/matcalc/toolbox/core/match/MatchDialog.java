@@ -46,7 +46,6 @@ public class MatchDialog extends ModernDialogHelpWindow implements ModernClickLi
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
 	/**
 	 * The member match matrix.
 	 */

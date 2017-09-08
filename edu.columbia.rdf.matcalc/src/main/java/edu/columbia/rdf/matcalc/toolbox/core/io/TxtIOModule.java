@@ -17,6 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 
 import org.jebtk.math.matrix.AnnotationMatrix;
@@ -66,10 +67,10 @@ public class TxtIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix openFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
 		
 		ImportDialog dialog = new ImportDialog(window, 
 				MainMatCalcWindow.estimateRowAnnotations(file, true), 
@@ -84,37 +85,37 @@ public class TxtIOModule extends IOModule  {
 		
 		return autoOpenFile(window, 
 				file, 
-				dialog.getHasHeader(), 
-				dialog.getSkipMatches(),
+				dialog.getHasHeader() ? 1: 0,
 				dialog.getRowAnnotations(),
-				dialog.getDelimiter());
+				dialog.getDelimiter(),
+				dialog.getSkipLines());
 	}
 	
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
 		if (delimiter.equals(",")) {
 			// Use the csv parser instead
-			if (hasHeader) {
-				return new CsvMatrixParser(hasHeader, rowAnnotations).parse(file);
+			if (headers > 0) {
+				return new CsvMatrixParser(true, rowAnnotations).parse(file);
 			} else {
-				return new CsvDynamicMatrixParser(hasHeader, rowAnnotations).parse(file);
+				return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
 			}
 		} else {
-			if (hasHeader) {
-				return new MixedMatrixParser(hasHeader, 
-						skipMatches, 
+			if (headers > 0) {
+				return new MixedMatrixParser(true, 
+						skipLines, 
 						rowAnnotations, 
 						delimiter).parse(file);
 			} else {
-				return new DynamicMatrixParser(hasHeader, 
-						skipMatches, 
+				return new DynamicMatrixParser(skipLines, 
 						rowAnnotations, 
-						delimiter).parse(file); //return AnnotationMatrix.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
+						delimiter)
+						.parse(file); //return AnnotationMatrix.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
 			}
 		}
 	}

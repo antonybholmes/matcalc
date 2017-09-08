@@ -23,7 +23,7 @@ import java.awt.event.MouseMotionListener;
 
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
-import org.jebtk.graphplot.figure.properties.LegendPosition;
+import org.jebtk.graphplot.figure.GridLocation;
 import org.jebtk.graphplot.figure.properties.LegendProperties;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.ribbon.Ribbon;
@@ -34,7 +34,7 @@ import org.jebtk.modern.widget.ModernClickWidget;
 
 // TODO: Auto-generated Javadoc
 /**
- * The class LegendPositionPicker.
+ * The class GridLocationPicker.
  */
 public class LegendPositionPicker extends ModernClickWidget implements RibbonModeProperty, TextProperty {
 	
@@ -46,7 +46,7 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
 	/**
 	 * The member position.
 	 */
-	private LegendPosition mPosition = LegendPosition.TOP_RIGHT;
+	private GridLocation mPosition = GridLocation.NE;
 
 	/**
 	 * The member legend.
@@ -100,31 +100,31 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
 		public void mouseClicked(MouseEvent e) {
 			switch (highlighted) {
 			case 0:
-				mPosition = LegendPosition.TOP_LEFT;
+				mPosition = GridLocation.NW;
 				break;
 			case 1:
-				mPosition = LegendPosition.TOP_MIDDLE;
+				mPosition = GridLocation.N;
 				break;
 			case 2:
-				mPosition = LegendPosition.TOP_RIGHT;
+				mPosition = GridLocation.NE;
 				break;
 			case 3:
-				mPosition = LegendPosition.CENTER_LEFT;
-				break;
-			case 4:
-				mPosition = LegendPosition.CENTER;
+				mPosition = GridLocation.W;
 				break;
 			case 5:
-				mPosition = LegendPosition.CENTER_RIGHT;
+				mPosition = GridLocation.E;
 				break;
 			case 6:
-				mPosition = LegendPosition.BOTTOM_LEFT;
+				mPosition = GridLocation.SW;
 				break;
 			case 7:
-				mPosition = LegendPosition.BOTTOM_MIDDLE;
+				mPosition = GridLocation.S;
 				break;
 			case 8:
-				mPosition = LegendPosition.BOTTOM_RIGHT;
+				mPosition = GridLocation.SE;
+				break;
+			default:
+				mPosition = GridLocation.CENTER;
 				break;
 			}
 			
@@ -196,7 +196,7 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
 	 *
 	 * @param position the new position
 	 */
-	private void setPosition(LegendPosition position) {
+	private void setPosition(GridLocation position) {
 		mPosition = position;
 		
 		repaint();
@@ -219,7 +219,7 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
 		
 		int pc = 0;
 		
-		LegendPosition p;
+		GridLocation p;
 		
 		for (int i = 0; i < 3; ++i) {
 			x = PADDING;
@@ -227,31 +227,28 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
 			for (int j = 0; j < 3; ++j) {
 				switch (pc) {
 				case 0:
-					p = LegendPosition.TOP_LEFT;
+					p = GridLocation.NE;
 					break;
 				case 1:
-					p = LegendPosition.TOP_MIDDLE;
+					p = GridLocation.N;
 					break;
 				case 3:
-					p = LegendPosition.CENTER_LEFT;
-					break;
-				case 4:
-					p = LegendPosition.CENTER;
+					p = GridLocation.NW;
 					break;
 				case 5:
-					p = LegendPosition.CENTER_RIGHT;
+					p = GridLocation.NE;
 					break;
 				case 6:
-					p = LegendPosition.BOTTOM_LEFT;
+					p = GridLocation.SW;
 					break;
 				case 7:
-					p = LegendPosition.BOTTOM_MIDDLE;
+					p = GridLocation.S;
 					break;
 				case 8:
-					p = LegendPosition.BOTTOM_RIGHT;
+					p = GridLocation.SE;
 					break;
 				default:
-					p = LegendPosition.TOP_RIGHT;
+					p = GridLocation.CENTER;
 					break;
 				}
 				

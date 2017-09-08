@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Collection;
 
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.CsvDynamicMatrixParser;
@@ -61,14 +61,14 @@ public class CsvIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
-			boolean hasHeader,
-			List<String> skipMatches,
+			int headers,
 			int rowAnnotations,
-			String delimiter) throws IOException {
-		if (hasHeader) {
-			return new CsvMatrixParser(hasHeader, rowAnnotations).parse(file);
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
+		if (headers > 0) {
+			return new CsvMatrixParser(true, rowAnnotations).parse(file);
 		} else {
-			return new CsvDynamicMatrixParser(hasHeader, rowAnnotations).parse(file);
+			return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
 		}
 	}
 			
