@@ -121,7 +121,7 @@ public class ColumnAnnotationModule extends CalcModule implements ModernClickLis
 		//AnnotationMatrix.copyRowAnnotations(m, ret);
 
 		switch (m.getType()) {
-		case NUMERIC:
+		case NUMBER:
 			for (int i = minC; i < c; ++i) {
 				ret.setNumRowAnnotations(m.getText(-1, i), m.columnAsDouble(i));
 			}

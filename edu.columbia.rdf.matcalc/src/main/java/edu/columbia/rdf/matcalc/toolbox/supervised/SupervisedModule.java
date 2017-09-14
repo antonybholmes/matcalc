@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.matcalc.toolbox.stats.ttest.legacy;
+package edu.columbia.rdf.matcalc.toolbox.supervised;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.jebtk.core.Indexed;
@@ -54,7 +55,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
 /**
  * The class OneWayAnovaModule.
  */
-public class TTestModule extends CalcModule implements ModernClickListener {
+public class SupervisedModule extends CalcModule implements ModernClickListener {
 	
 	/**
 	 * The member parent.
@@ -76,10 +77,10 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 	public void init(MainMatCalcWindow window) {
 		mParent = window;
 		
-		RibbonLargeButton button = new RibbonLargeButton("T-Test", 
+		RibbonLargeButton button = new RibbonLargeButton("Supervised Classification", 
 				new Raster32Icon(new DiffExp32VectorIcon()),
-				"T-Test",
-				"Supervised clustering using a T-test.");
+				"Supervised Classification",
+				"Supervised classification.");
 		button.addClickListener(this);
 
 		mParent.getRibbon().getToolbar("Statistics").getSection("Statistics").add(button);
@@ -91,7 +92,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 	@Override
 	public void clicked(ModernClickEvent e) {
 		try {
-			ttest();
+			classification();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (ParseException e1) {
@@ -105,8 +106,8 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws ParseException the parse exception
 	 */
-	private void ttest() throws IOException, ParseException {
-		ttest(new ClusterProperties());
+	private void classification() throws IOException, ParseException {
+		classification(new ClusterProperties());
 	}
 
 	/**
@@ -116,7 +117,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws ParseException the parse exception
 	 */
-	private void ttest(Properties properties) throws IOException, ParseException {
+	private void classification(Properties properties) throws IOException, ParseException {
 		AnnotationMatrix m = mParent.getCurrentMatrix();
 		
 		if (m == null) {
@@ -133,7 +134,8 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 		
 		XYSeriesModel rowGroups = XYSeriesModel.create(mParent.getRowGroups());
 
-		TTestDialog dialog = new TTestDialog(mParent, m, mParent.getGroups());
+		SupervisedDialog dialog = 
+				new SupervisedDialog(mParent, m, mParent.getGroups());
 
 		dialog.setVisible(true);
 
@@ -163,7 +165,6 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 		
 		boolean isLog2 = dialog.getIsLog2Transformed();
 		boolean log2Data = dialog.getLog2Transform();
-		boolean equalVariance = dialog.getEqualVariance();
 		boolean plot = dialog.getCreatePlot();
 
 		FDRType fdrType = dialog.getFDRType();
@@ -174,6 +175,8 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 
 		double classificationAlpha = dialog.getUpDownP(); //0.05;
 
+		TestType testType = dialog.getTest();
+		
 		ttest(m, 
 				minExp, 
 				alpha,
@@ -185,6 +188,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 				topGenes,
 				collapseType,
 				collapseName,
+				testType,
 				fdrType, 
 				g1, 
 				g2,
@@ -192,7 +196,6 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 				rowGroups,
 				isLog2,
 				log2Data, 
-				equalVariance, 
 				plot,
 				properties);
 	}
@@ -235,6 +238,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 			int topGenes,
 			CollapseType collapseType,
 			String rowAnnotation,
+			TestType test,
 			FDRType fdrType,
 			XYSeries g1, 
 			XYSeries g2,
@@ -242,7 +246,6 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 			XYSeriesModel rowGroups,
 			boolean isLog2Data,
 			boolean log2Data,
-			boolean equalVariance,
 			boolean plot,
 			Properties properties) throws IOException, ParseException {
 
@@ -286,8 +289,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 		// P-values
 		//
 
-		List<Double> pValues = 
-				MatrixOperations.tTest(log2M, g1, g2, equalVariance);
+		List<Double> pValues = getP(log2M, g1, g2,test);
 
 		AnnotationMatrix pValuesM = new AnnotatableMatrix(log2M);
 				
@@ -475,7 +477,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 			posZScores = CollectionUtils.reverseSort(CollectionUtils.subList(zscoresIndexed, 
 					MathUtils.ge(zscoresIndexed, minZ)));
 		} else {
-			posZScores = new ArrayList<Indexed<Integer, Double>>();
+			posZScores = Collections.emptyList(); //new ArrayList<Indexed<Integer, Double>>();
 		}
 		
 		List<Indexed<Integer, Double>> negZScores;
@@ -484,7 +486,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 			negZScores = CollectionUtils.sort(CollectionUtils.subList(zscoresIndexed, 
 					MathUtils.lt(zscoresIndexed, -minZ)));
 		} else {
-			negZScores = new ArrayList<Indexed<Integer, Double>>();
+			negZScores = Collections.emptyList(); //new ArrayList<Indexed<Integer, Double>>();
 		}
 		
 		// Filter for top genes if necessary
@@ -542,7 +544,7 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 					.add(new CountGroup("down", ui.size(), indices.size() - 1));
 			
 			
-			mParent.addToHistory(new TTestPlotMatrixTransform(mParent, 
+			mParent.addToHistory(new SupervisedPlotMatrixTransform(mParent, 
 					mNormalized, 
 					groups,
 					comparisonGroups,
@@ -555,5 +557,25 @@ public class TTestModule extends CalcModule implements ModernClickListener {
 		// Add a reference at the end so that it is easy for users to find
 		// the matrix they probably want the most
 		mParent.addToHistory("Results", mDeltaSorted);
+	}
+	
+	public static List<Double> getP(AnnotationMatrix m, 
+			XYSeries g1, 
+			XYSeries g2,
+			TestType test) {
+		List<Double> pValues;
+		
+		switch (test) {
+		case MANN_WHITNEY:
+			pValues = MatrixOperations.mannWhitney(m, g1, g2);
+			break;
+		default:
+			pValues = MatrixOperations.tTest(m, 
+					g1, 
+					g2, 
+					test == TestType.TTEST_EQUAL_VARIANCE);
+		}
+		
+		return pValues;
 	}
 }

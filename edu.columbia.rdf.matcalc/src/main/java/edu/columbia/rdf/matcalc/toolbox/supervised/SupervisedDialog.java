@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.matcalc.toolbox.stats.ttest.legacy;
+package edu.columbia.rdf.matcalc.toolbox.supervised;
 
 import java.text.ParseException;
 import java.util.List;
@@ -28,8 +28,10 @@ import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.statistics.FDRType;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
+import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
+import org.jebtk.modern.button.ModernRadioButton;
 import org.jebtk.modern.dialog.ModernDialogMultiCardWindow;
 import org.jebtk.modern.dialog.ModernDialogTaskType;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -52,7 +54,7 @@ import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
 /**
  * The class TTestDialog.
  */
-public class TTestDialog extends ModernDialogMultiCardWindow {
+public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	
 	/**
 	 * The constant serialVersionUID.
@@ -124,7 +126,8 @@ public class TTestDialog extends ModernDialogMultiCardWindow {
 	/** The m up down P field. */
 	private ModernCompactSpinner mUpDownPField = 
 			new ModernCompactSpinner(0, 1, 0.05, 0.01);
-
+	
+	private TestCombo mTestCombo = new TestCombo();
 
 	/**
 	 * Instantiates a new t test dialog.
@@ -133,11 +136,11 @@ public class TTestDialog extends ModernDialogMultiCardWindow {
 	 * @param matrix the matrix
 	 * @param groups the groups
 	 */
-	public TTestDialog(ModernWindow parent, 
+	public SupervisedDialog(ModernWindow parent, 
 			AnnotationMatrix matrix,
 			XYSeriesGroup groups) {
 		super(parent, 
-				"T-Test Differential Expression",
+				"Supervised Classification",
 				"matcalc.ttest.help.url",
 				ModernDialogTaskType.OK_CANCEL);
 		
@@ -208,6 +211,13 @@ public class TTestDialog extends ModernDialogMultiCardWindow {
 		
 		box = VBox.create();
 		
+		sectionHeader("Test", box);
+		
+		box.add(mTestCombo);
+
+
+		midSectionHeader("Correction", box);
+		
 		//sectionHeader("Multiple Comparison Options", box);
 		box.add(mFdrPanel);
 		
@@ -219,7 +229,8 @@ public class TTestDialog extends ModernDialogMultiCardWindow {
 		
 		addTab("Statistics", box);
 
-		mTabsModel.changeTab(0);
+		
+		getTabsModel().changeTab(0);
 	}
 	
 	/* (non-Javadoc)
@@ -419,6 +430,10 @@ public class TTestDialog extends ModernDialogMultiCardWindow {
 	 * @return the min fold change
 	 */
 	public double getMinFoldChange() {
-		return mFilterPanel.getMinFoldChange();
+		return  mFilterPanel.getMinFoldChange();
+	}
+
+	public TestType getTest() {
+		return mTestCombo.getTest();
 	}
 }

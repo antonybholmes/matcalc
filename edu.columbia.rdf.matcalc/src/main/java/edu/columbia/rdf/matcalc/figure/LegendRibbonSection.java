@@ -59,6 +59,9 @@ public class LegendRibbonSection extends RibbonSection {
 	/** The m show background button. */
 	private CheckBox mShowBackgroundButton = 
 			new ModernCheckSwitch("Background");
+	
+	private CheckBox mInsideButton = 
+			new ModernCheckSwitch("Inside");
 
 	/**
 	 * The legend position picker.
@@ -76,7 +79,7 @@ public class LegendRibbonSection extends RibbonSection {
 		
 		mLegend = legend;
 		
-		add(mShowButton, mShowBorderButton, mShowBackgroundButton);
+		add(mShowButton, mShowBorderButton, mShowBackgroundButton, mInsideButton);
 		add(ModernPanel.createHGap());
 		addSeparator();
 		//add(ModernPanel.createHGap());
@@ -87,6 +90,7 @@ public class LegendRibbonSection extends RibbonSection {
 		mShowButton.setSelected(legend.getVisible());
 		mShowBorderButton.setSelected(legend.getStyle().getLineStyle().getVisible());
 		mShowBackgroundButton.setSelected(legend.getStyle().getFillStyle().getVisible());
+		mInsideButton.setSelected(legend.isInside());
 		
 		mShowButton.addClickListener(new ModernClickListener() {
 			@Override
@@ -104,6 +108,12 @@ public class LegendRibbonSection extends RibbonSection {
 			@Override
 			public void clicked(ModernClickEvent e) {
 				mLegend.getStyle().getFillStyle().setVisible(mShowBackgroundButton.isSelected());
+			}});
+		
+		mInsideButton.addClickListener(new ModernClickListener() {
+			@Override
+			public void clicked(ModernClickEvent e) {
+				mLegend.setInside(mInsideButton.isSelected());
 			}});
 		
 		mLegend.addChangeListener(new ChangeListener() {

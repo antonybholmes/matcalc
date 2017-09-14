@@ -19,8 +19,25 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.window.ModernWindow;
 
-public class VolcanoPlotMatrixTransform extends PlotFigureTransform {
+import edu.columbia.rdf.matcalc.MainMatCalcWindow;
+import edu.columbia.rdf.matcalc.PlotMatrixTransform;
+import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * Transform the rows of a matrix.
+ * 
+ * @author Antony Holmes Holmes
+ *
+ */
+public class PlotFigureTransform extends PlotMatrixTransform {
 	
+	/**
+	 * The member canvas.
+	 */
+	private Figure mFigure;
+
 	/**
 	 * Instantiates a new volcano plot matrix transform.
 	 *
@@ -28,7 +45,20 @@ public class VolcanoPlotMatrixTransform extends PlotFigureTransform {
 	 * @param inputMatrix the input matrix
 	 * @param figure the canvas
 	 */
-	public VolcanoPlotMatrixTransform(ModernWindow parent, AnnotationMatrix m, Figure figure) {
-		super(parent, "Create Volcano Plot", m, figure);
+	public PlotFigureTransform(ModernWindow parent, 
+			String name,
+			AnnotationMatrix m,
+			Figure figure) {
+		super(parent, name, m);
+		
+		mFigure = figure;
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
+	 */
+	@Override
+	public Graph2dWindow createWindow() {
+		return new Graph2dWindow((MainMatCalcWindow) getParent(), mFigure);
 	}
 }

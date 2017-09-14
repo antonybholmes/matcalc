@@ -484,7 +484,11 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		public boolean open() throws IOException {
 			boolean status = false;
 			
+			System.err.println("ha" + mWindow.mInputFiles.size() + " " + mOpenMode);
+			
 			for (Path file : mFiles) {
+				System.err.println("ha" + file + " " + mWindow.mInputFiles.size() + " " + mOpenMode);
+				
 				if (mWindow.mInputFiles.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
 					MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
 					window.setVisible(true);
@@ -1315,7 +1319,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	private void browseForFile(Path pwd) throws IOException, SAXException, ParserConfigurationException, InvalidFormatException, ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, UnsupportedLookAndFeelException {
 		//openFile(BioInfDialog.openMatrixFile(this, pwd));
 
-		openFile(FileDialog.openFile(this, pwd, mOpenFileFilters));
+		openFile(FileDialog.openFile(this, pwd, mOpenFileFilters)).open();
 	}
 
 	/**
@@ -1325,7 +1329,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @return the open file
 	 */
 	public OpenFile openFile(Path file) {
-		System.err.println("matalcl opne " + file.toAbsolutePath());
 		return openFiles(CollectionUtils.asList(file.toAbsolutePath()));
 	}
 	

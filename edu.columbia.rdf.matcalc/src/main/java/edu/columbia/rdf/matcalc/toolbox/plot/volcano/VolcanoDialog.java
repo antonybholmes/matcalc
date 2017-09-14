@@ -27,6 +27,7 @@ import org.jebtk.math.statistics.FDRType;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -41,6 +42,8 @@ import edu.columbia.rdf.matcalc.GroupMenuItem;
 import edu.columbia.rdf.matcalc.figure.PlotConstants;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapsePanel;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
+import edu.columbia.rdf.matcalc.toolbox.supervised.TestCombo;
+import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,7 +60,7 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 	 * The check log2.
 	 */
 	private CheckBox checkLog2 = 
-			new ModernCheckBox(PlotConstants.MENU_LOG_TRANSFORM, true);
+			new ModernCheckSwitch(PlotConstants.MENU_LOG_TRANSFORM, true);
 	
 	
 	/**
@@ -84,13 +87,9 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 	 * The check plot.
 	 */
 	private CheckBox checkPlot = 
-			new ModernCheckBox(PlotConstants.MENU_CREATE_PLOT, true);
+			new ModernCheckSwitch(PlotConstants.MENU_CREATE_PLOT, true);
 	
-	/**
-	 * The check equal variance.
-	 */
-	private CheckBox checkEqualVariance = 
-			new ModernCheckBox("Equal variance between groups");
+	private TestCombo mTestCombo = new TestCombo();
 	
 	/**
 	 * The check reset.
@@ -215,14 +214,14 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 		box.add(UI.createVGap(5));
 		box.add(new HExpandBox("Group 2", mGroup2Combo));
 		box.add(UI.createVGap(5));
-		box.add(checkEqualVariance);
+		box.add(mTestCombo);
 		
 		midSectionHeader("False Discovery Rate", box);
 
 		box.add(mFdrPanel);
 		
 		
-		box.add(UI.createVGap(30));
+		box.add(UI.createVGap(20));
 		box.add(checkPlot);
 		
 		setDialogCardContent(box);
@@ -273,13 +272,8 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 		return checkLog2.isSelected();
 	}
 	
-	/**
-	 * Gets the equal variance.
-	 *
-	 * @return the equal variance
-	 */
-	public boolean getEqualVariance() {
-		return checkEqualVariance.isSelected();
+	public TestType getTest() {
+		return mTestCombo.getTest();
 	}
 	
 	/**

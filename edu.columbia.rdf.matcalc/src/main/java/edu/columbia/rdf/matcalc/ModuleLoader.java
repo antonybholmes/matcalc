@@ -63,7 +63,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.scatter.ScatterModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.scatter.SmoothedLineGraphModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
-import edu.columbia.rdf.matcalc.toolbox.stats.ttest.legacy.TTestModule;
+import edu.columbia.rdf.matcalc.toolbox.supervised.SupervisedModule;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -127,7 +127,7 @@ public class ModuleLoader {
 		
 		addModule(RowOrderModule.class);
 		addModule(ColumnFilterModule.class);
-		addModule(TTestModule.class);
+		addModule(SupervisedModule.class);
 		addModule(VennModule.class);
 		addModule(ZoomModule.class);
 		addModule(ViewModule.class);

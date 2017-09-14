@@ -44,14 +44,13 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.Raster32Icon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
-import org.jebtk.modern.theme.ThemeService;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 import edu.columbia.rdf.matcalc.icons.VolcanoPlot32VectorIcon;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
-import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseModule;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
+import edu.columbia.rdf.matcalc.toolbox.supervised.SupervisedModule;
+import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -154,8 +153,8 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		double pvalue = dialog.getMaxP();
 
 		boolean logData = dialog.getLog2Transform();
-		boolean equalVariance = dialog.getEqualVariance();
 		boolean plot = dialog.getCreatePlot();
+		TestType test = dialog.getTest();
 
 		FDRType fdrType = dialog.getFDRType();
 
@@ -167,12 +166,12 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 				minExp, 
 				pvalue, 
 				collapseType, 
-				collapseName, 
+				collapseName,
+				test,
 				fdrType, 
 				g1, 
 				g2, 
 				logData, 
-				equalVariance, 
 				plot);
 	}
 
@@ -197,36 +196,38 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 			double alpha,
 			CollapseType collapseType,
 			String collapseName,
+			TestType test,
 			FDRType fdrType,
-			MatrixGroup g1, 
-			MatrixGroup g2,
+			XYSeries g1, 
+			XYSeries g2,
 			boolean logData,
-			boolean equalVariance,
-			boolean plot) throws ParseException {
+			boolean plot) {
 
 		List<MatrixGroup> groups = new ArrayList<MatrixGroup>();
 		groups.add(g1);
 		groups.add(g2);
 
 
-		AnnotationMatrix mColumnFiltered = 
-				mParent.addToHistory("Keep group columns", AnnotatableMatrix.copyInnerColumns(m, groups));
+		AnnotationMatrix columnFilteredM = 
+				mParent.addToHistory("Keep group columns", 
+						AnnotatableMatrix.copyInnerColumns(m, groups));
 
 
-		AnnotationMatrix mlog2;
+		AnnotationMatrix log2M;
 
 		if (logData) {
-			mlog2 = mParent.addToHistory("log2", MatrixOperations.log2(MatrixOperations.min(mColumnFiltered, minExp)));
+			log2M = mParent.addToHistory("log2", 
+					MatrixOperations.log2(MatrixOperations.min(columnFilteredM, minExp)));
 		} else {
-			mlog2 = m;
+			log2M = m;
 		}
 
 
-		List<Double> p = MatrixUtils.tTest(mlog2, g1, g2, equalVariance);
+		List<Double> p = SupervisedModule.getP(log2M, g1, g2, test);
 
-		List<Double> foldChanges = MatrixUtils.logFoldChange(mlog2, g1, g2);
+		List<Double> foldChanges = MatrixUtils.logFoldChange(log2M, g1, g2);
 
-		AnnotationMatrix annM = new AnnotatableMatrix(mlog2);
+		AnnotationMatrix annM = new AnnotatableMatrix(log2M);
 		annM.setNumRowAnnotations("Log2 Fold Change", foldChanges);
 		mParent.addToHistory("Add log2 fold changes", annM);
 
@@ -235,19 +236,19 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		mParent.addToHistory("Add p-values", pValuesM);
 
 
-		AnnotationMatrix mcollapsed = CollapseModule.collapse(pValuesM,
-				collapseName,
-				g1,
-				g2,
-				collapseType,
-				mParent);
+		//AnnotationMatrix mcollapsed = CollapseModule.collapse(pValuesM,
+		//		collapseName,
+		//		g1,
+		//		g2,
+		//		collapseType,
+		//		mParent);
 
-		mParent.addToHistory("Collapse rows", mcollapsed);
+		//mParent.addToHistory("Collapse rows", mcollapsed);
 
-		double[] fdr = Statistics.fdr(mcollapsed.getRowAnnotationValues("P-value"), 
+		double[] fdr = Statistics.fdr(pValuesM.getRowAnnotationValues("P-value"), 
 				fdrType);
 
-		AnnotationMatrix fdrM = new AnnotatableMatrix(mcollapsed);
+		AnnotationMatrix fdrM = new AnnotatableMatrix(pValuesM);
 		fdrM.setNumRowAnnotations("FDR", fdr);
 		mParent.addToHistory("False discovery rate", fdrM);
 
@@ -265,8 +266,6 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		double[] pFoldChangeAnnotation = 
 				fdrM.getRowAnnotationValues("Log2 Fold Change");
 
-
-		// Create a plot
 
 
 
@@ -296,28 +295,30 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		SubFigure subFigure = figure.currentSubFigure();
 
 		Axes axes = subFigure.currentAxes();
+		
+		axes.getLegend().setInside(false);
 
-		XYSeries notSigSeries = new XYSeries("Non-significant");
-		XYSeries foldUpSeries = new XYSeries("Up Significant");
-		XYSeries foldDownSeries = new XYSeries("Down Significant");
+		XYSeries notSigSeries1 = new XYSeries("Non-significant");
+		XYSeries foldUpSeries = new XYSeries("Up");
+		XYSeries foldDownSeries = new XYSeries("Down");
 
-		notSigSeries.getStyle().getFillStyle().setColor(ThemeService.getInstance().colors().getHighlight(2));
-		notSigSeries.getStyle().getLineStyle().setColor(ThemeService.getInstance().colors().getHighlight(4));
-		notSigSeries.setMarker(ShapeStyle.CIRCLE);
-
-
-		foldUpSeries.getStyle().getFillStyle().setColor(ColorUtils.decodeHtmlColor("#ff5555"));
-		foldUpSeries.getStyle().getLineStyle().setColor(Color.RED);
+		notSigSeries1.getStyle().setVisible(false);
+		notSigSeries1.setMarker(ShapeStyle.CIRCLE);
+		notSigSeries1.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.GRAY, 0.5));
+		notSigSeries1.getMarkerStyle().getLineStyle().setColor(Color.GRAY);
+		
+		foldUpSeries.getStyle().setVisible(false);
 		foldUpSeries.setMarker(ShapeStyle.CIRCLE);
+		foldUpSeries.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.RED, 0.5));
+		foldUpSeries.getMarkerStyle().getLineStyle().setColor(Color.RED);
 
-		foldDownSeries.getStyle().getFillStyle().setColor(ColorUtils.decodeHtmlColor("#5555ff"));
-		foldDownSeries.getStyle().getLineStyle().setColor(Color.BLUE);
+		foldDownSeries.getStyle().setVisible(false);
+
 		foldDownSeries.setMarker(ShapeStyle.CIRCLE);
-
+		foldDownSeries.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.BLUE, 0.5));
+		foldDownSeries.getMarkerStyle().getLineStyle().setColor(Color.BLUE);
 
 		double pthres = -Mathematics.log10(alpha);
-
-		Matrix foldM;
 
 		int c;
 
@@ -325,30 +326,31 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		// No Signal
 		//
 
-		foldM = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+		Matrix foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
 
 		c = 0;
 
 		for (int i = 0; i < log2FoldChanges.size(); ++i) {
 			if (minusLog10PValues.get(i) <= pthres) {
-				foldM.update(c, 0, log2FoldChanges.get(i));
-				foldM.update(c, 1, minusLog10PValues.get(i));
+				foldM1.update(c, 0, log2FoldChanges.get(i));
+				foldM1.update(c, 1, minusLog10PValues.get(i));
 
 				++c;
 			}
 		}
+		
 		
 		double minX = 0;
 		double minY = 0;
 		double maxX = 1;
 		double maxY = 1;
 
-		if (foldM.getRowCount() > 0) {
-			AnnotationMatrix noSigM = new AnnotatableMatrix(foldM);
+		if (foldM1.getRowCount() > 0) {
+			AnnotationMatrix noSigM = new AnnotatableMatrix(foldM1);
 
 			noSigM.setColumnNames("Non-significant x", "Non-significant y");
 
-			PlotFactory.createScatterPlot(noSigM, axes, notSigSeries);
+			PlotFactory.createScatterPlot(noSigM, axes, notSigSeries1);
 			
 			minX = Math.min(minX, MatrixUtils.minInColumn(noSigM, 0));
 			maxX = Math.max(maxX, MatrixUtils.maxInColumn(noSigM, 0));
@@ -360,23 +362,24 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		// Down
 		//
 
-		foldM = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+		foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
 
 		c = 0;
 
 		for (int i = 0; i < log2FoldChanges.size(); ++i) {
 			if (minusLog10PValues.get(i) > pthres && log2FoldChanges.get(i) < 0) {
-				foldM.update(c, 0, log2FoldChanges.get(i));
-				foldM.update(c, 1, minusLog10PValues.get(i));
+				foldM1.update(c, 0, log2FoldChanges.get(i));
+				foldM1.update(c, 1, minusLog10PValues.get(i));
 
 				++c;
 			}
 		}
 
-		if (foldM.getRowCount() > 0) {
-			AnnotationMatrix foldDownM = new AnnotatableMatrix(foldM);
+		if (foldM1.getRowCount() > 0) {
+			AnnotationMatrix foldDownM = new AnnotatableMatrix(foldM1);
 
-			foldDownM.setColumnNames("Down Significant x", "Down Significant y");
+			foldDownM.setColumnNames(foldDownSeries.getName() + " x", 
+					foldDownSeries.getName() + " y");
 
 			PlotFactory.createScatterPlot(foldDownM, axes, foldDownSeries);
 			
@@ -390,23 +393,24 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		// up
 		//
 
-		foldM = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+		foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
 
 		c = 0;
 
 		for (int i = 0; i < log2FoldChanges.size(); ++i) {
 			if (minusLog10PValues.get(i) > pthres && log2FoldChanges.get(i) >= 0) {
-				foldM.update(c, 0, log2FoldChanges.get(i));
-				foldM.update(c, 1, minusLog10PValues.get(i));
+				foldM1.update(c, 0, log2FoldChanges.get(i));
+				foldM1.update(c, 1, minusLog10PValues.get(i));
 
 				++c;
 			}
 		}
 
-		if (foldM.getRowCount() > 0) {
-			AnnotationMatrix foldUpM = new AnnotatableMatrix(foldM);
+		if (foldM1.getRowCount() > 0) {
+			AnnotationMatrix foldUpM = new AnnotatableMatrix(foldM1);
 
-			foldUpM.setColumnNames("Up Significant x", "Up Significant y");
+			foldUpM.setColumnNames(foldUpSeries.getName() + " x", 
+					foldUpSeries.getName() + " y");
 
 			PlotFactory.createScatterPlot(foldUpM, axes, foldUpSeries);
 			
@@ -416,49 +420,21 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 			maxY = Math.max(maxY, MatrixUtils.maxInColumn(foldUpM, 1));
 		}
 
-		/*
-			if (minusLog10PValues.get(i) > pthres) {
-				if (log2FoldChanges.get(i) >= 0) {
-					foldUpSeries.add(mfdr.getRowName(i), log2FoldChanges.get(i), minusLog10PValues.get(i));
-				} else {
-					foldDownSeries.add(mfdr.getRowName(i), log2FoldChanges.get(i), minusLog10PValues.get(i));
-				}
-			} else {
-				notSigSeries.add(mfdr.getRowName(i), log2FoldChanges.get(i), minusLog10PValues.get(i));
-			}
-		 */
-
-
-
-
-
-
-		//gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
-
-
-		// How big to make the x axis
-		//double min = Mathematics.min(log2FoldChanges);
-		//double max = Mathematics.max(log2FoldChanges);
-
 		double x = Math.max(Math.abs(minX), Math.abs(maxX));
 
 		axes.getX1Axis().setLimitsAutoRound(Math.signum(minX) * x, Math.signum(maxX) * x);
-		//gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
 		axes.getX1Axis().getTitle().setText("Log2 fold change");
 
 
 		double y = Math.max(Math.abs(minY), Math.abs(maxY));
 		
 		axes.getY1Axis().setLimitsAutoRound(Math.signum(minY) * y, Math.signum(maxY) * y);
-		//gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
 		axes.getY1Axis().getTitle().setText("-Log10 p-value");
 
 		axes.setMargins(100);
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-
-		window.setVisible(true);
+		mParent.addToHistory(new VolcanoPlotMatrixTransform(mParent, fdrM, figure));
+		
+		mParent.addToHistory("Results", fdrM);
 	}
 }

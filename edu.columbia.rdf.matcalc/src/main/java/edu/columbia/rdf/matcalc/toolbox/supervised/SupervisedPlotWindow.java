@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.matcalc.toolbox.stats.ttest.legacy;
+package edu.columbia.rdf.matcalc.toolbox.supervised;
 
 import java.util.List;
 
@@ -24,23 +24,27 @@ import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
-import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressionPlotMatrixTransform;
+import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressionPlotWindow;
 
 // TODO: Auto-generated Javadoc
 /**
- * Creates a ttest plot of a matrix. Attempts to reuse
- * existing plot if it still exists.
- * 
+ * Merges designated segments together using the merge column. Consecutive rows with the same
+ * merge id will be merged together. Coordinates and copy number will be adjusted but
+ * genes, cytobands etc are not.
+ *
  * @author Antony Holmes Holmes
  *
  */
-public class TTestPlotMatrixTransform extends DifferentialExpressionPlotMatrixTransform {
+public class SupervisedPlotWindow extends DifferentialExpressionPlotWindow  {
 	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
 	/**
-	 * Instantiates a new t test plot matrix transform.
+	 * Instantiates a new t test plot window.
 	 *
-	 * @param parent the parent
-	 * @param inputMatrix the input matrix
+	 * @param window the window
+	 * @param matrix the matrix
 	 * @param groups the groups
 	 * @param comparisonGroups the comparison groups
 	 * @param rowGroups the row groups
@@ -48,37 +52,22 @@ public class TTestPlotMatrixTransform extends DifferentialExpressionPlotMatrixTr
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public TTestPlotMatrixTransform(ModernRibbonWindow parent,
-			AnnotationMatrix inputMatrix, 
+	public SupervisedPlotWindow(ModernRibbonWindow window,
+			AnnotationMatrix matrix,
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,
 			XYSeriesModel rowGroups,
 			CountGroups countGroups,
 			List<String> history,
 			Properties properties) {
-		super(parent,
-				"Create T-Test Plot",
-				inputMatrix,
+		super(window,
+				"Supervised Classification",
+				matrix, 
 				groups,
 				comparisonGroups,
 				rowGroups,
 				countGroups,
 				history,
 				properties);
-	}
-
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
-	 */
-	@Override
-	public TTestPlotWindow createWindow() {
-		return new TTestPlotWindow((ModernRibbonWindow)mParent,
-				mMatrix,
-				mGroups,
-				mComparisonGroups,
-				mRowGroups,
-				mCountGroups,
-				mHistory,
-				mProperties);
 	}
 }
