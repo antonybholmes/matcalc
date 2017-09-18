@@ -31,7 +31,7 @@ import javax.swing.Box;
 
 import org.jebtk.core.Mathematics;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogTaskType;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;

@@ -19,7 +19,7 @@ import java.text.ParseException;
 
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.MatrixTransforms;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;

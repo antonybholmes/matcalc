@@ -15,7 +15,7 @@ normalize() * Copyright 2016 Antony Holmes
  */
 package edu.columbia.rdf.matcalc.toolbox.math;
 
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.event.ModernClickEvent;

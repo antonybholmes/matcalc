@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.math;
 
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;

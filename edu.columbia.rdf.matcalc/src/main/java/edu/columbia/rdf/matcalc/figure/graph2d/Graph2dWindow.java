@@ -31,7 +31,7 @@ import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.contentpane.SizableContentPane;

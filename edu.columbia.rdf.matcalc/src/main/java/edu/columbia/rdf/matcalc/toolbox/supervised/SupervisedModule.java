@@ -35,7 +35,7 @@ import org.jebtk.math.matrix.AnnotatableMatrix;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.DoubleMatrix;
 import org.jebtk.math.matrix.Matrix;
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.statistics.FDRType;
 import org.jebtk.math.statistics.Statistics;
 import org.jebtk.modern.dialog.ModernDialogStatus;

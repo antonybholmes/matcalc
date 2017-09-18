@@ -23,7 +23,7 @@ import org.jebtk.core.collections.ArrayListCreator;
 import org.jebtk.core.collections.DefaultHashMap;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.MatrixGroup;
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;

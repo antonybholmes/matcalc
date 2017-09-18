@@ -15,7 +15,7 @@ normalize() * Copyright 2016 Antony Holmes
  */
 package edu.columbia.rdf.matcalc.toolbox.math;
 
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -61,6 +61,6 @@ public class TransposeModule extends CalcWinModule implements ModernClickListene
 	public void clicked(ModernClickEvent e) {
 		mWindow.addToHistory("Transpose", 
 				"Transpose", 
-				MatrixOperations.transpose(mWindow.getCurrentMatrix()));
+				(AnnotationMatrix)mWindow.getCurrentMatrix().transpose());
 	}
 }

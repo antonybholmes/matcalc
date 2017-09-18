@@ -27,7 +27,7 @@ import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.AnnotatableMatrix;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.MatrixGroup;
-import org.jebtk.math.matrix.MatrixOperations;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.statistics.Statistics;
 import org.jebtk.modern.graphics.colormap.ColorMapModel;
 import org.jebtk.modern.tabs.TabsModel;
