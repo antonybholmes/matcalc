@@ -23,6 +23,7 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 
+import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
@@ -41,12 +42,17 @@ public abstract class XlIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix openFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,
 			Collection<String> skipLines) throws IOException {
+		
+		
+		
+		
 		ImportDialog dialog = 
-				new ImportDialog(window, 0, true, TextUtils.TAB_DELIMITER);
+				new ImportDialog(window, 0, true, TextUtils.TAB_DELIMITER, false);
 
 		dialog.setVisible(true);
 
@@ -58,7 +64,8 @@ public abstract class XlIOModule extends IOModule  {
 		rowAnnotations = dialog.getRowAnnotations();
 
 		return super.openFile(window, 
-				file, 
+				file,
+				type,
 				headers, 
 				rowAnnotations, 
 				delimiter,

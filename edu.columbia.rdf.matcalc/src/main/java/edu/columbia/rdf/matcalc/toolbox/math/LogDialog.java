@@ -30,9 +30,7 @@ package edu.columbia.rdf.matcalc.toolbox.math;
 import javax.swing.Box;
 
 import org.jebtk.modern.UI;
-import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButtonGroup;
-import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.button.ModernRadioButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.dialog.ModernDialogTaskType;
@@ -95,10 +93,6 @@ public class LogDialog extends ModernDialogHelpWindow implements ModernClickList
 	 */
 	private ModernCompactSpinner mAddField =
 			new ModernCompactSpinner(1, 100, 1);
-	
-	/** The m check keep text. */
-	private CheckBox mCheckKeepText = 
-			new ModernCheckBox("Keep text");
 	
 	/**
 	 * Instantiates a new log dialog.

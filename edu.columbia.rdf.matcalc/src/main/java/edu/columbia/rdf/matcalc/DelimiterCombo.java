@@ -34,8 +34,8 @@ public class DelimiterCombo extends ModernComboBox {
 	 * Instantiates a new delimiter combo.
 	 */
 	public DelimiterCombo() {
-		addMenuItem("<Tab>");
-		addMenuItem("<Space>");
+		addMenuItem("Tab");
+		addMenuItem("Space");
 		addMenuItem(",");
 		addMenuItem(";");
 		

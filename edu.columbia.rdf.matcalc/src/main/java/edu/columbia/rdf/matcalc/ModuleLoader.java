@@ -39,18 +39,18 @@ import edu.columbia.rdf.matcalc.toolbox.core.io.MatrixIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.TsvIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.TxtIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.XlsIOModule;
-import edu.columbia.rdf.matcalc.toolbox.core.io.XlsxIOModule;
+import edu.columbia.rdf.matcalc.toolbox.core.io.XLSXIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.match.MatchModule;
 import edu.columbia.rdf.matcalc.toolbox.core.roworder.RowOrderModule;
 import edu.columbia.rdf.matcalc.toolbox.core.search.SearchColumnModule;
-import edu.columbia.rdf.matcalc.toolbox.core.shift.ShiftModule;
 import edu.columbia.rdf.matcalc.toolbox.core.sort.SortColumnsByRowModule;
 import edu.columbia.rdf.matcalc.toolbox.core.sort.SortModule;
 import edu.columbia.rdf.matcalc.toolbox.core.venn.VennModule;
 import edu.columbia.rdf.matcalc.toolbox.math.LogModule;
 import edu.columbia.rdf.matcalc.toolbox.math.NormalizeModule;
 import edu.columbia.rdf.matcalc.toolbox.math.PowerModule;
-import edu.columbia.rdf.matcalc.toolbox.math.QuantileNormalizeModule;
+import edu.columbia.rdf.matcalc.toolbox.math.StatsModule;
+import edu.columbia.rdf.matcalc.toolbox.math.ThresholdModule;
 import edu.columbia.rdf.matcalc.toolbox.math.TransposeModule;
 import edu.columbia.rdf.matcalc.toolbox.math.ZScoreModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.barchart.BarChartModule;
@@ -81,7 +81,7 @@ public class ModuleLoader {
 	public ModuleLoader() {
 		addModule(MatrixIOModule.class);
 		addModule(ExcelIOModule.class);
-		addModule(XlsxIOModule.class);
+		addModule(XLSXIOModule.class);
 		addModule(XlsIOModule.class);
 		addModule(TxtIOModule.class);
 		addModule(TsvIOModule.class);
@@ -99,14 +99,15 @@ public class ModuleLoader {
 		addModule(BoxWhiskerPlotModule.class);
 		addModule(BoxWhiskerScatterPlotModule.class);
 		addModule(VolcanoPlotModule.class);
-		addModule(ShiftModule.class);
+		
 		
 		addModule(TransposeModule.class);
+		addModule(ThresholdModule.class);
 		addModule(LogModule.class);
 		addModule(PowerModule.class);
-		addModule(ZScoreModule.class);
 		addModule(NormalizeModule.class);
-		addModule(QuantileNormalizeModule.class);
+		addModule(ZScoreModule.class);
+		addModule(StatsModule.class);
 		
 		addModule(SortModule.class);
 		addModule(SortColumnsByRowModule.class);

@@ -25,6 +25,7 @@ import org.jebtk.core.NameProperty;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
+import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
 // TODO: Auto-generated Javadoc
@@ -57,12 +58,14 @@ public abstract class FileModule implements NameProperty {
 	 */
 	public AnnotationMatrix openFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,
 			Collection<String> skipLines) throws IOException {
 		return autoOpenFile(window, 
-				file, 
+				file,
+				type,
 				headers, 
 				rowAnnotations, 
 				delimiter,
@@ -74,6 +77,7 @@ public abstract class FileModule implements NameProperty {
 	 * 
 	 * @param window
 	 * @param file
+	 * @param mFileType 
 	 * @param headers			How many lines represent a header.
 	 * @param rowAnnotations
 	 * @param delimiter
@@ -83,6 +87,7 @@ public abstract class FileModule implements NameProperty {
 	 */
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type, 
 			int headers,
 			int rowAnnotations,
 			String delimiter,

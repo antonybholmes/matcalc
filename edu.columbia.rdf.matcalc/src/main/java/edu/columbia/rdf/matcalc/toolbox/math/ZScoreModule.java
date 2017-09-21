@@ -17,10 +17,11 @@ package edu.columbia.rdf.matcalc.toolbox.math;
 
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
-import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.ribbon.RibbonLargeButton;
+import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernTwoLineMenuItem;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
@@ -51,20 +52,22 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
 	public void init(MainMatCalcWindow window) {
 		mWindow = window;
 
-		ModernButton button = new RibbonLargeButton("z-score", 
-				UIService.getInstance().loadIcon("z_score", UIService.ICON_SIZE_32),
-				"z-score", 
-				"z-score values.");
+		ModernPopupMenu popup = new ModernPopupMenu();
+
+		popup.addMenuItem(new ModernTwoLineMenuItem("Matrix", 
+				"Z-score matrix.", 
+				UIService.getInstance().loadIcon("z_score", 32)));
+		popup.addMenuItem(new ModernTwoLineMenuItem("Row",
+				"Row z-score.",
+				UIService.getInstance().loadIcon("z_score", 32)));
+
+		// The default behaviour is to do a log2 transform.
+		RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Z-score", 
+				UIService.getInstance().loadIcon("z_score", 32), popup);
+		button.setChangeText(false);
+		button.setToolTip("Z-score", "Z-score functions.");
+		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
 		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Transform").getSection("Z-score").add(button);
-		
-		button = new RibbonLargeButton("Row", 
-				UIService.getInstance().loadIcon("z_score", UIService.ICON_SIZE_32),
-				"Row z-score", 
-				"z-score rows.");
-		button.setClickMessage("Row z-score");
-		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Transform").getSection("Z-score").add(button);
 
 	}
 
@@ -73,7 +76,7 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
 	 */
 	@Override
 	public void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("z-score")) {
+		if (e.getMessage().equals("Matrix")) {
 			mWindow.addToHistory("z-score", "z-score", MatrixOperations.zscore(mWindow.getCurrentMatrix())); //new ZScoreMatrixTransform(this, getCurrentMatrix()));
 		} else if (e.getMessage().equals("Row z-score")) {
 			mWindow.addToHistory("Row z-score", "Row z-score", MatrixOperations.rowZscore(mWindow.getCurrentMatrix())); //addFlowItem(new ZScoreRowsMatrixTransform(this, getCurrentMatrix()));

@@ -149,12 +149,12 @@ public class CollapseModule extends CalcModule implements ModernClickListener  {
 			ret = MatrixOperations.collapseMaxStdDev(m, rowAnnotationCollapseName); //new CollapseMaxStdDevMatrixView(m, rowAnnotationCollapseName);
 			break;
 		case MAX_MEAN:
-			ret = MatrixOperations.addMean(m);
+			ret = MatrixOperations.addRowMeans(m);
 			window.addToHistory("Add Mean", ret);
 			ret = MatrixOperations.collapseMaxMean(m, rowAnnotationCollapseName); //new CollapseMaxMeanMatrixView(m, rowAnnotationCollapseName);
 			break;
 		case MAX_MEDIAN:
-			ret = MatrixOperations.addMedian(m);
+			ret = MatrixOperations.addRowMedians(m);
 			window.addToHistory("Add Median", ret);
 			ret = MatrixOperations.collapseMaxMedian(ret, rowAnnotationCollapseName); //return new CollapseMaxMedianMatrixView(m, rowAnnotationCollapseName);
 			break;

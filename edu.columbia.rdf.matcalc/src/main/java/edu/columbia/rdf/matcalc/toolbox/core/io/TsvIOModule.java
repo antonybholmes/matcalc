@@ -18,14 +18,14 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.List;
 
 import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DoubleMatrixParser;
 import org.jebtk.math.matrix.DynamicMatrixParser;
-import org.jebtk.math.matrix.MixedMatrixParser;
 import org.jebtk.modern.io.GuiFileExtFilter;
 import org.jebtk.modern.io.TsvGuiFileFilter;
 
+import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
 
@@ -63,13 +63,14 @@ public class TsvIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,
 			Collection<String> skipLines) throws IOException {
 
 		if (headers > 0) {
-			return new MixedMatrixParser(true, 
+			return new DoubleMatrixParser(true, 
 					skipLines, 
 					rowAnnotations, 
 					delimiter).parse(file);

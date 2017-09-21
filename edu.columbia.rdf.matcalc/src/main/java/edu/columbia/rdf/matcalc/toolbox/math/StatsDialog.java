@@ -25,13 +25,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package edu.columbia.rdf.matcalc.toolbox.core;
+package edu.columbia.rdf.matcalc.toolbox.math;
 
 import javax.swing.Box;
 
 import org.jebtk.core.Mathematics;
-import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogTaskType;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
@@ -39,7 +37,6 @@ import org.jebtk.modern.panel.HExpandBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.text.ModernClipboardNumericalTextField;
 import org.jebtk.modern.text.ModernTextBorderPanel;
-import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
@@ -50,13 +47,13 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * @author Antony Holmes Holmes
  *
  */
-public class SummaryDialog extends ModernDialogTaskWindow {
+public class StatsDialog extends ModernDialogTaskWindow {
 	
 	/**
 	 * The constant serialVersionUID.
 	 */
 	private static final long serialVersionUID = 1L;
-	private MainMatCalcWindow mWindow;
+	private double mValue;
 	
 	
 	/**
@@ -65,13 +62,14 @@ public class SummaryDialog extends ModernDialogTaskWindow {
 	 * @param parent the parent
 	 * @param checked the checked
 	 */
-	public SummaryDialog(MainMatCalcWindow parent) {
-		super(parent, false, ModernDialogTaskType.CLOSE);
+	public StatsDialog(MainMatCalcWindow parent, 
+			String name,
+			double value) {
+		super(parent, ModernDialogTaskType.CLOSE);
 		
-		setTitle("Summary");
+		setTitle(name);
 		
-		mWindow = parent;
-		
+		mValue = value;
 		setup();
 
 		createUi();
@@ -81,7 +79,7 @@ public class SummaryDialog extends ModernDialogTaskWindow {
 	 * Setup.
 	 */
 	private void setup() {
-		setSize(400, 300);
+		setSize(400, 180);
 		
 		UI.centerWindowToScreen(this);
 	}
@@ -92,22 +90,10 @@ public class SummaryDialog extends ModernDialogTaskWindow {
 	 * Creates the ui.
 	 */
 	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
-		
 		Box box = VBox.create();
 		
-		box.add(new HExpandBox("Min", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.min(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Max", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.max(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Sum", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.sum(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Mean", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.mean(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Median", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.median(m), 4), false), 120)));
-
+		box.add(new HExpandBox(getTitle(), new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(mValue, 4), false), 120)));
+	
 		setDialogCardContent(box);
 	}
 }

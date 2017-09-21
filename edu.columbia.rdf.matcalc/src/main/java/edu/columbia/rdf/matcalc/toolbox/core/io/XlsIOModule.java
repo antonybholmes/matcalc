@@ -26,6 +26,7 @@ import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.ui.external.microsoft.XlsGuiFileFilter;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
+import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
 
@@ -62,6 +63,7 @@ public class XlsIOModule extends XlIOModule  {
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,

@@ -18,16 +18,21 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.external.microsoft.ExcelMatrix;
+import org.jebtk.math.external.microsoft.XLSXMetaData;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
+import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
+import edu.columbia.rdf.matcalc.FileType;
+import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
+import edu.columbia.rdf.matcalc.OpenFile;
 
 
 // TODO: Auto-generated Javadoc
@@ -36,7 +41,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  *
  * @author Antony Holmes Holmes
  */
-public class XlsxIOModule extends XlIOModule  {
+public class XLSXIOModule extends XlIOModule  {
 
 	/** The Constant FILTER. */
 	private static final GuiFileExtFilter FILTER = new XlsxGuiFileFilter();
@@ -44,7 +49,7 @@ public class XlsxIOModule extends XlIOModule  {
 	/**
 	 * Instantiates a new xlsx IO module.
 	 */
-	public XlsxIOModule() {
+	public XLSXIOModule() {
 		registerFileOpenType(FILTER);
 		registerFileSaveType(FILTER);
 	}
@@ -54,7 +59,44 @@ public class XlsxIOModule extends XlIOModule  {
 	 */
 	@Override
 	public String getName() {
-		return "Excel Xlsx IO";
+		return "Excel XLSX IO";
+	}
+	
+	@Override
+	public AnnotationMatrix openFile(final MainMatCalcWindow window,
+			final Path file,
+			FileType type,
+			int headers,
+			int rowAnnotations,
+			String delimiter,
+			Collection<String> skipLines) throws IOException {
+		
+		XLSXMetaData metaData = new XLSXMetaData(file);
+		
+		rowAnnotations = metaData.estimateRowAnnotations();
+		
+		ImportDialog dialog = new ImportDialog(window, 
+				rowAnnotations, 
+				true, 
+				delimiter, 
+				metaData.isNumerical(rowAnnotations));
+
+		dialog.setVisible(true);
+
+		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+			return null;
+		}
+
+		headers = dialog.getHasHeader() ? 1 : 0;
+		rowAnnotations = dialog.getRowAnnotations();
+
+		return autoOpenFile(window, 
+				file,
+				type,
+				headers, 
+				rowAnnotations, 
+				delimiter,
+				skipLines);
 	}
 
 	/* (non-Javadoc)
@@ -63,6 +105,7 @@ public class XlsxIOModule extends XlIOModule  {
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,

@@ -45,12 +45,11 @@ public class TransposeModule extends CalcWinModule implements ModernClickListene
 	public void init(MainMatCalcWindow window) {
 		super.init(window);
 
-		RibbonLargeButton button = new RibbonLargeButton("Transpose", 
-				UIService.getInstance().loadIcon("transpose", 24),
+		RibbonLargeButton button = new RibbonLargeButton(UIService.getInstance().loadIcon("transpose", 24),
 				"Transpose", 
 				"Transpose a matrix.");
 		button.addClickListener(this);
-		window.getRibbon().getToolbar("Transform").getSection("Transform").add(button);
+		window.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
 
 	}
 

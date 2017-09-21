@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.matcalc.toolbox.core.shift;
+package edu.columbia.rdf.matcalc.toolbox.math;
 
 import java.text.ParseException;
 
@@ -22,11 +22,12 @@ import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.MatrixTransforms;
 import org.jebtk.modern.UIService;
-import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.input.ModernInputDialog;
-import org.jebtk.modern.ribbon.RibbonLargeButton;
+import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernTwoLineMenuItem;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
@@ -38,7 +39,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  *
  * @author Antony Holmes Holmes
  */
-public class ShiftModule extends CalcModule implements ModernClickListener {
+public class ThresholdModule extends CalcModule implements ModernClickListener {
 	/**
 	 * The member window.
 	 */
@@ -58,30 +59,25 @@ public class ShiftModule extends CalcModule implements ModernClickListener {
 	@Override
 	public void init(MainMatCalcWindow window) {
 		mWindow = window;
+		
+		ModernPopupMenu popup = new ModernPopupMenu();
 
-		ModernButton button;
+		popup.addMenuItem(new ModernTwoLineMenuItem("Min", 
+				"Ensure each cell has a minimum value.", 
+				UIService.getInstance().loadIcon("min", 32)));
+		popup.addMenuItem(new ModernTwoLineMenuItem("Min/Max",
+				"Threshold all values between maximum and maximum.",
+				UIService.getInstance().loadIcon("min_max", 32)));
+		popup.addMenuItem(new ModernTwoLineMenuItem("Min Shift",
+				"Shift all values to be >= 0.",
+				UIService.getInstance().loadIcon("min_shift", 32)));
 
-		button = new RibbonLargeButton("Min", 
-				UIService.getInstance().loadIcon("min", 32),
-				"Min Filter", 
-				"Set all values below minimum to minimum.");
+		// The default behaviour is to do a log2 transform.
+		RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Threshold", popup);
+		button.setChangeText(false);
+		button.setToolTip("Threshold", "Threshold functions.");
+		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
 		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Transform").getSection("Shift").add(button);
-
-		button = new RibbonLargeButton("Min/Max", 
-				UIService.getInstance().loadIcon("min_max", 32),
-				"Min/Max Filter", 
-				"Set all values below minimum to minimum and all values above maximum to maximum.");
-		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Transform").getSection("Shift").add(button);
-
-		button = new RibbonLargeButton("Min Shift", 
-				UIService.getInstance().loadIcon("min_shift", 32),
-				"Min Shift", 
-				"Shift all values so that the minimum is the greater of zero or itself.");
-		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Transform").getSection("Shift").add(button);
-
 	}
 
 	/* (non-Javadoc)
@@ -98,11 +94,12 @@ public class ShiftModule extends CalcModule implements ModernClickListener {
 			mWindow.addToHistory("Minimum Threshold", 
 					MatrixTransforms.minMaxThreshold(mWindow, m, 1, 10000)); //addFlowItem(new MinMaxMatrixTransform(this, getCurrentMatrix(), 1, 10000));
 		} else if (e.getMessage().equals("Min Shift")) {
-			mWindow.addToHistory("Min Shift", 
-					MatrixTransforms.subtract(mWindow, m, 1));
+			minShift(); //mWindow.addToHistory("Min Shift", MatrixTransforms.subtract(mWindow, m, 1));
 		} else if (e.getMessage().equals("Median Shift")) {
 			mWindow.addToHistory("Median Shift", 
 					MatrixOperations.divide(m, MatrixOperations.median(m))); //.collapseMaxMedian(m, rowAnnotation)MatrixTransforms.medianShift(mWindow, m));
+		} else {
+			
 		}
 	}
 	
@@ -111,7 +108,7 @@ public class ShiftModule extends CalcModule implements ModernClickListener {
 	 *
 	 * @throws ParseException the parse exception
 	 */
-	private void minShift() throws ParseException {
+	private void minShift() {
 		AnnotationMatrix m = mWindow.getCurrentMatrix();
 		
 		double min = MatrixOperations.min(m);
@@ -129,7 +126,7 @@ public class ShiftModule extends CalcModule implements ModernClickListener {
 			return;
 		}
 		
-		double add = TextUtils.parseDouble(dialog.getText());
+		double add = Double.parseDouble(dialog.getText());
 		
 		AnnotationMatrix ret = MatrixOperations.add(MatrixOperations.subtract(m, min), add);
 		

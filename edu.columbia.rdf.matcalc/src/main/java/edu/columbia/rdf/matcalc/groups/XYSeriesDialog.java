@@ -49,7 +49,7 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -90,11 +90,11 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
 	 * The member regex check.
 	 */
 	private CheckBox mRegexCheck = 
-			new ModernCheckBox("Regular expression");
+			new ModernCheckSwitch("Regular expression");
 	
 	/** The m check case sensitive. */
 	private CheckBox mCheckCaseSensitive = 
-			new ModernCheckBox("Case sensitive");
+			new ModernCheckSwitch("Case sensitive");
 	
 	/**
 	 * The member color button.

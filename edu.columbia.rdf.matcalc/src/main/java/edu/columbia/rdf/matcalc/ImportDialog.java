@@ -57,7 +57,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	/**
 	 * The member check header.
 	 */
-	private CheckBox mCheckHeader = new ModernCheckSwitch("File has header", 
+	private CheckBox mCheckHeader = new ModernCheckSwitch("Has header row", 
 			SettingsService.getInstance().getAsBool("matcalc.import.file.has-header"));
 	
 	/** The m check skip. */
@@ -68,6 +68,8 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	private ModernTextField mFieldSkip = 
 			new ModernClipboardTextField(SettingsService.getInstance().getAsString("matcalc.import.file.skip.matches"));
 
+	private CheckBox mNumericalCheck = new ModernCheckSwitch("Numerical", true);
+	
 	/** The m delimiter combo. */
 	private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
 	
@@ -82,13 +84,15 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	public ImportDialog(ModernWindow parent, 
 			int rowAnnotations,
 			boolean isExcel,
-			String delimiter) {
+			String delimiter,
+			boolean isNumerical) {
 		super(parent, "matcalc.import.help.url");
 		
 		setTitle("Import");
 	
 		mSpinner = new ModernCompactSpinner(0, 100, rowAnnotations);
 		mDelimiterCombo.setDelimiter(delimiter);
+		mNumericalCheck.setSelected(isNumerical);
 		
 		createUi(isExcel);
 		
@@ -100,7 +104,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	 * Setup.
 	 */
 	private void setup() {
-		setSize(480, 270);
+		setSize(480, 300);
 		
 		mCheckSkip.setEnabled(false);
 		
@@ -129,8 +133,10 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 			box.add(new HExpandBox(mCheckSkip, new ModernTextBorderPanel(mFieldSkip, 80)));
 			box.add(UI.createVGap(5));
 			box.add(new HExpandBox("Delimiter", mDelimiterCombo));
-			
 		}
+		
+		box.add(UI.createVGap(5));
+		box.add(mNumericalCheck);
 		
 		setDialogCardContent(box);
 	}
@@ -189,5 +195,9 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	 */
 	public String getDelimiter() {
 		return mDelimiterCombo.getDelimiter();
+	}
+	
+	public boolean isNumerical() {
+		return mNumericalCheck.isSelected();
 	}
 }

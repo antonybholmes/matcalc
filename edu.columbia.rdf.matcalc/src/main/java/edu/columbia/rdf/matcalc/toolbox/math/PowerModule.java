@@ -21,7 +21,9 @@ import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.ribbon.RibbonLargeButton;
+import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernTwoLineMenuItem;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -52,24 +54,26 @@ public class PowerModule extends CalcModule implements ModernClickListener {
 	@Override
 	public void init(MainMatCalcWindow window) {
 		mWindow = window;
+		
+		ModernPopupMenu popup = new ModernPopupMenu();
 
-		RibbonLargeButton button = new RibbonLargeButton("x^y",
-				UIService.getInstance().loadIcon("log", 24),
-				"x^y", 
-				"Compute the yth power of each cell.");
+		popup.addMenuItem(new ModernTwoLineMenuItem("m^x", 
+				"Compute the xth power of each cell.", 
+				UIService.getInstance().loadIcon("mx", 24)));
+		popup.addMenuItem(new ModernTwoLineMenuItem("x^m",
+				"Compute x to the power of each cell.",
+				UIService.getInstance().loadIcon("xm", 24)));
+		popup.addMenuItem(new ModernTwoLineMenuItem("e^m",
+				"Compute the exponent of each cell.",
+				UIService.getInstance().loadIcon("em", 24)));
+
+		// The default behaviour is to do a log2 transform.
+		RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Power", 
+				UIService.getInstance().loadIcon("xy", 24), popup);
+		button.setChangeText(false);
+		button.setToolTip("Power", "Power functions.");
+		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
 		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Transform").getSection("Transform").add(button);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("x^y")) {
-			mWindow.addToHistory("x^y", 
-					power(mWindow, mWindow.getCurrentMatrix(), 2)); //new Log2MatrixTransform(this, getCurrentMatrix(), 1));
-		}
 	}
 	
 	/**
@@ -88,9 +92,40 @@ public class PowerModule extends CalcModule implements ModernClickListener {
 		dialog.setVisible(true);
 		
 		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			return MatrixOperations.power(matrix, dialog.getBase());
+			return (AnnotationMatrix)MatrixOperations.power(matrix, dialog.getBase());
 		} else {
 			return null;
+		}
+	}
+	
+	public static AnnotationMatrix power(ModernWindow parent, 
+			int base,
+			AnnotationMatrix matrix) {
+		PowerDialog dialog = new PowerDialog(parent, base);
+		
+		dialog.setVisible(true);
+		
+		if (dialog.getStatus() == ModernDialogStatus.OK) {
+			return (AnnotationMatrix)MatrixOperations.power(dialog.getBase(), matrix);
+		} else {
+			return null;
+		}
+	}
+	
+	public static AnnotationMatrix em(AnnotationMatrix matrix) {
+		return (AnnotationMatrix)MatrixOperations.em(matrix);
+	}
+
+	@Override
+	public void clicked(ModernClickEvent e) {
+		if (e.getMessage().equals("m^x")) {
+			mWindow.addToHistory("m^x", 
+					power(mWindow, mWindow.getCurrentMatrix(), 2));
+		} else if (e.getMessage().equals("x^m")) {
+			mWindow.addToHistory("x^m", 
+					power(mWindow, 2, mWindow.getCurrentMatrix()));
+		} else {
+			mWindow.addToHistory("e^m", em(mWindow.getCurrentMatrix()));
 		}
 	}
 }

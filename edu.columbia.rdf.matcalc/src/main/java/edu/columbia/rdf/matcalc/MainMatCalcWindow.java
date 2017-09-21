@@ -49,6 +49,7 @@ import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.io.ReaderUtils;
 import org.jebtk.core.io.Temp;
+import org.jebtk.core.text.RegexUtils;
 import org.jebtk.core.text.Splitter;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
@@ -137,7 +138,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	/**
 	 * The member input file.
 	 */
-	private List<Path> mInputFiles = new ArrayList<Path>();
+	protected List<Path> mInputFiles = new ArrayList<Path>();
 	//private Path outputFile;
 
 	/**
@@ -206,7 +207,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			new ArrayList<GuiFileExtFilter>();
 
 	/** Modules associated with opening files with a given extension. */
-	private Map<String, FileModule> mOpenFileModuleMap =
+	protected Map<String, FileModule> mOpenFileModuleMap =
 			new HashMap<String, FileModule>();
 
 	/** The m save file filters. */
@@ -395,286 +396,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		}
 	}
 
-	/**
-	 * The Class OpenFile.
-	 */
-	public static class OpenFile {
-		
-		/** The m window. */
-		private MainMatCalcWindow mWindow;
-
-		/** The m open mode. */
-		private OpenMode mOpenMode = OpenMode.NEW_WINDOW;
-		
-		/** How many header rows there are. Default assume 1. */
-		private int mHeaders = 1;
-		
-		/** The m row annotations. */
-		private int mRowAnnotations = 0;
-		
-		/** The m delimiter. */
-		private String mDelimiter = TextUtils.TAB_DELIMITER;
-		
-		/** The m skip lines. */
-		private Collection<String> mSkipLines = Collections.emptyList();
-		
-		/** The m files. */
-		private Collection<Path> mFiles;
-
-		/**
-		 * Instantiates a new open file.
-		 *
-		 * @param window the window
-		 * @param file the file
-		 */
-		public OpenFile(MainMatCalcWindow window, Path file) {
-			this(window, CollectionUtils.asList(file));
-		}
-
-		/**
-		 * Instantiates a new open file.
-		 *
-		 * @param window the window
-		 * @param files the files
-		 */
-		public OpenFile(MainMatCalcWindow window, Collection<Path> files) {
-			mWindow = window;
-			mFiles = files;
-		}
-
-		/**
-		 * Instantiates a new open file.
-		 *
-		 * @param openFile the open file
-		 * @param file the file
-		 */
-		public OpenFile(OpenFile openFile, Path file) {
-			this(openFile, CollectionUtils.asList(file));
-		}
-
-		/**
-		 * Instantiates a new open file.
-		 *
-		 * @param openFile the open file
-		 */
-		public OpenFile(OpenFile openFile) {
-			this(openFile, openFile.mFiles);
-		}
-
-		/**
-		 * Instantiates a new open file.
-		 *
-		 * @param openFile the open file
-		 * @param files the files
-		 */
-		public OpenFile(OpenFile openFile, Collection<Path> files) {
-			mWindow = openFile.mWindow;
-			mFiles = files;
-			mHeaders = openFile.mHeaders;
-			mRowAnnotations = openFile.mRowAnnotations;
-			mSkipLines = openFile.mSkipLines;
-		}
-
-		/**
-		 * Open.
-		 *
-		 * @return true, if successful
-		 * @throws IOException Signals that an I/O exception has occurred.
-		 */
-		public boolean open() throws IOException {
-			boolean status = false;
-			
-			System.err.println("ha" + mWindow.mInputFiles.size() + " " + mOpenMode);
-			
-			for (Path file : mFiles) {
-				System.err.println("ha" + file + " " + mWindow.mInputFiles.size() + " " + mOpenMode);
-				
-				if (mWindow.mInputFiles.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
-					MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
-					window.setVisible(true);
-
-					OpenFile of = new OpenFile(this, file);
-					of.mWindow = new MainMatCalcWindow(mWindow.getAppInfo());
-
-					of.open();
-
-					status |= false;
-				} else {
-					String ext = PathUtils.getFileExt(file);
-
-					FileModule module = mWindow.mOpenFileModuleMap.get(ext);
-					
-					System.err.println("what have we here " + file.toAbsolutePath());
-
-					if (module != null) {
-						AnnotationMatrix m = module.openFile(mWindow, 
-							file, 
-							mHeaders,
-							mRowAnnotations,
-							mDelimiter,
-							mSkipLines);
-
-						openMatrix(mWindow, file, m);
-						
-						status |= true;
-					} else {
-						status |= false;
-					}
-				}
-			}
-			
-			return status;
-		}
-
-		/**
-		 * Auto open.
-		 *
-		 * @return true, if successful
-		 * @throws IOException Signals that an I/O exception has occurred.
-		 */
-		public boolean autoOpen() throws IOException {
-			boolean status = false;
-			
-			for (Path file : mFiles) {
-				if (mWindow.mInputFiles.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
-					MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
-					window.setVisible(true);
-
-					OpenFile of = new OpenFile(this, file);
-					of.mWindow = new MainMatCalcWindow(mWindow.getAppInfo());
-
-					of.autoOpen();
-
-					status |= false;
-				} else {
-					String ext = PathUtils.getFileExt(file);
-
-					FileModule module = mWindow.mOpenFileModuleMap.get(ext);
-
-					if (module != null) {
-					AnnotationMatrix m = module.autoOpenFile(mWindow, 
-							file, 
-							mHeaders,
-							mRowAnnotations,
-							mDelimiter,
-							mSkipLines);
-
-						openMatrix(mWindow, file, m);
-						
-						status |= true;
-					} else {
-						status |= false;
-					}
-				}
-			}
-			
-			return status;
-		}
-
-		/**
-		 * Open mode.
-		 *
-		 * @param openMode the open mode
-		 * @return the open file
-		 */
-		public OpenFile openMode(OpenMode openMode) {
-			OpenFile of = new OpenFile(this);
-			of.mOpenMode = openMode;
-			return of;
-		}
-
-		/**
-		 * Headers.
-		 *
-		 * @param headers the headers
-		 * @return the open file
-		 */
-		public OpenFile headers(int headers) {
-			OpenFile of = new OpenFile(this);
-			of.mHeaders = headers;
-			return of;
-		}
-		
-		/**
-		 * No header.
-		 *
-		 * @return the open file
-		 */
-		public OpenFile noHeader() {
-			return headers(0);
-		}
-
-		/**
-		 * Specify the number of row annotations.
-		 *
-		 * @param headers 	the number of row annotations.
-		 * 
-		 * @return 			
-		 */
-		public OpenFile rowAnnotations(int headers) {
-			OpenFile of = new OpenFile(this);
-			of.mRowAnnotations = headers;
-			return of;
-		}
-
-		/**
-		 * Specify the delimiter. The default is the tab character.
-		 *
-		 * @param delimiter the delimiter
-		 * @return the open file
-		 */
-		public OpenFile delimiter(String delimiter) {
-			OpenFile of = new OpenFile(this);
-			of.mDelimiter = delimiter;
-			return of;
-		}
-
-		public OpenFile skipLines(String skip) {
-			return skipLines(CollectionUtils.asList(skip));
-		}
-		
-		/**
-		 * Specify lines that can be skipped at the beginning of the file
-		 * e.g. for example # or %.
-		 * 
-		 * @param skipLines 	the characters that can be skipped.
-		 * @return 				the open file
-		 */
-		public OpenFile skipLines(Collection<String> skipLines) {
-			OpenFile of = new OpenFile(this);
-			of.mSkipLines = skipLines;
-			return of;
-		}
-
-		/**
-		 * Open matrix.
-		 *
-		 * @param window the window
-		 * @param file the file
-		 * @param m the m
-		 * @return true, if successful
-		 */
-		private static boolean openMatrix(MainMatCalcWindow window,
-				Path file,
-				AnnotationMatrix m) {
-			boolean status = false;
-
-			if (m != null) {
-				window.openMatrix(m);
-				status = true;
-			}
-
-			if (status) {
-				window.mInputFiles.add(file);
-
-				RecentFilesService.getInstance().add(file);
-
-				window.setSubTitle(PathUtils.getName(file));
-			}
-
-			return status;
-		}
-	}
+	
 
 	/**
 	 * Instantiates a new main mat calc window.
@@ -748,19 +470,19 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		JComponent content = (JComponent)getContentPane();
 
 		content
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "open");
+		.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+		.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "open");
 		content.getActionMap().put("open", new OpenAction());
 
 		content
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "save");
-		
+		.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+		.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "save");
+
 		content.getActionMap().put("save", new SaveAction());
 
 		content
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), "find");
+		.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+		.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), "find");
 		content.getActionMap().put("find", new FindAction());
 
 		setSize(1440, 900);
@@ -780,7 +502,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		for (Plugin plugin : PluginService.getInstance()) {
 
 			System.err.println("Loading plugin " + plugin.getName());
-			
+
 			module = (Module)plugin.getPluginClass().newInstance();
 
 			mModules.add(module);
@@ -1200,7 +922,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param selectedIndex the selected index
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(MatrixTransform transform, int selectedIndex) {
+	public AnnotationMatrix addToHistory(MatrixTransform transform, 
+			int selectedIndex) {
 		if (transform == null) {
 			return null;
 		}
@@ -1331,7 +1054,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	public OpenFile openFile(Path file) {
 		return openFiles(CollectionUtils.asList(file.toAbsolutePath()));
 	}
-	
+
 	/**
 	 * Open files.
 	 *
@@ -1369,6 +1092,25 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		window.setVisible(true);
 
 	}
+	
+	public boolean openMatrix(Path file, AnnotationMatrix m) {
+		boolean status = false;
+
+		if (m != null) {
+			openMatrix(m);
+			status = true;
+		}
+
+		if (status) {
+			mInputFiles.add(file);
+
+			RecentFilesService.getInstance().add(file);
+
+			setSubTitle(PathUtils.getName(file));
+		}
+
+		return status;
+	}
 
 	/**
 	 * Open matrix.
@@ -1402,8 +1144,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			} else {
 				setSubTitle("Load matrix");
 			}
-
-			//createGroupsPanel(m);
 
 			addToHistory(getSubTitle(), m);
 		}
@@ -1490,122 +1230,13 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 *
 	 * @param file the file
 	 * @param hasHeader the has header
+	 * @param skipLines 
 	 * @return the int
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static int estimateRowAnnotations(Path file, boolean hasHeader) throws IOException {
-		if (BioPathUtils.ext().xlsx().test(file) || BioPathUtils.ext().xls().test(file)) {
-			return 0;
-		}
+	
 
-		BufferedReader reader = FileUtils.newBufferedReader(file);
 
-		int ret = 0;
-
-		try {
-			if (hasHeader) {
-				reader.readLine();
-			}
-
-			List<String> tokens = Splitter.onTab().text(reader.readLine());
-
-			for (int i = 0; i < tokens.size(); ++i) {
-				if (TextUtils.isNumber(tokens.get(i))) {
-					ret = i;
-					break;
-				}
-			}
-		} finally {
-			reader.close();
-		}
-
-		return ret;
-	}
-
-	/**
-	 * Guess the file delimiter.
-	 *
-	 * @param file the file
-	 * @return the string
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static String guessDelimiter(Path file) throws IOException {
-		//
-		// Work out if we need to skip annotation rows that should be
-		// ignored
-
-		int skipLines = FileUtils.countHeaderLines(file);
-
-		BufferedReader reader = FileUtils.newBufferedReader(file);
-
-		String ret = TextUtils.TAB_DELIMITER;
-
-		try {
-			// Skip past any header
-			ReaderUtils.skipLines(reader, skipLines);
-
-			char[] chars = reader.readLine().toCharArray();
-
-			for (char c : chars) {
-				//System.err.println("test " + c + " " + (c == '\t'));
-
-				boolean found = false;
-
-				switch (c) {
-				case '\t':
-					ret = TextUtils.TAB_DELIMITER;
-					found = true;
-					break;
-				case ';':
-					ret = TextUtils.SEMI_COLON_DELIMITER;
-					found = true;
-					break;
-				case ',':
-					ret = TextUtils.COMMA_DELIMITER;
-					found = true;
-					break;
-				default:
-					found = false;
-					break;
-				}
-
-				if (found) {
-					break;
-				}
-			}
-		} finally {
-			reader.close();
-		}
-
-		return ret;
-	}
-
-	/**
-	 * Parses the txt matrix.
-	 *
-	 * @param file the file
-	 * @param hasHeader the has header
-	 * @param skipMatches the skip matches
-	 * @param rowAnnotations the row annotations
-	 * @param delimiter the delimiter
-	 * @return the annotation matrix
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static AnnotationMatrix parseTxtMatrix(Path file, 
-			boolean hasHeader,
-			List<String> skipMatches,
-			int rowAnnotations, 
-			String delimiter) throws IOException {
-		if (hasHeader) {
-			if (rowAnnotations > 0) {
-				return new DoubleMatrixParser(hasHeader, skipMatches, rowAnnotations, delimiter).parse(file);
-			} else {
-				return new MixedMatrixParser(hasHeader, skipMatches, rowAnnotations, delimiter).parse(file);
-			}
-		} else {
-			return AnnotationMatrix.parseDynamicMatrix(file, skipMatches, rowAnnotations, TextUtils.TAB_DELIMITER);
-		}
-	}
 
 	/**
 	 * Adds the group pane to the layout if it is not already showing.
@@ -2325,5 +1956,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		return mZoomModel;
 	}
 
-
+	public FileModule getFileModule(String ext) {
+		return mOpenFileModuleMap.get(ext);
+	}
 }

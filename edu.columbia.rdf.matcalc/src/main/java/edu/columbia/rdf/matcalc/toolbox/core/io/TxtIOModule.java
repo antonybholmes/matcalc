@@ -18,19 +18,21 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.List;
 
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.CsvDynamicMatrixParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
+import org.jebtk.math.matrix.DoubleMatrixParser;
 import org.jebtk.math.matrix.DynamicMatrixParser;
 import org.jebtk.math.matrix.MixedMatrixParser;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.io.GuiFileExtFilter;
 import org.jebtk.modern.io.TxtGuiFileFilter;
 
+import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
+import edu.columbia.rdf.matcalc.OpenFile;
 
 
 // TODO: Auto-generated Javadoc
@@ -67,33 +69,45 @@ public class TxtIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix openFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,
-			Collection<String> skipLines) throws IOException {
+			Collection<String> skipMatches) throws IOException {
+
+		rowAnnotations = OpenFile.estimateRowAnnotations(file, headers, skipMatches);
 		
-		ImportDialog dialog = new ImportDialog(window, 
-				MainMatCalcWindow.estimateRowAnnotations(file, true), 
+		delimiter = OpenFile.guessDelimiter(file, skipMatches);
+		
+		boolean numerical = OpenFile.guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
+		
+		System.err.println("aha " + rowAnnotations + " " + delimiter + " " + numerical);
+		
+		ImportDialog dialog = new ImportDialog(window,
+				rowAnnotations, 
 				false,
-				MainMatCalcWindow.guessDelimiter(file));
+				delimiter,
+				numerical);
 
 		dialog.setVisible(true);
 
 		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
 			return null;
 		}
-		
+
 		return autoOpenFile(window, 
-				file, 
+				file,
+				dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
 				dialog.getHasHeader() ? 1: 0,
 				dialog.getRowAnnotations(),
 				dialog.getDelimiter(),
 				dialog.getSkipLines());
 	}
-	
+
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,
@@ -107,10 +121,19 @@ public class TxtIOModule extends IOModule  {
 			}
 		} else {
 			if (headers > 0) {
-				return new MixedMatrixParser(true, 
-						skipLines, 
-						rowAnnotations, 
-						delimiter).parse(file);
+				if (type == FileType.NUMERICAL) {
+					return new DoubleMatrixParser(true, 
+							skipLines, 
+							rowAnnotations, 
+							delimiter)
+							.parse(file);
+				} else {
+					return new MixedMatrixParser(true, 
+							skipLines, 
+							rowAnnotations, 
+							delimiter)
+							.parse(file);
+				}
 			} else {
 				return new DynamicMatrixParser(skipLines, 
 						rowAnnotations, 

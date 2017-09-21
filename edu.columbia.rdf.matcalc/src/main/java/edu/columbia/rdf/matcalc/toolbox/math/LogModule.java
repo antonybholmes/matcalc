@@ -106,7 +106,7 @@ public class LogModule extends CalcModule implements ModernClickListener {
 				new RibbonLargeOptionalDropDownButton("Log", ICON, popup);
 		button.setToolTip("Log", "Log transform a matrix.");
 
-		mWindow.getRibbon().getToolbar("Transform").getSection("Transform").add(button);
+		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
 
 		button.addClickListener(this);
 	}

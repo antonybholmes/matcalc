@@ -67,7 +67,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 	 */
 	@Override
 	public String getName() {
-		return "T-Test";
+		return "Supervised";
 	}
 	
 	/* (non-Javadoc)

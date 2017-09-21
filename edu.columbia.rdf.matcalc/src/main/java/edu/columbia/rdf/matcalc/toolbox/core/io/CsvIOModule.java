@@ -25,6 +25,7 @@ import org.jebtk.math.matrix.CsvMatrixParser;
 import org.jebtk.modern.io.CsvGuiFileFilter;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
+import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
 
@@ -61,6 +62,7 @@ public class CsvIOModule extends IOModule  {
 	@Override
 	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
+			FileType type,
 			int headers,
 			int rowAnnotations,
 			String delimiter,
