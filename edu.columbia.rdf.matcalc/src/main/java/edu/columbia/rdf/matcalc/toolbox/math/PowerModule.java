@@ -68,8 +68,8 @@ public class PowerModule extends CalcModule implements ModernClickListener {
 				UIService.getInstance().loadIcon("em", 24)));
 
 		// The default behaviour is to do a log2 transform.
-		RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Power", 
-				UIService.getInstance().loadIcon("xy", 24), popup);
+		RibbonLargeDropDownButton button = 
+				new RibbonLargeDropDownButton(UIService.getInstance().loadIcon("xy", 24), popup);
 		button.setChangeText(false);
 		button.setToolTip("Power", "Power functions.");
 		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);

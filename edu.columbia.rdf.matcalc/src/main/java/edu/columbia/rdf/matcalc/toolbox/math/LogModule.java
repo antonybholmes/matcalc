@@ -103,7 +103,7 @@ public class LogModule extends CalcModule implements ModernClickListener {
 
 		// The default behaviour is to do a log2 transform.
 		RibbonLargeOptionalDropDownButton button = 
-				new RibbonLargeOptionalDropDownButton("Log", ICON, popup);
+				new RibbonLargeOptionalDropDownButton("Log(m)", popup);
 		button.setToolTip("Log", "Log transform a matrix.");
 
 		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
@@ -116,12 +116,12 @@ public class LogModule extends CalcModule implements ModernClickListener {
 	 */
 	@Override
 	public void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("Log") || e.getMessage().equals("Log 2")) {
-			mWindow.addToHistory("log2", "log2", log2(mWindow, mWindow.getCurrentMatrix(), 1)); //new Log2MatrixTransform(this, getCurrentMatrix(), 1));
-		} else if (e.getMessage().equals("Log 10")) {
+		if (e.getMessage().equals("Log 10")) {
 			mWindow.addToHistory("log10", "log10", log10(mWindow, mWindow.getCurrentMatrix(), 1)); //new Log10MatrixTransform(this, getCurrentMatrix(), 1));
 		} else if (e.getMessage().equals("Ln")) {
 			mWindow.addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1)); //new NaturalLogMatrixTransform(this, getCurrentMatrix(), 1));
+		} else {
+			mWindow.addToHistory("log2", "log2", log2(mWindow, mWindow.getCurrentMatrix(), 1));
 		}
 	}
 	

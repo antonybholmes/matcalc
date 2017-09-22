@@ -62,8 +62,7 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
 				UIService.getInstance().loadIcon("z_score", 32)));
 
 		// The default behaviour is to do a log2 transform.
-		RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Z-score", 
-				UIService.getInstance().loadIcon("z_score", 32), popup);
+		RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Z-score", popup);
 		button.setChangeText(false);
 		button.setToolTip("Z-score", "Z-score functions.");
 		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
