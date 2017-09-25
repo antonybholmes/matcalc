@@ -97,7 +97,6 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 		createUi(isExcel);
 		
 		setup();
-
 	}
 
 	/**
@@ -123,10 +122,9 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 		
 		Box box = VBox.create();
 
-		// Text columns is more intuitive terminology than row annotations
-		box.add(new HExpandBox("Text columns", mSpinner));
-		box.add(UI.createVGap(10));
 		box.add(mCheckHeader);
+		//box.add(UI.createVGap(10));
+
 		
 		if (!isExcel) {
 			box.add(UI.createVGap(5));
@@ -134,6 +132,11 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 			box.add(UI.createVGap(5));
 			box.add(new HExpandBox("Delimiter", mDelimiterCombo));
 		}
+		
+		box.add(UI.createVGap(5));
+		
+		// Text columns is more intuitive terminology than row annotations
+		box.add(new HExpandBox("Text columns", mSpinner));
 		
 		box.add(UI.createVGap(5));
 		box.add(mNumericalCheck);

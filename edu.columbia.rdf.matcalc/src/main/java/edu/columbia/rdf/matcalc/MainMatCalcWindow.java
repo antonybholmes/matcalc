@@ -21,7 +21,6 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
@@ -40,22 +39,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.core.Plugin;
 import org.jebtk.core.PluginService;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
-import org.jebtk.core.io.ReaderUtils;
 import org.jebtk.core.io.Temp;
-import org.jebtk.core.text.RegexUtils;
-import org.jebtk.core.text.Splitter;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.math.matrix.DoubleMatrixParser;
-import org.jebtk.math.matrix.MixedMatrixParser;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.EditableMatrixTableModel;
 import org.jebtk.math.ui.matrix.MatrixTable;
@@ -82,6 +75,7 @@ import org.jebtk.modern.graphics.icons.QuickOpenVectorIcon;
 import org.jebtk.modern.graphics.icons.QuickSaveVectorIcon;
 import org.jebtk.modern.help.GuiAppInfo;
 import org.jebtk.modern.help.ModernAboutDialog;
+import org.jebtk.modern.io.ModernFileCrumb;
 import org.jebtk.modern.io.FileDialog;
 import org.jebtk.modern.io.GuiFileExtFilter;
 import org.jebtk.modern.io.OpenRibbonPanel;
@@ -243,6 +237,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 	/** The m zoom model. */
 	private ZoomModel mZoomModel = new ZoomModel();
+	
+	private ModernFileCrumb mFileCrumb = 
+			new ModernFileCrumb(RecentFilesService.getInstance().getPwd());
 
 	/**
 	 * The class MouseEvents.
@@ -1796,7 +1793,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		c.setBody(mTableScrollPane);
 		//c.setBorder(ModernWidget.DOUBLE_BORDER);
 
-		setCard(c);
+		System.err.println("hu");
+		setCardBottom(c, mFileCrumb);
 
 		// Highlight A1
 		mMatrixTable.getCellSelectionModel().setSelection(0, 0);

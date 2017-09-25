@@ -81,8 +81,6 @@ public class TxtIOModule extends IOModule  {
 		
 		boolean numerical = OpenFile.guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
 		
-		System.err.println("aha " + rowAnnotations + " " + delimiter + " " + numerical);
-		
 		ImportDialog dialog = new ImportDialog(window,
 				rowAnnotations, 
 				false,

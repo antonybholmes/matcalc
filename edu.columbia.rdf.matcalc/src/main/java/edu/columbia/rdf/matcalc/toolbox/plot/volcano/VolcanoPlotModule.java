@@ -48,7 +48,6 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.icons.VolcanoPlot32VectorIcon;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
-import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
 import edu.columbia.rdf.matcalc.toolbox.supervised.SupervisedModule;
 import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
 
@@ -149,7 +148,6 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		groups.add(g1);
 		groups.add(g2);
 
-		double minExp = dialog.getMinExp();
 		double pvalue = dialog.getMaxP();
 
 		boolean logData = dialog.getLog2Transform();
@@ -158,15 +156,12 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 
 		FDRType fdrType = dialog.getFDRType();
 
-		CollapseType collapseType = dialog.getCollapseType();
+		//CollapseType collapseType = dialog.getCollapseType();
+		//String collapseName = dialog.getCollapseName();
 
-		String collapseName = dialog.getCollapseName();
-
-		volcanoPlot(m, 
-				minExp, 
-				pvalue, 
-				collapseType, 
-				collapseName,
+		volcanoPlot(mParent,
+				m, 
+				pvalue,
 				test,
 				fdrType, 
 				g1, 
@@ -181,8 +176,6 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 	 * @param m the m
 	 * @param minExp the min exp
 	 * @param alpha the alpha
-	 * @param collapseType the collapse type
-	 * @param collapseName the collapse name
 	 * @param fdrType the fdr type
 	 * @param g1 the g1
 	 * @param g2 the g2
@@ -191,11 +184,9 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 	 * @param plot the plot
 	 * @throws ParseException the parse exception
 	 */
-	private void volcanoPlot(AnnotationMatrix m,
-			double minExp,
+	public static void volcanoPlot(MainMatCalcWindow parent,
+			AnnotationMatrix m,
 			double alpha,
-			CollapseType collapseType,
-			String collapseName,
 			TestType test,
 			FDRType fdrType,
 			XYSeries g1, 
@@ -208,32 +199,31 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		groups.add(g2);
 
 
-		AnnotationMatrix columnFilteredM = 
-				mParent.addToHistory("Keep group columns", 
+		AnnotationMatrix columnFilteredM = parent.addToHistory("Keep group columns", 
 						AnnotatableMatrix.copyInnerColumns(m, groups));
 
 
-		AnnotationMatrix log2M;
+		AnnotationMatrix logM;
 
 		if (logData) {
-			log2M = mParent.addToHistory("log2", 
-					MatrixOperations.log2(MatrixOperations.min(columnFilteredM, minExp)));
+			logM = parent.addToHistory("log2(1 + data)", 
+					MatrixOperations.log2(MatrixOperations.add(columnFilteredM, 1)));
 		} else {
-			log2M = m;
+			logM = m;
 		}
 
 
-		List<Double> p = SupervisedModule.getP(log2M, g1, g2, test);
+		List<Double> p = SupervisedModule.getP(logM, g1, g2, test);
 
-		List<Double> foldChanges = MatrixUtils.logFoldChange(log2M, g1, g2);
+		List<Double> foldChanges = MatrixUtils.logFoldChange(logM, g1, g2);
 
-		AnnotationMatrix annM = new AnnotatableMatrix(log2M);
+		AnnotationMatrix annM = new AnnotatableMatrix(logM);
 		annM.setNumRowAnnotations("Log2 Fold Change", foldChanges);
-		mParent.addToHistory("Add log2 fold changes", annM);
+		parent.addToHistory("Add log2 fold changes", annM);
 
 		AnnotationMatrix pValuesM = new AnnotatableMatrix(annM);
 		pValuesM.setNumRowAnnotations("P-value", p);
-		mParent.addToHistory("Add p-values", pValuesM);
+		parent.addToHistory("Add p-values", pValuesM);
 
 
 		//AnnotationMatrix mcollapsed = CollapseModule.collapse(pValuesM,
@@ -250,7 +240,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 
 		AnnotationMatrix fdrM = new AnnotatableMatrix(pValuesM);
 		fdrM.setNumRowAnnotations("FDR", fdr);
-		mParent.addToHistory("False discovery rate", fdrM);
+		parent.addToHistory("False discovery rate", fdrM);
 
 
 		// filter by fdr
@@ -433,8 +423,8 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 
 		axes.setMargins(100);
 
-		mParent.addToHistory(new VolcanoPlotMatrixTransform(mParent, fdrM, figure));
+		parent.addToHistory(new VolcanoPlotMatrixTransform(parent, fdrM, figure));
 		
-		mParent.addToHistory("Results", fdrM);
+		parent.addToHistory("Results", fdrM);
 	}
 }

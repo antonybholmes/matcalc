@@ -15,12 +15,10 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.supervised;
 
-import java.text.ParseException;
 import java.util.List;
 
 import javax.swing.Box;
 
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.AnnotationMatrix;
@@ -40,6 +38,7 @@ import org.jebtk.modern.panel.HExpandBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
+import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
@@ -60,6 +59,47 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 * The constant serialVersionUID.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static class PlotTypePanel extends VBox {
+		private static final long serialVersionUID = 1L;
+
+		/**
+		 * The member check plot.
+		 */
+		private CheckBox mCheckPlot = 
+				new ModernCheckSwitch(PlotConstants.MENU_CREATE_PLOT, true);
+		
+		
+		private ModernRadioButton mHeatMapRadio =
+				new ModernRadioButton("Heat map", true);
+		
+		private ModernRadioButton mVolcanoRadio =
+				new ModernRadioButton("Volcano plot");
+		
+		public PlotTypePanel() {
+			add(mCheckPlot);
+			add(UI.createVGap(5));
+			add(mHeatMapRadio);
+			//add(UI.createVGap(5));
+			add(mVolcanoRadio);
+			
+			new ModernButtonGroup(mHeatMapRadio, mVolcanoRadio);
+			
+			setBorder(ModernWidget.QUAD_BORDER);
+		}
+
+		public PlotType getCreatePlot() {
+			if (mCheckPlot.isSelected()) {
+				if (mHeatMapRadio.isSelected()) {
+					return PlotType.HEATMAP;
+				} else {
+					return PlotType.VOLCANO;
+				}
+			} else {
+				return PlotType.NONE;
+			}
+		}
+	}
 
 	/**
 	 * The member check is log2.
@@ -78,11 +118,6 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 */
 	private XYSeriesGroup mGroups;
 	
-	/**
-	 * The member check plot.
-	 */
-	private CheckBox mCheckPlot = 
-			new ModernCheckBox(PlotConstants.MENU_CREATE_PLOT, true);
 	
 
 	/**
@@ -120,14 +155,17 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	/**
 	 * The member expression field.
 	 */
-	private ModernCompactSpinner mExpressionField = 
-			new ModernCompactSpinner(1, 10000, 1);
+	//private ModernCompactSpinner mExpressionField = 
+	//		new ModernCompactSpinner(1, 10000, 1);
 	
 	/** The m up down P field. */
 	private ModernCompactSpinner mUpDownPField = 
 			new ModernCompactSpinner(0, 1, 0.05, 0.01);
 	
 	private TestCombo mTestCombo = new TestCombo();
+	
+	private PlotTypePanel mPlotPanel = new PlotTypePanel();
+	
 
 	/**
 	 * Instantiates a new t test dialog.
@@ -179,9 +217,9 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 		box.add(mCheckIsLog2);
 		box.add(UI.createVGap(5));
 		box.add(mCheckLog2);
-		box.add(UI.createVGap(5));
+		//box.add(UI.createVGap(5));
 		
-		box.add(new HExpandBox("Minimum Expression", mExpressionField));
+		//box.add(new HExpandBox("Minimum Expression", mExpressionField));
 
 		//midSectionHeader("Groups", box);
 		
@@ -228,7 +266,10 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 		box.add(new HExpandBox("Up/down p-value", mUpDownPField));
 		
 		addTab("Statistics", box);
-
+		
+		box = VBox.create();
+		
+		setLeftSecondary(mPlotPanel);
 		
 		getTabsModel().changeTab(0);
 	}
@@ -329,8 +370,8 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 *
 	 * @return the creates the plot
 	 */
-	public boolean getCreatePlot() {
-		return mCheckPlot.isSelected();
+	public PlotType getCreatePlot() {
+		return mPlotPanel.getCreatePlot();
 	}
 
 	/**
@@ -357,9 +398,9 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 * @return the min exp
 	 * @throws ParseException the parse exception
 	 */
-	public double getMinExp() throws ParseException {
-		return TextUtils.parseDouble(mExpressionField.getText()); //TextUtils.parseDouble(expressionField.getText());
-	}
+	//public double getMinExp() {
+	//	return mExpressionField.getValue(); //TextUtils.parseDouble(expressionField.getText());
+	//}
 	
 	/**
 	 * Gets the min zscore.

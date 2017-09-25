@@ -15,11 +15,8 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.plot.volcano;
 
-import java.text.ParseException;
-
 import javax.swing.Box;
 
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.AnnotationMatrix;
@@ -30,10 +27,8 @@ import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
-import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.HExpandBox;
-import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
@@ -74,11 +69,6 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 	private ModernComboBox mGroup2Combo = new ModernComboBox();
 
 	/**
-	 * The member expression field.
-	 */
-	private ModernTextField mExpressionField = new ModernTextField("1");
-
-	/**
 	 * The member groups.
 	 */
 	private XYSeriesGroup mGroups;
@@ -106,21 +96,6 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 	 * The member collapse panel.
 	 */
 	private CollapsePanel mCollapsePanel;
-	
-	
-	/**
-	 * The class LogClickEvents.
-	 */
-	private class LogClickEvents implements ModernClickListener {
-
-		/* (non-Javadoc)
-		 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mExpressionField.setEnabled(checkLog2.isSelected());
-		}
-	}
 	
 	/**
 	 * Instantiates a new volcano dialog.
@@ -158,8 +133,6 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 		mGroup1Combo.setSelectedIndex(0);
 		mGroup2Combo.setSelectedIndex(1);
 		
-		checkLog2.addClickListener(new LogClickEvents());
-		
 		setSize(500, 520);
 		
 		UI.centerWindowToScreen(this);
@@ -185,7 +158,7 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 
 		Box box = Box.createVerticalBox();
 		
-		sectionHeader("Expression", box);
+		//sectionHeader("Expression", box);
 		
 		box.add(checkLog2);
 		
@@ -208,7 +181,7 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 		box.add(ModernPanel.createVGap());
 		*/
 		
-		midSectionHeader("Group options", box);
+		midSectionHeader("Test", box);
 
 		box.add(new HExpandBox("Group 1", mGroup1Combo));
 		box.add(UI.createVGap(5));
@@ -274,16 +247,6 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 	
 	public TestType getTest() {
 		return mTestCombo.getTest();
-	}
-	
-	/**
-	 * Gets the min exp.
-	 *
-	 * @return the min exp
-	 * @throws ParseException the parse exception
-	 */
-	public double getMinExp() throws ParseException {
-		return TextUtils.parseDouble(mExpressionField.getText());
 	}
 	
 	/**

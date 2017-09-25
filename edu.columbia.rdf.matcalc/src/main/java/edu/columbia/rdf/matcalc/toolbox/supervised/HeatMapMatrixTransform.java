@@ -34,7 +34,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressi
  * @author Antony Holmes Holmes
  *
  */
-public class SupervisedPlotMatrixTransform extends DifferentialExpressionPlotMatrixTransform {
+public class HeatMapMatrixTransform extends DifferentialExpressionPlotMatrixTransform {
 	
 	/**
 	 * Instantiates a new t test plot matrix transform.
@@ -48,7 +48,7 @@ public class SupervisedPlotMatrixTransform extends DifferentialExpressionPlotMat
 	 * @param history the history
 	 * @param properties the properties
 	 */
-	public SupervisedPlotMatrixTransform(ModernRibbonWindow parent,
+	public HeatMapMatrixTransform(ModernRibbonWindow parent,
 			AnnotationMatrix inputMatrix, 
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,
