@@ -120,7 +120,7 @@ public class OpenFile {
 		boolean status = false;
 
 		for (Path file : mFiles) {
-			if (mWindow.mInputFiles.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
+			if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
 				MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
 				window.setVisible(true);
 
@@ -165,7 +165,7 @@ public class OpenFile {
 		boolean status = false;
 
 		for (Path file : mFiles) {
-			if (mWindow.mInputFiles.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
+			if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
 				MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
 				window.setVisible(true);
 
