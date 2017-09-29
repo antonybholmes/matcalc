@@ -48,6 +48,7 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.io.Temp;
+import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.AnnotationMatrix;
@@ -166,9 +167,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * The member history panel.
 	 */
 	private MatCalcHistoryPanel mHistoryPanel;
-	
+
 	private FilesPanel mFilesPanel;
-	
+
 	private FileModel mFileModel = new FileModel();
 
 	//private MatrixTable mMatrixTable = new MatrixTable();
@@ -249,6 +250,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	private ZoomModel mZoomModel = new ZoomModel();
 
 	private DirPanel mDirPanel;
+
+	private static final boolean AUTO_SHOW_FILES_PANE =
+			SettingsService.getInstance().getAsBool("matcalc.files-pane.auto-show");
 
 	/**
 	 * The class MouseEvents.
@@ -402,7 +406,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		}
 	}
 
-	
+
 
 	/**
 	 * Instantiates a new main mat calc window.
@@ -458,11 +462,11 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		mFindDialog = new FindReplaceDialog(this);
 
 		mHistoryPanel = new MatCalcHistoryPanel(this);
-		
+
 		mFilesModel.setPwd(RecentFilesService.getInstance().getPwd());
-		
-		mDirPanel = new DirPanel(mFilesModel);
-		mFilesPanel = new FilesPanel(mFilesModel, mFileModel);
+
+		mDirPanel = new DirPanel(this, mFilesModel.getPwdModel());
+		mFilesPanel = new FilesPanel(mFilesModel.getPwdModel(), mFileModel);
 
 		createRibbon();
 
@@ -497,7 +501,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		content.getActionMap().put("find", new FindAction());
 
 		// When user clicks on file in file list, open it
-		mFileModel.addChangeListener(new ChangeListener(){
+		mFileModel.addChangeListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent e) {
 				try {
@@ -506,8 +510,15 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 					e1.printStackTrace();
 				}
 			}});
-		
-		
+
+		if (AUTO_SHOW_FILES_PANE) {
+			mFilesModel.getPwdModel().addChangeListener(new ChangeListener() {
+				@Override
+				public void changed(ChangeEvent e) {
+					addFilesPane();
+				}});
+		}
+
 		setSize(1440, 900);
 
 		UI.centerWindowToScreen(this);
@@ -638,7 +649,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		getRibbon().getHomeToolbar().add(new ClipboardRibbonSection(getRibbon()));
 
-		
+
 		button = new RibbonLargeButton("Files", 
 				UIService.getInstance().loadIcon(FolderVectorIcon.class, 32),
 				"Show Files",
@@ -692,26 +703,26 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 */
 	public final void createUi() {
 		setContentHeader(mDirPanel);
-		
+
 		setCard(new ModernComponent());
 
 		ModernStatusZoomSlider slider = new ModernStatusZoomSlider(mZoomModel);
 
-		mStatusBar.addRight(slider);
+		getStatusBar().addRight(slider);
 
 		createGroupsPanel();
-		
+
 		addFilesPane();
 	}
-	
+
 	private void addFilesPane() {
 		if (getTabsPane().getModel().getLeftTabs().containsTab("Files")) {
 			return;
 		}
 
 		getTabsPane()
-		.getModel()
-		.addLeftTab("Files", new CloseableHTab("Files", mFilesPanel, getTabsPane()), 250, 200, 500);
+			.getModel()
+			.addLeftTab("Files", new CloseableHTab("Files", mFilesPanel, getTabsPane()), 250, 200, 500);
 	}
 
 	/* (non-Javadoc)
@@ -948,7 +959,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			return null;
 		}
 
-		return addToHistory(new MatrixTransform(this, name, description, matrix), selectedIndex);
+		return addToHistory(selectedIndex, new MatrixTransform(this, name, description, matrix));
 	}
 
 	/**
@@ -958,7 +969,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @return the annotation matrix
 	 */
 	public AnnotationMatrix addToHistory(MatrixTransform transform) {
-		return addToHistory(transform, getHistoryIndex());
+		return addToHistory(getHistoryIndex(), transform);
 	}
 
 	/**
@@ -968,8 +979,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param selectedIndex the selected index
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(MatrixTransform transform, 
-			int selectedIndex) {
+	public AnnotationMatrix addToHistory(int selectedIndex, 
+			MatrixTransform transform) {
 		if (transform == null) {
 			return null;
 		}
@@ -1088,7 +1099,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	private void browseForFile(Path pwd) throws IOException, SAXException, ParserConfigurationException, InvalidFormatException, ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, UnsupportedLookAndFeelException {
 		openFile(FileDialog.openFile(this, pwd, mOpenFileFilters)).open();
 	}
-	
+
 	public void open(Path file) throws IOException {
 		openFile(file).open();
 	}
@@ -1140,7 +1151,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		window.setVisible(true);
 
 	}
-	
+
 	public boolean openMatrix(Path file, AnnotationMatrix m) {
 		boolean status = false;
 
@@ -1152,7 +1163,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		if (status) {
 			mFilesModel.add(file);
 
-			RecentFilesService.getInstance().add(file);
 
 			setSubTitle(PathUtils.getName(file));
 		}
@@ -1272,7 +1282,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		addHistoryPane();
 	}
-	
+
 
 
 
@@ -1446,7 +1456,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		// file
 
 		if (status) {
-			setSubTitle(PathUtils.getName(file));
+			mFilesModel.add(file);
+
+			//setSubTitle(PathUtils.getName(file));
 
 			ModernMessageDialog.createFileSavedDialog(this, file);
 		}
@@ -1839,12 +1851,12 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		// Highlight A1
 		mMatrixTable.getCellSelectionModel().setSelection(0, 0);
 	}
-	
+
 	@Override
 	public void setCard(Component c) {
 		getTabsPane()
-			.getModel()
-			.setCenterTab(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)));
+		.getModel()
+		.setCenterTab(new ModernComponent(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)), ModernWidget.BORDER));
 	}
 
 	/* (non-Javadoc)

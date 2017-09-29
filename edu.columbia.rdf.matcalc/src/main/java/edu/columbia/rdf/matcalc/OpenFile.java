@@ -17,6 +17,7 @@ import org.jebtk.core.text.Splitter;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.XLSXMetaData;
 import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.modern.io.RecentFilesService;
 
 import edu.columbia.rdf.matcalc.toolbox.FileModule;
 
@@ -144,6 +145,8 @@ public class OpenFile {
 							mSkipLines);
 
 					mWindow.openMatrix(file, m);
+
+					RecentFilesService.getInstance().add(file);
 
 					status |= true;
 				} else {

@@ -225,7 +225,7 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
 				}
 			}});
 		
-		setSize(500, 300);
+		setSize(520, 300);
 		
 		UI.centerWindowToScreen(this);
 	}

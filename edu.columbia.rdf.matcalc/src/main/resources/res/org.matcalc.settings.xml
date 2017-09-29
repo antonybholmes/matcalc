@@ -36,4 +36,7 @@
 	
 	<setting name="matcalc.data-extraction.help.url" value="https://bitbucket.org/lab_rdf/matcalc/wiki/Data_Extraction"/>
 	<setting name="matcalc.split.help.url" value="https://bitbucket.org/lab_rdf/matcalc/wiki/Split"/>
+	
+	<!-- If the user changes directory, auto show the files pane -->
+	<setting name="matcalc.files-pane.auto-show" value="true"/>
 </settings>
