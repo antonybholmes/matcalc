@@ -180,7 +180,19 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 
 		switch(plotType) {
-		case HEATMAP:
+		case VOLCANO:
+			VolcanoPlotModule.volcanoPlot(mParent,
+					m, 
+					alpha,
+					TestType.TTEST_UNEQUAL_VARIANCE,
+					fdrType, 
+					g1, 
+					g2, 
+					!dialog.getIsLog2Transformed() || dialog.getLog2Transform(), 
+					true);
+
+			break;
+		default:
 			statTest(m, 
 					alpha,
 					classificationAlpha,
@@ -201,22 +213,6 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 					log2Data, 
 					plotType,
 					properties);
-
-			break;
-		case VOLCANO:
-			VolcanoPlotModule.volcanoPlot(mParent,
-					m, 
-					alpha,
-					TestType.TTEST_UNEQUAL_VARIANCE,
-					fdrType, 
-					g1, 
-					g2, 
-					!dialog.getIsLog2Transformed() || dialog.getLog2Transform(), 
-					true);
-
-			break;
-		default:
-			break;
 		}
 
 

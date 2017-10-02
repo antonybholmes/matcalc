@@ -92,7 +92,7 @@ public class TreeControl extends VBox {
 		box.setBorder(BorderService.getInstance().createLeftBorder(10));
 		
 		add(box);
-		setBorder(ModernWidget.BORDER);
+		//setBorder(ModernWidget.BORDER);
 		
 		mSlider.addChangeListener(new ChangeListener() {
 			@Override

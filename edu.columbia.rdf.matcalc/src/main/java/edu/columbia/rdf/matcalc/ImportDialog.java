@@ -57,7 +57,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	/**
 	 * The member check header.
 	 */
-	private CheckBox mCheckHeader = new ModernCheckSwitch("Has header row", 
+	private CheckBox mCheckHeader = new ModernCheckSwitch("Header row", 
 			SettingsService.getInstance().getAsBool("matcalc.import.file.has-header"));
 	
 	/** The m check skip. */

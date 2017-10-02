@@ -38,9 +38,10 @@ import edu.columbia.rdf.matcalc.toolbox.core.io.ExcelIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.MatrixIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.TsvIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.TxtIOModule;
-import edu.columbia.rdf.matcalc.toolbox.core.io.XlsIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.XLSXIOModule;
+import edu.columbia.rdf.matcalc.toolbox.core.io.XlsIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.match.MatchModule;
+import edu.columbia.rdf.matcalc.toolbox.core.paste.PasteModule;
 import edu.columbia.rdf.matcalc.toolbox.core.roworder.RowOrderModule;
 import edu.columbia.rdf.matcalc.toolbox.core.search.SearchColumnModule;
 import edu.columbia.rdf.matcalc.toolbox.core.sort.SortColumnsByRowModule;
@@ -79,6 +80,8 @@ public class ModuleLoader {
 	 * Instantiates a new module loader.
 	 */
 	public ModuleLoader() {
+		addModule(PasteModule.class);
+		
 		addModule(MatrixIOModule.class);
 		addModule(ExcelIOModule.class);
 		addModule(XLSXIOModule.class);
@@ -86,6 +89,7 @@ public class ModuleLoader {
 		addModule(TxtIOModule.class);
 		addModule(TsvIOModule.class);
 		addModule(CsvIOModule.class);
+		
 		addModule(LegacyHeatMapModule.class);
 		addModule(LegacyClusterModule.class);
 		addModule(SmoothedLineGraphModule.class);
