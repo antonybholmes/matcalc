@@ -15,14 +15,12 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 
-import java.awt.Graphics2D;
 import java.util.List;
 
 import org.jebtk.core.Properties;
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.ColorBar;
-import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.PlotElement;
 import org.jebtk.graphplot.figure.heatmap.legacy.BottomColumnLabelPlotElement;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelPosition;
@@ -51,7 +49,6 @@ import org.jebtk.graphplot.plotbox.PlotBoxEmpty;
 import org.jebtk.graphplot.plotbox.PlotBoxRow;
 import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
 
@@ -59,7 +56,7 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
 /**
  * The class ClusterCanvas.
  */
-public class ClusterCanvas extends ModernPlotCanvas {
+public class ClusterCanvas extends PlotBoxRow {
 
 	/**
 	 * The constant serialVersionUID.
@@ -105,12 +102,6 @@ public class ClusterCanvas extends ModernPlotCanvas {
 	private static final int COLOR_BAR_HEIGHT = 
 			SettingsService.getInstance().getAsInt("graphplot.plot.color-bar-height");
 
-	//private static final int treeWidth = 200;
-
-	/**
-	 * The member plot box.
-	 */
-	private PlotBox mPlotBox;
 
 	/**
 	 * Instantiates a new cluster canvas.
@@ -187,10 +178,8 @@ public class ClusterCanvas extends ModernPlotCanvas {
 		PlotBox emptyVBox = new PlotBoxEmpty(VERTICAL_GAP);
 		PlotBox emptyHBox = new PlotBoxEmpty(HOZ_GAP);
 
-		mPlotBox = new PlotBoxRow();
-
 		// Add space at the top
-		mPlotBox.addChild(emptyVBox);
+		addChild(emptyVBox);
 
 
 		PlotElement element;
@@ -331,9 +320,9 @@ public class ClusterCanvas extends ModernPlotCanvas {
 				columnBox.addChild(element);
 			}
 
-			mPlotBox.addChild(columnBox);
+			addChild(columnBox);
 
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
 		}
 
 
@@ -374,9 +363,9 @@ public class ClusterCanvas extends ModernPlotCanvas {
 			//}
 
 			columnBox.addChild(element);
-			mPlotBox.addChild(columnBox);
+			addChild(columnBox);
 
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
 		}
 
 
@@ -403,9 +392,9 @@ public class ClusterCanvas extends ModernPlotCanvas {
 
 			columnBox.addChild(columnLabelsBox);
 
-			mPlotBox.addChild(columnBox);
+			addChild(columnBox);
 
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
 		}
 
 		//
@@ -473,12 +462,12 @@ public class ClusterCanvas extends ModernPlotCanvas {
 				}
 			}
 
-			mPlotBox.addChild(columnBox);
+			addChild(columnBox);
 
 			//
 			// Space
 			//
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
 		}
 
 		//
@@ -540,28 +529,6 @@ public class ClusterCanvas extends ModernPlotCanvas {
 
 		columnBox.addChild(rowBox);
 
-		mPlotBox.addChild(columnBox);
-		
-		setPreferredSize(mPlotBox.getPreferredSize());
+		addChild(columnBox);
 	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.plot.ModernPlotCanvas#plot(java.awt.Graphics2D, org.abh.lib.ui.modern.graphics.DrawingContext)
-	 */
-	@Override
-	public void plot(Graphics2D g2, DrawingContext context, Object... params) {
-		mPlotBox.plot(g2, context, params);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.graphics.ModernCanvas#getCanvasSize()
-	 */
-	//@Override
-	//public void setPreferredSize(Dimension d) {
-	//	setPreferredSize(IntDim.toDimension(mPlotBox.getCanvasSize()));
-	//}
-	
-	//public void setPreferredSize(IntDim d) {
-	//	setPreferredSize(IntDim.toDimension(d));
-	//}
 }

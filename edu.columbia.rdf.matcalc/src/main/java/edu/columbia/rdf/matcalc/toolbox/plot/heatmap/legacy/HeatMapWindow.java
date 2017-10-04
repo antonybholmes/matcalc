@@ -18,10 +18,10 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy;
 import java.util.List;
 
 import org.jebtk.core.Properties;
-import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalization;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.graphics.colormap.ColorMap;
@@ -130,7 +130,8 @@ public abstract class HeatMapWindow extends FigureWindow {
 	 *
 	 * @return the canvas
 	 */
-	public ModernPlotCanvas getCanvas() {
+	@Override
+	public PlotBox getPlot() {
 		return mFormatPane.getCanvas();
 	}
 	

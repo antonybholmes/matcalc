@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
-import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.FigurePanel;
@@ -34,7 +33,6 @@ import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.contentpane.CloseableHTab;
-import org.jebtk.modern.contentpane.SizableContentPane;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarLocation;
@@ -73,6 +71,8 @@ public class Graph2dWindow extends FigureWindow {
 			new ArrayList<AnnotationMatrix>();
 
 	private FigurePanel mFigurePanel;
+
+	private Figure mFigure;
 
 	/**
 	 * The class ColorMapEvents.
@@ -151,7 +151,7 @@ public class Graph2dWindow extends FigureWindow {
 	public Graph2dWindow(MainMatCalcWindow window, 
 			Figure figure, 
 			boolean allowStyle) {
-		super(window, figure, allowStyle);
+		super(window, allowStyle);
 
 		// add canvas to the plot
 		mFigure = figure;
@@ -178,7 +178,6 @@ public class Graph2dWindow extends FigureWindow {
 
 			@Override
 			public void changed(ChangeEvent e) {
-				System.err.println("graph 2d");
 				mFigure.setStyle(mStyleModel.get());
 				
 //				for (int z : mFigure.getSubFigureZModel()) {
@@ -362,15 +361,6 @@ public class Graph2dWindow extends FigureWindow {
 		//mFigure.refresh();
 	}
 
-	/**
-	 * Gets the figure.
-	 *
-	 * @return the figure
-	 */
-	public Figure getFigure() {
-		return mFigure;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.matcalc.graph2d.FigureWindow#getColorNormalizationModel()
 	 */
@@ -379,7 +369,11 @@ public class Graph2dWindow extends FigureWindow {
 	}
 
 	@Override
-	public ModernPlotCanvas getCanvas() {
-		return mFigurePanel;
+	public PlotBox getPlot() {
+		return mFigure;
+	}
+
+	public Figure getFigure() {
+		return mFigure;
 	}
 }

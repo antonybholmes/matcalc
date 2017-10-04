@@ -17,14 +17,12 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.util.List;
 
 import org.jebtk.core.Properties;
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.ColorBar;
-import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.PlotElement;
 import org.jebtk.graphplot.figure.heatmap.legacy.BottomColumnLabelPlotElement;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelPosition;
@@ -50,7 +48,6 @@ import org.jebtk.graphplot.plotbox.PlotBoxColumn;
 import org.jebtk.graphplot.plotbox.PlotBoxEmpty;
 import org.jebtk.graphplot.plotbox.PlotBoxRow;
 import org.jebtk.math.matrix.AnnotationMatrix;
-import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
 // TODO: Auto-generated Javadoc
@@ -60,7 +57,7 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
  * @author Antony Holmes Holmes
  *
  */
-public class HeatMapCanvas extends ModernPlotCanvas {
+public class HeatMapCanvas extends PlotBoxRow {
 	
 	/**
 	 * The constant serialVersionUID.
@@ -103,11 +100,6 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 			SettingsService.getInstance().getAsInt("graphplot.plot.color-bar-height");
 
 	/**
-	 * The member plot box.
-	 */
-	private PlotBox mPlotBox;
-	
-	/**
 	 * Instantiates a new heat map canvas.
 	 *
 	 * @param matrix the matrix
@@ -147,8 +139,6 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 		heatMapElement.setOutlineColor((Color)properties.getProperty("plot.outline-color"));
 		heatMapElement.setBorderColor((Color)properties.getProperty("plot.border-color"));
 
-		mPlotBox = new PlotBoxRow();
-
 		PlotElement element;
 
 		PlotBox columnBox;
@@ -156,7 +146,7 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 		PlotBox emptyVBox = new PlotBoxEmpty(verticalGap);
 		PlotBox emptyHBox = new PlotBoxEmpty(horizontalGap);
 		
-		mPlotBox.addChild(emptyVBox);
+		addChild(emptyVBox);
 		
 		
 		//
@@ -271,10 +261,10 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 					groupProperties);
 			columnBox.addChild(element);
 
-			mPlotBox.addChild(columnBox);
+			addChild(columnBox);
 
 			// space
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
 		}
 
 
@@ -297,9 +287,9 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 
 			element = new GroupColorBarPlotElement(matrix, aspectRatio, groups, groupProperties);
 			columnBox.addChild(element);
-			mPlotBox.addChild(columnBox);
+			addChild(columnBox);
 
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
 		}
 
 
@@ -322,12 +312,12 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 
 			columnBox.addChild(columnLabelsBox);
 
-			mPlotBox.addChild(columnBox);
+			addChild(columnBox);
 
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
 		} else {
-			mPlotBox.addChild(emptyVBox);
-			mPlotBox.addChild(emptyVBox);
+			addChild(emptyVBox);
+			addChild(emptyVBox);
 		}
 
 		
@@ -358,9 +348,9 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 			columnBox.addChild(rowLabelsBox);
 		}
 
-		mPlotBox.addChild(columnBox);
+		addChild(columnBox);
 
-		mPlotBox.addChild(emptyVBox);
+		addChild(emptyVBox);
 
 		//
 		// Labels and legend
@@ -407,14 +397,6 @@ public class HeatMapCanvas extends ModernPlotCanvas {
 
 		columnBox.addChild(rowBox);
 
-		mPlotBox.addChild(columnBox);
-	}
-
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.plot.ModernPlotCanvas#plot(java.awt.Graphics2D, org.abh.common.ui.ui.graphics.DrawingContext)
-	 */
-	@Override
-	public void plot(Graphics2D g2, DrawingContext context, Object... params) {
-		mPlotBox.plot(g2, context, params);
+		addChild(columnBox);
 	}
 }

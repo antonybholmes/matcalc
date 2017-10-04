@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.figure;
 
-import org.jebtk.graphplot.ModernPlotCanvas;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabsModel;
@@ -60,7 +60,7 @@ public abstract class FormatPlotPane extends ModernComponent {
 	 *
 	 * @return the canvas
 	 */
-	public abstract ModernPlotCanvas getCanvas();
+	public abstract PlotBox getCanvas();
 	
 	/**
 	 * Update.

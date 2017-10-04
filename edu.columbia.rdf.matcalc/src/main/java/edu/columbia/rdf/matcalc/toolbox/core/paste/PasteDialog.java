@@ -9,7 +9,8 @@ import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.CheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -31,15 +32,16 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 public class PasteDialog extends ModernDialogHelpWindow implements ModernClickListener {
 	private static final long serialVersionUID = 1L;
 
-	private ModernCheckBox mCheckIndex = 
-			new ModernCheckBox("Common index", true);
+	/** Assume first column is common between files */
+	private CheckBox mCheckIndex = 
+			new ModernCheckSwitch("Common index", true);
 	
 	//private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
 	
 	private ChooseFilesPanel mChooseFilesPanel;
 	
 	public PasteDialog(MainMatCalcWindow parent) {
-		super(parent, "org.matcalc.toolbox.paste.help.url");
+		super(parent, "matcalc.toolbox.paste.help.url");
 
 		setTitle("Paste Files");
 		
@@ -59,7 +61,7 @@ public class PasteDialog extends ModernDialogHelpWindow implements ModernClickLi
 				.getInstance()
 				.getAsBool("org.matcalc.toolbox.paste.common-index", true));
 
-		setSize(500, 560);
+		setSize(500, 420);
 
 		UI.centerWindowToScreen(this);
 	}
@@ -68,15 +70,14 @@ public class PasteDialog extends ModernDialogHelpWindow implements ModernClickLi
 		ModernComponent content = new ModernComponent();
 		
 		Box box = VBox.create();
-		midSectionHeader("Options", box);
-		box.add(mCheckIndex);
+		box.add(UI.createVGap(10));
 		box.add(mCheckIndex);
 		
 		content.setFooter(box);
 		
 		content.setBody(mChooseFilesPanel);
 		
-		setContent(content);
+		setDialogCardContent(content);
 	}
 	
 	@Override

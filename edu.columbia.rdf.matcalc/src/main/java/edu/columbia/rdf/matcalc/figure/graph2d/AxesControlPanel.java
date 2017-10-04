@@ -17,19 +17,13 @@ package edu.columbia.rdf.matcalc.figure.graph2d;
 
 import javax.swing.JComponent;
 
-import org.jebtk.core.event.ChangeEvent;
-import org.jebtk.core.event.ChangeListener;
-import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
-import org.jebtk.graphplot.figure.GridLocation;
-import org.jebtk.graphplot.figure.Layer;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.collapsepane.AbstractCollapsePane;
 import org.jebtk.modern.collapsepane.ModernSubCollapsePane;
-import org.jebtk.modern.graphics.ModernCanvasListener;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.window.ModernRibbonWindow;
@@ -151,8 +145,7 @@ public class AxesControlPanel extends FormatPlotPane {
 	 * @see org.matcalc.figure.FormatPlotPane#getCanvas()
 	 */
 	@Override
-	public ModernPlotCanvas getCanvas() {
-		// TODO Auto-generated method stub
+	public PlotBox getCanvas() {
 		return null;
 	}
 
@@ -161,7 +154,6 @@ public class AxesControlPanel extends FormatPlotPane {
 	 */
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		// Do nothing
 	}
 }

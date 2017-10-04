@@ -24,7 +24,6 @@ import org.jebtk.core.Properties;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.geom.IntDim;
-import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelProperties;
@@ -34,11 +33,12 @@ import org.jebtk.graphplot.figure.heatmap.legacy.RowLabelProperties;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
+import org.jebtk.graphplot.plotbox.PlotBox;
+import org.jebtk.graphplot.plotbox.PlotBoxPanel;
 import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.AnnotatableMatrix;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.math.matrix.utils.MatrixOperations;
-import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.collapsepane.AbstractCollapsePane;
@@ -54,11 +54,9 @@ import org.jebtk.modern.scrollpane.ScrollBarLocation;
 import org.jebtk.modern.tabs.TabsModel;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
-import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.zoom.ZoomModel;
 
 import edu.columbia.rdf.matcalc.figure.BlockSizeControl;
-import edu.columbia.rdf.matcalc.figure.CanvasPanel;
 import edu.columbia.rdf.matcalc.figure.CheckControl;
 import edu.columbia.rdf.matcalc.figure.ColoredPlotControl;
 import edu.columbia.rdf.matcalc.figure.ColumnLabelPositionPlotElement;
@@ -77,7 +75,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy.ClusterCanva
 /**
  * The class HeatMapPanel.
  */
-public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernClickListener, ChangeListener {
+public class HeatMapPanel extends FormatPlotPane implements ModernClickListener, ChangeListener {
 
 	/**
 	 * The constant serialVersionUID.
@@ -88,7 +86,7 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 	/**
 	 * The member canvas.
 	 */
-	protected ModernPlotCanvas mCanvas;
+	protected PlotBox mCanvas;
 
 	/**
 	 * The member matrix.
@@ -723,7 +721,7 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 	 * @param columnLabelProperties the column label properties
 	 * @return the modern plot canvas
 	 */
-	public ModernPlotCanvas createCanvas(AnnotationMatrix m,
+	public PlotBox createCanvas(AnnotationMatrix m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,
@@ -750,25 +748,16 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 	 *
 	 * @param canvas the canvas
 	 */
-	public void display(ModernPlotCanvas canvas) {
-		//ZoomCanvas zoomCanvas = new ZoomCanvas(canvas);
+	public void display(PlotBox canvas) {
+		PlotBoxPanel panel = new PlotBoxPanel(canvas);
 
-		canvas.setZoomModel(mZoomModel);
+		panel.setZoomModel(mZoomModel);
 
 		//BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-		ModernScrollPane scrollPane = new ModernScrollPane(canvas)
+		ModernScrollPane scrollPane = new ModernScrollPane(panel)
 			.setVScrollBarLocation(ScrollBarLocation.FLOATING)
-			.setHScrollBarLocation(ScrollBarLocation.FLOATING);
-
-		//ModernComponent panel = new ModernComponent(scrollPane, BORDER);
-
-		//panel.setBorder(ModernPanel.BORDER);
-
-		//mContent.setCenterTab(new ModernPanel(scrollPane, BORDER)); //new CenterTab(new ModernPanel(scrollPane, ModernWidget.BORDER)));
-	
-		System.err.println("heat map " + mParent);
-		
+			.setHScrollBarLocation(ScrollBarLocation.FLOATING);	
 		
 		mParent.setCard(scrollPane);
 	}
@@ -777,7 +766,7 @@ public class HeatMapPanel extends FormatPlotPane implements CanvasPanel, ModernC
 	 * @see edu.columbia.rdf.lib.bioinformatics.ui.plot.CanvasPanel#getCanvas()
 	 */
 	@Override
-	public ModernPlotCanvas getCanvas() {
+	public PlotBox getCanvas() {
 		return mCanvas;
 	}
 

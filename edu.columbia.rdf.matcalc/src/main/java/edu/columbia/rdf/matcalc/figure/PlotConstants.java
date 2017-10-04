@@ -54,7 +54,7 @@ public class PlotConstants {
 	/**
 	 * The constant MENU_LOG_TRANSFORM.
 	 */
-	public static final String MENU_LOG_TRANSFORM = "Log2 transform data";
+	public static final String MENU_LOG_TRANSFORM = "Log2 transform";
 	
 	/**
 	 * The constant LABEL_COLOR_INTENSITY.
@@ -69,9 +69,13 @@ public class PlotConstants {
 	/**
 	 * The constant MENU_IS_LOG_TRANSFORMED.
 	 */
-	public static final String MENU_IS_LOG_TRANSFORMED = "Data is log2 transformed";
+	public static final String MENU_IS_LOG_TRANSFORMED = "Log2 transformed";
 
 	public static final String LABEL_BLOCK_SIZE = "Block Size";
 	
 	public static final String LABEL_LEGEND = "Legend";
+
+	public static final String MENU_PLOT = "Plot";
+
+	public static final String MENU_UPDATE = "Update";
 }

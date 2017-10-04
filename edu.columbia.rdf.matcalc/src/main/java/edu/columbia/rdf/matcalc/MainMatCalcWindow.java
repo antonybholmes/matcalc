@@ -74,7 +74,6 @@ import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.event.ModernSelectionListener;
-import org.jebtk.modern.graphics.icons.FolderVectorIcon;
 import org.jebtk.modern.graphics.icons.QuickOpenVectorIcon;
 import org.jebtk.modern.graphics.icons.QuickSaveVectorIcon;
 import org.jebtk.modern.help.GuiAppInfo;
@@ -87,7 +86,6 @@ import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.io.SaveAsRibbonPanel;
 import org.jebtk.modern.panel.CardPanel;
 import org.jebtk.modern.ribbon.QuickAccessButton;
-import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.splitpane.ModernVSplitPaneLine;
@@ -641,8 +639,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
 		button.setClickMessage(UI.MENU_SAVE);
-		button.setToolTip(new ModernToolTip("Save", 
-				"Save the current table."));
+		button.setToolTip(new ModernToolTip("Save", "Save the current table."));
 		button.addClickListener(this);
 		addQuickAccessButton(button);
 
@@ -650,12 +647,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		getRibbon().getHomeToolbar().add(new ClipboardRibbonSection(getRibbon()));
 
 
-		button = new RibbonLargeButton("Files", 
-				UIService.getInstance().loadIcon(FolderVectorIcon.class, 32),
-				"Show Files",
-				"Show the file list.");
-		button.addClickListener(this);
-		getRibbon().getToolbar("View").getSection("Files").add(button);
+		
 
 
 		//
@@ -715,7 +707,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		addFilesPane();
 	}
 
-	private void addFilesPane() {
+	public void addFilesPane() {
 		if (getTabsPane().getModel().getLeftTabs().containsTab("Files")) {
 			return;
 		}
@@ -813,8 +805,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		} else if (e.getMessage().equals("Row z-score")) {
 			addToHistory("Row z-score", "Row z-score", MatrixOperations.rowZscore(getCurrentMatrix())); //addFlowItem(new ZScoreRowsMatrixTransform(this, getCurrentMatrix()));
 			//new StdDevFilterMatrixTransform(this, getCurrentMatrix(), 1.5));
-		} else if (e.getMessage().equals("Files")) {
-			addFilesPane();
 		} else if (e.getMessage().equals(UI.MENU_ABOUT)) {
 			ModernAboutDialog.show(this, getAppInfo());
 		} else if (e.getMessage().equals(UI.MENU_EXIT)) {

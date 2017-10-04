@@ -78,13 +78,13 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 	public void init(MainMatCalcWindow window) {
 		mParent = window;
 
-		RibbonLargeButton button = new RibbonLargeButton("Supervised Classification", 
+		RibbonLargeButton button = new RibbonLargeButton("Supervised", 
 				new Raster32Icon(new DiffExp32VectorIcon()),
 				"Supervised Classification",
 				"Supervised classification.");
 		button.addClickListener(this);
 
-		mParent.getRibbon().getToolbar("Statistics").getSection("Statistics").add(button);
+		mParent.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
 	}
 
 	/* (non-Javadoc)

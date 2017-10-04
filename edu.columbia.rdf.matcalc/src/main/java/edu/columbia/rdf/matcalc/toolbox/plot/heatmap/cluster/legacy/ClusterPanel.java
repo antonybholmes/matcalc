@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 import java.util.List;
 
 import org.jebtk.core.Properties;
-import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelProperties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
@@ -26,6 +25,7 @@ import org.jebtk.graphplot.figure.heatmap.legacy.RowLabelProperties;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.graphics.colormap.ColorMapModel;
@@ -126,7 +126,7 @@ public class ClusterPanel extends HeatMapPanel {
 	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createCanvas(org.abh.common.math.matrix.AnnotationMatrix, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double, org.graphplot.figure.heatmap.legacy.RowLabelProperties, org.graphplot.figure.heatmap.legacy.ColumnLabelProperties)
 	 */
 	@Override
-	public ModernPlotCanvas createCanvas(AnnotationMatrix m,
+	public PlotBox createCanvas(AnnotationMatrix m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,

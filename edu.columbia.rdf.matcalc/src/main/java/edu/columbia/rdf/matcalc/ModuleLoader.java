@@ -24,6 +24,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.core.ColumnAnnotationModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ExtractDataModule;
 import edu.columbia.rdf.matcalc.toolbox.core.GroupModule;
+import edu.columbia.rdf.matcalc.toolbox.core.ShowFilesModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SplitModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SummaryModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ViewModule;
@@ -80,7 +81,7 @@ public class ModuleLoader {
 	 * Instantiates a new module loader.
 	 */
 	public ModuleLoader() {
-		addModule(PasteModule.class);
+		
 		
 		addModule(MatrixIOModule.class);
 		addModule(ExcelIOModule.class);
@@ -90,19 +91,7 @@ public class ModuleLoader {
 		addModule(TsvIOModule.class);
 		addModule(CsvIOModule.class);
 		
-		addModule(LegacyHeatMapModule.class);
-		addModule(LegacyClusterModule.class);
-		addModule(SmoothedLineGraphModule.class);
-		//addModule(ScatterLineModule.class);
-		addModule(ScatterModule.class);
-		addModule(BarChartModule.class);
-		//addModule(BarChartHModule.class);
-		addModule(StackedBarChartModule.class);
-		addModule(HistogramModule.class);
-		//addModule(PieChartModule.class);
-		addModule(BoxWhiskerPlotModule.class);
-		addModule(BoxWhiskerScatterPlotModule.class);
-		addModule(VolcanoPlotModule.class);
+		
 		
 		
 		addModule(TransposeModule.class);
@@ -132,11 +121,31 @@ public class ModuleLoader {
 		
 		addModule(RowOrderModule.class);
 		addModule(ColumnFilterModule.class);
-		addModule(SupervisedModule.class);
+		
 		addModule(VennModule.class);
+		
+		addModule(PasteModule.class);
+		
+		addModule(LegacyHeatMapModule.class);
+		addModule(LegacyClusterModule.class);
+		addModule(SmoothedLineGraphModule.class);
+		//addModule(ScatterLineModule.class);
+		addModule(ScatterModule.class);
+		addModule(BarChartModule.class);
+		//addModule(BarChartHModule.class);
+		addModule(StackedBarChartModule.class);
+		addModule(HistogramModule.class);
+		//addModule(PieChartModule.class);
+		addModule(BoxWhiskerPlotModule.class);
+		addModule(BoxWhiskerScatterPlotModule.class);
+		addModule(VolcanoPlotModule.class);
+		
+		addModule(SupervisedModule.class);
+		
+		
+		addModule(ShowFilesModule.class);
 		addModule(ZoomModule.class);
 		addModule(ViewModule.class);
-		
 	}
 	
 	/**

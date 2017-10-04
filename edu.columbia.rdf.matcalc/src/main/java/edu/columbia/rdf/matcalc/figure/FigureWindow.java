@@ -23,11 +23,10 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.graphplot.Image;
 import org.jebtk.graphplot.MatrixGroupModel;
-import org.jebtk.graphplot.ModernPlotCanvas;
-import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.Graph2dStyleModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.icons.FormatPlot32VectorIcon;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.clipboard.ClipboardRibbonSection;
@@ -118,11 +117,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	/** The m scale model. */
 	protected ScaleModel mScaleModel = new ScaleModel();
 
-	/**
-	 * The member figure.
-	 */
-	protected Figure mFigure = null;
-	
+
 	/**
 	 * The constant NEXT_ID.
 	 */
@@ -189,7 +184,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * @param window the window
 	 */
 	public FigureWindow(ModernWindow window) {
-		this(window, null, true);
+		this(window, true);
 	}
 
 	/**
@@ -199,11 +194,10 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * @param figure the figure
 	 * @param allowStyle the allow style
 	 */
-	public FigureWindow(ModernWindow window, Figure figure, boolean allowStyle) {
+	public FigureWindow(ModernWindow window, boolean allowStyle) {
 		super(window.getAppInfo());
 
 		mWindow = window;
-		mFigure = figure;
 		mAllowStyle = allowStyle;
 
 		setSubTitle("Figure " + mId);
@@ -369,7 +363,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * @throws TranscoderException the transcoder exception
 	 */
 	private void save(Path file) throws IOException, TranscoderException {
-		Image.write(getCanvas(), file);
+		Image.write(getPlot(), file);
 		
 		RecentFilesService.getInstance().setPwd(file.getParent());
 		
@@ -383,7 +377,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 *
 	 * @return the canvas
 	 */
-	public abstract ModernPlotCanvas getCanvas();
+	public abstract PlotBox getPlot();
 
 	/**
 	 * Gets the color normalization model.
