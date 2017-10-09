@@ -23,6 +23,7 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.graphplot.Image;
 import org.jebtk.graphplot.MatrixGroupModel;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.Graph2dStyleModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.icons.FormatPlot32VectorIcon;
@@ -117,6 +118,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	/** The m scale model. */
 	protected ScaleModel mScaleModel = new ScaleModel();
 
+	protected Figure mFigure;
 
 	/**
 	 * The constant NEXT_ID.
@@ -183,8 +185,8 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 *
 	 * @param window the window
 	 */
-	public FigureWindow(ModernWindow window) {
-		this(window, true);
+	public FigureWindow(ModernWindow window, Figure figure) {
+		this(window, figure, true);
 	}
 
 	/**
@@ -194,10 +196,13 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
 	 * @param figure the figure
 	 * @param allowStyle the allow style
 	 */
-	public FigureWindow(ModernWindow window, boolean allowStyle) {
+	public FigureWindow(ModernWindow window, Figure figure, boolean allowStyle) {
 		super(window.getAppInfo());
 
 		mWindow = window;
+		// add canvas to the plot
+		mFigure = figure;
+
 		mAllowStyle = allowStyle;
 
 		setSubTitle("Figure " + mId);

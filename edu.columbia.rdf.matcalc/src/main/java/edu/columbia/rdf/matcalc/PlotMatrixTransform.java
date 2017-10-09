@@ -54,7 +54,7 @@ public abstract class PlotMatrixTransform extends MatrixTransform {
 	public void apply() {
 		ModernWindow window = WindowService.getInstance().findByName(mWindowReference);
 		
-		System.err.println("search for plot window " + mWindowReference + " " + (window == null));
+		//System.err.println("search for plot window " + mWindowReference + " " + (window == null));
 		
 		if (window != null) {
 			// if it does, focus it

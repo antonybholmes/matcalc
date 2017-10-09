@@ -88,7 +88,7 @@ public abstract class HeatMapWindow extends FigureWindow {
 			CountGroups countGroups,
 			List<String> history,
 			Properties properties) {
-		super(window);
+		super(window, null);
 		
 		setMatrix(matrix);
 		mGroups = groups;

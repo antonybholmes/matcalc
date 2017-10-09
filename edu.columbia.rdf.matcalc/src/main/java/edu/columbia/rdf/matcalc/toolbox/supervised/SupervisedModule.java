@@ -559,15 +559,16 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 				.add(new CountGroup("up", 0, ui.size() - 1))
 				.add(new CountGroup("down", ui.size(), indices.size() - 1));
 
-		mParent.addToHistory(new HeatMapMatrixTransform(mParent, 
-				mNormalized, 
-				groups,
-				comparisonGroups,
-				rowGroups,
-				countGroups,
-				history, 
-				properties));
-
+		if (plotType != PlotType.NONE) {
+			mParent.addToHistory(new HeatMapMatrixTransform(mParent, 
+					mNormalized, 
+					groups,
+					comparisonGroups,
+					rowGroups,
+					countGroups,
+					history, 
+					properties));
+		}
 
 		// Add a reference at the end so that it is easy for users to find
 		// the matrix they probably want the most

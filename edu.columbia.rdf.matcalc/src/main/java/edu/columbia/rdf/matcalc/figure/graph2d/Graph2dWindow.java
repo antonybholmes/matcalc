@@ -72,7 +72,7 @@ public class Graph2dWindow extends FigureWindow {
 
 	private FigurePanel mFigurePanel;
 
-	private Figure mFigure;
+	
 
 	/**
 	 * The class ColorMapEvents.
@@ -151,11 +151,9 @@ public class Graph2dWindow extends FigureWindow {
 	public Graph2dWindow(MainMatCalcWindow window, 
 			Figure figure, 
 			boolean allowStyle) {
-		super(window, allowStyle);
+		super(window, figure, allowStyle);
 
-		// add canvas to the plot
-		mFigure = figure;
-
+		
 		setup();
 	}
 
