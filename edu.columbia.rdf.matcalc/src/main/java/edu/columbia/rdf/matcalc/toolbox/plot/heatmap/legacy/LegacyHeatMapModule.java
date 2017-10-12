@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -87,7 +87,7 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void plot() throws IOException {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		XYSeriesModel groups = XYSeriesModel.create(mParent.getGroups());
 

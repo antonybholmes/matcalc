@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.math;
 import java.text.ParseException;
 
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.MatrixTransforms;
 import org.jebtk.modern.UIService;
@@ -85,7 +85,7 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
 	 */
 	@Override
 	public void clicked(ModernClickEvent e) {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		if (e.getMessage().equals("Min")) {
 			mWindow.addToHistory("Minimum Threshold", 
@@ -109,7 +109,7 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
 	 * @throws ParseException the parse exception
 	 */
 	private void minShift() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		double min = MatrixOperations.min(m);
 		
@@ -128,7 +128,7 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
 		
 		double add = Double.parseDouble(dialog.getText());
 		
-		AnnotationMatrix ret = MatrixOperations.add(MatrixOperations.subtract(m, min), add);
+		DataFrame ret = MatrixOperations.add(MatrixOperations.subtract(m, min), add);
 		
 		mWindow.addToHistory("Minimum Threshold", ret);
 	}

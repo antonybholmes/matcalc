@@ -23,8 +23,8 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -95,7 +95,7 @@ public class GroupModule extends CalcModule implements ModernClickListener  {
 	 * Match.
 	 */
 	private void match() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		if (m == null) {
 			return;
@@ -119,8 +119,8 @@ public class GroupModule extends CalcModule implements ModernClickListener  {
 			idMap.get(id).add(item);
 		}
 		
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.createAnnotatableMatrix(idMap.size(), 3);
+		DataFrame ret = 
+				DataFrame.createDataFrame(idMap.size(), 3);
 		
 		ret.setName("Group");
 		

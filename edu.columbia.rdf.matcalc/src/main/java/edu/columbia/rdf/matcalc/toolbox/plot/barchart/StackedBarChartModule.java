@@ -27,7 +27,7 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -78,7 +78,7 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
 	 * Creates the bar chart.
 	 */
 	private void createBarChart() {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		Figure figure = Figure.createFigure(); //window.getFigure();
 

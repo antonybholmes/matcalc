@@ -25,7 +25,7 @@ import javax.swing.Box;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.math.external.microsoft.Excel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.XlsxTxtGuiFileFilter;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
@@ -144,7 +144,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
 	/**
 	 * The member m.
 	 */
-	private AnnotationMatrix mM;
+	private DataFrame mM;
 
 
 	/**
@@ -168,7 +168,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
 	 * @param parent the parent
 	 * @param m the m
 	 */
-	public MatrixRowFilterDialog(ModernWindow parent, AnnotationMatrix m) {
+	public MatrixRowFilterDialog(ModernWindow parent, DataFrame m) {
 		super(parent, "matcalc.filter.rows.help.url");
 
 		setAutoDispose(false);

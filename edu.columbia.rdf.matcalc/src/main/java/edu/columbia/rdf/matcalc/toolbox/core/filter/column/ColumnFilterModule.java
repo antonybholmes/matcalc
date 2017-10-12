@@ -15,8 +15,8 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.filter.column;
 
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -82,7 +82,7 @@ public class ColumnFilterModule extends CalcModule implements ModernClickListene
 	 * Order.
 	 */
 	private void order() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		ColumnFilterDialog dialog = new ColumnFilterDialog(mWindow, m);
 		
@@ -92,8 +92,8 @@ public class ColumnFilterModule extends CalcModule implements ModernClickListene
 			return;
 		}
 		
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.copyInnerColumns(m, dialog.getColumns());
+		DataFrame ret = 
+				DataFrame.copyInnerColumns(m, dialog.getColumns());
 		
 		mWindow.addToHistory("Filter columns", ret);
 	}

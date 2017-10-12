@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.math;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -133,8 +133,8 @@ public class LogModule extends CalcModule implements ModernClickListener {
 	 * @param min the min
 	 * @return the annotation matrix
 	 */
-	public static AnnotationMatrix log2(ModernWindow parent, 
-			AnnotationMatrix matrix, 
+	public static DataFrame log2(ModernWindow parent, 
+			DataFrame matrix, 
 			double min) {
 		LogDialog dialog = new LogDialog(parent, min, 2, false);
 		
@@ -151,8 +151,8 @@ public class LogModule extends CalcModule implements ModernClickListener {
 	 * @param min the min
 	 * @return the annotation matrix
 	 */
-	public static AnnotationMatrix log10(ModernWindow parent, 
-			AnnotationMatrix matrix, 
+	public static DataFrame log10(ModernWindow parent, 
+			DataFrame matrix, 
 			double min) {
 		LogDialog dialog = new LogDialog(parent, min, 10, false);
 		
@@ -169,8 +169,8 @@ public class LogModule extends CalcModule implements ModernClickListener {
 	 * @param min the min
 	 * @return the annotation matrix
 	 */
-	public static AnnotationMatrix ln(ModernWindow parent, 
-			AnnotationMatrix matrix, 
+	public static DataFrame ln(ModernWindow parent, 
+			DataFrame matrix, 
 			double min) {
 		LogDialog dialog = new LogDialog(parent, min, 2, true);
 		
@@ -187,12 +187,12 @@ public class LogModule extends CalcModule implements ModernClickListener {
 	 * @param dialog the dialog
 	 * @return the annotation matrix
 	 */
-	public static AnnotationMatrix log(ModernWindow parent, 
-			AnnotationMatrix matrix, 
+	public static DataFrame log(ModernWindow parent, 
+			DataFrame matrix, 
 			LogDialog dialog) {
 
 		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			AnnotationMatrix m;
+			DataFrame m;
 			
 			if (dialog.getAdd()) {
 				m = MatrixOperations.add(matrix, dialog.getAddAmount());
@@ -205,7 +205,7 @@ public class LogModule extends CalcModule implements ModernClickListener {
 			if (dialog.getNatural()) {
 				return MatrixOperations.ln(m);
 			} else {
-				AnnotationMatrix ret = MatrixOperations.log(m, dialog.getBase());
+				DataFrame ret = MatrixOperations.log(m, dialog.getBase());
 
 				return ret;
 			}

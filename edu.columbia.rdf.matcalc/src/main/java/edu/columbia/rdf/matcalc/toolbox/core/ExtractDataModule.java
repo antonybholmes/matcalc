@@ -27,7 +27,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernDropDownButton;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -131,8 +131,8 @@ public class ExtractDataModule extends CalcModule implements ModernClickListener
 	 *
 	 * @return the annotation matrix
 	 */
-	private AnnotationMatrix extractNumerical() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+	private DataFrame extractNumerical() {
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		return m.extractNumbers();
 	}
@@ -142,8 +142,8 @@ public class ExtractDataModule extends CalcModule implements ModernClickListener
 	 *
 	 * @return the annotation matrix
 	 */
-	private AnnotationMatrix extractText() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+	private DataFrame extractText() {
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		return m.extractText();
 	}

@@ -41,7 +41,7 @@ import org.jebtk.core.tree.TreeRootNode;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.external.microsoft.Excel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.ui.external.microsoft.ExcelUI;
 import org.jebtk.math.ui.matrix.AllMatrixGroupGuiFileFilter;
@@ -124,7 +124,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
 	/**
 	 * The member matrix.
 	 */
-	protected AnnotationMatrix mMatrix;
+	protected DataFrame mMatrix;
 
 	/**
 	 * The class LoadEvents.
@@ -285,7 +285,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
 	 *
 	 * @param matrix the new matrix
 	 */
-	public void setMatrix(AnnotationMatrix matrix) {
+	public void setMatrix(DataFrame matrix) {
 		mMatrix = matrix;
 	}
 
@@ -387,7 +387,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
 
 		List<Integer> columns = mParent.getSelectedColumns();
 
-		List<String> names = AnnotationMatrix.columnNames(mMatrix, columns);
+		List<String> names = DataFrame.columnNames(mMatrix, columns);
 
 		return names;
 	}
@@ -677,7 +677,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
 			return;
 		}
 
-		AnnotationMatrix groupsMatrix = Excel.convertToMatrix(file, 
+		DataFrame groupsMatrix = Excel.convertToMatrix(file, 
 				true,
 				TextUtils.emptyList(),
 				0,

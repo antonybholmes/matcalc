@@ -28,7 +28,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -119,7 +119,7 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
 	 * Creates the plot.
 	 */
 	private void plot() {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		if (m == null) {
 			showLoadMatrixError(mParent);

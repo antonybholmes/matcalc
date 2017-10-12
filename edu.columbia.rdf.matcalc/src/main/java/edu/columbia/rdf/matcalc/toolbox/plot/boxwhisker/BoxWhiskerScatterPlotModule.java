@@ -23,7 +23,7 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.Raster32Icon;
@@ -83,7 +83,7 @@ public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernCli
 	 * Box whisker plot.
 	 */
 	private void boxWhiskerPlot() {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		boxWhiskerPlot(m, true);
 	}
@@ -94,7 +94,7 @@ public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernCli
 	 * @param m the m
 	 * @param plot the plot
 	 */
-	private void boxWhiskerPlot(AnnotationMatrix m, boolean plot) {
+	private void boxWhiskerPlot(DataFrame m, boolean plot) {
 		Figure figure = Figure.createFigure(); //window.getFigure();
 
 		SubFigure graph = figure.currentSubFigure();

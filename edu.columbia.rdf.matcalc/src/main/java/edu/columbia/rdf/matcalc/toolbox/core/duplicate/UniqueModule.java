@@ -22,8 +22,8 @@ import java.util.Map;
 
 import org.jebtk.core.collections.UniqueArrayList;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -103,7 +103,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener  {
 					MessageDialogType.WARNING);
 		}
 
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		int c = columns.get(0);
 
@@ -122,7 +122,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener  {
 			rows.get(id).add(i);
 		}
 
-		AnnotationMatrix ret = AnnotatableMatrix.createAnnotatableMatrix(ids.size(), m.getColumnCount());
+		DataFrame ret = DataFrame.createDataFrame(ids.size(), m.getColumnCount());
 
 		ret.setColumnNames(m.getColumnNames());
 

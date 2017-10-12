@@ -24,7 +24,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.statistics.HistBin;
 import org.jebtk.math.statistics.Statistics;
 import org.jebtk.modern.UIService;
@@ -76,7 +76,7 @@ public class HistogramModule extends CalcModule implements ModernClickListener {
 	 * Creates the plot.
 	 */
 	private void createPlot() {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		Figure figure = Figure.createFigure();
 

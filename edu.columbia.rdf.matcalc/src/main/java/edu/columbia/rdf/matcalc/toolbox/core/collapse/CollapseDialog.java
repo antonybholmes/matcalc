@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.core.collapse;
 
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -42,7 +42,7 @@ public class CollapseDialog extends ModernDialogHelpWindow implements ModernClic
 	/**
 	 * The member matrix.
 	 */
-	private AnnotationMatrix mMatrix;
+	private DataFrame mMatrix;
 
 	/**
 	 * The member groups.
@@ -58,7 +58,7 @@ public class CollapseDialog extends ModernDialogHelpWindow implements ModernClic
 	 * @param groups the groups
 	 */
 	public CollapseDialog(ModernWindow parent, 
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			XYSeriesGroup groups) {
 		super(parent, "matcalc.modules.collapse.help.url");
 		

@@ -24,7 +24,7 @@ import org.jebtk.core.tree.TreeNode;
 import org.jebtk.core.tree.TreeRootNode;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
@@ -67,7 +67,7 @@ public class RowGroupTreePanel extends ColumnGroupTreePanel {
 		
 		List<Integer> columns = mParent.getSelectedRows();
 		
-		List<String> names = AnnotationMatrix.rowNames(mMatrix, columns);
+		List<String> names = DataFrame.rowNames(mMatrix, columns);
 		
 		return names;
 	}

@@ -22,7 +22,7 @@ import org.jebtk.graphplot.figure.heatmap.ColorNormalization;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.graphplot.plotbox.PlotBox;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 import org.jebtk.modern.window.ModernWindow;
@@ -61,7 +61,7 @@ public abstract class HeatMapWindow extends FigureWindow {
 	protected List<String> mHistory;
 
 	/** The m matrix. */
-	protected AnnotationMatrix mMatrix;
+	protected DataFrame mMatrix;
 
 	/** The m count groups. */
 	protected CountGroups mCountGroups;
@@ -82,7 +82,7 @@ public abstract class HeatMapWindow extends FigureWindow {
 	 * @param properties the properties
 	 */
 	public HeatMapWindow(ModernWindow window,
-			AnnotationMatrix matrix, 
+			DataFrame matrix, 
 			XYSeriesModel groups,
 			XYSeriesModel rowGroups,
 			CountGroups countGroups,
@@ -105,7 +105,7 @@ public abstract class HeatMapWindow extends FigureWindow {
 	 *
 	 * @param matrix the new matrix
 	 */
-	public void setMatrix(AnnotationMatrix matrix) {
+	public void setMatrix(DataFrame matrix) {
 		mMatrix = matrix;
 	}
 

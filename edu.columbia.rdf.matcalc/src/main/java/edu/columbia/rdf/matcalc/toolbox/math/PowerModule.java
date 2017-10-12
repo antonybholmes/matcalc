@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.math;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -84,36 +84,36 @@ public class PowerModule extends CalcModule implements ModernClickListener {
 	 * @param base the base
 	 * @return the annotation matrix
 	 */
-	public static AnnotationMatrix power(ModernWindow parent, 
-			AnnotationMatrix matrix, 
+	public static DataFrame power(ModernWindow parent, 
+			DataFrame matrix, 
 			int base) {
 		PowerDialog dialog = new PowerDialog(parent, base);
 		
 		dialog.setVisible(true);
 		
 		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			return (AnnotationMatrix)MatrixOperations.power(matrix, dialog.getBase());
+			return (DataFrame)MatrixOperations.power(matrix, dialog.getBase());
 		} else {
 			return null;
 		}
 	}
 	
-	public static AnnotationMatrix power(ModernWindow parent, 
+	public static DataFrame power(ModernWindow parent, 
 			int base,
-			AnnotationMatrix matrix) {
+			DataFrame matrix) {
 		PowerDialog dialog = new PowerDialog(parent, base);
 		
 		dialog.setVisible(true);
 		
 		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			return (AnnotationMatrix)MatrixOperations.power(dialog.getBase(), matrix);
+			return (DataFrame)MatrixOperations.power(dialog.getBase(), matrix);
 		} else {
 			return null;
 		}
 	}
 	
-	public static AnnotationMatrix em(AnnotationMatrix matrix) {
-		return (AnnotationMatrix)MatrixOperations.em(matrix);
+	public static DataFrame em(DataFrame matrix) {
+		return (DataFrame)MatrixOperations.em(matrix);
 	}
 
 	@Override

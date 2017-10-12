@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.help.GuiAppInfo;
 
 
@@ -104,7 +104,7 @@ public class MainMatCalc {
 	 */
 	public static MainMatCalcWindow main(GuiAppInfo appInfo,
 			ModuleLoader moduleLoader,
-			AnnotationMatrix m) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
+			DataFrame m) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
 		//AppService.getInstance().setAppName("matcalc");
 		
 		setup(moduleLoader);

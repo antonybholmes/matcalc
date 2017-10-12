@@ -46,6 +46,6 @@ public class MatrixGroupCheckSwitch extends ModernCheckSwitch {
 	 * @param selected the selected
 	 */
 	public MatrixGroupCheckSwitch(XYSeries group, boolean selected) {
-		super(group.getName(), selected, group.getColor());
+		super(group.getName(), selected, group.getColor(), group.getColor());
 	}
 }

@@ -23,8 +23,8 @@ import java.util.Set;
 import org.jebtk.core.Indexed;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
@@ -96,7 +96,7 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
 	 * Match.
 	 */
 	private void sort() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		List<Integer> rows = mWindow.getSelectedRows();
 
@@ -132,7 +132,7 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
 	 * @param r the r
 	 * @param asc the asc
 	 */
-	private void sortByRow(AnnotationMatrix m, int r, boolean asc) {
+	private void sortByRow(DataFrame m, int r, boolean asc) {
 
 
 		// If a column belongs to more than one group, we
@@ -175,7 +175,7 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
 	 * @param groups the groups
 	 * @param asc the asc
 	 */
-	private void sortByRowWithinGroups(AnnotationMatrix m, 
+	private void sortByRowWithinGroups(DataFrame m, 
 			int r, 
 			XYSeriesGroup groups,
 			boolean asc) {
@@ -234,14 +234,14 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
 	 * @param m the m
 	 * @param columns the columns
 	 */
-	private void output(AnnotationMatrix m, 
+	private void output(DataFrame m, 
 			List<Integer> columns) {
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.createAnnotatableMatrix(m.getRowCount(), m.getColumnCount());
+		DataFrame ret = 
+				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount());
 
-		AnnotationMatrix.copyRowAnnotations(m, ret);
+		DataFrame.copyRowAnnotations(m, ret);
 
-		AnnotationMatrix.copyColumns(m, columns, ret);
+		DataFrame.copyColumns(m, columns, ret);
 
 		mWindow.addToHistory("Sort matrix", ret);
 	}

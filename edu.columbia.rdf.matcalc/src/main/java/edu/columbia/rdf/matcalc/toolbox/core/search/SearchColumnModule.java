@@ -23,8 +23,8 @@ import java.util.TreeSet;
 
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -103,7 +103,7 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
 			return;
 		}
 
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		SearchColumnDialog dialog = new SearchColumnDialog(mWindow);
 
@@ -159,14 +159,14 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
 			}
 		}
 
-		AnnotationMatrix ret = AnnotatableMatrix.createAnnotatableMatrix(m.getRowCount(), 
+		DataFrame ret = DataFrame.createDataFrame(m.getRowCount(), 
 				m.getColumnCount() + 2);
 
 		// Copy before column
-		AnnotationMatrix.copyColumns(m, 0, column - 1, ret);
+		DataFrame.copyColumns(m, 0, column - 1, ret);
 
 		// Shift the rest by one column so we can insert the results
-		AnnotationMatrix.copyColumns(m, column, ret, column + 2);
+		DataFrame.copyColumns(m, column, ret, column + 2);
 
 		//ret.setColumnName(c + 1, "Match In " + window.getSubTitle()  + " - " + copyM.getColumnName(inputDialog.getReplaceColumn()));
 		ret.setColumnName(column, "Number Of Matches");

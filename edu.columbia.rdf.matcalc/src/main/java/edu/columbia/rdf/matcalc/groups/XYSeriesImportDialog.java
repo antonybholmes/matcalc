@@ -33,7 +33,7 @@ import org.jebtk.core.ColorUtils;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.external.microsoft.Excel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.ExcelDialog;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
@@ -97,10 +97,10 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
 			new ModernDialogFlatButton("Clear Filter", UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
 
 	/** The m groups matrix. */
-	private AnnotationMatrix mGroupsMatrix;
+	private DataFrame mGroupsMatrix;
 
 	/** The m matrix. */
-	private AnnotationMatrix mMatrix;
+	private DataFrame mMatrix;
 
 	/** The m series map. */
 	private Map<String, XYSeries> mSeriesMap;
@@ -139,8 +139,8 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
 	 * @param groupsMatrix the groups matrix
 	 */
 	public XYSeriesImportDialog(ModernWindow parent, 
-			AnnotationMatrix matrix, 
-			AnnotationMatrix groupsMatrix) {
+			DataFrame matrix, 
+			DataFrame groupsMatrix) {
 		super(parent);
 
 		mMatrix = matrix;

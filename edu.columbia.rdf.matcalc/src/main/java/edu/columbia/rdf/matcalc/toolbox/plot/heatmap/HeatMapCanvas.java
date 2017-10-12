@@ -47,7 +47,7 @@ import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.graphplot.plotbox.PlotBoxColumn;
 import org.jebtk.graphplot.plotbox.PlotBoxEmpty;
 import org.jebtk.graphplot.plotbox.PlotBoxRow;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
 // TODO: Auto-generated Javadoc
@@ -114,7 +114,7 @@ public class HeatMapCanvas extends PlotBoxRow {
 	 * @param groupProperties the group properties
 	 * @param properties the properties
 	 */
-	public HeatMapCanvas(AnnotationMatrix matrix,
+	public HeatMapCanvas(DataFrame matrix,
 			XYSeriesGroup groups,
 			XYSeriesGroup rowGroups,
 			CountGroups countGroups,

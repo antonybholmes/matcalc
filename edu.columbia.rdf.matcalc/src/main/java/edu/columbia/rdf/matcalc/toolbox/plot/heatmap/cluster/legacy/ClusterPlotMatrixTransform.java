@@ -21,7 +21,7 @@ import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.cluster.Cluster;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotMatrixTransform;
@@ -59,7 +59,7 @@ public class ClusterPlotMatrixTransform extends HeatMapPlotMatrixTransform {
 	 * @param properties the properties
 	 */
 	public ClusterPlotMatrixTransform(ModernRibbonWindow parent,
-			AnnotationMatrix matrix, 
+			DataFrame matrix, 
 			XYSeriesModel groups,
 			XYSeriesModel rowGroups,
 			Cluster rowCluster,

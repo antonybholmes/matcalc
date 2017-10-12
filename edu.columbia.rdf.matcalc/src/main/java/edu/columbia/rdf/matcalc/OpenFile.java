@@ -16,7 +16,7 @@ import org.jebtk.core.text.RegexUtils;
 import org.jebtk.core.text.Splitter;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.XLSXMetaData;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.io.RecentFilesService;
 
 import edu.columbia.rdf.matcalc.toolbox.FileModule;
@@ -136,7 +136,7 @@ public class OpenFile {
 				FileModule module = mWindow.getFileModule(ext);
 
 				if (module != null) {
-					AnnotationMatrix m = module.openFile(mWindow, 
+					DataFrame m = module.openFile(mWindow, 
 							file,
 							mFileType,
 							mHeaders,
@@ -184,7 +184,7 @@ public class OpenFile {
 				FileModule module = mWindow.mOpenFileModuleMap.get(ext);
 
 				if (module != null) {
-					AnnotationMatrix m = module.autoOpenFile(mWindow, 
+					DataFrame m = module.autoOpenFile(mWindow, 
 							file,
 							mFileType,
 							mHeaders,

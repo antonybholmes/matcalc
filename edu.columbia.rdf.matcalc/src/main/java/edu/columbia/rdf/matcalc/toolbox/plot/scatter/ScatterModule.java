@@ -25,7 +25,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -75,7 +75,7 @@ public class ScatterModule extends CalcModule implements ModernClickListener {
 	 * Creates the scatter.
 	 */
 	private void createScatter() {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		Figure figure = Figure.createFigure(); //window.getFigure();
 

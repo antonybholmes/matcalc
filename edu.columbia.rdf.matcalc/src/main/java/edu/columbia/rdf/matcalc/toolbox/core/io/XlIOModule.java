@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 
 import edu.columbia.rdf.matcalc.FileType;
@@ -40,7 +40,7 @@ public abstract class XlIOModule extends IOModule  {
 	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
 	 */
 	@Override
-	public AnnotationMatrix openFile(final MainMatCalcWindow window,
+	public DataFrame openFile(final MainMatCalcWindow window,
 			final Path file,
 			FileType type,
 			int headers,

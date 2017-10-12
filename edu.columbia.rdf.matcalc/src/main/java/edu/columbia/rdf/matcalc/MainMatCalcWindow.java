@@ -51,7 +51,7 @@ import org.jebtk.core.io.Temp;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.EditableMatrixTableModel;
 import org.jebtk.math.ui.matrix.MatrixTable;
@@ -64,7 +64,6 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButtonWidget;
 import org.jebtk.modern.clipboard.ClipboardRibbonSection;
-import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.contentpane.HTab;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
@@ -90,6 +89,7 @@ import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.splitpane.ModernVSplitPaneLine;
 import org.jebtk.modern.table.ModernSpreadsheetBar;
+import org.jebtk.modern.tabs.IconTabsFolderIcon;
 import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabsModel;
 import org.jebtk.modern.widget.ModernWidget;
@@ -151,8 +151,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	private SaveAsRibbonPanel mSaveAsPanel = new SaveAsRibbonPanel();
 
 	/** The m matrices. */
-	private List<AnnotationMatrix> mMatrices = 
-			new ArrayList<AnnotationMatrix>();
+	private List<DataFrame> mMatrices = 
+			new ArrayList<DataFrame>();
 
 
 	//private ModernListModel<MatrixTransform> transformModel = 
@@ -255,7 +255,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	/**
 	 * The class MouseEvents.
 	 */
-	private class MouseEvents extends MouseAdapter {
+	private class HistoryMouseEvents extends MouseAdapter {
 
 		/* (non-Javadoc)
 		 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
@@ -266,7 +266,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 				MatrixTransform transform = mHistoryPanel.getSelectedItem();
 
 				if (transform != null) {
-					transform.apply();
+					transform.uiApply();
 				}
 			}
 		}
@@ -436,7 +436,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param appInfo the app info
 	 * @param m the m
 	 */
-	public MainMatCalcWindow(GuiAppInfo appInfo, AnnotationMatrix m) {
+	public MainMatCalcWindow(GuiAppInfo appInfo, DataFrame m) {
 		super(appInfo);
 
 		try {
@@ -476,7 +476,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		mHistoryPanel.setRowHeight(48);
 		mHistoryPanel.setCellRenderer(new MatrixTransformCellRenderer());
 		//mHistoryPanel.setModel(transformModel);
-		mHistoryPanel.addMouseListener(new MouseEvents());
+		mHistoryPanel.addMouseListener(new HistoryMouseEvents());
 
 		mHistoryPanel.addSelectionListener(this);
 
@@ -509,6 +509,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 				}
 			}});
 
+		/*
 		if (AUTO_SHOW_FILES_PANE) {
 			mFilesModel.getPwdModel().addChangeListener(new ChangeListener() {
 				@Override
@@ -516,6 +517,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 					addFilesPane();
 				}});
 		}
+		*/
 
 		setSize(1440, 900);
 
@@ -647,7 +649,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		getRibbon().getHomeToolbar().add(new ClipboardRibbonSection(getRibbon()));
 
 
-		
+
 
 
 		//
@@ -704,17 +706,27 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		createGroupsPanel();
 
-		addFilesPane();
+		//addFilesPane();
+		
+		addLeftSideTab("Files", new IconTabsFolderIcon(), mFilesPanel);
 	}
 
 	public void addFilesPane() {
+		getLeftTabsModel().changeTab("Files");
+		
+		addLeftTabsPane();
+		
+		/*
 		if (getTabsPane().getModel().getLeftTabs().containsTab("Files")) {
 			return;
 		}
 
-		getTabsPane()
-			.getModel()
-			.addLeftTab("Files", new CloseableHTab("Files", mFilesPanel, getTabsPane()), 250, 200, 500);
+		getTabsPane().addLeftTab("Files", 
+				new CloseableHTab("Files", mFilesPanel, getTabsPane()), 
+				250, 
+				200, 
+				500);
+		*/
 	}
 
 	/* (non-Javadoc)
@@ -818,7 +830,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * Find.
 	 */
 	private void find() {
-		AnnotationMatrix m = getCurrentMatrix();
+		DataFrame m = getCurrentMatrix();
 
 		if (m != null) {
 			mFindDialog.setVisible(m, mMatrixTable);
@@ -838,7 +850,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 *
 	 * @return the current matrix
 	 */
-	public AnnotationMatrix getCurrentMatrix() {
+	public DataFrame getCurrentMatrix() {
 		if (mHistoryPanel.getItemCount() == 0) {
 			return null;
 		}
@@ -857,7 +869,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 *
 	 * @return the matrices
 	 */
-	public List<AnnotationMatrix> getMatrices() {
+	public List<DataFrame> getMatrices() {
 		return Collections.unmodifiableList(mMatrices);
 	}
 
@@ -887,8 +899,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param matrix the matrix
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(String name,
-			AnnotationMatrix matrix) {
+	public DataFrame addToHistory(String name,
+			DataFrame matrix) {
 		if (matrix == null) {
 			return null;
 		}
@@ -904,9 +916,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param matrix the matrix
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(String name,
+	public DataFrame addToHistory(String name,
 			String description,
-			AnnotationMatrix matrix) {
+			DataFrame matrix) {
 		if (matrix == null) {
 			return null;
 		}
@@ -922,8 +934,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param selectedIndex the selected index
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(String name,
-			AnnotationMatrix matrix,
+	public DataFrame addToHistory(String name,
+			DataFrame matrix,
 			int selectedIndex) {
 		if (matrix == null) {
 			return null;
@@ -941,9 +953,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param selectedIndex the selected index
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(String name,
+	public DataFrame addToHistory(String name,
 			String description,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			int selectedIndex) {
 		if (matrix == null) {
 			return null;
@@ -958,7 +970,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param transform the transform
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(MatrixTransform transform) {
+	public DataFrame addToHistory(MatrixTransform transform) {
 		return addToHistory(getHistoryIndex(), transform);
 	}
 
@@ -969,7 +981,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param selectedIndex the selected index
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix addToHistory(int selectedIndex, 
+	public DataFrame addToHistory(int selectedIndex, 
 			MatrixTransform transform) {
 		if (transform == null) {
 			return null;
@@ -980,6 +992,18 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		mHistoryPanel.addItem(transform, selectedIndex).apply();
 
 		return transform.getMatrix();
+	}
+
+	public DataFrame selectHistory(int selectedIndex) {
+		mHistoryPanel.setSelectedIndex(selectedIndex);
+
+		MatrixTransform transform = mHistoryPanel.getSelectedItem();
+
+		if (transform != null) {
+			return transform.getMatrix();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -1119,7 +1143,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 *
 	 * @param m the m
 	 */
-	public void openMatrixInNewWindow(AnnotationMatrix m) {
+	public void openMatrixInNewWindow(DataFrame m) {
 		MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
 
 		window.openMatrix(m);
@@ -1133,7 +1157,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 *
 	 * @param matrices the matrices
 	 */
-	public void openMatricesInNewWindow(List<AnnotationMatrix> matrices) {
+	public void openMatricesInNewWindow(List<DataFrame> matrices) {
 		MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
 
 		window.openMatrices(matrices);
@@ -1142,7 +1166,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 	}
 
-	public boolean openMatrix(Path file, AnnotationMatrix m) {
+	public boolean openMatrix(Path file, DataFrame m) {
 		boolean status = false;
 
 		if (m != null) {
@@ -1165,7 +1189,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 *
 	 * @param m the m
 	 */
-	public void openMatrix(AnnotationMatrix m) {
+	public void openMatrix(DataFrame m) {
 		openMatrix(m, OpenMode.CURRENT_WINDOW);
 	}
 
@@ -1177,7 +1201,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param m the m
 	 * @param openMode the open mode
 	 */
-	public void openMatrix(AnnotationMatrix m, OpenMode openMode) {
+	public void openMatrix(DataFrame m, OpenMode openMode) {
 		if (mMatrices.size() > 0 && openMode == OpenMode.NEW_WINDOW) {
 			MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
 
@@ -1202,7 +1226,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 *
 	 * @param matrices the matrices
 	 */
-	public void openMatrices(List<AnnotationMatrix> matrices) {
+	public void openMatrices(List<DataFrame> matrices) {
 		openMatrices(matrices, OpenMode.CURRENT_WINDOW);
 	}
 
@@ -1212,7 +1236,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @param matrices the matrices
 	 * @param openMode the open mode
 	 */
-	public void openMatrices(List<AnnotationMatrix> matrices, 
+	public void openMatrices(List<DataFrame> matrices, 
 			OpenMode openMode) {
 		if (mMatrices.size() > 0 && openMode == OpenMode.NEW_WINDOW) {
 			MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
@@ -1222,14 +1246,14 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			window.setVisible(true);
 		} else {
 
-			for (AnnotationMatrix matrix : matrices) {
+			for (DataFrame matrix : matrices) {
 				openMatrix(matrix, openMode);
 			}
 
 			/*
 			mMatrices.addAll(matrices);
 
-			AnnotationMatrix m = matrices.get(0);
+			DataFrame m = matrices.get(0);
 
 			if (m.getName().length() > 0) {
 				setSubTitle(m.getName());
@@ -1253,7 +1277,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * Creates the groups panel.
 	 */
 	private void createGroupsPanel() {
-		//AnnotationMatrix m = getCurrentMatrix();
+		//DataFrame m = getCurrentMatrix();
 
 		mColumnGroupsPanel = new ColumnGroupTreePanel(this);
 		mRowGroupsPanel = new RowGroupTreePanel(this);
@@ -1333,7 +1357,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @throws TranscoderException the transcoder exception
 	 */
 	private void export(Path pwd) throws IOException, TranscoderException {
-		AnnotationMatrix matrix = getCurrentMatrix();
+		DataFrame matrix = getCurrentMatrix();
 
 		if (matrix == null) {
 			ModernMessageDialog.createWarningDialog(this, 
@@ -1353,7 +1377,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @throws TranscoderException the transcoder exception
 	 */
 	private void exportMatrix(Path pwd) throws IOException, TranscoderException {
-		AnnotationMatrix matrix = getCurrentMatrix();
+		DataFrame matrix = getCurrentMatrix();
 
 		if (matrix == null) {
 			return;
@@ -1410,7 +1434,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void save(Path file) throws IOException {
-		AnnotationMatrix matrix = getCurrentMatrix();
+		DataFrame matrix = getCurrentMatrix();
 
 		String ext = PathUtils.getFileExt(file);
 
@@ -1430,14 +1454,14 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			RecentFilesService.getInstance().add(file);
 		} else if (ext.equals("est")) {
 			// Use version 2 as more flexible
-			AnnotationMatrix.writeEstMatrixV2(matrix, file);
+			DataFrame.writeEstMatrixV2(matrix, file);
 			RecentFilesService.getInstance().add(file);
 		} else if (ext.equals("xlsx")) {
 			Excel.writeXlsx(matrix, file);
 			RecentFilesService.getInstance().add(file);
 		} else {
 			// txt
-			AnnotationMatrix.writeDataMatrix(matrix, file);
+			DataFrame.writeDataMatrix(matrix, file);
 			RecentFilesService.getInstance().add(file);
 		}
 		 */
@@ -1478,7 +1502,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			return;
 		}
 
-		AnnotationMatrix m = getCurrentMatrix();
+		DataFrame m = getCurrentMatrix();
 
 		TTestDialog dialog = new TTestDialog(this, m, groups);
 
@@ -1542,7 +1566,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	/*
-	public void foldChange(AnnotationMatrix m,
+	public void foldChange(DataFrame m,
 			double minExp,
 			XYSeries g1, 
 			XYSeries g2,
@@ -1556,11 +1580,11 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		groups.add(g1);
 		groups.add(g2);
 
-		AnnotationMatrix mColumnFiltered = addToHistory("Extract grouped columns", 
+		DataFrame mColumnFiltered = addToHistory("Extract grouped columns", 
 				AnnotatableMatrix.copyInnerColumns(m, groups));
 
 
-		AnnotationMatrix mlog2;
+		DataFrame mlog2;
 
 		if (isLog2Data || log2Data) {
 			mlog2 = MatrixOperations.log2(MatrixOperations.min(mColumnFiltered,  minExp));
@@ -1582,25 +1606,25 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		String name = isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change";
 
-		AnnotationMatrix mfoldchanges = new AnnotatableMatrix(mlog2);
+		DataFrame mfoldchanges = new AnnotatableMatrix(mlog2);
 		mfoldchanges.setRowAnnotations(name, foldChanges);
 		addToHistory(name, mfoldchanges);
 
-		//AnnotationMatrix mfoldchanges = addFlowItem(isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change", 
-		//		new RowAnnotationMatrixView(mlog2, 
+		//DataFrame mfoldchanges = addFlowItem(isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change", 
+		//		new RowDataFrameView(mlog2, 
 		//				isLog2Data|| log2Data ? "Log2 Fold Change" : "Fold Change", 
 		//						ArrayUtils.toObjects(foldChanges)));
 
 		List<Double> zscores = 
 				NumericalMatrix.diffGroupZScores(mfoldchanges, g1, g2);
 
-		AnnotationMatrix mzscores = new AnnotatableMatrix(mfoldchanges);
+		DataFrame mzscores = new AnnotatableMatrix(mfoldchanges);
 		mzscores.setRowAnnotations("Z-score", zscores);
 
 		addToHistory("Add row z-scores", mzscores);
 
-		//AnnotationMatrix mzscores = addFlowItem("Add row z-scores", 
-		//		new RowAnnotationMatrixView(mfoldchanges, 
+		//DataFrame mzscores = addFlowItem("Add row z-scores", 
+		//		new RowDataFrameView(mfoldchanges, 
 		//				"Z-score", 
 		//				ArrayUtils.toObjects(zscores)));
 
@@ -1627,24 +1651,24 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		List<Integer> indices = IndexedValue.indices(sortedZscores);
 
-		AnnotationMatrix mDeltaSorted = 
+		DataFrame mDeltaSorted = 
 				AnnotatableMatrix.copyInnerRows(mzscores, indices);
 		addToHistory("Sort by row z-score", mDeltaSorted); //new RowFilterMatrixView(mzscores, indices));
 
 
-		AnnotationMatrix mNormalized = 
+		DataFrame mNormalized = 
 				MatrixOperations.groupZScore(mDeltaSorted, groups);
 		addToHistory("Normalize expression within groups", mNormalized); //new GroupZScoreMatrixView(mDeltaSorted, groups));
 
 
 
-		//AnnotationMatrix mMinMax = addFlowItem("Min/max threshold", 
+		//DataFrame mMinMax = addFlowItem("Min/max threshold", 
 		//		"min: " + Plot.MIN_STD + ", max: "+ Plot.MAX_STD,
 		//		new MinMaxBoundedMatrixView(mNormalized, 
 		//				Plot.MIN_STD, 
 		//				Plot.MAX_STD));
 
-		//AnnotationMatrix mStandardized = 
+		//DataFrame mStandardized = 
 		//		addFlowItem("Row normalize", new RowNormalizedMatrixView(mMinMax));
 
 		if (!plot) {
@@ -1679,7 +1703,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			return;
 		}
 
-		AnnotationMatrix m = getCurrentMatrix();
+		DataFrame m = getCurrentMatrix();
 
 		if (m == null) {
 			return;
@@ -1720,12 +1744,12 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 	/*
 	private void pieChart() throws IOException {
-		AnnotationMatrix m = getCurrentMatrix();
+		DataFrame m = getCurrentMatrix();
 
 		pieChart(m, "title", false);
 	}
 
-	private void pieChart(AnnotationMatrix m,
+	private void pieChart(DataFrame m,
 			String rowAnnotationName,
 			boolean group) throws IOException {
 
@@ -1805,7 +1829,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		//System.err.println("selected " + transformList.getSelectedIndex());
 
-		AnnotationMatrix matrix = getCurrentMatrix();
+		DataFrame matrix = getCurrentMatrix();
 
 		if (matrix == null) {
 			return;

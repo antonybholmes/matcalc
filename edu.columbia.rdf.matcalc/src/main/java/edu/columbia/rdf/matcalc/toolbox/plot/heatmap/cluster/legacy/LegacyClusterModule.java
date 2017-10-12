@@ -25,8 +25,8 @@ import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.cluster.DistanceMetric;
 import org.jebtk.math.cluster.HierarchicalClustering;
 import org.jebtk.math.cluster.Linkage;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -109,7 +109,7 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void cluster(Properties properties) throws IOException {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		if (m == null) {
 			return;
@@ -153,7 +153,7 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 	 * @param properties the properties
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public void cluster(AnnotationMatrix m,
+	public void cluster(DataFrame m,
 			DistanceMetric distanceMetric,
 			Linkage linkage,
 			boolean clusterRows,
@@ -214,10 +214,10 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 			columnOrder = Mathematics.sequence(0, im.getColumnCount() - 1);
 		}
 
-		AnnotationMatrix m2 = 
+		DataFrame m2 = 
 				AnnotatableMatrix.copyInnerRows(m, rowOrder);
 
-		AnnotationMatrix m3 = 
+		DataFrame m3 = 
 				AnnotatableMatrix.copyInnerColumns(m2, columnOrder);
 
 		mWindow.addToHistory("Cluster ordered matrix", m3);
@@ -260,8 +260,8 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 	 * @return the annotation matrix
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static AnnotationMatrix cluster(MainMatCalcWindow window,
-			AnnotationMatrix m,
+	public static DataFrame cluster(MainMatCalcWindow window,
+			DataFrame m,
 			DistanceMetric distanceMetric,
 			Linkage linkage,
 			boolean clusterRows,
@@ -295,23 +295,23 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 			return m;
 		}
 
-		AnnotationMatrix m2;
+		DataFrame m2;
 		
 		if (rowCluster != null) {
 			List<Integer> rowOrder = Cluster.getLeafOrderedIds(rowCluster);
 			
-			m2 = AnnotatableMatrix.copyRows(m, rowOrder);
+			m2 = DataFrame.copyRows(m, rowOrder);
 		} else {
 			//rowOrder = Mathematics.sequence(0, m.getRowCount() - 1);
 			m2 = m;
 		}
 
-		AnnotationMatrix m3;
+		DataFrame m3;
 		
 		if (columnCluster != null) {
 			List<Integer> columnOrder = Cluster.getLeafOrderedIds(columnCluster);
 			
-			m3 = AnnotatableMatrix.copyInnerColumns(m2, columnOrder);
+			m3 = DataFrame.copyInnerColumns(m2, columnOrder);
 		} else {
 			//columnOrder = Mathematics.sequence(0, m.getColumnCount() - 1);
 			m3 = m2;

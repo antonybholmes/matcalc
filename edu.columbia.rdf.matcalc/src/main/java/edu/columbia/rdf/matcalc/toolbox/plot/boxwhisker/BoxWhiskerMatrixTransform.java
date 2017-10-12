@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.plot.boxwhisker;
 
 import org.jebtk.graphplot.figure.SubFigure;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -46,7 +46,7 @@ public class BoxWhiskerMatrixTransform extends PlotMatrixTransform {
 	 * @param canvas the canvas
 	 */
 	public BoxWhiskerMatrixTransform(ModernWindow parent,
-			AnnotationMatrix inputMatrix, 
+			DataFrame inputMatrix, 
 			SubFigure canvas) {
 		super(parent, "Create Box Whisker Plot", inputMatrix);
 		

@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.jebtk.graphplot.figure.heatmap.legacy.AnnotationProperties;
 import org.jebtk.graphplot.figure.heatmap.legacy.RowLabelPosition;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -68,7 +68,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
 	 * @param rowLabelPosition the row label position
 	 */
 	public RowLabelControl(ModernWindow parent,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			RowLabelPosition rowLabelPosition) {
 		this(parent, matrix, rowLabelPosition, true);
 	}
@@ -82,7 +82,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
 	 * @param show the show
 	 */
 	public RowLabelControl(ModernWindow parent,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			RowLabelPosition rowLabelPosition,
 			boolean show) {
 		

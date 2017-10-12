@@ -24,8 +24,8 @@ import java.util.List;
 import org.jebtk.core.collections.BooleanFixedStack;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.search.SearchStackOperator;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -106,7 +106,7 @@ public class FilterModule extends CalcModule implements ModernClickListener  {
 	 * @throws ParseException the parse exception
 	 */
 	private void filter() throws ParseException {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		List<Integer> columns = mWindow.getSelectedColumns();
 		
@@ -225,12 +225,12 @@ public class FilterModule extends CalcModule implements ModernClickListener  {
 		}
 
 		
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.createAnnotatableMatrix(rows.size(), m.getColumnCount());
+		DataFrame ret = 
+				DataFrame.createDataFrame(rows.size(), m.getColumnCount());
 		
-		AnnotationMatrix.copyColumnAnnotations(m, ret);
+		DataFrame.copyColumnAnnotations(m, ret);
 		
-		AnnotationMatrix.copyRows(m, rows, ret);
+		DataFrame.copyRows(m, rows, ret);
 		
 		mWindow.addToHistory("Filter matrix", ret);
 	}

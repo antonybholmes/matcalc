@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.plot.volcano;
 
 import org.jebtk.graphplot.figure.Figure;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernWindow;
 
 public class VolcanoPlotMatrixTransform extends PlotFigureTransform {
@@ -28,7 +28,7 @@ public class VolcanoPlotMatrixTransform extends PlotFigureTransform {
 	 * @param inputMatrix the input matrix
 	 * @param figure the canvas
 	 */
-	public VolcanoPlotMatrixTransform(ModernWindow parent, AnnotationMatrix m, Figure figure) {
+	public VolcanoPlotMatrixTransform(ModernWindow parent, DataFrame m, Figure figure) {
 		super(parent, "Create Volcano Plot", m, figure);
 	}
 }

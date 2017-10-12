@@ -19,7 +19,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -35,14 +35,14 @@ public class ColumnSorters extends VBoxAutoWidth {
 	private static final long serialVersionUID = 1L;
 	
 	/** The m M. */
-	private AnnotationMatrix mM;
+	private DataFrame mM;
 	
 	/**
 	 * Instantiates a new column sorters.
 	 *
 	 * @param m the m
 	 */
-	public ColumnSorters(AnnotationMatrix m) {
+	public ColumnSorters(DataFrame m) {
 		mM = m;
 		
 		setBorder(BorderService.getInstance().createBorder(5));

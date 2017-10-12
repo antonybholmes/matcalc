@@ -29,7 +29,7 @@ import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.plotbox.PlotBox;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.contentpane.CloseableHTab;
@@ -67,8 +67,8 @@ public class Graph2dWindow extends FigureWindow {
 	private PlotSizeModel mSizeModel = new PlotSizeModel();
 
 	/** The m matrices. */
-	private List<AnnotationMatrix> mMatrices = 
-			new ArrayList<AnnotationMatrix>();
+	private List<DataFrame> mMatrices = 
+			new ArrayList<DataFrame>();
 
 	private FigurePanel mFigurePanel;
 
@@ -252,7 +252,7 @@ public class Graph2dWindow extends FigureWindow {
 		// them
 		if (mMatrices.size() == 0) {
 			for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
-				AnnotationMatrix m = subFigure.currentAxes().currentPlot().getMatrix();
+				DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
 				
 				if (m != null) {
 					mMatrices.add(m);
@@ -267,7 +267,7 @@ public class Graph2dWindow extends FigureWindow {
 		// Cycle through the matrices
 
 		for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
-			AnnotationMatrix m = subFigure.currentAxes().currentPlot().getMatrix();
+			DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
 
 			if (m == null) {
 				continue;

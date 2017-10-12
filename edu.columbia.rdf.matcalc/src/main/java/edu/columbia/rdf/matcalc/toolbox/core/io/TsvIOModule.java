@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrixParser;
 import org.jebtk.math.matrix.DynamicMatrixParser;
 import org.jebtk.modern.io.GuiFileExtFilter;
@@ -61,7 +61,7 @@ public class TsvIOModule extends IOModule  {
 	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
 	 */
 	@Override
-	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
+	public DataFrame autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
 			FileType type,
 			int headers,
@@ -78,19 +78,19 @@ public class TsvIOModule extends IOModule  {
 			return new DynamicMatrixParser(skipLines, 
 					rowAnnotations, 
 					delimiter)
-					.parse(file); //return AnnotationMatrix.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
+					.parse(file); //return DataFrame.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
 		}
 	}
 
 
 	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.AnnotationMatrix)
+	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
 	 */
 	@Override
 	public boolean saveFile(final MainMatCalcWindow window,
 			final Path file, 
-			final AnnotationMatrix m) throws IOException {
-		AnnotationMatrix.writeAnnotationMatrix(m, file);
+			final DataFrame m) throws IOException {
+		DataFrame.writeDataFrame(m, file);
 
 		return true;
 	}

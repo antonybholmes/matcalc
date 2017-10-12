@@ -21,7 +21,7 @@ import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
@@ -62,7 +62,7 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow  {
 	 */
 	public DifferentialExpressionPlotWindow(ModernRibbonWindow window,
 			String name,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,
 			XYSeriesModel rowGroups,
@@ -84,7 +84,7 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow  {
 	
 	/*
 	@Override
-	public void setMatrix(AnnotationMatrix matrix) {
+	public void setMatrix(DataFrame matrix) {
 		super.setMatrix(matrix);
 		
 		setFormatPane();

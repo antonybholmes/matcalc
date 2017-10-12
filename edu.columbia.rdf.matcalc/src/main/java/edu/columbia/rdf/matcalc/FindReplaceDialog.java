@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.Box;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixCellRef;
 import org.jebtk.math.ui.matrix.MatrixTable;
 import org.jebtk.modern.ModernComponent;
@@ -125,12 +125,12 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
 	/**
 	 * The member m.
 	 */
-	private AnnotationMatrix mM;
+	private DataFrame mM;
 
 	/**
 	 * The member start cell.
 	 */
-	private MatrixCellRef mStartCell = AnnotationMatrix.START_CELL;
+	private MatrixCellRef mStartCell = DataFrame.START_CELL;
 
 	/**
 	 * The member table.
@@ -322,7 +322,7 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
 			text = mReplaceFindField.getText();
 		}
 
-		MatrixCellRef cell = AnnotationMatrix.find(mM, 
+		MatrixCellRef cell = DataFrame.find(mM, 
 				text,
 				mCheckFindCaseSensitive.isSelected(),
 				mCheckFindEntireCell.isSelected(),
@@ -385,7 +385,7 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
 	 * Replace all.
 	 */
 	private void replaceAll() {
-		List<MatrixCellRef> cells = AnnotationMatrix.findAll(mM, 
+		List<MatrixCellRef> cells = DataFrame.findAll(mM, 
 				mReplaceFindField.getText(),
 				mCheckReplaceCaseSensitive.isSelected(),
 				mCheckReplaceEntireCell.isSelected(),
@@ -443,11 +443,11 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
 	 * @param m the m
 	 * @param table the table
 	 */
-	public void setVisible(AnnotationMatrix m, MatrixTable table) {
+	public void setVisible(DataFrame m, MatrixTable table) {
 		mM = m;
 		mTable = table;
 
-		mStartCell = AnnotationMatrix.START_CELL;
+		mStartCell = DataFrame.START_CELL;
 
 		setVisible(true);
 	}

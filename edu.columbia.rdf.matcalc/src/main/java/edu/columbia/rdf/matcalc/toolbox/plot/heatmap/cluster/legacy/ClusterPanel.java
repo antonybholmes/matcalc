@@ -27,7 +27,7 @@ import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.math.cluster.Cluster;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.colormap.ColorMapModel;
 import org.jebtk.modern.tabs.TabsModel;
 import org.jebtk.modern.window.ModernRibbonWindow;
@@ -66,7 +66,7 @@ public class ClusterPanel extends HeatMapPanel {
 	 * @param properties the properties
 	 */
 	public ClusterPanel(ModernRibbonWindow window,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			XYSeriesModel groups,
 			XYSeriesModel rowGroups,
 			Cluster rowCluster,
@@ -117,16 +117,16 @@ public class ClusterPanel extends HeatMapPanel {
 			rowSeriesOfInterest.add(series);
 		}
 		
-		AnnotationMatrix m = createMatrix(mMatrix, min, max);
+		DataFrame m = createMatrix(mMatrix, min, max);
 		
 		display(m, seriesOfInterest, rowSeriesOfInterest, min, max);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createCanvas(org.abh.common.math.matrix.AnnotationMatrix, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double, org.graphplot.figure.heatmap.legacy.RowLabelProperties, org.graphplot.figure.heatmap.legacy.ColumnLabelProperties)
+	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createCanvas(org.abh.common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double, org.graphplot.figure.heatmap.legacy.RowLabelProperties, org.graphplot.figure.heatmap.legacy.ColumnLabelProperties)
 	 */
 	@Override
-	public PlotBox createCanvas(AnnotationMatrix m,
+	public PlotBox createCanvas(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,

@@ -24,7 +24,7 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalization;
 import org.jebtk.graphplot.plotbox.PlotBoxGridLayout;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -108,7 +108,7 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
 
 		int c = 0;
 		
-		for (AnnotationMatrix m : mParent.getMatrices()) {
+		for (DataFrame m : mParent.getMatrices()) {
 			SubFigure subFigure = figure.newSubFigure();
 			
 			// Add some filler space around the plot

@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.jebtk.core.NameProperty;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
@@ -56,7 +56,7 @@ public abstract class FileModule implements NameProperty {
 	 * @return
 	 * @throws IOException
 	 */
-	public AnnotationMatrix openFile(final MainMatCalcWindow window,
+	public DataFrame openFile(final MainMatCalcWindow window,
 			final Path file,
 			FileType type,
 			int headers,
@@ -85,7 +85,7 @@ public abstract class FileModule implements NameProperty {
 	 * @return
 	 * @throws IOException
 	 */
-	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
+	public DataFrame autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
 			FileType type, 
 			int headers,
@@ -107,7 +107,7 @@ public abstract class FileModule implements NameProperty {
 	 */
 	public boolean saveFile(final MainMatCalcWindow window,
 			final Path file, 
-			final AnnotationMatrix m) throws IOException {
+			final DataFrame m) throws IOException {
 		return false;
 	}
 	

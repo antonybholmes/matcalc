@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox;
 
 import java.util.List;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.table.ModernTableModel;
 
@@ -47,7 +47,7 @@ public class ColumnsCombo extends ModernComboBox {
 	 *
 	 * @param m the m
 	 */
-	public ColumnsCombo(AnnotationMatrix m) {
+	public ColumnsCombo(DataFrame m) {
 		setMatrix(m);
 	}
 	
@@ -56,7 +56,7 @@ public class ColumnsCombo extends ModernComboBox {
 	 *
 	 * @param m the new matrix
 	 */
-	public void setMatrix(AnnotationMatrix m) {
+	public void setMatrix(DataFrame m) {
 		clear();
 		
 		for (String name : m.getRowAnnotationNames()) {

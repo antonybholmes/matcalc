@@ -17,8 +17,8 @@ package edu.columbia.rdf.matcalc.toolbox.stats;
 
 import org.apache.commons.math3.distribution.FDistribution;
 import org.jebtk.core.Mathematics;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -75,7 +75,7 @@ public class OneWayAnovaModule extends CalcModule implements ModernClickListener
 	 * Anova.
 	 */
 	private void anova() {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 		
 		int rows = m.getRowCount();
 		int cols = m.getColumnCount();
@@ -212,7 +212,7 @@ public class OneWayAnovaModule extends CalcModule implements ModernClickListener
 		System.err.println("err " + errSS + " " + errDegFree + "  " + errMS);
 		System.err.println("total " + totalSS + " " + totalDegFree);
 		
-		AnnotationMatrix ret = AnnotatableMatrix.createNumericalMatrix(3, 5);
+		DataFrame ret = DataFrame.createNumericalMatrix(3, 5);
 		
 		ret.setColumnName(0, "SS");
 		ret.setColumnName(1, "df");

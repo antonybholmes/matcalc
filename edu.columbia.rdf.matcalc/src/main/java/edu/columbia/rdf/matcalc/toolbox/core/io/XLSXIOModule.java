@@ -24,7 +24,7 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.external.microsoft.ExcelMatrix;
 import org.jebtk.math.external.microsoft.XLSXMetaData;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.io.GuiFileExtFilter;
@@ -63,7 +63,7 @@ public class XLSXIOModule extends XlIOModule  {
 	}
 	
 	@Override
-	public AnnotationMatrix openFile(final MainMatCalcWindow window,
+	public DataFrame openFile(final MainMatCalcWindow window,
 			final Path file,
 			FileType type,
 			int headers,
@@ -103,7 +103,7 @@ public class XLSXIOModule extends XlIOModule  {
 	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
 	 */
 	@Override
-	public AnnotationMatrix autoOpenFile(final MainMatCalcWindow window,
+	public DataFrame autoOpenFile(final MainMatCalcWindow window,
 			final Path file,
 			FileType type,
 			int headers,
@@ -123,12 +123,12 @@ public class XLSXIOModule extends XlIOModule  {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.AnnotationMatrix)
+	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
 	 */
 	@Override
 	public boolean saveFile(final MainMatCalcWindow window,
 			final Path file, 
-			final AnnotationMatrix m) throws IOException {
+			final DataFrame m) throws IOException {
 		Excel.writeXlsx(m, file);
 
 		return true;

@@ -19,7 +19,7 @@ import javax.swing.Box;
 
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.statistics.FDRType;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
@@ -105,7 +105,7 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
 	 * @param groups the groups
 	 */
 	public VolcanoDialog(ModernWindow parent, 
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			XYSeriesGroup groups) {
 		super(parent, "matcalc.modules.volcano.help.url");
 		

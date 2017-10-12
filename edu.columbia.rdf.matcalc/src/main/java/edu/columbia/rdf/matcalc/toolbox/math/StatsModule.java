@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.math;
 
 import java.text.ParseException;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -104,7 +104,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	}
 
 	private void sum() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		double mean = MatrixOperations.sum(m);
 
@@ -121,7 +121,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	 * @throws ParseException the parse exception
 	 */
 	private void mean() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		double mean = MatrixOperations.mean(m);
 
@@ -133,7 +133,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	}
 
 	private void median() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		double mean = MatrixOperations.median(m);
 
@@ -145,7 +145,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	}
 
 	private void mode() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		double mean = MatrixOperations.mode(m);
 
@@ -157,7 +157,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	}
 
 	private void rowSum() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		if (m != null) {
 			mWindow.addToHistory("Row sums", MatrixOperations.addRowSums(m));
@@ -165,7 +165,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	}
 
 	private void rowMean() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		if (m != null) {
 			mWindow.addToHistory("Row means", MatrixOperations.addRowMeans(m));
@@ -173,7 +173,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	}
 
 	private void rowMedian() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		if (m != null) {
 			mWindow.addToHistory("Row medians", MatrixOperations.addRowMedians(m));
@@ -181,7 +181,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
 	}
 
 	private void rowMode() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		if (m != null) {
 			mWindow.addToHistory("Row modes", MatrixOperations.addRowModes(m));

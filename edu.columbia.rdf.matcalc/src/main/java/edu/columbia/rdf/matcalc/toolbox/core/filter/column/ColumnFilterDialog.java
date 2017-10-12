@@ -34,7 +34,7 @@ import org.jebtk.core.IndexedInt;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.Excel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.ExcelUI;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
@@ -116,7 +116,7 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
 	/**
 	 * The member m.
 	 */
-	private AnnotationMatrix mM;
+	private DataFrame mM;
 
 
 	/** The m select all. */
@@ -129,7 +129,7 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
 	 * @param parent the parent
 	 * @param m the m
 	 */
-	public ColumnFilterDialog(ModernWindow parent, AnnotationMatrix m) {
+	public ColumnFilterDialog(ModernWindow parent, DataFrame m) {
 		super(parent, "matcalc.filter.columns.help.url");
 		
 		setAutoDispose(false);

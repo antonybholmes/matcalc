@@ -15,8 +15,8 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core;
 
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -95,30 +95,30 @@ public class ColumnAnnotationModule extends CalcModule implements ModernClickLis
 			return;
 		}
 
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		int minC = -m.getRowAnnotationNames().size();
 
 		// First copy the columns and turn them into annotations
-		AnnotationMatrix ret;
+		DataFrame ret;
 
 		if (c > minC) {
-			ret = AnnotatableMatrix.createAnnotatableMatrix(m.getRowCount(), 
+			ret = DataFrame.createDataFrame(m.getRowCount(), 
 					m.getColumnCount() - c);
 		} else {
 			// If there are no annotation columns, assume the matrix has
 			// mixed content
-			ret = AnnotatableMatrix.createAnnotatableMatrix(m.getRowCount(), 
+			ret = DataFrame.createDataFrame(m.getRowCount(), 
 					m.getColumnCount());
 		}
 
 		// Copy the other columns
 		// Columns start with negative indices if they are part of the annotation
-		AnnotationMatrix.copyColumns(m, c, ret);
+		DataFrame.copyColumns(m, c, ret);
 
 
 		// Copy existing row annotations
-		//AnnotationMatrix.copyRowAnnotations(m, ret);
+		//DataFrame.copyRowAnnotations(m, ret);
 
 		switch (m.getType()) {
 		case NUMBER:

@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.match;
 
 import javax.swing.Box;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -49,12 +49,12 @@ public class MatchDialog extends ModernDialogHelpWindow implements ModernClickLi
 	/**
 	 * The member match matrix.
 	 */
-	private AnnotationMatrix mMatchMatrix = null;
+	private DataFrame mMatchMatrix = null;
 	
 	/**
 	 * The member m.
 	 */
-	private AnnotationMatrix mM;
+	private DataFrame mM;
 
 	/**
 	 * The member c.
@@ -107,7 +107,7 @@ public class MatchDialog extends ModernDialogHelpWindow implements ModernClickLi
 	 * @param m the m
 	 * @param c the c
 	 */
-	public MatchDialog(MainMatCalcWindow parent, AnnotationMatrix m, int c) {
+	public MatchDialog(MainMatCalcWindow parent, DataFrame m, int c) {
 		super(parent, "matcalc.match-in-files.help.url");
 		
 		mWindow = parent;

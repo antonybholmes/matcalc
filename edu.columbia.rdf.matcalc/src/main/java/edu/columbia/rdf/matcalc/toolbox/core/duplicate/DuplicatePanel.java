@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.duplicate;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.panel.HExpandBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.text.ModernTextBorderPanel;
@@ -52,7 +52,7 @@ public class DuplicatePanel extends VBox {
 	 *
 	 * @param matrix the matrix
 	 */
-	public DuplicatePanel(AnnotationMatrix matrix) {
+	public DuplicatePanel(DataFrame matrix) {
 		//ModernLabel label = new ModernLabel("ID", ModernWidget.STANDARD_SIZE);
 		
 		//box2.add(label);

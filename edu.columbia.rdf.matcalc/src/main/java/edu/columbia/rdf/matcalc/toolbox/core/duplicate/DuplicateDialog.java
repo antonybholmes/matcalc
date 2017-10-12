@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.duplicate;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickListener;
@@ -41,7 +41,7 @@ public class DuplicateDialog extends ModernDialogHelpWindow implements ModernCli
 	/**
 	 * The member matrix.
 	 */
-	private AnnotationMatrix mMatrix;
+	private DataFrame mMatrix;
 
 
 	/**
@@ -51,7 +51,7 @@ public class DuplicateDialog extends ModernDialogHelpWindow implements ModernCli
 	 * @param matrix the matrix
 	 */
 	public DuplicateDialog(ModernWindow parent, 
-			AnnotationMatrix matrix) {
+			DataFrame matrix) {
 		super(parent, "matcalc.modules.duplicate.help.url");
 		
 		setTitle("Duplicate Rows");

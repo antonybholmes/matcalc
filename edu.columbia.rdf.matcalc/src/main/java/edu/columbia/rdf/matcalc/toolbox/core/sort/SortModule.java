@@ -24,8 +24,8 @@ import org.jebtk.core.Mathematics;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -95,7 +95,7 @@ public class SortModule extends CalcModule implements ModernClickListener  {
 	 * Match.
 	 */
 	private void sort() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		List<Integer> columns = mWindow.getSelectedColumns();
 		
@@ -170,12 +170,12 @@ public class SortModule extends CalcModule implements ModernClickListener  {
 			}
 		}
 		
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.createAnnotatableMatrix(m.getRowCount(), m.getColumnCount());
+		DataFrame ret = 
+				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount());
 		
-		AnnotationMatrix.copyColumnAnnotations(m, ret);
+		DataFrame.copyColumnAnnotations(m, ret);
 		
-		AnnotationMatrix.copyRows(m, rows, ret);
+		DataFrame.copyRows(m, rows, ret);
 		
 		mWindow.addToHistory("Sort matrix", ret);
 	}

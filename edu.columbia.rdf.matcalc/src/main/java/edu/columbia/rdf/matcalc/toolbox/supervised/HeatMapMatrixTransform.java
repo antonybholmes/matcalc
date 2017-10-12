@@ -21,7 +21,7 @@ import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressionPlotMatrixTransform;
@@ -49,7 +49,7 @@ public class HeatMapMatrixTransform extends DifferentialExpressionPlotMatrixTran
 	 * @param properties the properties
 	 */
 	public HeatMapMatrixTransform(ModernRibbonWindow parent,
-			AnnotationMatrix inputMatrix, 
+			DataFrame inputMatrix, 
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,
 			XYSeriesModel rowGroups,

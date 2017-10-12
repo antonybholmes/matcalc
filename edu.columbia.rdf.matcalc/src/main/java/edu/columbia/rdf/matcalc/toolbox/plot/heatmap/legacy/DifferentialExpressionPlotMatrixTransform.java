@@ -21,7 +21,7 @@ import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
 // TODO: Auto-generated Javadoc
@@ -53,7 +53,7 @@ public abstract class DifferentialExpressionPlotMatrixTransform extends HeatMapP
 	 */
 	public DifferentialExpressionPlotMatrixTransform(ModernRibbonWindow parent,
 			String name,
-			AnnotationMatrix inputMatrix,
+			DataFrame inputMatrix,
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,
 			XYSeriesModel rowGroups,

@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.barchart;
 
 import javax.swing.Box;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.event.ModernClickListener;
@@ -52,7 +52,7 @@ public class BarChartDialog extends ModernDialogTaskWindow implements ModernClic
 	 * @param parent the parent
 	 * @param m the m
 	 */
-	public BarChartDialog(ModernWindow parent, AnnotationMatrix m) {
+	public BarChartDialog(ModernWindow parent, DataFrame m) {
 		super(parent);
 		
 		mRowCombo = new MatrixRowAnnotationCombo(m);

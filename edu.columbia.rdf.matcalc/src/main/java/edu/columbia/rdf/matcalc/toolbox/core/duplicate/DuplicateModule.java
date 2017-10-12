@@ -20,8 +20,8 @@ import java.util.List;
 
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.Splitter;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -102,7 +102,7 @@ public class DuplicateModule extends CalcModule implements ModernClickListener  
 			return;
 		}
 
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		DuplicateDialog dialog = new DuplicateDialog(mWindow, m);
 
@@ -131,7 +131,7 @@ public class DuplicateModule extends CalcModule implements ModernClickListener  
 			}
 		}
 
-		AnnotationMatrix ret = AnnotatableMatrix.createAnnotatableMatrix(rows.size(), 
+		DataFrame ret = DataFrame.createDataFrame(rows.size(), 
 				m.getColumnCount());
 
 

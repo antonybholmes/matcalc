@@ -21,7 +21,7 @@ import javax.swing.Box;
 
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.statistics.FDRType;
 import org.jebtk.modern.UI;
@@ -149,7 +149,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	/**
 	 * The member matrix.
 	 */
-	private AnnotationMatrix mMatrix;
+	private DataFrame mMatrix;
 	
 	
 	/**
@@ -175,7 +175,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 * @param groups the groups
 	 */
 	public SupervisedDialog(ModernWindow parent, 
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			XYSeriesGroup groups) {
 		super(parent, 
 				"Supervised Classification",

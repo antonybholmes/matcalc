@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.core.collapse;
 
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.panel.HExpandBox;
@@ -66,7 +66,7 @@ public class CollapsePanel extends VBox {
 	 * @param matrix the matrix
 	 * @param groups the groups
 	 */
-	public CollapsePanel(AnnotationMatrix matrix, XYSeriesGroup groups) {
+	public CollapsePanel(DataFrame matrix, XYSeriesGroup groups) {
 		mHeaderCombo = new MatrixRowAnnotationCombo(matrix);
 		add(new HExpandBox("Column", mHeaderCombo));
 		

@@ -29,8 +29,8 @@ import org.jebtk.core.io.Io;
 import org.jebtk.core.io.Temp;
 import org.jebtk.core.stream.Stream;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernDropDownButton;
@@ -162,7 +162,7 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 		boolean createZip = dialog.getCreateZip();
 
 
-		AnnotationMatrix current = mWindow.getCurrentMatrix();
+		DataFrame current = mWindow.getCurrentMatrix();
 
 		ListMultiMap<String, Integer> idMap = ArrayListMultiMap.create();
 
@@ -191,12 +191,12 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 				.toList();
 
 
-		List<AnnotationMatrix> matrices = 
-				new ArrayList<AnnotationMatrix>(ids.size());
+		List<DataFrame> matrices = 
+				new ArrayList<DataFrame>(ids.size());
 
 		for (String id : ids) {
 			System.err.println("split id " + id);
-			matrices.add(AnnotatableMatrix.createAnnotatableMatrixFromRows(current, idMap.get(id)));
+			matrices.add(DataFrame.createAnnotatableMatrixFromRows(current, idMap.get(id)));
 		}
 
 		splitByGroup(cleanedIds, matrices, openMatrices, createZip);
@@ -227,16 +227,16 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 		boolean openMatrices = dialog.getLoad();
 		boolean createZip = dialog.getCreateZip();
 
-		AnnotationMatrix current = mWindow.getCurrentMatrix();
+		DataFrame current = mWindow.getCurrentMatrix();
 
 		List<List<Integer>> allIndices = 
 				MatrixGroup.findColumnIndices(current, groups);
 
-		List<AnnotationMatrix> matrices = 
-				new ArrayList<AnnotationMatrix>(groups.size());
+		List<DataFrame> matrices = 
+				new ArrayList<DataFrame>(groups.size());
 
 		for (List<Integer> indices : allIndices) {
-			matrices.add(AnnotatableMatrix.createAnnotatableMatrixFromColumns(current, indices));
+			matrices.add(DataFrame.createAnnotatableMatrixFromColumns(current, indices));
 		}
 
 		List<String> ids = new ArrayList<String>(groups.size());
@@ -263,7 +263,7 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void splitByGroup(List<String> ids,
-			List<AnnotationMatrix> matrices,
+			List<DataFrame> matrices,
 			boolean openMatrices,
 			boolean createZip) throws IOException {
 
@@ -288,11 +288,11 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 					for (int i = 0; i < ids.size(); ++i) {
 						String id = ids.get(i);
 
-						AnnotationMatrix m = matrices.get(i);
+						DataFrame m = matrices.get(i);
 
 						Path tmp = Temp.createTempFile(id + ".txt");
 
-						AnnotationMatrix.writeAnnotationMatrix(m, tmp);
+						DataFrame.writeDataFrame(m, tmp);
 
 						files.add(tmp);
 					}

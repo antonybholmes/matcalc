@@ -48,7 +48,7 @@ import org.jebtk.graphplot.plotbox.PlotBoxColumn;
 import org.jebtk.graphplot.plotbox.PlotBoxEmpty;
 import org.jebtk.graphplot.plotbox.PlotBoxRow;
 import org.jebtk.math.cluster.Cluster;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
 
@@ -118,7 +118,7 @@ public class ClusterCanvas extends PlotBoxRow {
 	 * @param groupProperties the group properties
 	 * @param properties the properties
 	 */
-	public ClusterCanvas(AnnotationMatrix matrix,
+	public ClusterCanvas(DataFrame matrix,
 			XYSeriesGroup groups,
 			XYSeriesGroup rowGroups,
 			CountGroups countGroups,
@@ -161,7 +161,7 @@ public class ClusterCanvas extends PlotBoxRow {
 	 * @param groupProperties the group properties
 	 * @param properties the properties
 	 */
-	public ClusterCanvas(AnnotationMatrix matrix,
+	public ClusterCanvas(DataFrame matrix,
 			Cluster rowCluster,
 			Cluster columnCluster,
 			XYSeriesGroup groups,

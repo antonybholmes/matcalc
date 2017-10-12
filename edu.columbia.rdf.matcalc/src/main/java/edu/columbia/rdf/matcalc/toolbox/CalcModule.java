@@ -19,7 +19,7 @@ import java.util.Map;
 
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.help.GuiAppInfo;
 import org.jebtk.modern.window.ModernWindow;
@@ -85,11 +85,11 @@ public abstract class CalcModule extends Module {
 	 * @return the map
 	 */
 	protected static Map<String, Integer> findColumns(MainMatCalcWindow w,
-			AnnotationMatrix m, 
+			DataFrame m, 
 			String... terms) {
 		
 		Map<String, Integer> indexMap = 
-				AnnotationMatrix.findColumns(m, terms);
+				DataFrame.findColumns(m, terms);
 		
 		boolean found = true;
 		

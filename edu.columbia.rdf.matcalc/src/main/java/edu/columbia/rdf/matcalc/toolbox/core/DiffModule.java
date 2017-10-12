@@ -22,8 +22,8 @@ import java.util.Map;
 import org.jebtk.bioinformatics.Affymetrix;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -120,7 +120,7 @@ public class DiffModule extends CalcModule implements ModernClickListener  {
 			return;
 		}
 		
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
 		List<String> ids = getIds(inputDialog.getText());
 		
@@ -131,14 +131,14 @@ public class DiffModule extends CalcModule implements ModernClickListener  {
 		int c = columns.get(0);
 		// first clone the matrix
 
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.createAnnotatableMatrix(m.getRowCount(), m.getColumnCount() + 1);
+		DataFrame ret = 
+				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount() + 1);
 
 		// Copy before column
-		AnnotationMatrix.copyColumns(m, 0, c, ret);
+		DataFrame.copyColumns(m, 0, c, ret);
 		
 		// Shift the rest by one column so we can insert the results
-		AnnotationMatrix.copyColumns(m, c + 1, ret, c + 2);
+		DataFrame.copyColumns(m, c + 1, ret, c + 2);
 		
 		ret.setColumnName(c + 1, "Diff Match");
 		

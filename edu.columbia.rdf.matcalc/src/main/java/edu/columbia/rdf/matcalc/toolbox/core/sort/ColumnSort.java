@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.sort;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
@@ -57,7 +57,7 @@ public class ColumnSort extends HBox implements ModernClickListener {
 	 * @param m the m
 	 * @param label the label
 	 */
-	public ColumnSort(AnnotationMatrix m, String label) {
+	public ColumnSort(DataFrame m, String label) {
 		add(new ModernAutoSizeLabel(label, 60));
 		
 		mColumnsCombo = new ColumnsCombo(m);
@@ -86,7 +86,7 @@ public class ColumnSort extends HBox implements ModernClickListener {
 	 * @param m the m
 	 * @param c the c
 	 */
-	public ColumnSort(AnnotationMatrix m, int c) {
+	public ColumnSort(DataFrame m, int c) {
 		this(m, c, true);
 	}
 	
@@ -97,7 +97,7 @@ public class ColumnSort extends HBox implements ModernClickListener {
 	 * @param c the c
 	 * @param asc the asc
 	 */
-	public ColumnSort(AnnotationMatrix m, int c, boolean asc) {
+	public ColumnSort(DataFrame m, int c, boolean asc) {
 		this(m, "Sort by", c, asc);
 	}
 
@@ -108,7 +108,7 @@ public class ColumnSort extends HBox implements ModernClickListener {
 	 * @param label the label
 	 * @param c the c
 	 */
-	public ColumnSort(AnnotationMatrix m, String label, int c) {
+	public ColumnSort(DataFrame m, String label, int c) {
 		this(m, label, c, true);
 	}
 	
@@ -120,7 +120,7 @@ public class ColumnSort extends HBox implements ModernClickListener {
 	 * @param c the c
 	 * @param asc the asc
 	 */
-	public ColumnSort(AnnotationMatrix m, String label, int c, boolean asc) {
+	public ColumnSort(DataFrame m, String label, int c, boolean asc) {
 		this(m, label);
 		
 		if (c != -1) {

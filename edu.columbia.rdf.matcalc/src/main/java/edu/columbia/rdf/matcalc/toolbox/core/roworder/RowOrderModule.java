@@ -17,8 +17,8 @@ package edu.columbia.rdf.matcalc.toolbox.core.roworder;
 
 import java.util.List;
 
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -82,7 +82,7 @@ public class RowOrderModule extends CalcModule implements ModernClickListener {
 	 * Filter.
 	 */
 	public void filter() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		RowOrderDialog dialog = new RowOrderDialog(mWindow, m);
 		
@@ -94,7 +94,7 @@ public class RowOrderModule extends CalcModule implements ModernClickListener {
 		
 		List<Integer> rows = dialog.getRows();
 			
-		AnnotationMatrix ret = AnnotatableMatrix.copyRows(m, rows);
+		DataFrame ret = DataFrame.copyRows(m, rows);
 		
 		mWindow.addToHistory("Row order", ret);
 	}

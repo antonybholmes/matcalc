@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
 
 import java.text.ParseException;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
@@ -64,7 +64,7 @@ public class ColumnFilter extends HBox implements ModernClickListener {
 	 * @param m the m
 	 * @param isFirst the is first
 	 */
-	public ColumnFilter(AnnotationMatrix m, boolean isFirst) {
+	public ColumnFilter(DataFrame m, boolean isFirst) {
 		if (isFirst) {
 			add(UI.createHGap(80));
 		} else {

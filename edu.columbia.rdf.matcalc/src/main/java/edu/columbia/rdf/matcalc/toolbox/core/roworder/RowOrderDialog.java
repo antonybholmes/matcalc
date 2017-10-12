@@ -34,7 +34,7 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.Io;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
@@ -117,7 +117,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	/**
 	 * The member m.
 	 */
-	private AnnotationMatrix mM;
+	private DataFrame mM;
 
 	
 	/**
@@ -141,7 +141,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	 * @param parent the parent
 	 * @param m the m
 	 */
-	public RowOrderDialog(ModernWindow parent, AnnotationMatrix m) {
+	public RowOrderDialog(ModernWindow parent, DataFrame m) {
 		super(parent, "matcalc.modules.row-order.help.url");
 		
 		mM = m;

@@ -19,7 +19,7 @@ import java.util.List;
 
 import javax.swing.Box;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
@@ -68,7 +68,7 @@ public class FilterDialog extends ModernDialogHelpWindow implements ModernClickL
 	 * @param m the m
 	 * @param c the c
 	 */
-	public FilterDialog(MainMatCalcWindow parent, AnnotationMatrix m, int c) {
+	public FilterDialog(MainMatCalcWindow parent, DataFrame m, int c) {
 		super(parent, "matcalc.filter.help.url");
 		
 		mContentPanel = new ColumnFilters(m);

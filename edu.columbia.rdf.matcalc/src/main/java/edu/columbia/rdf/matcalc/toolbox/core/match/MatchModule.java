@@ -21,8 +21,8 @@ import java.util.Set;
 
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -112,7 +112,7 @@ public class MatchModule extends CalcModule implements ModernClickListener  {
 			return;
 		}
 		
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		int c = columns.get(0);
 		
@@ -127,7 +127,7 @@ public class MatchModule extends CalcModule implements ModernClickListener  {
 		MainMatCalcWindow window = 
 				(MainMatCalcWindow)WindowService.getInstance().findByName(inputDialog.getWindowName());
 		
-		AnnotationMatrix copyM = window.getCurrentMatrix();
+		DataFrame copyM = window.getCurrentMatrix();
 		
 		List<String> ids = 
 				copyM.columnAsText(inputDialog.getMatchColumn());
@@ -139,14 +139,14 @@ public class MatchModule extends CalcModule implements ModernClickListener  {
 				CollectionUtils.createMapSet(TextUtils.toLowerCase(ids), values);
 
 	
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.createAnnotatableMatrix(m.getRowCount(), m.getColumnCount() + 2);
+		DataFrame ret = 
+				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount() + 2);
 
 		// Copy before column
-		AnnotationMatrix.copyColumns(m, 0, c, ret);
+		DataFrame.copyColumns(m, 0, c, ret);
 		
 		// Shift the rest by one column so we can insert the results
-		AnnotationMatrix.copyColumns(m, c + 1, ret, c + 3);
+		DataFrame.copyColumns(m, c + 1, ret, c + 3);
 		
 		//ret.setColumnName(c + 1, "Match In " + window.getSubTitle()  + " - " + copyM.getColumnName(inputDialog.getReplaceColumn()));
 		ret.setColumnName(c + 1, "Number Of Matches");

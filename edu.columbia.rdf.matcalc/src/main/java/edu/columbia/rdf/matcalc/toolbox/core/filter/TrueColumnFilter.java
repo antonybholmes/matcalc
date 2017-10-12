@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.filter;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,7 +32,7 @@ public class TrueColumnFilter extends ColumnFilter {
 	 * @param m the m
 	 * @param isFirst the is first
 	 */
-	public TrueColumnFilter(AnnotationMatrix m, boolean isFirst) {
+	public TrueColumnFilter(DataFrame m, boolean isFirst) {
 		super(m, isFirst);
 	}
 	

@@ -22,7 +22,7 @@ import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.cluster.DistanceMetric;
 import org.jebtk.math.cluster.HierarchicalClustering;
 import org.jebtk.math.cluster.Linkage;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -88,7 +88,7 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
 
 		Linkage linkage = dialog.getLinkage();
 
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		boolean plot = dialog.getCreatePlot();
 
@@ -112,7 +112,7 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
 	 * @param optimalLeafOrder the optimal leaf order
 	 * @param showHeatmap the show heatmap
 	 */
-	public void cluster(AnnotationMatrix m,
+	public void cluster(DataFrame m,
 			DistanceMetric distanceMetric,
 			Linkage linkage,
 			boolean clusterRows,

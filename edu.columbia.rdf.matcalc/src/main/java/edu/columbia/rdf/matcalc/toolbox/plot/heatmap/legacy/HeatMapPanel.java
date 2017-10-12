@@ -36,8 +36,8 @@ import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.graphplot.plotbox.PlotBoxPanel;
 import org.jebtk.math.cluster.Cluster;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -91,7 +91,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	/**
 	 * The member matrix.
 	 */
-	protected AnnotationMatrix mMatrix;
+	protected DataFrame mMatrix;
 
 	/**
 	 * The member zoom model.
@@ -220,7 +220,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 * @param properties the properties
 	 */
 	public HeatMapPanel(ModernRibbonWindow parent,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			XYSeriesModel groupsModel,
 			XYSeriesModel rowGroupsModel,
 			CountGroups countGroups,
@@ -266,7 +266,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 * @param properties the properties
 	 */
 	public HeatMapPanel(ModernRibbonWindow parent,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			Cluster rowCluster,
 			Cluster columnCluster,
 			XYSeriesModel groupsModel,
@@ -527,7 +527,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 			}
 		}
 
-		AnnotationMatrix m = createMatrix(mMatrix, 
+		DataFrame m = createMatrix(mMatrix, 
 				seriesOfInterest, 
 				rowSeriesOfInterest, 
 				min, 
@@ -544,7 +544,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 * @param max the max
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix createMatrix(AnnotationMatrix m,
+	public DataFrame createMatrix(DataFrame m,
 			double min,
 			double max) {
 		
@@ -565,12 +565,12 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 * @param max the max
 	 * @return the annotation matrix
 	 */
-	public AnnotationMatrix createMatrix(AnnotationMatrix m,
+	public DataFrame createMatrix(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,
 			double max) {
-		AnnotationMatrix ret = m;
+		DataFrame ret = m;
 
 		//double plotMin = Plot.MIN_STD;
 		//double plotMax = Plot.MAX_STD;
@@ -611,7 +611,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		
 	
 		if (groupsOfInterest.size() > 0) {
-			ret = AnnotatableMatrix.copyInnerColumns(ret, groupsOfInterest);
+			ret = DataFrame.copyInnerColumns(ret, groupsOfInterest);
 		}
 
 		if (mColorStandardizationModel.get().getType() != ColorNormalizationType.NONE) {
@@ -633,7 +633,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 * @param min the min
 	 * @param max the max
 	 */
-	public void display(AnnotationMatrix m,
+	public void display(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,
@@ -721,7 +721,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 * @param columnLabelProperties the column label properties
 	 * @return the modern plot canvas
 	 */
-	public PlotBox createCanvas(AnnotationMatrix m,
+	public PlotBox createCanvas(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,

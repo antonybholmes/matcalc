@@ -30,7 +30,7 @@ package edu.columbia.rdf.matcalc.toolbox.core;
 import javax.swing.Box;
 
 import org.jebtk.core.Mathematics;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogTaskType;
@@ -94,7 +94,7 @@ public class SummaryDialog extends ModernDialogTaskWindow {
 	private final void createUi() {
 		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
 		
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		Box box = VBox.create();
 		

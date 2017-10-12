@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.jebtk.core.collections.ArrayListCreator;
 import org.jebtk.core.collections.DefaultHashMap;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
@@ -96,7 +96,7 @@ public class CollapseModule extends CalcModule implements ModernClickListener  {
 	 * @throws ParseException the parse exception
 	 */
 	private void collapse() throws ParseException {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		CollapseDialog dialog = new CollapseDialog(mWindow, m, mWindow.getGroups());
 		
@@ -129,14 +129,14 @@ public class CollapseModule extends CalcModule implements ModernClickListener  {
 	 * @return the annotation matrix
 	 * @throws ParseException the parse exception
 	 */
-	public static AnnotationMatrix collapse(AnnotationMatrix m,
+	public static DataFrame collapse(DataFrame m,
 			String rowAnnotationCollapseName,
 			MatrixGroup group1,
 			MatrixGroup group2,
 			CollapseType type,
 			MainMatCalcWindow window) throws ParseException {
 
-		AnnotationMatrix ret = null;
+		DataFrame ret = null;
 
 		switch (type) {
 		case MAX:

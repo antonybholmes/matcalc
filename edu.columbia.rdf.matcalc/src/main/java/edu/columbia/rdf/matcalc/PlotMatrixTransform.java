@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc;
 
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.matrix.transform.MatrixTransform;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowService;
@@ -43,7 +43,7 @@ public abstract class PlotMatrixTransform extends MatrixTransform {
 	 */
 	public PlotMatrixTransform(ModernWindow parent,
 			String name,
-			AnnotationMatrix inputMatrix) {
+			DataFrame inputMatrix) {
 		super(parent, name, inputMatrix);
 	}
 
@@ -52,21 +52,18 @@ public abstract class PlotMatrixTransform extends MatrixTransform {
 	 */
 	@Override
 	public void apply() {
-		ModernWindow window = WindowService.getInstance().findByName(mWindowReference);
+		ModernWindow window = 
+				WindowService.getInstance().findByName(mWindowReference);
 		
-		//System.err.println("search for plot window " + mWindowReference + " " + (window == null));
-		
-		if (window != null) {
-			// if it does, focus it
-			WindowService.setFocus(window);
-		} else {
+		if (window == null) {
 			// else create a new window
 			window = createWindow();
 
 			mWindowReference = window.getTitle();
-			
-			window.setVisible(true);
 		}
+		
+		window.setVisible(true);
+		WindowService.setFocus(window);
 		
 		super.apply();
 	}

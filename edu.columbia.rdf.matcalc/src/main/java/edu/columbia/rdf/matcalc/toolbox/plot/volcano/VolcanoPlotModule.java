@@ -29,8 +29,8 @@ import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.icons.ShapeStyle;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DynamicDoubleMatrix;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.math.matrix.MatrixGroup;
@@ -120,7 +120,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 			return;
 		}
 
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		if (m == null) {
 			return;
@@ -185,7 +185,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 	 * @throws ParseException the parse exception
 	 */
 	public static void volcanoPlot(MainMatCalcWindow parent,
-			AnnotationMatrix m,
+			DataFrame m,
 			double alpha,
 			TestType test,
 			FDRType fdrType,
@@ -199,11 +199,11 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		groups.add(g2);
 
 
-		AnnotationMatrix columnFilteredM = parent.addToHistory("Keep group columns", 
-						AnnotatableMatrix.copyInnerColumns(m, groups));
+		DataFrame columnFilteredM = parent.addToHistory("Keep group columns", 
+						DataFrame.copyInnerColumns(m, groups));
 
 
-		AnnotationMatrix logM;
+		DataFrame logM;
 
 		if (logData) {
 			logM = parent.addToHistory("log2(1 + data)", 
@@ -217,16 +217,16 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 
 		List<Double> foldChanges = MatrixUtils.logFoldChange(logM, g1, g2);
 
-		AnnotationMatrix annM = new AnnotatableMatrix(logM);
+		DataFrame annM = new DataFrame(logM);
 		annM.setNumRowAnnotations("Log2 Fold Change", foldChanges);
 		parent.addToHistory("Add log2 fold changes", annM);
 
-		AnnotationMatrix pValuesM = new AnnotatableMatrix(annM);
+		DataFrame pValuesM = new DataFrame(annM);
 		pValuesM.setNumRowAnnotations("P-value", p);
 		parent.addToHistory("Add p-values", pValuesM);
 
 
-		//AnnotationMatrix mcollapsed = CollapseModule.collapse(pValuesM,
+		//DataFrame mcollapsed = CollapseModule.collapse(pValuesM,
 		//		collapseName,
 		//		g1,
 		//		g2,
@@ -238,7 +238,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		double[] fdr = Statistics.fdr(pValuesM.getRowAnnotationValues("P-value"), 
 				fdrType);
 
-		AnnotationMatrix fdrM = new AnnotatableMatrix(pValuesM);
+		DataFrame fdrM = new DataFrame(pValuesM);
 		fdrM.setNumRowAnnotations("FDR", fdr);
 		parent.addToHistory("False discovery rate", fdrM);
 
@@ -247,7 +247,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		//List<IndexedValue<Integer, Double>> pValueIndices = 
 		//		Statistics.threshold(fdr, alpha);
 
-		//AnnotationMatrix mfdrfiltered = addFlowItem("False discovery filter", 
+		//DataFrame mfdrfiltered = addFlowItem("False discovery filter", 
 		//		new RowFilterMatrixView(mfdr, IndexedValueInt.indices(pValueIndices)));
 
 
@@ -336,7 +336,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		double maxY = 1;
 
 		if (foldM1.getRowCount() > 0) {
-			AnnotationMatrix noSigM = new AnnotatableMatrix(foldM1);
+			DataFrame noSigM = new DataFrame(foldM1);
 
 			noSigM.setColumnNames("Non-significant x", "Non-significant y");
 
@@ -366,7 +366,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		}
 
 		if (foldM1.getRowCount() > 0) {
-			AnnotationMatrix foldDownM = new AnnotatableMatrix(foldM1);
+			DataFrame foldDownM = new DataFrame(foldM1);
 
 			foldDownM.setColumnNames(foldDownSeries.getName() + " x", 
 					foldDownSeries.getName() + " y");
@@ -397,7 +397,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		}
 
 		if (foldM1.getRowCount() > 0) {
-			AnnotationMatrix foldUpM = new AnnotatableMatrix(foldM1);
+			DataFrame foldUpM = new DataFrame(foldM1);
 
 			foldUpM.setColumnNames(foldUpSeries.getName() + " x", 
 					foldUpSeries.getName() + " y");

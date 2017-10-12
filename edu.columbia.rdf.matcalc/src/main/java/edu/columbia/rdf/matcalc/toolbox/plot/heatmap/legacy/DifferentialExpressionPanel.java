@@ -24,8 +24,8 @@ import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.statistics.Statistics;
@@ -68,7 +68,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 	 * @param properties the properties
 	 */
 	public DifferentialExpressionPanel(ModernRibbonWindow parent,
-			AnnotationMatrix matrix,
+			DataFrame matrix,
 			XYSeriesModel groups,
 			XYSeriesGroup comparisonGroups,
 			XYSeriesModel rowGroups,
@@ -97,25 +97,25 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createMatrix(org.abh.common.math.matrix.AnnotationMatrix, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double)
+	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createMatrix(org.abh.common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double)
 	 */
 	@Override
-	public AnnotationMatrix createMatrix(AnnotationMatrix m,
+	public DataFrame createMatrix(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,
 			double max) {
 		// First zscore
-		AnnotationMatrix ret = groupZScoreMatrix(m,
+		DataFrame ret = groupZScoreMatrix(m,
 				mComparisonGroups,
 				groupsOfInterest);
 
-		ret = AnnotatableMatrix.copyColumns(ret, groupsOfInterest);
+		ret = DataFrame.copyColumns(ret, groupsOfInterest);
 
 		//System.err.println("copy " + ret.getColumnNames() + " " + ret.getRowCount());
 		
 		// zscore the matrix
-		//AnnotationMatrix zMatrix = 
+		//DataFrame zMatrix = 
 		//		new GroupZScoreMatrixView(mColumnFiltered, groupsOfInterest));
 
 		//ret = PatternDiscoveryModule.groupZScoreMatrix(ret,
@@ -136,7 +136,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 
 	/*
 	@Override
-	public ModernPlotCanvas createCanvas(AnnotationMatrix m,
+	public ModernPlotCanvas createCanvas(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
 			double min,
@@ -169,15 +169,15 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 	 * @param groups the groups
 	 * @return the annotation matrix
 	 */
-	public static <X extends MatrixGroup> AnnotationMatrix groupZScoreMatrix(AnnotationMatrix m,
+	public static <X extends MatrixGroup> DataFrame groupZScoreMatrix(DataFrame m,
 			XYSeriesGroup comparisonGroups,
 			List<X> groups) {
 
-		AnnotationMatrix ret = 
-				AnnotatableMatrix.createNumericalMatrix(m);
+		DataFrame ret = 
+				DataFrame.createNumericalMatrix(m);
 
-		//AnnotationMatrix.copyColumnAnnotations(m, ret);
-		//AnnotationMatrix.copyRowAnnotations(m, ret);
+		//DataFrame.copyColumnAnnotations(m, ret);
+		//DataFrame.copyRowAnnotations(m, ret);
 
 
 

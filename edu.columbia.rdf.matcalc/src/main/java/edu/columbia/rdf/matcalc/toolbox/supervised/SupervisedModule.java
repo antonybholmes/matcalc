@@ -31,8 +31,8 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.MathUtils;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrix;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.math.matrix.utils.MatrixOperations;
@@ -119,7 +119,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 	 * @throws ParseException the parse exception
 	 */
 	private void classification(Properties properties) throws IOException, ParseException {
-		AnnotationMatrix m = mParent.getCurrentMatrix();
+		DataFrame m = mParent.getCurrentMatrix();
 
 		if (m == null) {
 			return;
@@ -246,7 +246,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws ParseException the parse exception
 	 */
-	public void statTest(AnnotationMatrix m,
+	public void statTest(DataFrame m,
 			double alpha,
 			double classificationAlpha,
 			double minFold,
@@ -271,18 +271,18 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		comparisonGroups.add(g1);
 		comparisonGroups.add(g2);
 
-		//AnnotationMatrix colFilteredM = 
+		//DataFrame colFilteredM = 
 		//		mParent.addToHistory("Extract grouped columns", 
 		//				AnnotatableMatrix.copyInnerColumns(m, comparisonGroups));
 
 
-		AnnotationMatrix colFilteredM = m;
+		DataFrame colFilteredM = m;
 
 		//
 		// Remove bad gene symbols
 		//
 
-		//AnnotationMatrix mCleaned = AnnotatableMatrix.copyRows(mColumnFiltered, 
+		//DataFrame mCleaned = AnnotatableMatrix.copyRows(mColumnFiltered, 
 		//		rowAnnotationName, 
 		//		"^---$", 
 		//		false);
@@ -293,7 +293,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		// Log the matrix
 		//
 
-		AnnotationMatrix log2M;
+		DataFrame log2M;
 
 		if (log2Data) {
 			log2M = mParent.addToHistory("log2(1 + data)",
@@ -308,7 +308,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		List<Double> pValues = getP(log2M, g1, g2,test);
 
-		AnnotationMatrix pValuesM = new AnnotatableMatrix(log2M);
+		DataFrame pValuesM = new DataFrame(log2M);
 
 		pValuesM.setNumRowAnnotations("P-value", pValues);
 
@@ -317,9 +317,9 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		// Set the p-values of genes with bad names to NaN so they can be
 		// excluded from analysis
-		//AnnotationMatrix.setAnnotation(mpvalues,
+		//DataFrame.setAnnotation(mpvalues,
 		//		"P-value",
-		//		AnnotationMatrix.matchRows(mpvalues, rowAnnotation, BLANK_ROW_REGEX),
+		//		DataFrame.matchRows(mpvalues, rowAnnotation, BLANK_ROW_REGEX),
 		//		Double.NaN);
 
 		mParent.addToHistory("Add P-values", pValuesM);
@@ -341,7 +341,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		String name = isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change";
 
-		AnnotationMatrix foldChangesM = new AnnotatableMatrix(pValuesM);
+		DataFrame foldChangesM = new DataFrame(pValuesM);
 		foldChangesM.setNumRowAnnotations(name, foldChanges);
 
 		mParent.addToHistory(name, foldChangesM);
@@ -351,7 +351,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		// Group means
 		//
 
-		AnnotationMatrix meansM = new AnnotatableMatrix(foldChangesM);
+		DataFrame meansM = new DataFrame(foldChangesM);
 
 		meansM.setNumRowAnnotations(g1.getName() + " mean", 
 				DoubleMatrix.means(foldChangesM, g1));
@@ -380,7 +380,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		name = isLog2Data || log2Data ? "Log2 Fold Change Filter" : "Fold Change Filter";
 
-		AnnotationMatrix foldFilterM = AnnotatableMatrix.copyRows(meansM, 
+		DataFrame foldFilterM = DataFrame.copyRows(meansM, 
 				IndexedInt.indices(pFoldIndices));
 
 
@@ -391,7 +391,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		// Collapse rows
 		//
 
-		AnnotationMatrix collapsedM = CollapseModule.collapse(foldFilterM,
+		DataFrame collapsedM = CollapseModule.collapse(foldFilterM,
 				rowAnnotation,
 				g1,
 				g2,
@@ -401,13 +401,13 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		double[] fdr = Statistics.fdr(collapsedM.getRowAnnotationValues("P-value"), 
 				fdrType);
 
-		AnnotationMatrix mfdr = new AnnotatableMatrix(collapsedM);
+		DataFrame mfdr = new DataFrame(collapsedM);
 		mfdr.setNumRowAnnotations("FDR", fdr);
 
 		mParent.addToHistory("FDR", mfdr);
 
-		//AnnotationMatrix mfdr = addFlowItem("False discovery rate", 
-		//		new RowAnnotationMatrixView(mcollapsed, 
+		//DataFrame mfdr = addFlowItem("False discovery rate", 
+		//		new RowDataFrameView(mcollapsed, 
 		//				"FDR", 
 		//				ArrayUtils.toObjects(fdr)));
 
@@ -417,11 +417,11 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		List<Indexed<Integer, Double>> pValueIndices = 
 				Statistics.threshold(fdr, alpha);
 
-		AnnotationMatrix fdrFilteredM = 
-				AnnotatableMatrix.copyRows(mfdr, IndexedInt.indices(pValueIndices));
+		DataFrame fdrFilteredM = 
+				DataFrame.copyRows(mfdr, IndexedInt.indices(pValueIndices));
 		mParent.addToHistory("False discovery filter", fdrFilteredM);
 
-		//AnnotationMatrix mfdrfiltered = addFlowItem("False discovery filter", 
+		//DataFrame mfdrfiltered = addFlowItem("False discovery filter", 
 		//		new RowFilterMatrixView(mfdr, 
 		//				IndexedValueInt.indices(pValueIndices)));
 
@@ -429,14 +429,14 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		List<Double> zscores = 
 				DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
 
-		AnnotationMatrix zscoresM = new AnnotatableMatrix(fdrFilteredM);
+		DataFrame zscoresM = new DataFrame(fdrFilteredM);
 
 		zscoresM.setNumRowAnnotations("Z-score", zscores);
 		mParent.addToHistory("Z-score", zscoresM);
 
 
-		//AnnotationMatrix mzscores = addFlowItem("Add row z-scores", 
-		//		new RowAnnotationMatrixView(mfdrfiltered, 
+		//DataFrame mzscores = addFlowItem("Add row z-scores", 
+		//		new RowDataFrameView(mfdrfiltered, 
 		//				"Z-score", 
 		//				ArrayUtils.toObjects(zscores)));
 
@@ -445,7 +445,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		List<String> classifications = new ArrayList<String>();
 
-		Matrix im = zscoresM.getInnerMatrix();
+		Matrix im = zscoresM.getMatrix();
 
 		for (int i = 0; i < im.getRowCount(); ++i) {
 			String classification = "not_expressed";
@@ -473,15 +473,15 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		String comparison = g1.getName() + "vs" + g2.getName() + " (p <= " + classificationAlpha + ")";
 
-		AnnotationMatrix classM = new AnnotatableMatrix(zscoresM);
+		DataFrame classM = new DataFrame(zscoresM);
 
 		classM.setTextRowAnnotations(comparison, classifications);
 
 		mParent.addToHistory("Add row classification", classM);
 
 
-		//AnnotationMatrix mclassification = addFlowItem("Add row classification", 
-		//		new RowAnnotationMatrixView(mzscores, 
+		//DataFrame mclassification = addFlowItem("Add row classification", 
+		//		new RowDataFrameView(mzscores, 
 		//				comparison, 
 		//				ArrayUtils.toObjects(classifications)));
 
@@ -526,31 +526,31 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		List<Integer> indices = CollectionUtils.append(ui, li); // IndexedValue.indices(sortedZscores);
 
-		AnnotationMatrix mDeltaSorted = 
-				AnnotatableMatrix.copyRows(classM, indices);
+		DataFrame mDeltaSorted = 
+				DataFrame.copyRows(classM, indices);
 
 		mParent.addToHistory("Sort by row z-score", mDeltaSorted);
 
-		//AnnotationMatrix mDeltaSorted = addFlowItem("Sort by row z-score", 
+		//DataFrame mDeltaSorted = addFlowItem("Sort by row z-score", 
 		//		new RowFilterMatrixView(mclassification, indices));
 
-		AnnotationMatrix mNormalized = 
+		DataFrame mNormalized = 
 				MatrixOperations.groupZScore(mDeltaSorted, comparisonGroups);
 
 		mParent.addToHistory("Normalize expression within groups", mNormalized);
 
-		//AnnotationMatrix mNormalized = addFlowItem("Normalize expression within groups", 
+		//DataFrame mNormalized = addFlowItem("Normalize expression within groups", 
 		//		new GroupZScoreMatrixView(mDeltaSorted, groups));
 
 
 
-		//AnnotationMatrix mMinMax = addFlowItem("Min/max threshold", 
+		//DataFrame mMinMax = addFlowItem("Min/max threshold", 
 		//		"min: " + Plot.MIN_STD + ", max: "+ Plot.MAX_STD,
 		//		new MinMaxBoundedMatrixView(mNormalized, 
 		//				Plot.MIN_STD, 
 		//				Plot.MAX_STD));
 
-		//AnnotationMatrix mStandardized = 
+		//DataFrame mStandardized = 
 		//		addFlowItem("Row normalize", new RowNormalizedMatrixView(mMinMax));
 
 		List<String> history = mParent.getTransformationHistory();
@@ -575,7 +575,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		mParent.addToHistory("Results", mDeltaSorted);
 	}
 
-	public static List<Double> getP(AnnotationMatrix m, 
+	public static List<Double> getP(DataFrame m, 
 			XYSeries g1, 
 			XYSeries g2,
 			TestType test) {

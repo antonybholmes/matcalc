@@ -23,8 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -94,7 +94,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 	 * Filter.
 	 */
 	public void filter() {
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 		
 		
 		MatrixRowFilterDialog dialog = new MatrixRowFilterDialog(mWindow, m);
@@ -129,16 +129,16 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 			return;
 		}
 		
-		AnnotationMatrix ret = null;
+		DataFrame ret = null;
 		
 		if (missingNames.size() > 0) {
 			// Need to insert blank rows
 			
-			ret = AnnotatableMatrix.createAnnotatableMatrix(rows.size() + missingNames.size(), 
+			ret = DataFrame.createDataFrame(rows.size() + missingNames.size(), 
 					m.getColumnCount());
 			
-			AnnotationMatrix.copyColumnNames(m, ret);
-			AnnotationMatrix.copyRows(m, rows, ret);
+			DataFrame.copyColumnNames(m, ret);
+			DataFrame.copyRows(m, rows, ret);
 			
 			// Insert some blank rows
 			Matrix.setRowNA(rows.size(), ret.getRowCount() - 1, ret);
@@ -148,7 +148,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 			}
 			
 		} else {
-			ret = AnnotatableMatrix.copyRows(m, rows);
+			ret = DataFrame.copyRows(m, rows);
 		}
 		
 		mWindow.addToHistory("Row Filter", ret);
@@ -177,7 +177,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 	 * 							inList == true.
 	 * @return the rows
 	 */
-	private static void getRows(final AnnotationMatrix m,
+	private static void getRows(final DataFrame m,
 			final String columnText,
 			int column,
 			boolean exactMatch,
