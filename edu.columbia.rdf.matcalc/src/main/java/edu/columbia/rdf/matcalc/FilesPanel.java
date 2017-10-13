@@ -35,8 +35,6 @@ public class FilesPanel extends ModernComponent implements ChangeListener {
 		mModel = model;
 		mFileModel = fileModel;
 		
-		model.addChangeListener(this);
-		
 		mList.setCellRenderer(new FilesListRenderer());
 		mList.setModel(mListModel);
 		
@@ -45,7 +43,9 @@ public class FilesPanel extends ModernComponent implements ChangeListener {
 				.setVerticalScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW)
 				.setVScrollBarLocation(ScrollBarLocation.FLOATING));
 		
-		setBorder(BORDER);
+		//setBorder(BORDER);
+		
+		model.addChangeListener(this);
 		
 		mList.addMouseListener(new MouseAdapter(){
 			@Override

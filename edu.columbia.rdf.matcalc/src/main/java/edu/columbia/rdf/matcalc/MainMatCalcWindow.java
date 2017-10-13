@@ -91,6 +91,7 @@ import org.jebtk.modern.splitpane.ModernVSplitPaneLine;
 import org.jebtk.modern.table.ModernSpreadsheetBar;
 import org.jebtk.modern.tabs.IconTabsFolderIcon;
 import org.jebtk.modern.tabs.SegmentTabsPanel;
+import org.jebtk.modern.tabs.TabPanel;
 import org.jebtk.modern.tabs.TabsModel;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.widget.tooltip.ModernToolTip;
@@ -503,21 +504,22 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 			@Override
 			public void changed(ChangeEvent e) {
 				try {
+					// If a user double clicks on a file in the files panel,
+					// open it
 					open(mFileModel.get());
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}});
 
-		/*
 		if (AUTO_SHOW_FILES_PANE) {
 			mFilesModel.getPwdModel().addChangeListener(new ChangeListener() {
 				@Override
 				public void changed(ChangeEvent e) {
-					addFilesPane();
+					//Show the files panel
+					getIconTabs().changeTab(0);
 				}});
 		}
-		*/
 
 		setSize(1440, 900);
 
@@ -708,25 +710,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		//addFilesPane();
 		
-		addLeftSideTab("Files", new IconTabsFolderIcon(), mFilesPanel);
-	}
-
-	public void addFilesPane() {
-		getLeftTabsModel().changeTab("Files");
-		
-		addLeftTabsPane();
-		
-		/*
-		if (getTabsPane().getModel().getLeftTabs().containsTab("Files")) {
-			return;
-		}
-
-		getTabsPane().addLeftTab("Files", 
-				new CloseableHTab("Files", mFilesPanel, getTabsPane()), 
-				250, 
-				200, 
-				500);
-		*/
+		getIconTabs().addTab("Files", new IconTabsFolderIcon(), new TabPanel("Files", mFilesPanel));
 	}
 
 	/* (non-Javadoc)

@@ -24,7 +24,6 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.core.ColumnAnnotationModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ExtractDataModule;
 import edu.columbia.rdf.matcalc.toolbox.core.GroupModule;
-import edu.columbia.rdf.matcalc.toolbox.core.ShowFilesModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SplitModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SummaryModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ViewModule;
@@ -142,8 +141,6 @@ public class ModuleLoader {
 		
 		addModule(SupervisedModule.class);
 		
-		
-		addModule(ShowFilesModule.class);
 		addModule(ZoomModule.class);
 		addModule(ViewModule.class);
 	}
