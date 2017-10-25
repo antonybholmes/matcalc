@@ -17,6 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 
 import java.util.List;
 
+import org.jebtk.core.MinMax;
 import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelProperties;
@@ -41,7 +42,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel;
  * The class ClusterPanel.
  */
 public class ClusterPanel extends HeatMapPanel {
-	
+
 	/**
 	 * The constant serialVersionUID.
 	 */
@@ -80,29 +81,26 @@ public class ClusterPanel extends HeatMapPanel {
 			List<String> history,
 			Properties properties) {
 		super(window,
-			matrix,
-			rowCluster,
-			columnCluster,
-			groups,
-			rowGroups,
-			countGroups,
-			history,
-			zoomModel,
-			colorMapModel,
-			colorStandardizationModel,
-			intensityModel,
-			contentModel,
-			properties);
+				matrix,
+				rowCluster,
+				columnCluster,
+				groups,
+				rowGroups,
+				countGroups,
+				history,
+				zoomModel,
+				colorMapModel,
+				colorStandardizationModel,
+				intensityModel,
+				contentModel,
+				properties);
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#update()
-	 */
+
 	@Override
 	public void update() {
-		double max = mScaleModel.get(); //mIntensityModel.getBaseline();
-		double min = -max; //mIntensityModel.getBaseline(); //PlotConstants.MIN_STD; // / scale;
 		//PlotConstants.MAX_STD; // / scale;
+
+		MinMax norm = MinMax.create(-mScaleModel.get(), mScaleModel.get());
 
 		// Create version of the matrix with only the groups of interest
 		XYSeriesGroup seriesOfInterest = new XYSeriesGroup();
@@ -112,16 +110,16 @@ public class ClusterPanel extends HeatMapPanel {
 		}
 
 		XYSeriesGroup rowSeriesOfInterest = new XYSeriesGroup();
-		
+
 		for (XYSeries series : mRowGroupsModel) {
 			rowSeriesOfInterest.add(series);
 		}
-		
-		DataFrame m = createMatrix(mMatrix, min, max);
-		
-		display(m, seriesOfInterest, rowSeriesOfInterest, min, max);
+
+		DataFrame m = createMatrix(mMatrix, norm);
+
+		display(m, seriesOfInterest, rowSeriesOfInterest, norm);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createCanvas(org.abh.common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double, org.graphplot.figure.heatmap.legacy.RowLabelProperties, org.graphplot.figure.heatmap.legacy.ColumnLabelProperties)
 	 */
@@ -129,11 +127,10 @@ public class ClusterPanel extends HeatMapPanel {
 	public PlotBox createCanvas(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
-			double min,
-			double max,
+			MinMax norm,
 			RowLabelProperties rowLabelProperties,
 			ColumnLabelProperties columnLabelProperties) {
-		
+
 		return new ClusterCanvas(m,
 				mRowCluster,
 				mColumnCluster,
@@ -141,8 +138,8 @@ public class ClusterPanel extends HeatMapPanel {
 				rowGroupsOfInterest,
 				mCountGroups,
 				mHistory,
-				min,
-				max,
+				norm.getMin(),
+				norm.getMax(),
 				rowLabelProperties,
 				columnLabelProperties,
 				mGroupsElement.getProperties(),

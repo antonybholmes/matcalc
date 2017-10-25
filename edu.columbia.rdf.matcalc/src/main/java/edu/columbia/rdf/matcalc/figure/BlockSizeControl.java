@@ -16,6 +16,7 @@
 package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.core.event.ChangeListener;
+import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.graphplot.figure.heatmap.legacy.MatrixPlotElement;
 import org.jebtk.modern.UI;
@@ -38,11 +39,11 @@ public class BlockSizeControl extends VBox {
 	 * The member aspect field.
 	 */
 	private ModernCompactSpinner mXField = 
-			new ModernCompactSpinner(1, 100, 100);
+			new ModernCompactSpinner(0.1, 100, 100, 0.1);
 	
 	/** The m Y field. */
 	private ModernCompactSpinner mYField = 
-			new ModernCompactSpinner(1, 100, 100);
+			new ModernCompactSpinner(0.1, 100, 100, 0.1);
 	
 	/**
 	 * Instantiates a new aspect ratio control.
@@ -56,14 +57,22 @@ public class BlockSizeControl extends VBox {
 	 *
 	 * @param aspectRatio the aspect ratio
 	 */
-	public BlockSizeControl(IntDim aspectRatio) {
+	public BlockSizeControl(IntDim dim) {
+		this(dim.getW(), dim.getH());
+	}
+	
+	public BlockSizeControl(DoubleDim dim) {
+		this(dim.getW(), dim.getH());
+	}
+	
+	public BlockSizeControl(double w, double h) {
 		
 		add(new HExpandBox("Width", mXField));
 		add(UI.createVGap(5));
 		add(new HExpandBox("Height", mYField));
 		
-		mXField.setValue(aspectRatio.getW());
-		mYField.setValue(aspectRatio.getH());
+		mXField.setValue(w);
+		mYField.setValue(h);
 		
 		setAlignmentY(TOP_ALIGNMENT);
 	}
@@ -83,8 +92,7 @@ public class BlockSizeControl extends VBox {
 	 *
 	 * @return the aspect ratio
 	 */
-	public IntDim getBlockSize() {
-		return new IntDim(mXField.getIntValue(), mYField.getIntValue());
+	public DoubleDim getBlockSize() {
+		return new DoubleDim(mXField.getValue(), mYField.getValue());
 	}
-
 }

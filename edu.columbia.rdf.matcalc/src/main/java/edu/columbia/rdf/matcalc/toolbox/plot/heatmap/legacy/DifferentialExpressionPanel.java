@@ -18,13 +18,13 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jebtk.core.MinMax;
 import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
@@ -103,8 +103,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 	public DataFrame createMatrix(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
-			double min,
-			double max) {
+			MinMax norm) {
 		// First zscore
 		DataFrame ret = groupZScoreMatrix(m,
 				mComparisonGroups,
@@ -126,7 +125,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 			//min /= scale;
 			//max /= scale;
 
-			ret = MatrixOperations.normalize(ret, min, max);
+			ret = MatrixOperations.normalize(ret, norm);
 			
 			//System.err.println("ret " + ret.getColumnNames() + " " + ret.getRowCount());
 		}

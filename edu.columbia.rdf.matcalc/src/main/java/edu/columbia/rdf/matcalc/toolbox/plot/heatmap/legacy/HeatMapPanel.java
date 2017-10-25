@@ -20,10 +20,11 @@ import java.util.List;
 
 import javax.swing.Box;
 
+import org.jebtk.core.MinMax;
 import org.jebtk.core.Properties;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
-import org.jebtk.core.geom.IntDim;
+import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelProperties;
@@ -36,7 +37,6 @@ import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.graphplot.plotbox.PlotBoxPanel;
 import org.jebtk.math.cluster.Cluster;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UI;
@@ -357,7 +357,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		rightPanel.addTab(PlotConstants.LABEL_HEATMAP, box, true);
 		
 		box = VBox.create();
-		mAspectRatioElement = new BlockSizeControl((IntDim)properties.getProperty("plot.block-size"));
+		mAspectRatioElement = new BlockSizeControl((DoubleDim)properties.getProperty("plot.block-size"));
 		mAspectRatioElement.addChangeListener(this);
 		box.add(mAspectRatioElement);
 		box.setBorder(LARGE_BORDER);
@@ -506,9 +506,9 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 */
 	@Override
 	public void update() {
-		double max = mScaleModel.get(); //mIntensityModel.getBaseline();
-		double min = -max; //mIntensityModel.getBaseline(); //PlotConstants.MIN_STD; // / scale;
 		//PlotConstants.MAX_STD; // / scale;
+		
+		MinMax norm = MinMax.create(-mScaleModel.get(), mScaleModel.get());
 
 		// Create version of the matrix with only the groups of interest
 		XYSeriesGroup seriesOfInterest = new XYSeriesGroup();
@@ -530,10 +530,9 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		DataFrame m = createMatrix(mMatrix, 
 				seriesOfInterest, 
 				rowSeriesOfInterest, 
-				min, 
-				max);
+				norm);
 
-		display(m, seriesOfInterest, rowSeriesOfInterest, min, max);
+		display(m, seriesOfInterest, rowSeriesOfInterest, norm);
 	}
 	
 	/**
@@ -544,15 +543,11 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	 * @param max the max
 	 * @return the annotation matrix
 	 */
-	public DataFrame createMatrix(DataFrame m,
-			double min,
-			double max) {
-		
-		return createMatrix(m, 
+	public DataFrame createMatrix(DataFrame m, MinMax norm) {
+		return createMatrix(m,
 				XYSeriesGroup.EMPTY_GROUP, 
 				XYSeriesGroup.EMPTY_GROUP, 
-				min, 
-				max);
+				norm);
 	}
 
 	/**
@@ -568,8 +563,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	public DataFrame createMatrix(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
-			double min,
-			double max) {
+			MinMax norm) {
 		DataFrame ret = m;
 
 		//double plotMin = Plot.MIN_STD;
@@ -591,12 +585,12 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		case NORMALIZE:
 			if (Double.isNaN(mColorStandardizationModel.get().getMax())) {
 				// Auto use the min and max to normalize
-				min = MatrixOperations.min(ret);
-				max = MatrixOperations.max(ret);
+				norm.setMin(MatrixOperations.min(ret));
+				norm.setMax(MatrixOperations.max(ret));
 			} else {
 				// Use fixed bounds to normalize on.
-				min = mColorStandardizationModel.get().getMin();
-				max = mColorStandardizationModel.get().getMax();
+				norm.setMin(mColorStandardizationModel.get().getMin());
+				norm.setMax(mColorStandardizationModel.get().getMax());
 			}
 
 			break;
@@ -618,7 +612,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 			//min /= scale;
 			//max /= scale;
 
-			ret = MatrixOperations.normalize(ret, min, max);
+			ret = MatrixOperations.normalize(ret, norm);
 		}
 
 		return ret;
@@ -636,8 +630,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	public void display(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
-			double min,
-			double max) {
+			MinMax norm) {
 		ColorMap colorMap = mColorMapModel.get();
 		
 		RowLabelProperties rowLabelProperties = new RowLabelProperties();
@@ -701,8 +694,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		mCanvas = createCanvas(m,
 				groupsOfInterest,
 				rowGroupsOfInterest,
-				min,
-				max,
+				norm,
 				rowLabelProperties,
 				columnLabelProperties);
 
@@ -724,8 +716,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 	public PlotBox createCanvas(DataFrame m,
 			XYSeriesGroup groupsOfInterest,
 			XYSeriesGroup rowGroupsOfInterest,
-			double min,
-			double max,
+			MinMax norm,
 			RowLabelProperties rowLabelProperties,
 			ColumnLabelProperties columnLabelProperties) {
 		return new ClusterCanvas(m,
@@ -735,8 +726,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 				rowGroupsOfInterest,
 				mCountGroups,
 				mHistory,
-				min,
-				max,
+				norm.getMin(),
+				norm.getMax(),
 				rowLabelProperties,
 				columnLabelProperties,
 				mGroupsElement.getProperties(),

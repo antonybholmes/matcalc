@@ -20,6 +20,7 @@ import java.awt.Dimension;
 import java.util.List;
 
 import org.jebtk.core.Properties;
+import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.ColorBar;
@@ -126,8 +127,8 @@ public class HeatMapCanvas extends PlotBoxRow {
 			GroupProperties groupProperties,
 			Properties properties) {
 
-		IntDim aspectRatio = 
-				(IntDim)properties.getProperty("plot.block-size");
+		DoubleDim aspectRatio = 
+				(DoubleDim)properties.getProperty("plot.block-size");
 		
 		ColorMap colorMap = (ColorMap)properties.getProperty("plot.colormap");
 		

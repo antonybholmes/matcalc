@@ -18,6 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 import java.util.List;
 
 import org.jebtk.core.Properties;
+import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.ColorBar;
@@ -192,7 +193,8 @@ public class ClusterCanvas extends PlotBoxRow {
 
 		PlotBox rowLabelsBox = new PlotBoxColumn();
 
-		IntDim aspectRatio = (IntDim)properties.getProperty("plot.block-size");
+		DoubleDim aspectRatio = 
+				(DoubleDim)properties.getProperty("plot.block-size");
 
 		ColorMap colorMap = 
 				(ColorMap)properties.getProperty("plot.colormap");

@@ -236,7 +236,7 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 				new ArrayList<DataFrame>(groups.size());
 
 		for (List<Integer> indices : allIndices) {
-			matrices.add(DataFrame.createAnnotatableMatrixFromColumns(current, indices));
+			matrices.add(DataFrame.createAnnotatableMatrixFromCols(current, indices));
 		}
 
 		List<String> ids = new ArrayList<String>(groups.size());

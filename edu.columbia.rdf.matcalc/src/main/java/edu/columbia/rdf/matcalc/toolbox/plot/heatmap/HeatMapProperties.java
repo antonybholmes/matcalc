@@ -18,6 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
 import java.awt.Color;
 
 import org.jebtk.core.Properties;
+import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.AspectRatio;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
@@ -53,7 +54,7 @@ public class HeatMapProperties extends Properties {
 		setProperty("plot.colormap", ColorMap.createBlueWhiteRedMap());
 		setProperty("plot.show-legend", true);
 		setProperty("plot.aspect-ratio", new AspectRatio());
-		setProperty("plot.block-size", MatrixPlotElement.DEFAULT_BLOCK);
+		setProperty("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
 		setProperty("plot.show-row-labels", true);
 		setProperty("plot.color.standardization", ColorNormalizationType.ZSCORE_ROW);
 		setProperty("plot.color.intensity", 0);

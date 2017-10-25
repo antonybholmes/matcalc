@@ -61,14 +61,18 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 			SettingsService.getInstance().getAsBool("matcalc.import.file.has-header"));
 	
 	/** The m check skip. */
-	private CheckBox mCheckSkip = new ModernCheckSwitch("Skip lines starting with", 
-			true); //SettingsService.getInstance().getAsBool("matcalc.import.file.skip.lines"));
+	private CheckBox mCheckSkip = 
+			new ModernCheckSwitch("Skip lines starting with", true); //SettingsService.getInstance().getAsBool("matcalc.import.file.skip.lines"));
 
 	/** The m field skip. */
 	private ModernTextField mFieldSkip = 
 			new ModernClipboardTextField(SettingsService.getInstance().getAsString("matcalc.import.file.skip.matches"));
 
-	private CheckBox mNumericalCheck = new ModernCheckSwitch("Numerical", true);
+	private CheckBox mNumericalCheck = 
+			new ModernCheckSwitch("Numerical", true);
+	
+	private CheckBox mTextColsCheck = 
+			new ModernCheckSwitch("Text columns", true);
 	
 	/** The m delimiter combo. */
 	private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
@@ -136,7 +140,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 		box.add(UI.createVGap(5));
 		
 		// Text columns is more intuitive terminology than row annotations
-		box.add(new HExpandBox("Text columns", mSpinner));
+		box.add(new HExpandBox(mTextColsCheck, mSpinner));
 		
 		box.add(UI.createVGap(5));
 		box.add(mNumericalCheck);
@@ -169,7 +173,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	 * @return the row annotations
 	 */
 	public int getRowAnnotations() {
-		return mSpinner.getIntValue();
+		return mTextColsCheck.isSelected() ? mSpinner.getIntValue() : 0;
 	}
 	
 	/**
@@ -201,6 +205,6 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 	}
 	
 	public boolean isNumerical() {
-		return mNumericalCheck.isSelected();
+		return mTextColsCheck.isSelected() ? mNumericalCheck.isSelected() : false;
 	}
 }
