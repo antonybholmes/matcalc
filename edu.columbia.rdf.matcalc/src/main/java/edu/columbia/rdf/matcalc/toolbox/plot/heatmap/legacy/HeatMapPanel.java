@@ -399,6 +399,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		mRowsElement = new RowLabelControl(parent, 
 				matrix,
 				RowLabelPosition.RIGHT,
+				properties.getAsBool("plot.show-feature-counts"),
 				properties.getAsBool("plot.show-row-labels"));
 
 		box.add(mRowsElement);
@@ -605,7 +606,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		
 	
 		if (groupsOfInterest.size() > 0) {
-			ret = DataFrame.copyInnerColumns(ret, groupsOfInterest);
+			ret = DataFrame.copyColumns(ret, groupsOfInterest);
 		}
 
 		if (mColorStandardizationModel.get().getType() != ColorNormalizationType.NONE) {
@@ -635,7 +636,7 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 		
 		RowLabelProperties rowLabelProperties = new RowLabelProperties();
 		
-		rowLabelProperties.showFeatures = 
+		rowLabelProperties.showFeatureCounts = 
 				mRowsElement.getShowFeatureCount();
 		
 		rowLabelProperties.show = 

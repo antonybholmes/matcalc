@@ -18,6 +18,8 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy;
 import java.io.IOException;
 import java.util.List;
 
+import org.jebtk.core.Properties;
+import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.DataFrame;
@@ -97,13 +99,17 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
 
 		List<String> history = mParent.getTransformationHistory();
 		
+		Properties p = new HeatMapProperties();
+		
+		scaleLargeMatrixImage(m, p);
+		
 		mParent.addToHistory(new HeatMapPlotMatrixTransform(mParent, 
 				m, 
 				groups, 
 				rowGroups, 
 				countsGroup,
 				history,
-				new HeatMapProperties()));
+				p));
 	}
 
 	/* (non-Javadoc)
@@ -118,6 +124,52 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
 		}
 	}
 
+	/**
+	 * Reduce plot size to cope with large matrices.
+	 * 
+	 * @param m
+	 * @param properties
+	 */
+	public static void scaleLargeMatrixImage(DataFrame m, Properties properties) {
 	
+		double w = scale(m.getColumnCount());
+		double h = scale(m.getRowCount());
+		
+		if (w < 20 || h < 20) {
+			// Don't show grid
+			properties.setProperty("plot.show-grid-color", false);
+			properties.setProperty("plot.show-outline-color", false);
+		}
+		
+		if (h < 20) {
+			properties.setProperty("plot.show-feature-counts", false);
+			properties.setProperty("plot.show-row-labels", false);
+		}
+			
+		properties.setProperty("plot.block-size", new DoubleDim(w, h));
+	}
+	
+	/**
+	 * Scale the size of the plot size based on the row/col count so that the
+	 * image is not excessively large.
+	 * 
+	 * @param rows
+	 * @return
+	 */
+	public static double scale(int rows) {
+		if (rows > 20000) {
+			return 0.1;
+		} else if (rows > 10000) {
+			return 0.5;
+		} else if (rows > 2000) {
+			return 1;
+		} else if (rows > 1000) {
+			return 5;
+		} else if (rows > 500) {
+			return 10;
+		} else {
+			return 20;
+		}
+	}
 
 }

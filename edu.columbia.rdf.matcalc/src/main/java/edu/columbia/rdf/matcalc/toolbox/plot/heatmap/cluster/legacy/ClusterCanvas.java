@@ -175,7 +175,7 @@ public class ClusterCanvas extends PlotBoxRow {
 			ColumnLabelProperties columnLabelProperties,
 			GroupProperties groupProperties,
 			Properties properties) {
-		
+
 		PlotBox emptyVBox = new PlotBoxEmpty(VERTICAL_GAP);
 		PlotBox emptyHBox = new PlotBoxEmpty(HOZ_GAP);
 
@@ -206,72 +206,76 @@ public class ClusterCanvas extends PlotBoxRow {
 		int treeWidthV = properties.getAsInt("plot.tree.vert.width");
 		boolean treeVisV = properties.getAsBool("plot.tree.vert.visible");
 
-		if (rowLabelProperties.show) {
-			if (rowLabelProperties.showFeatures &&
-					rowLabelProperties.position == RowLabelPosition.RIGHT && 
-					matrix.getRowCount() > 1) {
-				rowLabelsBox.addChild(emptyHBox);
 
-				element = new CountBracketRightPlotElement(matrix, 
-						countGroups, 
-						10, 
-						aspectRatio,
-						rowLabelProperties.color);
-				
-				rowLabelsBox.addChild(element);
+		System.err.println("dsdsd " + rowLabelProperties.showFeatureCounts);
 
-				rowLabelsBox.addChild(emptyHBox);
+		if (rowLabelProperties.showFeatureCounts &&
+				rowLabelProperties.position == RowLabelPosition.RIGHT && 
+				matrix.getRowCount() > 1) {
+			rowLabelsBox.addChild(emptyHBox);
 
-				element = new CountPlotElement(matrix,
-						countGroups,
-						100, 
-						aspectRatio, 
-						rowLabelProperties.color);
+			element = new CountBracketRightPlotElement(matrix, 
+					countGroups, 
+					10, 
+					aspectRatio,
+					rowLabelProperties.color);
 
-				rowLabelsBox.addChild(element);
-			}
+			rowLabelsBox.addChild(element);
+
+			rowLabelsBox.addChild(emptyHBox);
+
+			element = new CountPlotElement(matrix,
+					countGroups,
+					100, 
+					aspectRatio, 
+					rowLabelProperties.color);
+
+			rowLabelsBox.addChild(element);
+		}
 
 
-			/*
+		/*
 			if (rowCluster != null) {
 				element = new RowHierarchicalLabelPlotElement(matrix, 
 						rowCluster, 
 						rowLabelProperties,
 						aspectRatio, 
 						CHAR_WIDTH);
-			 */
-			//} else {
+		 */
+		//} else {
+		if (rowLabelProperties.show) {
 			element = new RowLabelsPlotElement(matrix,
 					rowLabelProperties,
 					aspectRatio,
 					CHAR_WIDTH);
-			//}
+
+
+			rowLabelsBox.addChild(element);
+		}
+
+		if (rowLabelProperties.showFeatureCounts &&
+				rowLabelProperties.position == RowLabelPosition.LEFT && 
+				matrix.getRowCount() > 1) {
+			rowLabelsBox.addChild(emptyHBox);
+
+			element = new CountPlotElement(matrix, 
+					countGroups,
+					100, 
+					aspectRatio, 
+					rowLabelProperties.color);
 
 			rowLabelsBox.addChild(element);
 
-			if (rowLabelProperties.showFeatures &&
-					rowLabelProperties.position == RowLabelPosition.LEFT && 
-					matrix.getRowCount() > 1) {
-				rowLabelsBox.addChild(emptyHBox);
+			rowLabelsBox.addChild(emptyHBox);
 
-				element = new CountPlotElement(matrix, 
-						countGroups,
-						100, 
-						aspectRatio, 
-						rowLabelProperties.color);
-				
-				rowLabelsBox.addChild(element);
-
-				rowLabelsBox.addChild(emptyHBox);
-
-				element = new CountBracketLeftPlotElement(matrix, 
-						10, 
-						aspectRatio,
-						rowLabelProperties.color);
-				rowLabelsBox.addChild(element);
-			}
+			element = new CountBracketLeftPlotElement(matrix,
+					countGroups,
+					10, 
+					aspectRatio,
+					rowLabelProperties.color);
+			rowLabelsBox.addChild(element);
 		}
-	
+
 		PlotBox rowLabelsSpaceBox = 
 				new PlotBoxEmpty(rowLabelsBox.getPreferredSize().width, 0);
 
@@ -410,30 +414,30 @@ public class ClusterCanvas extends PlotBoxRow {
 
 			columnBox.addChild(emptyHBox);
 
-			if (rowLabelProperties.show) {
-				if (rowLabelProperties.position == RowLabelPosition.LEFT) {
-					columnBox.addChild(rowLabelsBox);
+
+			if (rowLabelProperties.position == RowLabelPosition.LEFT) {
+				columnBox.addChild(rowLabelsBox);
+				columnBox.addChild(emptyHBox);
+			} else {
+				// If labels are on the right, then tree appears on the left
+
+				if (treeVisH && rowCluster != null) {
+					element = new RowHTreeLeftPlotElement(matrix, 
+							treeWidthH, 
+							aspectRatio, 
+							rowCluster,
+							properties.getAsColor("plot.tree.hoz.color"));
+					//canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
+					columnBox.addChild(element);
+
 					columnBox.addChild(emptyHBox);
-				} else {
-					// If labels are on the right, then tree appears on the left
-
-					if (treeVisH && rowCluster != null) {
-						element = new RowHTreeLeftPlotElement(matrix, 
-								treeWidthH, 
-								aspectRatio, 
-								rowCluster,
-								properties.getAsColor("plot.tree.hoz.color"));
-						//canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
-						columnBox.addChild(element);
-
-						columnBox.addChild(emptyHBox);
-					}
 				}
 			}
 
 			element = new HeatMapPlotElement(matrix,
 					colorMap, 
 					aspectRatio);
+
 			((HeatMapPlotElement)element).setGridColor(properties.getAsColor("plot.grid-color"));
 			((HeatMapPlotElement)element).setOutlineColor(properties.getAsColor("plot.outline-color"));
 			((HeatMapPlotElement)element).setBorderColor(properties.getAsColor("plot.border-color"));
@@ -441,26 +445,24 @@ public class ClusterCanvas extends PlotBoxRow {
 
 			columnBox.addChild(element);
 
-			if (rowLabelProperties.show) {
-				if (rowLabelProperties.position == RowLabelPosition.RIGHT) {
+			if (rowLabelProperties.position == RowLabelPosition.RIGHT) {
+				columnBox.addChild(emptyHBox);
+				columnBox.addChild(rowLabelsBox);
+			} else {
+				// If labels are on the right, then tree appears on the left
+
+				if (treeVisH && rowCluster != null) {
 					columnBox.addChild(emptyHBox);
-					columnBox.addChild(rowLabelsBox);
-				} else {
-					// If labels are on the right, then tree appears on the left
 
-					if (treeVisH && rowCluster != null) {
-						columnBox.addChild(emptyHBox);
+					element = new RowHTreeRightPlotElement(matrix, 
+							treeWidthH, 
+							aspectRatio, 
+							rowCluster,
+							properties.getAsColor("plot.tree.hoz.color"));
+					//canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
+					columnBox.addChild(element);
 
-						element = new RowHTreeRightPlotElement(matrix, 
-								treeWidthH, 
-								aspectRatio, 
-								rowCluster,
-								properties.getAsColor("plot.tree.hoz.color"));
-						//canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
-						columnBox.addChild(element);
-
-						//columnBox.addChild(emptyHBox);
-					}
+					//columnBox.addChild(emptyHBox);
 				}
 			}
 

@@ -70,7 +70,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
 	public RowLabelControl(ModernWindow parent,
 			DataFrame matrix,
 			RowLabelPosition rowLabelPosition) {
-		this(parent, matrix, rowLabelPosition, true);
+		this(parent, matrix, rowLabelPosition, true, true);
 	}
 	
 	/**
@@ -84,7 +84,13 @@ public class RowLabelControl extends VBox implements ModernClickListener {
 	public RowLabelControl(ModernWindow parent,
 			DataFrame matrix,
 			RowLabelPosition rowLabelPosition,
+			boolean featureCounts,
 			boolean show) {
+		
+		mCheckFeatures = new ModernCheckSwitch("Feature Count", featureCounts);
+		add(mCheckFeatures);
+		
+		add(UI.createVGap(5));
 		
 		mShowElement = new ColoredPlotControl(parent, 
 				"Show",
@@ -92,11 +98,6 @@ public class RowLabelControl extends VBox implements ModernClickListener {
 				show);
 		
 		add(mShowElement);
-		
-		add(UI.createVGap(5));
-		
-		mCheckFeatures = new ModernCheckSwitch("Feature Count", true);
-		add(mCheckFeatures);
 		
 		add(UI.createVGap(5));
 		
@@ -213,7 +214,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
 	 * Update.
 	 */
 	public void update() {
-		mCheckFeatures.setEnabled(mShowElement.isSelected());
+		//mCheckFeatures.setEnabled(mShowElement.isSelected());
 		
 		for (ModernTwoStateWidget c : mAnnotationMap.values()) {
 			c.setEnabled(mShowElement.isSelected());

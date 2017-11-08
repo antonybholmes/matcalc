@@ -24,6 +24,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.core.ColumnAnnotationModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ExtractDataModule;
 import edu.columbia.rdf.matcalc.toolbox.core.GroupModule;
+import edu.columbia.rdf.matcalc.toolbox.core.OrderColumnsModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SplitModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SummaryModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ViewModule;
@@ -106,9 +107,10 @@ public class ModuleLoader {
 		addModule(FilterModule.class);
 		addModule(RowFilterModule.class);
 		addModule(ColumnFilterModule.class);
+		
 		addModule(SearchColumnModule.class);
 		addModule(MatchModule.class);
-		
+		addModule(OrderColumnsModule.class);
 		
 		addModule(SummaryModule.class);
 		addModule(CollapseModule.class);

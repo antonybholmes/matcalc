@@ -59,19 +59,19 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
  *
  */
 public class HeatMapCanvas extends PlotBoxRow {
-	
+
 	/**
 	 * The constant serialVersionUID.
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
+
 	/**
 	 * The horizontal gap.
 	 */
 	private Dimension horizontalGap = 
 			new Dimension(MatrixPlotElement.BLOCK_SIZE, 0);
-	
+
 	/**
 	 * The vertical gap.
 	 */
@@ -129,9 +129,9 @@ public class HeatMapCanvas extends PlotBoxRow {
 
 		DoubleDim aspectRatio = 
 				(DoubleDim)properties.getProperty("plot.block-size");
-		
+
 		ColorMap colorMap = (ColorMap)properties.getProperty("plot.colormap");
-		
+
 		HeatMapPlotElement heatMapElement = new HeatMapPlotElement(matrix, 
 				colorMap, 
 				aspectRatio);
@@ -146,17 +146,17 @@ public class HeatMapCanvas extends PlotBoxRow {
 
 		PlotBox emptyVBox = new PlotBoxEmpty(verticalGap);
 		PlotBox emptyHBox = new PlotBoxEmpty(horizontalGap);
-		
+
 		addChild(emptyVBox);
-		
-		
+
+
 		//
 		// Row labels
 		//
 
 		PlotBox rowLabelsBox = new PlotBoxColumn();
 
-		if (rowLabelProperties.showFeatures && 
+		if (rowLabelProperties.showFeatureCounts && 
 				rowLabelProperties.position == RowLabelPosition.RIGHT && 
 				matrix.getRowCount() > 1) {
 			rowLabelsBox.addChild(emptyHBox);
@@ -176,18 +176,20 @@ public class HeatMapCanvas extends PlotBoxRow {
 					100, 
 					aspectRatio, 
 					rowLabelProperties.color);
-			
+
 			rowLabelsBox.addChild(element);
 		}
 
-		element = new RowLabelsPlotElement(matrix, 
-				rowLabelProperties, 
-				aspectRatio,
-				CHAR_WIDTH);
+		if (rowLabelProperties.show) {
+			element = new RowLabelsPlotElement(matrix, 
+					rowLabelProperties, 
+					aspectRatio,
+					CHAR_WIDTH);
 
-		rowLabelsBox.addChild(element);
+			rowLabelsBox.addChild(element);
+		}
 
-		if (rowLabelProperties.showFeatures && 
+		if (rowLabelProperties.showFeatureCounts && 
 				rowLabelProperties.position == RowLabelPosition.LEFT 
 				&& matrix.getRowCount() > 1) {
 			rowLabelsBox.addChild(emptyHBox);
@@ -201,7 +203,8 @@ public class HeatMapCanvas extends PlotBoxRow {
 
 			rowLabelsBox.addChild(emptyHBox);
 
-			element = new CountBracketLeftPlotElement(matrix, 
+			element = new CountBracketLeftPlotElement(matrix,
+					countGroups,
 					10, 
 					aspectRatio,
 					rowLabelProperties.color);
@@ -210,15 +213,16 @@ public class HeatMapCanvas extends PlotBoxRow {
 
 
 
-		
-		PlotBox rowLabelsSpaceBox = new PlotBoxEmpty(rowLabelsBox.getPreferredSize().height, 0);
+
+		PlotBox rowLabelsSpaceBox = 
+				new PlotBoxEmpty(rowLabelsBox.getPreferredSize().height, 0);
 
 		//
 		// Vertical labels
 		//
 
 		int maxChars = properties.getAsInt("plot.row-label-max-chars");
-		
+
 		//
 		// Create space for the column labels
 		//
@@ -321,7 +325,7 @@ public class HeatMapCanvas extends PlotBoxRow {
 			addChild(emptyVBox);
 		}
 
-		
+
 		//
 		// cluster
 		//
@@ -393,7 +397,7 @@ public class HeatMapCanvas extends PlotBoxRow {
 				history, 
 				aspectRatio, 
 				400);
-		
+
 		rowBox.addChild(element);
 
 		columnBox.addChild(rowBox);

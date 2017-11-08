@@ -26,7 +26,6 @@ import org.jebtk.math.cluster.DistanceMetric;
 import org.jebtk.math.cluster.HierarchicalClustering;
 import org.jebtk.math.cluster.Linkage;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -38,6 +37,7 @@ import edu.columbia.rdf.matcalc.icons.Cluster32VectorIcon;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.HierarchicalClusteringDialog;
+import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
 
 
 // TODO: Auto-generated Javadoc
@@ -99,21 +99,17 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void cluster() throws IOException {
-		cluster(new ClusterProperties());
-	}
-
-	/**
-	 * Cluster.
-	 *
-	 * @param properties the properties
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void cluster(Properties properties) throws IOException {
 		DataFrame m = mWindow.getCurrentMatrix();
-
+		
 		if (m == null) {
 			return;
 		}
+		
+		Properties properties = new ClusterProperties();
+		
+		LegacyHeatMapModule.scaleLargeMatrixImage(m, properties);
+
+		
 
 		if (mWindow.getHistoryPanel().getItemCount() == 0) {
 			return;
@@ -127,11 +123,14 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
 			return;
 		}
+		
 
 		DistanceMetric distanceMetric = dialog.getDistanceMetric();
 
 		Linkage linkage = dialog.getLinkage();
 
+		properties.setProperty("plot.heatmap.visible", dialog.getShowHeatMap());
+		
 		cluster(m,
 				distanceMetric,
 				linkage, 

@@ -63,14 +63,17 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 	/**
 	 * The cluster columns check.
 	 */
-	private CheckBox clusterColumnsCheck = 
+	private CheckBox mCheckClusterColumns = 
 			new ModernCheckSwitch("Cluster columns", true);
 
 	/**
 	 * The cluster rows check.
 	 */
-	private CheckBox clusterRowsCheck = 
+	private CheckBox mCheckClusterRows = 
 			new ModernCheckSwitch("Cluster rows");
+	
+	private CheckBox mCheckShowHeatMap =
+			new ModernCheckSwitch("Show heat map", true);
 	
 	/** The m check optimal leaf order. */
 	private CheckBox mCheckOptimalLeafOrder = 
@@ -80,7 +83,7 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 	 * The member check plot.
 	 */
 	private CheckBox mCheckPlot = 
-			new ModernCheckSwitch(PlotConstants.MENU_SHOW_HEATMAP, true);
+			new ModernCheckSwitch(PlotConstants.MENU_PLOT, true);
 
 	
 	/**
@@ -111,7 +114,7 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 		
 		mDistanceCombo.setSelectedIndex(3);
 
-		setSize(480, 320);
+		setSize(480, 360);
 		
 		UI.centerWindowToScreen(this);
 	}
@@ -127,11 +130,13 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 		box.add(ModernPanel.createVGap());
 		box.add(new HExpandBox("Linkage", mLinkageCombo));
 		box.add(ModernPanel.createVGap());
-		box.add(clusterRowsCheck);
+		box.add(mCheckClusterRows);
 		box.add(ModernPanel.createVGap());
-		box.add(clusterColumnsCheck);
+		box.add(mCheckClusterColumns);
 		box.add(ModernPanel.createVGap());
 		box.add(mCheckPlot);
+		box.add(ModernPanel.createVGap());
+		box.add(mCheckShowHeatMap);
 		box.add(ModernPanel.createVGap());
 		box.add(mCheckOptimalLeafOrder);
 		
@@ -179,7 +184,7 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 	 * @return true, if successful
 	 */
 	public boolean clusterRows() {
-		return clusterRowsCheck.isSelected();
+		return mCheckClusterRows.isSelected();
 	}
 	
 	/**
@@ -188,7 +193,7 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 	 * @return true, if successful
 	 */
 	public boolean clusterColumns() {
-		return clusterColumnsCheck.isSelected();
+		return mCheckClusterColumns.isSelected();
 	}
 
 	/**
@@ -207,5 +212,9 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
 	 */
 	public boolean optimalLeafOrder() {
 		return mCheckOptimalLeafOrder.isSelected();
+	}
+	
+	public boolean getShowHeatMap() {
+		return mCheckShowHeatMap.isSelected();
 	}
 }

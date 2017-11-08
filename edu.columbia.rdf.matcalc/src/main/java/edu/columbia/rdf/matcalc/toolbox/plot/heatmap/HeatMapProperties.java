@@ -56,6 +56,7 @@ public class HeatMapProperties extends Properties {
 		setProperty("plot.aspect-ratio", new AspectRatio());
 		setProperty("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
 		setProperty("plot.show-row-labels", true);
+		setProperty("plot.show-feature-counts", true);
 		setProperty("plot.color.standardization", ColorNormalizationType.ZSCORE_ROW);
 		setProperty("plot.color.intensity", 0);
 		setProperty("plot.tree.hoz.width", 200);
