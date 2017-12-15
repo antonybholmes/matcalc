@@ -335,7 +335,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 		double maxX = 1;
 		double maxY = 1;
 
-		if (foldM1.getRowCount() > 0) {
+		if (foldM1.getRows() > 0) {
 			DataFrame noSigM = new DataFrame(foldM1);
 
 			noSigM.setColumnNames("Non-significant x", "Non-significant y");
@@ -365,7 +365,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 			}
 		}
 
-		if (foldM1.getRowCount() > 0) {
+		if (foldM1.getRows() > 0) {
 			DataFrame foldDownM = new DataFrame(foldM1);
 
 			foldDownM.setColumnNames(foldDownSeries.getName() + " x", 
@@ -396,7 +396,7 @@ public class VolcanoPlotModule extends CalcModule implements ModernClickListener
 			}
 		}
 
-		if (foldM1.getRowCount() > 0) {
+		if (foldM1.getRows() > 0) {
 			DataFrame foldUpM = new DataFrame(foldM1);
 
 			foldUpM.setColumnNames(foldUpSeries.getName() + " x", 

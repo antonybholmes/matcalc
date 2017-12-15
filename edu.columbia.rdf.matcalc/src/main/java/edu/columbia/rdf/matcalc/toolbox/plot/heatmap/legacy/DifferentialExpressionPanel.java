@@ -202,7 +202,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 
 		// Now normalize the the other groups
 
-		for (int r = 0; r < m.getRowCount(); ++r) {
+		for (int r = 0; r < m.getRows(); ++r) {
 			double mean = 0;
 			double sd = 0;
 

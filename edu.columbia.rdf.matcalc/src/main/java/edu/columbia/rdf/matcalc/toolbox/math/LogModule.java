@@ -205,9 +205,7 @@ public class LogModule extends CalcModule implements ModernClickListener {
 			if (dialog.getNatural()) {
 				return MatrixOperations.ln(m);
 			} else {
-				DataFrame ret = MatrixOperations.log(m, dialog.getBase());
-
-				return ret;
+				return MatrixOperations.log(m, dialog.getBase());
 			}
 		} else {
 			return null;

@@ -110,7 +110,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener  {
 		Map<String, List<Integer>> rows = new HashMap<String, List<Integer>>();
 		List<String> ids = new UniqueArrayList<String>();
 
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			String id = m.getText(i, c);
 			
 			ids.add(id);
@@ -122,7 +122,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener  {
 			rows.get(id).add(i);
 		}
 
-		DataFrame ret = DataFrame.createDataFrame(ids.size(), m.getColumnCount());
+		DataFrame ret = DataFrame.createDataFrame(ids.size(), m.getCols());
 
 		ret.setColumnNames(m.getColumnNames());
 
@@ -149,7 +149,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener  {
 		for (int row = 0; row < ids.size(); ++row) {
 			List<Integer> indices = rows.get(ids.get(row));
 			
-			for (int column = 0; column < m.getColumnCount(); ++column) {
+			for (int column = 0; column < m.getCols(); ++column) {
 				//StringBuilder buffer = new StringBuilder(m.getText(indices.get(0), column));
 				
 				List<String> items = new UniqueArrayList<String>(indices.size());

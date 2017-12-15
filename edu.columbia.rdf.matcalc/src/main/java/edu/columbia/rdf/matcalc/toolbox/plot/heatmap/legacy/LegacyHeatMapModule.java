@@ -132,8 +132,8 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
 	 */
 	public static void scaleLargeMatrixImage(DataFrame m, Properties properties) {
 	
-		double w = scale(m.getColumnCount());
-		double h = scale(m.getRowCount());
+		double w = scale(m.getCols());
+		double h = scale(m.getRows());
 		
 		if (w < 20 || h < 20) {
 			// Don't show grid

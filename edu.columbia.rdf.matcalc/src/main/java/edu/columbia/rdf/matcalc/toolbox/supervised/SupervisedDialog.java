@@ -27,7 +27,6 @@ import org.jebtk.math.statistics.FDRType;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButtonGroup;
-import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.button.ModernRadioButton;
 import org.jebtk.modern.dialog.ModernDialogMultiCardWindow;
@@ -112,7 +111,16 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 */
 	private ModernTwoStateWidget mCheckLog2 = 
 			new ModernCheckSwitch(PlotConstants.MENU_LOG_TRANSFORM);
+	
+	private ModernRadioButton mCheckOneOne = 
+			new ModernRadioButton("One vs One", true);
+	
+	private ModernRadioButton mCheckOneRest = 
+			new ModernRadioButton("One vs Rest");
 
+	private ModernRadioButton mCheckPairwise = 
+			new ModernRadioButton("Pairwise");
+	
 	/**
 	 * The member groups.
 	 */
@@ -123,8 +131,11 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	/**
 	 * The check reset.
 	 */
-	private CheckBox checkReset = 
-			new ModernCheckBox(PlotConstants.MENU_RESET_HISTORY);
+	private CheckBox mCheckReset = 
+			new ModernCheckSwitch(PlotConstants.MENU_RESET_HISTORY);
+	
+	private CheckBox mCheckHistory = 
+			new ModernCheckSwitch("Keep history", true);
 
 	/**
 	 * The member group panel.
@@ -185,7 +196,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 		mGroups = groups;
 		mMatrix = matrix;
 		
-		createUi();
+		
 
 		
 		setup();
@@ -195,6 +206,10 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 * Setup.
 	 */
 	private void setup() {
+		createUi();
+		
+		new ModernButtonGroup(mCheckOneOne, mCheckOneRest, mCheckPairwise);
+		
 		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
 		
 		setSize(640, 420);
@@ -217,7 +232,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 		box.add(mCheckIsLog2);
 		box.add(UI.createVGap(5));
 		box.add(mCheckLog2);
-		//box.add(UI.createVGap(5));
+		
 		
 		//box.add(new HExpandBox("Minimum Expression", mExpressionField));
 
@@ -228,6 +243,13 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 		mGroupPanel = new GroupPanel(mGroups);
 		
 		box.add(mGroupPanel);
+		box.add(UI.createVGap(5));
+		box.add(mCheckOneOne);
+		box.add(mCheckOneRest);
+		box.add(mCheckPairwise);
+		
+		box.add(UI.createVGap(20));
+		box.add(mCheckHistory);
 		
 		addTab("Input", box);
 		
@@ -444,7 +466,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 * @return the reset
 	 */
 	public boolean getReset() {
-		return checkReset.isSelected();
+		return mCheckReset.isSelected();
 	}
 
 	/**
@@ -471,10 +493,24 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 	 * @return the min fold change
 	 */
 	public double getMinFoldChange() {
-		return  mFilterPanel.getMinFoldChange();
+		return mFilterPanel.getMinFoldChange();
 	}
 
 	public TestType getTest() {
 		return mTestCombo.getTest();
+	}
+
+	public boolean getKeepHistory() {
+		return mCheckHistory.isSelected();
+	}
+	
+	public ComparisonType getComparisonType() {
+		if (mCheckOneRest.isSelected()) {
+			return ComparisonType.ONE_VS_REST;
+		} else if (mCheckPairwise.isSelected()) {
+			return ComparisonType.PAIRWISE;
+		} else {
+			return ComparisonType.ONE_VS_ONE;
+		}
 	}
 }

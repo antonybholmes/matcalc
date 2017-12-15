@@ -65,7 +65,7 @@ public class ColumnsCombo extends ModernComboBox {
 			
 		List<String> names = m.getColumnNames();
 		
-		int maxC = Math.min(m.getColumnCount(), MAX_COLUMNS);
+		int maxC = Math.min(m.getCols(), MAX_COLUMNS);
 		
 		for (int i = 0; i < maxC; ++i) {
 			String name = ModernTableModel.getAutoColumnHeading(i);

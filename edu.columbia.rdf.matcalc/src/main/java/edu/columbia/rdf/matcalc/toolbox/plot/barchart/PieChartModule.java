@@ -92,7 +92,7 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
 		
 		XYSeriesGroup groups = mParent.getGroups();
 		
-		for (int i = 0; i < m.getColumnCount(); ++i) {
+		for (int i = 0; i < m.getCols(); ++i) {
 			String name = m.getColumnName(i);
 			
 			Color color = null;

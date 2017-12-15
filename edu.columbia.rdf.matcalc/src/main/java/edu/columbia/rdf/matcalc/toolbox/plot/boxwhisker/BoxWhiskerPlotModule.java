@@ -108,7 +108,7 @@ public class BoxWhiskerPlotModule extends CalcModule implements ModernClickListe
 		
 		XYSeriesGroup allSeries = new XYSeriesGroup("Box Whisker");
 
-		for (int c = 0; c < m.getColumnCount(); ++c) {
+		for (int c = 0; c < m.getCols(); ++c) {
 			XYSeries series = new XYSeries(m.getColumnName(c), Color.BLACK);
 
 			allSeries.add(series);

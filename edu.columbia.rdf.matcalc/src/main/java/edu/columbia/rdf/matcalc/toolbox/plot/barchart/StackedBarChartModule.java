@@ -92,7 +92,7 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
 		
 		XYSeriesGroup seriesGroup = new XYSeriesGroup();
 
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			Color color = null;
 			
 			// See if the column matches a group, and if so use the group's

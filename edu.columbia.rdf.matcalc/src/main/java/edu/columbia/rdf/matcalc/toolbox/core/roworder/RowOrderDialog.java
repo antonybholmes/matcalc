@@ -33,6 +33,7 @@ import org.jebtk.core.IndexedInt;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.Io;
+import org.jebtk.core.io.TokenFunction;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.BorderService;
@@ -68,7 +69,7 @@ import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
  * @author Antony Holmes Holmes
  */
 public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
+
 	/**
 	 * The constant serialVersionUID.
 	 */
@@ -90,7 +91,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	 */
 	private ModernButton mUpButton = 
 			new ModernButton(UIService.getInstance().loadIcon(ArrowUpVectorIcon.class, 16));
-	
+
 	/**
 	 * The member down button.
 	 */
@@ -102,13 +103,13 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	 */
 	private ModernButton mAlphabeticalButton = 
 			new ModernButton("Alphabetical", UIService.getInstance().loadIcon("alphabetical", 16));
-	
+
 	/**
 	 * The member load button.
 	 */
 	private ModernButton mLoadButton = 
 			new ModernButton("Load order", UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
-	
+
 	/**
 	 * The member columns combo.
 	 */
@@ -119,7 +120,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	 */
 	private DataFrame mM;
 
-	
+
 	/**
 	 * The class TypeChangeEvents.
 	 */
@@ -132,9 +133,9 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 		public void clicked(ModernClickEvent e) {
 			changeIds();
 		}
-		
+
 	}
-	
+
 	/**
 	 * Instantiates a new row order dialog.
 	 *
@@ -143,31 +144,31 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	 */
 	public RowOrderDialog(ModernWindow parent, DataFrame m) {
 		super(parent, "matcalc.modules.row-order.help.url");
-		
+
 		mM = m;
-		
+
 		setTitle("Row Order");
-		
+
 		mColumnsCombo = new ColumnsCombo(m);
 
 		mColumnsCombo.setSelectedIndex(0);
 
 		mColumnsCombo.addClickListener(new TypeChangeEvents());
-		
+
 		ModernComponent content = new ModernComponent();
 
-		
-		
+
+
 		Box box = HBox.create();
 		box.add(new ModernLabel("Column", 80));
 		UI.setSize(mColumnsCombo, 300, 24);
 		box.add(mColumnsCombo);
 		box.setBorder(ModernPanel.LARGE_BORDER);
-		
+
 		content.setHeader(box);
-		
+
 		mTable.setShowHeader(false);
-		
+
 		//ModernScrollPane scrollPane = new ModernScrollPane(mTable);
 		//scrollPane.setBorder(ModernTheme.getInstance().getClass("widget").getBorder("dialog"));
 		//scrollPane.setBorder(ModernWidget.LINE_BORDER);
@@ -180,38 +181,38 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 
 		mUpButton.addClickListener(this);
 		box.add(mUpButton);
-		
+
 		box.add(ModernPanel.createVGap());
-		
+
 		mDownButton.addClickListener(this);
 		box.add(mDownButton);
-		
+
 		box.setBorder(BorderService.getInstance().createLeftBorder(10));
-		
+
 		content.setRight(box);
-		
+
 		box = HBox.create();
-		
+
 		box.setBorder(ModernPanel.TOP_BORDER);
-		
+
 		box.add(mLoadButton);
 		box.add(ModernPanel.createHGap());
 		box.add(mAlphabeticalButton);
-		
-		
-		
-		
+
+
+
+
 		content.setFooter(box);
 
 		setDialogCardContent(content);
 
 		changeIds();
-		
+
 		setSize(640, 480);
 		setResizable(true);
 		UI.centerWindowToScreen(this);
-		
-		
+
+
 		mLoadButton.addClickListener(this);
 		mAlphabeticalButton.addClickListener(this);
 	}
@@ -223,12 +224,12 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	 */
 	private void loadIds(List<Indexed<Integer, String>> ids) {
 		mModel = new RowOrderTableModel(ids);
-		
+
 		mTable.setModel(mModel);
 		mTable.getColumnModel().setWidth(0, 50);
 		mTable.getColumnModel().setWidth(1, 50);
 		mTable.getColumnModel().setWidth(2, 400);
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -252,41 +253,41 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 			super.clicked(e);
 		}
 	}
-	
+
 	/**
 	 * Sort alphabetically.
 	 */
 	private void sortAlphabetically() {
 		Map<String, List<Integer>> rowMap = 
 				new HashMap<String, List<Integer>>();
-		
+
 		for (int i = 0; i < mTable.getRowCount(); ++i) {
 			Indexed<Integer, String> column = mModel.get(i);
-			
+
 			// We must deal with multiple samples with the same name.
 			if (!rowMap.containsKey(column.getValue())) {
 				rowMap.put(column.getValue(), new ArrayList<Integer>());
 			}
-			
+
 			rowMap.get(column.getValue()).add(column.getIndex());
 		}
-		
+
 		List<String> sortedNames = CollectionUtils.sort(rowMap.keySet());
-		
+
 		List<Indexed<Integer, String>> columns = 
 				new ArrayList<Indexed<Integer, String>>();
-		
+
 		for (String name : sortedNames) {
 			List<Integer> ids = CollectionUtils.sort(rowMap.get(name));
-			
+
 			for (int id : ids) {
 				columns.add(new Indexed<Integer, String>(id, name));
 			}
 		}
-		
+
 		loadIds(columns);
 	}
-	
+
 	/**
 	 * Swap up.
 	 */
@@ -297,7 +298,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 			if (!mTable.getRowModel().isSelected(i)) {
 				continue;
 			}
-			
+
 			indices.add(i);
 		}
 
@@ -312,7 +313,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 			}
 
 			//columnTable.getCellSelectionModel().getRowSelectionModel().add(i - 1);
-			
+
 			mTable.getRowModel().setSelected(i - 1);
 		}
 	}
@@ -327,7 +328,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 			if (!mTable.getRowModel().isSelected(i)) {
 				continue;
 			}
-			
+
 			indices.add(i);
 		}
 
@@ -355,7 +356,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 				.open(mParent)
 				.all()
 				.getFile(RecentFilesService.getInstance().getPwd());
-		
+
 		if (file == null) {
 			return;
 		}
@@ -370,40 +371,25 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void sortByExternalIdList(Path file) throws IOException {
-		BufferedReader reader = FileUtils.newBufferedReader(file);
+		final List<String> ids = new ArrayList<String>();
 
-		String line;
+		FileUtils.tokenize(file, new TokenFunction() {
+			@Override
+			public void parse(List<String> tokens) {
+				ids.add(tokens.get(0).toLowerCase());
+			}});
 
-		List<String> ids = new ArrayList<String>();
-		
-		try {
-			// Skip header
-			reader.readLine();
-			
-    		while ((line = reader.readLine()) != null) {
-    			if (Io.isEmptyLine(line)) {
-    				continue;
-    			}
-
-    			List<String> tokens = TextUtils.tabSplit(line);
-
-    			ids.add(tokens.get(0).toLowerCase());
-    		}
-		} finally {
-			reader.close();
-		}
-		
 		// Now find those items in the list of indices
 
 		List<Indexed<Integer, String>> sorted = 
 				new ArrayList<Indexed<Integer, String>>();
 
 		Set<Integer> used = new HashSet<Integer>();
-		
+
 		for (String id : ids) {
 			for (int i = 0; i < mModel.getRowCount(); ++i) {
 				Indexed<Integer, String> v = mModel.get(i);
-				
+
 				if (v.getValue().toLowerCase().equals(id)) {
 					sorted.add(v);
 					used.add(i);
@@ -411,19 +397,19 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
 				}
 			}
 		}
-		
+
 		// Add all the ids that are not sorted by this method
-		
+
 		for (int i = 0; i < mModel.getRowCount(); ++i) {
 			if (!used.contains(i)) {
 				sorted.add(mModel.get(i));
 			}
 		}
-		
-		
+
+
 		loadIds(sorted);
 	}
-	
+
 	/**
 	 * Change ids.
 	 */

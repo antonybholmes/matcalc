@@ -876,6 +876,10 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 		return mHistoryPanel.search(text);
 	}
 
+	public History history() {
+		return new History(this);
+	}
+	
 	/**
 	 * Adds the to history.
 	 *
@@ -977,6 +981,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow implements ModernWindo
 
 		return transform.getMatrix();
 	}
+	
+	
 
 	public DataFrame selectHistory(int selectedIndex) {
 		mHistoryPanel.setSelectedIndex(selectedIndex);

@@ -140,7 +140,7 @@ public class MatchModule extends CalcModule implements ModernClickListener  {
 
 	
 		DataFrame ret = 
-				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount() + 2);
+				DataFrame.createDataFrame(m.getRows(), m.getCols() + 2);
 
 		// Copy before column
 		DataFrame.copyColumns(m, 0, c, ret);
@@ -152,7 +152,7 @@ public class MatchModule extends CalcModule implements ModernClickListener  {
 		ret.setColumnName(c + 1, "Number Of Matches");
 		ret.setColumnName(c + 2, "Matches From " + window.getSubTitle()  + " - " + copyM.getColumnName(inputDialog.getReplaceColumn()));
 		
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			String id = m.getText(i, c).toLowerCase();
 			
 			if (idMap.containsKey(id)) {

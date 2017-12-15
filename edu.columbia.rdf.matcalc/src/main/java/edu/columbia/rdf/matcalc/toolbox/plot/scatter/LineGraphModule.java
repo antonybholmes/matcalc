@@ -116,7 +116,7 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
 		
 		ColorCycle colorCycle = new ColorCycle();
 		
-		for (int j = 0; j < m.getColumnCount(); j += 2) {
+		for (int j = 0; j < m.getCols(); j += 2) {
 			Color color = colorCycle.next();
 			
 			XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(j), m.getColumnName(j + 1)), color);

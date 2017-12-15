@@ -158,7 +158,7 @@ public class HeatMapCanvas extends PlotBoxRow {
 
 		if (rowLabelProperties.showFeatureCounts && 
 				rowLabelProperties.position == RowLabelPosition.RIGHT && 
-				matrix.getRowCount() > 1) {
+				matrix.getRows() > 1) {
 			rowLabelsBox.addChild(emptyHBox);
 
 			element = new CountBracketRightPlotElement(matrix, 
@@ -191,7 +191,7 @@ public class HeatMapCanvas extends PlotBoxRow {
 
 		if (rowLabelProperties.showFeatureCounts && 
 				rowLabelProperties.position == RowLabelPosition.LEFT 
-				&& matrix.getRowCount() > 1) {
+				&& matrix.getRows() > 1) {
 			rowLabelsBox.addChild(emptyHBox);
 
 			element = new CountPlotElement(matrix,

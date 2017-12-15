@@ -165,7 +165,7 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
 
 		mNames = new TreeSet<String>();
 
-		for (int i = 0; i < mGroupsMatrix.getRowCount(); ++i) {
+		for (int i = 0; i < mGroupsMatrix.getRows(); ++i) {
 			String name = mGroupsMatrix.getText(i, 0);
 			String sample = createSampleRegex(mGroupsMatrix.getText(i, 1));
 
@@ -354,7 +354,7 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
 
 					Set<Integer> columns = CollectionUtils.toSet(XYSeries.findColumnIndices(mMatrix, series));
 
-					for (int j = 0; j < mMatrix.getColumnCount(); ++j) {
+					for (int j = 0; j < mMatrix.getCols(); ++j) {
 						if (!columns.contains(j)) {
 							s2.addRegex(createSampleRegex(mMatrix.getColumnName(j)));
 						}

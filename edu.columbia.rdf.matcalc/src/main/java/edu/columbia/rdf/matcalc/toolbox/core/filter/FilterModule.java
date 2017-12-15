@@ -180,11 +180,11 @@ public class FilterModule extends CalcModule implements ModernClickListener  {
 				CollectionUtils.reverse(CollectionUtils.toList(stack));
 		
 		// Create a master list of rows in sorted order
-		List<Integer> rows = new ArrayList<Integer>(m.getRowCount());
+		List<Integer> rows = new ArrayList<Integer>(m.getRows());
 		
 		BooleanFixedStack resultStack = new BooleanFixedStack();
 		
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			String text = m.getText(i, c);
 			
 			double value = m.getValue(i, c);
@@ -226,7 +226,7 @@ public class FilterModule extends CalcModule implements ModernClickListener  {
 
 		
 		DataFrame ret = 
-				DataFrame.createDataFrame(rows.size(), m.getColumnCount());
+				DataFrame.createDataFrame(rows.size(), m.getCols());
 		
 		DataFrame.copyColumnAnnotations(m, ret);
 		

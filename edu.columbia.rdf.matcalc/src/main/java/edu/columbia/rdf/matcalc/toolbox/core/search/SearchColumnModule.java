@@ -125,9 +125,9 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
 		}
 
 		List<Set<String>> matchMap = 
-				new ArrayList<Set<String>>(m.getRowCount());
+				new ArrayList<Set<String>>(m.getRows());
 
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			matchMap.add(new TreeSet<String>());
 
 			String lc = m.getText(i, column);
@@ -159,8 +159,8 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
 			}
 		}
 
-		DataFrame ret = DataFrame.createDataFrame(m.getRowCount(), 
-				m.getColumnCount() + 2);
+		DataFrame ret = DataFrame.createDataFrame(m.getRows(), 
+				m.getCols() + 2);
 
 		// Copy before column
 		DataFrame.copyColumns(m, 0, column - 1, ret);
@@ -172,7 +172,7 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
 		ret.setColumnName(column, "Number Of Matches");
 		ret.setColumnName(column + 1, "Matches");
 
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			int s = matchMap.get(i).size();
 
 			ret.set(i, column, s);

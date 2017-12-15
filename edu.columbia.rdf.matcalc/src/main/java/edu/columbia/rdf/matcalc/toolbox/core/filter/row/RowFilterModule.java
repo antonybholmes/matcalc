@@ -105,7 +105,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 			return;
 		}
 		
-		List<Integer> rows = new ArrayList<Integer>(m.getRowCount());
+		List<Integer> rows = new ArrayList<Integer>(m.getRows());
 		
 		List<String> names = dialog.getNames();
 		List<String> missingNames = new ArrayList<String>(names.size());
@@ -135,13 +135,13 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 			// Need to insert blank rows
 			
 			ret = DataFrame.createDataFrame(rows.size() + missingNames.size(), 
-					m.getColumnCount());
+					m.getCols());
 			
 			DataFrame.copyColumnNames(m, ret);
 			DataFrame.copyRows(m, rows, ret);
 			
 			// Insert some blank rows
-			Matrix.setRowNA(rows.size(), ret.getRowCount() - 1, ret);
+			Matrix.setRowNA(rows.size(), ret.getRows() - 1, ret);
 			
 			for (int i = 0; i < missingNames.size(); ++i) {
 				ret.set(i + rows.size(), column, missingNames.get(i));

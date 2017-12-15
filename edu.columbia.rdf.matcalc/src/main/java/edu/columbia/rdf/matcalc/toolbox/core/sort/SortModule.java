@@ -118,7 +118,7 @@ public class SortModule extends CalcModule implements ModernClickListener  {
 				new ArrayList<List<Integer>>();
 		
 		// Seed the sorter with an ordered list of all the rows
-		sortedIds.add(Mathematics.sequence(0, m.getRowCount() - 1));
+		sortedIds.add(Mathematics.sequence(0, m.getRows() - 1));
 
 		//List<ColumnSort> sorters = new ArrayList<ColumnSort>();
 		
@@ -162,7 +162,7 @@ public class SortModule extends CalcModule implements ModernClickListener  {
 		}
 		
 		// Create a master list of rows in sorted order
-		List<Integer> rows = new ArrayList<Integer>(m.getRowCount());
+		List<Integer> rows = new ArrayList<Integer>(m.getRows());
 		
 		for (List<Integer> ids : sortedIds) {
 			for (int id : ids) {
@@ -171,7 +171,7 @@ public class SortModule extends CalcModule implements ModernClickListener  {
 		}
 		
 		DataFrame ret = 
-				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount());
+				DataFrame.createDataFrame(m.getRows(), m.getCols());
 		
 		DataFrame.copyColumnAnnotations(m, ret);
 		

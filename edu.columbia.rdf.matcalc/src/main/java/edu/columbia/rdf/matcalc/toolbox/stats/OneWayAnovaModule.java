@@ -77,8 +77,8 @@ public class OneWayAnovaModule extends CalcModule implements ModernClickListener
 	private void anova() {
 		DataFrame m = mParent.getCurrentMatrix();
 		
-		int rows = m.getRowCount();
-		int cols = m.getColumnCount();
+		int rows = m.getRows();
+		int cols = m.getCols();
 		
 		
 		

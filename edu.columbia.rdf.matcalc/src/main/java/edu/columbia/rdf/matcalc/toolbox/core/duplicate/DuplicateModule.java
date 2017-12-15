@@ -114,12 +114,12 @@ public class DuplicateModule extends CalcModule implements ModernClickListener  
 
 		String delimiter = dialog.getDelimiter();
 
-		List<Integer> rows = new ArrayList<Integer>(m.getRowCount());
-		List<String> ids = new ArrayList<String>(m.getRowCount());
+		List<Integer> rows = new ArrayList<Integer>(m.getRows());
+		List<String> ids = new ArrayList<String>(m.getRows());
 
 		Splitter splitter = Splitter.on(delimiter);
 		
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			String text = m.getText(i, c);
 			
 			List<String> tokens = CollectionUtils.uniquePreserveOrder(splitter.text(text));
@@ -132,7 +132,7 @@ public class DuplicateModule extends CalcModule implements ModernClickListener  
 		}
 
 		DataFrame ret = DataFrame.createDataFrame(rows.size(), 
-				m.getColumnCount());
+				m.getCols());
 
 
 		ret.setColumnNames(m.getColumnNames());
@@ -146,7 +146,7 @@ public class DuplicateModule extends CalcModule implements ModernClickListener  
 		}
 
 		for (int i = 0; i < rows.size(); ++i) {
-			for (int j = 0; j < m.getColumnCount(); ++j) {
+			for (int j = 0; j < m.getCols(); ++j) {
 				if (j == c) {
 					// If we are on the column we selected, use the expanded
 					// value rather than the original

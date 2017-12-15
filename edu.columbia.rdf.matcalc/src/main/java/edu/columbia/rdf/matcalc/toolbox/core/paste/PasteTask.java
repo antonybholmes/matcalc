@@ -212,9 +212,9 @@ public class PasteTask extends SwingWorker<Void, Void> {
 
 					if (keyMap.containsKey(key)) {
 						if (mIndexMode) {
-							line = Stream.stream(tokens)
+							line = Stream.of(tokens)
 									.skip(1)
-									.mapToString()
+									.asString()
 									.tabJoin();
 						}
 

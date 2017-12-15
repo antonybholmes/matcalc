@@ -112,7 +112,7 @@ public class GroupModule extends CalcModule implements ModernClickListener  {
 		Map<String, Set<String>> idMap = 
 				DefaultTreeMap.create(new TreeSetCreator<String>()); //new TreeMap<String, Set<String>>();
 		
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			String id = m.getText(i, columns.get(0));
 			String item = m.getText(i, columns.get(1));
 			

@@ -86,7 +86,7 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
 
 		ColorCycle colorCycle = new ColorCycle();
 
-		for (int i = 0; i < m.getColumnCount(); i += 2) {
+		for (int i = 0; i < m.getCols(); i += 2) {
 			Color color = colorCycle.next();
 			
 			XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)), color);

@@ -92,7 +92,7 @@ public class PowerModule extends CalcModule implements ModernClickListener {
 		dialog.setVisible(true);
 		
 		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			return (DataFrame)MatrixOperations.power(matrix, dialog.getBase());
+			return MatrixOperations.power(matrix, dialog.getBase());
 		} else {
 			return null;
 		}
@@ -106,14 +106,14 @@ public class PowerModule extends CalcModule implements ModernClickListener {
 		dialog.setVisible(true);
 		
 		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			return (DataFrame)MatrixOperations.power(dialog.getBase(), matrix);
+			return MatrixOperations.power(dialog.getBase(), matrix);
 		} else {
 			return null;
 		}
 	}
 	
 	public static DataFrame em(DataFrame matrix) {
-		return (DataFrame)MatrixOperations.em(matrix);
+		return MatrixOperations.em(matrix);
 	}
 
 	@Override

@@ -103,13 +103,13 @@ public class ColumnAnnotationModule extends CalcModule implements ModernClickLis
 		DataFrame ret;
 
 		if (c > minC) {
-			ret = DataFrame.createDataFrame(m.getRowCount(), 
-					m.getColumnCount() - c);
+			ret = DataFrame.createDataFrame(m.getRows(), 
+					m.getCols() - c);
 		} else {
 			// If there are no annotation columns, assume the matrix has
 			// mixed content
-			ret = DataFrame.createDataFrame(m.getRowCount(), 
-					m.getColumnCount());
+			ret = DataFrame.createDataFrame(m.getRows(), 
+					m.getCols());
 		}
 
 		// Copy the other columns
@@ -123,7 +123,7 @@ public class ColumnAnnotationModule extends CalcModule implements ModernClickLis
 		switch (m.getType()) {
 		case NUMBER:
 			for (int i = minC; i < c; ++i) {
-				ret.setNumRowAnnotations(m.getText(-1, i), m.columnAsDouble(i));
+				ret.setNumRowAnnotations(m.getText(-1, i), m.columnToDoubleArray(i));
 			}
 
 			break;

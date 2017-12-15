@@ -146,7 +146,7 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
 		List<Indexed<Integer, Double>> valueIndices = 
 				new ArrayList<Indexed<Integer, Double>>();
 
-		for (int i = 0; i < m.getColumnCount(); ++i) {
+		for (int i = 0; i < m.getCols(); ++i) {
 			valueIndices.add(new Indexed<Integer, Double>(i, m.getValue(r, i)));
 		}
 
@@ -219,7 +219,7 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
 
 		// deal with all the other columns that are not in groups
 
-		for (int i = 0; i < m.getColumnCount(); ++i) {
+		for (int i = 0; i < m.getCols(); ++i) {
 			if (!used.contains(i)) {
 				columns.add(i);
 			}
@@ -237,7 +237,7 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
 	private void output(DataFrame m, 
 			List<Integer> columns) {
 		DataFrame ret = 
-				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount());
+				DataFrame.createDataFrame(m.getRows(), m.getCols());
 
 		DataFrame.copyRowAnnotations(m, ret);
 

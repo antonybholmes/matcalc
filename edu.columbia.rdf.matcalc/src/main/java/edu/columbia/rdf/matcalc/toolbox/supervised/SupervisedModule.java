@@ -15,16 +15,20 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.supervised;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.jebtk.core.Indexed;
 import org.jebtk.core.IndexedInt;
-import org.jebtk.core.Properties;
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.sys.SysUtils;
+import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroup;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeries;
@@ -32,9 +36,9 @@ import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.MathUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrix;
 import org.jebtk.math.matrix.Matrix;
+import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.statistics.FDRType;
 import org.jebtk.math.statistics.Statistics;
@@ -44,6 +48,7 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.Raster32Icon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
+import edu.columbia.rdf.matcalc.History;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.icons.DiffExp32VectorIcon;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
@@ -104,21 +109,11 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 	/**
 	 * Ttest.
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ParseException the parse exception
-	 */
-	private void classification() throws IOException, ParseException {
-		classification(new ClusterProperties());
-	}
-
-	/**
-	 * Ttest.
-	 *
 	 * @param properties the properties
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws ParseException the parse exception
 	 */
-	private void classification(Properties properties) throws IOException, ParseException {
+	private void classification() throws IOException, ParseException {
 		DataFrame m = mParent.getCurrentMatrix();
 
 		if (m == null) {
@@ -159,6 +154,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		double minZ = dialog.getMinZscore();
 		boolean posZ = dialog.getPosZ();
 		boolean negZ = dialog.getNegZ();
+		boolean keepHistory = dialog.getKeepHistory();
+		ComparisonType comparisonType = dialog.getComparisonType();
 
 		int topGenes = dialog.getTopGenes();
 
@@ -176,13 +173,18 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		TestType testType = dialog.getTest();
 
-
+		DataFrame collapsedM = CollapseModule.collapse(m,
+				collapseName,
+				g1,
+				g2,
+				collapseType,
+				mParent);
 
 
 		switch(plotType) {
 		case VOLCANO:
 			VolcanoPlotModule.volcanoPlot(mParent,
-					m, 
+					collapsedM, 
 					alpha,
 					TestType.TTEST_UNEQUAL_VARIANCE,
 					fdrType, 
@@ -193,6 +195,134 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 			break;
 		default:
+			switch (comparisonType) {
+			case ONE_VS_REST:
+				statTestOneVsRest(collapsedM, 
+						alpha,
+						classificationAlpha,
+						minFold,
+						minZ,
+						posZ,
+						negZ,
+						topGenes,
+						testType,
+						fdrType,
+						groups,
+						rowGroups,
+						isLog2,
+						log2Data);
+
+				break;
+			case PAIRWISE:
+				statTestPairwise(collapsedM, 
+						alpha,
+						classificationAlpha,
+						minFold,
+						minZ,
+						posZ,
+						negZ,
+						topGenes,
+						testType,
+						fdrType,
+						groups,
+						rowGroups,
+						isLog2,
+						log2Data);
+
+				break;
+			default:
+				statTest(collapsedM, 
+						alpha,
+						classificationAlpha,
+						minFold,
+						minZ,
+						posZ,
+						negZ,
+						topGenes,
+						testType,
+						fdrType, 
+						g1, 
+						g2,
+						groups,
+						rowGroups,
+						isLog2,
+						log2Data, 
+						plotType,
+						keepHistory);
+
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Test each group against the union of the other groups
+	 * @param m
+	 * @param alpha
+	 * @param classificationAlpha
+	 * @param minFold
+	 * @param minZ
+	 * @param posZ
+	 * @param negZ
+	 * @param topGenes
+	 * @param test
+	 * @param fdrType
+	 * @param g1
+	 * @param g2
+	 * @param allSeries
+	 * @param rowSeries
+	 * @param isLog2Data
+	 * @param log2Data
+	 * @param plotType
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public void statTestOneVsRest(DataFrame m,
+			double alpha,
+			double classificationAlpha,
+			double minFold,
+			double minZ,
+			boolean posZ,
+			boolean negZ,
+			int topGenes,
+			TestType test,
+			FDRType fdrType,
+			XYSeriesModel allSeries,
+			XYSeriesModel rowSeries,
+			boolean isLog2Data,
+			boolean log2Data) {
+
+		System.err.println("aha " + allSeries.getCount());
+
+		for (XYSeries s : allSeries) {
+
+
+			// Make a new group from all the old groups
+
+			// Clone original
+			//XYSeries s1 = XYSeries.createXYSeries(s, Color.RED);
+
+			// Create name from union of names of other groups
+			StringBuilder buffer = new StringBuilder();
+
+			for (XYSeries st : allSeries) {
+				if (!st.equals(s)) {
+					buffer.append(TextUtils.sentenceCase(TextUtils.head(st.getName(), 5)));
+				}
+			}
+
+			XYSeries s2 = XYSeries.createXYSeries(buffer.toString(), Color.BLUE);
+
+			for (XYSeries st : allSeries) {
+				if (!st.equals(s)) {
+					s2.union(st);
+				}
+			}
+
+			SysUtils.err().println(s2.getName(), MatrixGroup.findColumnIndices(m, s2));
+
+			XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
+
 			statTest(m, 
 					alpha,
 					classificationAlpha,
@@ -201,22 +331,66 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 					posZ,
 					negZ,
 					topGenes,
-					collapseType,
-					collapseName,
-					testType,
+					test,
 					fdrType, 
-					g1, 
-					g2,
-					groups,
-					rowGroups,
-					isLog2,
+					s, 
+					s2,
+					XYSeriesModel.create(newGroup),
+					rowSeries,
+					isLog2Data,
 					log2Data, 
-					plotType,
-					properties);
+					PlotType.NONE,
+					false);
+
 		}
+	}
 
+	public void statTestPairwise(DataFrame m,
+			double alpha,
+			double classificationAlpha,
+			double minFold,
+			double minZ,
+			boolean posZ,
+			boolean negZ,
+			int topGenes,
+			TestType test,
+			FDRType fdrType,
+			XYSeriesModel allSeries,
+			XYSeriesModel rowSeries,
+			boolean isLog2Data,
+			boolean log2Data) {
 
+		Set<XYSeries> used = new HashSet<XYSeries>();
+		
+		for (XYSeries s : allSeries) {
 
+			for (XYSeries s2 : allSeries) {
+				if (!s2.equals(s) && !used.contains(s2)) {
+					XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
+
+					statTest(m, 
+							alpha,
+							classificationAlpha,
+							minFold,
+							minZ,
+							posZ,
+							negZ,
+							topGenes,
+							test,
+							fdrType, 
+							s, 
+							s2,
+							XYSeriesModel.create(newGroup),
+							rowSeries,
+							isLog2Data,
+							log2Data, 
+							PlotType.NONE,
+							false);
+				}
+			}
+			
+			used.add(s);
+		}
 	}
 
 	/**
@@ -254,8 +428,6 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 			boolean posZ,
 			boolean negZ,
 			int topGenes,
-			CollapseType collapseType,
-			String rowAnnotation,
 			TestType test,
 			FDRType fdrType,
 			XYSeries g1, 
@@ -265,18 +437,20 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 			boolean isLog2Data,
 			boolean log2Data,
 			PlotType plotType,
-			Properties properties) throws IOException, ParseException {
+			boolean keepHistory) {
 
 		XYSeriesGroup comparisonGroups = new XYSeriesGroup();
 		comparisonGroups.add(g1);
 		comparisonGroups.add(g2);
 
 		//DataFrame colFilteredM = 
-		//		mParent.addToHistory("Extract grouped columns", 
+		//		history.addToHistory("Extract grouped columns", 
 		//				AnnotatableMatrix.copyInnerColumns(m, comparisonGroups));
 
 
 		DataFrame colFilteredM = m;
+
+		History history = mParent.history().keep(keepHistory);
 
 		//
 		// Remove bad gene symbols
@@ -287,7 +461,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		//		"^---$", 
 		//		false);
 
-		//mParent.addToHistory("Filter Bad Gene Symbols", mCleaned);
+		//history.addToHistory("Filter Bad Gene Symbols", mCleaned);
 
 		//
 		// Log the matrix
@@ -296,7 +470,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		DataFrame log2M;
 
 		if (log2Data) {
-			log2M = mParent.addToHistory("log2(1 + data)",
+			log2M = history.addToHistory("log2(1 + data)",
 					MatrixOperations.log2(MatrixOperations.add(colFilteredM, 1)));
 		} else {
 			log2M = colFilteredM;
@@ -322,7 +496,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		//		DataFrame.matchRows(mpvalues, rowAnnotation, BLANK_ROW_REGEX),
 		//		Double.NaN);
 
-		mParent.addToHistory("Add P-values", pValuesM);
+		history.addToHistory("Add P-values", pValuesM);
 
 		//
 		// Fold Changes
@@ -344,7 +518,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		DataFrame foldChangesM = new DataFrame(pValuesM);
 		foldChangesM.setNumRowAnnotations(name, foldChanges);
 
-		mParent.addToHistory(name, foldChangesM);
+		history.addToHistory(name, foldChangesM);
 
 
 		//
@@ -358,7 +532,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		meansM.setNumRowAnnotations(g2.getName() + " mean", 
 				DoubleMatrix.means(foldChangesM, g2));
 
-		mParent.addToHistory("Group Means", meansM);
+		history.addToHistory("Group Means", meansM);
 
 		//
 		// Fold change filter
@@ -385,26 +559,26 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 
 
-		mParent.addToHistory(name, foldFilterM);
+		history.addToHistory(name, foldFilterM);
 
 		//
 		// Collapse rows
 		//
 
-		DataFrame collapsedM = CollapseModule.collapse(foldFilterM,
-				rowAnnotation,
-				g1,
-				g2,
-				collapseType,
-				mParent);
+		//		DataFrame collapsedM = CollapseModule.collapse(foldFilterM,
+		//				rowAnnotation,
+		//				g1,
+		//				g2,
+		//				collapseType,
+		//				mParent);
 
-		double[] fdr = Statistics.fdr(collapsedM.getRowAnnotationValues("P-value"), 
+		double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"), 
 				fdrType);
 
-		DataFrame mfdr = new DataFrame(collapsedM);
+		DataFrame mfdr = new DataFrame(foldFilterM);
 		mfdr.setNumRowAnnotations("FDR", fdr);
 
-		mParent.addToHistory("FDR", mfdr);
+		history.addToHistory("FDR", mfdr);
 
 		//DataFrame mfdr = addFlowItem("False discovery rate", 
 		//		new RowDataFrameView(mcollapsed, 
@@ -419,7 +593,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		DataFrame fdrFilteredM = 
 				DataFrame.copyRows(mfdr, IndexedInt.indices(pValueIndices));
-		mParent.addToHistory("False discovery filter", fdrFilteredM);
+		history.addToHistory("False discovery filter", fdrFilteredM);
 
 		//DataFrame mfdrfiltered = addFlowItem("False discovery filter", 
 		//		new RowFilterMatrixView(mfdr, 
@@ -432,7 +606,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		DataFrame zscoresM = new DataFrame(fdrFilteredM);
 
 		zscoresM.setNumRowAnnotations("Z-score", zscores);
-		mParent.addToHistory("Z-score", zscoresM);
+		history.addToHistory("Z-score", zscoresM);
 
 
 		//DataFrame mzscores = addFlowItem("Add row z-scores", 
@@ -447,7 +621,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		Matrix im = zscoresM.getMatrix();
 
-		for (int i = 0; i < im.getRowCount(); ++i) {
+		for (int i = 0; i < im.getRows(); ++i) {
 			String classification = "not_expressed";
 
 			if (MatrixOperations.sumRow(im, i) > 0) {
@@ -477,7 +651,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
 		classM.setTextRowAnnotations(comparison, classifications);
 
-		mParent.addToHistory("Add row classification", classM);
+		history.addToHistory("Add row classification", classM);
 
 
 		//DataFrame mclassification = addFlowItem("Add row classification", 
@@ -529,7 +703,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		DataFrame mDeltaSorted = 
 				DataFrame.copyRows(classM, indices);
 
-		mParent.addToHistory("Sort by row z-score", mDeltaSorted);
+		history.addToHistory("Sort by row z-score", mDeltaSorted);
 
 		//DataFrame mDeltaSorted = addFlowItem("Sort by row z-score", 
 		//		new RowFilterMatrixView(mclassification, indices));
@@ -537,7 +711,7 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		DataFrame mNormalized = 
 				MatrixOperations.groupZScore(mDeltaSorted, comparisonGroups);
 
-		mParent.addToHistory("Normalize expression within groups", mNormalized);
+		history.addToHistory("Normalize expression within groups", mNormalized);
 
 		//DataFrame mNormalized = addFlowItem("Normalize expression within groups", 
 		//		new GroupZScoreMatrixView(mDeltaSorted, groups));
@@ -553,7 +727,6 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 		//DataFrame mStandardized = 
 		//		addFlowItem("Row normalize", new RowNormalizedMatrixView(mMinMax));
 
-		List<String> history = mParent.getTransformationHistory();
 
 		CountGroups countGroups = new CountGroups()
 				.add(new CountGroup("up", 0, ui.size() - 1))
@@ -566,8 +739,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 					comparisonGroups,
 					rowGroups,
 					countGroups,
-					history, 
-					properties));
+					mParent.getTransformationHistory(), 
+					new ClusterProperties()));
 		}
 
 		// Add a reference at the end so that it is easy for users to find

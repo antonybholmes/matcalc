@@ -92,7 +92,7 @@ public class BarChartHModule extends CalcModule implements ModernClickListener {
 
 		XYSeriesGroup seriesGroup = new XYSeriesGroup();
 
-		for (int i = 0; i < m.getColumnCount(); ++i) {
+		for (int i = 0; i < m.getCols(); ++i) {
 			Color color = null;
 			
 			// See if the column matches a group, and if so use the group's

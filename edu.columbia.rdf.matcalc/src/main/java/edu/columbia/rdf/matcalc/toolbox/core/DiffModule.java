@@ -132,7 +132,7 @@ public class DiffModule extends CalcModule implements ModernClickListener  {
 		// first clone the matrix
 
 		DataFrame ret = 
-				DataFrame.createDataFrame(m.getRowCount(), m.getColumnCount() + 1);
+				DataFrame.createDataFrame(m.getRows(), m.getCols() + 1);
 
 		// Copy before column
 		DataFrame.copyColumns(m, 0, c, ret);
@@ -142,7 +142,7 @@ public class DiffModule extends CalcModule implements ModernClickListener  {
 		
 		ret.setColumnName(c + 1, "Diff Match");
 		
-		for (int i = 0; i < m.getRowCount(); ++i) {
+		for (int i = 0; i < m.getRows(); ++i) {
 			String id = m.getText(i, c).toLowerCase();
 			
 			if (idMap.containsKey(id)) {

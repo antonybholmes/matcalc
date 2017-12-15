@@ -170,7 +170,7 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 
 		// first the list of ids
 
-		for (int i = 0; i < current.getRowCount(); ++i) {
+		for (int i = 0; i < current.getRows(); ++i) {
 			idMap.get(current.getText(i, c)).add(i);
 		}
 
@@ -178,7 +178,7 @@ public class SplitModule extends CalcModule implements ModernClickListener  {
 		List<String> ids = CollectionUtils.sort(idMap.keySet());
 
 
-		List<String> cleanedIds = Stream.stream(ids)
+		List<String> cleanedIds = Stream.of(ids)
 				.map(new Function<String, String> () {
 					@Override
 					public String apply(String item) {

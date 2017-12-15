@@ -21,7 +21,7 @@ import java.util.Collection;
 
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrixParser;
-import org.jebtk.math.matrix.DynamicMatrixParser;
+import org.jebtk.math.matrix.DynamicMixedMatrixParser;
 import org.jebtk.modern.io.GuiFileExtFilter;
 import org.jebtk.modern.io.TsvGuiFileFilter;
 
@@ -75,7 +75,7 @@ public class TsvIOModule extends IOModule  {
 					rowAnnotations, 
 					delimiter).parse(file);
 		} else {
-			return new DynamicMatrixParser(skipLines, 
+			return new DynamicMixedMatrixParser(skipLines, 
 					rowAnnotations, 
 					delimiter)
 					.parse(file); //return DataFrame.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
