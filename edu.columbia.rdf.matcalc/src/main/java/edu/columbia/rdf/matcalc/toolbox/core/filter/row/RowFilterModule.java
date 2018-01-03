@@ -16,14 +16,14 @@
 package edu.columbia.rdf.matcalc.toolbox.core.filter.row;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
+import org.jebtk.core.Range;
+import org.jebtk.core.collections.IterHashMap;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -209,7 +209,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 		// A lookup set so we can quickly see if a row matches what we are
 		// looking for
 		
-		Map<String, String> nameMap = new HashMap<String, String>();
+		IterMap<String, String> nameMap = new IterHashMap<String, String>();
 
 		for (String name : names) {
 			if (caseSensitive) {
@@ -256,7 +256,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 						continue;
 					}
 
-					for (String name : nameMap.keySet()) {
+					for (String name : nameMap) {
 						if (rowName.contains(name)) {
 							rows.add(i);
 							foundNameSet.add(nameMap.get(rowName));
@@ -266,14 +266,15 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 					}
 				}
 			} else {
-				for (int i = 0; i < rowCount; ++i) {
+				//for (int i = 0; i < rowCount; ++i) {
+				for (int i : Range.create(rowCount)) {
 					String rowName = ids.get(i);
 
 					if (rowName == null) {
 						continue;
 					}
 
-					for (String name : nameMap.keySet()) {
+					for (String name : nameMap) {
 						if (!rowName.contains(name)) {
 							rows.add(i);
 						}
@@ -283,7 +284,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 		}
 
 		if (includeMissing) {
-			// Add to the list of missing names, those we did not find.
+			// Add those we did not find to the list of missing names.
 			
 			for (String name : names) {
 				if (!foundNameSet.contains(name)) {

@@ -1,3 +1,6 @@
 /target/
 /recent.files.json
 /bin/
+/.settings/
+/*log*
+/.classpath

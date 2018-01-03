@@ -73,7 +73,8 @@ public class TsvIOModule extends IOModule  {
 			return new DoubleMatrixParser(true, 
 					skipLines, 
 					rowAnnotations, 
-					delimiter).parse(file);
+					delimiter)
+					.parse(file);
 		} else {
 			return new DynamicMixedMatrixParser(skipLines, 
 					rowAnnotations, 
