@@ -24,28 +24,28 @@ import org.jebtk.modern.widget.ModernWidget;
  * The class CollapseCombo.
  */
 public class CollapseCombo extends ModernComboBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new collapse combo.
-	 */
-	public CollapseCombo() {
-		addMenuItem("None");
-		addMenuItem("Max");
-		addMenuItem("Min");
-		addMenuItem("Max Std Dev");
-		addMenuItem("Max Mean");
-		addMenuItem("Max Median");
-		addMenuItem("Max T-statistic");
-		addMenuItem("Max IQR");
-		addMenuItem("Max QuartCoeffDisp");
-		
-		setSelectedIndex(0);
-		
-		UI.setSize(this, ModernWidget.LARGE_SIZE);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new collapse combo.
+   */
+  public CollapseCombo() {
+    addMenuItem("None");
+    addMenuItem("Max");
+    addMenuItem("Min");
+    addMenuItem("Max Std Dev");
+    addMenuItem("Max Mean");
+    addMenuItem("Max Median");
+    addMenuItem("Max T-statistic");
+    addMenuItem("Max IQR");
+    addMenuItem("Max QuartCoeffDisp");
+
+    setSelectedIndex(0);
+
+    UI.setSize(this, ModernWidget.LARGE_SIZE);
+  }
 }

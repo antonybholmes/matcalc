@@ -20,14 +20,14 @@ package edu.columbia.rdf.matcalc;
  * The enum AutoPlotType.
  */
 public enum AutoPlotType {
-	
-	/**
-	 * The none.
-	 */
-	NONE,
-	
-	/**
-	 * The heatmap.
-	 */
-	HEATMAP
+
+  /**
+   * The none.
+   */
+  NONE,
+
+  /**
+   * The heatmap.
+   */
+  HEATMAP
 }

@@ -33,127 +33,125 @@ import edu.columbia.rdf.matcalc.figure.AxisControl;
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 import edu.columbia.rdf.matcalc.figure.PlotControl;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class AxesControlPanel.
  */
 public class AxesControlPanel extends FormatPlotPane {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m figure. */
-	private Figure mFigure;
+  /** The m figure. */
+  private Figure mFigure;
 
-	/** The m parent. */
-	private ModernRibbonWindow mParent;
+  /** The m parent. */
+  private ModernRibbonWindow mParent;
 
-	/**
-	 * Instantiates a new axes control panel.
-	 *
-	 * @param parent the parent
-	 * @param figure the figure
-	 */
-	public AxesControlPanel(ModernRibbonWindow parent, Figure figure) {
-		mParent = parent;
-		mFigure = figure;
+  /**
+   * Instantiates a new axes control panel.
+   *
+   * @param parent
+   *          the parent
+   * @param figure
+   *          the figure
+   */
+  public AxesControlPanel(ModernRibbonWindow parent, Figure figure) {
+    mParent = parent;
+    mFigure = figure;
 
-		refresh();
+    refresh();
 
-		/*
-		figure.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				refresh();
-			}});
-		*/
-	}
+    /*
+     * figure.addChangeListener(new ChangeListener() {
+     * 
+     * @Override public void changed(ChangeEvent e) { refresh(); }});
+     */
+  }
 
-	/**
-	 * Refresh.
-	 */
-	private void refresh() {
-		//
-		// Figures
-		//
+  /**
+   * Refresh.
+   */
+  private void refresh() {
+    //
+    // Figures
+    //
 
-		JComponent c;
+    JComponent c;
 
-		AbstractCollapsePane figuresCollapsePane = new ModernSubCollapsePane();
+    AbstractCollapsePane figuresCollapsePane = new ModernSubCollapsePane();
 
-		for (SubFigure subFigure : mFigure.getSubFigures()) {
-			AbstractCollapsePane axesCollapsePane = new ModernSubCollapsePane();
+    for (SubFigure subFigure : mFigure.getSubFigures()) {
+      AbstractCollapsePane axesCollapsePane = new ModernSubCollapsePane();
 
-			for (Axes axes : subFigure.getAllAxes()) {
+      for (Axes axes : subFigure.getAllAxes()) {
 
-				//TabsModel axisTabsModel = new TabsModel();
+        // TabsModel axisTabsModel = new TabsModel();
 
-				//
-				// Axes
-				//
+        //
+        // Axes
+        //
 
-				AbstractCollapsePane axisCollapsePane = 
-						new ModernSubCollapsePane();
+        AbstractCollapsePane axisCollapsePane = new ModernSubCollapsePane();
 
-				c = new AxesControl(mParent, axes);
-				axisCollapsePane.addTab("Options", c, true);
+        c = new AxesControl(mParent, axes);
+        axisCollapsePane.addTab("Options", c, true);
 
-				c = new AxisControl(mParent, axes.getX1Axis(), true);
-				axisCollapsePane.addTab("X Axis", c, true);
+        c = new AxisControl(mParent, axes.getX1Axis(), true);
+        axisCollapsePane.addTab("X Axis", c, true);
 
-				//c = new AxisControl(mParent, axes.getX2Axis(), true);
-				//axisCollapsePane.addTab("X Axis 2", c);
+        // c = new AxisControl(mParent, axes.getX2Axis(), true);
+        // axisCollapsePane.addTab("X Axis 2", c);
 
-				c = new AxisControl(mParent, axes.getY1Axis(), true);
-				axisCollapsePane.addTab("Y Axis", c, true);
+        c = new AxisControl(mParent, axes.getY1Axis(), true);
+        axisCollapsePane.addTab("Y Axis", c, true);
 
-				//c = new AxisControl(mParent, axes.getY2Axis(), true);
-				//axisCollapsePane.addTab("Y Axis 2", c);
+        // c = new AxisControl(mParent, axes.getY2Axis(), true);
+        // axisCollapsePane.addTab("Y Axis 2", c);
 
+        // TabsModel plotsTabsModel = new TabsModel();
+        AbstractCollapsePane plotsCollapsePane = new ModernSubCollapsePane();
 
-				//TabsModel plotsTabsModel = new TabsModel();
-				AbstractCollapsePane plotsCollapsePane = 
-						new ModernSubCollapsePane();
+        for (Plot plot : axes.getPlots()) {
+          plotsCollapsePane.addTab(plot.getName(), new PlotControl(mParent, plot));
+        }
 
-				for (Plot plot : axes.getPlots()) {
-					plotsCollapsePane.addTab(plot.getName(), 
-									new PlotControl(mParent, plot));
-				}
+        axisCollapsePane.addTab("Plots", plotsCollapsePane, true);
 
-				axisCollapsePane.addTab("Plots", plotsCollapsePane, true);
+        axesCollapsePane.addTab(axes.getName(), axisCollapsePane, true);
+      }
 
-				axesCollapsePane.addTab(axes.getName(), axisCollapsePane, true);
-			}
+      figuresCollapsePane.addTab(subFigure.getName(), axesCollapsePane, true);
+    }
 
-			figuresCollapsePane.addTab(subFigure.getName(), axesCollapsePane, true);
-		}
+    figuresCollapsePane.setExpanded(true);
 
-		figuresCollapsePane.setExpanded(true);
+    // figuresCollapsePane.setBorder(RIGHT_BORDER);
+    ModernScrollPane scrollPane = new ModernScrollPane(figuresCollapsePane);
+    scrollPane.setScrollBarPolicy(ScrollBarPolicy.NEVER, ScrollBarPolicy.AUTO_SHOW);
+    scrollPane.setBorder(BORDER);
+    setBody(scrollPane);
+  }
 
-		//figuresCollapsePane.setBorder(RIGHT_BORDER);
-		ModernScrollPane scrollPane = new ModernScrollPane(figuresCollapsePane);
-		scrollPane.setScrollBarPolicy(ScrollBarPolicy.NEVER, 
-				ScrollBarPolicy.AUTO_SHOW);
-		scrollPane.setBorder(BORDER);
-		setBody(scrollPane); 
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.figure.FormatPlotPane#getCanvas()
+   */
+  @Override
+  public PlotBox getCanvas() {
+    return null;
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.figure.FormatPlotPane#getCanvas()
-	 */
-	@Override
-	public PlotBox getCanvas() {
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.matcalc.figure.FormatPlotPane#update()
-	 */
-	@Override
-	public void update() {
-		// Do nothing
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.figure.FormatPlotPane#update()
+   */
+  @Override
+  public void update() {
+    // Do nothing
+  }
 }

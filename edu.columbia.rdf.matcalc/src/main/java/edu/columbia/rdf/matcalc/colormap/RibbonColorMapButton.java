@@ -32,7 +32,6 @@ import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to select a color for an object etc.
@@ -41,177 +40,169 @@ import org.jebtk.modern.window.ModernWindow;
  *
  */
 public class RibbonColorMapButton extends RibbonLargeDropDownButton implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	private static final IntDim MAP_SIZE = new IntDim(36, 24);
-	
-	/**
-	 * The member popup.
-	 */
-	private ColorMapPopupMenu mPopup;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m color map. */
-	private ColorMap mColorMap;
+  private static final IntDim MAP_SIZE = new IntDim(36, 24);
 
-	/**
-	 * Instantiates a new ribbon color map button.
-	 *
-	 * @param parent the parent
-	 */
-	public RibbonColorMapButton(ModernWindow parent) {
-		this(parent, ColorMapService.getInstance().get("Jet"));
-	}
-	
-	/**
-	 * Instantiates a new color swatch button.
-	 *
-	 * @param parent the parent
-	 * @param colorMap the color map
-	 */
-	public RibbonColorMapButton(ModernWindow parent, ColorMap colorMap) {
-		super("Color Map", 
-				new ColorMapIcon(colorMap), 
-				new ColorMapPopupMenu(parent));
+  /**
+   * The member popup.
+   */
+  private ColorMapPopupMenu mPopup;
 
-		mPopup = (ColorMapPopupMenu)mMenu;
-		
-		mColorMap = colorMap;
-		
-		mMenu.addClickListener(this);
-	}
-	
-	@Override
-	public void setCompactSize() {
-		UI.setSize(this, 60, Ribbon.COMPACT_BUTTON_HEIGHT);
-	}
+  /** The m color map. */
+  private ColorMap mColorMap;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.button.ModernDropDownButton#drawBackground(java.awt.Graphics2D)
-	 */
-	/*
-	@Override
-	public void drawBackground(Graphics2D g2) {
-		if(mHighlight || mPopupShown) {
-			paintHighlightedOutlined(g2, getRect());
-		} else if(hasFocus()) {
-			paintOutlinedFocused(g2, getRect());
-		} else {
-			paintOutlined(g2, getRect());
-		}
-	}
-	*/
+  /**
+   * Instantiates a new ribbon color map button.
+   *
+   * @param parent
+   *          the parent
+   */
+  public RibbonColorMapButton(ModernWindow parent) {
+    this(parent, ColorMapService.getInstance().get("Jet"));
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.button.ModernDropDownButton#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawForegroundAAText(Graphics2D g2) {
-		int x = PADDING;
+  /**
+   * Instantiates a new color swatch button.
+   *
+   * @param parent
+   *          the parent
+   * @param colorMap
+   *          the color map
+   */
+  public RibbonColorMapButton(ModernWindow parent, ColorMap colorMap) {
+    super("Color Map", new ColorMapIcon(colorMap), new ColorMapPopupMenu(parent));
 
-		int y = (getHeight() - MAP_SIZE.getH()) / 2;
+    mPopup = (ColorMapPopupMenu) mMenu;
 
-		LinearGradientPaint paint = 
-				mColorMap.getAnchorColors().toGradientPaint(new Point2D.Float(x, 0), new Point2D.Float(x + MAP_SIZE.getW(), 0));
+    mColorMap = colorMap;
 
-		g2.setPaint(paint);
-		g2.fillRect(x, y, MAP_SIZE.getW(), MAP_SIZE.getH());
-		
-		/*
-		Graphics2D g2Temp = ImageUtils.createAAStrokeGraphics(g2);
-		
-		try {
-			g2Temp.setPaint(paint);
-			g2Temp.fillRect(x, y, MAP_SIZE.getW(), MAP_SIZE.getH());
-			//g2Temp.fillRect(x, y, w, MAP_SIZE);
-		
-			//g2Temp.setColor(LIGHT_LINE_COLOR);
-			//g2Temp.drawRect(x, y, MAP_SIZE.getW(), MAP_SIZE.getH());
-			//g2Temp.drawRect(x, y, w, MAP_SIZE);
-		} finally {
-			g2Temp.dispose();
-		}
-		*/
-		
-		/*
-		Graphics2D g2Temp = ImageUtils.createAAGraphics(g2);
-		
-		try {
-			g2Temp.setPaint(paint);
-		
-			g2Temp.fillRoundRect(x, 
-					y, 
-					w, 
-					16, 
-					ModernRoundedWidgetRenderer.ROUNDING, 
-					ModernRoundedWidgetRenderer.ROUNDING);
-		} finally {
-			g2Temp.dispose();
-		}
-		*/
-		
-		/*
-		double c = 0;
-		double inc = (mColorMap.getColorCount() - 1) / (double)w;
-		
-		for (int i = 0; i < w; ++i) {
-			g2.setColor(mColorMap.getColorByIndex((int)c));
-			
-			g2.drawLine(x, y, x, y + 16);
-			
-			++x;
-			
-			c += inc;
-		}
-		*/
-		
-		//g2.setColor(LINE_COLOR);
-		//g2.drawRect(PADDING, y, w, 16);
-		
-		//g2.setColor(ThemeService.getInstance().colors().getHighlight(4));
-		//g2.drawRect(x, y, 32, Resources.ICON_SIZE_16);
+    mMenu.addClickListener(this);
+  }
 
-		UIService.getInstance().loadIcon(TriangleDownVectorIcon.class, 16)
-			.drawIcon(g2, getWidth() - 16, (getHeight() - 16) / 2, 16);
-	}
+  @Override
+  public void setCompactSize() {
+    UI.setSize(this, 60, Ribbon.COMPACT_BUTTON_HEIGHT);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mPressed = false;
-		mHighlight = false;
-		
-		if (mPopup.getSelectedColorMap() != null) {
-			mColorMap = mPopup.getSelectedColorMap();
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.button.ModernDropDownButton#drawBackground(java.awt.
+   * Graphics2D)
+   */
+  /*
+   * @Override public void drawBackground(Graphics2D g2) { if(mHighlight ||
+   * mPopupShown) { paintHighlightedOutlined(g2, getRect()); } else if(hasFocus())
+   * { paintOutlinedFocused(g2, getRect()); } else { paintOutlined(g2, getRect());
+   * } }
+   */
 
-		repaint();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.button.ModernDropDownButton#drawForegroundAA(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawForegroundAAText(Graphics2D g2) {
+    int x = PADDING;
 
-		fireClicked();
-	}
+    int y = (getHeight() - MAP_SIZE.getH()) / 2;
 
-	/**
-	 * Gets the selected color.
-	 *
-	 * @return the selected color
-	 */
-	public ColorMap getSelectedColorMap() {
-		return mColorMap;
-	}
-	
-	/**
-	 * Sets the selected color map.
-	 *
-	 * @param colorMap the new selected color map
-	 */
-	public void setSelectedColorMap(ColorMap colorMap) {
-		mColorMap = colorMap;
-		
-		repaint();
-	}
+    LinearGradientPaint paint = mColorMap.getAnchorColors().toGradientPaint(new Point2D.Float(x, 0),
+        new Point2D.Float(x + MAP_SIZE.getW(), 0));
+
+    g2.setPaint(paint);
+    g2.fillRect(x, y, MAP_SIZE.getW(), MAP_SIZE.getH());
+
+    /*
+     * Graphics2D g2Temp = ImageUtils.createAAStrokeGraphics(g2);
+     * 
+     * try { g2Temp.setPaint(paint); g2Temp.fillRect(x, y, MAP_SIZE.getW(),
+     * MAP_SIZE.getH()); //g2Temp.fillRect(x, y, w, MAP_SIZE);
+     * 
+     * //g2Temp.setColor(LIGHT_LINE_COLOR); //g2Temp.drawRect(x, y, MAP_SIZE.getW(),
+     * MAP_SIZE.getH()); //g2Temp.drawRect(x, y, w, MAP_SIZE); } finally {
+     * g2Temp.dispose(); }
+     */
+
+    /*
+     * Graphics2D g2Temp = ImageUtils.createAAGraphics(g2);
+     * 
+     * try { g2Temp.setPaint(paint);
+     * 
+     * g2Temp.fillRoundRect(x, y, w, 16, ModernRoundedWidgetRenderer.ROUNDING,
+     * ModernRoundedWidgetRenderer.ROUNDING); } finally { g2Temp.dispose(); }
+     */
+
+    /*
+     * double c = 0; double inc = (mColorMap.getColorCount() - 1) / (double)w;
+     * 
+     * for (int i = 0; i < w; ++i) { g2.setColor(mColorMap.getColorByIndex((int)c));
+     * 
+     * g2.drawLine(x, y, x, y + 16);
+     * 
+     * ++x;
+     * 
+     * c += inc; }
+     */
+
+    // g2.setColor(LINE_COLOR);
+    // g2.drawRect(PADDING, y, w, 16);
+
+    // g2.setColor(ThemeService.getInstance().colors().getHighlight(4));
+    // g2.drawRect(x, y, 32, Resources.ICON_SIZE_16);
+
+    UIService.getInstance().loadIcon(TriangleDownVectorIcon.class, 16).drawIcon(g2, getWidth() - 16,
+        (getHeight() - 16) / 2, 16);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mPressed = false;
+    mHighlight = false;
+
+    if (mPopup.getSelectedColorMap() != null) {
+      mColorMap = mPopup.getSelectedColorMap();
+    }
+
+    repaint();
+
+    fireClicked();
+  }
+
+  /**
+   * Gets the selected color.
+   *
+   * @return the selected color
+   */
+  public ColorMap getSelectedColorMap() {
+    return mColorMap;
+  }
+
+  /**
+   * Sets the selected color map.
+   *
+   * @param colorMap
+   *          the new selected color map
+   */
+  public void setSelectedColorMap(ColorMap colorMap) {
+    mColorMap = colorMap;
+
+    repaint();
+  }
 }

@@ -28,78 +28,83 @@ import org.jebtk.math.matrix.DataFrame;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class RowGroupTreePanel.
  */
 public class RowGroupTreePanel extends ColumnGroupTreePanel {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new row group tree panel.
-	 *
-	 * @param parent the parent
-	 */
-	public RowGroupTreePanel(MainMatCalcWindow parent) {
-		super(parent);
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.ColumnGroupTreePanel#loadGroups(java.io.Path)
-	 */
-	@Override
-	public void loadGroups(Path file) throws IOException {
-		setGroups(XYSeriesGroup.createRowGroupsByName(file, mMatrix));
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.groups.ColumnGroupTreePanel#getSelectedNames()
-	 */
-	@Override
-	public List<String> getSelectedNames() {
-		// See if there are some columns selected
-		
-		List<Integer> columns = mParent.getSelectedRows();
-		
-		List<String> names = DataFrame.rowNames(mMatrix, columns);
-		
-		return names;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.ColumnGroupTreePanel#createTree()
-	 */
-	@Override
-	protected void createTree(Collection<XYSeries> groups, boolean clear) {
-		
-		TreeRootNode<XYSeries> root;
+  /**
+   * Instantiates a new row group tree panel.
+   *
+   * @param parent
+   *          the parent
+   */
+  public RowGroupTreePanel(MainMatCalcWindow parent) {
+    super(parent);
+  }
 
-		if (clear) {
-			root = new TreeRootNode<XYSeries>();
-			mTree.setRoot(root);
-		} else {
-			root = mTree.getRoot();
-		}
-		
-		for (XYSeries group : groups) {
-			TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(), group);
-			
-			for (int i : XYSeries.findRowIndices(mMatrix, group)) {
-				TreeNode<XYSeries> childNode = 
-						new TreeNode<XYSeries>(mMatrix.getRowName(i));
-				
-				groupNode.addChild(childNode);
-			}
-			
-			root.addChild(groupNode);
-		}
-		
-		mTree.setRoot(root);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.apps.matcalc.ColumnGroupTreePanel#loadGroups(java.io.Path)
+   */
+  @Override
+  public void loadGroups(Path file) throws IOException {
+    setGroups(XYSeriesGroup.createRowGroupsByName(file, mMatrix));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.groups.ColumnGroupTreePanel#getSelectedNames()
+   */
+  @Override
+  public List<String> getSelectedNames() {
+    // See if there are some columns selected
+
+    List<Integer> columns = mParent.getSelectedRows();
+
+    List<String> names = DataFrame.rowNames(mMatrix, columns);
+
+    return names;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.ColumnGroupTreePanel#createTree()
+   */
+  @Override
+  protected void createTree(Collection<XYSeries> groups, boolean clear) {
+
+    TreeRootNode<XYSeries> root;
+
+    if (clear) {
+      root = new TreeRootNode<XYSeries>();
+      mTree.setRoot(root);
+    } else {
+      root = mTree.getRoot();
+    }
+
+    for (XYSeries group : groups) {
+      TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(), group);
+
+      for (int i : XYSeries.findRowIndices(mMatrix, group)) {
+        TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(mMatrix.getRowName(i));
+
+        groupNode.addChild(childNode);
+      }
+
+      root.addChild(groupNode);
+    }
+
+    mTree.setRoot(root);
+  }
 }

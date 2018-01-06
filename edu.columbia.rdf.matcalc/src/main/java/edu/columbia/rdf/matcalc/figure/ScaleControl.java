@@ -40,188 +40,191 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
  * The class IntensityControl.
  */
 public class ScaleControl extends HBox implements ChangeListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member slider.
-	 */
-	private ModernCompactSpinner mSlider = null;
-	
-	/**
-	 * The member spinner.
-	 */
-	//private ModernCompactSpinner mSpinner = 
-	//		new ModernCompactSpinner(1, 10, 3);
-	
-	/**
-	 * The member listeners.
-	 */
-	private ModernClickListeners mListeners = new ModernClickListeners();
 
-	/** The m scale model. */
-	private ScaleModel mScaleModel;
-	
-	/** The m scale label. */
-	private ModernLabel mScaleLabel = new ModernNumericalLabel("0", 30);
-	
-	/**
-	 * The class ChangeEvents.
-	 */
-	private class ChangeEvents implements ChangeListener {
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		/* (non-Javadoc)
-		 * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			set();
-		}
-		
-	}
-	
-	/**
-	 * The class KeyEvents.
-	 */
-	private class KeyEvents extends KeyAdapter {
+  /**
+   * The member slider.
+   */
+  private ModernCompactSpinner mSlider = null;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyAdapter#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				set();
-			}
-		}
-	}
+  /**
+   * The member spinner.
+   */
+  // private ModernCompactSpinner mSpinner =
+  // new ModernCompactSpinner(1, 10, 3);
 
-	
-	/**
-	 * Instantiates a new intensity control.
-	 *
-	 * @param intensity the intensity
-	 */
-	public ScaleControl(double intensity) {
-		init();
-		
-		mSlider.setValue(intensity);
-	}
-	
-	/**
-	 * Instantiates a new scale control.
-	 *
-	 * @param intensityModel the intensity model
-	 */
-	public ScaleControl(ScaleModel intensityModel) {
-		mScaleModel = intensityModel;
-		
-		init();
-		
-		intensityModel.addChangeListener(this);
-		
-		mSlider.setValue(intensityModel.get());
-	}
-	
-	/**
-	 * Inits the.
-	 */
-	private void init() {
-		mSlider = new ScaleSpinner(3); //new ModernOrbSlider(3, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+  /**
+   * The member listeners.
+   */
+  private ModernClickListeners mListeners = new ModernClickListeners();
 
-		//Ui.setSize(mSlider, 80, ModernWidget.WIDGET_HEIGHT);
-		
-		add(new ModernAutoSizeLabel("Color scale"));
-		add(Box.createHorizontalGlue());
-		add(mSlider);
-		//add(Ui.createHGap(10));
-		//add(mScaleLabel);
-		//add(Ui.createHGap(5));
-		
-		//add(ModernPanel.createVGap());
-		//box = new HBoxPanel();
-		//box.add(new ModernLabel("Min"));
-		//box.add(Box.createHorizontalGlue());
-		//box.add(new ModernTextPanel(mMinField, ModernWidget.SMALL_SIZE));
-		//add(box);
-		
-		//add(ModernPanel.createVGap());
-		//box = new HBoxPanel();
-		//box.add(new ModernLabel("Range"));
-		//box.add(Box.createHorizontalGlue());
-		//box.add(new ModernTextBorderPanel(mMaxField, ModernWidget.SMALL_SIZE));
-		//add(box);
-		setAlignmentY(TOP_ALIGNMENT);
-		
-		UI.setSize(this, ModernWidget.MAX_SIZE);
-		
-		//mSpinner.addClickListener(new ClickEvents());
-		mSlider.addChangeListener(new ChangeEvents());
-	}
+  /** The m scale model. */
+  private ScaleModel mScaleModel;
 
-	/**
-	 * Update.
-	 */
-	private void set() {
-		
-		//mSlider.updateValue(mSpinner.getIntValue());
-		
-		mScaleModel.set(mSlider.getValue());
-		
-		mScaleLabel.setText(mSlider.getValue());
-		
-		mListeners.fireClicked(new ModernClickEvent(this));
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mListeners.addClickListener(l);
-	}
+  /** The m scale label. */
+  private ModernLabel mScaleLabel = new ModernNumericalLabel("0", 30);
 
-	/**
-	 * Returns the scaling factor of the intensity.
-	 *
-	 * @return the value
-	 */
-	public double getValue() {
-		return mSlider.getValue();
-		
-		/*
-		double v = mSpinner.getValue();
-		
-		if (v > 0) {
-			++v;
-		} else if (v < 0) {
-			v = 1.0 / (1.0 - v);
-		} else {
-			v = 1.0;
-		}
-		
-		return v;
-		*/
-	}
+  /**
+   * The class ChangeEvents.
+   */
+  private class ChangeEvents implements ChangeListener {
 
-	//public double getMin() {
-	//	return mMinField.getAsDouble();
-	//}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      set();
+    }
 
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
-	 */
-	@Override
-	public void changed(ChangeEvent e) {
-		if (mScaleModel.get() != mSlider.getValue()) {
-			System.err.println("scale " + mScaleModel.get());
-			
-			mSlider.setValue(mScaleModel.get());
-		}
-	}
+  /**
+   * The class KeyEvents.
+   */
+  private class KeyEvents extends KeyAdapter {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyAdapter#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
+      if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        set();
+      }
+    }
+  }
+
+  /**
+   * Instantiates a new intensity control.
+   *
+   * @param intensity
+   *          the intensity
+   */
+  public ScaleControl(double intensity) {
+    init();
+
+    mSlider.setValue(intensity);
+  }
+
+  /**
+   * Instantiates a new scale control.
+   *
+   * @param intensityModel
+   *          the intensity model
+   */
+  public ScaleControl(ScaleModel intensityModel) {
+    mScaleModel = intensityModel;
+
+    init();
+
+    intensityModel.addChangeListener(this);
+
+    mSlider.setValue(intensityModel.get());
+  }
+
+  /**
+   * Inits the.
+   */
+  private void init() {
+    mSlider = new ScaleSpinner(3); // new ModernOrbSlider(3, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+    // Ui.setSize(mSlider, 80, ModernWidget.WIDGET_HEIGHT);
+
+    add(new ModernAutoSizeLabel("Color scale"));
+    add(Box.createHorizontalGlue());
+    add(mSlider);
+    // add(Ui.createHGap(10));
+    // add(mScaleLabel);
+    // add(Ui.createHGap(5));
+
+    // add(ModernPanel.createVGap());
+    // box = new HBoxPanel();
+    // box.add(new ModernLabel("Min"));
+    // box.add(Box.createHorizontalGlue());
+    // box.add(new ModernTextPanel(mMinField, ModernWidget.SMALL_SIZE));
+    // add(box);
+
+    // add(ModernPanel.createVGap());
+    // box = new HBoxPanel();
+    // box.add(new ModernLabel("Range"));
+    // box.add(Box.createHorizontalGlue());
+    // box.add(new ModernTextBorderPanel(mMaxField, ModernWidget.SMALL_SIZE));
+    // add(box);
+    setAlignmentY(TOP_ALIGNMENT);
+
+    UI.setSize(this, ModernWidget.MAX_SIZE);
+
+    // mSpinner.addClickListener(new ClickEvents());
+    mSlider.addChangeListener(new ChangeEvents());
+  }
+
+  /**
+   * Update.
+   */
+  private void set() {
+
+    // mSlider.updateValue(mSpinner.getIntValue());
+
+    mScaleModel.set(mSlider.getValue());
+
+    mScaleLabel.setText(mSlider.getValue());
+
+    mListeners.fireClicked(new ModernClickEvent(this));
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mListeners.addClickListener(l);
+  }
+
+  /**
+   * Returns the scaling factor of the intensity.
+   *
+   * @return the value
+   */
+  public double getValue() {
+    return mSlider.getValue();
+
+    /*
+     * double v = mSpinner.getValue();
+     * 
+     * if (v > 0) { ++v; } else if (v < 0) { v = 1.0 / (1.0 - v); } else { v = 1.0;
+     * }
+     * 
+     * return v;
+     */
+  }
+
+  // public double getMin() {
+  // return mMinField.getAsDouble();
+  // }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+   */
+  @Override
+  public void changed(ChangeEvent e) {
+    if (mScaleModel.get() != mSlider.getValue()) {
+      System.err.println("scale " + mScaleModel.get());
+
+      mSlider.setValue(mScaleModel.get());
+    }
+  }
 }

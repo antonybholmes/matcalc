@@ -37,62 +37,55 @@ import org.jebtk.modern.menu.ModernPopupMenu;
  */
 public class Graph2dStyleMenu extends ModernPopupMenu {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The constant MENU_SIZE.
-	 */
-	private static final Dimension MENU_SIZE = 
-			new Dimension(200, 40);
-	
-	/**
-	 * The class PeakStyleMenuItem.
-	 */
-	private class PeakStyleMenuItem extends ModernIconMenuItem {
+  /**
+   * The constant MENU_SIZE.
+   */
+  private static final Dimension MENU_SIZE = new Dimension(200, 40);
 
-		/**
-		 * The constant serialVersionUID.
-		 */
-		private static final long serialVersionUID = 1L;
+  /**
+   * The class PeakStyleMenuItem.
+   */
+  private class PeakStyleMenuItem extends ModernIconMenuItem {
 
-		/**
-		 * Instantiates a new peak style menu item.
-		 *
-		 * @param text the text
-		 * @param icon the icon
-		 */
-		public PeakStyleMenuItem(String text, ModernIcon icon) {
-			super(text, icon);
-			
-			UI.setSize(this, MENU_SIZE);
-		}
-		
-	}
-	
-	/**
-	 * Instantiates a new graph2d style menu.
-	 */
-	public Graph2dStyleMenu() {
-		addMenuItem(new PeakStyleMenuItem("Joined", 
-				new Raster32Icon(new JoinedStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Joined Smooth", 
-				new Raster32Icon(new JoinedSmoothStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Filled", 
-				new Raster32Icon(new JoinedFilledTransStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Filled Smooth", 
-				new Raster32Icon(new JoinedSmoothFilledStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Lines", 
-				new Raster32Icon(new LinesStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Bars", 
-				new Raster32Icon(new BarsStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Scatter", 
-				new Raster32Icon(new ScatterStyleIcon())));
-		
-		// TODO: replace icon
-		addMenuItem(new PeakStyleMenuItem("Heat Map", 
-				new Raster32Icon(new HeatMap32VectorIcon())));
-	}
+    /**
+     * The constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Instantiates a new peak style menu item.
+     *
+     * @param text
+     *          the text
+     * @param icon
+     *          the icon
+     */
+    public PeakStyleMenuItem(String text, ModernIcon icon) {
+      super(text, icon);
+
+      UI.setSize(this, MENU_SIZE);
+    }
+
+  }
+
+  /**
+   * Instantiates a new graph2d style menu.
+   */
+  public Graph2dStyleMenu() {
+    addMenuItem(new PeakStyleMenuItem("Joined", new Raster32Icon(new JoinedStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Joined Smooth", new Raster32Icon(new JoinedSmoothStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Filled", new Raster32Icon(new JoinedFilledTransStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Filled Smooth", new Raster32Icon(new JoinedSmoothFilledStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Lines", new Raster32Icon(new LinesStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Bars", new Raster32Icon(new BarsStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Scatter", new Raster32Icon(new ScatterStyleIcon())));
+
+    // TODO: replace icon
+    addMenuItem(new PeakStyleMenuItem("Heat Map", new Raster32Icon(new HeatMap32VectorIcon())));
+  }
 }

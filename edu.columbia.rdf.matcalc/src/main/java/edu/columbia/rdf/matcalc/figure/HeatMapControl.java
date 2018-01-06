@@ -34,134 +34,133 @@ import org.jebtk.modern.window.ModernWindow;
  * The class HeatMapControl.
  */
 public class HeatMapControl extends Box {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check show.
-	 */
-	private CheckBox mCheckShow = new ModernCheckBox("Show", true);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member grid element.
-	 */
-	private ColoredPlotControl mGridElement;
+  /**
+   * The member check show.
+   */
+  private CheckBox mCheckShow = new ModernCheckBox("Show", true);
 
-	/**
-	 * The member border element.
-	 */
-	private ColoredPlotControl mBorderElement;
+  /**
+   * The member grid element.
+   */
+  private ColoredPlotControl mGridElement;
 
-	/**
-	 * The member aspect ratio element.
-	 */
-	private AspectRatioControl mAspectRatioElement;
+  /**
+   * The member border element.
+   */
+  private ColoredPlotControl mBorderElement;
 
-	
-	/**
-	 * Instantiates a new heat map control.
-	 *
-	 * @param parent the parent
-	 * @param show the show
-	 */
-	public HeatMapControl(ModernWindow parent, boolean show) {
-		super(BoxLayout.PAGE_AXIS);
-		
-		mCheckShow.setSelected(show);
-		
-		add(mCheckShow);
-		
-		add(ModernPanel.createVGap());
-		
-		mGridElement = new ColoredPlotControl(parent, 
-				"Grid",
-				Color.BLACK);
-		add(mGridElement);
-		
-		add(ModernPanel.createVGap());
-		
-		mBorderElement = new ColoredPlotControl(parent, 
-				"Border",
-				Color.BLACK);
-		add(mBorderElement);
+  /**
+   * The member aspect ratio element.
+   */
+  private AspectRatioControl mAspectRatioElement;
 
-		add(ModernPanel.createVGap());
-		
-		mAspectRatioElement = new AspectRatioControl();
-		add(mAspectRatioElement);
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mCheckShow.addClickListener(l);
-		mBorderElement.addClickListener(l);
-		mGridElement.addClickListener(l);
-	}
-	
-	/**
-	 * Adds the change listener.
-	 *
-	 * @param l the l
-	 */
-	public void addChangeListener(ChangeListener l) {
-		mAspectRatioElement.addChangeListener(l);
-	}
+  /**
+   * Instantiates a new heat map control.
+   *
+   * @param parent
+   *          the parent
+   * @param show
+   *          the show
+   */
+  public HeatMapControl(ModernWindow parent, boolean show) {
+    super(BoxLayout.PAGE_AXIS);
 
-	/**
-	 * Show heat map.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean showHeatMap() {
-		return mCheckShow.isSelected();
-	}
+    mCheckShow.setSelected(show);
 
-	/**
-	 * Gets the grid color.
-	 *
-	 * @return the grid color
-	 */
-	public Color getGridColor() {
-		return mGridElement.getSelectedColor();
-	}
+    add(mCheckShow);
 
-	/**
-	 * Gets the border color.
-	 *
-	 * @return the border color
-	 */
-	public Color getBorderColor() {
-		return mBorderElement.getSelectedColor();
-	}
-	
-	/**
-	 * Gets the properties.
-	 *
-	 * @return the properties
-	 */
-	public HeatMapSettings getProperties() {
-		HeatMapSettings properties = new HeatMapSettings();
-		properties.show = showHeatMap();
-		properties.aspectRatio = getAspectRatio();
-		properties.gridColor = getGridColor();
-		properties.borderColor = getBorderColor();
-		
-		return properties;
-	}
+    add(ModernPanel.createVGap());
 
-	/**
-	 * Gets the aspect ratio.
-	 *
-	 * @return the aspect ratio
-	 */
-	public AspectRatio getAspectRatio() {
-		return mAspectRatioElement.getAspectRatio();
-	}
+    mGridElement = new ColoredPlotControl(parent, "Grid", Color.BLACK);
+    add(mGridElement);
+
+    add(ModernPanel.createVGap());
+
+    mBorderElement = new ColoredPlotControl(parent, "Border", Color.BLACK);
+    add(mBorderElement);
+
+    add(ModernPanel.createVGap());
+
+    mAspectRatioElement = new AspectRatioControl();
+    add(mAspectRatioElement);
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mCheckShow.addClickListener(l);
+    mBorderElement.addClickListener(l);
+    mGridElement.addClickListener(l);
+  }
+
+  /**
+   * Adds the change listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addChangeListener(ChangeListener l) {
+    mAspectRatioElement.addChangeListener(l);
+  }
+
+  /**
+   * Show heat map.
+   *
+   * @return true, if successful
+   */
+  public boolean showHeatMap() {
+    return mCheckShow.isSelected();
+  }
+
+  /**
+   * Gets the grid color.
+   *
+   * @return the grid color
+   */
+  public Color getGridColor() {
+    return mGridElement.getSelectedColor();
+  }
+
+  /**
+   * Gets the border color.
+   *
+   * @return the border color
+   */
+  public Color getBorderColor() {
+    return mBorderElement.getSelectedColor();
+  }
+
+  /**
+   * Gets the properties.
+   *
+   * @return the properties
+   */
+  public HeatMapSettings getProperties() {
+    HeatMapSettings properties = new HeatMapSettings();
+    properties.show = showHeatMap();
+    properties.aspectRatio = getAspectRatio();
+    properties.gridColor = getGridColor();
+    properties.borderColor = getBorderColor();
+
+    return properties;
+  }
+
+  /**
+   * Gets the aspect ratio.
+   *
+   * @return the aspect ratio
+   */
+  public AspectRatio getAspectRatio() {
+    return mAspectRatioElement.getAspectRatio();
+  }
 }

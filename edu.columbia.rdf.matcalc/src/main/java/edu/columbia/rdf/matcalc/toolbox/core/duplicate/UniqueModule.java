@@ -35,151 +35,156 @@ import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Collapse a file based on a repeated column. The selected column will
- * be reduced to a list of unique values whilst all other columns will be
- * turned into semi-colon separated lists of values.
+ * Collapse a file based on a repeated column. The selected column will be
+ * reduced to a list of unique values whilst all other columns will be turned
+ * into semi-colon separated lists of values.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class UniqueModule extends CalcModule implements ModernClickListener  {
+public class UniqueModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mCollapseButton = 
-			new RibbonLargeButton("Unique", UIService.getInstance().loadIcon("collapse", 24));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mCollapseButton = new RibbonLargeButton("Unique",
+      UIService.getInstance().loadIcon("collapse", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Unique";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Unique";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mCollapseButton.setToolTip(new ModernToolTip("Unique", 
-				"Collapse rows on a column."), mWindow.getRibbon().getToolTipModel());
+    mCollapseButton.setToolTip(new ModernToolTip("Unique", "Collapse rows on a column."),
+        mWindow.getRibbon().getToolTipModel());
 
-		window.getRibbon().getToolbar("Transform").getSection("Duplicate").add(mCollapseButton);
+    window.getRibbon().getToolbar("Transform").getSection("Duplicate").add(mCollapseButton);
 
-		mCollapseButton.addClickListener(this);
-	}
+    mCollapseButton.addClickListener(this);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mCollapseButton)) {
-			collapse();
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mCollapseButton)) {
+      collapse();
+    }
+  }
 
-	/**
-	 * Match.
-	 */
-	private void collapse() {
-		List<Integer> columns = mWindow.getSelectedColumns();
+  /**
+   * Match.
+   */
+  private void collapse() {
+    List<Integer> columns = mWindow.getSelectedColumns();
 
-		if (columns == null || columns.size() == 0) {
-			ModernMessageDialog.createDialog(mWindow, 
-					"You must select a column of to match on.", 
-					MessageDialogType.WARNING);
-		}
+    if (columns == null || columns.size() == 0) {
+      ModernMessageDialog.createDialog(mWindow, "You must select a column of to match on.", MessageDialogType.WARNING);
+    }
 
-		DataFrame m = mWindow.getCurrentMatrix();
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		int c = columns.get(0);
+    int c = columns.get(0);
 
-		Map<String, List<Integer>> rows = new HashMap<String, List<Integer>>();
-		List<String> ids = new UniqueArrayList<String>();
+    Map<String, List<Integer>> rows = new HashMap<String, List<Integer>>();
+    List<String> ids = new UniqueArrayList<String>();
 
-		for (int i = 0; i < m.getRows(); ++i) {
-			String id = m.getText(i, c);
-			
-			ids.add(id);
-			
-			if (!rows.containsKey(id)) {
-				rows.put(id, new ArrayList<Integer>());
-			}
-			
-			rows.get(id).add(i);
-		}
+    for (int i = 0; i < m.getRows(); ++i) {
+      String id = m.getText(i, c);
 
-		DataFrame ret = DataFrame.createDataFrame(ids.size(), m.getCols());
+      ids.add(id);
 
-		ret.setColumnNames(m.getColumnNames());
+      if (!rows.containsKey(id)) {
+        rows.put(id, new ArrayList<Integer>());
+      }
 
-		// first copy the annotations
+      rows.get(id).add(i);
+    }
 
-		for (String name : m.getRowAnnotationNames()) {
-			for (int i = 0; i < ids.size(); ++i) {
-				List<Integer> indices = rows.get(ids.get(i));
-				
-				List<String> items = new UniqueArrayList<String>(indices.size());
-				
-				for (int k : indices) {
-					items.add(m.getRowAnnotationText(name, k));
-				}
-				
-				String text = TextUtils.scJoin(items);
-				
-				ret.setRowAnnotation(name, i, text);
-			}
-		}
-		
-		int max = 0;
-		
-		for (int row = 0; row < ids.size(); ++row) {
-			List<Integer> indices = rows.get(ids.get(row));
-			
-			for (int column = 0; column < m.getCols(); ++column) {
-				//StringBuilder buffer = new StringBuilder(m.getText(indices.get(0), column));
-				
-				List<String> items = new UniqueArrayList<String>(indices.size());
-				
-				for (int k : indices) {
-					items.add(m.getText(k, column));
-				}
-				
-				String text = TextUtils.scJoin(items);
-				
-				System.err.println(row + " " + column + " " + text);
-				
-				ret.set(row, column, text);
-				
-				max = Math.max(max, text.length());	
-			}
-		}
-		
-		// Set the collapse column values to their unique values
-		
-	
-		for (int row = 0; row < ids.size(); ++row) {
-			//System.err.println("c " + row + " " + c + " " + ids.get(row));
-			
-			ret.set(row, c, ids.get(row));
-		}
-		
-		//System.err.println("size " + ret.getColumnCount() + " " + ret.getRowCount());
+    DataFrame ret = DataFrame.createDataFrame(ids.size(), m.getCols());
 
-		//mWindow.addToHistory("Duplicate rows", m);
-		mWindow.addToHistory("Duplicate rows", ret);
-	}
+    ret.setColumnNames(m.getColumnNames());
+
+    // first copy the annotations
+
+    for (String name : m.getRowAnnotationNames()) {
+      for (int i = 0; i < ids.size(); ++i) {
+        List<Integer> indices = rows.get(ids.get(i));
+
+        List<String> items = new UniqueArrayList<String>(indices.size());
+
+        for (int k : indices) {
+          items.add(m.getRowAnnotationText(name, k));
+        }
+
+        String text = TextUtils.scJoin(items);
+
+        ret.setRowAnnotation(name, i, text);
+      }
+    }
+
+    int max = 0;
+
+    for (int row = 0; row < ids.size(); ++row) {
+      List<Integer> indices = rows.get(ids.get(row));
+
+      for (int column = 0; column < m.getCols(); ++column) {
+        // StringBuilder buffer = new StringBuilder(m.getText(indices.get(0), column));
+
+        List<String> items = new UniqueArrayList<String>(indices.size());
+
+        for (int k : indices) {
+          items.add(m.getText(k, column));
+        }
+
+        String text = TextUtils.scJoin(items);
+
+        System.err.println(row + " " + column + " " + text);
+
+        ret.set(row, column, text);
+
+        max = Math.max(max, text.length());
+      }
+    }
+
+    // Set the collapse column values to their unique values
+
+    for (int row = 0; row < ids.size(); ++row) {
+      // System.err.println("c " + row + " " + c + " " + ids.get(row));
+
+      ret.set(row, c, ids.get(row));
+    }
+
+    // System.err.println("size " + ret.getColumnCount() + " " + ret.getRowCount());
+
+    // mWindow.addToHistory("Duplicate rows", m);
+    mWindow.addToHistory("Duplicate rows", ret);
+  }
 }

@@ -42,114 +42,126 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class HeatMapModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
-	
-	/** The maps. */
-	private static ColorMap[] MAPS = {ColorMapService.getInstance().get("white_red"),
-			ColorMapService.getInstance().get("white_green"),
-			ColorMapService.getInstance().get("white_blue"),
-			ColorMap.createWhiteToColorMap("white_orange", Color.ORANGE),
-			ColorMap.createWhiteToColorMap("white_pink", Color.PINK),
-			ColorMap.createWhiteToColorMap("white_gray", Color.GRAY),
-			ColorMap.createWhiteToColorMap("white_black", Color.BLACK)};
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Heat Map";
-	}
+  /** The maps. */
+  private static ColorMap[] MAPS = { ColorMapService.getInstance().get("white_red"),
+      ColorMapService.getInstance().get("white_green"), ColorMapService.getInstance().get("white_blue"),
+      ColorMap.createWhiteToColorMap("white_orange", Color.ORANGE),
+      ColorMap.createWhiteToColorMap("white_pink", Color.PINK),
+      ColorMap.createWhiteToColorMap("white_gray", Color.GRAY),
+      ColorMap.createWhiteToColorMap("white_black", Color.BLACK) };
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#run(java.lang.String[])
-	 */
-	@Override
-	public void run(String... args) {
-		for (String arg : args) {
-			if (arg.contains("plot")) {
-				try {
-					plot();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Heat Map";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#run(java.lang.String[])
+   */
+  @Override
+  public void run(String... args) {
+    for (String arg : args) {
+      if (arg.contains("plot")) {
+        try {
+          plot();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
 
-		RibbonLargeButton button = new RibbonLargeButton("Heat Map", 
-				UIService.getInstance().loadIcon("heatmap", 24),
-				"Heat Map",
-				"Generate a heat map.");
-		button.addClickListener(this);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+    RibbonLargeButton button = new RibbonLargeButton("Heat Map", UIService.getInstance().loadIcon("heatmap", 24),
+        "Heat Map", "Generate a heat map.");
+    button.addClickListener(this);
 
-	/**
-	 * Creates the.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void plot() throws IOException {
-		Figure figure = Figure.createFigure();
-		
-		figure.setLayout(new PlotBoxGridLayout(1, mParent.getMatrices().size()));
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-		int c = 0;
-		
-		for (DataFrame m : mParent.getMatrices()) {
-			SubFigure subFigure = figure.newSubFigure();
-			
-			// Add some filler space around the plot
-			
-			//subFigure.getAxesZModel().get(BorderLocation.N).addZ(new SubFigureVFiller(100));
-			//subFigure.getAxesZModel().get(BorderLocation.W).addZ(new SubFigureHFiller(100));
-			//subFigure.getAxesZModel().get(BorderLocation.E).addZ(new SubFigureHFiller(100));
-			//subFigure.getAxesZModel().get(BorderLocation.S).addZ(new SubFigureVFiller(100));
-			
-			
-			Axes axes = subFigure.currentAxes();
+  /**
+   * Creates the.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void plot() throws IOException {
+    Figure figure = Figure.createFigure();
 
-			PlotFactory.createHeatMap(m, subFigure, axes, mParent.getGroups());
+    figure.setLayout(new PlotBoxGridLayout(1, mParent.getMatrices().size()));
 
-			axes.getX1Axis().getTitle().setText("Series").setVisible(false);
-			axes.getY1Axis().getTitle().setText("Count").setVisible(false);
-			axes.getY2Axis().getTitle().setText("Count").setVisible(false);
-			axes.getTitle().setText(m.getName()).setVisible(false);
-			
-			// Cycle through color maps to make plots
-			axes.currentPlot().setColorMap(MAPS[c % MAPS.length]);
-			
-			++c;
-		}
+    int c = 0;
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
+    for (DataFrame m : mParent.getMatrices()) {
+      SubFigure subFigure = figure.newSubFigure();
 
-		window.getColorNormalizationModel().set(ColorNormalization.NORMALIZE);
+      // Add some filler space around the plot
 
-		window.setVisible(true);
-	}
+      // subFigure.getAxesZModel().get(BorderLocation.N).addZ(new
+      // SubFigureVFiller(100));
+      // subFigure.getAxesZModel().get(BorderLocation.W).addZ(new
+      // SubFigureHFiller(100));
+      // subFigure.getAxesZModel().get(BorderLocation.E).addZ(new
+      // SubFigureHFiller(100));
+      // subFigure.getAxesZModel().get(BorderLocation.S).addZ(new
+      // SubFigureVFiller(100));
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		try {
-			plot();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-	}
+      Axes axes = subFigure.currentAxes();
+
+      PlotFactory.createHeatMap(m, subFigure, axes, mParent.getGroups());
+
+      axes.getX1Axis().getTitle().setText("Series").setVisible(false);
+      axes.getY1Axis().getTitle().setText("Count").setVisible(false);
+      axes.getY2Axis().getTitle().setText("Count").setVisible(false);
+      axes.getTitle().setText(m.getName()).setVisible(false);
+
+      // Cycle through color maps to make plots
+      axes.currentPlot().setColorMap(MAPS[c % MAPS.length]);
+
+      ++c;
+    }
+
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
+
+    window.getColorNormalizationModel().set(ColorNormalization.NORMALIZE);
+
+    window.setVisible(true);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    try {
+      plot();
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    }
+  }
 }

@@ -43,122 +43,126 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The class StackedBarChartModule.
  */
 public class StackedBarChartModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Stacked Bar Chart";
-	}
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Stacked Bar Chart";
+  }
 
-		RibbonLargeButton button = new RibbonLargeButton("Stacked", "Bar Chart", 
-				UIService.getInstance().loadIcon("stacked_bar_chart", 24),
-				"Stacked Bar Chart",
-				"Generate a stacked bar chart.");
-		button.addClickListener(this);
-		//button.setEnabled(false);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+    RibbonLargeButton button = new RibbonLargeButton("Stacked", "Bar Chart",
+        UIService.getInstance().loadIcon("stacked_bar_chart", 24), "Stacked Bar Chart",
+        "Generate a stacked bar chart.");
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
-	/**
-	 * Creates the bar chart.
-	 */
-	private void createBarChart() {
-		DataFrame m = mParent.getCurrentMatrix();
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-		Figure figure = Figure.createFigure(); //window.getFigure();
+  /**
+   * Creates the bar chart.
+   */
+  private void createBarChart() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-		SubFigure graph = figure.currentSubFigure();
-		
-		XYSeriesGroup groups = mParent.getRowGroups();
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-		Axes axes = graph.currentAxes();
+    SubFigure graph = figure.currentSubFigure();
 
-		ColorCycle colorCycle = new ColorCycle();
-		
-		XYSeriesGroup seriesGroup = new XYSeriesGroup();
+    XYSeriesGroup groups = mParent.getRowGroups();
 
-		for (int i = 0; i < m.getRows(); ++i) {
-			Color color = null;
-			
-			// See if the column matches a group, and if so use the group's
-			// color rather than a random color
-			for (MatrixGroup group : groups) {
-				Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findRowIndices(m, group));
-				
-				if (indices.contains(i)) {
-					color = group.getColor();
-					
-					break;
-				}
-			}
-			
-			if (color == null) {
-				color = colorCycle.next();
-			}
-			
-			XYSeries series = new XYSeries(m.getRowName(i), color);
-			
-			series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
-			series.getStyle().getLineStyle().setColor(color);
+    Axes axes = graph.currentAxes();
 
-			seriesGroup.add(series);
-		}
+    ColorCycle colorCycle = new ColorCycle();
 
+    XYSeriesGroup seriesGroup = new XYSeriesGroup();
 
-		PlotFactory.createStackedBarPlot(m, axes, seriesGroup);
+    for (int i = 0; i < m.getRows(); ++i) {
+      Color color = null;
 
-		//gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
+      // See if the column matches a group, and if so use the group's
+      // color rather than a random color
+      for (MatrixGroup group : groups) {
+        Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findRowIndices(m, group));
 
+        if (indices.contains(i)) {
+          color = group.getColor();
 
-		// How big to make the x axis
-		//double min = Mathematics.min(log2FoldChanges);
-		//double max = Mathematics.max(log2FoldChanges);
+          break;
+        }
+      }
 
+      if (color == null) {
+        color = colorCycle.next();
+      }
 
-		//gp.getXAxis().autoSetLimits(min, max);
-		//gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
-		axes.getX1Axis().getTitle().setText("Series");
+      XYSeries series = new XYSeries(m.getRowName(i), color);
 
+      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getLineStyle().setColor(color);
 
-		//min = Mathematics.min(minusLog10PValues);
-		//max = Mathematics.max(minusLog10PValues);
+      seriesGroup.add(series);
+    }
 
-		//System.err.println("my " + min + " " + max);
+    PlotFactory.createStackedBarPlot(m, axes, seriesGroup);
 
-		//gp.getYAxis().autoSetLimits(min, max);
-		//gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
+    // gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
 
-		axes.getY1Axis().getTitle().setText("Count");
+    // How big to make the x axis
+    // double min = Mathematics.min(log2FoldChanges);
+    // double max = Mathematics.max(log2FoldChanges);
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-		window.setVisible(true);
-	}
+    // gp.getXAxis().autoSetLimits(min, max);
+    // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // inc));
+    axes.getX1Axis().getTitle().setText("Series");
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		createBarChart();
-	}
+    // min = Mathematics.min(minusLog10PValues);
+    // max = Mathematics.max(minusLog10PValues);
 
+    // System.err.println("my " + min + " " + max);
 
+    // gp.getYAxis().autoSetLimits(min, max);
+    // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // inc));
+
+    axes.getY1Axis().getTitle().setText("Count");
+
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
+    window.setVisible(true);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    createBarChart();
+  }
 
 }

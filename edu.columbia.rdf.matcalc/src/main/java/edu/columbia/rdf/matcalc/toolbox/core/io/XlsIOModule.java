@@ -29,63 +29,61 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to open and save Excel files.
  *
  * @author Antony Holmes Holmes
  */
-public class XlsIOModule extends XlIOModule  {
-	
-	/** The Constant FILTER. */
-	private static final GuiFileExtFilter FILTER = new XlsGuiFileFilter();
+public class XlsIOModule extends XlIOModule {
 
-	/**
-	 * Instantiates a new xlsx IO module.
-	 */
-	public XlsIOModule() {
-		registerFileOpenType(FILTER);
-		registerFileSaveType(FILTER);
-	}
+  /** The Constant FILTER. */
+  private static final GuiFileExtFilter FILTER = new XlsGuiFileFilter();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Excel Xls IO";
-	}		
+  /**
+   * Instantiates a new xlsx IO module.
+   */
+  public XlsIOModule() {
+    registerFileOpenType(FILTER);
+    registerFileSaveType(FILTER);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
-	 */
-	@Override
-	public DataFrame autoOpenFile(final MainMatCalcWindow window,
-			final Path file,
-			FileType type,
-			int headers,
-			int rowAnnotations,
-			String delimiter,
-			Collection<String> skipLines) throws IOException {
-		try {
-			return Excel.convertXlsToMatrix(file, 
-					headers > 0, 
-					rowAnnotations);
-		} catch (InvalidFormatException e) {
-			throw new IOException(e.getMessage());
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
-	 */
-	@Override
-	public boolean saveFile(final MainMatCalcWindow window,
-			final Path file, 
-			final DataFrame m) throws IOException {
-		Excel.writeXls(m, file);
-		
-		return true;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Excel Xls IO";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, boolean, int)
+   */
+  @Override
+  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
+      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+    try {
+      return Excel.convertXlsToMatrix(file, headers > 0, rowAnnotations);
+    } catch (InvalidFormatException e) {
+      throw new IOException(e.getMessage());
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
+   */
+  @Override
+  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+    Excel.writeXls(m, file);
+
+    return true;
+  }
 }

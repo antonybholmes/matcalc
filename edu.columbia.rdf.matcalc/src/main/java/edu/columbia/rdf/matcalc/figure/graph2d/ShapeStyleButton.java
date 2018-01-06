@@ -29,135 +29,141 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class ShapeStyleButton extends ModernDialogFlatDropDownIconButton {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The class ClickEvents.
-	 */
-	private class ClickEvents implements ModernClickListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			if (e.getMessage().equals("Bar")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(0);
-			} else if (e.getMessage().equals("Circle")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(1);
-			} else if (e.getMessage().equals("Cross")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(2);
-			} else if (e.getMessage().equals("Diamond")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(3);
-			} else if (e.getMessage().equals("Minus")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(4);
-			} else if (e.getMessage().equals("Plus")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(5);
-			} else if (e.getMessage().equals("Square")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(6);
-			} else if (e.getMessage().equals("Triangle")) {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(7);
-			} else {
-				((ShapeStyleMultiIcon16)mIcon).setIcon(1);
-			}
-			
-			repaint();
-		}
-	}
-	
-	/**
-	 * Instantiates a new shape style button.
-	 *
-	 * @param style the style
-	 */
-	public ShapeStyleButton(ShapeStyle style) {
-		super(new ShapeStyleMultiIcon16(), new ShapeStyleMenu());
-		
-		addClickListener(new ClickEvents());
-		
-		setType(style);
-		
-		UI.setSize(this, ModernWidget.SIZE_48);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	
-	/**
-	 * Sets the style.
-	 *
-	 * @param style the new style
-	 */
-	public void setType(ShapeStyle style) {
-		switch (style) {
-		case BAR:
-			setSelectedIndex(0);
-			break;
-		case CIRCLE:
-			setSelectedIndex(1);
-			break;
-		case CROSS:
-			setSelectedIndex(2);
-			break;
-		case DIAMOND:
-			setSelectedIndex(3);
-			break;
-		case MINUS:
-			setSelectedIndex(4);
-			break;
-		case PLUS:
-			setSelectedIndex(5);
-			break;
-		case SQUARE:
-			setSelectedIndex(6);
-			break;
-		case TRIANGLE:
-			setSelectedIndex(7);
-			break;
-		default:
-			setSelectedIndex(1);
-			break;
-		}
-	}
-	
-	/**
-	 * Change type.
-	 *
-	 * @param style the style
-	 */
-	public void changeType(ShapeStyle style) {
-		
-		switch (style) {
-		case BAR:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(0);
-			break;
-		case CIRCLE:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(1);
-			break;
-		case CROSS:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(2);
-			break;
-		case DIAMOND:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(3);
-			break;
-		case MINUS:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(4);
-			break;
-		case PLUS:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(5);
-			break;
-		case SQUARE:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(6);
-			break;
-		case TRIANGLE:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(7);
-			break;
-		default:
-			((ShapeStyleMultiIcon16)mIcon).setIcon(1);
-			break;
-		}
-		
-		repaint();
-	}
+  /**
+   * The class ClickEvents.
+   */
+  private class ClickEvents implements ModernClickListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      if (e.getMessage().equals("Bar")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(0);
+      } else if (e.getMessage().equals("Circle")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(1);
+      } else if (e.getMessage().equals("Cross")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(2);
+      } else if (e.getMessage().equals("Diamond")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(3);
+      } else if (e.getMessage().equals("Minus")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(4);
+      } else if (e.getMessage().equals("Plus")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(5);
+      } else if (e.getMessage().equals("Square")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(6);
+      } else if (e.getMessage().equals("Triangle")) {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(7);
+      } else {
+        ((ShapeStyleMultiIcon16) mIcon).setIcon(1);
+      }
+
+      repaint();
+    }
+  }
+
+  /**
+   * Instantiates a new shape style button.
+   *
+   * @param style
+   *          the style
+   */
+  public ShapeStyleButton(ShapeStyle style) {
+    super(new ShapeStyleMultiIcon16(), new ShapeStyleMenu());
+
+    addClickListener(new ClickEvents());
+
+    setType(style);
+
+    UI.setSize(this, ModernWidget.SIZE_48);
+  }
+
+  /**
+   * Sets the style.
+   *
+   * @param style
+   *          the new style
+   */
+  public void setType(ShapeStyle style) {
+    switch (style) {
+    case BAR:
+      setSelectedIndex(0);
+      break;
+    case CIRCLE:
+      setSelectedIndex(1);
+      break;
+    case CROSS:
+      setSelectedIndex(2);
+      break;
+    case DIAMOND:
+      setSelectedIndex(3);
+      break;
+    case MINUS:
+      setSelectedIndex(4);
+      break;
+    case PLUS:
+      setSelectedIndex(5);
+      break;
+    case SQUARE:
+      setSelectedIndex(6);
+      break;
+    case TRIANGLE:
+      setSelectedIndex(7);
+      break;
+    default:
+      setSelectedIndex(1);
+      break;
+    }
+  }
+
+  /**
+   * Change type.
+   *
+   * @param style
+   *          the style
+   */
+  public void changeType(ShapeStyle style) {
+
+    switch (style) {
+    case BAR:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(0);
+      break;
+    case CIRCLE:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(1);
+      break;
+    case CROSS:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(2);
+      break;
+    case DIAMOND:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(3);
+      break;
+    case MINUS:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(4);
+      break;
+    case PLUS:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(5);
+      break;
+    case SQUARE:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(6);
+      break;
+    case TRIANGLE:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(7);
+      break;
+    default:
+      ((ShapeStyleMultiIcon16) mIcon).setIcon(1);
+      break;
+    }
+
+    repaint();
+  }
 }

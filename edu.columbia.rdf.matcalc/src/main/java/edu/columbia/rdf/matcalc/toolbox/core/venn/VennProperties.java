@@ -23,13 +23,13 @@ import org.jebtk.core.Properties;
  */
 public class VennProperties extends Properties {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new venn properties.
-	 */
-	public VennProperties() {
-		setProperty("venn.reference.radius", 150);
-	}
+  /**
+   * Instantiates a new venn properties.
+   */
+  public VennProperties() {
+    setProperty("venn.reference.radius", 150);
+  }
 }

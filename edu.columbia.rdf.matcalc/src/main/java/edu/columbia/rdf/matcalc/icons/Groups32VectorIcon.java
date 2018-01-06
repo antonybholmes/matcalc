@@ -26,43 +26,47 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class Groups32VectorIcon extends LeftPane32VectorIcon {
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.icons.LeftPane32VectorIcon#drawForeground(java.awt.Graphics2D, java.awt.Rectangle)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		super.drawIcon(g2, x, y, w, h, params);
-		
-		x = x + (w - WIDTH) / 2 + 2;
-		y = y + (h - HEIGHT) / 2 + BAR_HEIGHT + 2;
-		
-		int x2 = x + 3;
-		
-		int w1 = PANE_WIDTH - 5;
-		int w2 = PANE_WIDTH - 8;
-		
-		g2.setColor(ModernWidget.LINE_COLOR);
-		
-		g2.drawLine(x, y, x + w1, y);
-		
-		y += 2;
-		
-		g2.drawLine(x2, y, x2 + w2, y);
-		
-		y += 2;
-		
-		g2.drawLine(x2, y, x2 + w2, y);
-		
-		y += 4;
-		
-		g2.drawLine(x, y, x + w1, y);
-		
-		y += 2;
-		
-		g2.drawLine(x2, y, x2 + w2, y);
-		
-		y += 2;
-		
-		g2.drawLine(x2, y, x2 + w2, y);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.icons.LeftPane32VectorIcon#drawForeground(java.awt.
+   * Graphics2D, java.awt.Rectangle)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+    super.drawIcon(g2, x, y, w, h, params);
+
+    x = x + (w - WIDTH) / 2 + 2;
+    y = y + (h - HEIGHT) / 2 + BAR_HEIGHT + 2;
+
+    int x2 = x + 3;
+
+    int w1 = PANE_WIDTH - 5;
+    int w2 = PANE_WIDTH - 8;
+
+    g2.setColor(ModernWidget.LINE_COLOR);
+
+    g2.drawLine(x, y, x + w1, y);
+
+    y += 2;
+
+    g2.drawLine(x2, y, x2 + w2, y);
+
+    y += 2;
+
+    g2.drawLine(x2, y, x2 + w2, y);
+
+    y += 4;
+
+    g2.drawLine(x, y, x + w1, y);
+
+    y += 2;
+
+    g2.drawLine(x2, y, x2 + w2, y);
+
+    y += 2;
+
+    g2.drawLine(x2, y, x2 + w2, y);
+  }
 }

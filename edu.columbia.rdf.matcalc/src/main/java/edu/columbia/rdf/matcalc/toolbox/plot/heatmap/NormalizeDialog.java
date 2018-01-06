@@ -34,136 +34,128 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 // TODO: Auto-generated Javadoc
 /**
- * Allow users to choose whether to create a new figure or add to
- * an existing figure.
+ * Allow users to choose whether to create a new figure or add to an existing
+ * figure.
  * 
  * @author Antony Holmes Holmes
  *
  */
 public class NormalizeDialog extends ModernDialogTaskWindow {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member radio new.
-	 */
-	private ModernRadioButton mRadioAuto = 
-			new ModernRadioButton("Auto");
-	
-	/**
-	 * The member radio existing.
-	 */
-	private ModernRadioButton mRadioFixed = 
-			new ModernRadioButton("Fixed");
-	
-	private ModernTextField mTextAutoMin = 
-			new ModernClipboardNumericalTextField(-1);
-	
-	private ModernTextField mTextAutoMax = 
-			new ModernClipboardNumericalTextField(-1);
-	
-	private ModernTextField mTextMin = 
-			new ModernClipboardNumericalTextField(-1);
-	
-	private ModernTextField mTextMax = 
-			new ModernClipboardNumericalTextField(-1);
-	
-	/**
-	 * Instantiates a new figure dialog.
-	 *
-	 * @param parent the parent
-	 */
-	public NormalizeDialog(ModernWindow parent) {
-		super(parent);
-		
-		setTitle("Normalize");
-		
-		setup();
 
-		createUi();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	}
+  /**
+   * The member radio new.
+   */
+  private ModernRadioButton mRadioAuto = new ModernRadioButton("Auto");
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		mTextMin.setText(SettingsService.getInstance().getAsDouble("org.matcalc.figure.heatmap.normalize.min", 0));
-		mTextMax.setText(SettingsService.getInstance().getAsDouble("org.matcalc.figure.heatmap.normalize.max", 1));
-		
-		new ModernButtonGroup(mRadioFixed, mRadioAuto);
-		
-		if (SettingsService.getInstance().getAsBool("org.matcalc.figure.heatmap.normalize.mode.auto", true)) {
-			mRadioAuto.doClick();
-		} else {
-			mRadioFixed.doClick();
-		}
-		
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		setSize(480, 220);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+  /**
+   * The member radio existing.
+   */
+  private ModernRadioButton mRadioFixed = new ModernRadioButton("Fixed");
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		VBoxAutoWidth content = new VBoxAutoWidth();
+  private ModernTextField mTextAutoMin = new ModernClipboardNumericalTextField(-1);
 
-		content.add(mRadioAuto);
-		content.add(UI.createVGap(10));
-		
-		Box box = HBox.create();
-		
-		box.add(mRadioFixed);
-		box.add(UI.createHGap(20));
-		box.add(new ModernAutoSizeLabel("Min"));
-		box.add(UI.createHGap(10));
-		box.add(new ModernTextBorderPanel(mTextMin, 80));
-		box.add(UI.createHGap(20));
-		box.add(new ModernAutoSizeLabel("Max"));
-		box.add(UI.createHGap(10));
-		box.add(new ModernTextBorderPanel(mTextMax, 80));
-		
-		content.add(box);
-	
-		setDialogCardContent(content);
-	}
-	
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mOkButton)) {
-			SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.min", 
-					mTextMin.getAsDouble());
-			
-			SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.max", 
-					mTextMax.getAsDouble());
-			
-			SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.mode.auto",
-					mRadioAuto.isSelected());
-		}
-		
-		super.clicked(e);
-	}
+  private ModernTextField mTextAutoMax = new ModernClipboardNumericalTextField(-1);
 
-	public double getMin() {
-		return mTextMin.getAsDouble();
-	}
+  private ModernTextField mTextMin = new ModernClipboardNumericalTextField(-1);
 
-	public double getMax() {
-		return mTextMax.getAsDouble();
-	}
+  private ModernTextField mTextMax = new ModernClipboardNumericalTextField(-1);
 
-	public boolean getAuto() {
-		return mRadioAuto.isSelected();
-	}
+  /**
+   * Instantiates a new figure dialog.
+   *
+   * @param parent
+   *          the parent
+   */
+  public NormalizeDialog(ModernWindow parent) {
+    super(parent);
+
+    setTitle("Normalize");
+
+    setup();
+
+    createUi();
+
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    mTextMin.setText(SettingsService.getInstance().getAsDouble("org.matcalc.figure.heatmap.normalize.min", 0));
+    mTextMax.setText(SettingsService.getInstance().getAsDouble("org.matcalc.figure.heatmap.normalize.max", 1));
+
+    new ModernButtonGroup(mRadioFixed, mRadioAuto);
+
+    if (SettingsService.getInstance().getAsBool("org.matcalc.figure.heatmap.normalize.mode.auto", true)) {
+      mRadioAuto.doClick();
+    } else {
+      mRadioFixed.doClick();
+    }
+
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    setSize(480, 220);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    VBoxAutoWidth content = new VBoxAutoWidth();
+
+    content.add(mRadioAuto);
+    content.add(UI.createVGap(10));
+
+    Box box = HBox.create();
+
+    box.add(mRadioFixed);
+    box.add(UI.createHGap(20));
+    box.add(new ModernAutoSizeLabel("Min"));
+    box.add(UI.createHGap(10));
+    box.add(new ModernTextBorderPanel(mTextMin, 80));
+    box.add(UI.createHGap(20));
+    box.add(new ModernAutoSizeLabel("Max"));
+    box.add(UI.createHGap(10));
+    box.add(new ModernTextBorderPanel(mTextMax, 80));
+
+    content.add(box);
+
+    setDialogCardContent(content);
+  }
+
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mOkButton)) {
+      SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.min", mTextMin.getAsDouble());
+
+      SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.max", mTextMax.getAsDouble());
+
+      SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.mode.auto", mRadioAuto.isSelected());
+    }
+
+    super.clicked(e);
+  }
+
+  public double getMin() {
+    return mTextMin.getAsDouble();
+  }
+
+  public double getMax() {
+    return mTextMax.getAsDouble();
+  }
+
+  public boolean getAuto() {
+    return mRadioAuto.isSelected();
+  }
 }

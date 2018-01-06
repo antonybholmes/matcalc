@@ -27,22 +27,23 @@ import org.jebtk.modern.widget.ModernWidget;
  * @author Antony Holmes Holmes
  */
 public class MatrixRowAnnotationCombo extends ModernComboBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new matrix row annotation combo.
-	 *
-	 * @param matrix the matrix
-	 */
-	public MatrixRowAnnotationCombo(DataFrame matrix) {
-		for (String name : matrix.getRowAnnotationNames()) {
-			addMenuItem(name);
-		}
-		
-		UI.setSize(this, ModernWidget.EXTRA_LARGE_SIZE);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new matrix row annotation combo.
+   *
+   * @param matrix
+   *          the matrix
+   */
+  public MatrixRowAnnotationCombo(DataFrame matrix) {
+    for (String name : matrix.getRowAnnotationNames()) {
+      addMenuItem(name);
+    }
+
+    UI.setSize(this, ModernWidget.EXTRA_LARGE_SIZE);
+  }
 }

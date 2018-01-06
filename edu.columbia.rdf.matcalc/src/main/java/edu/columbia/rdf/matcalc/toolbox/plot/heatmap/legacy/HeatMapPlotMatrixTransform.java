@@ -35,98 +35,92 @@ import edu.columbia.rdf.matcalc.PlotMatrixTransform;
  *
  */
 public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
-	
-	/**
-	 * The member groups.
-	 */
-	protected XYSeriesModel mGroups;
-	
-	/**
-	 * The member row groups.
-	 */
-	protected XYSeriesModel mRowGroups;
-	
-	/**
-	 * The member history.
-	 */
-	protected List<String> mHistory;
-	
-	/**
-	 * The member properties.
-	 */
-	protected Properties mProperties;
 
-	/** The m count groups. */
-	protected CountGroups mCountGroups;
+  /**
+   * The member groups.
+   */
+  protected XYSeriesModel mGroups;
 
-	/**
-	 * Instantiates a new heat map plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param inputMatrix the input matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public HeatMapPlotMatrixTransform(MainMatCalcWindow parent,
-			DataFrame inputMatrix, 
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		this(parent, 
-				"Create Heat Map Plot", 
-				inputMatrix,
-				groups,
-				rowGroups,
-				countGroups,
-				history,
-				properties);
-	}
-	
-	/**
-	 * Instantiates a new heat map plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param inputMatrix the input matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public HeatMapPlotMatrixTransform(ModernRibbonWindow parent,
-			String name,
-			DataFrame inputMatrix, 
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups, 
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(parent, name, inputMatrix);
-		
-		mGroups = groups;
-		mRowGroups = rowGroups;
-		mCountGroups = countGroups;
-		mHistory = history;
-		mProperties = properties;
-	}
+  /**
+   * The member row groups.
+   */
+  protected XYSeriesModel mRowGroups;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
-	 */
-	@Override
-	public ModernWindow createWindow() {
-		return new HeatMapPlotWindow((ModernRibbonWindow)mParent,
-				mMatrix,
-				mGroups,
-				mRowGroups,
-				mCountGroups,
-				mHistory,
-				mProperties);
-	}
+  /**
+   * The member history.
+   */
+  protected List<String> mHistory;
+
+  /**
+   * The member properties.
+   */
+  protected Properties mProperties;
+
+  /** The m count groups. */
+  protected CountGroups mCountGroups;
+
+  /**
+   * Instantiates a new heat map plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param inputMatrix
+   *          the input matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public HeatMapPlotMatrixTransform(MainMatCalcWindow parent, DataFrame inputMatrix, XYSeriesModel groups,
+      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
+    this(parent, "Create Heat Map Plot", inputMatrix, groups, rowGroups, countGroups, history, properties);
+  }
+
+  /**
+   * Instantiates a new heat map plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param inputMatrix
+   *          the input matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public HeatMapPlotMatrixTransform(ModernRibbonWindow parent, String name, DataFrame inputMatrix, XYSeriesModel groups,
+      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
+    super(parent, name, inputMatrix);
+
+    mGroups = groups;
+    mRowGroups = rowGroups;
+    mCountGroups = countGroups;
+    mHistory = history;
+    mProperties = properties;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
+   */
+  @Override
+  public ModernWindow createWindow() {
+    return new HeatMapPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups, mRowGroups, mCountGroups, mHistory,
+        mProperties);
+  }
 }

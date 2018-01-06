@@ -71,334 +71,347 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
  */
 public abstract class FigureWindow extends ModernRibbonWindow implements ModernWindowConstructor, ModernClickListener {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member save as panel.
-	 */
-	private SaveAsRibbonPanel mSaveAsPanel = new SaveAsRibbonPanel();
+  /**
+   * The member save as panel.
+   */
+  private SaveAsRibbonPanel mSaveAsPanel = new SaveAsRibbonPanel();
 
-	/**
-	 * The member zoom model.
-	 */
-	protected ZoomModel mZoomModel = new ZoomModel();
+  /**
+   * The member zoom model.
+   */
+  protected ZoomModel mZoomModel = new ZoomModel();
 
-	/**
-	 * The member color map model.
-	 */
-	protected ColorMapModel mColorMapModel = 
-			new ColorMapModel();
+  /**
+   * The member color map model.
+   */
+  protected ColorMapModel mColorMapModel = new ColorMapModel();
 
-	/**
-	 * The member groups model.
-	 */
-	protected MatrixGroupModel mGroupsModel = 
-			new MatrixGroupModel();
+  /**
+   * The member groups model.
+   */
+  protected MatrixGroupModel mGroupsModel = new MatrixGroupModel();
 
-	/**
-	 * The member format pane.
-	 */
-	protected FormatPlotPane mFormatPane = null;
+  /**
+   * The member format pane.
+   */
+  protected FormatPlotPane mFormatPane = null;
 
-	/**
-	 * The member color model.
-	 */
-	protected ColorNormalizationModel mColorModel =
-			new ColorNormalizationModel();
+  /**
+   * The member color model.
+   */
+  protected ColorNormalizationModel mColorModel = new ColorNormalizationModel();
 
-	/** The m style model. */
-	protected Graph2dStyleModel mStyleModel = new Graph2dStyleModel();
+  /** The m style model. */
+  protected Graph2dStyleModel mStyleModel = new Graph2dStyleModel();
 
-	/** The m window. */
-	protected ModernWindow mWindow;
+  /** The m window. */
+  protected ModernWindow mWindow;
 
-	/** The m scale model. */
-	protected ScaleModel mScaleModel = new ScaleModel();
+  /** The m scale model. */
+  protected ScaleModel mScaleModel = new ScaleModel();
 
-	protected Figure mFigure;
+  protected Figure mFigure;
 
-	/**
-	 * The constant NEXT_ID.
-	 */
-	private static final AtomicInteger NEXT_ID = new AtomicInteger(1);
-	
-	/**
-	 * The member id.
-	 */
-	private final int mId = NEXT_ID.getAndIncrement();
+  /**
+   * The constant NEXT_ID.
+   */
+  private static final AtomicInteger NEXT_ID = new AtomicInteger(1);
 
-	/** The m allow style. */
-	private boolean mAllowStyle;
-	
-	/**
-	 * The class ExportCallBack.
-	 */
-	private class ExportCallBack implements DialogEventListener {
-		
-		/**
-		 * The member file.
-		 */
-		private Path mFile;
-		
-		/**
-		 * The member pwd.
-		 */
-		private Path mPwd;
+  /**
+   * The member id.
+   */
+  private final int mId = NEXT_ID.getAndIncrement();
 
-		/**
-		 * Instantiates a new export call back.
-		 *
-		 * @param file the file
-		 * @param pwd the pwd
-		 */
-		public ExportCallBack(Path file, Path pwd) {
-			mFile = file;
-			mPwd = pwd;
-		}
+  /** The m allow style. */
+  private boolean mAllowStyle;
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.ui.dialog.DialogEvent)
-		 */
-		@Override
-		public void statusChanged(DialogEvent e) {
-			if (e.getStatus() == ModernDialogStatus.OK) {
-				try {	
-					save(mFile);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			} else {
-				try {
-					export(mPwd);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Instantiates a new figure window.
-	 *
-	 * @param window the window
-	 */
-	public FigureWindow(ModernWindow window, Figure figure) {
-		this(window, figure, true);
-	}
+  /**
+   * The class ExportCallBack.
+   */
+  private class ExportCallBack implements DialogEventListener {
 
-	/**
-	 * Instantiates a new figure window.
-	 *
-	 * @param window the window
-	 * @param figure the figure
-	 * @param allowStyle the allow style
-	 */
-	public FigureWindow(ModernWindow window, Figure figure, boolean allowStyle) {
-		super(window.getAppInfo());
+    /**
+     * The member file.
+     */
+    private Path mFile;
 
-		mWindow = window;
-		// add canvas to the plot
-		mFigure = figure;
+    /**
+     * The member pwd.
+     */
+    private Path mPwd;
 
-		mAllowStyle = allowStyle;
+    /**
+     * Instantiates a new export call back.
+     *
+     * @param file
+     *          the file
+     * @param pwd
+     *          the pwd
+     */
+    public ExportCallBack(Path file, Path pwd) {
+      mFile = file;
+      mPwd = pwd;
+    }
 
-		setSubTitle("Figure " + mId);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.dialog.DialogEventListener#statusChanged(org.abh.common.
+     * ui.ui.dialog.DialogEvent)
+     */
+    @Override
+    public void statusChanged(DialogEvent e) {
+      if (e.getStatus() == ModernDialogStatus.OK) {
+        try {
+          save(mFile);
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
+      } else {
+        try {
+          export(mPwd);
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
+      }
+    }
+  }
 
-		setup();
-	}
+  /**
+   * Instantiates a new figure window.
+   *
+   * @param window
+   *          the window
+   */
+  public FigureWindow(ModernWindow window, Figure figure) {
+    this(window, figure, true);
+  }
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		createRibbon();
+  /**
+   * Instantiates a new figure window.
+   *
+   * @param window
+   *          the window
+   * @param figure
+   *          the figure
+   * @param allowStyle
+   *          the allow style
+   */
+  public FigureWindow(ModernWindow window, Figure figure, boolean allowStyle) {
+    super(window.getAppInfo());
 
-		createUi();
+    mWindow = window;
+    // add canvas to the plot
+    mFigure = figure;
 
-		setSize(1280, 768);
+    mAllowStyle = allowStyle;
 
-		UI.centerWindowToScreen(this);
-	}
+    setSubTitle("Figure " + mId);
 
+    setup();
+  }
 
+  /**
+   * Setup.
+   */
+  private void setup() {
+    createRibbon();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.window.ModernWindowConstructor#createRibbon()
-	 */
-	public void createRibbon() {
-		//RibbongetRibbonMenu() getRibbonMenu() = new RibbongetRibbonMenu()(0);
-		RibbonMenuItem menuItem;
+    createUi();
 
-		menuItem = new RibbonMenuItem(UI.MENU_SAVE_AS);
-		getRibbonMenu().addTabbedMenuItem(menuItem, mSaveAsPanel);
+    setSize(1280, 768);
 
-		getRibbonMenu().addDefaultItems(getAppInfo(), false);
+    UI.centerWindowToScreen(this);
+  }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.window.ModernWindowConstructor#createRibbon()
+   */
+  public void createRibbon() {
+    // RibbongetRibbonMenu() getRibbonMenu() = new RibbongetRibbonMenu()(0);
+    RibbonMenuItem menuItem;
 
-		getRibbonMenu().addClickListener(this);
+    menuItem = new RibbonMenuItem(UI.MENU_SAVE_AS);
+    getRibbonMenu().addTabbedMenuItem(menuItem, mSaveAsPanel);
 
+    getRibbonMenu().addDefaultItems(getAppInfo(), false);
 
-		ModernClickWidget button;
+    getRibbonMenu().addClickListener(this);
 
-		//Ribbon2 ribbon = new Ribbon2();
-		getRibbon().setHelpButtonEnabled(getAppInfo());
+    ModernClickWidget button;
 
-		button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
-		button.setClickMessage(UI.MENU_SAVE);
-		button.setToolTip(new ModernToolTip("Save", 
-				"Save the current image."));
-		button.addClickListener(this);
-		addQuickAccessButton(button);
+    // Ribbon2 ribbon = new Ribbon2();
+    getRibbon().setHelpButtonEnabled(getAppInfo());
 
-		getRibbon().getToolbar("Plot").add(new ClipboardRibbonSection(getRibbon()));
-		
-		if (mAllowStyle) {
-			getRibbon().getToolbar("Plot").add(new Graph2dStyleRibbonSection(getRibbon(), mStyleModel));
-		}
-		
-		getRibbon().getToolbar("Color").addSection(new ColorMapRibbonSection(this, mColorMapModel, mScaleModel));
-		getRibbon().getToolbar("Color").addSection(new ColorStandardizationRibbonSection(this, getRibbon(), mColorModel));
+    button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+    button.setClickMessage(UI.MENU_SAVE);
+    button.setToolTip(new ModernToolTip("Save", "Save the current image."));
+    button.addClickListener(this);
+    addQuickAccessButton(button);
 
+    getRibbon().getToolbar("Plot").add(new ClipboardRibbonSection(getRibbon()));
 
-		button = new RibbonLargeButton("Format", 
-				new Raster32Icon(new FormatPlot32VectorIcon()));
-		button.addClickListener(this);
-		getRibbon().getToolbar("View").getSection("Show").add(button);
+    if (mAllowStyle) {
+      getRibbon().getToolbar("Plot").add(new Graph2dStyleRibbonSection(getRibbon(), mStyleModel));
+    }
 
-		getRibbon().getToolbar("View").add(new ZoomRibbonSection(this, mZoomModel));
-		getRibbon().getToolbar("View").add(new WindowRibbonSection(this, getRibbon()));
+    getRibbon().getToolbar("Color").addSection(new ColorMapRibbonSection(this, mColorMapModel, mScaleModel));
+    getRibbon().getToolbar("Color").addSection(new ColorStandardizationRibbonSection(this, getRibbon(), mColorModel));
 
-		getRibbon().setSelectedIndex(0);
-	}
+    button = new RibbonLargeButton("Format", new Raster32Icon(new FormatPlot32VectorIcon()));
+    button.addClickListener(this);
+    getRibbon().getToolbar("View").getSection("Show").add(button);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.window.ModernWindow#createUi()
-	 */
-	public void createUi() {
-		mStatusBar.addRight(new ModernStatusZoomSlider(mZoomModel));
-	}
+    getRibbon().getToolbar("View").add(new ZoomRibbonSection(this, mZoomModel));
+    getRibbon().getToolbar("View").add(new WindowRibbonSection(this, getRibbon()));
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals(UI.MENU_SAVE)) {
-			try {
-				export();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (TranscoderException e1) {
-				e1.printStackTrace();
-			}
-		} else if (e.getMessage().equals(SaveAsRibbonPanel.DIRECTORY_SELECTED)) {
-			try {
-				export(mSaveAsPanel.getSelectedDirectory());
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (TranscoderException e1) {
-				e1.printStackTrace();
-			}
-		} else if (e.getMessage().equals("Format")) {
-			addFormatPane();
-		} else if (e.getMessage().equals(UI.MENU_ABOUT)) {
-			ModernAboutDialog.show(this, getAppInfo());
-		} else if (e.getMessage().equals(UI.MENU_CLOSE)) {
-			close();
-		} else {
+    getRibbon().setSelectedIndex(0);
+  }
 
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.window.ModernWindow#createUi()
+   */
+  public void createUi() {
+    mStatusBar.addRight(new ModernStatusZoomSlider(mZoomModel));
+  }
 
-	/**
-	 * Adds the history pane to the layout if it is not already showing.
-	 */
-	private void addFormatPane() {
-		if (getTabsPane().getModel().getRightTabs().containsTab("Format")) {
-			return;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals(UI.MENU_SAVE)) {
+      try {
+        export();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      } catch (TranscoderException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getMessage().equals(SaveAsRibbonPanel.DIRECTORY_SELECTED)) {
+      try {
+        export(mSaveAsPanel.getSelectedDirectory());
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      } catch (TranscoderException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getMessage().equals("Format")) {
+      addFormatPane();
+    } else if (e.getMessage().equals(UI.MENU_ABOUT)) {
+      ModernAboutDialog.show(this, getAppInfo());
+    } else if (e.getMessage().equals(UI.MENU_CLOSE)) {
+      close();
+    } else {
 
-		getTabsPane().addRightTab("Format", 
-				new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
-	}
+    }
+  }
 
-	/**
-	 * Export.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws TranscoderException the transcoder exception
-	 */
-	private void export() throws IOException, TranscoderException {
-		export(RecentFilesService.getInstance().getPwd());
-	}
-	
-	/**
-	 * Export.
-	 *
-	 * @param pwd the pwd
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws TranscoderException the transcoder exception
-	 */
-	private void export(Path pwd) throws IOException, TranscoderException {
-		Path file = Image.saveFile(this, pwd);
-		
-		if (file == null) {
-			return;
-		}
-		
-		if (FileUtils.exists(file)) {
-			//createFileExistsDialog(file, new ExportCallBack(file, pwd));
-			
-			ModernMessageDialog.createFileReplaceDialog(this, 
-					file, 
-					new ExportCallBack(file, pwd));
-		} else {
-			save(file);
-		}
-	}
-	
-	/**
-	 * Save.
-	 *
-	 * @param file the file
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws TranscoderException the transcoder exception
-	 */
-	private void save(Path file) throws IOException, TranscoderException {
-		Image.write(getPlot(), file);
-		
-		RecentFilesService.getInstance().setPwd(file.getParent());
-		
-		//createFileSavedDialog(file);
-		
-		ModernMessageDialog.createFileSavedDialog(this, file);
-	}
+  /**
+   * Adds the history pane to the layout if it is not already showing.
+   */
+  private void addFormatPane() {
+    if (getTabsPane().getModel().getRightTabs().containsTab("Format")) {
+      return;
+    }
 
-	/**
-	 * Gets the canvas.
-	 *
-	 * @return the canvas
-	 */
-	public abstract PlotBox getPlot();
+    getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
+  }
 
-	/**
-	 * Gets the color normalization model.
-	 *
-	 * @return the color normalization model
-	 */
-	public ColorNormalizationModel getColorNormalizationModel() {
-		return mColorModel;
-	}
+  /**
+   * Export.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws TranscoderException
+   *           the transcoder exception
+   */
+  private void export() throws IOException, TranscoderException {
+    export(RecentFilesService.getInstance().getPwd());
+  }
 
-	/**
-	 * Gets the style.
-	 *
-	 * @return the style
-	 */
-	public Graph2dStyleModel getStyle() {
-		return mStyleModel;
-	}
+  /**
+   * Export.
+   *
+   * @param pwd
+   *          the pwd
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws TranscoderException
+   *           the transcoder exception
+   */
+  private void export(Path pwd) throws IOException, TranscoderException {
+    Path file = Image.saveFile(this, pwd);
+
+    if (file == null) {
+      return;
+    }
+
+    if (FileUtils.exists(file)) {
+      // createFileExistsDialog(file, new ExportCallBack(file, pwd));
+
+      ModernMessageDialog.createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
+    } else {
+      save(file);
+    }
+  }
+
+  /**
+   * Save.
+   *
+   * @param file
+   *          the file
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws TranscoderException
+   *           the transcoder exception
+   */
+  private void save(Path file) throws IOException, TranscoderException {
+    Image.write(getPlot(), file);
+
+    RecentFilesService.getInstance().setPwd(file.getParent());
+
+    // createFileSavedDialog(file);
+
+    ModernMessageDialog.createFileSavedDialog(this, file);
+  }
+
+  /**
+   * Gets the canvas.
+   *
+   * @return the canvas
+   */
+  public abstract PlotBox getPlot();
+
+  /**
+   * Gets the color normalization model.
+   *
+   * @return the color normalization model
+   */
+  public ColorNormalizationModel getColorNormalizationModel() {
+    return mColorModel;
+  }
+
+  /**
+   * Gets the style.
+   *
+   * @return the style
+   */
+  public Graph2dStyleModel getStyle() {
+    return mStyleModel;
+  }
 }

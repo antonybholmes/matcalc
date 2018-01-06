@@ -21,15 +21,15 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
  */
 public class ClusterProperties extends HeatMapProperties {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new cluster properties.
-	 */
-	public ClusterProperties() {
-		// Whether to color edges of tree with 
-		setProperty("plot.tree.vert.leaf.color", false);
-		setProperty("plot.tree.hoz.leaf.color", false);
-	}
+  /**
+   * Instantiates a new cluster properties.
+   */
+  public ClusterProperties() {
+    // Whether to color edges of tree with
+    setProperty("plot.tree.vert.leaf.color", false);
+    setProperty("plot.tree.hoz.leaf.color", false);
+  }
 }

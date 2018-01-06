@@ -28,46 +28,42 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressi
 
 // TODO: Auto-generated Javadoc
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class SupervisedPlotWindow extends DifferentialExpressionPlotWindow  {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class SupervisedPlotWindow extends DifferentialExpressionPlotWindow {
 
-	/**
-	 * Instantiates a new t test plot window.
-	 *
-	 * @param window the window
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 * @param comparisonGroups the comparison groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public SupervisedPlotWindow(ModernRibbonWindow window,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesGroup comparisonGroups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(window,
-				"Supervised Classification",
-				matrix, 
-				groups,
-				comparisonGroups,
-				rowGroups,
-				countGroups,
-				history,
-				properties);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new t test plot window.
+   *
+   * @param window
+   *          the window
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public SupervisedPlotWindow(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups,
+      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups, List<String> history,
+      Properties properties) {
+    super(window, "Supervised Classification", matrix, groups, comparisonGroups, rowGroups, countGroups, history,
+        properties);
+  }
 }

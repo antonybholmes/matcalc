@@ -44,226 +44,225 @@ import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The class ColorDialog.
  */
 public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernClickListener {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
+  /** The m table. */
+  private ColorMapTable mTable = new ColorMapTable();
 
-	/** The m table. */
-	private ColorMapTable mTable = new ColorMapTable();
+  // private ModernButton mSelectAllButton =
+  // new ModernButton("Select All");
 
+  /** The m add button. */
+  private ModernButton mAddButton = new ModernButton("New...",
+      UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
-	//private ModernButton mSelectAllButton =
-	//		new ModernButton("Select All");
-	
-	/** The m add button. */
-	private ModernButton mAddButton =
-			new ModernButton("New...", UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
-	
-	/** The m delete button. */
-	private ModernButton mDeleteButton =
-			new ModernButton(UI.MENU_DELETE, UIService.getInstance().loadIcon("delete", 16));
+  /** The m delete button. */
+  private ModernButton mDeleteButton = new ModernButton(UI.MENU_DELETE, UIService.getInstance().loadIcon("delete", 16));
 
+  /** The m color map. */
+  private ColorMap mColorMap;
 
-	/** The m color map. */
-	private ColorMap mColorMap;
-	
-	/**
-	 * Instantiates a new color dialog.
-	 *
-	 * @param parent the parent
-	 * @param colorMap the color map
-	 */
-	public ColorMapsDialog(ModernWindow parent, ColorMap colorMap) {
-		super(parent, "matcalc.color-maps.help.url");
+  /**
+   * Instantiates a new color dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param colorMap
+   *          the color map
+   */
+  public ColorMapsDialog(ModernWindow parent, ColorMap colorMap) {
+    super(parent, "matcalc.color-maps.help.url");
 
-		mColorMap = colorMap;
-		
-		setup();
-	}
+    mColorMap = colorMap;
 
-	/**
-	 * Sets the up.
-	 */
-	private void setup() {
-		setResizable(true);
-		setBackground(ModernDialogWindow.DIALOG_BACKGROUND);
-		setSize(640, 480);
-		setTitle("Color Maps");
+    setup();
+  }
 
-		ModernComponent box1 = new ModernComponent();
-		
-		Box box2 = HBox.create();
-		
-		box2.add(mAddButton);
-		box2.add(UI.createHGap(5));
-		box2.add(mDeleteButton);
-		box2.setBorder(BorderService.getInstance().createBottomBorder(10));
-		
-		box1.setHeader(box2);
-		
-		ModernScrollPane scrollPane = new ModernScrollPane(mTable);
-		
-		//UI.setSize(scrollPane, 500, 200);
-		
-		box1.setBody(scrollPane);
+  /**
+   * Sets the up.
+   */
+  private void setup() {
+    setResizable(true);
+    setBackground(ModernDialogWindow.DIALOG_BACKGROUND);
+    setSize(640, 480);
+    setTitle("Color Maps");
 
-		setContent(new CardPanel(new ModernComponent(box1, ModernWidget.QUAD_BORDER)));
+    ModernComponent box1 = new ModernComponent();
 
+    Box box2 = HBox.create();
 
-		mAddButton.addClickListener(new ModernClickListener() {
+    box2.add(mAddButton);
+    box2.add(UI.createHGap(5));
+    box2.add(mDeleteButton);
+    box2.setBorder(BorderService.getInstance().createBottomBorder(10));
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				add();
-			}});
-		
-		mDeleteButton.addClickListener(new ModernClickListener() {
+    box1.setHeader(box2);
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				delete();
-			}});
-		
-		mTable.addMouseListener(new MouseListener() {
+    ModernScrollPane scrollPane = new ModernScrollPane(mTable);
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					edit();
-				}
-			}
+    // UI.setSize(scrollPane, 500, 200);
 
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+    box1.setBody(scrollPane);
 
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+    setContent(new CardPanel(new ModernComponent(box1, ModernWidget.QUAD_BORDER)));
 
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+    mAddButton.addClickListener(new ModernClickListener() {
 
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}});
-		
-		UI.centerWindowToScreen(this);
-	}
+      @Override
+      public void clicked(ModernClickEvent e) {
+        add();
+      }
+    });
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mOkButton)) {
-			mColorMap = (ColorMap)mTable.getValueAt(mTable.getSelectedRow(), 0);
-			
-			if (mColorMap == null) {
-				ModernMessageDialog.createWarningDialog(mParent, 
-						"You must select a color map.");
-				
-				return;
-			}
-		}
-		
-		super.clicked(e);
-	}
-	
-	/**
-	 * Delete.
-	 */
-	private void delete() {
-		List<Integer> indices = 
-				CollectionUtils.reverse(CollectionUtils.sort(CollectionUtils.toList(mTable.getRowModel().getSelectionModel())));
-		
-		if (indices.size() > 0) {
-			ModernDialogStatus status = ModernMessageDialog.createDialog(mParent, 
-					"Are you sure you want to delete the selected color maps?",
-					MessageDialogType.WARNING_OK_CANCEL);
-			
-			 if (status == ModernDialogStatus.OK) {
-				 for (int i : indices) {
-						ColorMapService.getInstance().remove((String)mTable.getValueAt(i, 1));
-					}
-			 }
-			
-		}
-		
-		
-	}
-	
-	/**
-	 * Adds the.
-	 */
-	private void add() {
-		ColorMapDialog dialog = new ColorMapDialog(mParent);
+    mDeleteButton.addClickListener(new ModernClickListener() {
 
-		dialog.setVisible(true);
+      @Override
+      public void clicked(ModernClickEvent e) {
+        delete();
+      }
+    });
 
-		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			
-			ColorMap colorMap = dialog.getColorMap();
-			
-			if (!ColorMapService.getInstance().contains(colorMap.getName())) {
-				ColorMapService.getInstance().add(dialog.getColorMap());
-			} else {
-				ModernMessageDialog.createWarningDialog(mParent, 
-						"'" + colorMap.getName() + "' is already in use. Please choose another name.");
-			}
-		}
-	}
-	
-	/**
-	 * Edits the.
-	 */
-	private void edit() {
-		ColorMap colorMap = (ColorMap)mTable.getValueAt(mTable.getSelectedRow(), 0);
-		
-		if (colorMap != null) {
-			ColorMapDialog dialog = new ColorMapDialog(mParent, colorMap);
+    mTable.addMouseListener(new MouseListener() {
 
-			dialog.setVisible(true);
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          edit();
+        }
+      }
 
-			if (dialog.getStatus() == ModernDialogStatus.OK) {
-				
-				colorMap = dialog.getColorMap();
-				
-				if (!ColorMapService.getInstance().contains(colorMap.getName())) {
-					ColorMapService.getInstance().add(dialog.getColorMap());
-				} else {
-					ModernMessageDialog.createWarningDialog(mParent, 
-							"'" + colorMap.getName() + "' is already in use. Please choose another name.");
-				}
-			}
-		}
-	}
+      @Override
+      public void mouseEntered(MouseEvent arg0) {
+        // TODO Auto-generated method stub
 
-	/**
-	 * Gets the color.
-	 *
-	 * @return the color
-	 */
-	public ColorMap getColorMap() {
-		return mColorMap;//new ColorMap(mTextName.getText(), mColorMapEditor.getColorMap(), false);
-	}
+      }
+
+      @Override
+      public void mouseExited(MouseEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void mousePressed(MouseEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent arg0) {
+        // TODO Auto-generated method stub
+
+      }
+    });
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mOkButton)) {
+      mColorMap = (ColorMap) mTable.getValueAt(mTable.getSelectedRow(), 0);
+
+      if (mColorMap == null) {
+        ModernMessageDialog.createWarningDialog(mParent, "You must select a color map.");
+
+        return;
+      }
+    }
+
+    super.clicked(e);
+  }
+
+  /**
+   * Delete.
+   */
+  private void delete() {
+    List<Integer> indices = CollectionUtils
+        .reverse(CollectionUtils.sort(CollectionUtils.toList(mTable.getRowModel().getSelectionModel())));
+
+    if (indices.size() > 0) {
+      ModernDialogStatus status = ModernMessageDialog.createDialog(mParent,
+          "Are you sure you want to delete the selected color maps?", MessageDialogType.WARNING_OK_CANCEL);
+
+      if (status == ModernDialogStatus.OK) {
+        for (int i : indices) {
+          ColorMapService.getInstance().remove((String) mTable.getValueAt(i, 1));
+        }
+      }
+
+    }
+
+  }
+
+  /**
+   * Adds the.
+   */
+  private void add() {
+    ColorMapDialog dialog = new ColorMapDialog(mParent);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.OK) {
+
+      ColorMap colorMap = dialog.getColorMap();
+
+      if (!ColorMapService.getInstance().contains(colorMap.getName())) {
+        ColorMapService.getInstance().add(dialog.getColorMap());
+      } else {
+        ModernMessageDialog.createWarningDialog(mParent,
+            "'" + colorMap.getName() + "' is already in use. Please choose another name.");
+      }
+    }
+  }
+
+  /**
+   * Edits the.
+   */
+  private void edit() {
+    ColorMap colorMap = (ColorMap) mTable.getValueAt(mTable.getSelectedRow(), 0);
+
+    if (colorMap != null) {
+      ColorMapDialog dialog = new ColorMapDialog(mParent, colorMap);
+
+      dialog.setVisible(true);
+
+      if (dialog.getStatus() == ModernDialogStatus.OK) {
+
+        colorMap = dialog.getColorMap();
+
+        if (!ColorMapService.getInstance().contains(colorMap.getName())) {
+          ColorMapService.getInstance().add(dialog.getColorMap());
+        } else {
+          ModernMessageDialog.createWarningDialog(mParent,
+              "'" + colorMap.getName() + "' is already in use. Please choose another name.");
+        }
+      }
+    }
+  }
+
+  /**
+   * Gets the color.
+   *
+   * @return the color
+   */
+  public ColorMap getColorMap() {
+    return mColorMap;// new ColorMap(mTextName.getText(), mColorMapEditor.getColorMap(), false);
+  }
 }

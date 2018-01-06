@@ -31,79 +31,82 @@ import org.jebtk.modern.panel.VBoxAutoWidth;
  */
 public class ColumnSorters extends VBoxAutoWidth {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m M. */
-	private DataFrame mM;
-	
-	/**
-	 * Instantiates a new column sorters.
-	 *
-	 * @param m the m
-	 */
-	public ColumnSorters(DataFrame m) {
-		mM = m;
-		
-		setBorder(BorderService.getInstance().createBorder(5));
-	}
-	
-	/**
-	 * Adds the.
-	 *
-	 * @param column the column
-	 */
-	public void add(int column) {
-		ColumnSort sort;
-		
-		if (getComponentCount() == 0) {
-			sort = new ColumnSort(mM, "Sort by", column);
-			sort.disableDelete();
-		} else {
-			sort = new ColumnSort(mM, "Then by", column);
-		}
-		
-		sort.addClickListener(new ModernClickListener() {
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				remove((Component)e.getSource());
-				revalidate();
-				repaint();
-			}});
-		
-		add(sort);
-		
-	}
+  /** The m M. */
+  private DataFrame mM;
 
-	/**
-	 * Clear.
-	 */
-	public void clear() {
-		removeAll();
-		
-		add(-1);
-		
-		revalidate();
-		repaint();
-	}
+  /**
+   * Instantiates a new column sorters.
+   *
+   * @param m
+   *          the m
+   */
+  public ColumnSorters(DataFrame m) {
+    mM = m;
 
-	/**
-	 * Gets the sorters.
-	 *
-	 * @return the sorters
-	 */
-	public List<ColumnSort> getSorters() {
-		List<ColumnSort> sorters = new ArrayList<ColumnSort>();
-		
-		for (int i = 0; i < getComponentCount(); ++i) {
-			Component c = getComponent(i);
-			
-			if (c instanceof ColumnSort) {
-				sorters.add((ColumnSort)c);
-			}
-		}
-		
-		return sorters;
-	}
+    setBorder(BorderService.getInstance().createBorder(5));
+  }
+
+  /**
+   * Adds the.
+   *
+   * @param column
+   *          the column
+   */
+  public void add(int column) {
+    ColumnSort sort;
+
+    if (getComponentCount() == 0) {
+      sort = new ColumnSort(mM, "Sort by", column);
+      sort.disableDelete();
+    } else {
+      sort = new ColumnSort(mM, "Then by", column);
+    }
+
+    sort.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        remove((Component) e.getSource());
+        revalidate();
+        repaint();
+      }
+    });
+
+    add(sort);
+
+  }
+
+  /**
+   * Clear.
+   */
+  public void clear() {
+    removeAll();
+
+    add(-1);
+
+    revalidate();
+    repaint();
+  }
+
+  /**
+   * Gets the sorters.
+   *
+   * @return the sorters
+   */
+  public List<ColumnSort> getSorters() {
+    List<ColumnSort> sorters = new ArrayList<ColumnSort>();
+
+    for (int i = 0; i < getComponentCount(); ++i) {
+      Component c = getComponent(i);
+
+      if (c instanceof ColumnSort) {
+        sorters.add((ColumnSort) c);
+      }
+    }
+
+    return sorters;
+  }
 }

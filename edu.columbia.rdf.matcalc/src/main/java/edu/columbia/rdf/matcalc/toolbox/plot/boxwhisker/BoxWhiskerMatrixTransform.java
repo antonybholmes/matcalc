@@ -23,7 +23,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.PlotMatrixTransform;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Transform the rows of a matrix.
@@ -32,32 +31,35 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
  *
  */
 public class BoxWhiskerMatrixTransform extends PlotMatrixTransform {
-	
-	/**
-	 * The member canvas.
-	 */
-	private SubFigure mCanvas;
 
-	/**
-	 * Instantiates a new box whisker matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param inputMatrix the input matrix
-	 * @param canvas the canvas
-	 */
-	public BoxWhiskerMatrixTransform(ModernWindow parent,
-			DataFrame inputMatrix, 
-			SubFigure canvas) {
-		super(parent, "Create Box Whisker Plot", inputMatrix);
-		
-		mCanvas = canvas;
-	}
+  /**
+   * The member canvas.
+   */
+  private SubFigure mCanvas;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
-	 */
-	@Override
-	public Graph2dWindow createWindow() {
-		return new Graph2dWindow((MainMatCalcWindow)getParent(), mCanvas);
-	}
+  /**
+   * Instantiates a new box whisker matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param inputMatrix
+   *          the input matrix
+   * @param canvas
+   *          the canvas
+   */
+  public BoxWhiskerMatrixTransform(ModernWindow parent, DataFrame inputMatrix, SubFigure canvas) {
+    super(parent, "Create Box Whisker Plot", inputMatrix);
+
+    mCanvas = canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
+   */
+  @Override
+  public Graph2dWindow createWindow() {
+    return new Graph2dWindow((MainMatCalcWindow) getParent(), mCanvas);
+  }
 }

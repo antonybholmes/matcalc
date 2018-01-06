@@ -29,55 +29,56 @@ import org.jebtk.modern.widget.ModernWidget;
  * @author Antony Holmes Holmes
  */
 public class DuplicatePanel extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member text delimiter.
-	 */
-	private ModernTextField mTextDelimiter = new ModernTextField(" /// ");
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member header combo.
-	 *
-	 * @param matrix the matrix
-	 */
-	//private MatrixRowAnnotationCombo mHeaderCombo;
+  /**
+   * The member text delimiter.
+   */
+  private ModernTextField mTextDelimiter = new ModernTextField(" /// ");
 
-	/**
-	 * Instantiates a new duplicate panel.
-	 *
-	 * @param matrix the matrix
-	 */
-	public DuplicatePanel(DataFrame matrix) {
-		//ModernLabel label = new ModernLabel("ID", ModernWidget.STANDARD_SIZE);
-		
-		//box2.add(label);
-		
-		//mHeaderCombo = new MatrixRowAnnotationCombo(matrix);
-		
-		//Ui.setSize(mHeaderCombo, new Dimension(180, ModernWidget.WIDGET_HEIGHT));
-		
-		//box2.add(mHeaderCombo);
-		
-		//add(box2);
-		
-		//add(Ui.createVGap(20));
-		
-		add(new HExpandBox("Delimiter", 
-				new ModernTextBorderPanel(mTextDelimiter, ModernWidget.STANDARD_SIZE)));
-		
-	}
-	
-	/**
-	 * Gets the delimiter.
-	 *
-	 * @return the delimiter
-	 */
-	public String getDelimiter() {
-		return mTextDelimiter.getText();
-	}
+  /**
+   * The member header combo.
+   *
+   * @param matrix
+   *          the matrix
+   */
+  // private MatrixRowAnnotationCombo mHeaderCombo;
+
+  /**
+   * Instantiates a new duplicate panel.
+   *
+   * @param matrix
+   *          the matrix
+   */
+  public DuplicatePanel(DataFrame matrix) {
+    // ModernLabel label = new ModernLabel("ID", ModernWidget.STANDARD_SIZE);
+
+    // box2.add(label);
+
+    // mHeaderCombo = new MatrixRowAnnotationCombo(matrix);
+
+    // Ui.setSize(mHeaderCombo, new Dimension(180, ModernWidget.WIDGET_HEIGHT));
+
+    // box2.add(mHeaderCombo);
+
+    // add(box2);
+
+    // add(Ui.createVGap(20));
+
+    add(new HExpandBox("Delimiter", new ModernTextBorderPanel(mTextDelimiter, ModernWidget.STANDARD_SIZE)));
+
+  }
+
+  /**
+   * Gets the delimiter.
+   *
+   * @return the delimiter
+   */
+  public String getDelimiter() {
+    return mTextDelimiter.getText();
+  }
 }

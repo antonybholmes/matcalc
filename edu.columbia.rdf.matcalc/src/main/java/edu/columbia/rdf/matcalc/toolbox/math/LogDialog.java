@@ -40,209 +40,204 @@ import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class LogDialog.
  */
 public class LogDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member radio none.
-	 */
-	private ModernRadioButton mRadioNone = 
-			new ModernRadioButton("None");
-	
-	/**
-	 * The member radio min.
-	 */
-	private ModernRadioButton mRadioMin = 
-			new ModernRadioButton("Minimum");
-	
-	/**
-	 * The member radio add.
-	 */
-	private ModernRadioButton mRadioAdd = 
-			new ModernRadioButton("Add");
-	
-	/** The m radio base. */
-	private ModernRadioButton mRadioBase = 
-			new ModernRadioButton("Base", true);
-	
-	/** The m radio natural. */
-	private ModernRadioButton mRadioNatural = 
-			new ModernRadioButton("Natural");
 
-	/** The m base field. */
-	private ModernCompactSpinner mBaseField = 
-			new ModernCompactSpinner(1, 100, 1);
-	
-	/**
-	 * The member min field.
-	 */
-	private ModernCompactSpinner mMinField = 
-			new ModernCompactSpinner(1, 100, 1);
-	
-	/**
-	 * The member add field.
-	 */
-	private ModernCompactSpinner mAddField =
-			new ModernCompactSpinner(1, 100, 1);
-	
-	/**
-	 * Instantiates a new log dialog.
-	 *
-	 * @param parent the parent
-	 * @param min the min
-	 * @param base the base
-	 * @param natural the natural
-	 */
-	public LogDialog(ModernWindow parent, 
-			double min,
-			int base,
-			boolean natural) {
-		super(parent, "matcalc.modules.math.log.url", ModernDialogTaskType.OK_CANCEL);
-		
-		setTitle("Logarithm Options");
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		setup(min, base, natural);
+  /**
+   * The member radio none.
+   */
+  private ModernRadioButton mRadioNone = new ModernRadioButton("None");
 
-		createUi();
-	}
+  /**
+   * The member radio min.
+   */
+  private ModernRadioButton mRadioMin = new ModernRadioButton("Minimum");
 
-	/**
-	 * Sets the up.
-	 *
-	 * @param min the new up
-	 * @param base the base
-	 * @param natural the natural
-	 */
-	private void setup(double min, int base, boolean natural) {
-		
-		
-		mMinField.setValue(min);
-		
-		new ModernButtonGroup(mRadioBase, mRadioNatural);
-		
-		new ModernButtonGroup(mRadioAdd, mRadioMin, mRadioNone);
-		
-		mRadioNone.doClick();
-		
-		
-		if (natural) {
-			mRadioNatural.doClick();
-		} else {
-			mRadioBase.doClick();
-			mBaseField.setValue(base);
-		}
-		
-		setSize(420, 360);
-		
-		UI.centerWindowToScreen(this);
-	}
+  /**
+   * The member radio add.
+   */
+  private ModernRadioButton mRadioAdd = new ModernRadioButton("Add");
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
+  /** The m radio base. */
+  private ModernRadioButton mRadioBase = new ModernRadioButton("Base", true);
 
-		Box box = VBox.create();
-		
-		sectionHeader("Base", box);
+  /** The m radio natural. */
+  private ModernRadioButton mRadioNatural = new ModernRadioButton("Natural");
 
-		box.add(new HExpandBox(mRadioBase, mBaseField));
-		box.add(UI.createVGap(5));
-		box.add(mRadioNatural);
-		
-		midSectionHeader("Adjustments", box);
-		
-		box.add(mRadioNone);
-		box.add(UI.createVGap(5));
-		box.add(new HExpandBox(mRadioAdd, mAddField));
-		box.add(UI.createVGap(5));
-		box.add(new HExpandBox(mRadioMin, mMinField));
+  /** The m base field. */
+  private ModernCompactSpinner mBaseField = new ModernCompactSpinner(1, 100, 1);
 
-		
-		//JPanel buttonPanel = new Panel(new FlowLayout(FlowLayout.LEFT));
+  /**
+   * The member min field.
+   */
+  private ModernCompactSpinner mMinField = new ModernCompactSpinner(1, 100, 1);
 
-		//importButton.setCanvasSize(new Dimension(100, ModernTheme.getInstance().getClass("widget").getInt("height")));
-		//exportButton.setCanvasSize(new Dimension(100, ModernTheme.getInstance().getClass("widget").getInt("height")));
+  /**
+   * The member add field.
+   */
+  private ModernCompactSpinner mAddField = new ModernCompactSpinner(1, 100, 1);
 
-		//buttonPanel.add(importButton);
-		//buttonPanel.add(exportButton);
+  /**
+   * Instantiates a new log dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param min
+   *          the min
+   * @param base
+   *          the base
+   * @param natural
+   *          the natural
+   */
+  public LogDialog(ModernWindow parent, double min, int base, boolean natural) {
+    super(parent, "matcalc.modules.math.log.url", ModernDialogTaskType.OK_CANCEL);
 
-		//panel.add(buttonPanel, BorderLayout.PAGE_END);
+    setTitle("Logarithm Options");
 
+    setup(min, base, natural);
 
-		setDialogCardContent(box);
-	}
+    createUi();
+  }
 
-	/**
-	 * Gets the min amount.
-	 *
-	 * @return the min amount
-	 */
-	public double getMinAmount() {
-		return mMinField.getValue();
-	}
-	
-	/**
-	 * Gets the adds the amount.
-	 *
-	 * @return the adds the amount
-	 */
-	public double getAddAmount() {
-		return mAddField.getValue();
-	}
-	
-	/**
-	 * Gets the do nothing.
-	 *
-	 * @return the do nothing
-	 */
-	public boolean getDoNothing() {
-		return mRadioNone.isSelected();
-	}
-	
-	/**
-	 * Gets the adds the.
-	 *
-	 * @return the adds the
-	 */
-	public boolean getAdd() {
-		return mRadioAdd.isSelected();
-	}
-	
-	/**
-	 * Gets the min.
-	 *
-	 * @return the min
-	 */
-	public boolean getMin() {
-		return mRadioMin.isSelected();
-	}
-	
-	/**
-	 * Gets the natural.
-	 *
-	 * @return the natural
-	 */
-	public boolean getNatural() {
-		return mRadioNatural.isSelected();
-	}
+  /**
+   * Sets the up.
+   *
+   * @param min
+   *          the new up
+   * @param base
+   *          the base
+   * @param natural
+   *          the natural
+   */
+  private void setup(double min, int base, boolean natural) {
 
-	/**
-	 * Gets the base.
-	 *
-	 * @return the base
-	 */
-	public int getBase() {
-		return mBaseField.getIntValue();
-	}
+    mMinField.setValue(min);
+
+    new ModernButtonGroup(mRadioBase, mRadioNatural);
+
+    new ModernButtonGroup(mRadioAdd, mRadioMin, mRadioNone);
+
+    mRadioNone.doClick();
+
+    if (natural) {
+      mRadioNatural.doClick();
+    } else {
+      mRadioBase.doClick();
+      mBaseField.setValue(base);
+    }
+
+    setSize(420, 360);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    Box box = VBox.create();
+
+    sectionHeader("Base", box);
+
+    box.add(new HExpandBox(mRadioBase, mBaseField));
+    box.add(UI.createVGap(5));
+    box.add(mRadioNatural);
+
+    midSectionHeader("Adjustments", box);
+
+    box.add(mRadioNone);
+    box.add(UI.createVGap(5));
+    box.add(new HExpandBox(mRadioAdd, mAddField));
+    box.add(UI.createVGap(5));
+    box.add(new HExpandBox(mRadioMin, mMinField));
+
+    // JPanel buttonPanel = new Panel(new FlowLayout(FlowLayout.LEFT));
+
+    // importButton.setCanvasSize(new Dimension(100,
+    // ModernTheme.getInstance().getClass("widget").getInt("height")));
+    // exportButton.setCanvasSize(new Dimension(100,
+    // ModernTheme.getInstance().getClass("widget").getInt("height")));
+
+    // buttonPanel.add(importButton);
+    // buttonPanel.add(exportButton);
+
+    // panel.add(buttonPanel, BorderLayout.PAGE_END);
+
+    setDialogCardContent(box);
+  }
+
+  /**
+   * Gets the min amount.
+   *
+   * @return the min amount
+   */
+  public double getMinAmount() {
+    return mMinField.getValue();
+  }
+
+  /**
+   * Gets the adds the amount.
+   *
+   * @return the adds the amount
+   */
+  public double getAddAmount() {
+    return mAddField.getValue();
+  }
+
+  /**
+   * Gets the do nothing.
+   *
+   * @return the do nothing
+   */
+  public boolean getDoNothing() {
+    return mRadioNone.isSelected();
+  }
+
+  /**
+   * Gets the adds the.
+   *
+   * @return the adds the
+   */
+  public boolean getAdd() {
+    return mRadioAdd.isSelected();
+  }
+
+  /**
+   * Gets the min.
+   *
+   * @return the min
+   */
+  public boolean getMin() {
+    return mRadioMin.isSelected();
+  }
+
+  /**
+   * Gets the natural.
+   *
+   * @return the natural
+   */
+  public boolean getNatural() {
+    return mRadioNatural.isSelected();
+  }
+
+  /**
+   * Gets the base.
+   *
+   * @return the base
+   */
+  public int getBase() {
+    return mBaseField.getIntValue();
+  }
 }

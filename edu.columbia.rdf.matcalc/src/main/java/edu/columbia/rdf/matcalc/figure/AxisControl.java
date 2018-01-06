@@ -28,76 +28,73 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisPlotControl.
  */
 public class AxisControl extends ModernSubCollapsePane {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new axis plot control.
-	 *
-	 * @param parent the parent
-	 * @param axis the axis
-	 * @param editLimits the edit limits
-	 */
-	public AxisControl(ModernWindow parent,
-			Axis axis,
-			boolean editLimits) {
-		
-		Box box = VBox.create();
-		box.add(new VisibleControl(parent, axis));
-		box.add(ModernPanel.createVGap());
-		box.add(new AxisLinePlotControl(parent, axis));
-		box.add(ModernPanel.createVGap());
-		box.add(new GridColorPlotControl(parent, axis.getGrid()));
-		box.setBorder(BORDER);
-		
-		if (editLimits) {
-			box.add(ModernPanel.createVGap());
-			box.add(new LimitsPlotControl(parent, axis));
-		}
-		
-		addTab("Options", box);
-		
-		box = VBox.create();
-		box.add(new VisibleControl(parent, axis.getTitle().getFontStyle()));
-		box.add(ModernPanel.createVGap());
-		box.add(new PlotTitleControl(parent, axis.getTitle()));
-		box.add(ModernPanel.createVGap());
-		box.add(new FontControl(parent, axis.getTitle().getFontStyle()));
-		box.setBorder(BORDER);
-		
-		addTab("Title", box);
-		
-		box = VBox.create();
-		
-		box.add(new TickColorPlotControl(parent, 
-				"Major", 
-				axis.getTicks().getMajorTicks()));
-		
-		box.add(ModernPanel.createVGap());
-		
-		box.add(new TickColorPlotControl(parent, 
-				"Minor", 
-				axis.getTicks().getMinorTicks()));
-		
-		box.add(ModernPanel.createVGap());
-		
-		box.add(new TicksInsidePlotControl(parent, axis.getTicks()));
-		box.setBorder(BORDER);
-		
-		addTab("Ticks", box);
-		
-		box = VBox.create();
-		box.add(new VisibleControl(parent, axis.getTicks().getMajorTicks().getFontStyle()));
-		box.add(ModernPanel.createVGap());
-		box.add(new TickLabelPlotControl(parent, axis.getTicks().getMajorTicks()));
-		box.add(ModernPanel.createVGap());
-		box.add(new FontControl(parent, axis.getTicks().getMajorTicks().getFontStyle()));
-		box.setBorder(BORDER);
-		
-		addTab("Tick Labels", box);
-		
-	}
+
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new axis plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param axis
+   *          the axis
+   * @param editLimits
+   *          the edit limits
+   */
+  public AxisControl(ModernWindow parent, Axis axis, boolean editLimits) {
+
+    Box box = VBox.create();
+    box.add(new VisibleControl(parent, axis));
+    box.add(ModernPanel.createVGap());
+    box.add(new AxisLinePlotControl(parent, axis));
+    box.add(ModernPanel.createVGap());
+    box.add(new GridColorPlotControl(parent, axis.getGrid()));
+    box.setBorder(BORDER);
+
+    if (editLimits) {
+      box.add(ModernPanel.createVGap());
+      box.add(new LimitsPlotControl(parent, axis));
+    }
+
+    addTab("Options", box);
+
+    box = VBox.create();
+    box.add(new VisibleControl(parent, axis.getTitle().getFontStyle()));
+    box.add(ModernPanel.createVGap());
+    box.add(new PlotTitleControl(parent, axis.getTitle()));
+    box.add(ModernPanel.createVGap());
+    box.add(new FontControl(parent, axis.getTitle().getFontStyle()));
+    box.setBorder(BORDER);
+
+    addTab("Title", box);
+
+    box = VBox.create();
+
+    box.add(new TickColorPlotControl(parent, "Major", axis.getTicks().getMajorTicks()));
+
+    box.add(ModernPanel.createVGap());
+
+    box.add(new TickColorPlotControl(parent, "Minor", axis.getTicks().getMinorTicks()));
+
+    box.add(ModernPanel.createVGap());
+
+    box.add(new TicksInsidePlotControl(parent, axis.getTicks()));
+    box.setBorder(BORDER);
+
+    addTab("Ticks", box);
+
+    box = VBox.create();
+    box.add(new VisibleControl(parent, axis.getTicks().getMajorTicks().getFontStyle()));
+    box.add(ModernPanel.createVGap());
+    box.add(new TickLabelPlotControl(parent, axis.getTicks().getMajorTicks()));
+    box.add(ModernPanel.createVGap());
+    box.add(new FontControl(parent, axis.getTicks().getMajorTicks().getFontStyle()));
+    box.setBorder(BORDER);
+
+    addTab("Tick Labels", box);
+
+  }
 }

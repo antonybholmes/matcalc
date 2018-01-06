@@ -31,63 +31,68 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisVisibleControl.
  */
 public class InsideControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check box.
-	 */
-	private CheckBox mCheckBox;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member axis.
-	 */
-	private LocationProperties mLayer;
-	
-	
-	/**
-	 * Instantiates a new axis visible control.
-	 *
-	 * @param parent the parent
-	 * @param layer the layer
-	 */
-	public InsideControl(ModernWindow parent, LocationProperties layer) {
-		mLayer = layer;
-		
-		mCheckBox = new ModernCheckSwitch("Inside");
-		mCheckBox.setSelected(layer.isInside());
-		
-		add(mCheckBox);
-		add(ModernPanel.createHGap());
+  /**
+   * The member check box.
+   */
+  private CheckBox mCheckBox;
 
-		mCheckBox.addClickListener(this);
-		
-		layer.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				mCheckBox.setSelected(mLayer.isInside());
-			}});
-	}
-	
+  /**
+   * The member axis.
+   */
+  private LocationProperties mLayer;
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckBox.isSelected();
-	}
+  /**
+   * Instantiates a new axis visible control.
+   *
+   * @param parent
+   *          the parent
+   * @param layer
+   *          the layer
+   */
+  public InsideControl(ModernWindow parent, LocationProperties layer) {
+    mLayer = layer;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mLayer.setInside(mCheckBox.isSelected());
-	}
+    mCheckBox = new ModernCheckSwitch("Inside");
+    mCheckBox.setSelected(layer.isInside());
+
+    add(mCheckBox);
+    add(ModernPanel.createHGap());
+
+    mCheckBox.addClickListener(this);
+
+    layer.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mCheckBox.setSelected(mLayer.isInside());
+      }
+    });
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mLayer.setInside(mCheckBox.isSelected());
+  }
 
 }

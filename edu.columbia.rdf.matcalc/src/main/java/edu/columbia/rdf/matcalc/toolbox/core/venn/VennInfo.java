@@ -19,23 +19,19 @@ import org.jebtk.core.AppVersion;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.help.GuiAppInfo;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class VennInfo.
  */
 public class VennInfo extends GuiAppInfo {
 
-	/**
-	 * Instantiates a new venn info.
-	 */
-	public VennInfo() {
-		super("Venn",
-				new AppVersion(2),
-				"Copyright (C) 2016 Antony Holmes",
-				UIService.getInstance().loadIcon(VennIcon.class, 32),
-				UIService.getInstance().loadIcon(VennIcon.class, 128),
-				"Create Venn diagrams.");
-	}
+  /**
+   * Instantiates a new venn info.
+   */
+  public VennInfo() {
+    super("Venn", new AppVersion(2), "Copyright (C) 2016 Antony Holmes",
+        UIService.getInstance().loadIcon(VennIcon.class, 32), UIService.getInstance().loadIcon(VennIcon.class, 128),
+        "Create Venn diagrams.");
+  }
 
 }

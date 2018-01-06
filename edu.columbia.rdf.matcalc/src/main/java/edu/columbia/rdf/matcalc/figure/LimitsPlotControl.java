@@ -38,109 +38,114 @@ import org.jebtk.modern.window.ModernWindow;
  * The class LimitsPlotControl.
  */
 public class LimitsPlotControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The min text field.
-	 */
-	private ModernTextField mMinTextField = new ModernClipboardTextField();
-	
-	/**
-	 * The max text field.
-	 */
-	private ModernTextField mMaxTextField = new ModernClipboardTextField();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member axis.
-	 */
-	private Axis mAxis;
-	
-	/**
-	 * The class KeyEvents.
-	 */
-	private class KeyEvents implements KeyListener {
+  /**
+   * The min text field.
+   */
+  private ModernTextField mMinTextField = new ModernClipboardTextField();
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyPressed(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+  /**
+   * The max text field.
+   */
+  private ModernTextField mMaxTextField = new ModernClipboardTextField();
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyReleased(KeyEvent e) {
-			if (e.getKeyCode() != KeyEvent.VK_ENTER) {
-				return;
-			}
-			
-			mAxis.setLimits(Double.parseDouble(mMinTextField.getText()), 
-					Double.parseDouble(mMaxTextField.getText()));
-		}
+  /**
+   * The member axis.
+   */
+  private Axis mAxis;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyTyped(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-	
-	/**
-	 * Instantiates a new limits plot control.
-	 *
-	 * @param parent the parent
-	 * @param axis the axis
-	 */
-	public LimitsPlotControl(ModernWindow parent,
-			Axis axis) {
-		mAxis = axis;
-		
-		Box box = HBox.create();
-		
-		ModernAutoSizeLabel label = new ModernAutoSizeLabel("Limits");
-		//Ui.setSize(label, ModernWidget.STANDARD_SIZE);
-		
-		box.add(label);
-		box.add(Box.createHorizontalGlue());
-		box.add(new ModernTextBorderPanel(mMinTextField, ModernWidget.SMALL_SIZE));
-		box.add(ModernPanel.createHGap());
-		box.add(new ModernTextBorderPanel(mMaxTextField, ModernWidget.SMALL_SIZE));
-		add(box);
+  /**
+   * The class KeyEvents.
+   */
+  private class KeyEvents implements KeyListener {
 
-		add(ModernPanel.createVGap());
-		
-		
-		
-		mMinTextField.addKeyListener(new KeyEvents());
-		mMaxTextField.addKeyListener(new KeyEvents());
-		
-		mAxis.addChangeListener(new ChangeListener() {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyPressed(KeyEvent arg0) {
+      // TODO Auto-generated method stub
 
-			@Override
-			public void changed(ChangeEvent e) {
-				update();
-			}});
-		
-		update();
-	}
-	
-	/**
-	 * Update.
-	 */
-	private void update() {
-		mMinTextField.setText(Double.toString(mAxis.getMin()));
-		mMaxTextField.setText(Double.toString(mAxis.getMax()));
-	}
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyReleased(KeyEvent e) {
+      if (e.getKeyCode() != KeyEvent.VK_ENTER) {
+        return;
+      }
+
+      mAxis.setLimits(Double.parseDouble(mMinTextField.getText()), Double.parseDouble(mMaxTextField.getText()));
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+      // TODO Auto-generated method stub
+
+    }
+
+  }
+
+  /**
+   * Instantiates a new limits plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param axis
+   *          the axis
+   */
+  public LimitsPlotControl(ModernWindow parent, Axis axis) {
+    mAxis = axis;
+
+    Box box = HBox.create();
+
+    ModernAutoSizeLabel label = new ModernAutoSizeLabel("Limits");
+    // Ui.setSize(label, ModernWidget.STANDARD_SIZE);
+
+    box.add(label);
+    box.add(Box.createHorizontalGlue());
+    box.add(new ModernTextBorderPanel(mMinTextField, ModernWidget.SMALL_SIZE));
+    box.add(ModernPanel.createHGap());
+    box.add(new ModernTextBorderPanel(mMaxTextField, ModernWidget.SMALL_SIZE));
+    add(box);
+
+    add(ModernPanel.createVGap());
+
+    mMinTextField.addKeyListener(new KeyEvents());
+    mMaxTextField.addKeyListener(new KeyEvents());
+
+    mAxis.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        update();
+      }
+    });
+
+    update();
+  }
+
+  /**
+   * Update.
+   */
+  private void update() {
+    mMinTextField.setText(Double.toString(mAxis.getMin()));
+    mMaxTextField.setText(Double.toString(mAxis.getMax()));
+  }
 }

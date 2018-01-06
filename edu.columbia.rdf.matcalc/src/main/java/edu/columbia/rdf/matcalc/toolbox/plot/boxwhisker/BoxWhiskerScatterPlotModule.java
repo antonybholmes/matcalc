@@ -40,79 +40,88 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Box Whisker Scatter Plot";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Box Whisker Scatter Plot";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		RibbonLargeButton button = new RibbonLargeButton("Box Whisker Scatter", 
-				new Raster32Icon(new BoxWhiskerScatter32VectorIcon()),
-				"Box Whisker Scatter Plot",
-				"Generate a box whisker scatter plot");
-		button.addClickListener(this);
-		//button.setEnabled(false);
+    RibbonLargeButton button = new RibbonLargeButton("Box Whisker Scatter",
+        new Raster32Icon(new BoxWhiskerScatter32VectorIcon()), "Box Whisker Scatter Plot",
+        "Generate a box whisker scatter plot");
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		boxWhiskerPlot();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    boxWhiskerPlot();
+  }
 
+  /**
+   * Box whisker plot.
+   */
+  private void boxWhiskerPlot() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-	/**
-	 * Box whisker plot.
-	 */
-	private void boxWhiskerPlot() {
-		DataFrame m = mParent.getCurrentMatrix();
+    boxWhiskerPlot(m, true);
+  }
 
-		boxWhiskerPlot(m, true);
-	}
+  /**
+   * Box whisker plot.
+   *
+   * @param m
+   *          the m
+   * @param plot
+   *          the plot
+   */
+  private void boxWhiskerPlot(DataFrame m, boolean plot) {
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-	/**
-	 * Box whisker plot.
-	 *
-	 * @param m the m
-	 * @param plot the plot
-	 */
-	private void boxWhiskerPlot(DataFrame m, boolean plot) {
-		Figure figure = Figure.createFigure(); //window.getFigure();
+    SubFigure graph = figure.currentSubFigure();
 
-		SubFigure graph = figure.currentSubFigure();
+    Axes axes = graph.currentAxes();
 
-		Axes axes = graph.currentAxes();
+    XYSeriesGroup allSeries = new XYSeriesGroup("Box Whisker");
 
-		XYSeriesGroup allSeries = new XYSeriesGroup("Box Whisker");
+    for (int c = 0; c < m.getCols(); ++c) {
+      XYSeries series = new XYSeries(m.getColumnName(c), Color.BLACK);
 
-		for (int c = 0; c < m.getCols(); ++c) {
-			XYSeries series = new XYSeries(m.getColumnName(c), Color.BLACK);
+      allSeries.add(series);
+    }
 
-			allSeries.add(series);
-		}
+    PlotFactory.createBoxWhiskerScatterPlot(m, axes, allSeries);
 
-		PlotFactory.createBoxWhiskerScatterPlot(m, axes, allSeries);
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-		
-		window.setVisible(true);
-	}
+    window.setVisible(true);
+  }
 }

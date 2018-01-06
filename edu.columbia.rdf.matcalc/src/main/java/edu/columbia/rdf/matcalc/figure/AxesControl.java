@@ -28,49 +28,51 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisPlotControl.
  */
 public class AxesControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new axis plot control.
-	 *
-	 * @param parent the parent
-	 * @param axes the axes
-	 */
-	public AxesControl(ModernWindow parent, Axes axes) {
-		add(new LayerVisibleControl(parent, axes));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new PlotTitleControl(parent, axes.getTitle()));
-		
-		add(UI.createVGap(10));
-		
-		add(new ModernAutoSizeLabel("LEGEND"));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new LegendControl(parent, axes.getLegend()));
-		
-		add(UI.createVGap(10));
-		
-		add(new ModernAutoSizeLabel("MARGINS"));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new MarginControl(parent, axes));
-		
-		add(UI.createVGap(10));
-		
-		add(new ModernAutoSizeLabel("SIZE"));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new SizeControl(parent, axes));
-		
-		setBorder(ModernWidget.BORDER);
-	}
+
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new axis plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param axes
+   *          the axes
+   */
+  public AxesControl(ModernWindow parent, Axes axes) {
+    add(new LayerVisibleControl(parent, axes));
+
+    add(ModernPanel.createVGap());
+
+    add(new PlotTitleControl(parent, axes.getTitle()));
+
+    add(UI.createVGap(10));
+
+    add(new ModernAutoSizeLabel("LEGEND"));
+
+    add(ModernPanel.createVGap());
+
+    add(new LegendControl(parent, axes.getLegend()));
+
+    add(UI.createVGap(10));
+
+    add(new ModernAutoSizeLabel("MARGINS"));
+
+    add(ModernPanel.createVGap());
+
+    add(new MarginControl(parent, axes));
+
+    add(UI.createVGap(10));
+
+    add(new ModernAutoSizeLabel("SIZE"));
+
+    add(ModernPanel.createVGap());
+
+    add(new SizeControl(parent, axes));
+
+    setBorder(ModernWidget.BORDER);
+  }
 }

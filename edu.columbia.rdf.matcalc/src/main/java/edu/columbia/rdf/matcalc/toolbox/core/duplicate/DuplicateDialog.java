@@ -26,72 +26,71 @@ import org.jebtk.modern.window.ModernWindow;
  * The class DuplicateDialog.
  */
 public class DuplicateDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
 
-	/**
-	 * The member duplicate panel.
-	 */
-	private DuplicatePanel mDuplicatePanel;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member matrix.
-	 */
-	private DataFrame mMatrix;
+  /**
+   * The member duplicate panel.
+   */
+  private DuplicatePanel mDuplicatePanel;
 
+  /**
+   * The member matrix.
+   */
+  private DataFrame mMatrix;
 
-	/**
-	 * Instantiates a new duplicate dialog.
-	 *
-	 * @param parent the parent
-	 * @param matrix the matrix
-	 */
-	public DuplicateDialog(ModernWindow parent, 
-			DataFrame matrix) {
-		super(parent, "matcalc.modules.duplicate.help.url");
-		
-		setTitle("Duplicate Rows");
-		
-		mMatrix = matrix;
-		
-		setup();
+  /**
+   * Instantiates a new duplicate dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param matrix
+   *          the matrix
+   */
+  public DuplicateDialog(ModernWindow parent, DataFrame matrix) {
+    super(parent, "matcalc.modules.duplicate.help.url");
 
-		createUi();
+    setTitle("Duplicate Rows");
 
-	}
+    mMatrix = matrix;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setSize(320, 160);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+    setup();
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		mDuplicatePanel = new DuplicatePanel(mMatrix);
-		
-		setDialogCardContent(mDuplicatePanel);
-	}
+    createUi();
 
-	/**
-	 * Gets the delimiter.
-	 *
-	 * @return the delimiter
-	 */
-	public String getDelimiter() {
-		return mDuplicatePanel.getDelimiter();
-	}
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setSize(320, 160);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    mDuplicatePanel = new DuplicatePanel(mMatrix);
+
+    setDialogCardContent(mDuplicatePanel);
+  }
+
+  /**
+   * Gets the delimiter.
+   *
+   * @return the delimiter
+   */
+  public String getDelimiter() {
+    return mDuplicatePanel.getDelimiter();
+  }
 }

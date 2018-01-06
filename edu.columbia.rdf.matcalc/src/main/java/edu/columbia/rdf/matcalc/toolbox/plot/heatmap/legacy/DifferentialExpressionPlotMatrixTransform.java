@@ -32,37 +32,40 @@ import org.jebtk.modern.window.ModernRibbonWindow;
  *
  */
 public abstract class DifferentialExpressionPlotMatrixTransform extends HeatMapPlotMatrixTransform {
-	
-	/**
-	 * The member comparison groups.
-	 */
-	protected XYSeriesGroup mComparisonGroups;
 
-	/**
-	 * Instantiates a new pattern discovery plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param inputMatrix the input matrix
-	 * @param groups the groups
-	 * @param comparisonGroups the comparison groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public DifferentialExpressionPlotMatrixTransform(ModernRibbonWindow parent,
-			String name,
-			DataFrame inputMatrix,
-			XYSeriesModel groups,
-			XYSeriesGroup comparisonGroups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(parent, name, inputMatrix, groups, rowGroups, countGroups, history, properties);
-		
-		mComparisonGroups = comparisonGroups;
+  /**
+   * The member comparison groups.
+   */
+  protected XYSeriesGroup mComparisonGroups;
 
-	}
+  /**
+   * Instantiates a new pattern discovery plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param inputMatrix
+   *          the input matrix
+   * @param groups
+   *          the groups
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public DifferentialExpressionPlotMatrixTransform(ModernRibbonWindow parent, String name, DataFrame inputMatrix,
+      XYSeriesModel groups, XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Properties properties) {
+    super(parent, name, inputMatrix, groups, rowGroups, countGroups, history, properties);
+
+    mComparisonGroups = comparisonGroups;
+
+  }
 }

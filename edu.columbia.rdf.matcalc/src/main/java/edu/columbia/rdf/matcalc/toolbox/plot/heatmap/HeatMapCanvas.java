@@ -60,348 +60,287 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
  */
 public class HeatMapCanvas extends PlotBoxRow {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-
-
-	/**
-	 * The horizontal gap.
-	 */
-	private Dimension horizontalGap = 
-			new Dimension(MatrixPlotElement.BLOCK_SIZE, 0);
-
-	/**
-	 * The vertical gap.
-	 */
-	private Dimension verticalGap = 
-			new Dimension(0, MatrixPlotElement.BLOCK_SIZE);
-
-	/**
-	 * The constant CHAR_WIDTH.
-	 */
-	private static final int CHAR_WIDTH = 
-			SettingsService.getInstance().getAsInt("graphplot.plot.char-width");
-
-	/**
-	 * The constant LEGEND_WIDTH.
-	 */
-	private static final int LEGEND_WIDTH = 
-			SettingsService.getInstance().getAsInt("plot.legend-width");
-
-	/**
-	 * The constant COLOR_BAR_WIDTH.
-	 */
-	private static final int COLOR_BAR_WIDTH = 
-			SettingsService.getInstance().getAsInt("graphplot.plot.color-bar-width");
-
-	/** The Constant COLOR_BAR_HEIGHT. */
-	private static final int COLOR_BAR_HEIGHT = 
-			SettingsService.getInstance().getAsInt("graphplot.plot.color-bar-height");
-
-	/**
-	 * Instantiates a new heat map canvas.
-	 *
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param min the min
-	 * @param max the max
-	 * @param rowLabelProperties the row label properties
-	 * @param columnLabelProperties the column label properties
-	 * @param groupProperties the group properties
-	 * @param properties the properties
-	 */
-	public HeatMapCanvas(DataFrame matrix,
-			XYSeriesGroup groups,
-			XYSeriesGroup rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			double min,
-			double max,
-			RowLabelProperties rowLabelProperties,
-			ColumnLabelProperties columnLabelProperties,
-			GroupProperties groupProperties,
-			Properties properties) {
-
-		DoubleDim aspectRatio = 
-				(DoubleDim)properties.getProperty("plot.block-size");
-
-		ColorMap colorMap = (ColorMap)properties.getProperty("plot.colormap");
-
-		HeatMapPlotElement heatMapElement = new HeatMapPlotElement(matrix, 
-				colorMap, 
-				aspectRatio);
-
-		heatMapElement.setGridColor((Color)properties.getProperty("plot.grid-color"));
-		heatMapElement.setOutlineColor((Color)properties.getProperty("plot.outline-color"));
-		heatMapElement.setBorderColor((Color)properties.getProperty("plot.border-color"));
-
-		PlotElement element;
-
-		PlotBox columnBox;
-
-		PlotBox emptyVBox = new PlotBoxEmpty(verticalGap);
-		PlotBox emptyHBox = new PlotBoxEmpty(horizontalGap);
-
-		addChild(emptyVBox);
-
-
-		//
-		// Row labels
-		//
-
-		PlotBox rowLabelsBox = new PlotBoxColumn();
-
-		if (rowLabelProperties.showFeatureCounts && 
-				rowLabelProperties.position == RowLabelPosition.RIGHT && 
-				matrix.getRows() > 1) {
-			rowLabelsBox.addChild(emptyHBox);
-
-			element = new CountBracketRightPlotElement(matrix, 
-					countGroups,
-					10, 
-					aspectRatio,
-					rowLabelProperties.color);
-			rowLabelsBox.addChild(element);
-
-
-			rowLabelsBox.addChild(emptyHBox);
-
-			element = new CountPlotElement(matrix,
-					countGroups,
-					100, 
-					aspectRatio, 
-					rowLabelProperties.color);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * The horizontal gap.
+   */
+  private Dimension horizontalGap = new Dimension(MatrixPlotElement.BLOCK_SIZE, 0);
+
+  /**
+   * The vertical gap.
+   */
+  private Dimension verticalGap = new Dimension(0, MatrixPlotElement.BLOCK_SIZE);
+
+  /**
+   * The constant CHAR_WIDTH.
+   */
+  private static final int CHAR_WIDTH = SettingsService.getInstance().getAsInt("graphplot.plot.char-width");
+
+  /**
+   * The constant LEGEND_WIDTH.
+   */
+  private static final int LEGEND_WIDTH = SettingsService.getInstance().getAsInt("plot.legend-width");
+
+  /**
+   * The constant COLOR_BAR_WIDTH.
+   */
+  private static final int COLOR_BAR_WIDTH = SettingsService.getInstance().getAsInt("graphplot.plot.color-bar-width");
+
+  /** The Constant COLOR_BAR_HEIGHT. */
+  private static final int COLOR_BAR_HEIGHT = SettingsService.getInstance().getAsInt("graphplot.plot.color-bar-height");
+
+  /**
+   * Instantiates a new heat map canvas.
+   *
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param min
+   *          the min
+   * @param max
+   *          the max
+   * @param rowLabelProperties
+   *          the row label properties
+   * @param columnLabelProperties
+   *          the column label properties
+   * @param groupProperties
+   *          the group properties
+   * @param properties
+   *          the properties
+   */
+  public HeatMapCanvas(DataFrame matrix, XYSeriesGroup groups, XYSeriesGroup rowGroups, CountGroups countGroups,
+      List<String> history, double min, double max, RowLabelProperties rowLabelProperties,
+      ColumnLabelProperties columnLabelProperties, GroupProperties groupProperties, Properties properties) {
+
+    DoubleDim aspectRatio = (DoubleDim) properties.getProperty("plot.block-size");
+
+    ColorMap colorMap = (ColorMap) properties.getProperty("plot.colormap");
+
+    HeatMapPlotElement heatMapElement = new HeatMapPlotElement(matrix, colorMap, aspectRatio);
+
+    heatMapElement.setGridColor((Color) properties.getProperty("plot.grid-color"));
+    heatMapElement.setOutlineColor((Color) properties.getProperty("plot.outline-color"));
+    heatMapElement.setBorderColor((Color) properties.getProperty("plot.border-color"));
+
+    PlotElement element;
+
+    PlotBox columnBox;
 
-			rowLabelsBox.addChild(element);
-		}
+    PlotBox emptyVBox = new PlotBoxEmpty(verticalGap);
+    PlotBox emptyHBox = new PlotBoxEmpty(horizontalGap);
+
+    addChild(emptyVBox);
+
+    //
+    // Row labels
+    //
+
+    PlotBox rowLabelsBox = new PlotBoxColumn();
+
+    if (rowLabelProperties.showFeatureCounts && rowLabelProperties.position == RowLabelPosition.RIGHT
+        && matrix.getRows() > 1) {
+      rowLabelsBox.addChild(emptyHBox);
+
+      element = new CountBracketRightPlotElement(matrix, countGroups, 10, aspectRatio, rowLabelProperties.color);
+      rowLabelsBox.addChild(element);
+
+      rowLabelsBox.addChild(emptyHBox);
 
-		if (rowLabelProperties.show) {
-			element = new RowLabelsPlotElement(matrix, 
-					rowLabelProperties, 
-					aspectRatio,
-					CHAR_WIDTH);
+      element = new CountPlotElement(matrix, countGroups, 100, aspectRatio, rowLabelProperties.color);
 
-			rowLabelsBox.addChild(element);
-		}
+      rowLabelsBox.addChild(element);
+    }
 
-		if (rowLabelProperties.showFeatureCounts && 
-				rowLabelProperties.position == RowLabelPosition.LEFT 
-				&& matrix.getRows() > 1) {
-			rowLabelsBox.addChild(emptyHBox);
-
-			element = new CountPlotElement(matrix,
-					countGroups,
-					100, 
-					aspectRatio, 
-					rowLabelProperties.color);
-			rowLabelsBox.addChild(element);
+    if (rowLabelProperties.show) {
+      element = new RowLabelsPlotElement(matrix, rowLabelProperties, aspectRatio, CHAR_WIDTH);
 
-			rowLabelsBox.addChild(emptyHBox);
+      rowLabelsBox.addChild(element);
+    }
 
-			element = new CountBracketLeftPlotElement(matrix,
-					countGroups,
-					10, 
-					aspectRatio,
-					rowLabelProperties.color);
-			rowLabelsBox.addChild(element);
-		}
+    if (rowLabelProperties.showFeatureCounts && rowLabelProperties.position == RowLabelPosition.LEFT
+        && matrix.getRows() > 1) {
+      rowLabelsBox.addChild(emptyHBox);
 
+      element = new CountPlotElement(matrix, countGroups, 100, aspectRatio, rowLabelProperties.color);
+      rowLabelsBox.addChild(element);
 
+      rowLabelsBox.addChild(emptyHBox);
 
+      element = new CountBracketLeftPlotElement(matrix, countGroups, 10, aspectRatio, rowLabelProperties.color);
+      rowLabelsBox.addChild(element);
+    }
 
-		PlotBox rowLabelsSpaceBox = 
-				new PlotBoxEmpty(rowLabelsBox.getPreferredSize().height, 0);
+    PlotBox rowLabelsSpaceBox = new PlotBoxEmpty(rowLabelsBox.getPreferredSize().height, 0);
 
-		//
-		// Vertical labels
-		//
+    //
+    // Vertical labels
+    //
 
-		int maxChars = properties.getAsInt("plot.row-label-max-chars");
+    int maxChars = properties.getAsInt("plot.row-label-max-chars");
 
-		//
-		// Create space for the column labels
-		//
+    //
+    // Create space for the column labels
+    //
 
-		if (columnLabelProperties.position == ColumnLabelPosition.TOP) {
-			element = new TopColumnLabelPlotElement(matrix,
-					groups,
-					aspectRatio,
-					properties,
-					columnLabelProperties.color, 
-					CHAR_WIDTH, 
-					maxChars);
-		} else {
-			element = new BottomColumnLabelPlotElement(matrix, 
-					aspectRatio,
-					columnLabelProperties.color, 
-					CHAR_WIDTH, 
-					maxChars);
-		}
+    if (columnLabelProperties.position == ColumnLabelPosition.TOP) {
+      element = new TopColumnLabelPlotElement(matrix, groups, aspectRatio, properties, columnLabelProperties.color,
+          CHAR_WIDTH, maxChars);
+    } else {
+      element = new BottomColumnLabelPlotElement(matrix, aspectRatio, columnLabelProperties.color, CHAR_WIDTH,
+          maxChars);
+    }
 
-		PlotBox columnLabelsBox = element;
+    PlotBox columnLabelsBox = element;
 
-		if (groupProperties.show && groups.getCount() > 0) {
-			columnBox = new PlotBoxColumn();
-			columnBox.addChild(emptyHBox);
+    if (groupProperties.show && groups.getCount() > 0) {
+      columnBox = new PlotBoxColumn();
+      columnBox.addChild(emptyHBox);
 
-			if (rowLabelProperties.show && 
-					rowLabelProperties.position == RowLabelPosition.LEFT) {
-				columnBox.addChild(rowLabelsSpaceBox);
-				columnBox.addChild(emptyHBox);
-			}
+      if (rowLabelProperties.show && rowLabelProperties.position == RowLabelPosition.LEFT) {
+        columnBox.addChild(rowLabelsSpaceBox);
+        columnBox.addChild(emptyHBox);
+      }
 
-			if (rowGroups.getCount() > 0) {
-				columnBox.addChild(emptyHBox);
-				columnBox.addChild(emptyHBox);
-			}
+      if (rowGroups.getCount() > 0) {
+        columnBox.addChild(emptyHBox);
+        columnBox.addChild(emptyHBox);
+      }
 
-			element = new GroupLabelPlotElement(matrix,
-					aspectRatio,
-					groups, 
-					groupProperties);
-			columnBox.addChild(element);
+      element = new GroupLabelPlotElement(matrix, aspectRatio, groups, groupProperties);
+      columnBox.addChild(element);
 
-			addChild(columnBox);
+      addChild(columnBox);
 
-			// space
-			addChild(emptyVBox);
-		}
+      // space
+      addChild(emptyVBox);
+    }
 
+    //
+    // Color bar
+    //
 
+    if (groupProperties.showColors && groups != null && groups.getCount() > 0) {
+      columnBox = new PlotBoxColumn();
 
-		//
-		// Color bar
-		//
+      columnBox.addChild(emptyHBox);
 
-		if (groupProperties.showColors && groups != null && groups.getCount() > 0) {
-			columnBox = new PlotBoxColumn();
+      // If left labels exist
+      if (rowLabelProperties.show && rowLabelProperties.position == RowLabelPosition.LEFT) {
+        columnBox.addChild(rowLabelsSpaceBox);
+        columnBox.addChild(emptyHBox);
+      }
 
-			columnBox.addChild(emptyHBox);
+      element = new GroupColorBarPlotElement(matrix, aspectRatio, groups, groupProperties);
+      columnBox.addChild(element);
+      addChild(columnBox);
 
-			// If left labels exist
-			if (rowLabelProperties.show && 
-					rowLabelProperties.position == RowLabelPosition.LEFT) {
-				columnBox.addChild(rowLabelsSpaceBox);
-				columnBox.addChild(emptyHBox);
-			}
+      addChild(emptyVBox);
+    }
 
-			element = new GroupColorBarPlotElement(matrix, aspectRatio, groups, groupProperties);
-			columnBox.addChild(element);
-			addChild(columnBox);
+    //
+    // Top labels
+    //
 
-			addChild(emptyVBox);
-		}
+    if (columnLabelProperties.show && columnLabelProperties.position == ColumnLabelPosition.TOP) {
+      columnBox = new PlotBoxColumn();
 
+      columnBox.addChild(emptyHBox);
 
-		//
-		// Top labels
-		//
+      // If left labels exist
+      if (rowLabelProperties.show && rowLabelProperties.position == RowLabelPosition.LEFT) {
+        columnBox.addChild(rowLabelsSpaceBox);
+        columnBox.addChild(emptyHBox);
+      }
 
-		if (columnLabelProperties.show && 
-				columnLabelProperties.position == ColumnLabelPosition.TOP) {
-			columnBox = new PlotBoxColumn();
+      columnBox.addChild(columnLabelsBox);
 
-			columnBox.addChild(emptyHBox);
+      addChild(columnBox);
 
-			// If left labels exist
-			if (rowLabelProperties.show && 
-					rowLabelProperties.position == RowLabelPosition.LEFT) {
-				columnBox.addChild(rowLabelsSpaceBox);
-				columnBox.addChild(emptyHBox);
-			}
+      addChild(emptyVBox);
+    } else {
+      addChild(emptyVBox);
+      addChild(emptyVBox);
+    }
 
-			columnBox.addChild(columnLabelsBox);
+    //
+    // cluster
+    //
 
-			addChild(columnBox);
+    columnBox = new PlotBoxColumn();
 
-			addChild(emptyVBox);
-		} else {
-			addChild(emptyVBox);
-			addChild(emptyVBox);
-		}
+    columnBox.addChild(emptyHBox);
 
+    if (rowLabelProperties.show && rowLabelProperties.position == RowLabelPosition.LEFT) {
+      columnBox.addChild(rowLabelsBox);
+      columnBox.addChild(emptyHBox);
+    }
 
-		//
-		// cluster
-		//
+    // For coloring purposes we use a
+    // normalized matrix, regardless of how the user
+    // manipulated the matrix before
 
-		columnBox = new PlotBoxColumn();
+    columnBox.addChild(heatMapElement);
 
-		columnBox.addChild(emptyHBox);
+    if (rowLabelProperties.show && rowLabelProperties.position == RowLabelPosition.RIGHT) {
+      columnBox.addChild(emptyHBox);
+      columnBox.addChild(rowLabelsBox);
+    }
 
-		if (rowLabelProperties.show && 
-				rowLabelProperties.position == RowLabelPosition.LEFT) {
-			columnBox.addChild(rowLabelsBox);
-			columnBox.addChild(emptyHBox);
-		}
+    addChild(columnBox);
 
-		// For coloring purposes we use a
-		// normalized matrix, regardless of how the user
-		// manipulated the matrix before
+    addChild(emptyVBox);
 
-		columnBox.addChild(heatMapElement);
+    //
+    // Labels and legend
+    //
 
+    columnBox = new PlotBoxColumn();
 
-		if (rowLabelProperties.show && 
-				rowLabelProperties.position == RowLabelPosition.RIGHT) {
-			columnBox.addChild(emptyHBox);
-			columnBox.addChild(rowLabelsBox);
-		}
+    columnBox.addChild(emptyHBox);
 
-		addChild(columnBox);
+    // If left labels exist
+    if (rowLabelProperties.show && rowLabelProperties.position == RowLabelPosition.LEFT) {
+      columnBox.addChild(rowLabelsSpaceBox);
+      columnBox.addChild(emptyHBox);
+    }
 
-		addChild(emptyVBox);
+    if (columnLabelProperties.show && columnLabelProperties.position == ColumnLabelPosition.BOTTOM) {
+      columnBox.addChild(columnLabelsBox);
 
-		//
-		// Labels and legend
-		//
+      // legend
+      columnBox.addChild(emptyHBox);
+      // columnBox.addChild(emptyHBox);
+    }
 
-		columnBox = new PlotBoxColumn();
+    PlotBox rowBox = new PlotBoxRow();
 
-		columnBox.addChild(emptyHBox);
+    if ((boolean) properties.getProperty("plot.show-legend")) {
+      element = new GroupsLegendPlotElement(matrix, aspectRatio, LEGEND_WIDTH, groups);
+      rowBox.addChild(element);
+      rowBox.addChild(emptyVBox);
+      element = new ColorBar(colorMap, min, max, new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
+      rowBox.addChild(element);
 
-		// If left labels exist
-		if (rowLabelProperties.show && 
-				rowLabelProperties.position == RowLabelPosition.LEFT) {
-			columnBox.addChild(rowLabelsSpaceBox);
-			columnBox.addChild(emptyHBox);
-		}
+      rowLabelsBox.addChild(emptyVBox);
+    }
 
-		if (columnLabelProperties.show && 
-				columnLabelProperties.position == ColumnLabelPosition.BOTTOM) {
-			columnBox.addChild(columnLabelsBox);
+    element = new MatrixSummaryPlotElement(matrix, history, aspectRatio, 400);
 
-			// legend
-			columnBox.addChild(emptyHBox);
-			//columnBox.addChild(emptyHBox);
-		}
+    rowBox.addChild(element);
 
-		PlotBox rowBox = new PlotBoxRow();
+    columnBox.addChild(rowBox);
 
-		if ((boolean)properties.getProperty("plot.show-legend")) {
-			element = new GroupsLegendPlotElement(matrix, aspectRatio, LEGEND_WIDTH, groups);
-			rowBox.addChild(element);
-			rowBox.addChild(emptyVBox);
-			element = new ColorBar(colorMap, min, max, new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
-			rowBox.addChild(element);
-
-			rowLabelsBox.addChild(emptyVBox);
-		}
-
-		element = new MatrixSummaryPlotElement(matrix, 
-				history, 
-				aspectRatio, 
-				400);
-
-		rowBox.addChild(element);
-
-		columnBox.addChild(rowBox);
-
-		addChild(columnBox);
-	}
+    addChild(columnBox);
+  }
 }

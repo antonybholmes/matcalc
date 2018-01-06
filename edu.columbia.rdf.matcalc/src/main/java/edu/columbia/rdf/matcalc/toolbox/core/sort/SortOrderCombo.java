@@ -23,17 +23,17 @@ import org.jebtk.modern.combobox.ModernComboBox;
  */
 public class SortOrderCombo extends ModernComboBox {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new sort order combo.
-	 */
-	public SortOrderCombo() {
-		addMenuItem("Ascending");
-		addMenuItem("Descending");
-		
-		setSelectedIndex(0);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new sort order combo.
+   */
+  public SortOrderCombo() {
+    addMenuItem("Ascending");
+    addMenuItem("Descending");
+
+    setSelectedIndex(0);
+  }
 
 }

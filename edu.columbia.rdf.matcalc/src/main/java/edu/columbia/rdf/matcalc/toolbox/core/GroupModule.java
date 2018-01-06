@@ -34,110 +34,117 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Group items by an index column and return the counts for each unique
- * index. For example if there are two columns: gender and name, if gender
- * is selected as the index, it will create two groups, male and female and
- * track now many names occur in each group.
+ * Group items by an index column and return the counts for each unique index.
+ * For example if there are two columns: gender and name, if gender is selected
+ * as the index, it will create two groups, male and female and track now many
+ * names occur in each group.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class GroupModule extends CalcModule implements ModernClickListener  {
+public class GroupModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mMatchButton = 
-			new RibbonLargeButton("Group", UIService.getInstance().loadIcon("group", 24));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mMatchButton = new RibbonLargeButton("Group",
+      UIService.getInstance().loadIcon("group", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Group";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Group";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mMatchButton.setToolTip("Group", "Group data.");
+    mMatchButton.setToolTip("Group", "Group data.");
 
-		window.getRibbon().getToolbar("Data").getSection("Tools").add(mMatchButton);
+    window.getRibbon().getToolbar("Data").getSection("Tools").add(mMatchButton);
 
-		mMatchButton.addClickListener(this);
+    mMatchButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("Group")) {
-			match();
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals("Group")) {
+      match();
+    }
+  }
 
-	/**
-	 * Match.
-	 */
-	private void match() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		if (m == null) {
-			return;
-		}
-		
-		List<Integer> columns = mWindow.getSelectedColumns();
-		
-		if (columns.size() < 2) {
-			ModernMessageDialog.createWarningDialog(mWindow, "You must select an index column and a values column.");
-			
-			return;
-		}
+  /**
+   * Match.
+   */
+  private void match() {
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		Map<String, Set<String>> idMap = 
-				DefaultTreeMap.create(new TreeSetCreator<String>()); //new TreeMap<String, Set<String>>();
-		
-		for (int i = 0; i < m.getRows(); ++i) {
-			String id = m.getText(i, columns.get(0));
-			String item = m.getText(i, columns.get(1));
-			
-			idMap.get(id).add(item);
-		}
-		
-		DataFrame ret = 
-				DataFrame.createDataFrame(idMap.size(), 3);
-		
-		ret.setName("Group");
-		
-		ret.setColumnName(0, m.getColumnName(columns.get(0)));
-		ret.setColumnName(1, "Count");
-		ret.setColumnName(2, m.getColumnName(columns.get(1)));
+    if (m == null) {
+      return;
+    }
 
-		List<String> ids = CollectionUtils.toList(idMap.keySet());
-		
-		for (int i = 0; i < ids.size(); ++i) {
-			String id = ids.get(i);
-			
-			ret.set(i, 0, id);
-			ret.set(i, 1, idMap.get(id).size());
-			ret.set(i, 2, TextUtils.scJoin(CollectionUtils.toList(idMap.get(id))));
-		}
-		
-		mWindow.openMatrix(ret);
-	}
+    List<Integer> columns = mWindow.getSelectedColumns();
+
+    if (columns.size() < 2) {
+      ModernMessageDialog.createWarningDialog(mWindow, "You must select an index column and a values column.");
+
+      return;
+    }
+
+    Map<String, Set<String>> idMap = DefaultTreeMap.create(new TreeSetCreator<String>()); // new TreeMap<String,
+                                                                                          // Set<String>>();
+
+    for (int i = 0; i < m.getRows(); ++i) {
+      String id = m.getText(i, columns.get(0));
+      String item = m.getText(i, columns.get(1));
+
+      idMap.get(id).add(item);
+    }
+
+    DataFrame ret = DataFrame.createDataFrame(idMap.size(), 3);
+
+    ret.setName("Group");
+
+    ret.setColumnName(0, m.getColumnName(columns.get(0)));
+    ret.setColumnName(1, "Count");
+    ret.setColumnName(2, m.getColumnName(columns.get(1)));
+
+    List<String> ids = CollectionUtils.toList(idMap.keySet());
+
+    for (int i = 0; i < ids.size(); ++i) {
+      String id = ids.get(i);
+
+      ret.set(i, 0, id);
+      ret.set(i, 1, idMap.get(id).size());
+      ret.set(i, 2, TextUtils.scJoin(CollectionUtils.toList(idMap.get(id))));
+    }
+
+    mWindow.openMatrix(ret);
+  }
 }

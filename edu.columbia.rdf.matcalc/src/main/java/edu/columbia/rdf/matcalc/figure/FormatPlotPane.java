@@ -20,50 +20,49 @@ import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabsModel;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class FormatPlotPane.
  */
 public abstract class FormatPlotPane extends ModernComponent {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member group tabs model.
-	 */
-	protected TabsModel mGroupTabsModel = new TabsModel();
-	
-	/**
-	 * Instantiates a new format plot pane.
-	 */
-	public FormatPlotPane() {
-		setBody(new SegmentTabsPanel(mGroupTabsModel, 80, 20));
-		
-		//setBorder(BORDER);
-	}
-	
-	/**
-	 * Gets the tabs.
-	 *
-	 * @return the tabs
-	 */
-	public TabsModel getTabs() {
-		return mGroupTabsModel;
-	}
-	
-	/**
-	 * Gets the canvas.
-	 *
-	 * @return the canvas
-	 */
-	public abstract PlotBox getCanvas();
-	
-	/**
-	 * Update.
-	 */
-	public abstract void update();
+
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * The member group tabs model.
+   */
+  protected TabsModel mGroupTabsModel = new TabsModel();
+
+  /**
+   * Instantiates a new format plot pane.
+   */
+  public FormatPlotPane() {
+    setBody(new SegmentTabsPanel(mGroupTabsModel, 80, 20));
+
+    // setBorder(BORDER);
+  }
+
+  /**
+   * Gets the tabs.
+   *
+   * @return the tabs
+   */
+  public TabsModel getTabs() {
+    return mGroupTabsModel;
+  }
+
+  /**
+   * Gets the canvas.
+   *
+   * @return the canvas
+   */
+  public abstract PlotBox getCanvas();
+
+  /**
+   * Update.
+   */
+  public abstract void update();
 }

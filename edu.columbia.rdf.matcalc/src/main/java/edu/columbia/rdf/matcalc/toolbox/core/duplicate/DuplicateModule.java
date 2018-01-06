@@ -34,129 +34,129 @@ import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class DuplicateModule.
  */
-public class DuplicateModule extends CalcModule implements ModernClickListener  {
+public class DuplicateModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mDuplicateButton = 
-			new RibbonLargeButton(UIService.getInstance().loadIcon("duplicate", 24));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mDuplicateButton = new RibbonLargeButton(UIService.getInstance().loadIcon("duplicate", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Match";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Match";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mDuplicateButton.setToolTip(new ModernToolTip("Duplicate", 
-				"Duplicate rows."), 
-				mWindow.getRibbon().getToolTipModel());
+    mDuplicateButton.setToolTip(new ModernToolTip("Duplicate", "Duplicate rows."),
+        mWindow.getRibbon().getToolTipModel());
 
-		window.getRibbon().getToolbar("Data").getSection("Tools").add(mDuplicateButton);
+    window.getRibbon().getToolbar("Data").getSection("Tools").add(mDuplicateButton);
 
-		mDuplicateButton.addClickListener(this);
+    mDuplicateButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mDuplicateButton)) {
-			duplicate();
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mDuplicateButton)) {
+      duplicate();
+    }
+  }
 
-	/**
-	 * Match.
-	 */
-	private void duplicate() {
-		int c = mWindow.getSelectedColumn();
+  /**
+   * Match.
+   */
+  private void duplicate() {
+    int c = mWindow.getSelectedColumn();
 
+    if (c == Integer.MIN_VALUE) {
+      ModernMessageDialog.createDialog(mWindow, "You must select a column of to match on.", MessageDialogType.WARNING);
 
-		if (c == Integer.MIN_VALUE) {
-			ModernMessageDialog.createDialog(mWindow, 
-					"You must select a column of to match on.", 
-					MessageDialogType.WARNING);
-			
-			return;
-		}
+      return;
+    }
 
-		DataFrame m = mWindow.getCurrentMatrix();
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		DuplicateDialog dialog = new DuplicateDialog(mWindow, m);
+    DuplicateDialog dialog = new DuplicateDialog(mWindow, m);
 
-		dialog.setVisible(true);
+    dialog.setVisible(true);
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		String delimiter = dialog.getDelimiter();
+    String delimiter = dialog.getDelimiter();
 
-		List<Integer> rows = new ArrayList<Integer>(m.getRows());
-		List<String> ids = new ArrayList<String>(m.getRows());
+    List<Integer> rows = new ArrayList<Integer>(m.getRows());
+    List<String> ids = new ArrayList<String>(m.getRows());
 
-		Splitter splitter = Splitter.on(delimiter);
-		
-		for (int i = 0; i < m.getRows(); ++i) {
-			String text = m.getText(i, c);
-			
-			List<String> tokens = CollectionUtils.uniquePreserveOrder(splitter.text(text));
-			
-			
-			for (String id : tokens) {
-				rows.add(i);
-				ids.add(id.trim());
-			}
-		}
+    Splitter splitter = Splitter.on(delimiter);
 
-		DataFrame ret = DataFrame.createDataFrame(rows.size(), 
-				m.getCols());
+    for (int i = 0; i < m.getRows(); ++i) {
+      String text = m.getText(i, c);
 
+      List<String> tokens = CollectionUtils.uniquePreserveOrder(splitter.text(text));
 
-		ret.setColumnNames(m.getColumnNames());
+      for (String id : tokens) {
+        rows.add(i);
+        ids.add(id.trim());
+      }
+    }
 
-		// first copy the annotations
+    DataFrame ret = DataFrame.createDataFrame(rows.size(), m.getCols());
 
-		for (String name : m.getRowAnnotationNames()) {
-			for (int i = 0; i < rows.size(); ++i) {
-				ret.setRowAnnotation(name, i, m.getRowAnnotation(name, rows.get(i)));
-			}
-		}
+    ret.setColumnNames(m.getColumnNames());
 
-		for (int i = 0; i < rows.size(); ++i) {
-			for (int j = 0; j < m.getCols(); ++j) {
-				if (j == c) {
-					// If we are on the column we selected, use the expanded
-					// value rather than the original
-					ret.set(i, j, ids.get(i));
-				} else {
-					ret.set(i, j, m.get(rows.get(i), j));
-				}
-			}
-		}
+    // first copy the annotations
 
-		mWindow.addToHistory("Duplicate rows", ret);
-	}
+    for (String name : m.getRowAnnotationNames()) {
+      for (int i = 0; i < rows.size(); ++i) {
+        ret.setRowAnnotation(name, i, m.getRowAnnotation(name, rows.get(i)));
+      }
+    }
+
+    for (int i = 0; i < rows.size(); ++i) {
+      for (int j = 0; j < m.getCols(); ++j) {
+        if (j == c) {
+          // If we are on the column we selected, use the expanded
+          // value rather than the original
+          ret.set(i, j, ids.get(i));
+        } else {
+          ret.set(i, j, m.get(rows.get(i), j));
+        }
+      }
+    }
+
+    mWindow.addToHistory("Duplicate rows", ret);
+  }
 }

@@ -34,98 +34,96 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The class LogModule.
  */
 public class PowerModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Power";
-	}
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
-		
-		ModernPopupMenu popup = new ModernPopupMenu();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Power";
+  }
 
-		popup.addMenuItem(new ModernTwoLineMenuItem("m^x", 
-				"Compute the xth power of each cell.", 
-				UIService.getInstance().loadIcon("mx", 24)));
-		popup.addMenuItem(new ModernTwoLineMenuItem("x^m",
-				"Compute x to the power of each cell.",
-				UIService.getInstance().loadIcon("xm", 24)));
-		popup.addMenuItem(new ModernTwoLineMenuItem("e^m",
-				"Compute the exponent of each cell.",
-				UIService.getInstance().loadIcon("em", 24)));
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		// The default behaviour is to do a log2 transform.
-		RibbonLargeDropDownButton button = 
-				new RibbonLargeDropDownButton(UIService.getInstance().loadIcon("xy", 24), popup);
-		button.setChangeText(false);
-		button.setToolTip("Power", "Power functions.");
-		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
-		button.addClickListener(this);
-	}
-	
-	/**
-	 * Power.
-	 *
-	 * @param parent the parent
-	 * @param matrix the matrix
-	 * @param base the base
-	 * @return the annotation matrix
-	 */
-	public static DataFrame power(ModernWindow parent, 
-			DataFrame matrix, 
-			int base) {
-		PowerDialog dialog = new PowerDialog(parent, base);
-		
-		dialog.setVisible(true);
-		
-		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			return MatrixOperations.power(matrix, dialog.getBase());
-		} else {
-			return null;
-		}
-	}
-	
-	public static DataFrame power(ModernWindow parent, 
-			int base,
-			DataFrame matrix) {
-		PowerDialog dialog = new PowerDialog(parent, base);
-		
-		dialog.setVisible(true);
-		
-		if (dialog.getStatus() == ModernDialogStatus.OK) {
-			return MatrixOperations.power(dialog.getBase(), matrix);
-		} else {
-			return null;
-		}
-	}
-	
-	public static DataFrame em(DataFrame matrix) {
-		return MatrixOperations.em(matrix);
-	}
+    ModernPopupMenu popup = new ModernPopupMenu();
 
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("m^x")) {
-			mWindow.addToHistory("m^x", 
-					power(mWindow, mWindow.getCurrentMatrix(), 2));
-		} else if (e.getMessage().equals("x^m")) {
-			mWindow.addToHistory("x^m", 
-					power(mWindow, 2, mWindow.getCurrentMatrix()));
-		} else {
-			mWindow.addToHistory("e^m", em(mWindow.getCurrentMatrix()));
-		}
-	}
+    popup.addMenuItem(new ModernTwoLineMenuItem("m^x", "Compute the xth power of each cell.",
+        UIService.getInstance().loadIcon("mx", 24)));
+    popup.addMenuItem(new ModernTwoLineMenuItem("x^m", "Compute x to the power of each cell.",
+        UIService.getInstance().loadIcon("xm", 24)));
+    popup.addMenuItem(new ModernTwoLineMenuItem("e^m", "Compute the exponent of each cell.",
+        UIService.getInstance().loadIcon("em", 24)));
+
+    // The default behaviour is to do a log2 transform.
+    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton(UIService.getInstance().loadIcon("xy", 24), popup);
+    button.setChangeText(false);
+    button.setToolTip("Power", "Power functions.");
+    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+    button.addClickListener(this);
+  }
+
+  /**
+   * Power.
+   *
+   * @param parent
+   *          the parent
+   * @param matrix
+   *          the matrix
+   * @param base
+   *          the base
+   * @return the annotation matrix
+   */
+  public static DataFrame power(ModernWindow parent, DataFrame matrix, int base) {
+    PowerDialog dialog = new PowerDialog(parent, base);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.OK) {
+      return MatrixOperations.power(matrix, dialog.getBase());
+    } else {
+      return null;
+    }
+  }
+
+  public static DataFrame power(ModernWindow parent, int base, DataFrame matrix) {
+    PowerDialog dialog = new PowerDialog(parent, base);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.OK) {
+      return MatrixOperations.power(dialog.getBase(), matrix);
+    } else {
+      return null;
+    }
+  }
+
+  public static DataFrame em(DataFrame matrix) {
+    return MatrixOperations.em(matrix);
+  }
+
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals("m^x")) {
+      mWindow.addToHistory("m^x", power(mWindow, mWindow.getCurrentMatrix(), 2));
+    } else if (e.getMessage().equals("x^m")) {
+      mWindow.addToHistory("x^m", power(mWindow, 2, mWindow.getCurrentMatrix()));
+    } else {
+      mWindow.addToHistory("e^m", em(mWindow.getCurrentMatrix()));
+    }
+  }
 }

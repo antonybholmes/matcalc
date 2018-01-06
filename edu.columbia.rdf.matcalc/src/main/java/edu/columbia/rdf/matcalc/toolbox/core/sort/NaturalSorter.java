@@ -19,168 +19,176 @@ import java.util.Comparator;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class NaturalSorter implements natural sorting for data so that
- * chr2 comes before chr11 rather than vanilla ascii sorting.
+ * The Class NaturalSorter implements natural sorting for data so that chr2
+ * comes before chr11 rather than vanilla ascii sorting.
  */
 public class NaturalSorter implements Comparator<String> {
-	
-	/**
-	 * Static object for reuse.
-	 */
-	public static final Comparator<String> INSTANCE = new NaturalSorter();
 
-	/* (non-Javadoc)
-	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-	 */
-	@Override
-	public int compare(String o1, String o2) {
-		char[] a = o1.toCharArray();
-		char[] b = o2.toCharArray();
+  /**
+   * Static object for reuse.
+   */
+  public static final Comparator<String> INSTANCE = new NaturalSorter();
 
-		int ia = 0;
-		int ib = 0;
-		char ca;
-		char cb;
-		int result;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+   */
+  @Override
+  public int compare(String o1, String o2) {
+    char[] a = o1.toCharArray();
+    char[] b = o2.toCharArray();
 
-		while (true) {
-			// Look at characters one at a time in each string
-			ca = charAt(a, ia);
-			cb = charAt(b, ib);
+    int ia = 0;
+    int ib = 0;
+    char ca;
+    char cb;
+    int result;
 
-			//
-			// Skip over leading spaces or zeros
-			//
-			
-			while (isLeading(ca)) {
-				ca = charAt(a, ++ia);
-			}
+    while (true) {
+      // Look at characters one at a time in each string
+      ca = charAt(a, ia);
+      cb = charAt(b, ib);
 
-			while (isLeading(cb)) {
-				cb = charAt(b, ++ib);
-			}
+      //
+      // Skip over leading spaces or zeros
+      //
 
-			//
-			// Compare strings
-			//
-			
-			// If the leading portion of the strings are the same, we
-			// try to sort by checking runs of digits in the strings and
-			// compare them numerically
-			if (Character.isDigit(ca) && Character.isDigit(cb)) {
-				result = compareNumericalSuffixes(a, ia, b, ib);
+      while (isLeading(ca)) {
+        ca = charAt(a, ++ia);
+      }
 
-				// If there are differences in the numbers, we have
-				// examined enough of the strings to determine how to
-				// sort them. Otherwise, we keep checking
-				if (result != 0) {
-					return result;
-				}
-			}
+      while (isLeading(cb)) {
+        cb = charAt(b, ++ib);
+      }
 
-			// If ca and cb are 0 it means we have reached the end of both
-			// strings and we are looking at null/terminating characters. It
-			// also means the strings are the same so return 0.
-			if (ca == 0 && cb == 0) {
-				return 0;
-			}
+      //
+      // Compare strings
+      //
 
-			// If at any point we can determine the strings are different,
-			// rank them by testing which character is smaller than the other.
-			if (ca < cb) {
-				return -1;
-			} else if (ca > cb) {
-				return 1;
-			} else {
-				// Chars in both string are the same so move to the next index.
-				++ia;
-				++ib;
-			}
-		}
-	}
+      // If the leading portion of the strings are the same, we
+      // try to sort by checking runs of digits in the strings and
+      // compare them numerically
+      if (Character.isDigit(ca) && Character.isDigit(cb)) {
+        result = compareNumericalSuffixes(a, ia, b, ib);
 
-	/**
-	 * Returns true if the char is a space or zero since we ignore leading
-	 * runs of these characters.
-	 *
-	 * @param c the c
-	 * @return true, if is leading
-	 */
-	private static boolean isLeading(char c) {
-		return Character.isSpaceChar(c) || c == '0';
-	}
+        // If there are differences in the numbers, we have
+        // examined enough of the strings to determine how to
+        // sort them. Otherwise, we keep checking
+        if (result != 0) {
+          return result;
+        }
+      }
 
-	/**
-	 * Compares the suffix of two strings to look for runs of digits to
-	 * make a numerical sort comparison. The prefix of both strings is
-	 * by definition the same so it cannot be used for sorting.
-	 *
-	 * @param a 	String a.
-	 * @param ai The index in a where to begin.
-	 * @param b 	String b.
-	 * @param bi The index in b where to begin.
-	 * @return the int
-	 */
-	private int compareNumericalSuffixes(char[] a, int ai, char[] b, int bi) {
-		int bias = 0;
+      // If ca and cb are 0 it means we have reached the end of both
+      // strings and we are looking at null/terminating characters. It
+      // also means the strings are the same so return 0.
+      if (ca == 0 && cb == 0) {
+        return 0;
+      }
 
-		// The longest run of digits wins. That aside, the greatest
-		// value wins, but we can't know that it will until we've scanned
-		// both numbers to know that they have the same magnitude, so we
-		// remember it in BIAS.
+      // If at any point we can determine the strings are different,
+      // rank them by testing which character is smaller than the other.
+      if (ca < cb) {
+        return -1;
+      } else if (ca > cb) {
+        return 1;
+      } else {
+        // Chars in both string are the same so move to the next index.
+        ++ia;
+        ++ib;
+      }
+    }
+  }
 
-		while (true) {
-			char ca = charAt(a, ai++);
-			char cb = charAt(b, bi++);
+  /**
+   * Returns true if the char is a space or zero since we ignore leading runs of
+   * these characters.
+   *
+   * @param c
+   *          the c
+   * @return true, if is leading
+   */
+  private static boolean isLeading(char c) {
+    return Character.isSpaceChar(c) || c == '0';
+  }
 
-			// Either we come to the end of a run of numbers or the 
-			// strings themselves
-			if (!Character.isDigit(ca) && !Character.isDigit(cb)) {
-				return bias;
-			}
+  /**
+   * Compares the suffix of two strings to look for runs of digits to make a
+   * numerical sort comparison. The prefix of both strings is by definition the
+   * same so it cannot be used for sorting.
+   *
+   * @param a
+   *          String a.
+   * @param ai
+   *          The index in a where to begin.
+   * @param b
+   *          String b.
+   * @param bi
+   *          The index in b where to begin.
+   * @return the int
+   */
+  private int compareNumericalSuffixes(char[] a, int ai, char[] b, int bi) {
+    int bias = 0;
 
-			// A has fewer digits than B so A must be smaller and come
-			// first
-			if (!Character.isDigit(ca)) {
-				return -1;
-			}
+    // The longest run of digits wins. That aside, the greatest
+    // value wins, but we can't know that it will until we've scanned
+    // both numbers to know that they have the same magnitude, so we
+    // remember it in BIAS.
 
-			// B has as fewer digits than A so A must be larger so it comes
-			// after B
-			if (!Character.isDigit(cb)) {
-				return 1;
-			}
+    while (true) {
+      char ca = charAt(a, ai++);
+      char cb = charAt(b, bi++);
 
-			// The first time we encounter a difference, record who is
-			// smaller
-			if (ca < cb) {
-				if (bias == 0) {
-					bias = -1;
-				}
-			}
-			
-			if (ca > cb) {
-				if (bias == 0) {
-					bias = 1;
-				}
-			}
-		}
-	}
+      // Either we come to the end of a run of numbers or the
+      // strings themselves
+      if (!Character.isDigit(ca) && !Character.isDigit(cb)) {
+        return bias;
+      }
 
-	/**
-	 * Returns a char from a char array or 0 if the bounds of the array
-	 * are exceeded. Guaranteed to return a value rather than throwing
-	 * an exception.
-	 *
-	 * @param s the s
-	 * @param i the i
-	 * @return the char
-	 */
-	private static char charAt(final char[] s, int i) {
-		if (i >= s.length) {
-			return 0;
-		} else {
-			return s[i];
-		}
-	}
+      // A has fewer digits than B so A must be smaller and come
+      // first
+      if (!Character.isDigit(ca)) {
+        return -1;
+      }
+
+      // B has as fewer digits than A so A must be larger so it comes
+      // after B
+      if (!Character.isDigit(cb)) {
+        return 1;
+      }
+
+      // The first time we encounter a difference, record who is
+      // smaller
+      if (ca < cb) {
+        if (bias == 0) {
+          bias = -1;
+        }
+      }
+
+      if (ca > cb) {
+        if (bias == 0) {
+          bias = 1;
+        }
+      }
+    }
+  }
+
+  /**
+   * Returns a char from a char array or 0 if the bounds of the array are
+   * exceeded. Guaranteed to return a value rather than throwing an exception.
+   *
+   * @param s
+   *          the s
+   * @param i
+   *          the i
+   * @return the char
+   */
+  private static char charAt(final char[] s, int i) {
+    if (i >= s.length) {
+      return 0;
+    } else {
+      return s[i];
+    }
+  }
 }

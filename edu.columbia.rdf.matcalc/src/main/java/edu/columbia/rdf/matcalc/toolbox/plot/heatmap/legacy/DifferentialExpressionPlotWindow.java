@@ -28,94 +28,75 @@ import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 
 // TODO: Auto-generated Javadoc
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow  {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow {
 
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m comparison groups. */
-	private XYSeriesGroup mComparisonGroups;
+  /** The m comparison groups. */
+  private XYSeriesGroup mComparisonGroups;
 
+  /**
+   * Instantiates a new pattern discovery plot window.
+   *
+   * @param window
+   *          the window
+   * @param name
+   *          the name
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the all groups
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public DifferentialExpressionPlotWindow(ModernRibbonWindow window, String name, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Properties properties) {
+    super(window, matrix, groups, rowGroups, countGroups, history, properties);
 
-	/**
-	 * Instantiates a new pattern discovery plot window.
-	 *
-	 * @param window the window
-	 * @param name the name
-	 * @param matrix the matrix
-	 * @param groups the all groups
-	 * @param comparisonGroups the comparison groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public DifferentialExpressionPlotWindow(ModernRibbonWindow window,
-			String name,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesGroup comparisonGroups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(window, 
-				matrix, 
-				groups, 
-				rowGroups, 
-				countGroups, 
-				history, 
-				properties);
-		
-		mComparisonGroups = comparisonGroups;
-		
-		setFormatPane();
-	}
-	
-	/*
-	@Override
-	public void setMatrix(DataFrame matrix) {
-		super.setMatrix(matrix);
-		
-		setFormatPane();
-	}
-	*/
-	
-	/**
-	 * Sets the format pane.
-	 */
-	public void setFormatPane() {
-		setFormatPane(createFormatPane());
-	}
+    mComparisonGroups = comparisonGroups;
 
-	/**
-	 * Creates the format pane.
-	 *
-	 * @return the format plot pane
-	 */
-	public FormatPlotPane createFormatPane() {
-		return new DifferentialExpressionPanel(this,
-				mMatrix,
-				mGroups,
-				mComparisonGroups,
-				mRowGroups,
-				mZoomModel,
-				mColorMapModel,
-				mColorModel, 
-				mScaleModel,
-				getTabsPane().getModel(),
-				mCountGroups,
-				mHistory,
-				mProperties);
-	}
+    setFormatPane();
+  }
+
+  /*
+   * @Override public void setMatrix(DataFrame matrix) { super.setMatrix(matrix);
+   * 
+   * setFormatPane(); }
+   */
+
+  /**
+   * Sets the format pane.
+   */
+  public void setFormatPane() {
+    setFormatPane(createFormatPane());
+  }
+
+  /**
+   * Creates the format pane.
+   *
+   * @return the format plot pane
+   */
+  public FormatPlotPane createFormatPane() {
+    return new DifferentialExpressionPanel(this, mMatrix, mGroups, mComparisonGroups, mRowGroups, mZoomModel,
+        mColorMapModel, mColorModel, mScaleModel, getTabsPane().getModel(), mCountGroups, mHistory, mProperties);
+  }
 }

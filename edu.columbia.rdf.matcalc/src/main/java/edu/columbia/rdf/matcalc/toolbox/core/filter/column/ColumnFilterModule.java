@@ -28,7 +28,6 @@ import org.jebtk.modern.theme.ThemeService;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Row name.
@@ -37,64 +36,72 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class ColumnFilterModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The button.
-	 */
-	private RibbonLargeButton mButton = new RibbonLargeButton(new Raster24Icon(new FilterVectorIcon(ThemeService.getInstance().colors().getHighlight(8),
-			ThemeService.getInstance().colors().getHighlight(6))),
-			"Filter Columns",
-			"Filter columns.");
-	
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The button.
+   */
+  private RibbonLargeButton mButton = new RibbonLargeButton(
+      new Raster24Icon(new FilterVectorIcon(ThemeService.getInstance().colors().getHighlight(8),
+          ThemeService.getInstance().colors().getHighlight(6))),
+      "Filter Columns", "Filter columns.");
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Filter Columns";
-	}
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
-		
-		mButton.addClickListener(this);
-		
-		mWindow.getRibbon().getToolbar("Data").getSection("Filter").add(mButton);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		order();
-	}
-		
-	/**
-	 * Order.
-	 */
-	private void order() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		ColumnFilterDialog dialog = new ColumnFilterDialog(mWindow, m);
-		
-		dialog.setVisible(true);
-		
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
-		DataFrame ret = 
-				DataFrame.copyInnerColumns(m, dialog.getColumns());
-		
-		mWindow.addToHistory("Filter columns", ret);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Filter Columns";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
+
+    mButton.addClickListener(this);
+
+    mWindow.getRibbon().getToolbar("Data").getSection("Filter").add(mButton);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    order();
+  }
+
+  /**
+   * Order.
+   */
+  private void order() {
+    DataFrame m = mWindow.getCurrentMatrix();
+
+    ColumnFilterDialog dialog = new ColumnFilterDialog(mWindow, m);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    DataFrame ret = DataFrame.copyInnerColumns(m, dialog.getColumns());
+
+    mWindow.addToHistory("Filter columns", ret);
+  }
 }

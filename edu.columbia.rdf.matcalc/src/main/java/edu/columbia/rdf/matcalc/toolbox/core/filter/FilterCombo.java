@@ -23,26 +23,26 @@ import org.jebtk.modern.combobox.ModernComboBox;
  */
 public class FilterCombo extends ModernComboBox {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new sort order combo.
-	 */
-	public FilterCombo() {
-		addMenuItem("equals");
-		addMenuItem("does not equal");
-		addMenuItem("is greater than");
-		addMenuItem("is greater than or equal to");
-		addMenuItem("is less than");
-		addMenuItem("is less than or equal to");
-		addMenuItem("starts with");
-		addMenuItem("does not start with");
-		addMenuItem("ends with");
-		addMenuItem("does not end with");
-		addMenuItem("contains");
-		addMenuItem("does not contain");
-		
-		setSelectedIndex(10);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new sort order combo.
+   */
+  public FilterCombo() {
+    addMenuItem("equals");
+    addMenuItem("does not equal");
+    addMenuItem("is greater than");
+    addMenuItem("is greater than or equal to");
+    addMenuItem("is less than");
+    addMenuItem("is less than or equal to");
+    addMenuItem("starts with");
+    addMenuItem("does not start with");
+    addMenuItem("ends with");
+    addMenuItem("does not end with");
+    addMenuItem("contains");
+    addMenuItem("does not contain");
+
+    setSelectedIndex(10);
+  }
 }

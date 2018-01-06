@@ -57,374 +57,355 @@ import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
  */
 public class VolcanoPlotModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The constant CREATE_GROUPS_MESSAGE.
-	 */
-	private static final String CREATE_GROUPS_MESSAGE = 
-			"You must load or create some groups.";
-
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Volcano Plot";
-	}
-
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
-
-		RibbonLargeButton button = new RibbonLargeButton("Volcano", "Plot", 
-				new Raster32Icon(new VolcanoPlot32VectorIcon()),
-				"Volcano Plot",
-				"Generate a volcano plot");
-		button.addClickListener(this);
-		//button.setEnabled(false);
-
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		try {
-			volcanoPlot();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-
-	/**
-	 * Volcano plot.
-	 *
-	 * @throws ParseException the parse exception
-	 */
-	private void volcanoPlot() throws ParseException {
-		XYSeriesGroup groups = mParent.getGroups();
-
-		if (groups.getCount() < 2) {
-			ModernMessageDialog.createWarningDialog(mParent, CREATE_GROUPS_MESSAGE);
-
-			return;
-		}
-
-		DataFrame m = mParent.getCurrentMatrix();
-
-		if (m == null) {
-			return;
-		}
-
-		VolcanoDialog dialog = new VolcanoDialog(mParent, m, groups);
-
-		dialog.setVisible(true);
-
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-
-		// We are only interested in the opened matrix
-		// without transformations.
-
-		if (dialog.getReset()) {
-			mParent.resetHistory();
-		}
-
-		XYSeries g1 = dialog.getGroup1(); // new Group("g1");
-		XYSeries g2 = dialog.getGroup2(); //new Group("g2");
-
-		groups = new XYSeriesGroup();
-		groups.add(g1);
-		groups.add(g2);
-
-		double pvalue = dialog.getMaxP();
-
-		boolean logData = dialog.getLog2Transform();
-		boolean plot = dialog.getCreatePlot();
-		TestType test = dialog.getTest();
-
-		FDRType fdrType = dialog.getFDRType();
-
-		//CollapseType collapseType = dialog.getCollapseType();
-		//String collapseName = dialog.getCollapseName();
+  /**
+   * The constant CREATE_GROUPS_MESSAGE.
+   */
+  private static final String CREATE_GROUPS_MESSAGE = "You must load or create some groups.";
+
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Volcano Plot";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
+
+    RibbonLargeButton button = new RibbonLargeButton("Volcano", "Plot", new Raster32Icon(new VolcanoPlot32VectorIcon()),
+        "Volcano Plot", "Generate a volcano plot");
+    button.addClickListener(this);
+    // button.setEnabled(false);
+
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    try {
+      volcanoPlot();
+    } catch (ParseException e1) {
+      e1.printStackTrace();
+    }
+  }
+
+  /**
+   * Volcano plot.
+   *
+   * @throws ParseException
+   *           the parse exception
+   */
+  private void volcanoPlot() throws ParseException {
+    XYSeriesGroup groups = mParent.getGroups();
+
+    if (groups.getCount() < 2) {
+      ModernMessageDialog.createWarningDialog(mParent, CREATE_GROUPS_MESSAGE);
+
+      return;
+    }
+
+    DataFrame m = mParent.getCurrentMatrix();
+
+    if (m == null) {
+      return;
+    }
+
+    VolcanoDialog dialog = new VolcanoDialog(mParent, m, groups);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    // We are only interested in the opened matrix
+    // without transformations.
+
+    if (dialog.getReset()) {
+      mParent.resetHistory();
+    }
+
+    XYSeries g1 = dialog.getGroup1(); // new Group("g1");
+    XYSeries g2 = dialog.getGroup2(); // new Group("g2");
+
+    groups = new XYSeriesGroup();
+    groups.add(g1);
+    groups.add(g2);
+
+    double pvalue = dialog.getMaxP();
+
+    boolean logData = dialog.getLog2Transform();
+    boolean plot = dialog.getCreatePlot();
+    TestType test = dialog.getTest();
+
+    FDRType fdrType = dialog.getFDRType();
 
-		volcanoPlot(mParent,
-				m, 
-				pvalue,
-				test,
-				fdrType, 
-				g1, 
-				g2, 
-				logData, 
-				plot);
-	}
+    // CollapseType collapseType = dialog.getCollapseType();
+    // String collapseName = dialog.getCollapseName();
+
+    volcanoPlot(mParent, m, pvalue, test, fdrType, g1, g2, logData, plot);
+  }
 
-	/**
-	 * Volcano plot.
-	 *
-	 * @param m the m
-	 * @param minExp the min exp
-	 * @param alpha the alpha
-	 * @param fdrType the fdr type
-	 * @param g1 the g1
-	 * @param g2 the g2
-	 * @param logData the log data
-	 * @param equalVariance the equal variance
-	 * @param plot the plot
-	 * @throws ParseException the parse exception
-	 */
-	public static void volcanoPlot(MainMatCalcWindow parent,
-			DataFrame m,
-			double alpha,
-			TestType test,
-			FDRType fdrType,
-			XYSeries g1, 
-			XYSeries g2,
-			boolean logData,
-			boolean plot) {
+  /**
+   * Volcano plot.
+   *
+   * @param m
+   *          the m
+   * @param minExp
+   *          the min exp
+   * @param alpha
+   *          the alpha
+   * @param fdrType
+   *          the fdr type
+   * @param g1
+   *          the g1
+   * @param g2
+   *          the g2
+   * @param logData
+   *          the log data
+   * @param equalVariance
+   *          the equal variance
+   * @param plot
+   *          the plot
+   * @throws ParseException
+   *           the parse exception
+   */
+  public static void volcanoPlot(MainMatCalcWindow parent, DataFrame m, double alpha, TestType test, FDRType fdrType,
+      XYSeries g1, XYSeries g2, boolean logData, boolean plot) {
 
-		List<MatrixGroup> groups = new ArrayList<MatrixGroup>();
-		groups.add(g1);
-		groups.add(g2);
+    List<MatrixGroup> groups = new ArrayList<MatrixGroup>();
+    groups.add(g1);
+    groups.add(g2);
 
+    DataFrame columnFilteredM = parent.addToHistory("Keep group columns", DataFrame.copyInnerColumns(m, groups));
 
-		DataFrame columnFilteredM = parent.addToHistory("Keep group columns", 
-						DataFrame.copyInnerColumns(m, groups));
+    DataFrame logM;
 
+    if (logData) {
+      logM = parent.addToHistory("log2(1 + data)", MatrixOperations.log2(MatrixOperations.add(columnFilteredM, 1)));
+    } else {
+      logM = m;
+    }
 
-		DataFrame logM;
+    List<Double> p = SupervisedModule.getP(logM, g1, g2, test);
 
-		if (logData) {
-			logM = parent.addToHistory("log2(1 + data)", 
-					MatrixOperations.log2(MatrixOperations.add(columnFilteredM, 1)));
-		} else {
-			logM = m;
-		}
+    List<Double> foldChanges = MatrixUtils.logFoldChange(logM, g1, g2);
 
+    DataFrame annM = new DataFrame(logM);
+    annM.setNumRowAnnotations("Log2 Fold Change", foldChanges);
+    parent.addToHistory("Add log2 fold changes", annM);
 
-		List<Double> p = SupervisedModule.getP(logM, g1, g2, test);
+    DataFrame pValuesM = new DataFrame(annM);
+    pValuesM.setNumRowAnnotations("P-value", p);
+    parent.addToHistory("Add p-values", pValuesM);
 
-		List<Double> foldChanges = MatrixUtils.logFoldChange(logM, g1, g2);
+    // DataFrame mcollapsed = CollapseModule.collapse(pValuesM,
+    // collapseName,
+    // g1,
+    // g2,
+    // collapseType,
+    // mParent);
 
-		DataFrame annM = new DataFrame(logM);
-		annM.setNumRowAnnotations("Log2 Fold Change", foldChanges);
-		parent.addToHistory("Add log2 fold changes", annM);
+    // mParent.addToHistory("Collapse rows", mcollapsed);
 
-		DataFrame pValuesM = new DataFrame(annM);
-		pValuesM.setNumRowAnnotations("P-value", p);
-		parent.addToHistory("Add p-values", pValuesM);
+    double[] fdr = Statistics.fdr(pValuesM.getRowAnnotationValues("P-value"), fdrType);
 
+    DataFrame fdrM = new DataFrame(pValuesM);
+    fdrM.setNumRowAnnotations("FDR", fdr);
+    parent.addToHistory("False discovery rate", fdrM);
 
-		//DataFrame mcollapsed = CollapseModule.collapse(pValuesM,
-		//		collapseName,
-		//		g1,
-		//		g2,
-		//		collapseType,
-		//		mParent);
+    // filter by fdr
+    // List<IndexedValue<Integer, Double>> pValueIndices =
+    // Statistics.threshold(fdr, alpha);
 
-		//mParent.addToHistory("Collapse rows", mcollapsed);
+    // DataFrame mfdrfiltered = addFlowItem("False discovery filter",
+    // new RowFilterMatrixView(mfdr, IndexedValueInt.indices(pValueIndices)));
 
-		double[] fdr = Statistics.fdr(pValuesM.getRowAnnotationValues("P-value"), 
-				fdrType);
+    double[] fdrAnnotation = fdrM.getRowAnnotationValues("FDR");
 
-		DataFrame fdrM = new DataFrame(pValuesM);
-		fdrM.setNumRowAnnotations("FDR", fdr);
-		parent.addToHistory("False discovery rate", fdrM);
+    double[] pFoldChangeAnnotation = fdrM.getRowAnnotationValues("Log2 Fold Change");
 
+    // need to convert p-values to -log10
 
-		// filter by fdr
-		//List<IndexedValue<Integer, Double>> pValueIndices = 
-		//		Statistics.threshold(fdr, alpha);
+    List<Double> minusLog10PValues = new ArrayList<Double>(fdrAnnotation.length);
 
-		//DataFrame mfdrfiltered = addFlowItem("False discovery filter", 
-		//		new RowFilterMatrixView(mfdr, IndexedValueInt.indices(pValueIndices)));
+    for (Double s : fdrAnnotation) {
+      minusLog10PValues.add(-Mathematics.log10(s));
+    }
 
+    List<Double> log2FoldChanges = new ArrayList<Double>(pFoldChangeAnnotation.length);
 
-		double[] fdrAnnotation = fdrM.getRowAnnotationValues("FDR");
+    for (Double s : pFoldChangeAnnotation) {
+      log2FoldChanges.add(s);
+    }
 
-		double[] pFoldChangeAnnotation = 
-				fdrM.getRowAnnotationValues("Log2 Fold Change");
+    //
+    // Create plot
+    //
 
+    Figure figure = Figure.createFigure();
 
+    SubFigure subFigure = figure.currentSubFigure();
 
+    Axes axes = subFigure.currentAxes();
 
-		// need to convert p-values to -log10
+    axes.getLegend().setInside(false);
 
-		List<Double> minusLog10PValues = 
-				new ArrayList<Double>(fdrAnnotation.length);
+    XYSeries notSigSeries1 = new XYSeries("Non-significant");
+    XYSeries foldUpSeries = new XYSeries("Up");
+    XYSeries foldDownSeries = new XYSeries("Down");
 
-		for (Double s : fdrAnnotation) {
-			minusLog10PValues.add(-Mathematics.log10(s));
-		}
+    notSigSeries1.getStyle().setVisible(false);
+    notSigSeries1.setMarker(ShapeStyle.CIRCLE);
+    notSigSeries1.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.GRAY, 0.5));
+    notSigSeries1.getMarkerStyle().getLineStyle().setColor(Color.GRAY);
 
+    foldUpSeries.getStyle().setVisible(false);
+    foldUpSeries.setMarker(ShapeStyle.CIRCLE);
+    foldUpSeries.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.RED, 0.5));
+    foldUpSeries.getMarkerStyle().getLineStyle().setColor(Color.RED);
 
-		List<Double> log2FoldChanges = 
-				new ArrayList<Double>(pFoldChangeAnnotation.length);
+    foldDownSeries.getStyle().setVisible(false);
 
-		for (Double s : pFoldChangeAnnotation) {
-			log2FoldChanges.add(s);
-		}
+    foldDownSeries.setMarker(ShapeStyle.CIRCLE);
+    foldDownSeries.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.BLUE, 0.5));
+    foldDownSeries.getMarkerStyle().getLineStyle().setColor(Color.BLUE);
 
-		//
-		// Create plot
-		//
+    double pthres = -Mathematics.log10(alpha);
 
-		Figure figure = Figure.createFigure();
+    int c;
 
-		SubFigure subFigure = figure.currentSubFigure();
+    //
+    // No Signal
+    //
 
-		Axes axes = subFigure.currentAxes();
-		
-		axes.getLegend().setInside(false);
+    Matrix foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
 
-		XYSeries notSigSeries1 = new XYSeries("Non-significant");
-		XYSeries foldUpSeries = new XYSeries("Up");
-		XYSeries foldDownSeries = new XYSeries("Down");
+    c = 0;
 
-		notSigSeries1.getStyle().setVisible(false);
-		notSigSeries1.setMarker(ShapeStyle.CIRCLE);
-		notSigSeries1.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.GRAY, 0.5));
-		notSigSeries1.getMarkerStyle().getLineStyle().setColor(Color.GRAY);
-		
-		foldUpSeries.getStyle().setVisible(false);
-		foldUpSeries.setMarker(ShapeStyle.CIRCLE);
-		foldUpSeries.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.RED, 0.5));
-		foldUpSeries.getMarkerStyle().getLineStyle().setColor(Color.RED);
+    for (int i = 0; i < log2FoldChanges.size(); ++i) {
+      if (minusLog10PValues.get(i) <= pthres) {
+        foldM1.update(c, 0, log2FoldChanges.get(i));
+        foldM1.update(c, 1, minusLog10PValues.get(i));
 
-		foldDownSeries.getStyle().setVisible(false);
+        ++c;
+      }
+    }
 
-		foldDownSeries.setMarker(ShapeStyle.CIRCLE);
-		foldDownSeries.getMarkerStyle().getFillStyle().setColor(ColorUtils.tint(Color.BLUE, 0.5));
-		foldDownSeries.getMarkerStyle().getLineStyle().setColor(Color.BLUE);
+    double minX = 0;
+    double minY = 0;
+    double maxX = 1;
+    double maxY = 1;
 
-		double pthres = -Mathematics.log10(alpha);
+    if (foldM1.getRows() > 0) {
+      DataFrame noSigM = new DataFrame(foldM1);
 
-		int c;
+      noSigM.setColumnNames("Non-significant x", "Non-significant y");
 
-		//
-		// No Signal
-		//
+      PlotFactory.createScatterPlot(noSigM, axes, notSigSeries1);
 
-		Matrix foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+      minX = Math.min(minX, MatrixUtils.minInColumn(noSigM, 0));
+      maxX = Math.max(maxX, MatrixUtils.maxInColumn(noSigM, 0));
+      minY = Math.min(minY, MatrixUtils.minInColumn(noSigM, 1));
+      maxY = Math.max(maxY, MatrixUtils.maxInColumn(noSigM, 1));
+    }
 
-		c = 0;
+    //
+    // Down
+    //
 
-		for (int i = 0; i < log2FoldChanges.size(); ++i) {
-			if (minusLog10PValues.get(i) <= pthres) {
-				foldM1.update(c, 0, log2FoldChanges.get(i));
-				foldM1.update(c, 1, minusLog10PValues.get(i));
+    foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
 
-				++c;
-			}
-		}
-		
-		
-		double minX = 0;
-		double minY = 0;
-		double maxX = 1;
-		double maxY = 1;
+    c = 0;
 
-		if (foldM1.getRows() > 0) {
-			DataFrame noSigM = new DataFrame(foldM1);
+    for (int i = 0; i < log2FoldChanges.size(); ++i) {
+      if (minusLog10PValues.get(i) > pthres && log2FoldChanges.get(i) < 0) {
+        foldM1.update(c, 0, log2FoldChanges.get(i));
+        foldM1.update(c, 1, minusLog10PValues.get(i));
 
-			noSigM.setColumnNames("Non-significant x", "Non-significant y");
+        ++c;
+      }
+    }
 
-			PlotFactory.createScatterPlot(noSigM, axes, notSigSeries1);
-			
-			minX = Math.min(minX, MatrixUtils.minInColumn(noSigM, 0));
-			maxX = Math.max(maxX, MatrixUtils.maxInColumn(noSigM, 0));
-			minY = Math.min(minY, MatrixUtils.minInColumn(noSigM, 1));
-			maxY = Math.max(maxY, MatrixUtils.maxInColumn(noSigM, 1));
-		}
+    if (foldM1.getRows() > 0) {
+      DataFrame foldDownM = new DataFrame(foldM1);
 
-		//
-		// Down
-		//
+      foldDownM.setColumnNames(foldDownSeries.getName() + " x", foldDownSeries.getName() + " y");
 
-		foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+      PlotFactory.createScatterPlot(foldDownM, axes, foldDownSeries);
 
-		c = 0;
+      minX = Math.min(minX, MatrixUtils.minInColumn(foldDownM, 0));
+      maxX = Math.max(maxX, MatrixUtils.maxInColumn(foldDownM, 0));
+      minY = Math.min(minY, MatrixUtils.minInColumn(foldDownM, 1));
+      maxY = Math.max(maxY, MatrixUtils.maxInColumn(foldDownM, 1));
+    }
 
-		for (int i = 0; i < log2FoldChanges.size(); ++i) {
-			if (minusLog10PValues.get(i) > pthres && log2FoldChanges.get(i) < 0) {
-				foldM1.update(c, 0, log2FoldChanges.get(i));
-				foldM1.update(c, 1, minusLog10PValues.get(i));
+    //
+    // up
+    //
 
-				++c;
-			}
-		}
+    foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
 
-		if (foldM1.getRows() > 0) {
-			DataFrame foldDownM = new DataFrame(foldM1);
+    c = 0;
 
-			foldDownM.setColumnNames(foldDownSeries.getName() + " x", 
-					foldDownSeries.getName() + " y");
+    for (int i = 0; i < log2FoldChanges.size(); ++i) {
+      if (minusLog10PValues.get(i) > pthres && log2FoldChanges.get(i) >= 0) {
+        foldM1.update(c, 0, log2FoldChanges.get(i));
+        foldM1.update(c, 1, minusLog10PValues.get(i));
 
-			PlotFactory.createScatterPlot(foldDownM, axes, foldDownSeries);
-			
-			minX = Math.min(minX, MatrixUtils.minInColumn(foldDownM, 0));
-			maxX = Math.max(maxX, MatrixUtils.maxInColumn(foldDownM, 0));
-			minY = Math.min(minY, MatrixUtils.minInColumn(foldDownM, 1));
-			maxY = Math.max(maxY, MatrixUtils.maxInColumn(foldDownM, 1));
-		}
+        ++c;
+      }
+    }
 
-		//
-		// up
-		//
+    if (foldM1.getRows() > 0) {
+      DataFrame foldUpM = new DataFrame(foldM1);
 
-		foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+      foldUpM.setColumnNames(foldUpSeries.getName() + " x", foldUpSeries.getName() + " y");
 
-		c = 0;
+      PlotFactory.createScatterPlot(foldUpM, axes, foldUpSeries);
 
-		for (int i = 0; i < log2FoldChanges.size(); ++i) {
-			if (minusLog10PValues.get(i) > pthres && log2FoldChanges.get(i) >= 0) {
-				foldM1.update(c, 0, log2FoldChanges.get(i));
-				foldM1.update(c, 1, minusLog10PValues.get(i));
+      minX = Math.min(minX, MatrixUtils.minInColumn(foldUpM, 0));
+      maxX = Math.max(maxX, MatrixUtils.maxInColumn(foldUpM, 0));
+      minY = Math.min(minY, MatrixUtils.minInColumn(foldUpM, 1));
+      maxY = Math.max(maxY, MatrixUtils.maxInColumn(foldUpM, 1));
+    }
 
-				++c;
-			}
-		}
+    double x = Math.max(Math.abs(minX), Math.abs(maxX));
 
-		if (foldM1.getRows() > 0) {
-			DataFrame foldUpM = new DataFrame(foldM1);
+    axes.getX1Axis().setLimitsAutoRound(Math.signum(minX) * x, Math.signum(maxX) * x);
+    axes.getX1Axis().getTitle().setText("Log2 fold change");
 
-			foldUpM.setColumnNames(foldUpSeries.getName() + " x", 
-					foldUpSeries.getName() + " y");
+    double y = Math.max(Math.abs(minY), Math.abs(maxY));
 
-			PlotFactory.createScatterPlot(foldUpM, axes, foldUpSeries);
-			
-			minX = Math.min(minX, MatrixUtils.minInColumn(foldUpM, 0));
-			maxX = Math.max(maxX, MatrixUtils.maxInColumn(foldUpM, 0));
-			minY = Math.min(minY, MatrixUtils.minInColumn(foldUpM, 1));
-			maxY = Math.max(maxY, MatrixUtils.maxInColumn(foldUpM, 1));
-		}
+    axes.getY1Axis().setLimitsAutoRound(Math.signum(minY) * y, Math.signum(maxY) * y);
+    axes.getY1Axis().getTitle().setText("-Log10 p-value");
 
-		double x = Math.max(Math.abs(minX), Math.abs(maxX));
+    axes.setMargins(100);
 
-		axes.getX1Axis().setLimitsAutoRound(Math.signum(minX) * x, Math.signum(maxX) * x);
-		axes.getX1Axis().getTitle().setText("Log2 fold change");
+    parent.addToHistory(new VolcanoPlotMatrixTransform(parent, fdrM, figure));
 
-
-		double y = Math.max(Math.abs(minY), Math.abs(maxY));
-		
-		axes.getY1Axis().setLimitsAutoRound(Math.signum(minY) * y, Math.signum(maxY) * y);
-		axes.getY1Axis().getTitle().setText("-Log10 p-value");
-
-		axes.setMargins(100);
-
-		parent.addToHistory(new VolcanoPlotMatrixTransform(parent, fdrM, figure));
-		
-		parent.addToHistory("Results", fdrM);
-	}
+    parent.addToHistory("Results", fdrM);
+  }
 }

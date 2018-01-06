@@ -17,17 +17,16 @@ package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.graphplot.ModernPlotCanvas;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The interface CanvasPanel.
  */
 public interface CanvasPanel {
-	
-	/**
-	 * Gets the canvas.
-	 *
-	 * @return the canvas
-	 */
-	public ModernPlotCanvas getCanvas();
+
+  /**
+   * Gets the canvas.
+   *
+   * @return the canvas
+   */
+  public ModernPlotCanvas getCanvas();
 }

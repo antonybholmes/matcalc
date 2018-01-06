@@ -23,7 +23,6 @@ import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.table.ModernTableCheckboxCellRenderer;
 import org.jebtk.modern.theme.ThemeService;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Displays an icon in a table cell.
@@ -32,50 +31,52 @@ import org.jebtk.modern.theme.ThemeService;
  *
  */
 public class ModernTableLayerCellRenderer extends ModernTableCheckboxCellRenderer {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The constant VISIBLE_ICON.
-	 */
-	private final static ModernIcon VISIBLE_ICON = 
-			UIService.getInstance().loadIcon("layer_visible", UIService.ICON_SIZE_16);
-	
-	/**
-	 * The constant INVISIBLE_ICON.
-	 */
-	private final static ModernIcon INVISIBLE_ICON = 
-			UIService.getInstance().loadIcon("blank", UIService.ICON_SIZE_16);
 
-	/**
-	 * Instantiates a new modern table layer cell renderer.
-	 */
-	public ModernTableLayerCellRenderer() {
-		setCanHighlight(false);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.table.ModernTableCheckboxCellRenderer#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	public void drawForegroundAAText(Graphics2D g2) {
+  /**
+   * The constant VISIBLE_ICON.
+   */
+  private final static ModernIcon VISIBLE_ICON = UIService.getInstance().loadIcon("layer_visible",
+      UIService.ICON_SIZE_16);
 
-		int x = (this.getWidth() - UIService.ICON_SIZE_16) / 2;
-		int y = (this.getHeight() - UIService.ICON_SIZE_16) / 2;
-		
-		if (selected) {
-			VISIBLE_ICON.drawIcon(g2, x, y, UIService.ICON_SIZE_16);
-		} else {
-			INVISIBLE_ICON.drawIcon(g2, x, y, UIService.ICON_SIZE_16);
-		}
-		
-		x = (this.getWidth() - UIService.ICON_SIZE_20) / 2;
-		y = (this.getHeight() - UIService.ICON_SIZE_20) / 2;
-		
-		drawRect(g2, 
-				ThemeService.getInstance().colors().getColorHighlight(2), 
-				new Rectangle(x, y, UIService.ICON_SIZE_20, UIService.ICON_SIZE_20));
-	}
+  /**
+   * The constant INVISIBLE_ICON.
+   */
+  private final static ModernIcon INVISIBLE_ICON = UIService.getInstance().loadIcon("blank", UIService.ICON_SIZE_16);
+
+  /**
+   * Instantiates a new modern table layer cell renderer.
+   */
+  public ModernTableLayerCellRenderer() {
+    setCanHighlight(false);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.table.ModernTableCheckboxCellRenderer#drawForegroundAA(
+   * java.awt.Graphics2D)
+   */
+  public void drawForegroundAAText(Graphics2D g2) {
+
+    int x = (this.getWidth() - UIService.ICON_SIZE_16) / 2;
+    int y = (this.getHeight() - UIService.ICON_SIZE_16) / 2;
+
+    if (selected) {
+      VISIBLE_ICON.drawIcon(g2, x, y, UIService.ICON_SIZE_16);
+    } else {
+      INVISIBLE_ICON.drawIcon(g2, x, y, UIService.ICON_SIZE_16);
+    }
+
+    x = (this.getWidth() - UIService.ICON_SIZE_20) / 2;
+    y = (this.getHeight() - UIService.ICON_SIZE_20) / 2;
+
+    drawRect(g2, ThemeService.getInstance().colors().getColorHighlight(2),
+        new Rectangle(x, y, UIService.ICON_SIZE_20, UIService.ICON_SIZE_20));
+  }
 }

@@ -22,5 +22,5 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The Class IOModule.
  */
 public abstract class IOModule extends CalcModule {
-	
+
 }

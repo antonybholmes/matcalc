@@ -43,195 +43,196 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 // TODO: Auto-generated Javadoc
 /**
  * Can compare a column of values to another list to see what is common and
- * record this in a new column next to the reference column. Useful for
- * doing overlaps and keeping data in a specific order in a table.
+ * record this in a new column next to the reference column. Useful for doing
+ * overlaps and keeping data in a specific order in a table.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class FilterModule extends CalcModule implements ModernClickListener  {
+public class FilterModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mFilterButton = 
-			new RibbonLargeButton("Filter", 
-					new Raster24Icon(new FilterVectorIcon(ThemeService.getInstance().colors().getColorHighlight(8),
-							ThemeService.getInstance().colors().getColorHighlight(6))));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mFilterButton = new RibbonLargeButton("Filter",
+      new Raster24Icon(new FilterVectorIcon(ThemeService.getInstance().colors().getColorHighlight(8),
+          ThemeService.getInstance().colors().getColorHighlight(6))));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Filter";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Filter";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mFilterButton.setToolTip(new ModernToolTip("Filter", 
-				"Filter rows in columns."), mWindow.getRibbon().getToolTipModel());
+    mFilterButton.setToolTip(new ModernToolTip("Filter", "Filter rows in columns."),
+        mWindow.getRibbon().getToolTipModel());
 
-		window.getRibbon().getToolbar("Data").getSection("Filter").add(mFilterButton);
+    window.getRibbon().getToolbar("Data").getSection("Filter").add(mFilterButton);
 
-		mFilterButton.addClickListener(this);
+    mFilterButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		try {
-			filter();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    try {
+      filter();
+    } catch (ParseException e1) {
+      e1.printStackTrace();
+    }
+  }
 
-	/**
-	 * Match.
-	 *
-	 * @throws ParseException the parse exception
-	 */
-	private void filter() throws ParseException {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		List<Integer> columns = mWindow.getSelectedColumns();
-		
-		if (columns.size() == 0) {
-			ModernMessageDialog.createDialog(mWindow, 
-					"You must select a column to match on.", 
-					MessageDialogType.WARNING);
-			return;
-		}
-		
-		int c = columns.get(0);
-		
-		FilterDialog dialog = new FilterDialog(mWindow, m, c);
+  /**
+   * Match.
+   *
+   * @throws ParseException
+   *           the parse exception
+   */
+  private void filter() throws ParseException {
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		dialog.setVisible(true);
+    List<Integer> columns = mWindow.getSelectedColumns();
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
-		List<ColumnFilter> columnFilters = dialog.getColumnFilters();
+    if (columns.size() == 0) {
+      ModernMessageDialog.createDialog(mWindow, "You must select a column to match on.", MessageDialogType.WARNING);
+      return;
+    }
 
-		Deque<FilterStackElement> stack =
-				new ArrayDeque<FilterStackElement>();
-		
-		// True for and false for or
-		Deque<Boolean> opStack =
-				new ArrayDeque<Boolean>();
-		
-		// dummy true since all expression begin with true so that the
-		// first filter is ANDed with true so that the infix expression
-		// is built correctly
-		stack.push(new FilterStackElement(true));
-		
-		for (ColumnFilter columnFilter : columnFilters) {
-			
-			// Process ORs since they have a lower precedence than AND.
-			if (!columnFilter.getLogical()) {
-				// OR so remove any ands
-				while (!opStack.isEmpty()) {
-					//System.err.println("peek " + opStack.peek());
-					
-					if (opStack.peek()) {
-						stack.push(new FilterStackElement(SearchStackOperator.AND));
-						opStack.pop();
-					} else {
-						// Stop once we encounter ORs
-						break;
-					}
-				}
-			}
-			
-			stack.push(new FilterStackElement(columnFilter));
-			
-			opStack.push(columnFilter.getLogical());
-		}
-		
-		while (!opStack.isEmpty()) {
-			boolean op = opStack.pop();
-			
-			if (op) {
-				stack.push(new FilterStackElement(SearchStackOperator.AND));
-			} else {
-				stack.push(new FilterStackElement(SearchStackOperator.OR));
-			}
-		}
-		
-		
-		// Reverse the stack to get the evaluation order
-		List<FilterStackElement> operators = 
-				CollectionUtils.reverse(CollectionUtils.toList(stack));
-		
-		// Create a master list of rows in sorted order
-		List<Integer> rows = new ArrayList<Integer>(m.getRows());
-		
-		BooleanFixedStack resultStack = new BooleanFixedStack();
-		
-		for (int i = 0; i < m.getRows(); ++i) {
-			String text = m.getText(i, c);
-			
-			double value = m.getValue(i, c);
-				
-			for (int j = 0; j < operators.size(); ++j) {
-				FilterStackElement op = operators.get(j);
-				
-				//System.err.println("op " + op.op);
-				
-				switch (op.op) {
-				case MATCH:
-					boolean match = op.filter.getFilter().test(text, value);
-					
-					resultStack.push(match);
-					break;
-				case RESULT:
-					resultStack.push(op.result);
-					break;
-				case AND:
-					// We must strict AND rather than lazy and since we
-					// need both operands to be removed from the stack
-					resultStack.push(resultStack.pop() & resultStack.pop());
-					break;
-				case OR:
-					resultStack.push(resultStack.pop() | resultStack.pop());
-					break;
-				default:
-					// Do nothing
-					break;
-				}
-			}
-			
-			// The last entry contains the result of the filter booleans
+    int c = columns.get(0);
 
-			if (resultStack.pop()) {
-				rows.add(i);
-			}
-		}
+    FilterDialog dialog = new FilterDialog(mWindow, m, c);
 
-		
-		DataFrame ret = 
-				DataFrame.createDataFrame(rows.size(), m.getCols());
-		
-		DataFrame.copyColumnAnnotations(m, ret);
-		
-		DataFrame.copyRows(m, rows, ret);
-		
-		mWindow.addToHistory("Filter matrix", ret);
-	}
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    List<ColumnFilter> columnFilters = dialog.getColumnFilters();
+
+    Deque<FilterStackElement> stack = new ArrayDeque<FilterStackElement>();
+
+    // True for and false for or
+    Deque<Boolean> opStack = new ArrayDeque<Boolean>();
+
+    // dummy true since all expression begin with true so that the
+    // first filter is ANDed with true so that the infix expression
+    // is built correctly
+    stack.push(new FilterStackElement(true));
+
+    for (ColumnFilter columnFilter : columnFilters) {
+
+      // Process ORs since they have a lower precedence than AND.
+      if (!columnFilter.getLogical()) {
+        // OR so remove any ands
+        while (!opStack.isEmpty()) {
+          // System.err.println("peek " + opStack.peek());
+
+          if (opStack.peek()) {
+            stack.push(new FilterStackElement(SearchStackOperator.AND));
+            opStack.pop();
+          } else {
+            // Stop once we encounter ORs
+            break;
+          }
+        }
+      }
+
+      stack.push(new FilterStackElement(columnFilter));
+
+      opStack.push(columnFilter.getLogical());
+    }
+
+    while (!opStack.isEmpty()) {
+      boolean op = opStack.pop();
+
+      if (op) {
+        stack.push(new FilterStackElement(SearchStackOperator.AND));
+      } else {
+        stack.push(new FilterStackElement(SearchStackOperator.OR));
+      }
+    }
+
+    // Reverse the stack to get the evaluation order
+    List<FilterStackElement> operators = CollectionUtils.reverse(CollectionUtils.toList(stack));
+
+    // Create a master list of rows in sorted order
+    List<Integer> rows = new ArrayList<Integer>(m.getRows());
+
+    BooleanFixedStack resultStack = new BooleanFixedStack();
+
+    for (int i = 0; i < m.getRows(); ++i) {
+      String text = m.getText(i, c);
+
+      double value = m.getValue(i, c);
+
+      for (int j = 0; j < operators.size(); ++j) {
+        FilterStackElement op = operators.get(j);
+
+        // System.err.println("op " + op.op);
+
+        switch (op.op) {
+        case MATCH:
+          boolean match = op.filter.getFilter().test(text, value);
+
+          resultStack.push(match);
+          break;
+        case RESULT:
+          resultStack.push(op.result);
+          break;
+        case AND:
+          // We must strict AND rather than lazy and since we
+          // need both operands to be removed from the stack
+          resultStack.push(resultStack.pop() & resultStack.pop());
+          break;
+        case OR:
+          resultStack.push(resultStack.pop() | resultStack.pop());
+          break;
+        default:
+          // Do nothing
+          break;
+        }
+      }
+
+      // The last entry contains the result of the filter booleans
+
+      if (resultStack.pop()) {
+        rows.add(i);
+      }
+    }
+
+    DataFrame ret = DataFrame.createDataFrame(rows.size(), m.getCols());
+
+    DataFrame.copyColumnAnnotations(m, ret);
+
+    DataFrame.copyRows(m, rows, ret);
+
+    mWindow.addToHistory("Filter matrix", ret);
+  }
 }

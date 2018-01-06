@@ -28,112 +28,110 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 // TODO: Auto-generated Javadoc
 /**
- * Allow users to choose whether to create a new figure or add to
- * an existing figure.
+ * Allow users to choose whether to create a new figure or add to an existing
+ * figure.
  * 
  * @author Antony Holmes Holmes
  *
  */
 public class FigureDialog extends ModernDialogTaskWindow {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member radio new.
-	 */
-	private ModernRadioButton mRadioNew = 
-			new ModernRadioButton("New");
-	
-	/**
-	 * The member radio existing.
-	 */
-	private ModernRadioButton mRadioExisting = 
-			new ModernRadioButton("Existing");
-	
-	/**
-	 * The member fig combo.
-	 */
-	private SubFigureCombo mFigCombo; // = new FigureCombo();
-	
-	/**
-	 * Instantiates a new figure dialog.
-	 *
-	 * @param parent the parent
-	 */
-	public FigureDialog(ModernWindow parent) {
-		super(parent);
-		
-		setTitle("Create Figure");
-		
-		setup();
 
-		createUi();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	}
+  /**
+   * The member radio new.
+   */
+  private ModernRadioButton mRadioNew = new ModernRadioButton("New");
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		setSize(400, 240);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+  /**
+   * The member radio existing.
+   */
+  private ModernRadioButton mRadioExisting = new ModernRadioButton("Existing");
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		Box content = VBox.create();
+  /**
+   * The member fig combo.
+   */
+  private SubFigureCombo mFigCombo; // = new FigureCombo();
 
-		content.add(mRadioNew);
-		content.add(UI.createVGap(10));
-		
-		Box box = HBox.create();
-		
-		box.add(mRadioExisting);
-		box.add(UI.createHGap(10));
-		box.add(mFigCombo);
-		
-		content.add(box);
-	
-		setContent(content);
-		
-		
-		ModernButtonGroup group = new ModernButtonGroup();
-		
-		group.add(mRadioNew);
-		group.add(mRadioExisting);
-		
-		mRadioNew.setSelected(true);
-		
-		//mRadioExisting.setEnabled(SubFigureService.getInstance().getCount() > 0);
-	}
+  /**
+   * Instantiates a new figure dialog.
+   *
+   * @param parent
+   *          the parent
+   */
+  public FigureDialog(ModernWindow parent) {
+    super(parent);
 
-	/**
-	 * Gets the adds the new figure.
-	 *
-	 * @return the adds the new figure
-	 */
-	public boolean getAddNewFigure() {
-		return mRadioNew.isSelected();
-	}
+    setTitle("Create Figure");
 
-	/**
-	 * Gets the figure name.
-	 *
-	 * @return the figure name
-	 */
-	public String getFigureName() {
-		return mFigCombo.getText();
-	}
+    setup();
+
+    createUi();
+
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    setSize(400, 240);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    Box content = VBox.create();
+
+    content.add(mRadioNew);
+    content.add(UI.createVGap(10));
+
+    Box box = HBox.create();
+
+    box.add(mRadioExisting);
+    box.add(UI.createHGap(10));
+    box.add(mFigCombo);
+
+    content.add(box);
+
+    setContent(content);
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(mRadioNew);
+    group.add(mRadioExisting);
+
+    mRadioNew.setSelected(true);
+
+    // mRadioExisting.setEnabled(SubFigureService.getInstance().getCount() > 0);
+  }
+
+  /**
+   * Gets the adds the new figure.
+   *
+   * @return the adds the new figure
+   */
+  public boolean getAddNewFigure() {
+    return mRadioNew.isSelected();
+  }
+
+  /**
+   * Gets the figure name.
+   *
+   * @return the figure name
+   */
+  public String getFigureName() {
+    return mFigCombo.getText();
+  }
 }

@@ -40,144 +40,151 @@ import org.jebtk.modern.window.ModernWindow;
  * The class MarginControl.
  */
 public class MarginControl extends VBox implements KeyListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member field top.
-	 */
-	private ModernTextField mFieldTop = new ModernNumericalTextField();
-	
-	/**
-	 * The member field left.
-	 */
-	private ModernTextField mFieldLeft = new ModernNumericalTextField();
-	
-	/**
-	 * The member field bottom.
-	 */
-	private ModernTextField mFieldBottom = new ModernNumericalTextField();
-	
-	/**
-	 * The member field right.
-	 */
-	private ModernTextField mFieldRight = new ModernNumericalTextField();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m layer. */
-	private PlotBox mLayer;
+  /**
+   * The member field top.
+   */
+  private ModernTextField mFieldTop = new ModernNumericalTextField();
 
-	/**
-	 * Instantiates a new margin control.
-	 *
-	 * @param parent the parent
-	 * @param layer the layer
-	 */
-	public MarginControl(ModernWindow parent, PlotBox layer) {
+  /**
+   * The member field left.
+   */
+  private ModernTextField mFieldLeft = new ModernNumericalTextField();
 
-		mLayer = layer;
-		
-		MarginProperties margins = layer.getMargins();
+  /**
+   * The member field bottom.
+   */
+  private ModernTextField mFieldBottom = new ModernNumericalTextField();
 
-		Box box;
-		
-		// top
-		box = HBox.create();
-		box.add(new ModernLabel("Top", ModernWidget.TINY_SIZE));
-		box.add(Box.createHorizontalGlue());
-		box.add(new ModernTextBorderPanel(mFieldTop, ModernWidget.SMALL_SIZE));
-		add(box);
-		add(ModernPanel.createVGap());
-		mFieldTop.setText(margins.getTop());
-		mFieldTop.addKeyListener(this);
+  /**
+   * The member field right.
+   */
+  private ModernTextField mFieldRight = new ModernNumericalTextField();
 
-		// left
-		box = HBox.create();
-		box.add(new ModernLabel("Left", ModernWidget.TINY_SIZE));
-		box.add(Box.createHorizontalGlue());
-		box.add(new ModernTextBorderPanel(mFieldLeft, ModernWidget.SMALL_SIZE));
-		add(box);
-		add(ModernPanel.createVGap());
-		mFieldLeft.setText(margins.getLeft());
-		mFieldLeft.addKeyListener(this);
+  /** The m layer. */
+  private PlotBox mLayer;
 
-		// bottom
-		box = HBox.create();
-		box.add(new ModernLabel("Bottom", ModernWidget.TINY_SIZE));
-		box.add(Box.createHorizontalGlue());
-		box.add(new ModernTextBorderPanel(mFieldBottom, ModernWidget.SMALL_SIZE));
-		add(box);
-		add(ModernPanel.createVGap());
-		mFieldBottom.setText(margins.getBottom());
-		mFieldBottom.addKeyListener(this);
+  /**
+   * Instantiates a new margin control.
+   *
+   * @param parent
+   *          the parent
+   * @param layer
+   *          the layer
+   */
+  public MarginControl(ModernWindow parent, PlotBox layer) {
 
-		// right
-		box = HBox.create();
-		box.add(new ModernLabel("Right", ModernWidget.TINY_SIZE));
-		box.add(Box.createHorizontalGlue());
-		box.add(new ModernTextBorderPanel(mFieldRight, ModernWidget.SMALL_SIZE));
-		add(box);
-		add(ModernPanel.createVGap());
-		mFieldRight.setText(margins.getRight());
-		mFieldRight.addKeyListener(this);
-		
-		layer.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				update();
-			}});
-	}
-	
-	private void update() {
-		mFieldTop.setText(mLayer.getMargins().getTop());
-		mFieldLeft.setText(mLayer.getMargins().getLeft());
-		mFieldBottom.setText(mLayer.getMargins().getBottom());
-		mFieldRight.setText(mLayer.getMargins().getRight());
-	}
+    mLayer = layer;
 
-	/**
-	 * Sets the margins.
-	 *
-	 * @throws ParseException the parse exception
-	 */
-	private void setMargins() throws ParseException {
-		mLayer.setMargins(mFieldTop.getAsInt(), 
-				mFieldLeft.getAsInt(), 
-				mFieldBottom.getAsInt(), 
-				mFieldRight.getAsInt());
-	}
+    MarginProperties margins = layer.getMargins();
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			try {
-				setMargins();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
+    Box box;
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+    // top
+    box = HBox.create();
+    box.add(new ModernLabel("Top", ModernWidget.TINY_SIZE));
+    box.add(Box.createHorizontalGlue());
+    box.add(new ModernTextBorderPanel(mFieldTop, ModernWidget.SMALL_SIZE));
+    add(box);
+    add(ModernPanel.createVGap());
+    mFieldTop.setText(margins.getTop());
+    mFieldTop.addKeyListener(this);
 
-	}
+    // left
+    box = HBox.create();
+    box.add(new ModernLabel("Left", ModernWidget.TINY_SIZE));
+    box.add(Box.createHorizontalGlue());
+    box.add(new ModernTextBorderPanel(mFieldLeft, ModernWidget.SMALL_SIZE));
+    add(box);
+    add(ModernPanel.createVGap());
+    mFieldLeft.setText(margins.getLeft());
+    mFieldLeft.addKeyListener(this);
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+    // bottom
+    box = HBox.create();
+    box.add(new ModernLabel("Bottom", ModernWidget.TINY_SIZE));
+    box.add(Box.createHorizontalGlue());
+    box.add(new ModernTextBorderPanel(mFieldBottom, ModernWidget.SMALL_SIZE));
+    add(box);
+    add(ModernPanel.createVGap());
+    mFieldBottom.setText(margins.getBottom());
+    mFieldBottom.addKeyListener(this);
 
-	}
+    // right
+    box = HBox.create();
+    box.add(new ModernLabel("Right", ModernWidget.TINY_SIZE));
+    box.add(Box.createHorizontalGlue());
+    box.add(new ModernTextBorderPanel(mFieldRight, ModernWidget.SMALL_SIZE));
+    add(box);
+    add(ModernPanel.createVGap());
+    mFieldRight.setText(margins.getRight());
+    mFieldRight.addKeyListener(this);
+
+    layer.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        update();
+      }
+    });
+  }
+
+  private void update() {
+    mFieldTop.setText(mLayer.getMargins().getTop());
+    mFieldLeft.setText(mLayer.getMargins().getLeft());
+    mFieldBottom.setText(mLayer.getMargins().getBottom());
+    mFieldRight.setText(mLayer.getMargins().getRight());
+  }
+
+  /**
+   * Sets the margins.
+   *
+   * @throws ParseException
+   *           the parse exception
+   */
+  private void setMargins() throws ParseException {
+    mLayer.setMargins(mFieldTop.getAsInt(), mFieldLeft.getAsInt(), mFieldBottom.getAsInt(), mFieldRight.getAsInt());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+      try {
+        setMargins();
+      } catch (ParseException e1) {
+        e1.printStackTrace();
+      }
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyReleased(KeyEvent arg0) {
+    // TODO Auto-generated method stub
+
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyTyped(KeyEvent arg0) {
+    // TODO Auto-generated method stub
+
+  }
 }

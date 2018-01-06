@@ -27,49 +27,54 @@ import org.jebtk.modern.text.ModernAutoSizeLabel;
  * The class NumericalControl.
  */
 public class NumericalControl extends HBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The field.
-	 */
-	private ModernCompactSpinner field;
-	
-	/**
-	 * Instantiates a new numerical control.
-	 *
-	 * @param name the name
-	 * @param min the min
-	 * @param max the max
-	 * @param value the value
-	 */
-	public NumericalControl(String name, int min, int max, int value) {
-		field = new ModernCompactSpinner(min, max, value);
-		
-		add(new ModernAutoSizeLabel(name));
-		add(Box.createHorizontalGlue());
-		add(field);
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addChangeListener(ChangeListener l) {
-		field.addChangeListener(l);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public int getValue() {
-		return field.getIntValue();
-	}
+  /**
+   * The field.
+   */
+  private ModernCompactSpinner field;
+
+  /**
+   * Instantiates a new numerical control.
+   *
+   * @param name
+   *          the name
+   * @param min
+   *          the min
+   * @param max
+   *          the max
+   * @param value
+   *          the value
+   */
+  public NumericalControl(String name, int min, int max, int value) {
+    field = new ModernCompactSpinner(min, max, value);
+
+    add(new ModernAutoSizeLabel(name));
+    add(Box.createHorizontalGlue());
+    add(field);
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addChangeListener(ChangeListener l) {
+    field.addChangeListener(l);
+  }
+
+  /**
+   * Gets the value.
+   *
+   * @return the value
+   */
+  public int getValue() {
+    return field.getIntValue();
+  }
 
 }

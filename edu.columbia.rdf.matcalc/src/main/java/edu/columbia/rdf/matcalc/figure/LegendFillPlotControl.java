@@ -23,20 +23,21 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisLinePlotControl.
  */
 public class LegendFillPlotControl extends FillStyleControl {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new axis line plot control.
-	 *
-	 * @param parent the parent
-	 * @param legend the legend
-	 */
-	public LegendFillPlotControl(ModernWindow parent,
-			LegendProperties legend) {
-		super(parent, "Background", legend.getStyle().getFillStyle());
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new axis line plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param legend
+   *          the legend
+   */
+  public LegendFillPlotControl(ModernWindow parent, LegendProperties legend) {
+    super(parent, "Background", legend.getStyle().getFillStyle());
+  }
 }

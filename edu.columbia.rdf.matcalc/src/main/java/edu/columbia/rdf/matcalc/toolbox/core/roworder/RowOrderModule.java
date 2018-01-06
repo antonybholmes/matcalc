@@ -29,7 +29,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.icons.OrderRows32VectorIcon;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Row name.
@@ -38,64 +37,72 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class RowOrderModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The button.
-	 */
-	private RibbonLargeButton button = new RibbonLargeButton(new Raster32Icon(new OrderRows32VectorIcon()),
-			"Row Order",
-			"Order rows.");
-	
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The button.
+   */
+  private RibbonLargeButton button = new RibbonLargeButton(new Raster32Icon(new OrderRows32VectorIcon()), "Row Order",
+      "Order rows.");
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Row Order";
-	}
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
-		
-		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Data").getSection("Sort").add(button);
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		filter();
-	}
-		
-	/**
-	 * Filter.
-	 */
-	public void filter() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		RowOrderDialog dialog = new RowOrderDialog(mWindow, m);
-		
-		dialog.setVisible(true);
-		
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
-		List<Integer> rows = dialog.getRows();
-			
-		DataFrame ret = DataFrame.copyRows(m, rows);
-		
-		mWindow.addToHistory("Row order", ret);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Row Order";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
+
+    button.addClickListener(this);
+    mWindow.getRibbon().getToolbar("Data").getSection("Sort").add(button);
+
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    filter();
+  }
+
+  /**
+   * Filter.
+   */
+  public void filter() {
+    DataFrame m = mWindow.getCurrentMatrix();
+
+    RowOrderDialog dialog = new RowOrderDialog(mWindow, m);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    List<Integer> rows = dialog.getRows();
+
+    DataFrame ret = DataFrame.copyRows(m, rows);
+
+    mWindow.addToHistory("Row order", ret);
+  }
 }

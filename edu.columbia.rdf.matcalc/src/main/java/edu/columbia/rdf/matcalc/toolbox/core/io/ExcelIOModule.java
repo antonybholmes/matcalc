@@ -20,31 +20,32 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Allow users to open and save Excel files. This module provides file
- * types, but expects other modules to handle opening and saving.
+ * Allow users to open and save Excel files. This module provides file types,
+ * but expects other modules to handle opening and saving.
  *
  * @author Antony Holmes Holmes
  */
 public class ExcelIOModule extends CalcModule {
-	
-	/** The Constant FILTER. */
-	private static final GuiFileExtFilter FILTER = new ExcelGuiFileFilter();
 
-	/**
-	 * Instantiates a new xlsx IO module.
-	 */
-	public ExcelIOModule() {
-		registerFileOpenType(FILTER);
-	}
+  /** The Constant FILTER. */
+  private static final GuiFileExtFilter FILTER = new ExcelGuiFileFilter();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Excel IO";
-	}
+  /**
+   * Instantiates a new xlsx IO module.
+   */
+  public ExcelIOModule() {
+    registerFileOpenType(FILTER);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Excel IO";
+  }
 }

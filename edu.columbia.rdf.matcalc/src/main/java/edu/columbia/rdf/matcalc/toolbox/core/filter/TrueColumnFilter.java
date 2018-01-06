@@ -23,25 +23,29 @@ import org.jebtk.math.matrix.DataFrame;
  */
 public class TrueColumnFilter extends ColumnFilter {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new true column filter.
-	 *
-	 * @param m the m
-	 * @param isFirst the is first
-	 */
-	public TrueColumnFilter(DataFrame m, boolean isFirst) {
-		super(m, isFirst);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.ColumnFilter#getFilter()
-	 */
-	@Override
-	public Filter getFilter() {
-		return TrueFilter.INSTANCE;
-	}
+  /**
+   * Instantiates a new true column filter.
+   *
+   * @param m
+   *          the m
+   * @param isFirst
+   *          the is first
+   */
+  public TrueColumnFilter(DataFrame m, boolean isFirst) {
+    super(m, isFirst);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.ColumnFilter#getFilter()
+   */
+  @Override
+  public Filter getFilter() {
+    return TrueFilter.INSTANCE;
+  }
 
 }

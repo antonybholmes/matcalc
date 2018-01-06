@@ -18,63 +18,57 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
 public class PasteModule extends CalcModule implements ModernClickListener {
-	
-	public final static Logger LOG = 
-			LoggerFactory.getLogger(PasteModule.class);
-	
-	private MainMatCalcWindow mWindow;
 
-	@Override
-	public void run(String... args) {
-		// Do nothing
-	}
+  public final static Logger LOG = LoggerFactory.getLogger(PasteModule.class);
 
-	@Override
-	public String getName() {
-		return "Paste";
-	}
-	
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  private MainMatCalcWindow mWindow;
 
-		Ribbon ribbon = window.getRibbon();
+  @Override
+  public void run(String... args) {
+    // Do nothing
+  }
 
-		ModernClickWidget button;
+  @Override
+  public String getName() {
+    return "Paste";
+  }
 
-		button = new RibbonLargeButton(UIService.getInstance().loadIcon("paste_files", 24));
-		button.setToolTip(new ModernToolTip("Paste Files", 
-				"Paste multiple files column wise."), 
-				ribbon.getToolTipModel());
-		button.addClickListener(this);
-		ribbon.getToolbar("Data").getSection("Tools").add(button);
-	}
-	
-	@Override
-	public void clicked(ModernClickEvent e) {
-		paste();
-	}
-	
-	private void paste() {
-		PasteDialog dialog = new PasteDialog(mWindow);
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		dialog.setVisible(true);
+    Ribbon ribbon = window.getRibbon();
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    ModernClickWidget button;
 
-		List<Path> files = dialog.getFiles();
-		
-		if (files.size() == 0) {
-			return;
-		}
-		
-		PasteTask task = new PasteTask(mWindow, 
-				files, 
-				dialog.getDelimiter(), 
-				dialog.getCommonIndex());
-			
-		task.doInBackground();
-	}
+    button = new RibbonLargeButton(UIService.getInstance().loadIcon("paste_files", 24));
+    button.setToolTip(new ModernToolTip("Paste Files", "Paste multiple files column wise."), ribbon.getToolTipModel());
+    button.addClickListener(this);
+    ribbon.getToolbar("Data").getSection("Tools").add(button);
+  }
+
+  @Override
+  public void clicked(ModernClickEvent e) {
+    paste();
+  }
+
+  private void paste() {
+    PasteDialog dialog = new PasteDialog(mWindow);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    List<Path> files = dialog.getFiles();
+
+    if (files.size() == 0) {
+      return;
+    }
+
+    PasteTask task = new PasteTask(mWindow, files, dialog.getDelimiter(), dialog.getCommonIndex());
+
+    task.doInBackground();
+  }
 }

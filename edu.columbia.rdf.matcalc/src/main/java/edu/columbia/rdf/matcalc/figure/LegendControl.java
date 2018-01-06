@@ -25,36 +25,37 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisPlotControl.
  */
 public class LegendControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new axis plot control.
-	 *
-	 * @param parent the parent
-	 * @param legend the legend
-	 */
-	public LegendControl(ModernWindow parent,
-			LegendProperties legend) {
-		add(new VisibleControl(parent, legend));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new LegendPositionControl(legend));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new LegendLinePlotControl(parent, legend));
-		
-		add(ModernPanel.createVGap());
-				
-		add(new LegendFillPlotControl(parent, legend));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new InsideControl(parent, legend));
-	}
+
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new axis plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param legend
+   *          the legend
+   */
+  public LegendControl(ModernWindow parent, LegendProperties legend) {
+    add(new VisibleControl(parent, legend));
+
+    add(ModernPanel.createVGap());
+
+    add(new LegendPositionControl(legend));
+
+    add(ModernPanel.createVGap());
+
+    add(new LegendLinePlotControl(parent, legend));
+
+    add(ModernPanel.createVGap());
+
+    add(new LegendFillPlotControl(parent, legend));
+
+    add(ModernPanel.createVGap());
+
+    add(new InsideControl(parent, legend));
+  }
 }

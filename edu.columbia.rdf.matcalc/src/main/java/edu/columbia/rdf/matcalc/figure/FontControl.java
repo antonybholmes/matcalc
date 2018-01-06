@@ -47,161 +47,160 @@ import org.jebtk.modern.window.ModernWindow;
  */
 public class FontControl extends VBox {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check visible.
-	 */
-	private ModernComboBox mFontsCombo = new FontsComboBox();
+  /**
+   * The member check visible.
+   */
+  private ModernComboBox mFontsCombo = new FontsComboBox();
 
-	/** The m font sizes combo. */
-	private ModernComboBox mFontSizesCombo = new FontSizesComboBox();
+  /** The m font sizes combo. */
+  private ModernComboBox mFontSizesCombo = new FontSizesComboBox();
 
-	/** The m bold button. */
-	private ModernCheckButton mBoldButton = 
-			new ModernCheckButton(UIService.getInstance().loadIcon("font_bold", UIService.ICON_SIZE_16));
+  /** The m bold button. */
+  private ModernCheckButton mBoldButton = new ModernCheckButton(
+      UIService.getInstance().loadIcon("font_bold", UIService.ICON_SIZE_16));
 
-	/**
-	 * The italic button.
-	 */
-	private ModernCheckButton mItalicButton = 
-			new ModernCheckButton(UIService.getInstance().loadIcon("font_italic", UIService.ICON_SIZE_16));
+  /**
+   * The italic button.
+   */
+  private ModernCheckButton mItalicButton = new ModernCheckButton(
+      UIService.getInstance().loadIcon("font_italic", UIService.ICON_SIZE_16));
 
-	/**
-	 * The underline button.
-	 */
-	private ModernCheckButton mUnderlineButton = 
-			new ModernCheckButton(UIService.getInstance().loadIcon("font_underline", UIService.ICON_SIZE_16));
+  /**
+   * The underline button.
+   */
+  private ModernCheckButton mUnderlineButton = new ModernCheckButton(
+      UIService.getInstance().loadIcon("font_underline", UIService.ICON_SIZE_16));
 
-	/** The m properties. */
-	private FontProperties mProperties;
+  /** The m properties. */
+  private FontProperties mProperties;
 
-	/** The m color button. */
-	private ColorSwatchButton mColorButton;
+  /** The m color button. */
+  private ColorSwatchButton mColorButton;
 
+  /**
+   * Instantiates a new tick color plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param properties
+   *          the properties
+   */
+  public FontControl(ModernWindow parent, FontProperties properties) {
+    mProperties = properties;
 
-	/**
-	 * Instantiates a new tick color plot control.
-	 *
-	 * @param parent the parent
-	 * @param properties the properties
-	 */
-	public FontControl(ModernWindow parent, FontProperties properties) {
-		mProperties = properties;
-		
-		mColorButton = new ColorSwatchButton(parent, properties.getColor());
-		
-		mColorButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mProperties.setColor(mColorButton.getSelectedColor());
-			}});
+    mColorButton = new ColorSwatchButton(parent, properties.getColor());
 
-		Box box = HBox.create();
+    mColorButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mProperties.setColor(mColorButton.getSelectedColor());
+      }
+    });
 
-		UI.setMinMaxSize(mFontsCombo, ModernWidget.MIN_SIZE, ModernWidget.MAX_SIZE);
-		box.add(mFontsCombo);
-		box.add(ModernPanel.createHGap());
-		box.add(mFontSizesCombo);
-		add(box);
+    Box box = HBox.create();
 
-		add(ModernPanel.createVGap());
+    UI.setMinMaxSize(mFontsCombo, ModernWidget.MIN_SIZE, ModernWidget.MAX_SIZE);
+    box.add(mFontsCombo);
+    box.add(ModernPanel.createHGap());
+    box.add(mFontSizesCombo);
+    add(box);
 
-		box = HBox.create();
-		box.add(mBoldButton);
-		box.add(mItalicButton);
-		box.add(mUnderlineButton);
-		box.add(ModernPanel.createHGap());
-		box.add(mColorButton);
-		add(box);
-		//setBorder(ModernWidget.BORDER);
-		
-		mProperties.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				setDetails();
-			}});
+    add(ModernPanel.createVGap());
 
-		mFontsCombo.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mProperties.setFamily(mFontsCombo.getText());
-			}});
+    box = HBox.create();
+    box.add(mBoldButton);
+    box.add(mItalicButton);
+    box.add(mUnderlineButton);
+    box.add(ModernPanel.createHGap());
+    box.add(mColorButton);
+    add(box);
+    // setBorder(ModernWidget.BORDER);
 
-		mFontSizesCombo.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mProperties.setFontSize(TextUtils.parseInt(mFontSizesCombo.getText()));
-			}});
+    mProperties.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        setDetails();
+      }
+    });
 
-		mBoldButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				setBoldItalic();
-			}});
-		
-		mItalicButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				setBoldItalic();
-			}});
-		
-		mUnderlineButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				setBoldItalic();
-			}});
-		
-		setDetails();
-	}
-	
-	/**
-	 * Sets the details.
-	 */
-	private void setDetails() {
-		mFontsCombo.setText(mProperties.getFont().getFamily());
-		mFontSizesCombo.setText(Integer.toString(mProperties.getFont().getSize()));
-		mBoldButton.setSelected(mProperties.getFont().isBold());
-		mItalicButton.setSelected(mProperties.getFont().isItalic());
-		mUnderlineButton.setSelected(mProperties.getFont().getAttributes().containsKey(TextAttribute.UNDERLINE) &&
-				mProperties.getFont().getAttributes().get(TextAttribute.UNDERLINE).equals(TextAttribute.UNDERLINE_ON));
-		mColorButton.setSelectedColor(mProperties.getColor());
-	}
+    mFontsCombo.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mProperties.setFamily(mFontsCombo.getText());
+      }
+    });
 
-	/**
-	 * Sets the bold italic.
-	 */
-	private void setBoldItalic() {
-		Font font = null;
-		
-		if (mBoldButton.isSelected() && mItalicButton.isSelected()) {
-			font = new Font(mProperties.getFont().getFamily(), 
-					Font.BOLD | Font.ITALIC, 
-					mProperties.getFont().getSize());
-		} else if (mBoldButton.isSelected()) {
-			font = new Font(mProperties.getFont().getFamily(), 
-					Font.BOLD, 
-					mProperties.getFont().getSize());
-		} else if (mItalicButton.isSelected()) {
-			font = new Font(mProperties.getFont().getFamily(), 
-					Font.ITALIC, 
-					mProperties.getFont().getSize());
-		} else {
-			font = new Font(mProperties.getFont().getFamily(), 
-					Font.PLAIN, 
-					mProperties.getFont().getSize());
-		}
+    mFontSizesCombo.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mProperties.setFontSize(TextUtils.parseInt(mFontSizesCombo.getText()));
+      }
+    });
 
-		if (mUnderlineButton.isSelected()) {
-			Map<TextAttribute, Object> map =
-					new Hashtable<TextAttribute, Object>();
-			map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-			font = font.deriveFont(map);
-		}
-		
-		mProperties.setFont(font);
-	}
+    mBoldButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        setBoldItalic();
+      }
+    });
+
+    mItalicButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        setBoldItalic();
+      }
+    });
+
+    mUnderlineButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        setBoldItalic();
+      }
+    });
+
+    setDetails();
+  }
+
+  /**
+   * Sets the details.
+   */
+  private void setDetails() {
+    mFontsCombo.setText(mProperties.getFont().getFamily());
+    mFontSizesCombo.setText(Integer.toString(mProperties.getFont().getSize()));
+    mBoldButton.setSelected(mProperties.getFont().isBold());
+    mItalicButton.setSelected(mProperties.getFont().isItalic());
+    mUnderlineButton.setSelected(mProperties.getFont().getAttributes().containsKey(TextAttribute.UNDERLINE)
+        && mProperties.getFont().getAttributes().get(TextAttribute.UNDERLINE).equals(TextAttribute.UNDERLINE_ON));
+    mColorButton.setSelectedColor(mProperties.getColor());
+  }
+
+  /**
+   * Sets the bold italic.
+   */
+  private void setBoldItalic() {
+    Font font = null;
+
+    if (mBoldButton.isSelected() && mItalicButton.isSelected()) {
+      font = new Font(mProperties.getFont().getFamily(), Font.BOLD | Font.ITALIC, mProperties.getFont().getSize());
+    } else if (mBoldButton.isSelected()) {
+      font = new Font(mProperties.getFont().getFamily(), Font.BOLD, mProperties.getFont().getSize());
+    } else if (mItalicButton.isSelected()) {
+      font = new Font(mProperties.getFont().getFamily(), Font.ITALIC, mProperties.getFont().getSize());
+    } else {
+      font = new Font(mProperties.getFont().getFamily(), Font.PLAIN, mProperties.getFont().getSize());
+    }
+
+    if (mUnderlineButton.isSelected()) {
+      Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>();
+      map.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+      font = font.deriveFont(map);
+    }
+
+    mProperties.setFont(font);
+  }
 }

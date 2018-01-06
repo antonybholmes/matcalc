@@ -24,20 +24,21 @@ import org.jebtk.modern.combobox.ModernComboBox;
  */
 public class SubFigureCombo extends ModernComboBox {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new figure combo.
-	 *
-	 * @param figure the figure
-	 */
-	public SubFigureCombo(Figure figure) {
-		for (String name : figure.getNames()) {
-			addMenuItem(name);
-		}
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new figure combo.
+   *
+   * @param figure
+   *          the figure
+   */
+  public SubFigureCombo(Figure figure) {
+    for (String name : figure.getNames()) {
+      addMenuItem(name);
+    }
+  }
 
 }

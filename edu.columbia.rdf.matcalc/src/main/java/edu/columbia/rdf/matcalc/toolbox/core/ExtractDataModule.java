@@ -41,110 +41,110 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class ExtractDataModule extends CalcModule implements ModernClickListener {	
-	
-	/** The Constant ICON. */
-	private static final ModernIcon ICON =
-			UIService.getInstance().loadIcon("extract", 24);
+public class ExtractDataModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /** The Constant ICON. */
+  private static final ModernIcon ICON = UIService.getInstance().loadIcon("extract", 24);
 
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/** The m button. */
-	private ModernDropDownButton mButton;
+  /** The m button. */
+  private ModernDropDownButton mButton;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Extract Data";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Extract Data";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		//mStvDevButton.addClickListener(this);
-		//mWindow.getRibbon().getToolbar("Bioinformatics").getSection("Expression").add(mStvDevButton);
-		//mMinExpButton.addClickListener(this);
-		//mWindow.getRibbon().getToolbar("Bioinformatics").getSection("Expression").add(mMinExpButton);
+    // mStvDevButton.addClickListener(this);
+    // mWindow.getRibbon().getToolbar("Bioinformatics").getSection("Expression").add(mStvDevButton);
+    // mMinExpButton.addClickListener(this);
+    // mWindow.getRibbon().getToolbar("Bioinformatics").getSection("Expression").add(mMinExpButton);
 
-		ModernPopupMenu popup = new ModernPopupMenu();
-		
-		popup.addMenuItem(new ModernTwoLineMenuItem("Numerical", 
-				"Extract numerical data from matrix.", 
-				ICON));
-		popup.addMenuItem(new ModernTwoLineMenuItem("Text",
-				"Extract text data from matrix.",
-				ICON));
-		
-		//popup.addMenuItem(new ModernMenuSeparator());
-		
-		popup.addMenuItem(new ModernMenuHelpItem("Help with extracting numbers or text...", 
-				"matcalc.data-extraction.help.url").setTextOffset(48));
-		
-		
-		mButton = new RibbonLargeDropDownButton("Extract", ICON, popup);
-		mButton.setChangeText(false);
-		mButton.setToolTip("Extract Data", "Extract numbers or text from a matrix.");
-		
-		mWindow.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
-		
-		mButton.addClickListener(this);
-	}
+    ModernPopupMenu popup = new ModernPopupMenu();
 
+    popup.addMenuItem(new ModernTwoLineMenuItem("Numerical", "Extract numerical data from matrix.", ICON));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Text", "Extract text data from matrix.", ICON));
 
+    // popup.addMenuItem(new ModernMenuSeparator());
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("Numerical")) {
-			mWindow.addToHistory("Extract numerical data", extractNumerical());
-		} else if (e.getMessage().equals("Text")) {
-			mWindow.addToHistory("Extract text data", extractText());
-		} else {
-			// Do nothing
-		}
-	}
+    popup.addMenuItem(
+        new ModernMenuHelpItem("Help with extracting numbers or text...", "matcalc.data-extraction.help.url")
+            .setTextOffset(48));
 
-	/**
-	 * Extract numerical.
-	 *
-	 * @return the annotation matrix
-	 */
-	private DataFrame extractNumerical() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		return m.extractNumbers();
-	}
-	
-	/**
-	 * Extract text.
-	 *
-	 * @return the annotation matrix
-	 */
-	private DataFrame extractText() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		return m.extractText();
-	}
+    mButton = new RibbonLargeDropDownButton("Extract", ICON, popup);
+    mButton.setChangeText(false);
+    mButton.setToolTip("Extract Data", "Extract numbers or text from a matrix.");
+
+    mWindow.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
+
+    mButton.addClickListener(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals("Numerical")) {
+      mWindow.addToHistory("Extract numerical data", extractNumerical());
+    } else if (e.getMessage().equals("Text")) {
+      mWindow.addToHistory("Extract text data", extractText());
+    } else {
+      // Do nothing
+    }
+  }
+
+  /**
+   * Extract numerical.
+   *
+   * @return the annotation matrix
+   */
+  private DataFrame extractNumerical() {
+    DataFrame m = mWindow.getCurrentMatrix();
+
+    return m.extractNumbers();
+  }
+
+  /**
+   * Extract text.
+   *
+   * @return the annotation matrix
+   */
+  private DataFrame extractText() {
+    DataFrame m = mWindow.getCurrentMatrix();
+
+    return m.extractText();
+  }
 }

@@ -20,15 +20,18 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernWindow;
 
 public class VolcanoPlotMatrixTransform extends PlotFigureTransform {
-	
-	/**
-	 * Instantiates a new volcano plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param inputMatrix the input matrix
-	 * @param figure the canvas
-	 */
-	public VolcanoPlotMatrixTransform(ModernWindow parent, DataFrame m, Figure figure) {
-		super(parent, "Create Volcano Plot", m, figure);
-	}
+
+  /**
+   * Instantiates a new volcano plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param inputMatrix
+   *          the input matrix
+   * @param figure
+   *          the canvas
+   */
+  public VolcanoPlotMatrixTransform(ModernWindow parent, DataFrame m, Figure figure) {
+    super(parent, "Create Volcano Plot", m, figure);
+  }
 }

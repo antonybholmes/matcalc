@@ -26,41 +26,45 @@ import org.jebtk.modern.graphics.icons.ModernVectorIcon;
  */
 public class BoxWhiskerScatter32VectorIcon extends ModernVectorIcon {
 
-	/**
-	 * The constant WIDTH.
-	 */
-	private static final int WIDTH = 15;
-	
-	/**
-	 * The constant HEIGHT.
-	 */
-	private static final int HEIGHT = 24;
+  /**
+   * The constant WIDTH.
+   */
+  private static final int WIDTH = 15;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D, java.awt.Rectangle)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		
-		int x1 = x + (w - WIDTH) / 2;
-		int y1 = y + (h - HEIGHT) / 2;
-		
-		int c;
-		
-		g2.setColor(Color.BLACK);
-		
-		c = y1 + h / 2;
-		
-		g2.drawLine(x1, y1 + c, x1 + WIDTH, y1 + c);
-		
-		c = x + w / 2;
-		
-		g2.drawLine(x1, y1, x1 + WIDTH, y1);
-		
-		g2.drawLine(c, y1, c, y1 + HEIGHT);
-		
-		g2.drawLine(x1, y1 + HEIGHT, x1 + WIDTH, y1 + HEIGHT);
-		
-		g2.drawOval(c - 3, y1 + 10, 4, 4);
-	}
+  /**
+   * The constant HEIGHT.
+   */
+  private static final int HEIGHT = 24;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D,
+   * java.awt.Rectangle)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+
+    int x1 = x + (w - WIDTH) / 2;
+    int y1 = y + (h - HEIGHT) / 2;
+
+    int c;
+
+    g2.setColor(Color.BLACK);
+
+    c = y1 + h / 2;
+
+    g2.drawLine(x1, y1 + c, x1 + WIDTH, y1 + c);
+
+    c = x + w / 2;
+
+    g2.drawLine(x1, y1, x1 + WIDTH, y1);
+
+    g2.drawLine(c, y1, c, y1 + HEIGHT);
+
+    g2.drawLine(x1, y1 + HEIGHT, x1 + WIDTH, y1 + HEIGHT);
+
+    g2.drawOval(c - 3, y1 + 10, 4, 4);
+  }
 }

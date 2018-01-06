@@ -35,142 +35,158 @@ import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
  */
 public class ColumnSort extends HBox implements ModernClickListener {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m columns combo. */
-	private ColumnsCombo mColumnsCombo;
-	
-	/** The m sort combo. */
-	private SortOrderCombo mSortCombo = new SortOrderCombo();
-	
-	/** The m delete button. */
-	private ModernButton mDeleteButton = 
-			new ModernButton(UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
-	
-	/** The m listeners. */
-	private ModernClickListeners mListeners = new ModernClickListeners();
-	
-	/**
-	 * Instantiates a new column sort.
-	 *
-	 * @param m the m
-	 * @param label the label
-	 */
-	public ColumnSort(DataFrame m, String label) {
-		add(new ModernAutoSizeLabel(label, 60));
-		
-		mColumnsCombo = new ColumnsCombo(m);
-		UI.setSize(mColumnsCombo, 200, ModernWidget.WIDGET_HEIGHT);
-		add(mColumnsCombo);
-		
-		//add(Ui.createHGap(30));
-		
-		//add(new ModernLabel("Order"));
-		add(UI.createHGap(5));
-		UI.setSize(mSortCombo, 150, ModernWidget.WIDGET_HEIGHT);
-		add(mSortCombo);
-		
-		add(UI.createHGap(5));
-		
-		add(mDeleteButton);
-		
-		setBorder(ModernWidget.BOTTOM_BORDER);
-		
-		mDeleteButton.addClickListener(this);
-	}
-	
-	/**
-	 * Instantiates a new column sort.
-	 *
-	 * @param m the m
-	 * @param c the c
-	 */
-	public ColumnSort(DataFrame m, int c) {
-		this(m, c, true);
-	}
-	
-	/**
-	 * Instantiates a new column sort.
-	 *
-	 * @param m the m
-	 * @param c the c
-	 * @param asc the asc
-	 */
-	public ColumnSort(DataFrame m, int c, boolean asc) {
-		this(m, "Sort by", c, asc);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new column sort.
-	 *
-	 * @param m the m
-	 * @param label the label
-	 * @param c the c
-	 */
-	public ColumnSort(DataFrame m, String label, int c) {
-		this(m, label, c, true);
-	}
-	
-	/**
-	 * Instantiates a new column sort.
-	 *
-	 * @param m the m
-	 * @param label the label
-	 * @param c the c
-	 * @param asc the asc
-	 */
-	public ColumnSort(DataFrame m, String label, int c, boolean asc) {
-		this(m, label);
-		
-		if (c != -1) {
-			mColumnsCombo.setSelectedIndex(c);
-		}
-		
-		mSortCombo.setSelectedIndex(asc ? 0 : 1);
-	}
+  /** The m columns combo. */
+  private ColumnsCombo mColumnsCombo;
 
-	
+  /** The m sort combo. */
+  private SortOrderCombo mSortCombo = new SortOrderCombo();
 
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mListeners.addClickListener(l);
-	}
+  /** The m delete button. */
+  private ModernButton mDeleteButton = new ModernButton(UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mListeners.fireClicked(new ModernClickEvent(this, "delete"));
-	}
+  /** The m listeners. */
+  private ModernClickListeners mListeners = new ModernClickListeners();
 
-	/**
-	 * Gets the column.
-	 *
-	 * @return the column
-	 */
-	public int getColumn() {
-		return mColumnsCombo.getSelectedIndex();
-	}
-	
-	/**
-	 * Gets the sort asc.
-	 *
-	 * @return the sort asc
-	 */
-	public boolean getSortAsc() {
-		return mSortCombo.getSelectedIndex() == 0;
-	}
+  /**
+   * Instantiates a new column sort.
+   *
+   * @param m
+   *          the m
+   * @param label
+   *          the label
+   */
+  public ColumnSort(DataFrame m, String label) {
+    add(new ModernAutoSizeLabel(label, 60));
 
-	/**
-	 * Disable delete.
-	 */
-	public void disableDelete() {
-		mDeleteButton.setVisible(false);
-	}
+    mColumnsCombo = new ColumnsCombo(m);
+    UI.setSize(mColumnsCombo, 200, ModernWidget.WIDGET_HEIGHT);
+    add(mColumnsCombo);
+
+    // add(Ui.createHGap(30));
+
+    // add(new ModernLabel("Order"));
+    add(UI.createHGap(5));
+    UI.setSize(mSortCombo, 150, ModernWidget.WIDGET_HEIGHT);
+    add(mSortCombo);
+
+    add(UI.createHGap(5));
+
+    add(mDeleteButton);
+
+    setBorder(ModernWidget.BOTTOM_BORDER);
+
+    mDeleteButton.addClickListener(this);
+  }
+
+  /**
+   * Instantiates a new column sort.
+   *
+   * @param m
+   *          the m
+   * @param c
+   *          the c
+   */
+  public ColumnSort(DataFrame m, int c) {
+    this(m, c, true);
+  }
+
+  /**
+   * Instantiates a new column sort.
+   *
+   * @param m
+   *          the m
+   * @param c
+   *          the c
+   * @param asc
+   *          the asc
+   */
+  public ColumnSort(DataFrame m, int c, boolean asc) {
+    this(m, "Sort by", c, asc);
+  }
+
+  /**
+   * Instantiates a new column sort.
+   *
+   * @param m
+   *          the m
+   * @param label
+   *          the label
+   * @param c
+   *          the c
+   */
+  public ColumnSort(DataFrame m, String label, int c) {
+    this(m, label, c, true);
+  }
+
+  /**
+   * Instantiates a new column sort.
+   *
+   * @param m
+   *          the m
+   * @param label
+   *          the label
+   * @param c
+   *          the c
+   * @param asc
+   *          the asc
+   */
+  public ColumnSort(DataFrame m, String label, int c, boolean asc) {
+    this(m, label);
+
+    if (c != -1) {
+      mColumnsCombo.setSelectedIndex(c);
+    }
+
+    mSortCombo.setSelectedIndex(asc ? 0 : 1);
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mListeners.addClickListener(l);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+   * ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mListeners.fireClicked(new ModernClickEvent(this, "delete"));
+  }
+
+  /**
+   * Gets the column.
+   *
+   * @return the column
+   */
+  public int getColumn() {
+    return mColumnsCombo.getSelectedIndex();
+  }
+
+  /**
+   * Gets the sort asc.
+   *
+   * @return the sort asc
+   */
+  public boolean getSortAsc() {
+    return mSortCombo.getSelectedIndex() == 0;
+  }
+
+  /**
+   * Disable delete.
+   */
+  public void disableDelete() {
+    mDeleteButton.setVisible(false);
+  }
 }

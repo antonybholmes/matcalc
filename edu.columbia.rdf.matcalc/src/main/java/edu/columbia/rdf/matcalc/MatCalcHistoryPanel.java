@@ -24,59 +24,58 @@ import org.jebtk.modern.window.ModernWindow;
  * The class MatCalcHistoryPanel.
  */
 public class MatCalcHistoryPanel extends ModernHistoryPanel<MatrixTransform> {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new mat calc history panel.
-	 *
-	 * @param parent the parent
-	 */
-	public MatCalcHistoryPanel(ModernWindow parent) {
-		super(parent);
-		
-		//setBorder(LARGE_BORDER);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Search.
-	 *
-	 * @param text the text
-	 * @return the int
-	 */
-	public int search(String text) {
-		String ls = text.toLowerCase();
-		
-		for (int i = 0; i < mHistoryModel.getItemCount(); ++i) {
-			if (mHistoryModel.getValueAt(i).getName().toLowerCase().contains(ls)) {
-				return i;
-			}
-		}
-		
-		return -1;
-	}
+  /**
+   * Instantiates a new mat calc history panel.
+   *
+   * @param parent
+   *          the parent
+   */
+  public MatCalcHistoryPanel(ModernWindow parent) {
+    super(parent);
 
-	//@Override
-	/**
-	public MatrixTransform addItem(MatrixTransform item) {
-		if (item == null) {
-			return null;
-		}
-		
-		System.err.println(Math.max(1, mHistoryList.getSelectedIndex()) + " " + (mHistoryModel.getItemCount() - 1));
+    // setBorder(LARGE_BORDER);
+  }
 
-		for (int i = mHistoryModel.getItemCount() - 1; i > Math.max(1, mHistoryList.getSelectedIndex()); --i) {
-			mHistoryModel.removeValueAt(i);
-		}
+  /**
+   * Search.
+   *
+   * @param text
+   *          the text
+   * @return the int
+   */
+  public int search(String text) {
+    String ls = text.toLowerCase();
 
-		mHistoryModel.addValue(item);
+    for (int i = 0; i < mHistoryModel.getItemCount(); ++i) {
+      if (mHistoryModel.getValueAt(i).getName().toLowerCase().contains(ls)) {
+        return i;
+      }
+    }
 
-		mHistoryList.setSelectedIndex(mHistoryList.getItemCount() - 1);
+    return -1;
+  }
 
-		return item;
-	}
-	**/
+  // @Override
+  /**
+   * public MatrixTransform addItem(MatrixTransform item) { if (item == null) {
+   * return null; }
+   * 
+   * System.err.println(Math.max(1, mHistoryList.getSelectedIndex()) + " " +
+   * (mHistoryModel.getItemCount() - 1));
+   * 
+   * for (int i = mHistoryModel.getItemCount() - 1; i > Math.max(1,
+   * mHistoryList.getSelectedIndex()); --i) { mHistoryModel.removeValueAt(i); }
+   * 
+   * mHistoryModel.addValue(item);
+   * 
+   * mHistoryList.setSelectedIndex(mHistoryList.getItemCount() - 1);
+   * 
+   * return item; }
+   **/
 }

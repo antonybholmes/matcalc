@@ -25,7 +25,6 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow sorting of columns or rows in a table.
@@ -33,74 +32,73 @@ import org.jebtk.modern.window.ModernWindow;
  * @author Antony Holmes Holmes
  */
 public class SortColumnsByRowDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The model.
-	 */
-	private CheckBox mCheckByGroups = 
-			new ModernCheckBox("Sort within groups");
-	
-	/** The m check asc. */
-	private CheckBox mCheckAsc = new ModernCheckBox("Ascending", true);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	
-	/**
-	 * Instantiates a new sort column groups by row dialog.
-	 *
-	 * @param parent the parent
-	 */
-	public SortColumnsByRowDialog(ModernWindow parent) {
-		super(parent, "matcalc.modules.sort-col-by-row.help.url");
+  /**
+   * The model.
+   */
+  private CheckBox mCheckByGroups = new ModernCheckBox("Sort within groups");
 
-		setup();
-	}
-	
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setTitle("Sort Columns By Row");
-		
-		createUi();
+  /** The m check asc. */
+  private CheckBox mCheckAsc = new ModernCheckBox("Ascending", true);
 
-		setSize(400, 200);
-		
-		UI.centerWindowToScreen(this);
-	}
+  /**
+   * Instantiates a new sort column groups by row dialog.
+   *
+   * @param parent
+   *          the parent
+   */
+  public SortColumnsByRowDialog(ModernWindow parent) {
+    super(parent, "matcalc.modules.sort-col-by-row.help.url");
 
-	/**
-	 * Creates the ui.
-	 */
-	private void createUi() {
-		Box box = VBox.create();
-		
-		box.add(mCheckAsc);
-		box.add(UI.createVGap(5));
-		box.add(mCheckByGroups);
-		
-		setDialogCardContent(box);
-	}
+    setup();
+  }
 
-	/**
-	 * Gets the sort within groups.
-	 *
-	 * @return the sort within groups
-	 */
-	public boolean getSortWithinGroups() {
-		return mCheckByGroups.isSelected();
-	}
-	
-	/**
-	 * Gets the sort asc.
-	 *
-	 * @return the sort asc
-	 */
-	public boolean getSortAsc() {
-		return mCheckAsc.isSelected();
-	}
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setTitle("Sort Columns By Row");
+
+    createUi();
+
+    setSize(400, 200);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private void createUi() {
+    Box box = VBox.create();
+
+    box.add(mCheckAsc);
+    box.add(UI.createVGap(5));
+    box.add(mCheckByGroups);
+
+    setDialogCardContent(box);
+  }
+
+  /**
+   * Gets the sort within groups.
+   *
+   * @return the sort within groups
+   */
+  public boolean getSortWithinGroups() {
+    return mCheckByGroups.isSelected();
+  }
+
+  /**
+   * Gets the sort asc.
+   *
+   * @return the sort asc
+   */
+  public boolean getSortAsc() {
+    return mCheckAsc.isSelected();
+  }
 }

@@ -42,255 +42,216 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
  */
 public class DifferentialExpressionPanel extends HeatMapPanel {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m comparison groups. */
-	private XYSeriesGroup mComparisonGroups;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new pattern discovery panel.
-	 *
-	 * @param parent the parent
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 * @param comparisonGroups the comparison groups
-	 * @param rowGroups the row groups
-	 * @param zoomModel the zoom model
-	 * @param colorMapModel the color map model
-	 * @param colorStandardizationModel the color standardization model
-	 * @param intensityModel the intensity model
-	 * @param contentModel the content model
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public DifferentialExpressionPanel(ModernRibbonWindow parent,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesGroup comparisonGroups,
-			XYSeriesModel rowGroups,
-			ZoomModel zoomModel,
-			ColorMapModel colorMapModel,
-			ColorNormalizationModel colorStandardizationModel,
-			ScaleModel intensityModel,
-			TabsModel contentModel,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(parent, 
-				matrix,
-				groups,
-				rowGroups,
-				countGroups,
-				history, 
-				zoomModel, 
-				colorMapModel, 
-				colorStandardizationModel, 
-				intensityModel, 
-				contentModel,
-				properties);
-		
-		mComparisonGroups = comparisonGroups;
-	}
+  /** The m comparison groups. */
+  private XYSeriesGroup mComparisonGroups;
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createMatrix(org.abh.common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double)
-	 */
-	@Override
-	public DataFrame createMatrix(DataFrame m,
-			XYSeriesGroup groupsOfInterest,
-			XYSeriesGroup rowGroupsOfInterest,
-			MinMax norm) {
-		// First zscore
-		DataFrame ret = groupZScoreMatrix(m,
-				mComparisonGroups,
-				groupsOfInterest);
+  /**
+   * Instantiates a new pattern discovery panel.
+   *
+   * @param parent
+   *          the parent
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param rowGroups
+   *          the row groups
+   * @param zoomModel
+   *          the zoom model
+   * @param colorMapModel
+   *          the color map model
+   * @param colorStandardizationModel
+   *          the color standardization model
+   * @param intensityModel
+   *          the intensity model
+   * @param contentModel
+   *          the content model
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public DifferentialExpressionPanel(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groups,
+      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, ZoomModel zoomModel, ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel, ScaleModel intensityModel, TabsModel contentModel,
+      CountGroups countGroups, List<String> history, Properties properties) {
+    super(parent, matrix, groups, rowGroups, countGroups, history, zoomModel, colorMapModel, colorStandardizationModel,
+        intensityModel, contentModel, properties);
 
-		ret = DataFrame.copyColumns(ret, groupsOfInterest);
+    mComparisonGroups = comparisonGroups;
+  }
 
-		//System.err.println("copy " + ret.getColumnNames() + " " + ret.getRowCount());
-		
-		// zscore the matrix
-		//DataFrame zMatrix = 
-		//		new GroupZScoreMatrixView(mColumnFiltered, groupsOfInterest));
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createMatrix(org.abh.
+   * common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeriesGroup,
+   * org.graphplot.figure.series.XYSeriesGroup, double, double)
+   */
+  @Override
+  public DataFrame createMatrix(DataFrame m, XYSeriesGroup groupsOfInterest, XYSeriesGroup rowGroupsOfInterest,
+      MinMax norm) {
+    // First zscore
+    DataFrame ret = groupZScoreMatrix(m, mComparisonGroups, groupsOfInterest);
 
-		//ret = PatternDiscoveryModule.groupZScoreMatrix(ret,
-		//		mComparisonGroups,
-		//		groupsOfInterest);
+    ret = DataFrame.copyColumns(ret, groupsOfInterest);
 
-		if (mColorStandardizationModel.get().getType() != ColorNormalizationType.NONE) {
-			//min /= scale;
-			//max /= scale;
+    // System.err.println("copy " + ret.getColumnNames() + " " + ret.getRowCount());
 
-			ret = MatrixOperations.normalize(ret, norm);
-			
-			//System.err.println("ret " + ret.getColumnNames() + " " + ret.getRowCount());
-		}
+    // zscore the matrix
+    // DataFrame zMatrix =
+    // new GroupZScoreMatrixView(mColumnFiltered, groupsOfInterest));
 
-		return ret;
-	}
+    // ret = PatternDiscoveryModule.groupZScoreMatrix(ret,
+    // mComparisonGroups,
+    // groupsOfInterest);
 
-	/*
-	@Override
-	public ModernPlotCanvas createCanvas(DataFrame m,
-			XYSeriesGroup groupsOfInterest,
-			XYSeriesGroup rowGroupsOfInterest,
-			double min,
-			double max,
-			ColorMap colorMap,
-			RowLabelProperties rowLabelProperties,
-			ColumnLabelProperties columnLabelProperties) {
-		return new DifferentialExpressionCanvas(m,
-				groupsOfInterest,
-				null,
-				colorMap,
-				min,
-				max,
-				rowLabelProperties,
-				columnLabelProperties,
-				mGroupsElement.getProperties(),
-				mRowsElement.getShowP(),
-				mRowsElement.getShowZ(),
-				mHistory,
-				mProperties);
-	}
-	*/
-	
-	/**
-	 * Group Z score matrix.
-	 *
-	 * @param <X> the generic type
-	 * @param m the m
-	 * @param comparisonGroups the comparison groups
-	 * @param groups the groups
-	 * @return the annotation matrix
-	 */
-	public static <X extends MatrixGroup> DataFrame groupZScoreMatrix(DataFrame m,
-			XYSeriesGroup comparisonGroups,
-			List<X> groups) {
+    if (mColorStandardizationModel.get().getType() != ColorNormalizationType.NONE) {
+      // min /= scale;
+      // max /= scale;
 
-		DataFrame ret = 
-				DataFrame.createNumericalMatrix(m);
+      ret = MatrixOperations.normalize(ret, norm);
 
-		//DataFrame.copyColumnAnnotations(m, ret);
-		//DataFrame.copyRowAnnotations(m, ret);
+      // System.err.println("ret " + ret.getColumnNames() + " " + ret.getRowCount());
+    }
 
+    return ret;
+  }
 
+  /*
+   * @Override public ModernPlotCanvas createCanvas(DataFrame m, XYSeriesGroup
+   * groupsOfInterest, XYSeriesGroup rowGroupsOfInterest, double min, double max,
+   * ColorMap colorMap, RowLabelProperties rowLabelProperties,
+   * ColumnLabelProperties columnLabelProperties) { return new
+   * DifferentialExpressionCanvas(m, groupsOfInterest, null, colorMap, min, max,
+   * rowLabelProperties, columnLabelProperties, mGroupsElement.getProperties(),
+   * mRowsElement.getShowP(), mRowsElement.getShowZ(), mHistory, mProperties); }
+   */
 
-		// We normalize the comparison groups separately to the the others
-		List<List<Integer>> comparisonIndices = 
-				MatrixGroup.findColumnIndices(m, comparisonGroups);
+  /**
+   * Group Z score matrix.
+   *
+   * @param <X>
+   *          the generic type
+   * @param m
+   *          the m
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param groups
+   *          the groups
+   * @return the annotation matrix
+   */
+  public static <X extends MatrixGroup> DataFrame groupZScoreMatrix(DataFrame m, XYSeriesGroup comparisonGroups,
+      List<X> groups) {
 
-		///for (XYSeries g : comparisonGroups) {
-		//	System.err.println("used " + g.getName());
-		//}
+    DataFrame ret = DataFrame.createNumericalMatrix(m);
 
-		// We ignore these indices when calculating the means for 
-		//the other groups
-		//Set<Integer> used = 
-		//		CollectionUtils.toSet(CollectionUtils.flatten(comparisonIndices));
+    // DataFrame.copyColumnAnnotations(m, ret);
+    // DataFrame.copyRowAnnotations(m, ret);
 
-		List<List<Integer>> groupIndices = 
-				MatrixGroup.findColumnIndices(m, groups);
+    // We normalize the comparison groups separately to the the others
+    List<List<Integer>> comparisonIndices = MatrixGroup.findColumnIndices(m, comparisonGroups);
 
-		//System.err.println("all " + CollectionUtils.flatten(groupIndices));
+    /// for (XYSeries g : comparisonGroups) {
+    // System.err.println("used " + g.getName());
+    // }
 
+    // We ignore these indices when calculating the means for
+    // the other groups
+    // Set<Integer> used =
+    // CollectionUtils.toSet(CollectionUtils.flatten(comparisonIndices));
 
+    List<List<Integer>> groupIndices = MatrixGroup.findColumnIndices(m, groups);
 
-		// Now normalize the the other groups
+    // System.err.println("all " + CollectionUtils.flatten(groupIndices));
 
-		for (int r = 0; r < m.getRows(); ++r) {
-			double mean = 0;
-			double sd = 0;
+    // Now normalize the the other groups
 
-			int groupCount = 0;
+    for (int r = 0; r < m.getRows(); ++r) {
+      double mean = 0;
+      double sd = 0;
 
-			// Only take the means and sd of the comparison groups
+      int groupCount = 0;
 
-			for (List<Integer> indices : comparisonIndices) {
-				List<Double> d1 = new ArrayList<Double>(indices.size());
+      // Only take the means and sd of the comparison groups
 
-				for (int c : indices) {
-					// Do not count indices in the comparison groups
-					// since the other groups must be normalized
-					// independently
-					//if (!used.contains(c)) {
-					d1.add(m.getValue(r, c));
-					//}
-				}
+      for (List<Integer> indices : comparisonIndices) {
+        List<Double> d1 = new ArrayList<Double>(indices.size());
 
-				mean += Statistics.mean(d1);
-				sd += Statistics.popStdDev(d1); // sampleStandardDeviation
+        for (int c : indices) {
+          // Do not count indices in the comparison groups
+          // since the other groups must be normalized
+          // independently
+          // if (!used.contains(c)) {
+          d1.add(m.getValue(r, c));
+          // }
+        }
 
-				++groupCount;
-			}
+        mean += Statistics.mean(d1);
+        sd += Statistics.popStdDev(d1); // sampleStandardDeviation
 
-			//System.err.println("m " + mean + " " + sd + " " + groupCount);
+        ++groupCount;
+      }
 
-			mean /= groupCount;
-			sd /= groupCount;
+      // System.err.println("m " + mean + " " + sd + " " + groupCount);
 
-			// Normalize the values
-			for (List<Integer> indices : groupIndices) {
-				for (int c : indices) {
-					//if (!used.contains(c)) {
-					
-					if (sd != 0) {
-						ret.update(r, c, (m.getValue(r, c) - mean) / sd);
-					} else {
-						ret.update(r, c, 0);
-					}
-					
-					//}
-				}
-			}
-		}
+      mean /= groupCount;
+      sd /= groupCount;
 
-		// Normalize the comparisons
+      // Normalize the values
+      for (List<Integer> indices : groupIndices) {
+        for (int c : indices) {
+          // if (!used.contains(c)) {
 
-		/*
-		for (int i = 0; i < m.getRowCount(); ++i) {
-			double mean = 0;
-			double sd = 0;
+          if (sd != 0) {
+            ret.update(r, c, (m.getValue(r, c) - mean) / sd);
+          } else {
+            ret.update(r, c, 0);
+          }
 
-			int groupCount = 0;
+          // }
+        }
+      }
+    }
 
-			for (List<Integer> indices : comparisonIndices) {
-				if (indices.size() == 0) {
-					continue;
-				}
+    // Normalize the comparisons
 
-				List<Double> d1 = new ArrayList<Double>(indices.size());
+    /*
+     * for (int i = 0; i < m.getRowCount(); ++i) { double mean = 0; double sd = 0;
+     * 
+     * int groupCount = 0;
+     * 
+     * for (List<Integer> indices : comparisonIndices) { if (indices.size() == 0) {
+     * continue; }
+     * 
+     * List<Double> d1 = new ArrayList<Double>(indices.size());
+     * 
+     * for (int c : indices) { d1.add(m.getValue(i, c)); }
+     * 
+     * mean += Statistics.mean(d1); sd += Statistics.popStdDev(d1); //
+     * sampleStandardDeviation
+     * 
+     * ++groupCount; }
+     * 
+     * mean /= groupCount; sd /= groupCount;
+     * 
+     * // Normalize the values for (List<Integer> indices : comparisonIndices) { if
+     * (indices.size() == 0) { continue; }
+     * 
+     * for (int c : indices) { ret.setValue(i, c, (m.getValue(i, c) - mean) / sd); }
+     * } }
+     */
 
-				for (int c : indices) {
-					d1.add(m.getValue(i, c));
-				}
-
-				mean += Statistics.mean(d1);
-				sd += Statistics.popStdDev(d1); // sampleStandardDeviation
-
-				++groupCount;
-			}
-
-			mean /= groupCount;
-			sd /= groupCount;
-
-			// Normalize the values
-			for (List<Integer> indices : comparisonIndices) {
-				if (indices.size() == 0) {
-					continue;
-				}
-
-				for (int c : indices) {
-					ret.setValue(i, c, (m.getValue(i, c) - mean) / sd);
-				}
-			}
-		}
-		 */
-
-		return ret;
-	}
+    return ret;
+  }
 }

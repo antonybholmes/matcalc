@@ -43,106 +43,91 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel;
  */
 public class ClusterPanel extends HeatMapPanel {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new cluster panel.
-	 *
-	 * @param window the window
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param rowCluster the row cluster
-	 * @param columnCluster the column cluster
-	 * @param zoomModel the zoom model
-	 * @param colorMapModel the color map model
-	 * @param colorStandardizationModel the color standardization model
-	 * @param intensityModel the intensity model
-	 * @param contentModel the content model
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public ClusterPanel(ModernRibbonWindow window,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			Cluster rowCluster,
-			Cluster columnCluster,
-			ZoomModel zoomModel,
-			ColorMapModel colorMapModel,
-			ColorNormalizationModel colorStandardizationModel,
-			ScaleModel intensityModel,
-			TabsModel contentModel,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(window,
-				matrix,
-				rowCluster,
-				columnCluster,
-				groups,
-				rowGroups,
-				countGroups,
-				history,
-				zoomModel,
-				colorMapModel,
-				colorStandardizationModel,
-				intensityModel,
-				contentModel,
-				properties);
-	}
+  /**
+   * Instantiates a new cluster panel.
+   *
+   * @param window
+   *          the window
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param rowCluster
+   *          the row cluster
+   * @param columnCluster
+   *          the column cluster
+   * @param zoomModel
+   *          the zoom model
+   * @param colorMapModel
+   *          the color map model
+   * @param colorStandardizationModel
+   *          the color standardization model
+   * @param intensityModel
+   *          the intensity model
+   * @param contentModel
+   *          the content model
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public ClusterPanel(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      Cluster rowCluster, Cluster columnCluster, ZoomModel zoomModel, ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel, ScaleModel intensityModel, TabsModel contentModel,
+      CountGroups countGroups, List<String> history, Properties properties) {
+    super(window, matrix, rowCluster, columnCluster, groups, rowGroups, countGroups, history, zoomModel, colorMapModel,
+        colorStandardizationModel, intensityModel, contentModel, properties);
+  }
 
-	@Override
-	public void update() {
-		//PlotConstants.MAX_STD; // / scale;
+  @Override
+  public void update() {
+    // PlotConstants.MAX_STD; // / scale;
 
-		MinMax norm = MinMax.create(-mScaleModel.get(), mScaleModel.get());
+    MinMax norm = MinMax.create(-mScaleModel.get(), mScaleModel.get());
 
-		// Create version of the matrix with only the groups of interest
-		XYSeriesGroup seriesOfInterest = new XYSeriesGroup();
+    // Create version of the matrix with only the groups of interest
+    XYSeriesGroup seriesOfInterest = new XYSeriesGroup();
 
-		for (XYSeries series : mGroupsModel) {
-			seriesOfInterest.add(series);
-		}
+    for (XYSeries series : mGroupsModel) {
+      seriesOfInterest.add(series);
+    }
 
-		XYSeriesGroup rowSeriesOfInterest = new XYSeriesGroup();
+    XYSeriesGroup rowSeriesOfInterest = new XYSeriesGroup();
 
-		for (XYSeries series : mRowGroupsModel) {
-			rowSeriesOfInterest.add(series);
-		}
+    for (XYSeries series : mRowGroupsModel) {
+      rowSeriesOfInterest.add(series);
+    }
 
-		DataFrame m = createMatrix(mMatrix, norm);
+    DataFrame m = createMatrix(mMatrix, norm);
 
-		display(m, seriesOfInterest, rowSeriesOfInterest, norm);
-	}
+    display(m, seriesOfInterest, rowSeriesOfInterest, norm);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createCanvas(org.abh.common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeriesGroup, org.graphplot.figure.series.XYSeriesGroup, double, double, org.graphplot.figure.heatmap.legacy.RowLabelProperties, org.graphplot.figure.heatmap.legacy.ColumnLabelProperties)
-	 */
-	@Override
-	public PlotBox createCanvas(DataFrame m,
-			XYSeriesGroup groupsOfInterest,
-			XYSeriesGroup rowGroupsOfInterest,
-			MinMax norm,
-			RowLabelProperties rowLabelProperties,
-			ColumnLabelProperties columnLabelProperties) {
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel#createCanvas(org.abh.
+   * common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeriesGroup,
+   * org.graphplot.figure.series.XYSeriesGroup, double, double,
+   * org.graphplot.figure.heatmap.legacy.RowLabelProperties,
+   * org.graphplot.figure.heatmap.legacy.ColumnLabelProperties)
+   */
+  @Override
+  public PlotBox createCanvas(DataFrame m, XYSeriesGroup groupsOfInterest, XYSeriesGroup rowGroupsOfInterest,
+      MinMax norm, RowLabelProperties rowLabelProperties, ColumnLabelProperties columnLabelProperties) {
 
-		return new ClusterCanvas(m,
-				mRowCluster,
-				mColumnCluster,
-				groupsOfInterest,
-				rowGroupsOfInterest,
-				mCountGroups,
-				mHistory,
-				norm.getMin(),
-				norm.getMax(),
-				rowLabelProperties,
-				columnLabelProperties,
-				mGroupsElement.getProperties(),
-				mProperties);
-	}
+    return new ClusterCanvas(m, mRowCluster, mColumnCluster, groupsOfInterest, rowGroupsOfInterest, mCountGroups,
+        mHistory, norm.getMin(), norm.getMax(), rowLabelProperties, columnLabelProperties,
+        mGroupsElement.getProperties(), mProperties);
+  }
 }

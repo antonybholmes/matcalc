@@ -32,100 +32,113 @@ import org.jebtk.modern.graphics.ImageUtils;
  */
 public abstract class VennCanvas extends ModernPlotCanvas {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
+  /** The Constant SIZE. */
+  protected static final Dimension SIZE = new Dimension(1000, 1000);
 
-	/** The Constant SIZE. */
-	protected static final Dimension SIZE = new Dimension(1000, 1000);
-	
-	/** The m groups. */
-	protected GroupsModel mGroups;
-	
-	/** The m properties. */
-	protected Properties mProperties = new VennProperties();
-	
-	/**
-	 * The Class ChangeEvents.
-	 */
-	private class ChangeEvents implements ChangeListener {
+  /** The m groups. */
+  protected GroupsModel mGroups;
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			layout();
-		}
-		
-	}
-	
-	/**
-	 * Instantiates a new venn canvas.
-	 */
-	public VennCanvas() {
-		setCanvasSize(SIZE);
-		
-		mProperties.addChangeListener(new ChangeEvents());
-	}
+  /** The m properties. */
+  protected Properties mProperties = new VennProperties();
 
-	/**
-	 * Sets the groups.
-	 *
-	 * @param groups the groups
-	 * @param style the style
-	 */
-	public void setGroups(GroupsModel groups, CircleStyle style) {
-		mGroups = groups;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.awt.Container#layout()
-	 */
-	public void layout() {
-		
-	}
+  /**
+   * The Class ChangeEvents.
+   */
+  private class ChangeEvents implements ChangeListener {
 
-	/**
-	 * Gets the properties.
-	 *
-	 * @return the properties
-	 */
-	public Properties getProperties() {
-		return mProperties;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.graphplot.ModernPlotCanvas#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext)
-	 */
-	public void plot(Graphics2D g2, DrawingContext context, Object... params) {
-		aaPlot(g2, context);
-	}
-	
-	/**
-	 * Aa plot.
-	 *
-	 * @param g2 the g 2
-	 * @param context the context
-	 */
-	public void aaPlot(Graphics2D g2, DrawingContext context) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      layout();
+    }
 
-		Graphics2D g2Temp = ImageUtils.createAAGraphics(g2);
+  }
 
-		try {
-			drawPlot(g2Temp, context);
-		} finally {
-			g2Temp.dispose();
-		}
-	}
+  /**
+   * Instantiates a new venn canvas.
+   */
+  public VennCanvas() {
+    setCanvasSize(SIZE);
 
-	/**
-	 * Draw plot.
-	 *
-	 * @param g2Temp the g 2 temp
-	 * @param context the context
-	 */
-	public void drawPlot(Graphics2D g2Temp, DrawingContext context) {
-		// do nothing
-	}
+    mProperties.addChangeListener(new ChangeEvents());
+  }
+
+  /**
+   * Sets the groups.
+   *
+   * @param groups
+   *          the groups
+   * @param style
+   *          the style
+   */
+  public void setGroups(GroupsModel groups, CircleStyle style) {
+    mGroups = groups;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.Container#layout()
+   */
+  public void layout() {
+
+  }
+
+  /**
+   * Gets the properties.
+   *
+   * @return the properties
+   */
+  public Properties getProperties() {
+    return mProperties;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.ModernPlotCanvas#plot(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext)
+   */
+  public void plot(Graphics2D g2, DrawingContext context, Object... params) {
+    aaPlot(g2, context);
+  }
+
+  /**
+   * Aa plot.
+   *
+   * @param g2
+   *          the g 2
+   * @param context
+   *          the context
+   */
+  public void aaPlot(Graphics2D g2, DrawingContext context) {
+
+    Graphics2D g2Temp = ImageUtils.createAAGraphics(g2);
+
+    try {
+      drawPlot(g2Temp, context);
+    } finally {
+      g2Temp.dispose();
+    }
+  }
+
+  /**
+   * Draw plot.
+   *
+   * @param g2Temp
+   *          the g 2 temp
+   * @param context
+   *          the context
+   */
+  public void drawPlot(Graphics2D g2Temp, DrawingContext context) {
+    // do nothing
+  }
 }

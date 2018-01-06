@@ -36,8 +36,6 @@ import org.jebtk.modern.tree.ModernTreeIconTextNodeRenderer;
 import org.jebtk.modern.tree.ModernTreeNodeRenderer;
 import org.jebtk.modern.tree.Tree;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Basic renderer for displaying directories and files within the map database.
@@ -45,70 +43,76 @@ import org.jebtk.modern.tree.Tree;
  * @author Antony Holmes Holmes
  */
 public class MatrixGroupTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member group.
-	 */
-	private MatrixGroup mGroup;
 
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawNodeIcon(Graphics2D g2) {
-		if (mNode.isParent() && mGroup != null) {
-			g2.setColor(mGroup.getColor());
-			g2.fillRect(0, (mRect.getH() - 16) / 2, 16, 16);
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawNodeText(Graphics2D g2) {
-		Point p = getStringCenterPlotCoordinates(g2, getRect(), mNode.getName());
-		
-		g2.setColor(TEXT_COLOR);
-		
-		StringBuilder buffer = new StringBuilder(mNode.getName());
-		
-		if (mNode.isParent() && mGroup != null) {
-			//buffer.append(" ").append(group.getSearch());
-			
-			buffer.append(" (").append(Integer.toString(mNode.getChildCount())).append(")");//group.getSearch());
-		
-			g2.setFont(BOLD_FONT);
-		} else {
-			g2.setFont(FONT);
-		}
-		
-		g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()), 0, p.y);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean, boolean, boolean, int, int)
-	 */
-	@Override
-	public ModernTreeNodeRenderer getRenderer(Tree<?> tree,
-			TreeNode<?> node,
-			boolean nodeIsHighlighted, 
-			boolean nodeIsSelected, 
-			boolean hasFocus, 
-			boolean isDragToNode, 
-			int depth, 
-			int row) {
-		
-		super.getRenderer(tree, node, nodeIsHighlighted, nodeIsSelected, hasFocus, isDragToNode, depth, row);
-		
-		mGroup = (MatrixGroup)node.getValue();
-		
-		return this;
-	}
+  /**
+   * The member group.
+   */
+  private MatrixGroup mGroup;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#drawForegroundAA(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawNodeIcon(Graphics2D g2) {
+    if (mNode.isParent() && mGroup != null) {
+      g2.setColor(mGroup.getColor());
+      g2.fillRect(0, (mRect.getH() - 16) / 2, 16, 16);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawNodeText(Graphics2D g2) {
+    Point p = getStringCenterPlotCoordinates(g2, getRect(), mNode.getName());
+
+    g2.setColor(TEXT_COLOR);
+
+    StringBuilder buffer = new StringBuilder(mNode.getName());
+
+    if (mNode.isParent() && mGroup != null) {
+      // buffer.append(" ").append(group.getSearch());
+
+      buffer.append(" (").append(Integer.toString(mNode.getChildCount())).append(")");// group.getSearch());
+
+      g2.setFont(BOLD_FONT);
+    } else {
+      g2.setFont(FONT);
+    }
+
+    g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()), 0, p.y);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.
+   * ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean, boolean,
+   * boolean, int, int)
+   */
+  @Override
+  public ModernTreeNodeRenderer getRenderer(Tree<?> tree, TreeNode<?> node, boolean nodeIsHighlighted,
+      boolean nodeIsSelected, boolean hasFocus, boolean isDragToNode, int depth, int row) {
+
+    super.getRenderer(tree, node, nodeIsHighlighted, nodeIsSelected, hasFocus, isDragToNode, depth, row);
+
+    mGroup = (MatrixGroup) node.getValue();
+
+    return this;
+  }
 }

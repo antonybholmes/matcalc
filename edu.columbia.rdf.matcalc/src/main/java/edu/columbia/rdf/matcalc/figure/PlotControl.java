@@ -33,38 +33,39 @@ import edu.columbia.rdf.matcalc.figure.graph2d.XYSeriesPlotControl;
  */
 public class PlotControl extends ModernSubCollapsePane {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new axis plot control.
-	 *
-	 * @param parent the parent
-	 * @param plot the plot
-	 */
-	public PlotControl(ModernWindow parent, Plot plot) {
-		Box box = VBox.create();
-		box.add(new LayerVisibleControl(parent, plot));
-		box.add(ModernPanel.createVGap());
-		box.add(new ColorMapControl(parent, plot));
-		box.add(ModernPanel.createVGap());
-		box.setBorder(BORDER);
-		
-		addTab("Options", box);
+  /**
+   * Instantiates a new axis plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param plot
+   *          the plot
+   */
+  public PlotControl(ModernWindow parent, Plot plot) {
+    Box box = VBox.create();
+    box.add(new LayerVisibleControl(parent, plot));
+    box.add(ModernPanel.createVGap());
+    box.add(new ColorMapControl(parent, plot));
+    box.add(ModernPanel.createVGap());
+    box.setBorder(BORDER);
 
-		if (plot.getChildCount() > 0) {
-			addTab("Layers", new PlotLayersVisibleControl(parent, plot));
-		}
+    addTab("Options", box);
 
+    if (plot.getChildCount() > 0) {
+      addTab("Layers", new PlotLayersVisibleControl(parent, plot));
+    }
 
-		int seriesId = 1;
+    int seriesId = 1;
 
-		for (XYSeries series : plot.getAllSeries()) {
-			addTab("Series " + seriesId, new XYSeriesPlotControl(parent, series));
+    for (XYSeries series : plot.getAllSeries()) {
+      addTab("Series " + seriesId, new XYSeriesPlotControl(parent, series));
 
-			++seriesId;
-		}
-	}
+      ++seriesId;
+    }
+  }
 }

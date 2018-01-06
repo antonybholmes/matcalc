@@ -40,141 +40,133 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class ClusterHeatMapModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Cluster Heat Map";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Cluster Heat Map";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		RibbonLargeButton button = new RibbonLargeButton("Cluster Heat Map", 
-				UIService.getInstance().loadIcon(Cluster32VectorIcon.class, 24),
-				"Heat Map",
-				"Generate a cluster heat map.");
-		button.addClickListener(this);
+    RibbonLargeButton button = new RibbonLargeButton("Cluster Heat Map",
+        UIService.getInstance().loadIcon(Cluster32VectorIcon.class, 24), "Heat Map", "Generate a cluster heat map.");
+    button.addClickListener(this);
 
-		//button.setEnabled(false);
+    // button.setEnabled(false);
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-	/**
-	 * Creates the.
-	 */
-	private void create() {
-		HierarchicalClusteringDialog dialog = 
-				new HierarchicalClusteringDialog(mParent);
+  /**
+   * Creates the.
+   */
+  private void create() {
+    HierarchicalClusteringDialog dialog = new HierarchicalClusteringDialog(mParent);
 
-		dialog.setVisible(true);
+    dialog.setVisible(true);
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		DistanceMetric distanceMetric = dialog.getDistanceMetric();
+    DistanceMetric distanceMetric = dialog.getDistanceMetric();
 
-		Linkage linkage = dialog.getLinkage();
+    Linkage linkage = dialog.getLinkage();
 
-		DataFrame m = mParent.getCurrentMatrix();
+    DataFrame m = mParent.getCurrentMatrix();
 
-		boolean plot = dialog.getCreatePlot();
+    boolean plot = dialog.getCreatePlot();
 
-		cluster(m,
-				distanceMetric,
-				linkage, 
-				dialog.clusterRows(),
-				dialog.clusterColumns(),
-				dialog.optimalLeafOrder(),
-				plot);
-	}
+    cluster(m, distanceMetric, linkage, dialog.clusterRows(), dialog.clusterColumns(), dialog.optimalLeafOrder(), plot);
+  }
 
-	/**
-	 * Cluster.
-	 *
-	 * @param m the m
-	 * @param distanceMetric the distance metric
-	 * @param linkage the linkage
-	 * @param clusterRows the cluster rows
-	 * @param clusterColumns the cluster columns
-	 * @param optimalLeafOrder the optimal leaf order
-	 * @param showHeatmap the show heatmap
-	 */
-	public void cluster(DataFrame m,
-			DistanceMetric distanceMetric,
-			Linkage linkage,
-			boolean clusterRows,
-			boolean clusterColumns,
-			boolean optimalLeafOrder,
-			boolean showHeatmap) {
+  /**
+   * Cluster.
+   *
+   * @param m
+   *          the m
+   * @param distanceMetric
+   *          the distance metric
+   * @param linkage
+   *          the linkage
+   * @param clusterRows
+   *          the cluster rows
+   * @param clusterColumns
+   *          the cluster columns
+   * @param optimalLeafOrder
+   *          the optimal leaf order
+   * @param showHeatmap
+   *          the show heatmap
+   */
+  public void cluster(DataFrame m, DistanceMetric distanceMetric, Linkage linkage, boolean clusterRows,
+      boolean clusterColumns, boolean optimalLeafOrder, boolean showHeatmap) {
 
-		if (m == null) {
-			return;
-		}
+    if (m == null) {
+      return;
+    }
 
-		Cluster rowCluster = null;
-		Cluster columnCluster = null;
+    Cluster rowCluster = null;
+    Cluster columnCluster = null;
 
+    if (clusterRows) {
+      rowCluster = HierarchicalClustering.rowCluster(m, linkage, distanceMetric, optimalLeafOrder);
+    }
 
-		if (clusterRows) {
-			rowCluster = HierarchicalClustering.rowCluster(m, 
-					linkage,
-					distanceMetric,
-					optimalLeafOrder);
-		}
+    if (clusterColumns) {
+      columnCluster = HierarchicalClustering.columnCluster(m, linkage, distanceMetric, optimalLeafOrder);
+    }
 
-		if (clusterColumns) {
-			columnCluster = HierarchicalClustering.columnCluster(m,
-					linkage,
-					distanceMetric,
-					optimalLeafOrder);
-		}
+    if (rowCluster == null && columnCluster == null) {
+      return;
+    }
 
-		if (rowCluster == null && columnCluster == null) {
-			return;
-		}
+    // XYSeriesGroup allSeries = mParent.getGroups();
 
-		//XYSeriesGroup allSeries = mParent.getGroups();
+    /*
+     * for (int c = 0; c < m.getColumnCount(); ++c) { XYSeries series = new
+     * XYSeries(m.getColumnName(c));
+     * 
+     * allSeries.add(series); }
+     */
 
-		/*
-		for (int c = 0; c < m.getColumnCount(); ++c) {
-			XYSeries series = new XYSeries(m.getColumnName(c));
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-			allSeries.add(series);
-		}
-		 */
+    SubFigure subFigure = figure.currentSubFigure();
 
-		Figure figure = Figure.createFigure(); //window.getFigure();
+    PlotFactory.createClusterHeatMap(m, subFigure, mParent.getGroups(), rowCluster, columnCluster);
 
-		SubFigure subFigure = figure.currentSubFigure();
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
 
-		PlotFactory.createClusterHeatMap(m, subFigure, mParent.getGroups(), rowCluster, columnCluster);
+    window.setVisible(true);
+  }
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-		
-		window.setVisible(true);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		create();
-	}
-
-
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    create();
+  }
 
 }

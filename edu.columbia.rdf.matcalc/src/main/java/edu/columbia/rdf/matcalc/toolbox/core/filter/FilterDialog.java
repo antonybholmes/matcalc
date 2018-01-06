@@ -42,107 +42,107 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * The class MatchDialog.
  */
 public class FilterDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m add button. */
-	private ModernButton mAddButton = new ModernButton("Add Filter", 
-			UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
-	/** The m clear button. */
-	private ModernButton mClearButton = new ModernButton(UI.MENU_CLEAR, 
-			UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	
-	/** The m content panel. */
-	private ColumnFilters mContentPanel;
+  /** The m add button. */
+  private ModernButton mAddButton = new ModernButton("Add Filter",
+      UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
-	
-	/**
-	 * Instantiates a new match dialog.
-	 *
-	 * @param parent the parent
-	 * @param m the m
-	 * @param c the c
-	 */
-	public FilterDialog(MainMatCalcWindow parent, DataFrame m, int c) {
-		super(parent, "matcalc.filter.help.url");
-		
-		mContentPanel = new ColumnFilters(m);
-		
-		setTitle("Filter " + m.getColumnName(c) + " column");
-		
-		setup();
+  /** The m clear button. */
+  private ModernButton mClearButton = new ModernButton(UI.MENU_CLEAR,
+      UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
 
-		createUi();
-		
-		mContentPanel.add(c);
-	}
+  /** The m content panel. */
+  private ColumnFilters mContentPanel;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		mAddButton.addClickListener(new ModernClickListener() {
+  /**
+   * Instantiates a new match dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param m
+   *          the m
+   * @param c
+   *          the c
+   */
+  public FilterDialog(MainMatCalcWindow parent, DataFrame m, int c) {
+    super(parent, "matcalc.filter.help.url");
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mContentPanel.add(-1);
-			}
-			
-		});
-		
-		mClearButton.addClickListener(new ModernClickListener() {
+    mContentPanel = new ColumnFilters(m);
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mContentPanel.clear();
-			}
-			
-		});
-		
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		setSize(640, 300);
-		
-		setResizable(true);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		ModernComponent content = new ModernComponent();
-		
-		Box box = new HSpacedBox();
-		
-		box.add(mAddButton);
-		box.add(mClearButton);
-		
-		box.setBorder(BorderService.getInstance().createBottomBorder(10));
-		
-		content.setHeader(box);
-		
-		ModernScrollPane scrollPane = new ModernScrollPane(mContentPanel)
-				.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
-				.setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
-		
-		content.setBody(scrollPane);
-		
-		setDialogCardContent(content);
-	}
-	
-	/**
-	 * Gets the column filters.
-	 *
-	 * @return the column filters
-	 */
-	public List<ColumnFilter> getColumnFilters() {
-		return mContentPanel.getColumnFilters();
-	}
+    setTitle("Filter " + m.getColumnName(c) + " column");
+
+    setup();
+
+    createUi();
+
+    mContentPanel.add(c);
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    mAddButton.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mContentPanel.add(-1);
+      }
+
+    });
+
+    mClearButton.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mContentPanel.clear();
+      }
+
+    });
+
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    setSize(640, 300);
+
+    setResizable(true);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    ModernComponent content = new ModernComponent();
+
+    Box box = new HSpacedBox();
+
+    box.add(mAddButton);
+    box.add(mClearButton);
+
+    box.setBorder(BorderService.getInstance().createBottomBorder(10));
+
+    content.setHeader(box);
+
+    ModernScrollPane scrollPane = new ModernScrollPane(mContentPanel)
+        .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER).setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
+
+    content.setBody(scrollPane);
+
+    setDialogCardContent(content);
+  }
+
+  /**
+   * Gets the column filters.
+   *
+   * @return the column filters
+   */
+  public List<ColumnFilter> getColumnFilters() {
+    return mContentPanel.getColumnFilters();
+  }
 }

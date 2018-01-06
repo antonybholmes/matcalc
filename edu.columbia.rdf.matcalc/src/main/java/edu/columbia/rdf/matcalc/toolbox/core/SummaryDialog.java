@@ -51,63 +51,69 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  *
  */
 public class SummaryDialog extends ModernDialogTaskWindow {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	private MainMatCalcWindow mWindow;
-	
-	
-	/**
-	 * Instantiates a new modern int input dialog.
-	 *
-	 * @param parent the parent
-	 * @param checked the checked
-	 */
-	public SummaryDialog(MainMatCalcWindow parent) {
-		super(parent, false, ModernDialogTaskType.CLOSE);
-		
-		setTitle("Summary");
-		
-		mWindow = parent;
-		
-		setup();
 
-		createUi();
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+  private MainMatCalcWindow mWindow;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setSize(400, 300);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+  /**
+   * Instantiates a new modern int input dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param checked
+   *          the checked
+   */
+  public SummaryDialog(MainMatCalcWindow parent) {
+    super(parent, false, ModernDialogTaskType.CLOSE);
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		Box box = VBox.create();
-		
-		box.add(new HExpandBox("Min", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.min(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Max", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.max(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Sum", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.sum(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Mean", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.mean(m), 4), false), 120)));
-		box.add(UI.createVGap(ModernWidget.PADDING));
-		box.add(new HExpandBox("Median", new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.median(m), 4), false), 120)));
+    setTitle("Summary");
 
-		setDialogCardContent(box);
-	}
+    mWindow = parent;
+
+    setup();
+
+    createUi();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setSize(400, 300);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    DataFrame m = mWindow.getCurrentMatrix();
+
+    Box box = VBox.create();
+
+    box.add(new HExpandBox("Min", new ModernTextBorderPanel(
+        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.min(m), 4), false), 120)));
+    box.add(UI.createVGap(ModernWidget.PADDING));
+    box.add(new HExpandBox("Max", new ModernTextBorderPanel(
+        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.max(m), 4), false), 120)));
+    box.add(UI.createVGap(ModernWidget.PADDING));
+    box.add(new HExpandBox("Sum", new ModernTextBorderPanel(
+        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.sum(m), 4), false), 120)));
+    box.add(UI.createVGap(ModernWidget.PADDING));
+    box.add(new HExpandBox("Mean", new ModernTextBorderPanel(
+        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.mean(m), 4), false), 120)));
+    box.add(UI.createVGap(ModernWidget.PADDING));
+    box.add(new HExpandBox("Median", new ModernTextBorderPanel(
+        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.median(m), 4), false), 120)));
+
+    setDialogCardContent(box);
+  }
 }

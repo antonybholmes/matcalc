@@ -26,383 +26,382 @@ import edu.columbia.rdf.matcalc.toolbox.FileModule;
  */
 public class OpenFile {
 
-	/** The m window. */
-	private MainMatCalcWindow mWindow;
+  /** The m window. */
+  private MainMatCalcWindow mWindow;
 
-	/** The m open mode. */
-	private OpenMode mOpenMode = OpenMode.NEW_WINDOW;
+  /** The m open mode. */
+  private OpenMode mOpenMode = OpenMode.NEW_WINDOW;
 
-	private FileType mFileType = FileType.MIXED;
+  private FileType mFileType = FileType.MIXED;
 
-	/** How many header rows there are. Default assume 1. */
-	private int mHeaders = 1;
+  /** How many header rows there are. Default assume 1. */
+  private int mHeaders = 1;
 
-	/** The m row annotations. */
-	private int mRowAnnotations = 0;
+  /** The m row annotations. */
+  private int mRowAnnotations = 0;
 
-	/** The m delimiter. */
-	private String mDelimiter = TextUtils.TAB_DELIMITER;
+  /** The m delimiter. */
+  private String mDelimiter = TextUtils.TAB_DELIMITER;
 
-	/** The m skip lines. */
-	private Collection<String> mSkipLines = Collections.emptyList();
+  /** The m skip lines. */
+  private Collection<String> mSkipLines = Collections.emptyList();
 
-	/** The m files. */
-	private Collection<Path> mFiles;
+  /** The m files. */
+  private Collection<Path> mFiles;
 
-	/**
-	 * Instantiates a new open file.
-	 *
-	 * @param window the window
-	 * @param file the file
-	 */
-	public OpenFile(MainMatCalcWindow window, Path file) {
-		this(window, CollectionUtils.asList(file));
-	}
+  /**
+   * Instantiates a new open file.
+   *
+   * @param window
+   *          the window
+   * @param file
+   *          the file
+   */
+  public OpenFile(MainMatCalcWindow window, Path file) {
+    this(window, CollectionUtils.asList(file));
+  }
 
-	/**
-	 * Instantiates a new open file.
-	 *
-	 * @param window the window
-	 * @param files the files
-	 */
-	public OpenFile(MainMatCalcWindow window, Collection<Path> files) {
-		mWindow = window;
-		mFiles = files;
-	}
+  /**
+   * Instantiates a new open file.
+   *
+   * @param window
+   *          the window
+   * @param files
+   *          the files
+   */
+  public OpenFile(MainMatCalcWindow window, Collection<Path> files) {
+    mWindow = window;
+    mFiles = files;
+  }
 
-	/**
-	 * Instantiates a new open file.
-	 *
-	 * @param openFile the open file
-	 * @param file the file
-	 */
-	public OpenFile(OpenFile openFile, Path file) {
-		this(openFile, CollectionUtils.asList(file));
-	}
+  /**
+   * Instantiates a new open file.
+   *
+   * @param openFile
+   *          the open file
+   * @param file
+   *          the file
+   */
+  public OpenFile(OpenFile openFile, Path file) {
+    this(openFile, CollectionUtils.asList(file));
+  }
 
-	/**
-	 * Instantiates a new open file.
-	 *
-	 * @param openFile the open file
-	 */
-	public OpenFile(OpenFile openFile) {
-		this(openFile, openFile.mFiles);
-	}
+  /**
+   * Instantiates a new open file.
+   *
+   * @param openFile
+   *          the open file
+   */
+  public OpenFile(OpenFile openFile) {
+    this(openFile, openFile.mFiles);
+  }
 
-	/**
-	 * Instantiates a new open file.
-	 *
-	 * @param openFile the open file
-	 * @param files the files
-	 */
-	public OpenFile(OpenFile openFile, Collection<Path> files) {
-		mWindow = openFile.mWindow;
-		mFiles = files;
-		mHeaders = openFile.mHeaders;
-		mRowAnnotations = openFile.mRowAnnotations;
-		mSkipLines = openFile.mSkipLines;
-		mOpenMode = openFile.mOpenMode;
-		mFileType = openFile.mFileType;
-	}
+  /**
+   * Instantiates a new open file.
+   *
+   * @param openFile
+   *          the open file
+   * @param files
+   *          the files
+   */
+  public OpenFile(OpenFile openFile, Collection<Path> files) {
+    mWindow = openFile.mWindow;
+    mFiles = files;
+    mHeaders = openFile.mHeaders;
+    mRowAnnotations = openFile.mRowAnnotations;
+    mSkipLines = openFile.mSkipLines;
+    mOpenMode = openFile.mOpenMode;
+    mFileType = openFile.mFileType;
+  }
 
-	public OpenFile(OpenFile openFile, Path file, MainMatCalcWindow window) {
-		this(openFile, file);
-		
-		mWindow = window;
-	}
+  public OpenFile(OpenFile openFile, Path file, MainMatCalcWindow window) {
+    this(openFile, file);
 
-	/**
-	 * Open.
-	 *
-	 * @return true, if successful
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public boolean open() throws IOException {
-		boolean status = false;
+    mWindow = window;
+  }
 
-		for (Path file : mFiles) {
-			if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
-				MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
-				window.setVisible(true);
+  /**
+   * Open.
+   *
+   * @return true, if successful
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public boolean open() throws IOException {
+    boolean status = false;
 
-				OpenFile of = new OpenFile(this, file, window);
+    for (Path file : mFiles) {
+      if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
+        MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
+        window.setVisible(true);
 
-				of.open();
+        OpenFile of = new OpenFile(this, file, window);
 
-				status |= false;
-			} else {
-				String ext = PathUtils.getFileExt(file);
+        of.open();
 
-				FileModule module = mWindow.getFileModule(ext);
+        status |= false;
+      } else {
+        String ext = PathUtils.getFileExt(file);
 
-				if (module != null) {
-					DataFrame m = module.openFile(mWindow, 
-							file,
-							mFileType,
-							mHeaders,
-							mRowAnnotations,
-							mDelimiter,
-							mSkipLines);
+        FileModule module = mWindow.getFileModule(ext);
 
-					mWindow.openMatrix(file, m);
+        if (module != null) {
+          DataFrame m = module.openFile(mWindow, file, mFileType, mHeaders, mRowAnnotations, mDelimiter, mSkipLines);
 
-					RecentFilesService.getInstance().add(file);
+          mWindow.openMatrix(file, m);
 
-					status |= true;
-				} else {
-					status |= false;
-				}
-			}
-		}
-		
-		return status;
-	}
+          RecentFilesService.getInstance().add(file);
 
-	/**
-	 * Auto open.
-	 *
-	 * @return true, if successful
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public boolean autoOpen() throws IOException {
-		boolean status = false;
+          status |= true;
+        } else {
+          status |= false;
+        }
+      }
+    }
 
-		for (Path file : mFiles) {
-			if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
-				MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
-				window.setVisible(true);
+    return status;
+  }
 
-				OpenFile of = new OpenFile(this, file);
-				of.mWindow = new MainMatCalcWindow(mWindow.getAppInfo());
+  /**
+   * Auto open.
+   *
+   * @return true, if successful
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public boolean autoOpen() throws IOException {
+    boolean status = false;
 
-				of.autoOpen();
+    for (Path file : mFiles) {
+      if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
+        MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
+        window.setVisible(true);
 
-				status |= false;
-			} else {
-				String ext = PathUtils.getFileExt(file);
+        OpenFile of = new OpenFile(this, file);
+        of.mWindow = new MainMatCalcWindow(mWindow.getAppInfo());
 
-				FileModule module = mWindow.mOpenFileModuleMap.get(ext);
+        of.autoOpen();
 
-				if (module != null) {
-					DataFrame m = module.autoOpenFile(mWindow, 
-							file,
-							mFileType,
-							mHeaders,
-							mRowAnnotations,
-							mDelimiter,
-							mSkipLines);
+        status |= false;
+      } else {
+        String ext = PathUtils.getFileExt(file);
 
-					mWindow.openMatrix(file, m);
+        FileModule module = mWindow.mOpenFileModuleMap.get(ext);
 
-					status |= true;
-				} else {
-					status |= false;
-				}
-			}
-		}
+        if (module != null) {
+          DataFrame m = module.autoOpenFile(mWindow, file, mFileType, mHeaders, mRowAnnotations, mDelimiter,
+              mSkipLines);
 
-		return status;
-	}
+          mWindow.openMatrix(file, m);
 
-	/**
-	 * Open mode.
-	 *
-	 * @param openMode the open mode
-	 * @return the open file
-	 */
-	public OpenFile openMode(OpenMode openMode) {
-		OpenFile of = new OpenFile(this);
-		of.mOpenMode = openMode;
-		return of;
-	}
+          status |= true;
+        } else {
+          status |= false;
+        }
+      }
+    }
 
-	public OpenFile type(FileType type) {
-		OpenFile of = new OpenFile(this);
-		of.mFileType = type;
-		return of;
-	}
+    return status;
+  }
 
-	/**
-	 * Headers.
-	 *
-	 * @param headers the headers
-	 * @return the open file
-	 */
-	public OpenFile headers(int headers) {
-		OpenFile of = new OpenFile(this);
-		of.mHeaders = headers;
-		return of;
-	}
+  /**
+   * Open mode.
+   *
+   * @param openMode
+   *          the open mode
+   * @return the open file
+   */
+  public OpenFile openMode(OpenMode openMode) {
+    OpenFile of = new OpenFile(this);
+    of.mOpenMode = openMode;
+    return of;
+  }
 
-	/**
-	 * No header.
-	 *
-	 * @return the open file
-	 */
-	public OpenFile noHeader() {
-		return headers(0);
-	}
+  public OpenFile type(FileType type) {
+    OpenFile of = new OpenFile(this);
+    of.mFileType = type;
+    return of;
+  }
 
-	/**
-	 * Specify the number of row annotations.
-	 *
-	 * @param headers 	the number of row annotations.
-	 * 
-	 * @return 			
-	 */
-	public OpenFile rowAnnotations(int headers) {
-		OpenFile of = new OpenFile(this);
-		of.mRowAnnotations = headers;
-		return of;
-	}
+  /**
+   * Headers.
+   *
+   * @param headers
+   *          the headers
+   * @return the open file
+   */
+  public OpenFile headers(int headers) {
+    OpenFile of = new OpenFile(this);
+    of.mHeaders = headers;
+    return of;
+  }
 
-	/**
-	 * Specify the delimiter. The default is the tab character.
-	 *
-	 * @param delimiter the delimiter
-	 * @return the open file
-	 */
-	public OpenFile delimiter(String delimiter) {
-		OpenFile of = new OpenFile(this);
-		of.mDelimiter = delimiter;
-		return of;
-	}
+  /**
+   * No header.
+   *
+   * @return the open file
+   */
+  public OpenFile noHeader() {
+    return headers(0);
+  }
 
-	public OpenFile skipLines(String skip) {
-		return skipLines(CollectionUtils.asList(skip));
-	}
+  /**
+   * Specify the number of row annotations.
+   *
+   * @param headers
+   *          the number of row annotations.
+   * 
+   * @return
+   */
+  public OpenFile rowAnnotations(int headers) {
+    OpenFile of = new OpenFile(this);
+    of.mRowAnnotations = headers;
+    return of;
+  }
 
-	/**
-	 * Specify lines that can be skipped at the beginning of the file
-	 * e.g. for example # or %.
-	 * 
-	 * @param skipLines 	the characters that can be skipped.
-	 * @return 				the open file
-	 */
-	public OpenFile skipLines(Collection<String> skipLines) {
-		OpenFile of = new OpenFile(this);
-		of.mSkipLines = skipLines;
-		return of;
-	}
-	
+  /**
+   * Specify the delimiter. The default is the tab character.
+   *
+   * @param delimiter
+   *          the delimiter
+   * @return the open file
+   */
+  public OpenFile delimiter(String delimiter) {
+    OpenFile of = new OpenFile(this);
+    of.mDelimiter = delimiter;
+    return of;
+  }
 
-	/**
-	 * Guess the file delimiter.
-	 *
-	 * @param file the file
-	 * @return the string
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static String guessDelimiter(Path file, 
-			Collection<String> skipMatches) throws IOException {
-		//
-		// Work out if we need to skip annotation rows that should be
-		// ignored
+  public OpenFile skipLines(String skip) {
+    return skipLines(CollectionUtils.asList(skip));
+  }
 
-		int skipLines = ReaderUtils.countHeaderLines(file, skipMatches);
+  /**
+   * Specify lines that can be skipped at the beginning of the file e.g. for
+   * example # or %.
+   * 
+   * @param skipLines
+   *          the characters that can be skipped.
+   * @return the open file
+   */
+  public OpenFile skipLines(Collection<String> skipLines) {
+    OpenFile of = new OpenFile(this);
+    of.mSkipLines = skipLines;
+    return of;
+  }
 
-		BufferedReader reader = FileUtils.newBufferedReader(file);
+  /**
+   * Guess the file delimiter.
+   *
+   * @param file
+   *          the file
+   * @return the string
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public static String guessDelimiter(Path file, Collection<String> skipMatches) throws IOException {
+    //
+    // Work out if we need to skip annotation rows that should be
+    // ignored
 
-		String ret = TextUtils.TAB_DELIMITER;
+    int skipLines = ReaderUtils.countHeaderLines(file, skipMatches);
 
-		try {
-			// Skip past any header
-			ReaderUtils.skipLines(reader, skipLines);
+    BufferedReader reader = FileUtils.newBufferedReader(file);
 
-			char[] chars = reader.readLine().toCharArray();
+    String ret = TextUtils.TAB_DELIMITER;
 
-			for (char c : chars) {
-				//System.err.println("test " + c + " " + (c == '\t'));
+    try {
+      // Skip past any header
+      ReaderUtils.skipLines(reader, skipLines);
 
-				boolean found = false;
+      char[] chars = reader.readLine().toCharArray();
 
-				switch (c) {
-				case '\t':
-					ret = TextUtils.TAB_DELIMITER;
-					found = true;
-					break;
-				case ';':
-					ret = TextUtils.SEMI_COLON_DELIMITER;
-					found = true;
-					break;
-				case ',':
-					ret = TextUtils.COMMA_DELIMITER;
-					found = true;
-					break;
-				default:
-					found = false;
-					break;
-				}
+      for (char c : chars) {
+        // System.err.println("test " + c + " " + (c == '\t'));
 
-				if (found) {
-					break;
-				}
-			}
-		} finally {
-			reader.close();
-		}
+        boolean found = false;
 
-		return ret;
-	}
-	
-	/**
-	 * Guess if file contains only numbers.
-	 * 
-	 * @param file
-	 * @return
-	 * @throws IOException
-	 */
-	public static boolean guessNumerical(Path file,
-			int headers,
-			String delimiter,
-			int rowAnnotations,
-			Collection<String> skipMatches) throws IOException {
-		//
-		// Work out if we need to skip annotation rows that should be
-		// ignored
+        switch (c) {
+        case '\t':
+          ret = TextUtils.TAB_DELIMITER;
+          found = true;
+          break;
+        case ';':
+          ret = TextUtils.SEMI_COLON_DELIMITER;
+          found = true;
+          break;
+        case ',':
+          ret = TextUtils.COMMA_DELIMITER;
+          found = true;
+          break;
+        default:
+          found = false;
+          break;
+        }
 
-		int skipLines = ReaderUtils.countHeaderLines(file, skipMatches);
+        if (found) {
+          break;
+        }
+      }
+    } finally {
+      reader.close();
+    }
 
-		BufferedReader reader = FileUtils.newBufferedReader(file);
+    return ret;
+  }
 
-		List<String> tokens;
-		
-		try {
-			// Skip past any header
-			ReaderUtils.skipLines(reader, skipLines);
-			
-			ReaderUtils.skipLines(reader, headers);
-			
-			tokens = Splitter.on(delimiter).text(reader.readLine());
-		} finally {
-			reader.close();
-		}
+  /**
+   * Guess if file contains only numbers.
+   * 
+   * @param file
+   * @return
+   * @throws IOException
+   */
+  public static boolean guessNumerical(Path file, int headers, String delimiter, int rowAnnotations,
+      Collection<String> skipMatches) throws IOException {
+    //
+    // Work out if we need to skip annotation rows that should be
+    // ignored
 
-		return TextUtils.areNumbers(CollectionUtils.tail(tokens, rowAnnotations));
-	}
-	
-	public static int estimateRowAnnotations(Path file, 
-			int headers, 
-			Collection<String> skipLines) throws IOException {
-		if (BioPathUtils.ext().xlsx().test(file) || 
-				BioPathUtils.ext().xls().test(file)) {
-			return 0;
-		}
+    int skipLines = ReaderUtils.countHeaderLines(file, skipMatches);
 
-		BufferedReader reader = FileUtils.newBufferedReader(file);
+    BufferedReader reader = FileUtils.newBufferedReader(file);
 
-		int ret = 0;
+    List<String> tokens;
 
-		try {
-			ReaderUtils.skipLines(reader, headers);
+    try {
+      // Skip past any header
+      ReaderUtils.skipLines(reader, skipLines);
 
-			List<String> tokens = Splitter.onTab().text(reader.readLine());
+      ReaderUtils.skipLines(reader, headers);
 
-			ret = XLSXMetaData.estimateRowAnnotations(tokens);
-		} finally {
-			reader.close();
-		}
+      tokens = Splitter.on(delimiter).text(reader.readLine());
+    } finally {
+      reader.close();
+    }
 
-		return ret;
-	}
+    return TextUtils.areNumbers(CollectionUtils.tail(tokens, rowAnnotations));
+  }
+
+  public static int estimateRowAnnotations(Path file, int headers, Collection<String> skipLines) throws IOException {
+    if (BioPathUtils.ext().xlsx().test(file) || BioPathUtils.ext().xls().test(file)) {
+      return 0;
+    }
+
+    BufferedReader reader = FileUtils.newBufferedReader(file);
+
+    int ret = 0;
+
+    try {
+      ReaderUtils.skipLines(reader, headers);
+
+      List<String> tokens = Splitter.onTab().text(reader.readLine());
+
+      ret = XLSXMetaData.estimateRowAnnotations(tokens);
+    } finally {
+      reader.close();
+    }
+
+    return ret;
+  }
 }

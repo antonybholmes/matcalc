@@ -39,137 +39,148 @@ import edu.columbia.rdf.matcalc.figure.graph2d.FillPatternButton;
  * The class FillControl.
  */
 public class FillStyleControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member color button.
-	 */
-	private ColorSwatchButton mColorButton;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member fill.
-	 */
-	private FillProperties mFillStyle;
+  /**
+   * The member color button.
+   */
+  private ColorSwatchButton mColorButton;
 
-	/**
-	 * The member check box.
-	 */
-	private CheckBox mCheckBox;
+  /**
+   * The member fill.
+   */
+  private FillProperties mFillStyle;
 
-	/**
-	 * The member pattern button.
-	 */
-	private FillPatternButton mPatternButton;
-	
-	/**
-	 * The class PatternEvents.
-	 */
-	private class PatternEvents implements ModernClickListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			FillPattern pattern;
-			
-			if (e.getMessage().equals("Cross")) {
-				pattern = FillPattern.CROSS_HATCH;
-			} else if (e.getMessage().equals("Back")) {
-				pattern = FillPattern.BACK_HATCH;
-			} else if (e.getMessage().equals("Forward")) {
-				pattern = FillPattern.FORWARD_HATCH;
-			} else if (e.getMessage().equals("Vert")) {
-				pattern = FillPattern.VERT_HATCH;
-			} else if (e.getMessage().equals("Hoz")) {
-				pattern = FillPattern.HOZ_HATCH;
-			} else {
-				pattern = FillPattern.SOLID;
-			}
+  /**
+   * The member check box.
+   */
+  private CheckBox mCheckBox;
 
-			mFillStyle.setPattern(pattern);
-			
-			//setColors();
-		}
-	}
-	
-	/**
-	 * Instantiates a new fill control.
-	 *
-	 * @param parent the parent
-	 * @param fill the fill
-	 */
-	public FillStyleControl(ModernWindow parent, FillProperties fill) {
-		this(parent, "Fill", fill);
-	}
-	
-	/**
-	 * Instantiates a new fill control.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param fill the fill
-	 */
-	public FillStyleControl(ModernWindow parent,
-			String name, 
-			FillProperties fill) {
-		mFillStyle = fill;
-		
-		mCheckBox = new ModernCheckSwitch(name);
-		mCheckBox.setSelected(fill.getVisible());
-		
-		mColorButton = new ColorSwatchButton(parent, fill.getColor());
-		
-		mPatternButton = new FillPatternButton(fill.getPattern());
-		
-		add(mCheckBox);
-		add(Box.createHorizontalGlue());
-		add(ModernPanel.createHGap());
-		add(mColorButton);
-		add(ModernPanel.createHGap());
-		add(mPatternButton);
-		
-		mCheckBox.addClickListener(this);
-		mColorButton.addClickListener(this);
-		mPatternButton.addClickListener(new PatternEvents());
-		
-		mFillStyle.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				mColorButton.setSelectedColor(mFillStyle.getColor());
-			}});
-	}
-	
+  /**
+   * The member pattern button.
+   */
+  private FillPatternButton mPatternButton;
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckBox.isSelected();
-	}
+  /**
+   * The class PatternEvents.
+   */
+  private class PatternEvents implements ModernClickListener {
 
-	/**
-	 * Gets the selected color.
-	 *
-	 * @return the selected color
-	 */
-	public Color getSelectedColor() {
-		return mColorButton.getSelectedColor();
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mFillStyle.updateColor(getSelectedColor());
-		mFillStyle.setVisible(isSelected());
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      FillPattern pattern;
+
+      if (e.getMessage().equals("Cross")) {
+        pattern = FillPattern.CROSS_HATCH;
+      } else if (e.getMessage().equals("Back")) {
+        pattern = FillPattern.BACK_HATCH;
+      } else if (e.getMessage().equals("Forward")) {
+        pattern = FillPattern.FORWARD_HATCH;
+      } else if (e.getMessage().equals("Vert")) {
+        pattern = FillPattern.VERT_HATCH;
+      } else if (e.getMessage().equals("Hoz")) {
+        pattern = FillPattern.HOZ_HATCH;
+      } else {
+        pattern = FillPattern.SOLID;
+      }
+
+      mFillStyle.setPattern(pattern);
+
+      // setColors();
+    }
+  }
+
+  /**
+   * Instantiates a new fill control.
+   *
+   * @param parent
+   *          the parent
+   * @param fill
+   *          the fill
+   */
+  public FillStyleControl(ModernWindow parent, FillProperties fill) {
+    this(parent, "Fill", fill);
+  }
+
+  /**
+   * Instantiates a new fill control.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param fill
+   *          the fill
+   */
+  public FillStyleControl(ModernWindow parent, String name, FillProperties fill) {
+    mFillStyle = fill;
+
+    mCheckBox = new ModernCheckSwitch(name);
+    mCheckBox.setSelected(fill.getVisible());
+
+    mColorButton = new ColorSwatchButton(parent, fill.getColor());
+
+    mPatternButton = new FillPatternButton(fill.getPattern());
+
+    add(mCheckBox);
+    add(Box.createHorizontalGlue());
+    add(ModernPanel.createHGap());
+    add(mColorButton);
+    add(ModernPanel.createHGap());
+    add(mPatternButton);
+
+    mCheckBox.addClickListener(this);
+    mColorButton.addClickListener(this);
+    mPatternButton.addClickListener(new PatternEvents());
+
+    mFillStyle.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mColorButton.setSelectedColor(mFillStyle.getColor());
+      }
+    });
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /**
+   * Gets the selected color.
+   *
+   * @return the selected color
+   */
+  public Color getSelectedColor() {
+    return mColorButton.getSelectedColor();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mFillStyle.updateColor(getSelectedColor());
+    mFillStyle.setVisible(isSelected());
+  }
 
 }

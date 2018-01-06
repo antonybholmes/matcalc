@@ -28,106 +28,106 @@ import org.jebtk.modern.window.ModernWindow;
  * The class CollapseDialog.
  */
 public class CollapseDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member collapse panel.
-	 */
-	private CollapsePanel mCollapsePanel;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member matrix.
-	 */
-	private DataFrame mMatrix;
+  /**
+   * The member collapse panel.
+   */
+  private CollapsePanel mCollapsePanel;
 
-	/**
-	 * The member groups.
-	 */
-	private XYSeriesGroup mGroups;
+  /**
+   * The member matrix.
+   */
+  private DataFrame mMatrix;
 
+  /**
+   * The member groups.
+   */
+  private XYSeriesGroup mGroups;
 
-	/**
-	 * Instantiates a new collapse dialog.
-	 *
-	 * @param parent the parent
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 */
-	public CollapseDialog(ModernWindow parent, 
-			DataFrame matrix,
-			XYSeriesGroup groups) {
-		super(parent, "matcalc.modules.collapse.help.url");
-		
-		setTitle("Collapse Rows");
-		
-		mMatrix = matrix;
-		mGroups = groups;
-		
-		setup();
+  /**
+   * Instantiates a new collapse dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   */
+  public CollapseDialog(ModernWindow parent, DataFrame matrix, XYSeriesGroup groups) {
+    super(parent, "matcalc.modules.collapse.help.url");
 
-		createUi();
+    setTitle("Collapse Rows");
 
-	}
+    mMatrix = matrix;
+    mGroups = groups;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setSize(500, 300);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+    setup();
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		mCollapsePanel = new CollapsePanel(mMatrix, mGroups);
-		
-		setDialogCardContent(mCollapsePanel);
-	}
+    createUi();
 
-	/**
-	 * Gets the collapse type.
-	 *
-	 * @return the collapse type
-	 */
-	public CollapseType getCollapseType() {
-		return mCollapsePanel.getCollapseType();
-	}
+  }
 
-	/**
-	 * Gets the collapse name.
-	 *
-	 * @return the collapse name
-	 */
-	public String getCollapseName() {
-		return mCollapsePanel.getCollapseName();
-	}
-	
-	/**
-	 * Gets the group1.
-	 *
-	 * @return the group1
-	 */
-	public MatrixGroup getGroup1() {
-		return mCollapsePanel.getGroup1();
-	}
-	
-	/**
-	 * Gets the group2.
-	 *
-	 * @return the group2
-	 */
-	public MatrixGroup getGroup2() {
-		return mCollapsePanel.getGroup2();
-	}
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setSize(500, 300);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    mCollapsePanel = new CollapsePanel(mMatrix, mGroups);
+
+    setDialogCardContent(mCollapsePanel);
+  }
+
+  /**
+   * Gets the collapse type.
+   *
+   * @return the collapse type
+   */
+  public CollapseType getCollapseType() {
+    return mCollapsePanel.getCollapseType();
+  }
+
+  /**
+   * Gets the collapse name.
+   *
+   * @return the collapse name
+   */
+  public String getCollapseName() {
+    return mCollapsePanel.getCollapseName();
+  }
+
+  /**
+   * Gets the group1.
+   *
+   * @return the group1
+   */
+  public MatrixGroup getGroup1() {
+    return mCollapsePanel.getGroup1();
+  }
+
+  /**
+   * Gets the group2.
+   *
+   * @return the group2
+   */
+  public MatrixGroup getGroup2() {
+    return mCollapsePanel.getGroup2();
+  }
 }

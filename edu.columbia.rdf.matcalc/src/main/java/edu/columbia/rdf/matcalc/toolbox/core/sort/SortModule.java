@@ -36,147 +36,148 @@ import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Can compare a column of values to another list to see what is common and
- * record this in a new column next to the reference column. Useful for
- * doing overlaps and keeping data in a specific order in a table.
+ * record this in a new column next to the reference column. Useful for doing
+ * overlaps and keeping data in a specific order in a table.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class SortModule extends CalcModule implements ModernClickListener  {
+public class SortModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mSortButton = 
-			new RibbonLargeButton("Sort", UIService.getInstance().loadIcon("sort", 24));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mSortButton = new RibbonLargeButton("Sort", UIService.getInstance().loadIcon("sort", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Sort";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Sort";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mSortButton.setToolTip(new ModernToolTip("Sort", 
-				"Sort columns."), mWindow.getRibbon().getToolTipModel());
+    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."), mWindow.getRibbon().getToolTipModel());
 
-		window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
+    window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
 
-		mSortButton.addClickListener(this);
+    mSortButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		sort();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    sort();
+  }
 
-	/**
-	 * Match.
-	 */
-	private void sort() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		List<Integer> columns = mWindow.getSelectedColumns();
-		
-		int c = -1;
-		
-		if (columns.size() > 0) {
-			c = columns.get(0);
-		}
-		
-		SortDialog dialog = new SortDialog(mWindow, m, c);
+  /**
+   * Match.
+   */
+  private void sort() {
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		dialog.setVisible(true);
+    List<Integer> columns = mWindow.getSelectedColumns();
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
+    int c = -1;
 
-		List<List<Integer>> sortedIds =
-				new ArrayList<List<Integer>>();
-		
-		// Seed the sorter with an ordered list of all the rows
-		sortedIds.add(Mathematics.sequence(0, m.getRows() - 1));
+    if (columns.size() > 0) {
+      c = columns.get(0);
+    }
 
-		//List<ColumnSort> sorters = new ArrayList<ColumnSort>();
-		
-		//sorters.add(new ColumnSort(m, 1, false));
-		//sorters.add(new ColumnSort(m, 2));
-		
-		List<ColumnSort> sorters = dialog.getSorters();
-		
-		for (ColumnSort sorter : sorters) {
-			c = sorter.getColumn();
-			
-			List<List<Integer>> newSortedIds = new ArrayList<List<Integer>>(); 
-			
-			for (List<Integer> ids : sortedIds) {
-				// Sort the lists by key
-				
-				Map<String, Set<Integer>> sortMap =
-						DefaultTreeMap.create(new TreeSetCreator<Integer>());
-				
-				for (int id : ids) {
-					sortMap.get(m.getText(id, c)).add(id);
-				}
-				
-				List<String> sortedKeys = 
-						CollectionUtils.sort(sortMap.keySet(), NaturalSorter.INSTANCE);
-				
-				if (!sorter.getSortAsc()) {
-					sortedKeys = CollectionUtils.reverse(sortedKeys);
-				}
-				
-				// Create new list of sorted lists
-				
-				for (String key : sortedKeys) {
-					newSortedIds.add(CollectionUtils.sort(sortMap.get(key)));
-				}
-			}
-			
-			// Swap the new ids for the old so that now we sort sub lists
-			// on each loop
-			sortedIds = newSortedIds;
-		}
-		
-		// Create a master list of rows in sorted order
-		List<Integer> rows = new ArrayList<Integer>(m.getRows());
-		
-		for (List<Integer> ids : sortedIds) {
-			for (int id : ids) {
-				rows.add(id);
-			}
-		}
-		
-		DataFrame ret = 
-				DataFrame.createDataFrame(m.getRows(), m.getCols());
-		
-		DataFrame.copyColumnAnnotations(m, ret);
-		
-		DataFrame.copyRows(m, rows, ret);
-		
-		mWindow.addToHistory("Sort matrix", ret);
-	}
+    SortDialog dialog = new SortDialog(mWindow, m, c);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    List<List<Integer>> sortedIds = new ArrayList<List<Integer>>();
+
+    // Seed the sorter with an ordered list of all the rows
+    sortedIds.add(Mathematics.sequence(0, m.getRows() - 1));
+
+    // List<ColumnSort> sorters = new ArrayList<ColumnSort>();
+
+    // sorters.add(new ColumnSort(m, 1, false));
+    // sorters.add(new ColumnSort(m, 2));
+
+    List<ColumnSort> sorters = dialog.getSorters();
+
+    for (ColumnSort sorter : sorters) {
+      c = sorter.getColumn();
+
+      List<List<Integer>> newSortedIds = new ArrayList<List<Integer>>();
+
+      for (List<Integer> ids : sortedIds) {
+        // Sort the lists by key
+
+        Map<String, Set<Integer>> sortMap = DefaultTreeMap.create(new TreeSetCreator<Integer>());
+
+        for (int id : ids) {
+          sortMap.get(m.getText(id, c)).add(id);
+        }
+
+        List<String> sortedKeys = CollectionUtils.sort(sortMap.keySet(), NaturalSorter.INSTANCE);
+
+        if (!sorter.getSortAsc()) {
+          sortedKeys = CollectionUtils.reverse(sortedKeys);
+        }
+
+        // Create new list of sorted lists
+
+        for (String key : sortedKeys) {
+          newSortedIds.add(CollectionUtils.sort(sortMap.get(key)));
+        }
+      }
+
+      // Swap the new ids for the old so that now we sort sub lists
+      // on each loop
+      sortedIds = newSortedIds;
+    }
+
+    // Create a master list of rows in sorted order
+    List<Integer> rows = new ArrayList<Integer>(m.getRows());
+
+    for (List<Integer> ids : sortedIds) {
+      for (int id : ids) {
+        rows.add(id);
+      }
+    }
+
+    DataFrame ret = DataFrame.createDataFrame(m.getRows(), m.getCols());
+
+    DataFrame.copyColumnAnnotations(m, ret);
+
+    DataFrame.copyRows(m, rows, ret);
+
+    mWindow.addToHistory("Sort matrix", ret);
+  }
 }

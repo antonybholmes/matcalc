@@ -27,63 +27,67 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
  */
 public class Graph2dStyleRibbonButton extends RibbonLargeDropDownButton {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The class ClickEvents.
-	 */
-	private class ClickEvents implements ModernClickListener {
+  /**
+   * The class ClickEvents.
+   */
+  private class ClickEvents implements ModernClickListener {
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			if (e.getMessage().equals("Joined")) {
-				setIcon(0);
-			} else if (e.getMessage().equals("Joined Smooth")) {
-				setIcon(1);
-			} else if (e.getMessage().equals("Filled")) {
-				setIcon(2);
-			} else if (e.getMessage().equals("Filled Smooth")) {
-				setIcon(3);
-			} else if (e.getMessage().equals("Lines")) {
-				setIcon(4);
-			} else if (e.getMessage().equals("Bars")) {
-				setIcon(5);
-			} else if (e.getMessage().equals("Scatter")) {
-				setIcon(6);
-			} else if (e.getMessage().equals("Heat Map")) {
-				setIcon(7);
-			} else {
-				setIcon(0);
-			}
-			
-			repaint();
-		}
-	}
-	
-	/**
-	 * Instantiates a new graph2d style ribbon button.
-	 */
-	public Graph2dStyleRibbonButton() {
-		super(new Graph2dStyleMultiIcon24(), new Graph2dStyleMenu());
-		
-		addClickListener(new ClickEvents());
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      if (e.getMessage().equals("Joined")) {
+        setIcon(0);
+      } else if (e.getMessage().equals("Joined Smooth")) {
+        setIcon(1);
+      } else if (e.getMessage().equals("Filled")) {
+        setIcon(2);
+      } else if (e.getMessage().equals("Filled Smooth")) {
+        setIcon(3);
+      } else if (e.getMessage().equals("Lines")) {
+        setIcon(4);
+      } else if (e.getMessage().equals("Bars")) {
+        setIcon(5);
+      } else if (e.getMessage().equals("Scatter")) {
+        setIcon(6);
+      } else if (e.getMessage().equals("Heat Map")) {
+        setIcon(7);
+      } else {
+        setIcon(0);
+      }
 
-	/**
-	 * Sets the icon.
-	 *
-	 * @param index the new icon
-	 */
-	private void setIcon(int index) {
-		((Graph2dStyleMultiIcon24)mIcon).setIcon(index);
-		
-		mCompactIcon = new ModernScaleIcon(mIcon, 24);
-	}
+      repaint();
+    }
+  }
+
+  /**
+   * Instantiates a new graph2d style ribbon button.
+   */
+  public Graph2dStyleRibbonButton() {
+    super(new Graph2dStyleMultiIcon24(), new Graph2dStyleMenu());
+
+    addClickListener(new ClickEvents());
+  }
+
+  /**
+   * Sets the icon.
+   *
+   * @param index
+   *          the new icon
+   */
+  private void setIcon(int index) {
+    ((Graph2dStyleMultiIcon24) mIcon).setIcon(index);
+
+    mCompactIcon = new ModernScaleIcon(mIcon, 24);
+  }
 }

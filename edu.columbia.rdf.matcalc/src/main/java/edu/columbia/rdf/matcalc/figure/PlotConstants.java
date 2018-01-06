@@ -20,62 +20,62 @@ package edu.columbia.rdf.matcalc.figure;
  * The class PlotConstants.
  */
 public class PlotConstants {
-	
-	/**
-	 * The constant MIN_STD.
-	 */
-	public static final double MIN_STD = -3;
-	
-	/**
-	 * The constant MAX_STD.
-	 */
-	public static final double MAX_STD = 3;
-	
-	/**
-	 * The constant LABEL_COLOR_NORMALIZATION.
-	 */
-	public static final String LABEL_COLOR_NORMALIZATION = "Color Normalization";
-	
-	/**
-	 * The constant LABEL_HEATMAP.
-	 */
-	public static final String LABEL_HEATMAP = "Heat Map";
-	
-	/**
-	 * The constant MENU_RESET_HISTORY.
-	 */
-	public static final String MENU_RESET_HISTORY = "Reset history";
-	
-	/**
-	 * The constant MENU_CREATE_PLOT.
-	 */
-	public static final String MENU_CREATE_PLOT = "Create plot";
-	
-	/**
-	 * The constant MENU_LOG_TRANSFORM.
-	 */
-	public static final String MENU_LOG_TRANSFORM = "Log2 transform";
-	
-	/**
-	 * The constant LABEL_COLOR_INTENSITY.
-	 */
-	public static final String LABEL_COLOR_INTENSITY = "Color Scale";
-	
-	/**
-	 * The constant MENU_SHOW_HEATMAP.
-	 */
-	public static final String MENU_SHOW_HEATMAP = "Show heat map";
-	
-	/**
-	 * The constant MENU_IS_LOG_TRANSFORMED.
-	 */
-	public static final String MENU_IS_LOG_TRANSFORMED = "Log2 transformed";
 
-	public static final String LABEL_BLOCK_SIZE = "Block Size";
-	
-	public static final String LABEL_LEGEND = "Legend";
+  /**
+   * The constant MIN_STD.
+   */
+  public static final double MIN_STD = -3;
 
-	public static final String MENU_PLOT = "Plot";
+  /**
+   * The constant MAX_STD.
+   */
+  public static final double MAX_STD = 3;
 
-	public static final String MENU_UPDATE = "Update";
+  /**
+   * The constant LABEL_COLOR_NORMALIZATION.
+   */
+  public static final String LABEL_COLOR_NORMALIZATION = "Color Normalization";
+
+  /**
+   * The constant LABEL_HEATMAP.
+   */
+  public static final String LABEL_HEATMAP = "Heat Map";
+
+  /**
+   * The constant MENU_RESET_HISTORY.
+   */
+  public static final String MENU_RESET_HISTORY = "Reset history";
+
+  /**
+   * The constant MENU_CREATE_PLOT.
+   */
+  public static final String MENU_CREATE_PLOT = "Create plot";
+
+  /**
+   * The constant MENU_LOG_TRANSFORM.
+   */
+  public static final String MENU_LOG_TRANSFORM = "Log2 transform";
+
+  /**
+   * The constant LABEL_COLOR_INTENSITY.
+   */
+  public static final String LABEL_COLOR_INTENSITY = "Color Scale";
+
+  /**
+   * The constant MENU_SHOW_HEATMAP.
+   */
+  public static final String MENU_SHOW_HEATMAP = "Show heat map";
+
+  /**
+   * The constant MENU_IS_LOG_TRANSFORMED.
+   */
+  public static final String MENU_IS_LOG_TRANSFORMED = "Log2 transformed";
+
+  public static final String LABEL_BLOCK_SIZE = "Block Size";
+
+  public static final String LABEL_LEGEND = "Legend";
+
+  public static final String MENU_PLOT = "Plot";
+
+  public static final String MENU_UPDATE = "Update";
 }

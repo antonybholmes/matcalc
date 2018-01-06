@@ -19,64 +19,62 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
 
-
 // TODO: Auto-generated Javadoc
 /**
- *  Defines a set of delimiters for parsing files.
+ * Defines a set of delimiters for parsing files.
  */
 public class DelimiterCombo extends ModernComboBox {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	
-	/**
-	 * Instantiates a new delimiter combo.
-	 */
-	public DelimiterCombo() {
-		addMenuItem("Tab");
-		addMenuItem("Space");
-		addMenuItem(",");
-		addMenuItem(";");
-		
-		setSelectedIndex(0);
-		
-		UI.setSize(this, 80);
-	}
-	
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Gets the delimiter.
-	 *
-	 * @return the delimiter
-	 */
-	public String getDelimiter() {
-		switch (getSelectedIndex()) {
-		case 1:
-			return " ";
-		case 2:
-			return ",";
-		case 3:
-			return ";";
-		default:
-			return TextUtils.TAB_DELIMITER;
-		}
-	}
+  /**
+   * Instantiates a new delimiter combo.
+   */
+  public DelimiterCombo() {
+    addMenuItem("Tab");
+    addMenuItem("Space");
+    addMenuItem(",");
+    addMenuItem(";");
 
-	/**
-	 * Set the default delimiter.
-	 *
-	 * @param delimiter the new delimiter
-	 */
-	public void setDelimiter(String delimiter) {
-		if (delimiter.equals(" ")) {
-			setSelectedIndex(1);
-		} else if (delimiter.equals(",")) {
-			setSelectedIndex(2);
-		} else if (delimiter.equals(";")) {
-			setSelectedIndex(3);
-		} else {
-			setSelectedIndex(0);
-		}
-	}
+    setSelectedIndex(0);
+
+    UI.setSize(this, 80);
+  }
+
+  /**
+   * Gets the delimiter.
+   *
+   * @return the delimiter
+   */
+  public String getDelimiter() {
+    switch (getSelectedIndex()) {
+    case 1:
+      return " ";
+    case 2:
+      return ",";
+    case 3:
+      return ";";
+    default:
+      return TextUtils.TAB_DELIMITER;
+    }
+  }
+
+  /**
+   * Set the default delimiter.
+   *
+   * @param delimiter
+   *          the new delimiter
+   */
+  public void setDelimiter(String delimiter) {
+    if (delimiter.equals(" ")) {
+      setSelectedIndex(1);
+    } else if (delimiter.equals(",")) {
+      setSelectedIndex(2);
+    } else if (delimiter.equals(";")) {
+      setSelectedIndex(3);
+    } else {
+      setSelectedIndex(0);
+    }
+  }
 }

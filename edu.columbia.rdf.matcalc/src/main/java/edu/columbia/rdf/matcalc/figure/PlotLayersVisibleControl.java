@@ -33,29 +33,30 @@ import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class LayersPanel.
  */
 public class PlotLayersVisibleControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new layers panel.
-	 *
-	 * @param parent the parent
-	 * @param plot the plot
-	 */
-	public PlotLayersVisibleControl(ModernWindow parent, Plot plot) {
-		for (PlotBox child : plot) {
-			add(new PlotLayerVisibleControl(parent, child));
-		}
-		
-		setBorder(ModernWidget.BORDER);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new layers panel.
+   *
+   * @param parent
+   *          the parent
+   * @param plot
+   *          the plot
+   */
+  public PlotLayersVisibleControl(ModernWindow parent, Plot plot) {
+    for (PlotBox child : plot) {
+      add(new PlotLayerVisibleControl(parent, child));
+    }
+
+    setBorder(ModernWidget.BORDER);
+  }
 }

@@ -30,120 +30,120 @@ import org.jebtk.modern.window.ModernWindow;
 import edu.columbia.rdf.matcalc.figure.FigureWindow;
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
 public abstract class HeatMapWindow extends FigureWindow {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member all groups.
-	 */
-	protected XYSeriesModel mGroups = null;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member properties.
-	 */
-	protected Properties mProperties; // = new HeatMapProperties();
+  /**
+   * The member all groups.
+   */
+  protected XYSeriesModel mGroups = null;
 
-	/** The m history. */
-	protected List<String> mHistory;
+  /**
+   * The member properties.
+   */
+  protected Properties mProperties; // = new HeatMapProperties();
 
-	/** The m matrix. */
-	protected DataFrame mMatrix;
+  /** The m history. */
+  protected List<String> mHistory;
 
-	/** The m count groups. */
-	protected CountGroups mCountGroups;
+  /** The m matrix. */
+  protected DataFrame mMatrix;
 
-	/** The m row groups. */
-	protected XYSeriesModel mRowGroups;
-	
-	
-	/**
-	 * Instantiates a new heat map window.
-	 *
-	 * @param window the window
-	 * @param matrix the matrix
-	 * @param groups the all groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public HeatMapWindow(ModernWindow window,
-			DataFrame matrix, 
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(window, null);
-		
-		setMatrix(matrix);
-		mGroups = groups;
-		mRowGroups = rowGroups;
-		mCountGroups = countGroups;
-		mHistory = history;
-		mProperties = properties;
-		
-		mColorModel.set(ColorNormalization.ZSCORE_ROW);
-	}
-	
-	/**
-	 * Sets the matrix.
-	 *
-	 * @param matrix the new matrix
-	 */
-	public void setMatrix(DataFrame matrix) {
-		mMatrix = matrix;
-	}
+  /** The m count groups. */
+  protected CountGroups mCountGroups;
 
-	/**
-	 * Sets the format pane.
-	 *
-	 * @param formatPane the new format pane
-	 */
-	public void setFormatPane(FormatPlotPane formatPane) {
-		mFormatPane = formatPane;
+  /** The m row groups. */
+  protected XYSeriesModel mRowGroups;
 
-		getTabsPane().getModel().getRightTabs().clear();
-		getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
-		
-		mFormatPane.update();
-	}
-	
-	
-	
-	/**
-	 * Gets the canvas.
-	 *
-	 * @return the canvas
-	 */
-	@Override
-	public PlotBox getPlot() {
-		return mFormatPane.getCanvas();
-	}
-	
-	
-	/**
-	 * Sets the color map.
-	 *
-	 * @param colormap the new color map
-	 */
-	public void setColorMap(ColorMap colormap) {
-		if (colormap != null) {
-			mColorMapModel.set(colormap);
-		}
-	}
+  /**
+   * Instantiates a new heat map window.
+   *
+   * @param window
+   *          the window
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the all groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public HeatMapWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Properties properties) {
+    super(window, null);
+
+    setMatrix(matrix);
+    mGroups = groups;
+    mRowGroups = rowGroups;
+    mCountGroups = countGroups;
+    mHistory = history;
+    mProperties = properties;
+
+    mColorModel.set(ColorNormalization.ZSCORE_ROW);
+  }
+
+  /**
+   * Sets the matrix.
+   *
+   * @param matrix
+   *          the new matrix
+   */
+  public void setMatrix(DataFrame matrix) {
+    mMatrix = matrix;
+  }
+
+  /**
+   * Sets the format pane.
+   *
+   * @param formatPane
+   *          the new format pane
+   */
+  public void setFormatPane(FormatPlotPane formatPane) {
+    mFormatPane = formatPane;
+
+    getTabsPane().getModel().getRightTabs().clear();
+    getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
+
+    mFormatPane.update();
+  }
+
+  /**
+   * Gets the canvas.
+   *
+   * @return the canvas
+   */
+  @Override
+  public PlotBox getPlot() {
+    return mFormatPane.getCanvas();
+  }
+
+  /**
+   * Sets the color map.
+   *
+   * @param colormap
+   *          the new color map
+   */
+  public void setColorMap(ColorMap colormap) {
+    if (colormap != null) {
+      mColorMapModel.set(colormap);
+    }
+  }
 }

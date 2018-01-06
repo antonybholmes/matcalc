@@ -45,90 +45,88 @@ import org.jebtk.modern.window.ModernWindow;
  *
  */
 public class SplitDialog extends ModernDialogHelpWindow {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member spinner.
-	 */
-	private CheckBox mCheckLoad = 
-			new ModernCheckBox("Load matrices", true);
-	
-	/** The m check zip. */
-	private CheckBox mCheckZip = 
-			new ModernCheckBox("Create zip file", true);
 
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new split dialog.
-	 *
-	 * @param parent the parent
-	 */
-	public SplitDialog(ModernWindow parent) {
-		this(parent, false);
-	}
-	
-	/**
-	 * Instantiates a new modern int input dialog.
-	 *
-	 * @param parent the parent
-	 * @param checked the checked
-	 */
-	public SplitDialog(ModernWindow parent,
-			boolean checked) {
-		super(parent,
-				ModernDialogTaskType.OK_CANCEL);
-		
-		setTitle("Split");
-		
-		setup();
+  /**
+   * The member spinner.
+   */
+  private CheckBox mCheckLoad = new ModernCheckBox("Load matrices", true);
 
-		createUi();
-	}
+  /** The m check zip. */
+  private CheckBox mCheckZip = new ModernCheckBox("Create zip file", true);
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setSize(400, 200);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+  /**
+   * Instantiates a new split dialog.
+   *
+   * @param parent
+   *          the parent
+   */
+  public SplitDialog(ModernWindow parent) {
+    this(parent, false);
+  }
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		Box box = VBox.create();
-		
-		box.add(mCheckLoad);
-		box.add(mCheckZip);
+  /**
+   * Instantiates a new modern int input dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param checked
+   *          the checked
+   */
+  public SplitDialog(ModernWindow parent, boolean checked) {
+    super(parent, ModernDialogTaskType.OK_CANCEL);
 
-		setContent(box);
-	}
+    setTitle("Split");
 
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public boolean getLoad() {
-		return mCheckLoad.isSelected();
-	}
-	
-	/**
-	 * Gets the creates the zip.
-	 *
-	 * @return the creates the zip
-	 */
-	public boolean getCreateZip() {
-		return mCheckZip.isSelected();
-	}
+    setup();
+
+    createUi();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setSize(400, 200);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    Box box = VBox.create();
+
+    box.add(mCheckLoad);
+    box.add(mCheckZip);
+
+    setContent(box);
+  }
+
+  /**
+   * Gets the value.
+   *
+   * @return the value
+   */
+  public boolean getLoad() {
+    return mCheckLoad.isSelected();
+  }
+
+  /**
+   * Gets the creates the zip.
+   *
+   * @return the creates the zip
+   */
+  public boolean getCreateZip() {
+    return mCheckZip.isSelected();
+  }
 }

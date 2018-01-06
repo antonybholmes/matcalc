@@ -22,21 +22,24 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * The class ZScoreModule.
  */
 public abstract class CalcWinModule extends CalcModule {
-	
-	/**
-	 * The member window.
-	 */
-	protected MainMatCalcWindow mWindow; 
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
-	}
 
-	public MainMatCalcWindow getWindow() {
-		return mWindow;
-	}
+  /**
+   * The member window.
+   */
+  protected MainMatCalcWindow mWindow;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
+  }
+
+  public MainMatCalcWindow getWindow() {
+    return mWindow;
+  }
 }

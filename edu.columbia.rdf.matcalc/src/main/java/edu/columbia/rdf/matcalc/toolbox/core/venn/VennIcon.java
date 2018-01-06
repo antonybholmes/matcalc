@@ -23,11 +23,11 @@ import org.jebtk.modern.graphics.icons.ModernApplicationIcon;
  * The Class MatCalcIcon.
  */
 public class VennIcon extends ModernApplicationIcon {
-	
-	/**
-	 * Instantiates a new mat calc icon.
-	 */
-	public VennIcon() {
-		super("V", "e", ColorTheme.BLUE);
-	}
+
+  /**
+   * Instantiates a new mat calc icon.
+   */
+  public VennIcon() {
+    super("V", "e", ColorTheme.BLUE);
+  }
 }

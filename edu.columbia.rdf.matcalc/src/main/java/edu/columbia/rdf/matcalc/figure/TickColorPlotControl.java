@@ -33,91 +33,96 @@ import org.jebtk.modern.window.ModernWindow;
  * The class TickColorPlotControl.
  */
 public class TickColorPlotControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check visible.
-	 */
-	private CheckBox mCheckVisible;
-	
-	/**
-	 * The member color button.
-	 */
-	private ColorSwatchButton mColorButton;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member tick.
-	 */
-	private TickMarkProperties mTick;
-	
-	/**
-	 * Instantiates a new tick color plot control.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param tick the tick
-	 */
-	public TickColorPlotControl(ModernWindow parent,
-			String name,
-			TickMarkProperties tick) {
+  /**
+   * The member check visible.
+   */
+  private CheckBox mCheckVisible;
 
-		mTick = tick;
-		
-		mCheckVisible = new ModernCheckBox(name);
-		mCheckVisible.setSelected(tick.getLineStyle().getVisible());
-		
-		mColorButton = new ColorSwatchButton(parent, 
-				tick.getLineStyle().getColor());
-		
-		add(mCheckVisible);
-		add(Box.createHorizontalGlue());
-		add(mColorButton);
-		//setBorder(ModernWidget.BORDER);
+  /**
+   * The member color button.
+   */
+  private ColorSwatchButton mColorButton;
 
-		mCheckVisible.addClickListener(new ModernClickListener() {
+  /**
+   * The member tick.
+   */
+  private TickMarkProperties mTick;
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mTick.getLineStyle().setVisible(mCheckVisible.isSelected());
-			}});
-		
-		mColorButton.addClickListener(new ModernClickListener() {
+  /**
+   * Instantiates a new tick color plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param tick
+   *          the tick
+   */
+  public TickColorPlotControl(ModernWindow parent, String name, TickMarkProperties tick) {
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mTick.getLineStyle().setColor(getSelectedColor());
-			}});
-	}
-	
+    mTick = tick;
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckVisible.isSelected();
-	}
+    mCheckVisible = new ModernCheckBox(name);
+    mCheckVisible.setSelected(tick.getLineStyle().getVisible());
 
-	/**
-	 * Gets the selected color.
-	 *
-	 * @return the selected color
-	 */
-	public Color getSelectedColor() {
-		return isSelected() ? mColorButton.getSelectedColor() : null;
-	}
+    mColorButton = new ColorSwatchButton(parent, tick.getLineStyle().getColor());
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mTick.getLineStyle().setColor(getSelectedColor());
-	}
+    add(mCheckVisible);
+    add(Box.createHorizontalGlue());
+    add(mColorButton);
+    // setBorder(ModernWidget.BORDER);
+
+    mCheckVisible.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mTick.getLineStyle().setVisible(mCheckVisible.isSelected());
+      }
+    });
+
+    mColorButton.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mTick.getLineStyle().setColor(getSelectedColor());
+      }
+    });
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckVisible.isSelected();
+  }
+
+  /**
+   * Gets the selected color.
+   *
+   * @return the selected color
+   */
+  public Color getSelectedColor() {
+    return isSelected() ? mColorButton.getSelectedColor() : null;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mTick.getLineStyle().setColor(getSelectedColor());
+  }
 
 }

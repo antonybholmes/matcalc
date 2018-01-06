@@ -30,71 +30,76 @@ import org.jebtk.modern.window.ModernWindow;
  * The class Graph2dStyleControl.
  */
 public class Graph2dStyleControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member style button.
-	 */
-	private Graph2dStyleButton mStyleButton;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member axes.
-	 */
-	private Axes mAxes;
+  /**
+   * The member style button.
+   */
+  private Graph2dStyleButton mStyleButton;
 
-	/**
-	 * The member style.
-	 */
-	private PlotStyle mStyle = PlotStyle.BARS;
+  /**
+   * The member axes.
+   */
+  private Axes mAxes;
 
-	/**
-	 * Instantiates a new graph2d style control.
-	 *
-	 * @param parent the parent
-	 * @param axes the axes
-	 */
-	public Graph2dStyleControl(ModernWindow parent, Axes axes) {
+  /**
+   * The member style.
+   */
+  private PlotStyle mStyle = PlotStyle.BARS;
 
-		mAxes = axes;
-		
-		mStyleButton = new Graph2dStyleButton(PlotStyle.BARS);
-		
-		add(new ModernLabel("Style"));
-		add(Box.createHorizontalGlue());
-		add(mStyleButton);
-		
+  /**
+   * Instantiates a new graph2d style control.
+   *
+   * @param parent
+   *          the parent
+   * @param axes
+   *          the axes
+   */
+  public Graph2dStyleControl(ModernWindow parent, Axes axes) {
 
-		mStyleButton.addClickListener(this);
-	}
+    mAxes = axes;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("Filled")) {
-			mStyle  = PlotStyle.FILLED;
-		} else if (e.getMessage().equals("Filled Smooth")) {
-			mStyle = PlotStyle.FILLED_SMOOTH;
-		} else if (e.getMessage().equals("Joined")) {
-			mStyle = PlotStyle.JOINED;
-		} else if (e.getMessage().equals("Joined Smooth")) {
-			mStyle = PlotStyle.JOINED_SMOOTH_ZERO_ENDS;
-		} else if (e.getMessage().equals("Lines")) {
-			mStyle = PlotStyle.LINES;
-		} else if (e.getMessage().equals("Bars")) {
-			mStyle = PlotStyle.BARS;
-		} else if (e.getMessage().equals("Scatter")) {
-			mStyle = PlotStyle.SCATTER;
-		} else {
-			mStyle = PlotStyle.BARS;
-		}
-		
-		mAxes.setStyle(mStyle);
-	}
+    mStyleButton = new Graph2dStyleButton(PlotStyle.BARS);
+
+    add(new ModernLabel("Style"));
+    add(Box.createHorizontalGlue());
+    add(mStyleButton);
+
+    mStyleButton.addClickListener(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals("Filled")) {
+      mStyle = PlotStyle.FILLED;
+    } else if (e.getMessage().equals("Filled Smooth")) {
+      mStyle = PlotStyle.FILLED_SMOOTH;
+    } else if (e.getMessage().equals("Joined")) {
+      mStyle = PlotStyle.JOINED;
+    } else if (e.getMessage().equals("Joined Smooth")) {
+      mStyle = PlotStyle.JOINED_SMOOTH_ZERO_ENDS;
+    } else if (e.getMessage().equals("Lines")) {
+      mStyle = PlotStyle.LINES;
+    } else if (e.getMessage().equals("Bars")) {
+      mStyle = PlotStyle.BARS;
+    } else if (e.getMessage().equals("Scatter")) {
+      mStyle = PlotStyle.SCATTER;
+    } else {
+      mStyle = PlotStyle.BARS;
+    }
+
+    mAxes.setStyle(mStyle);
+  }
 
 }

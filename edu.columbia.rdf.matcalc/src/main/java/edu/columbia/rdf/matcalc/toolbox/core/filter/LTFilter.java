@@ -21,32 +21,37 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
  */
 public class LTFilter implements Filter {
 
-	/** The m V. */
-	private double mV;
-	
-	/**
-	 * Instantiates a new LT filter.
-	 *
-	 * @param v the v
-	 */
-	public LTFilter(double v) {
-		mV = v;
-	}
+  /** The m V. */
+  private double mV;
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
-	 */
-	@Override
-	public boolean test(String text, double value) {
-		return value < mV;
-	}
+  /**
+   * Instantiates a new LT filter.
+   *
+   * @param v
+   *          the v
+   */
+  public LTFilter(double v) {
+    mV = v;
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Less than";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
+   */
+  @Override
+  public boolean test(String text, double value) {
+    return value < mV;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#getName()
+   */
+  @Override
+  public String getName() {
+    return "Less than";
+  }
 
 }

@@ -35,99 +35,102 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
  */
 public class OptionalEntry extends HBox {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member check box.
-	 */
-	private ModernTwoStateWidget mCheckBox;
-	
-	/**
-	 * The member text.
-	 */
-	private ModernCompactSpinner mText;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	
-	/**
-	 * The class FocusEvents.
-	 */
-	private class FocusEvents implements FocusListener {
+  /**
+   * The member check box.
+   */
+  private ModernTwoStateWidget mCheckBox;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.FocusListener#focusGained(java.awt.event.FocusEvent)
-		 */
-		@Override
-		public void focusGained(FocusEvent e) {
-			mCheckBox.setSelected(true);
-		}
+  /**
+   * The member text.
+   */
+  private ModernCompactSpinner mText;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.FocusListener#focusLost(java.awt.event.FocusEvent)
-		 */
-		@Override
-		public void focusLost(FocusEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
+  /**
+   * The class FocusEvents.
+   */
+  private class FocusEvents implements FocusListener {
 
-	
-	/**
-	 * Instantiates a new optional entry.
-	 *
-	 * @param name the name
-	 * @param value the value
-	 * @param checked the checked
-	 */
-	public OptionalEntry(String name, double value, boolean checked) {
-		mCheckBox = new ModernCheckSwitch(name, checked);
-		
-		add(mCheckBox);
-		
-		add(Box.createHorizontalGlue());
-		
-		mText = new ModernCompactSpinner(value);
-		add(mText);
-		
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.FocusListener#focusGained(java.awt.event.FocusEvent)
+     */
+    @Override
+    public void focusGained(FocusEvent e) {
+      mCheckBox.setSelected(true);
+    }
 
-		mText.addFocusListener(new FocusEvents());
-		
-		
-		
-		
-	}
-	
-	/**
-	 * Gets the selected.
-	 *
-	 * @return the selected
-	 */
-	public boolean getSelected() {
-		return mCheckBox.isSelected();
-	}
-	
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 * @throws ParseException the parse exception
-	 */
-	public double getValue() throws ParseException {
-		return mText.getValue();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.FocusListener#focusLost(java.awt.event.FocusEvent)
+     */
+    @Override
+    public void focusLost(FocusEvent e) {
+      // TODO Auto-generated method stub
 
-	/**
-	 * Gets the int value.
-	 *
-	 * @return the int value
-	 * @throws ParseException the parse exception
-	 */
-	public int getIntValue() throws ParseException {
-		return mText.getIntValue();
-	}
+    }
+
+  }
+
+  /**
+   * Instantiates a new optional entry.
+   *
+   * @param name
+   *          the name
+   * @param value
+   *          the value
+   * @param checked
+   *          the checked
+   */
+  public OptionalEntry(String name, double value, boolean checked) {
+    mCheckBox = new ModernCheckSwitch(name, checked);
+
+    add(mCheckBox);
+
+    add(Box.createHorizontalGlue());
+
+    mText = new ModernCompactSpinner(value);
+    add(mText);
+
+    mText.addFocusListener(new FocusEvents());
+
+  }
+
+  /**
+   * Gets the selected.
+   *
+   * @return the selected
+   */
+  public boolean getSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /**
+   * Gets the value.
+   *
+   * @return the value
+   * @throws ParseException
+   *           the parse exception
+   */
+  public double getValue() throws ParseException {
+    return mText.getValue();
+  }
+
+  /**
+   * Gets the int value.
+   *
+   * @return the int value
+   * @throws ParseException
+   *           the parse exception
+   */
+  public int getIntValue() throws ParseException {
+    return mText.getIntValue();
+  }
 
 }

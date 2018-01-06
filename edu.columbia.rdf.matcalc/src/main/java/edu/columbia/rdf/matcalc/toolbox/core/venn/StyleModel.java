@@ -23,14 +23,14 @@ import org.jebtk.core.model.ItemModel;
  */
 public class StyleModel extends ItemModel<CircleStyle> {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new style model.
-	 */
-	public StyleModel() {
-		set(CircleStyle.UNIFORM);
-	}
-	
+  /**
+   * Instantiates a new style model.
+   */
+  public StyleModel() {
+    set(CircleStyle.UNIFORM);
+  }
+
 }

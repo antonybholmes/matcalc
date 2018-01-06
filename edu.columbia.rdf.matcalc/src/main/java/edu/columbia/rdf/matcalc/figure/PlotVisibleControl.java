@@ -28,59 +28,61 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisVisibleControl.
  */
 public class PlotVisibleControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check box.
-	 */
-	private ModernCheckSwitch mCheckBox;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member axis.
-	 */
-	private Plot mPlot;
-	
-	
-	/**
-	 * Instantiates a new axis visible control.
-	 *
-	 * @param parent the parent
-	 * @param plot the plot
-	 */
-	public PlotVisibleControl(ModernWindow parent,
-			Plot plot) {
-		mPlot = plot;
-		
-		mCheckBox = new ModernCheckSwitch("Show");
-		mCheckBox.setSelected(plot.getVisible());
-		
-		add(mCheckBox);
-		add(ModernPanel.createHGap());
-		
-		
-		mCheckBox.addClickListener(this);
-	}
-	
+  /**
+   * The member check box.
+   */
+  private ModernCheckSwitch mCheckBox;
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckBox.isSelected();
-	}
+  /**
+   * The member axis.
+   */
+  private Plot mPlot;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mPlot.setVisible(mCheckBox.isSelected());
-	}
+  /**
+   * Instantiates a new axis visible control.
+   *
+   * @param parent
+   *          the parent
+   * @param plot
+   *          the plot
+   */
+  public PlotVisibleControl(ModernWindow parent, Plot plot) {
+    mPlot = plot;
+
+    mCheckBox = new ModernCheckSwitch("Show");
+    mCheckBox.setSelected(plot.getVisible());
+
+    add(mCheckBox);
+    add(ModernPanel.createHGap());
+
+    mCheckBox.addClickListener(this);
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mPlot.setVisible(mCheckBox.isSelected());
+  }
 
 }

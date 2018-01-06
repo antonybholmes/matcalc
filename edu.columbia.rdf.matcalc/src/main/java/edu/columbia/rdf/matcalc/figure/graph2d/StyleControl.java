@@ -28,27 +28,29 @@ import edu.columbia.rdf.matcalc.figure.LineStyleControl;
  * The class XYSeriesPlotControl.
  */
 public class StyleControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new XY series plot control.
-	 *
-	 * @param parent the parent
-	 * @param style the style
-	 */
-	public StyleControl(ModernWindow parent, StyleProperties style) {
-		add(new LineStyleControl(parent, style.getLineStyle()));
-		
-		add(ModernPanel.createVGap());
-		
-		add(new FillStyleControl(parent, style.getFillStyle()));
-		
-		add(ModernPanel.createVGap());
-		
-		//setBorder(ModernWidget.BORDER);
-	}
+
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new XY series plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param style
+   *          the style
+   */
+  public StyleControl(ModernWindow parent, StyleProperties style) {
+    add(new LineStyleControl(parent, style.getLineStyle()));
+
+    add(ModernPanel.createVGap());
+
+    add(new FillStyleControl(parent, style.getFillStyle()));
+
+    add(ModernPanel.createVGap());
+
+    // setBorder(ModernWidget.BORDER);
+  }
 }

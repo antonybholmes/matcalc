@@ -26,7 +26,6 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Order columns by groups
@@ -35,64 +34,72 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class OrderColumnsModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The button.
-	 */
-	private RibbonLargeButton mButton = new RibbonLargeButton(UIService.getInstance().loadIcon(RunVectorIcon.class, 24),
-			"Order Columns",
-			"Order columns by groups.");
-	
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The button.
+   */
+  private RibbonLargeButton mButton = new RibbonLargeButton(UIService.getInstance().loadIcon(RunVectorIcon.class, 24),
+      "Order Columns", "Order columns by groups.");
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Order Columns";
-	}
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
-		
-		mButton.addClickListener(this);
-		
-		mWindow.getRibbon().getToolbar("Data").getSection("Filter").add(mButton);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		order();
-	}
-		
-	/**
-	 * Order.
-	 */
-	private void order() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		if (m == null) {
-			return;
-		}
-		
-		XYSeriesGroup groups = mWindow.getGroups();
-		
-		if (groups.size() == 0) {
-			return;
-		}
-		
-		DataFrame ret = DataFrame.copyColumns(m, groups);
-		
-		mWindow.addToHistory("Order columns", ret);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Order Columns";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
+
+    mButton.addClickListener(this);
+
+    mWindow.getRibbon().getToolbar("Data").getSection("Filter").add(mButton);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    order();
+  }
+
+  /**
+   * Order.
+   */
+  private void order() {
+    DataFrame m = mWindow.getCurrentMatrix();
+
+    if (m == null) {
+      return;
+    }
+
+    XYSeriesGroup groups = mWindow.getGroups();
+
+    if (groups.size() == 0) {
+      return;
+    }
+
+    DataFrame ret = DataFrame.copyColumns(m, groups);
+
+    mWindow.addToHistory("Order columns", ret);
+  }
 }

@@ -27,7 +27,6 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow user to change which columns are annotation or not.
@@ -36,105 +35,107 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class ColumnAnnotationModule extends CalcModule implements ModernClickListener  {
+public class ColumnAnnotationModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member split button.
-	 */
-	private RibbonLargeButton mButton = 
-			new RibbonLargeButton(UIService.getInstance().loadIcon("annotation", 24));
+  /**
+   * The member split button.
+   */
+  private RibbonLargeButton mButton = new RibbonLargeButton(UIService.getInstance().loadIcon("annotation", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Column Annotation";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Column Annotation";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mButton.setToolTip("Column Annotation", 
-				"Adjust which columns are annotation columns.");
+    mButton.setToolTip("Column Annotation", "Adjust which columns are annotation columns.");
 
-		window.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
+    window.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
 
-		mButton.addClickListener(this);
+    mButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		annotate();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    annotate();
+  }
 
-	/**
-	 * Split.
-	 */
-	private void annotate() {
-		int c = mWindow.getSelectedColumn();
+  /**
+   * Split.
+   */
+  private void annotate() {
+    int c = mWindow.getSelectedColumn();
 
-		if (c == Integer.MIN_VALUE) {
-			ModernMessageDialog.createDialog(mWindow, 
-					"You must select a column.", 
-					MessageDialogType.WARNING);
+    if (c == Integer.MIN_VALUE) {
+      ModernMessageDialog.createDialog(mWindow, "You must select a column.", MessageDialogType.WARNING);
 
-			return;
-		}
+      return;
+    }
 
-		DataFrame m = mWindow.getCurrentMatrix();
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		int minC = -m.getRowAnnotationNames().size();
+    int minC = -m.getRowAnnotationNames().size();
 
-		// First copy the columns and turn them into annotations
-		DataFrame ret;
+    // First copy the columns and turn them into annotations
+    DataFrame ret;
 
-		if (c > minC) {
-			ret = DataFrame.createDataFrame(m.getRows(), 
-					m.getCols() - c);
-		} else {
-			// If there are no annotation columns, assume the matrix has
-			// mixed content
-			ret = DataFrame.createDataFrame(m.getRows(), 
-					m.getCols());
-		}
+    if (c > minC) {
+      ret = DataFrame.createDataFrame(m.getRows(), m.getCols() - c);
+    } else {
+      // If there are no annotation columns, assume the matrix has
+      // mixed content
+      ret = DataFrame.createDataFrame(m.getRows(), m.getCols());
+    }
 
-		// Copy the other columns
-		// Columns start with negative indices if they are part of the annotation
-		DataFrame.copyColumns(m, c, ret);
+    // Copy the other columns
+    // Columns start with negative indices if they are part of the annotation
+    DataFrame.copyColumns(m, c, ret);
 
+    // Copy existing row annotations
+    // DataFrame.copyRowAnnotations(m, ret);
 
-		// Copy existing row annotations
-		//DataFrame.copyRowAnnotations(m, ret);
+    switch (m.getType()) {
+    case NUMBER:
+      for (int i = minC; i < c; ++i) {
+        ret.setNumRowAnnotations(m.getText(-1, i), m.columnToDoubleArray(i));
+      }
 
-		switch (m.getType()) {
-		case NUMBER:
-			for (int i = minC; i < c; ++i) {
-				ret.setNumRowAnnotations(m.getText(-1, i), m.columnToDoubleArray(i));
-			}
+      break;
+    default:
+      for (int i = minC; i < c; ++i) {
+        ret.setTextRowAnnotations(m.getText(-1, i), m.columnAsText(i));
+      }
 
-			break;
-		default:
-			for (int i = minC; i < c; ++i) {
-				ret.setTextRowAnnotations(m.getText(-1, i), m.columnAsText(i));
-			}
-			
-			break;
-		}
+      break;
+    }
 
-		mWindow.addToHistory("Adjust matrix", ret);
-	}
+    mWindow.addToHistory("Adjust matrix", ret);
+  }
 }

@@ -28,30 +28,29 @@ import org.jebtk.modern.window.WindowService;
  * The class MatCalcWindowCombo.
  */
 public class MatCalcWindowCombo extends ModernComboBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The constant SIZE.
-	 */
-	private static final Dimension SIZE = 
-			new Dimension(400, ModernWidget.WIDGET_HEIGHT);
 
-	/**
-	 * Instantiates a new mat calc window combo.
-	 */
-	public MatCalcWindowCombo() {
-		for (ModernWindow window : WindowService.getInstance()) {
-			if (!(window instanceof MainMatCalcWindow)) {
-				continue;
-			}
-			
-			addMenuItem(window.getSubTitle());
-		}
-		
-		UI.setSize(this, SIZE);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * The constant SIZE.
+   */
+  private static final Dimension SIZE = new Dimension(400, ModernWidget.WIDGET_HEIGHT);
+
+  /**
+   * Instantiates a new mat calc window combo.
+   */
+  public MatCalcWindowCombo() {
+    for (ModernWindow window : WindowService.getInstance()) {
+      if (!(window instanceof MainMatCalcWindow)) {
+        continue;
+      }
+
+      addMenuItem(window.getSubTitle());
+    }
+
+    UI.setSize(this, SIZE);
+  }
 }

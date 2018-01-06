@@ -23,20 +23,21 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisLinePlotControl.
  */
 public class AxisLinePlotControl extends LineStyleControl {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new axis line plot control.
-	 *
-	 * @param parent the parent
-	 * @param axis the axis
-	 */
-	public AxisLinePlotControl(ModernWindow parent,
-			Axis axis) {
-		super(parent, "Axis", axis.getLineStyle());
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new axis line plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param axis
+   *          the axis
+   */
+  public AxisLinePlotControl(ModernWindow parent, Axis axis) {
+    super(parent, "Axis", axis.getLineStyle());
+  }
 }

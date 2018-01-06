@@ -26,148 +26,151 @@ import org.jebtk.modern.theme.ThemeService;
  */
 public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
 
-	/**
-	 * The constant WIDTH.
-	 */
-	private static final int WIDTH = 28;
-	
-	/**
-	 * The constant HALF_WIDTH.
-	 */
-	private static final int HALF_WIDTH = WIDTH / 2;
-	
-	/**
-	 * The constant SIZE.
-	 */
-	private static final int SIZE = 4;
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D, java.awt.Rectangle)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		x = x + WIDTH / 2;
-		y = y + WIDTH / 2;
-		
-		g2.setColor(ThemeService.getInstance().colors().getColorHighlight(3));
-		
-		for (double i = Math.PI / 2; i >= 0; i -= 0.3) {
-			int x1 = (int)(x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
-			int y1 = (int)(y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 1.5);
-			
-			g2.setColor(ThemeService.getInstance().colors().getColorHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getColorHighlight(4));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-			
-			x1 = (int)(x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+  /**
+   * The constant WIDTH.
+   */
+  private static final int WIDTH = 28;
 
-			g2.setColor(ThemeService.getInstance().colors().getColorHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getColorHighlight(4));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-		}
-		
-		for (double i = Math.PI / 2; i >= 0; i -= 0.3) {
-			int x1 = (int)(x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
-			int y1 = (int)(y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH);
-				
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-			
-			x1 = (int)(x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+  /**
+   * The constant HALF_WIDTH.
+   */
+  private static final int HALF_WIDTH = WIDTH / 2;
 
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-			
-		}
-		
-		for (double i = Math.PI / 2; i >= 0.1; i -= 0.3) {
-			int x1 = (int)(x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
-			int y1 = (int)(y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 0.7);
-			
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-			
-			x1 = (int)(x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+  /**
+   * The constant SIZE.
+   */
+  private static final int SIZE = 4;
 
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-		}
-		
-		for (double i = Math.PI / 2; i >= 0.5; i -= 0.3) {
-			int x1 = (int)(x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
-			int y1 = (int)(y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 0.5);
-			
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-			
-			x1 = (int)(x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D,
+   * java.awt.Rectangle)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+    x = x + WIDTH / 2;
+    y = y + WIDTH / 2;
 
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
-			g2.fillOval(x1, y1, SIZE, SIZE);
-			g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
-			g2.drawOval(x1, y1, SIZE, SIZE);
-		}
-		
-		
+    g2.setColor(ThemeService.getInstance().colors().getColorHighlight(3));
 
-		/*
-		g2.setColor(Color.BLACK);
-		g2.setStroke(ModernTheme.QUAD_LINE_STROKE);
-		
-		g2.drawArc(x, y, WIDTH / 2, WIDTH, 0, 90);
-		g2.drawArc(x + WIDTH / 2, y, WIDTH / 2, WIDTH, 90, 90);
-		*/
-		
-		/*
-		g2.setColor(ThemeService.getInstance().colors().getHighlight(4));
-		
-		g2.fillOval(x, y + WIDTH / 2 - SIZE, SIZE, SIZE);
-		
-		g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - SIZE - SIZE / 2, SIZE, SIZE);
-		
-		g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
-		g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
-		g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
-		g2.fillOval(x + SIZE, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
-		
-		
-		g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x + SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE, SIZE);
-		
-		g2.setColor(ThemeService.getInstance().getThemeColor(3));
-		
+    for (double i = Math.PI / 2; i >= 0; i -= 0.3) {
+      int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
+      int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 1.5);
 
-		g2.fillOval(x - SIZE  - SIZE / 2, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
-		g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
-		g2.fillOval(x - SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
-		g2.fillOval(x + SIZE  + SIZE / 2, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
-		
-		g2.fillOval(x - SIZE  - SIZE / 2, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x - SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x + SIZE  + SIZE / 2, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE, SIZE);
-		
-		g2.fillOval(x - 2 * SIZE, y + WIDTH / 2 - 5 * SIZE, SIZE, SIZE);
-		g2.fillOval(x + 2 * SIZE, y + WIDTH / 2 - 5 * SIZE, SIZE, SIZE);
-		
-		g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 6 * SIZE, SIZE, SIZE);
-		*/
-	}
+      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(4));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+
+      x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+
+      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(4));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+    }
+
+    for (double i = Math.PI / 2; i >= 0; i -= 0.3) {
+      int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
+      int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH);
+
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+
+      x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+
+    }
+
+    for (double i = Math.PI / 2; i >= 0.1; i -= 0.3) {
+      int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
+      int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 0.7);
+
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+
+      x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+    }
+
+    for (double i = Math.PI / 2; i >= 0.5; i -= 0.3) {
+      int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
+      int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 0.5);
+
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+
+      x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
+
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.fillOval(x1, y1, SIZE, SIZE);
+      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.drawOval(x1, y1, SIZE, SIZE);
+    }
+
+    /*
+     * g2.setColor(Color.BLACK); g2.setStroke(ModernTheme.QUAD_LINE_STROKE);
+     * 
+     * g2.drawArc(x, y, WIDTH / 2, WIDTH, 0, 90); g2.drawArc(x + WIDTH / 2, y, WIDTH
+     * / 2, WIDTH, 90, 90);
+     */
+
+    /*
+     * g2.setColor(ThemeService.getInstance().colors().getHighlight(4));
+     * 
+     * g2.fillOval(x, y + WIDTH / 2 - SIZE, SIZE, SIZE);
+     * 
+     * g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - SIZE - SIZE / 2, SIZE, SIZE);
+     * g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - SIZE - SIZE / 2, SIZE, SIZE);
+     * 
+     * g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE); g2.fillOval(x -
+     * SIZE / 2, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE); g2.fillOval(x + SIZE / 2, y
+     * + WIDTH / 2 - 2 * SIZE, SIZE, SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 2
+     * * SIZE, SIZE, SIZE);
+     * 
+     * 
+     * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2,
+     * SIZE, SIZE);
+     * 
+     * g2.setColor(ThemeService.getInstance().getThemeColor(3));
+     * 
+     * 
+     * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE); g2.fillOval(x -
+     * SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE); g2.fillOval(x + SIZE + SIZE / 2,
+     * y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
+     * 
+     * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x - SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE,
+     * SIZE); g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 3 * SIZE - SIZE / 2,
+     * SIZE, SIZE);
+     * 
+     * g2.fillOval(x - 2 * SIZE, y + WIDTH / 2 - 5 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x + 2 * SIZE, y + WIDTH / 2 - 5 * SIZE, SIZE, SIZE);
+     * 
+     * g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 6 * SIZE, SIZE, SIZE);
+     */
+  }
 }

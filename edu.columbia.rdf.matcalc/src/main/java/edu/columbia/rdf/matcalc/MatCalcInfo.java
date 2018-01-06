@@ -27,16 +27,13 @@ import edu.columbia.rdf.matcalc.icons.MatCalcIcon;
  */
 public class MatCalcInfo extends GuiAppInfo {
 
-	/**
-	 * Instantiates a new mat calc info.
-	 */
-	public MatCalcInfo() {
-		super("MatCalc",
-				new AppVersion(15),
-				"Copyright (C) 2014-${year} Antony Holmes",
-				UIService.getInstance().loadIcon(MatCalcIcon.class, 32),
-				UIService.getInstance().loadIcon(MatCalcIcon.class, 128),
-				"Matrix calculations and plotting.");
-	}
+  /**
+   * Instantiates a new mat calc info.
+   */
+  public MatCalcInfo() {
+    super("MatCalc", new AppVersion(15), "Copyright (C) 2014-${year} Antony Holmes",
+        UIService.getInstance().loadIcon(MatCalcIcon.class, 32),
+        UIService.getInstance().loadIcon(MatCalcIcon.class, 128), "Matrix calculations and plotting.");
+  }
 
 }

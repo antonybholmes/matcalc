@@ -36,109 +36,117 @@ import edu.columbia.rdf.matcalc.figure.VisibleControl;
  * The class ShapeStyleControl.
  */
 public class MarkerStyleControl extends HBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member shape button.
-	 */
-	private ShapeStyleButton mShapeButton;
-	
-	/** The m size spinner. */
-	private ModernCompactSpinner mSizeSpinner;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member series.
-	 */
-	private XYSeries mSeries;
+  /**
+   * The member shape button.
+   */
+  private ShapeStyleButton mShapeButton;
 
-	/** The m vc. */
-	private VisibleControl mVc;
-	
-	/**
-	 * The class ShapeEvents.
-	 */
-	private class ShapeEvents implements ModernClickListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			ShapeStyle shape;
-			
-			if (e.getMessage().equals("Bar")) {
-				shape = ShapeStyle.BAR;
-			} else if (e.getMessage().equals("Circle")) {
-				shape = ShapeStyle.CIRCLE;
-			} else if (e.getMessage().equals("Cross")) {
-				shape = ShapeStyle.CROSS;
-			} else if (e.getMessage().equals("Diamond")) {
-				shape = ShapeStyle.DIAMOND;
-			} else if (e.getMessage().equals("Minus")) {
-				shape = ShapeStyle.MINUS;
-			} else if (e.getMessage().equals("Plus")) {
-				shape = ShapeStyle.PLUS;
-			} else if (e.getMessage().equals("Square")) {
-				shape = ShapeStyle.SQUARE;
-			} else if (e.getMessage().equals("Triangle")) {
-				shape = ShapeStyle.TRIANGLE;
-			} else {
-				shape = ShapeStyle.CIRCLE;
-			}
+  /** The m size spinner. */
+  private ModernCompactSpinner mSizeSpinner;
 
-			mSeries.setMarker(shape);
-			
-			//setColors();
-		}
-	}
-	
-	/**
-	 * Instantiates a new shape style control.
-	 *
-	 * @param parent the parent
-	 * @param series the series
-	 */
-	public MarkerStyleControl(ModernWindow parent, XYSeries series) {
-		mSeries = series;
+  /**
+   * The member series.
+   */
+  private XYSeries mSeries;
 
-		mSizeSpinner = new ModernCompactSpinner(1, 100, series.getMarker().getSize());
-		UI.setSize(mSizeSpinner, ModernWidget.TINY_SIZE);
-		
-		mShapeButton = new ShapeStyleButton(series.getMarker().getType());
-		
-		mVc = new VisibleControl(parent, series.getMarker());
-		
-		add(mVc);
-		add(Box.createHorizontalGlue());
-		add(mSizeSpinner);
-		add(ModernWidget.createHGap());
-		add(mShapeButton);
-		
-		series.addChangeListener(new ChangeListener() {
+  /** The m vc. */
+  private VisibleControl mVc;
 
-			@Override
-			public void changed(ChangeEvent e) {
-				// Change the image but do not trigger a change event.
-				mShapeButton.changeType(mSeries.getMarker().getType());
-				
-				// Change the shape the control is operating since we may 
-				// have changed the shape so it will require updating the 
-				// controller otherwise the control will be left editing an 
-				// orphaned shape.
-				mVc.changeProperties(mSeries.getMarker());
-			}});
-		
-		mShapeButton.addClickListener(new ShapeEvents());
-		
-		mSizeSpinner.addChangeListener(new ChangeListener() {
+  /**
+   * The class ShapeEvents.
+   */
+  private class ShapeEvents implements ModernClickListener {
 
-			@Override
-			public void changed(ChangeEvent e) {
-				mSeries.getMarker().setSize(mSizeSpinner.getIntValue());
-			}});
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      ShapeStyle shape;
+
+      if (e.getMessage().equals("Bar")) {
+        shape = ShapeStyle.BAR;
+      } else if (e.getMessage().equals("Circle")) {
+        shape = ShapeStyle.CIRCLE;
+      } else if (e.getMessage().equals("Cross")) {
+        shape = ShapeStyle.CROSS;
+      } else if (e.getMessage().equals("Diamond")) {
+        shape = ShapeStyle.DIAMOND;
+      } else if (e.getMessage().equals("Minus")) {
+        shape = ShapeStyle.MINUS;
+      } else if (e.getMessage().equals("Plus")) {
+        shape = ShapeStyle.PLUS;
+      } else if (e.getMessage().equals("Square")) {
+        shape = ShapeStyle.SQUARE;
+      } else if (e.getMessage().equals("Triangle")) {
+        shape = ShapeStyle.TRIANGLE;
+      } else {
+        shape = ShapeStyle.CIRCLE;
+      }
+
+      mSeries.setMarker(shape);
+
+      // setColors();
+    }
+  }
+
+  /**
+   * Instantiates a new shape style control.
+   *
+   * @param parent
+   *          the parent
+   * @param series
+   *          the series
+   */
+  public MarkerStyleControl(ModernWindow parent, XYSeries series) {
+    mSeries = series;
+
+    mSizeSpinner = new ModernCompactSpinner(1, 100, series.getMarker().getSize());
+    UI.setSize(mSizeSpinner, ModernWidget.TINY_SIZE);
+
+    mShapeButton = new ShapeStyleButton(series.getMarker().getType());
+
+    mVc = new VisibleControl(parent, series.getMarker());
+
+    add(mVc);
+    add(Box.createHorizontalGlue());
+    add(mSizeSpinner);
+    add(ModernWidget.createHGap());
+    add(mShapeButton);
+
+    series.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        // Change the image but do not trigger a change event.
+        mShapeButton.changeType(mSeries.getMarker().getType());
+
+        // Change the shape the control is operating since we may
+        // have changed the shape so it will require updating the
+        // controller otherwise the control will be left editing an
+        // orphaned shape.
+        mVc.changeProperties(mSeries.getMarker());
+      }
+    });
+
+    mShapeButton.addClickListener(new ShapeEvents());
+
+    mSizeSpinner.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        mSeries.getMarker().setSize(mSizeSpinner.getIntValue());
+      }
+    });
+  }
 }

@@ -26,8 +26,6 @@ import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonSection;
 
-
-
 /**
  * Allows user to select a color map.
  *
@@ -35,93 +33,95 @@ import org.jebtk.modern.ribbon.RibbonSection;
  *
  */
 public class LegendRibbonSection extends RibbonSection {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member legend.
-	 */
-	private LegendProperties mLegend;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The show legend button.
-	 */
-	private CheckBox mShowButton = 
-			new ModernCheckSwitch("Show");
-	
-	/** The m show border button. */
-	private CheckBox mShowBorderButton = 
-			new ModernCheckSwitch("Border");
-	
-	/** The m show background button. */
-	private CheckBox mShowBackgroundButton = 
-			new ModernCheckSwitch("Background");
-	
-	private CheckBox mInsideButton = 
-			new ModernCheckSwitch("Inside");
+  /**
+   * The member legend.
+   */
+  private LegendProperties mLegend;
 
-	/**
-	 * The legend position picker.
-	 */
-	private LegendPositionPicker legendPositionPicker;
-	
-	/**
-	 * Instantiates a new legend ribbon section.
-	 *
-	 * @param ribbon the ribbon
-	 * @param legend the legend
-	 */
-	public LegendRibbonSection(Ribbon ribbon, LegendProperties legend) {
-		super(ribbon, "Legend");
-		
-		mLegend = legend;
-		
-		add(mShowButton, mShowBorderButton, mShowBackgroundButton, mInsideButton);
-		add(ModernPanel.createHGap());
-		addSeparator();
-		//add(ModernPanel.createHGap());
-		legendPositionPicker = new LegendPositionPicker(legend);
-		add(legendPositionPicker);
-		
-		
-		mShowButton.setSelected(legend.getVisible());
-		mShowBorderButton.setSelected(legend.getStyle().getLineStyle().getVisible());
-		mShowBackgroundButton.setSelected(legend.getStyle().getFillStyle().getVisible());
-		mInsideButton.setSelected(legend.isInside());
-		
-		mShowButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mLegend.setVisible(mShowButton.isSelected());
-			}});
-		
-		mShowBorderButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mLegend.getStyle().getLineStyle().setVisible(mShowBorderButton.isSelected());
-			}});
-		
-		mShowBackgroundButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mLegend.getStyle().getFillStyle().setVisible(mShowBackgroundButton.isSelected());
-			}});
-		
-		mInsideButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mLegend.setInside(mInsideButton.isSelected());
-			}});
-		
-		mLegend.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				mShowButton.setSelected(mLegend.getVisible());
-				mShowBorderButton.setSelected(mLegend.getStyle().getLineStyle().getVisible());
-				mShowBackgroundButton.setSelected(mLegend.getStyle().getFillStyle().getVisible());
-			}});
-	}
+  /**
+   * The show legend button.
+   */
+  private CheckBox mShowButton = new ModernCheckSwitch("Show");
+
+  /** The m show border button. */
+  private CheckBox mShowBorderButton = new ModernCheckSwitch("Border");
+
+  /** The m show background button. */
+  private CheckBox mShowBackgroundButton = new ModernCheckSwitch("Background");
+
+  private CheckBox mInsideButton = new ModernCheckSwitch("Inside");
+
+  /**
+   * The legend position picker.
+   */
+  private LegendPositionPicker legendPositionPicker;
+
+  /**
+   * Instantiates a new legend ribbon section.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param legend
+   *          the legend
+   */
+  public LegendRibbonSection(Ribbon ribbon, LegendProperties legend) {
+    super(ribbon, "Legend");
+
+    mLegend = legend;
+
+    add(mShowButton, mShowBorderButton, mShowBackgroundButton, mInsideButton);
+    add(ModernPanel.createHGap());
+    addSeparator();
+    // add(ModernPanel.createHGap());
+    legendPositionPicker = new LegendPositionPicker(legend);
+    add(legendPositionPicker);
+
+    mShowButton.setSelected(legend.getVisible());
+    mShowBorderButton.setSelected(legend.getStyle().getLineStyle().getVisible());
+    mShowBackgroundButton.setSelected(legend.getStyle().getFillStyle().getVisible());
+    mInsideButton.setSelected(legend.isInside());
+
+    mShowButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mLegend.setVisible(mShowButton.isSelected());
+      }
+    });
+
+    mShowBorderButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mLegend.getStyle().getLineStyle().setVisible(mShowBorderButton.isSelected());
+      }
+    });
+
+    mShowBackgroundButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mLegend.getStyle().getFillStyle().setVisible(mShowBackgroundButton.isSelected());
+      }
+    });
+
+    mInsideButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mLegend.setInside(mInsideButton.isSelected());
+      }
+    });
+
+    mLegend.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mShowButton.setSelected(mLegend.getVisible());
+        mShowBorderButton.setSelected(mLegend.getStyle().getLineStyle().getVisible());
+        mShowBackgroundButton.setSelected(mLegend.getStyle().getFillStyle().getVisible());
+      }
+    });
+  }
 }

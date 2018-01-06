@@ -35,82 +35,81 @@ import edu.columbia.rdf.matcalc.MatrixRowAnnotationCombo;
  * The class BarChartDialog.
  */
 public class BarChartDialog extends ModernDialogTaskWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member row combo.
-	 */
-	private MatrixRowAnnotationCombo mRowCombo;
-	
-	/**
-	 * Instantiates a new bar chart dialog.
-	 *
-	 * @param parent the parent
-	 * @param m the m
-	 */
-	public BarChartDialog(ModernWindow parent, DataFrame m) {
-		super(parent);
-		
-		mRowCombo = new MatrixRowAnnotationCombo(m);
-		
-		setTitle("Plot Bar Chart");
-		
-		setup();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		createUi();
+  /**
+   * The member row combo.
+   */
+  private MatrixRowAnnotationCombo mRowCombo;
 
-	}
+  /**
+   * Instantiates a new bar chart dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param m
+   *          the m
+   */
+  public BarChartDialog(ModernWindow parent, DataFrame m) {
+    super(parent);
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		setSize(320, 240);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+    mRowCombo = new MatrixRowAnnotationCombo(m);
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		Box content = VBox.create();
+    setTitle("Plot Bar Chart");
 
-		int[] rows = {ModernWidget.WIDGET_HEIGHT};
-		int[] cols = {150, 120};
-		
-		MatrixPanel matrixPanel;
-		
-		matrixPanel = new MatrixPanel(rows, 
-				cols, 
-				ModernWidget.PADDING, 
-				ModernWidget.PADDING);
+    setup();
 
-		matrixPanel.add(new ModernAutoSizeLabel("Row Annotation"));
-		matrixPanel.add(mRowCombo);
-		
-		matrixPanel.setBorder(ModernWidget.DOUBLE_BORDER);
-		content.add(matrixPanel);
-	
-		setContent(content);
-	}
+    createUi();
 
-	/**
-	 * Gets the annotation name.
-	 *
-	 * @return the annotation name
-	 */
-	public String getAnnotationName() {
-		return mRowCombo.getText();
-	}
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    setSize(320, 240);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    Box content = VBox.create();
+
+    int[] rows = { ModernWidget.WIDGET_HEIGHT };
+    int[] cols = { 150, 120 };
+
+    MatrixPanel matrixPanel;
+
+    matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+
+    matrixPanel.add(new ModernAutoSizeLabel("Row Annotation"));
+    matrixPanel.add(mRowCombo);
+
+    matrixPanel.setBorder(ModernWidget.DOUBLE_BORDER);
+    content.add(matrixPanel);
+
+    setContent(content);
+  }
+
+  /**
+   * Gets the annotation name.
+   *
+   * @return the annotation name
+   */
+  public String getAnnotationName() {
+    return mRowCombo.getText();
+  }
 }

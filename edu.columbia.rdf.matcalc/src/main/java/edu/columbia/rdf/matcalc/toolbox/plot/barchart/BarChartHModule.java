@@ -43,94 +43,102 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The class BarChartHModule.
  */
 public class BarChartHModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Horizontal Bar Chart";
-	}
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Horizontal Bar Chart";
+  }
 
-		RibbonLargeButton button = new RibbonLargeButton("Bar", "Chart", 
-				UIService.getInstance().loadIcon("bar_chart_h", 24),
-				"Horizontal Bar Chart",
-				"Generate a horizontal bar chart.");
-		button.addClickListener(this);
-		//button.setEnabled(false);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+    RibbonLargeButton button = new RibbonLargeButton("Bar", "Chart",
+        UIService.getInstance().loadIcon("bar_chart_h", 24), "Horizontal Bar Chart",
+        "Generate a horizontal bar chart.");
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
-	/**
-	 * Creates the bar chart.
-	 */
-	private void createBarChart() {
-		DataFrame m = mParent.getCurrentMatrix();
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-		XYSeriesGroup groups = mParent.getGroups();
+  /**
+   * Creates the bar chart.
+   */
+  private void createBarChart() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-		Figure figure = Figure.createFigure(); //window.getFigure();
+    XYSeriesGroup groups = mParent.getGroups();
 
-		SubFigure graph = figure.currentSubFigure();
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-		Axes axes = graph.newAxes();
+    SubFigure graph = figure.currentSubFigure();
 
-		ColorCycle colorCycle = new ColorCycle();
+    Axes axes = graph.newAxes();
 
-		XYSeriesGroup seriesGroup = new XYSeriesGroup();
+    ColorCycle colorCycle = new ColorCycle();
 
-		for (int i = 0; i < m.getCols(); ++i) {
-			Color color = null;
-			
-			// See if the column matches a group, and if so use the group's
-			// color rather than a random color
-			for (MatrixGroup group : groups) {
-				Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findColumnIndices(m, group));
-				
-				if (indices.contains(i)) {
-					color = group.getColor();
-					
-					break;
-				}
-			}
-			
-			if (color == null) {
-				color = colorCycle.next();
-			}
-			
-			XYSeries series = new XYSeries(m.getColumnName(i), color);
-			
-			series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
-			series.getStyle().getLineStyle().setColor(color);
+    XYSeriesGroup seriesGroup = new XYSeriesGroup();
 
-			seriesGroup.add(series);
-		}
+    for (int i = 0; i < m.getCols(); ++i) {
+      Color color = null;
 
-		PlotFactory.createBarPlotH(m, axes, seriesGroup);
+      // See if the column matches a group, and if so use the group's
+      // color rather than a random color
+      for (MatrixGroup group : groups) {
+        Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findColumnIndices(m, group));
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-		
-		window.setVisible(true);
-	}
+        if (indices.contains(i)) {
+          color = group.getColor();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		createBarChart();
-	}
+          break;
+        }
+      }
+
+      if (color == null) {
+        color = colorCycle.next();
+      }
+
+      XYSeries series = new XYSeries(m.getColumnName(i), color);
+
+      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getLineStyle().setColor(color);
+
+      seriesGroup.add(series);
+    }
+
+    PlotFactory.createBarPlotH(m, axes, seriesGroup);
+
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
+
+    window.setVisible(true);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    createBarChart();
+  }
 }

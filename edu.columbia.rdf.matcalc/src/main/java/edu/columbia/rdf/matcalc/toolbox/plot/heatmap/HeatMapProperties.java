@@ -32,44 +32,43 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class HeatMapProperties extends Properties {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new heat map properties.
-	 */
-	public HeatMapProperties() {
-		setProperty("plot.row-label-max-chars", 
-				SettingsService.getInstance().getAsInt("plot.row-label-max-chars"));
-		
-		setProperty("plot.border-color", Color.BLACK);
-		setProperty("plot.grid-color", ModernWidget.LINE_COLOR);
-		setProperty("plot.outline-color", Color.BLACK);
-		
-		setProperty("plot.border-color-enabled", true);
-		setProperty("plot.show-grid-color", true);
-		setProperty("plot.show-outline-color", true);
-		setProperty("plot.colormap", ColorMap.createBlueWhiteRedMap());
-		setProperty("plot.show-legend", true);
-		setProperty("plot.aspect-ratio", new AspectRatio());
-		setProperty("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
-		setProperty("plot.show-row-labels", true);
-		setProperty("plot.show-feature-counts", true);
-		setProperty("plot.color.standardization", ColorNormalizationType.ZSCORE_ROW);
-		setProperty("plot.color.intensity", 0);
-		setProperty("plot.tree.hoz.width", 200);
-		setProperty("plot.tree.hoz.visible", true);
-		setProperty("plot.tree.hoz.color", Color.BLACK);
-		setProperty("plot.tree.vert.width", 200);
-		setProperty("plot.tree.vert.visible", true);
-		setProperty("plot.tree.vert.color", Color.BLACK);
-		
-		// Whether to color labels by their group color or not
-		setProperty("plot.labels.color-by-group", false);
-		
-		setProperty("plot.heatmap.visible", true);
-	}
-	
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new heat map properties.
+   */
+  public HeatMapProperties() {
+    setProperty("plot.row-label-max-chars", SettingsService.getInstance().getAsInt("plot.row-label-max-chars"));
+
+    setProperty("plot.border-color", Color.BLACK);
+    setProperty("plot.grid-color", ModernWidget.LINE_COLOR);
+    setProperty("plot.outline-color", Color.BLACK);
+
+    setProperty("plot.border-color-enabled", true);
+    setProperty("plot.show-grid-color", true);
+    setProperty("plot.show-outline-color", true);
+    setProperty("plot.colormap", ColorMap.createBlueWhiteRedMap());
+    setProperty("plot.show-legend", true);
+    setProperty("plot.aspect-ratio", new AspectRatio());
+    setProperty("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
+    setProperty("plot.show-row-labels", true);
+    setProperty("plot.show-feature-counts", true);
+    setProperty("plot.color.standardization", ColorNormalizationType.ZSCORE_ROW);
+    setProperty("plot.color.intensity", 0);
+    setProperty("plot.tree.hoz.width", 200);
+    setProperty("plot.tree.hoz.visible", true);
+    setProperty("plot.tree.hoz.color", Color.BLACK);
+    setProperty("plot.tree.vert.width", 200);
+    setProperty("plot.tree.vert.visible", true);
+    setProperty("plot.tree.vert.color", Color.BLACK);
+
+    // Whether to color labels by their group color or not
+    setProperty("plot.labels.color-by-group", false);
+
+    setProperty("plot.heatmap.visible", true);
+  }
+
 }

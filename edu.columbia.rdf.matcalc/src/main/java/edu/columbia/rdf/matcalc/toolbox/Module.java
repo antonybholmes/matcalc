@@ -26,42 +26,43 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 // TODO: Auto-generated Javadoc
 /**
  * The module interface dictates the function of a MatCalc module that can
- * extend the functionality of the base MatCalc application. Modules can
- * access the current matrix and add new matrices to the work flow as well
- * as provide
+ * extend the functionality of the base MatCalc application. Modules can access
+ * the current matrix and add new matrices to the work flow as well as provide
  */
 public abstract class Module extends FileModule implements Iterable<FileModule> {
-	
-	private List<FileModule> mFileModules = new ArrayList<FileModule>();
-	
-	public void registerFileModule(FileModule module) {
-		mFileModules.add(module);
-	}
-	
-	@Override
-	public Iterator<FileModule> iterator() {
-		return mFileModules.iterator();
-	}
-	
-	/**
-	 * Gets the module info.
-	 *
-	 * @return the module info
-	 */
-	public abstract GuiAppInfo getModuleInfo();
-	
-	/**
-	 * Each module is given access to the app so that it can manipulate
-	 * the UI and add new functions.
-	 *
-	 * @param window the window
-	 */
-	public abstract void init(MainMatCalcWindow window);
-	
-	/**
-	 * Should run itself.
-	 *
-	 * @param args the args
-	 */
-	public abstract void run(String... args);
+
+  private List<FileModule> mFileModules = new ArrayList<FileModule>();
+
+  public void registerFileModule(FileModule module) {
+    mFileModules.add(module);
+  }
+
+  @Override
+  public Iterator<FileModule> iterator() {
+    return mFileModules.iterator();
+  }
+
+  /**
+   * Gets the module info.
+   *
+   * @return the module info
+   */
+  public abstract GuiAppInfo getModuleInfo();
+
+  /**
+   * Each module is given access to the app so that it can manipulate the UI and
+   * add new functions.
+   *
+   * @param window
+   *          the window
+   */
+  public abstract void init(MainMatCalcWindow window);
+
+  /**
+   * Should run itself.
+   *
+   * @param args
+   *          the args
+   */
+  public abstract void run(String... args);
 }

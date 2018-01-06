@@ -31,56 +31,67 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The class ZScoreModule.
  */
 public class ZScoreModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Z-score";
-	}
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Z-score";
+  }
 
-		ModernPopupMenu popup = new ModernPopupMenu();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		popup.addMenuItem(new ModernTwoLineMenuItem("Matrix", 
-				"Z-score matrix.", 
-				UIService.getInstance().loadIcon("z_score", 32)));
-		popup.addMenuItem(new ModernTwoLineMenuItem("Row",
-				"Row z-score.",
-				UIService.getInstance().loadIcon("z_score", 32)));
+    ModernPopupMenu popup = new ModernPopupMenu();
 
-		// The default behaviour is to do a log2 transform.
-		RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Z-score", popup);
-		button.setChangeText(false);
-		button.setToolTip("Z-score", "Z-score functions.");
-		mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
-		button.addClickListener(this);
+    popup.addMenuItem(
+        new ModernTwoLineMenuItem("Matrix", "Z-score matrix.", UIService.getInstance().loadIcon("z_score", 32)));
+    popup
+        .addMenuItem(new ModernTwoLineMenuItem("Row", "Row z-score.", UIService.getInstance().loadIcon("z_score", 32)));
 
-	}
+    // The default behaviour is to do a log2 transform.
+    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Z-score", popup);
+    button.setChangeText(false);
+    button.setToolTip("Z-score", "Z-score functions.");
+    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+    button.addClickListener(this);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("Matrix")) {
-			mWindow.addToHistory("z-score", "z-score", MatrixOperations.zscore(mWindow.getCurrentMatrix())); //new ZScoreMatrixTransform(this, getCurrentMatrix()));
-		} else if (e.getMessage().equals("Row z-score")) {
-			mWindow.addToHistory("Row z-score", "Row z-score", MatrixOperations.rowZscore(mWindow.getCurrentMatrix())); //addFlowItem(new ZScoreRowsMatrixTransform(this, getCurrentMatrix()));
-		} else {
-			// do nothing
-		}
-	}
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals("Matrix")) {
+      mWindow.addToHistory("z-score", "z-score", MatrixOperations.zscore(mWindow.getCurrentMatrix())); // new
+                                                                                                       // ZScoreMatrixTransform(this,
+                                                                                                       // getCurrentMatrix()));
+    } else if (e.getMessage().equals("Row z-score")) {
+      mWindow.addToHistory("Row z-score", "Row z-score", MatrixOperations.rowZscore(mWindow.getCurrentMatrix())); // addFlowItem(new
+                                                                                                                  // ZScoreRowsMatrixTransform(this,
+                                                                                                                  // getCurrentMatrix()));
+    } else {
+      // do nothing
+    }
+  }
 }

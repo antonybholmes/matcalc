@@ -33,81 +33,85 @@ import edu.columbia.rdf.matcalc.MatCalcInfo;
  */
 public abstract class CalcModule extends Module {
 
-	/**
-	 * The constant LOAD_MATRIX_MESSAGE.
-	 */
-	private static final String LOAD_MATRIX_MESSAGE = 
-			"You must load a file.";
-	
-	/** The Constant DEFAULT_INFO. */
-	private static final GuiAppInfo DEFAULT_INFO = 
-			new MatCalcInfo();
+  /**
+   * The constant LOAD_MATRIX_MESSAGE.
+   */
+  private static final String LOAD_MATRIX_MESSAGE = "You must load a file.";
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#getModuleInfo()
-	 */
-	@Override
-	public GuiAppInfo getModuleInfo() {
-		return DEFAULT_INFO;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.Module#init(org.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		// Do nothing
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#run(java.lang.String[])
-	 */
-	@Override
-	public void run(String... args) {
-		// Do nothing
-	}
-	
-	/**
-	 * Show a standard error telling user to load a file.
-	 *
-	 * @param parent the parent
-	 */
-	public static final void showLoadMatrixError(ModernWindow window) {
-		ModernMessageDialog.createWarningDialog(window, LOAD_MATRIX_MESSAGE);
-	}
-	
-	/**
-	 * Find columns.
-	 *
-	 * @param w the w
-	 * @param m the m
-	 * @param terms the terms
-	 * @return the map
-	 */
-	protected static Map<String, Integer> findColumns(MainMatCalcWindow w,
-			DataFrame m, 
-			String... terms) {
-		
-		Map<String, Integer> indexMap = 
-				DataFrame.findColumns(m, terms);
-		
-		boolean found = true;
-		
-		for (String term : terms) {
-			if (indexMap.get(term) == -1) {
-				found = false;
-				break;
-			}
-		}
-		
-		if (found) {
-			return indexMap;
-		} else {
-			ModernMessageDialog.createWarningDialog(w,
-					"The matrix must include columns named " +
-					TextUtils.formattedList(CollectionUtils.sort(CollectionUtils.unique(terms))) + ".");
-			
-			return null;
-		}
-	}
+  /** The Constant DEFAULT_INFO. */
+  private static final GuiAppInfo DEFAULT_INFO = new MatCalcInfo();
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#getModuleInfo()
+   */
+  @Override
+  public GuiAppInfo getModuleInfo() {
+    return DEFAULT_INFO;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.Module#init(org.matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    // Do nothing
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#run(java.lang.String[])
+   */
+  @Override
+  public void run(String... args) {
+    // Do nothing
+  }
+
+  /**
+   * Show a standard error telling user to load a file.
+   *
+   * @param parent
+   *          the parent
+   */
+  public static final void showLoadMatrixError(ModernWindow window) {
+    ModernMessageDialog.createWarningDialog(window, LOAD_MATRIX_MESSAGE);
+  }
+
+  /**
+   * Find columns.
+   *
+   * @param w
+   *          the w
+   * @param m
+   *          the m
+   * @param terms
+   *          the terms
+   * @return the map
+   */
+  protected static Map<String, Integer> findColumns(MainMatCalcWindow w, DataFrame m, String... terms) {
+
+    Map<String, Integer> indexMap = DataFrame.findColumns(m, terms);
+
+    boolean found = true;
+
+    for (String term : terms) {
+      if (indexMap.get(term) == -1) {
+        found = false;
+        break;
+      }
+    }
+
+    if (found) {
+      return indexMap;
+    } else {
+      ModernMessageDialog.createWarningDialog(w, "The matrix must include columns named "
+          + TextUtils.formattedList(CollectionUtils.sort(CollectionUtils.unique(terms))) + ".");
+
+      return null;
+    }
+  }
 }

@@ -43,107 +43,107 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * The class MatchDialog.
  */
 public class SortDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	
-	/** The m add button. */
-	private ModernButton mAddButton = 
-			new ModernButton("Add Level", UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
-	/** The m clear button. */
-	private ModernButton mClearButton = 
-			new ModernButton(UI.MENU_CLEAR, UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	
-	/** The m content panel. */
-	private ColumnSorters mContentPanel;
+  /** The m add button. */
+  private ModernButton mAddButton = new ModernButton("Add Level",
+      UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
-	
-	/**
-	 * Instantiates a new match dialog.
-	 *
-	 * @param parent the parent
-	 * @param m the m
-	 * @param c the c
-	 */
-	public SortDialog(MainMatCalcWindow parent, DataFrame m, int c) {
-		super(parent, "matcalc.sort.help.url");
-		
-		mContentPanel = new ColumnSorters(m);
-		
-		setTitle("Sort");
-		
-		setup();
+  /** The m clear button. */
+  private ModernButton mClearButton = new ModernButton(UI.MENU_CLEAR,
+      UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
 
-		createUi();
-		
-		mContentPanel.add(c);
-	}
+  /** The m content panel. */
+  private ColumnSorters mContentPanel;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		mAddButton.addClickListener(new ModernClickListener() {
+  /**
+   * Instantiates a new match dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param m
+   *          the m
+   * @param c
+   *          the c
+   */
+  public SortDialog(MainMatCalcWindow parent, DataFrame m, int c) {
+    super(parent, "matcalc.sort.help.url");
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mContentPanel.add(-1);
-			}
-			
-		});
-		
-		mClearButton.addClickListener(new ModernClickListener() {
+    mContentPanel = new ColumnSorters(m);
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mContentPanel.clear();
-			}
-			
-		});
-		
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		setSize(600, 300);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		ModernComponent content = new ModernComponent();
-		
-		Box box = HBox.create();
-		
-		box.add(mAddButton);
-		box.add(UI.createHGap(5));
-		box.add(mClearButton);
-		
-		box.setBorder(BorderService.getInstance().createBottomBorder(5));
-		
-		content.setHeader(box);
-		
-		ModernScrollPane scrollPane = new ModernScrollPane(mContentPanel);
-		
-		scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-		
-		content.setBody(new ModernLineBorderPanel(scrollPane));
-		
-		setDialogCardContent(content);
-	}
-	
-	/**
-	 * Gets the sorters.
-	 *
-	 * @return the sorters
-	 */
-	public List<ColumnSort> getSorters() {
-		return mContentPanel.getSorters();
-	}
+    setTitle("Sort");
+
+    setup();
+
+    createUi();
+
+    mContentPanel.add(c);
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    mAddButton.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mContentPanel.add(-1);
+      }
+
+    });
+
+    mClearButton.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mContentPanel.clear();
+      }
+
+    });
+
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    setSize(600, 300);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    ModernComponent content = new ModernComponent();
+
+    Box box = HBox.create();
+
+    box.add(mAddButton);
+    box.add(UI.createHGap(5));
+    box.add(mClearButton);
+
+    box.setBorder(BorderService.getInstance().createBottomBorder(5));
+
+    content.setHeader(box);
+
+    ModernScrollPane scrollPane = new ModernScrollPane(mContentPanel);
+
+    scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
+
+    content.setBody(new ModernLineBorderPanel(scrollPane));
+
+    setDialogCardContent(content);
+  }
+
+  /**
+   * Gets the sorters.
+   *
+   * @return the sorters
+   */
+  public List<ColumnSort> getSorters() {
+    return mContentPanel.getSorters();
+  }
 }

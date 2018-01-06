@@ -30,39 +30,43 @@ import org.jebtk.modern.menu.ModernMenuItem;
  */
 public class DashedLineMenuItem extends ModernMenuItem {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member stroke.
-	 */
-	private Stroke mStroke;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Construct a new menu item with a given name for a given
-	 * line style.
-	 *
-	 * @param name the name
-	 * @param stroke the stroke
-	 */
-	public DashedLineMenuItem(String name, Stroke stroke) {
-		super(name);
-		
-		mStroke = stroke;
-	}
+  /**
+   * The member stroke.
+   */
+  private Stroke mStroke;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.menu.ModernMenuItem#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawForegroundAAText(Graphics2D g2) {
-		g2.setColor(Color.BLACK);
-		g2.setStroke(mStroke);
-		
-		int y = mRect.getH() / 2;
-		
-		g2.drawLine(PADDING, y, getWidth() - PADDING, y);
-	}
+  /**
+   * Construct a new menu item with a given name for a given line style.
+   *
+   * @param name
+   *          the name
+   * @param stroke
+   *          the stroke
+   */
+  public DashedLineMenuItem(String name, Stroke stroke) {
+    super(name);
+
+    mStroke = stroke;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.ui.ui.menu.ModernMenuItem#drawForegroundAA(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawForegroundAAText(Graphics2D g2) {
+    g2.setColor(Color.BLACK);
+    g2.setStroke(mStroke);
+
+    int y = mRect.getH() / 2;
+
+    g2.drawLine(PADDING, y, getWidth() - PADDING, y);
+  }
 }

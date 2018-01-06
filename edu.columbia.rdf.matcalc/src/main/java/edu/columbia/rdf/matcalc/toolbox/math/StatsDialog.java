@@ -48,52 +48,50 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  *
  */
 public class StatsDialog extends ModernDialogTaskWindow {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	private double mValue;
-	
-	
-	/**
-	 * Instantiates a new modern int input dialog.
-	 *
-	 * @param parent the parent
-	 * @param checked the checked
-	 */
-	public StatsDialog(MainMatCalcWindow parent, 
-			String name,
-			double value) {
-		super(parent, ModernDialogTaskType.CLOSE);
-		
-		setTitle(name);
-		
-		mValue = value;
-		setup();
 
-		createUi();
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+  private double mValue;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setSize(400, 180);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+  /**
+   * Instantiates a new modern int input dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param checked
+   *          the checked
+   */
+  public StatsDialog(MainMatCalcWindow parent, String name, double value) {
+    super(parent, ModernDialogTaskType.CLOSE);
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		Box box = VBox.create();
-		
-		box.add(new HExpandBox(getTitle(), new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(mValue, 4), false), 120)));
-	
-		setDialogCardContent(box);
-	}
+    setTitle(name);
+
+    mValue = value;
+    setup();
+
+    createUi();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setSize(400, 180);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    Box box = VBox.create();
+
+    box.add(new HExpandBox(getTitle(),
+        new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(mValue, 4), false), 120)));
+
+    setDialogCardContent(box);
+  }
 }

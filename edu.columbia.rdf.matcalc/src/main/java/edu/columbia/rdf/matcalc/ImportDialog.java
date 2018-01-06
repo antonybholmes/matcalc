@@ -43,174 +43,175 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
  * @author Antony Holmes Holmes
  */
 public class ImportDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member spinner.
-	 */
-	private ModernCompactSpinner mSpinner;
-	
-	/**
-	 * The member check header.
-	 */
-	private CheckBox mCheckHeader = new ModernCheckSwitch("Header text rows", 
-			SettingsService.getInstance().getAsBool("matcalc.import.file.has-header"));
-	
-	/** The m check skip. */
-	private CheckBox mCheckSkip = 
-			new ModernCheckSwitch("Skip lines starting with", true); //SettingsService.getInstance().getAsBool("matcalc.import.file.skip.lines"));
 
-	/** The m field skip. */
-	private ModernTextField mFieldSkip = 
-			new ModernClipboardTextField(SettingsService.getInstance().getAsString("matcalc.import.file.skip.matches"));
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	private CheckBox mNumericalCheck = 
-			new ModernCheckSwitch("Numerical", true);
-	
-	private CheckBox mTextColsCheck = 
-			new ModernCheckSwitch("Header text columns", true);
-	
-	/** The m delimiter combo. */
-	private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
+  /**
+   * The member spinner.
+   */
+  private ModernCompactSpinner mSpinner;
 
-	private ModernCompactSpinner mRowSpinner;
-	
-	/**
-	 * Instantiates a new row annotation dialog.
-	 *
-	 * @param parent the parent
-	 * @param rowAnnotations the row annotations
-	 * @param isExcel the is excel
-	 * @param delimiter the delimiter
-	 */
-	public ImportDialog(ModernWindow parent, 
-			int rowAnnotations,
-			boolean isExcel,
-			String delimiter,
-			boolean isNumerical) {
-		super(parent, "matcalc.import.help.url");
-		
-		setTitle("Import");
-	
-		mSpinner = new ModernCompactSpinner(0, 100, rowAnnotations);
-		mRowSpinner = new ModernCompactSpinner(0, 100, 1);
-		mDelimiterCombo.setDelimiter(delimiter);
-		mNumericalCheck.setSelected(isNumerical);
-		
-		createUi(isExcel);
-		
-		setup();
-	}
+  /**
+   * The member check header.
+   */
+  private CheckBox mCheckHeader = new ModernCheckSwitch("Header text rows",
+      SettingsService.getInstance().getAsBool("matcalc.import.file.has-header"));
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setSize(480, 300);
-		
-		mCheckSkip.setEnabled(false);
-		
-		addWindowFocusListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		UI.centerWindowToScreen(this);
-	}
+  /** The m check skip. */
+  private CheckBox mCheckSkip = new ModernCheckSwitch("Skip lines starting with", true); // SettingsService.getInstance().getAsBool("matcalc.import.file.skip.lines"));
 
-	/**
-	 * Creates the ui.
-	 *
-	 * @param isExcel the is excel
-	 */
-	private final void createUi(boolean isExcel) {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		Box box = VBox.create();
+  /** The m field skip. */
+  private ModernTextField mFieldSkip = new ModernClipboardTextField(
+      SettingsService.getInstance().getAsString("matcalc.import.file.skip.matches"));
 
-		box.add(new HExpandBox(mCheckHeader, mRowSpinner));
-		
-		if (!isExcel) {
-			box.add(UI.createVGap(5));
-			box.add(new HExpandBox(mCheckSkip, new ModernTextBorderPanel(mFieldSkip, 80)));
-			box.add(UI.createVGap(5));
-			box.add(new HExpandBox("Delimiter", mDelimiterCombo));
-		}
-		
-		box.add(UI.createVGap(5));
-		
-		// Text columns is more intuitive terminology than row annotations
-		box.add(new HExpandBox(mTextColsCheck, mSpinner));
-		
-		box.add(UI.createVGap(5));
-		box.add(mNumericalCheck);
-		
-		setDialogCardContent(box);
-	}
+  private CheckBox mNumericalCheck = new ModernCheckSwitch("Numerical", true);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mOkButton)) {
-			SettingsService.getInstance().update("matcalc.import.file.has-header", 
-					mCheckHeader.isSelected());
-			
-			SettingsService.getInstance().update("matcalc.import.file.skip.lines", 
-					mCheckSkip.isSelected());
-			
-			SettingsService.getInstance().update("matcalc.import.file.skip.matches", 
-					mFieldSkip.getText());
-		}
-		
-		super.clicked(e);
-	}
+  private CheckBox mTextColsCheck = new ModernCheckSwitch("Header text columns", true);
 
-	/**
-	 * Gets the row annotations.
-	 *
-	 * @return the row annotations
-	 */
-	public int getRowAnnotations() {
-		return mTextColsCheck.isSelected() ? mSpinner.getIntValue() : 0;
-	}
-	
-	/**
-	 * Gets the checks for header.
-	 *
-	 * @return the checks for header
-	 */
-	public boolean getHasHeader() {
-		// If there are row annotations, there must be a header
-		return getColAnnotations() > 0;
-	}
-	
-	public int getColAnnotations() {
-		// If there are row annotations, there must be a header
-		return mCheckHeader.isSelected() ? mRowSpinner.getIntValue() : 0;
-	}
+  /** The m delimiter combo. */
+  private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
 
-	/**
-	 * Return the line prefixes to skip on on.
-	 *
-	 * @return the skip matches
-	 */
-	public List<String> getSkipLines() {
-		return Splitter.onComma().text(mFieldSkip.getText());
-	}
-	
-	/**
-	 * Gets the delimiter.
-	 *
-	 * @return the delimiter
-	 */
-	public String getDelimiter() {
-		return mDelimiterCombo.getDelimiter();
-	}
-	
-	public boolean isNumerical() {
-		return mTextColsCheck.isSelected() ? mNumericalCheck.isSelected() : false;
-	}
+  private ModernCompactSpinner mRowSpinner;
+
+  /**
+   * Instantiates a new row annotation dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param rowAnnotations
+   *          the row annotations
+   * @param isExcel
+   *          the is excel
+   * @param delimiter
+   *          the delimiter
+   */
+  public ImportDialog(ModernWindow parent, int rowAnnotations, boolean isExcel, String delimiter, boolean isNumerical) {
+    super(parent, "matcalc.import.help.url");
+
+    setTitle("Import");
+
+    mSpinner = new ModernCompactSpinner(0, 100, rowAnnotations);
+    mRowSpinner = new ModernCompactSpinner(0, 100, 1);
+    mDelimiterCombo.setDelimiter(delimiter);
+    mNumericalCheck.setSelected(isNumerical);
+
+    createUi(isExcel);
+
+    setup();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setSize(480, 300);
+
+    mCheckSkip.setEnabled(false);
+
+    addWindowFocusListener(new WindowWidgetFocusEvents(mOkButton));
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   *
+   * @param isExcel
+   *          the is excel
+   */
+  private final void createUi(boolean isExcel) {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    Box box = VBox.create();
+
+    box.add(new HExpandBox(mCheckHeader, mRowSpinner));
+
+    if (!isExcel) {
+      box.add(UI.createVGap(5));
+      box.add(new HExpandBox(mCheckSkip, new ModernTextBorderPanel(mFieldSkip, 80)));
+      box.add(UI.createVGap(5));
+      box.add(new HExpandBox("Delimiter", mDelimiterCombo));
+    }
+
+    box.add(UI.createVGap(5));
+
+    // Text columns is more intuitive terminology than row annotations
+    box.add(new HExpandBox(mTextColsCheck, mSpinner));
+
+    box.add(UI.createVGap(5));
+    box.add(mNumericalCheck);
+
+    setDialogCardContent(box);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mOkButton)) {
+      SettingsService.getInstance().update("matcalc.import.file.has-header", mCheckHeader.isSelected());
+
+      SettingsService.getInstance().update("matcalc.import.file.skip.lines", mCheckSkip.isSelected());
+
+      SettingsService.getInstance().update("matcalc.import.file.skip.matches", mFieldSkip.getText());
+    }
+
+    super.clicked(e);
+  }
+
+  /**
+   * Gets the row annotations.
+   *
+   * @return the row annotations
+   */
+  public int getRowAnnotations() {
+    return mTextColsCheck.isSelected() ? mSpinner.getIntValue() : 0;
+  }
+
+  /**
+   * Gets the checks for header.
+   *
+   * @return the checks for header
+   */
+  public boolean getHasHeader() {
+    // If there are row annotations, there must be a header
+    return getColAnnotations() > 0;
+  }
+
+  public int getColAnnotations() {
+    // If there are row annotations, there must be a header
+    return mCheckHeader.isSelected() ? mRowSpinner.getIntValue() : 0;
+  }
+
+  /**
+   * Return the line prefixes to skip on on.
+   *
+   * @return the skip matches
+   */
+  public List<String> getSkipLines() {
+    return Splitter.onComma().text(mFieldSkip.getText());
+  }
+
+  /**
+   * Gets the delimiter.
+   *
+   * @return the delimiter
+   */
+  public String getDelimiter() {
+    return mDelimiterCombo.getDelimiter();
+  }
+
+  public boolean isNumerical() {
+    return mTextColsCheck.isSelected() ? mNumericalCheck.isSelected() : false;
+  }
 }

@@ -63,708 +63,580 @@ import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
  */
 public class SupervisedModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Supervised";
-	}
-
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
-
-		RibbonLargeButton button = new RibbonLargeButton("Supervised", 
-				new Raster32Icon(new DiffExp32VectorIcon()),
-				"Supervised Classification",
-				"Supervised classification.");
-		button.addClickListener(this);
-
-		mParent.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		try {
-			classification();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	/**
-	 * Ttest.
-	 *
-	 * @param properties the properties
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ParseException the parse exception
-	 */
-	private void classification() throws IOException, ParseException {
-		DataFrame m = mParent.getCurrentMatrix();
-
-		if (m == null) {
-			return;
-		}
-
-		XYSeriesModel groups = XYSeriesModel.create(mParent.getGroups());
-
-		if (groups.getCount() == 0) {
-			MainMatCalcWindow.createGroupWarningDialog(mParent);
-
-			return;
-		}
-
-		XYSeriesModel rowGroups = XYSeriesModel.create(mParent.getRowGroups());
-
-		SupervisedDialog dialog = 
-				new SupervisedDialog(mParent, m, mParent.getGroups());
-
-		dialog.setVisible(true);
-
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-
-		// We are only interested in the opened matrix
-		// without transformations.
-
-		if (dialog.getReset()) {
-			mParent.resetHistory();
-		}
-
-		XYSeries g1 = dialog.getGroup1(); // new Group("g1");
-		XYSeries g2 = dialog.getGroup2(); // new Group("g2");
-
-		double minFold = dialog.getMinFoldChange();
-		double alpha = dialog.getMaxP();
-		double minZ = dialog.getMinZscore();
-		boolean posZ = dialog.getPosZ();
-		boolean negZ = dialog.getNegZ();
-		boolean keepHistory = dialog.getKeepHistory();
-		ComparisonType comparisonType = dialog.getComparisonType();
-
-		int topGenes = dialog.getTopGenes();
-
-		boolean isLog2 = dialog.getIsLog2Transformed();
-		boolean log2Data = dialog.getLog2Transform();
-		PlotType plotType = dialog.getCreatePlot();
-
-		FDRType fdrType = dialog.getFDRType();
-
-		CollapseType collapseType = dialog.getCollapseType();
-
-		String collapseName = dialog.getCollapseName();
-
-		double classificationAlpha = dialog.getUpDownP(); //0.05;
-
-		TestType testType = dialog.getTest();
-
-		DataFrame collapsedM = CollapseModule.collapse(m,
-				collapseName,
-				g1,
-				g2,
-				collapseType,
-				mParent);
-
-
-		switch(plotType) {
-		case VOLCANO:
-			VolcanoPlotModule.volcanoPlot(mParent,
-					collapsedM, 
-					alpha,
-					TestType.TTEST_UNEQUAL_VARIANCE,
-					fdrType, 
-					g1, 
-					g2, 
-					!dialog.getIsLog2Transformed() || dialog.getLog2Transform(), 
-					true);
-
-			break;
-		default:
-			switch (comparisonType) {
-			case ONE_VS_REST:
-				statTestOneVsRest(collapsedM, 
-						alpha,
-						classificationAlpha,
-						minFold,
-						minZ,
-						posZ,
-						negZ,
-						topGenes,
-						testType,
-						fdrType,
-						groups,
-						rowGroups,
-						isLog2,
-						log2Data);
-
-				break;
-			case PAIRWISE:
-				statTestPairwise(collapsedM, 
-						alpha,
-						classificationAlpha,
-						minFold,
-						minZ,
-						posZ,
-						negZ,
-						topGenes,
-						testType,
-						fdrType,
-						groups,
-						rowGroups,
-						isLog2,
-						log2Data);
-
-				break;
-			default:
-				statTest(collapsedM, 
-						alpha,
-						classificationAlpha,
-						minFold,
-						minZ,
-						posZ,
-						negZ,
-						topGenes,
-						testType,
-						fdrType, 
-						g1, 
-						g2,
-						groups,
-						rowGroups,
-						isLog2,
-						log2Data, 
-						plotType,
-						keepHistory);
-
-				break;
-			}
-		}
-	}
-
-	/**
-	 * Test each group against the union of the other groups
-	 * @param m
-	 * @param alpha
-	 * @param classificationAlpha
-	 * @param minFold
-	 * @param minZ
-	 * @param posZ
-	 * @param negZ
-	 * @param topGenes
-	 * @param test
-	 * @param fdrType
-	 * @param g1
-	 * @param g2
-	 * @param allSeries
-	 * @param rowSeries
-	 * @param isLog2Data
-	 * @param log2Data
-	 * @param plotType
-	 * @throws IOException
-	 * @throws ParseException
-	 */
-	public void statTestOneVsRest(DataFrame m,
-			double alpha,
-			double classificationAlpha,
-			double minFold,
-			double minZ,
-			boolean posZ,
-			boolean negZ,
-			int topGenes,
-			TestType test,
-			FDRType fdrType,
-			XYSeriesModel allSeries,
-			XYSeriesModel rowSeries,
-			boolean isLog2Data,
-			boolean log2Data) {
-
-		System.err.println("aha " + allSeries.getCount());
-
-		for (XYSeries s : allSeries) {
-
-
-			// Make a new group from all the old groups
-
-			// Clone original
-			//XYSeries s1 = XYSeries.createXYSeries(s, Color.RED);
-
-			// Create name from union of names of other groups
-			StringBuilder buffer = new StringBuilder();
-
-			for (XYSeries st : allSeries) {
-				if (!st.equals(s)) {
-					buffer.append(TextUtils.sentenceCase(TextUtils.head(st.getName(), 5)));
-				}
-			}
-
-			XYSeries s2 = XYSeries.createXYSeries(buffer.toString(), Color.BLUE);
-
-			for (XYSeries st : allSeries) {
-				if (!st.equals(s)) {
-					s2.union(st);
-				}
-			}
-
-			SysUtils.err().println(s2.getName(), MatrixGroup.findColumnIndices(m, s2));
-
-			XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
-
-			statTest(m, 
-					alpha,
-					classificationAlpha,
-					minFold,
-					minZ,
-					posZ,
-					negZ,
-					topGenes,
-					test,
-					fdrType, 
-					s, 
-					s2,
-					XYSeriesModel.create(newGroup),
-					rowSeries,
-					isLog2Data,
-					log2Data, 
-					PlotType.NONE,
-					false);
-
-		}
-	}
-
-	public void statTestPairwise(DataFrame m,
-			double alpha,
-			double classificationAlpha,
-			double minFold,
-			double minZ,
-			boolean posZ,
-			boolean negZ,
-			int topGenes,
-			TestType test,
-			FDRType fdrType,
-			XYSeriesModel allSeries,
-			XYSeriesModel rowSeries,
-			boolean isLog2Data,
-			boolean log2Data) {
-
-		Set<XYSeries> used = new HashSet<XYSeries>();
-		
-		for (XYSeries s : allSeries) {
-
-			for (XYSeries s2 : allSeries) {
-				if (!s2.equals(s) && !used.contains(s2)) {
-					XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
-
-					statTest(m, 
-							alpha,
-							classificationAlpha,
-							minFold,
-							minZ,
-							posZ,
-							negZ,
-							topGenes,
-							test,
-							fdrType, 
-							s, 
-							s2,
-							XYSeriesModel.create(newGroup),
-							rowSeries,
-							isLog2Data,
-							log2Data, 
-							PlotType.NONE,
-							false);
-				}
-			}
-			
-			used.add(s);
-		}
-	}
-
-	/**
-	 * Ttest.
-	 *
-	 * @param m the m
-	 * @param minExp the min exp
-	 * @param alpha the alpha
-	 * @param classificationAlpha the classification alpha
-	 * @param minFold the min fold
-	 * @param minZ the min z
-	 * @param posZ the pos z
-	 * @param negZ the neg z
-	 * @param topGenes the top genes
-	 * @param collapseType the collapse type
-	 * @param rowAnnotation the row annotation
-	 * @param fdrType the fdr type
-	 * @param g1 the g1
-	 * @param g2 the g2
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param isLog2Data the is log2 data
-	 * @param log2Data the log2 data
-	 * @param equalVariance the equal variance
-	 * @param plotType the plot
-	 * @param properties the properties
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ParseException the parse exception
-	 */
-	public void statTest(DataFrame m,
-			double alpha,
-			double classificationAlpha,
-			double minFold,
-			double minZ,
-			boolean posZ,
-			boolean negZ,
-			int topGenes,
-			TestType test,
-			FDRType fdrType,
-			XYSeries g1, 
-			XYSeries g2,
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			boolean isLog2Data,
-			boolean log2Data,
-			PlotType plotType,
-			boolean keepHistory) {
-
-		XYSeriesGroup comparisonGroups = new XYSeriesGroup();
-		comparisonGroups.add(g1);
-		comparisonGroups.add(g2);
-
-		//DataFrame colFilteredM = 
-		//		history.addToHistory("Extract grouped columns", 
-		//				AnnotatableMatrix.copyInnerColumns(m, comparisonGroups));
-
-
-		DataFrame colFilteredM = m;
-
-		History history = mParent.history().keep(keepHistory);
-
-		//
-		// Remove bad gene symbols
-		//
-
-		//DataFrame mCleaned = AnnotatableMatrix.copyRows(mColumnFiltered, 
-		//		rowAnnotationName, 
-		//		"^---$", 
-		//		false);
-
-		//history.addToHistory("Filter Bad Gene Symbols", mCleaned);
-
-		//
-		// Log the matrix
-		//
-
-		DataFrame log2M;
-
-		if (log2Data) {
-			log2M = history.addToHistory("log2(1 + data)",
-					MatrixOperations.log2(MatrixOperations.add(colFilteredM, 1)));
-		} else {
-			log2M = colFilteredM;
-		}
-
-		//
-		// P-values
-		//
-
-		List<Double> pValues = getP(log2M, g1, g2,test);
-
-		DataFrame pValuesM = new DataFrame(log2M);
-
-		pValuesM.setNumRowAnnotations("P-value", pValues);
-
-		//System.err.println("p " + pValues);
-		//System.err.println("p2 " + Arrays.toString(pValuesM.getRowAnnotationValues("P-value")));
-
-		// Set the p-values of genes with bad names to NaN so they can be
-		// excluded from analysis
-		//DataFrame.setAnnotation(mpvalues,
-		//		"P-value",
-		//		DataFrame.matchRows(mpvalues, rowAnnotation, BLANK_ROW_REGEX),
-		//		Double.NaN);
-
-		history.addToHistory("Add P-values", pValuesM);
-
-		//
-		// Fold Changes
-		//
-
-		List<Double> foldChanges;
-
-		if (isLog2Data || log2Data) {
-			foldChanges = DoubleMatrix.logFoldChange(pValuesM, g1, g2);
-		} else {
-			foldChanges = DoubleMatrix.foldChange(pValuesM, g1, g2);
-		}
-
-		// filter by fold changes
-		// filter by fdr
-
-		String name = isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change";
-
-		DataFrame foldChangesM = new DataFrame(pValuesM);
-		foldChangesM.setNumRowAnnotations(name, foldChanges);
-
-		history.addToHistory(name, foldChangesM);
-
-
-		//
-		// Group means
-		//
-
-		DataFrame meansM = new DataFrame(foldChangesM);
-
-		meansM.setNumRowAnnotations(g1.getName() + " mean", 
-				DoubleMatrix.means(foldChangesM, g1));
-		meansM.setNumRowAnnotations(g2.getName() + " mean", 
-				DoubleMatrix.means(foldChangesM, g2));
-
-		history.addToHistory("Group Means", meansM);
-
-		//
-		// Fold change filter
-		//
-
-		double posMinFold = minFold;
-		double negMinFold = posMinFold;
-
-		if (minFold > 0) {
-			if (isLog2Data || log2Data) {
-				negMinFold = -negMinFold;
-			} else {
-				negMinFold = 1.0 / negMinFold;
-			}
-		}
-
-		List<Indexed<Integer, Double>> pFoldIndices = 
-				Statistics.outOfRange(foldChanges, negMinFold, posMinFold);
-
-		name = isLog2Data || log2Data ? "Log2 Fold Change Filter" : "Fold Change Filter";
-
-		DataFrame foldFilterM = DataFrame.copyRows(meansM, 
-				IndexedInt.indices(pFoldIndices));
-
-
-
-		history.addToHistory(name, foldFilterM);
-
-		//
-		// Collapse rows
-		//
-
-		//		DataFrame collapsedM = CollapseModule.collapse(foldFilterM,
-		//				rowAnnotation,
-		//				g1,
-		//				g2,
-		//				collapseType,
-		//				mParent);
-
-		double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"), 
-				fdrType);
-
-		DataFrame mfdr = new DataFrame(foldFilterM);
-		mfdr.setNumRowAnnotations("FDR", fdr);
-
-		history.addToHistory("FDR", mfdr);
-
-		//DataFrame mfdr = addFlowItem("False discovery rate", 
-		//		new RowDataFrameView(mcollapsed, 
-		//				"FDR", 
-		//				ArrayUtils.toObjects(fdr)));
-
-
-
-		// filter by fdr
-		List<Indexed<Integer, Double>> pValueIndices = 
-				Statistics.threshold(fdr, alpha);
-
-		DataFrame fdrFilteredM = 
-				DataFrame.copyRows(mfdr, IndexedInt.indices(pValueIndices));
-		history.addToHistory("False discovery filter", fdrFilteredM);
-
-		//DataFrame mfdrfiltered = addFlowItem("False discovery filter", 
-		//		new RowFilterMatrixView(mfdr, 
-		//				IndexedValueInt.indices(pValueIndices)));
-
-
-		List<Double> zscores = 
-				DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
-
-		DataFrame zscoresM = new DataFrame(fdrFilteredM);
-
-		zscoresM.setNumRowAnnotations("Z-score", zscores);
-		history.addToHistory("Z-score", zscoresM);
-
-
-		//DataFrame mzscores = addFlowItem("Add row z-scores", 
-		//		new RowDataFrameView(mfdrfiltered, 
-		//				"Z-score", 
-		//				ArrayUtils.toObjects(zscores)));
-
-		// Lets give a default classification to each row based on a p-value of 0.05 and
-		// a zscore > 1
-
-		List<String> classifications = new ArrayList<String>();
-
-		Matrix im = zscoresM.getMatrix();
-
-		for (int i = 0; i < im.getRows(); ++i) {
-			String classification = "not_expressed";
-
-			if (MatrixOperations.sumRow(im, i) > 0) {
-				classification = "not_moving";
-			}
-
-			double zscore = zscoresM.getRowAnnotationValue("Z-score", i);
-			double p = zscoresM.getRowAnnotationValue("FDR", i);
-
-			//if (p <= 0.05) {
-			if (p <= classificationAlpha) {	
-				if (zscore > 0) {
-					classification = "up";
-				} else if (zscore < 0) {
-					classification = "down";
-				} else {
-					// do nothing
-				}
-			}
-
-			classifications.add(classification);
-		}
-
-		String comparison = g1.getName() + "vs" + g2.getName() + " (p <= " + classificationAlpha + ")";
-
-		DataFrame classM = new DataFrame(zscoresM);
-
-		classM.setTextRowAnnotations(comparison, classifications);
-
-		history.addToHistory("Add row classification", classM);
-
-
-		//DataFrame mclassification = addFlowItem("Add row classification", 
-		//		new RowDataFrameView(mzscores, 
-		//				comparison, 
-		//				ArrayUtils.toObjects(classifications)));
-
-		List<Indexed<Integer, Double>> zscoresIndexed = 
-				IndexedInt.index(zscores);
-
-		List<Indexed<Integer, Double>> posZScores;
-
-		if (posZ) {
-			posZScores = CollectionUtils.reverseSort(CollectionUtils.subList(zscoresIndexed, 
-					MathUtils.ge(zscoresIndexed, minZ)));
-		} else {
-			posZScores = Collections.emptyList(); //new ArrayList<Indexed<Integer, Double>>();
-		}
-
-		List<Indexed<Integer, Double>> negZScores;
-
-		if (negZ) {
-			negZScores = CollectionUtils.sort(CollectionUtils.subList(zscoresIndexed, 
-					MathUtils.lt(zscoresIndexed, -minZ)));
-		} else {
-			negZScores = Collections.emptyList(); //new ArrayList<Indexed<Integer, Double>>();
-		}
-
-		// Filter for top genes if necessary
-
-		List<Integer> ui = Indexed.indices(posZScores);
-		List<Integer> li = Indexed.indices(negZScores);
-
-		if (topGenes != -1) {
-			ui = CollectionUtils.head(ui, topGenes);
-			li = CollectionUtils.head(li, topGenes);
-		}
-
-
-		// Now make a list of the new zscores in the correct order,
-		// positive decreasing, negative, decreasing
-		//List<IndexedValue<Integer, Double>> sortedZscores = 
-		//		CollectionUtils.append(posZScores, negZScores);
-
-		// Put the zscores in order
-
-		List<Integer> indices = CollectionUtils.append(ui, li); // IndexedValue.indices(sortedZscores);
-
-		DataFrame mDeltaSorted = 
-				DataFrame.copyRows(classM, indices);
-
-		history.addToHistory("Sort by row z-score", mDeltaSorted);
-
-		//DataFrame mDeltaSorted = addFlowItem("Sort by row z-score", 
-		//		new RowFilterMatrixView(mclassification, indices));
-
-		DataFrame mNormalized = 
-				MatrixOperations.groupZScore(mDeltaSorted, comparisonGroups);
-
-		history.addToHistory("Normalize expression within groups", mNormalized);
-
-		//DataFrame mNormalized = addFlowItem("Normalize expression within groups", 
-		//		new GroupZScoreMatrixView(mDeltaSorted, groups));
-
-
-
-		//DataFrame mMinMax = addFlowItem("Min/max threshold", 
-		//		"min: " + Plot.MIN_STD + ", max: "+ Plot.MAX_STD,
-		//		new MinMaxBoundedMatrixView(mNormalized, 
-		//				Plot.MIN_STD, 
-		//				Plot.MAX_STD));
-
-		//DataFrame mStandardized = 
-		//		addFlowItem("Row normalize", new RowNormalizedMatrixView(mMinMax));
-
-
-		CountGroups countGroups = new CountGroups()
-				.add(new CountGroup("up", 0, ui.size() - 1))
-				.add(new CountGroup("down", ui.size(), indices.size() - 1));
-
-		if (plotType != PlotType.NONE) {
-			mParent.addToHistory(new HeatMapMatrixTransform(mParent, 
-					mNormalized, 
-					groups,
-					comparisonGroups,
-					rowGroups,
-					countGroups,
-					mParent.getTransformationHistory(), 
-					new ClusterProperties()));
-		}
-
-		// Add a reference at the end so that it is easy for users to find
-		// the matrix they probably want the most
-		mParent.addToHistory("Results", mDeltaSorted);
-	}
-
-	public static List<Double> getP(DataFrame m, 
-			XYSeries g1, 
-			XYSeries g2,
-			TestType test) {
-		List<Double> pValues;
-
-		switch (test) {
-		case MANN_WHITNEY:
-			pValues = MatrixOperations.mannWhitney(m, g1, g2);
-			break;
-		default:
-			pValues = MatrixOperations.tTest(m, 
-					g1, 
-					g2, 
-					test == TestType.TTEST_EQUAL_VARIANCE);
-		}
-
-		return pValues;
-	}
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Supervised";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
+
+    RibbonLargeButton button = new RibbonLargeButton("Supervised", new Raster32Icon(new DiffExp32VectorIcon()),
+        "Supervised Classification", "Supervised classification.");
+    button.addClickListener(this);
+
+    mParent.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    try {
+      classification();
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    } catch (ParseException e1) {
+      e1.printStackTrace();
+    }
+  }
+
+  /**
+   * Ttest.
+   *
+   * @param properties
+   *          the properties
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws ParseException
+   *           the parse exception
+   */
+  private void classification() throws IOException, ParseException {
+    DataFrame m = mParent.getCurrentMatrix();
+
+    if (m == null) {
+      return;
+    }
+
+    XYSeriesModel groups = XYSeriesModel.create(mParent.getGroups());
+
+    if (groups.getCount() == 0) {
+      MainMatCalcWindow.createGroupWarningDialog(mParent);
+
+      return;
+    }
+
+    XYSeriesModel rowGroups = XYSeriesModel.create(mParent.getRowGroups());
+
+    SupervisedDialog dialog = new SupervisedDialog(mParent, m, mParent.getGroups());
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    // We are only interested in the opened matrix
+    // without transformations.
+
+    if (dialog.getReset()) {
+      mParent.resetHistory();
+    }
+
+    XYSeries g1 = dialog.getGroup1(); // new Group("g1");
+    XYSeries g2 = dialog.getGroup2(); // new Group("g2");
+
+    double minFold = dialog.getMinFoldChange();
+    double alpha = dialog.getMaxP();
+    double minZ = dialog.getMinZscore();
+    boolean posZ = dialog.getPosZ();
+    boolean negZ = dialog.getNegZ();
+    boolean keepHistory = dialog.getKeepHistory();
+    ComparisonType comparisonType = dialog.getComparisonType();
+
+    int topGenes = dialog.getTopGenes();
+
+    boolean isLog2 = dialog.getIsLog2Transformed();
+    boolean log2Data = dialog.getLog2Transform();
+    PlotType plotType = dialog.getCreatePlot();
+
+    FDRType fdrType = dialog.getFDRType();
+
+    CollapseType collapseType = dialog.getCollapseType();
+
+    String collapseName = dialog.getCollapseName();
+
+    double classificationAlpha = dialog.getUpDownP(); // 0.05;
+
+    TestType testType = dialog.getTest();
+
+    DataFrame collapsedM = CollapseModule.collapse(m, collapseName, g1, g2, collapseType, mParent);
+
+    switch (plotType) {
+    case VOLCANO:
+      VolcanoPlotModule.volcanoPlot(mParent, collapsedM, alpha, TestType.TTEST_UNEQUAL_VARIANCE, fdrType, g1, g2,
+          !dialog.getIsLog2Transformed() || dialog.getLog2Transform(), true);
+
+      break;
+    default:
+      switch (comparisonType) {
+      case ONE_VS_REST:
+        statTestOneVsRest(collapsedM, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, testType,
+            fdrType, groups, rowGroups, isLog2, log2Data);
+
+        break;
+      case PAIRWISE:
+        statTestPairwise(collapsedM, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, testType, fdrType,
+            groups, rowGroups, isLog2, log2Data);
+
+        break;
+      default:
+        statTest(collapsedM, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, testType, fdrType, g1, g2,
+            groups, rowGroups, isLog2, log2Data, plotType, keepHistory);
+
+        break;
+      }
+    }
+  }
+
+  /**
+   * Test each group against the union of the other groups
+   * 
+   * @param m
+   * @param alpha
+   * @param classificationAlpha
+   * @param minFold
+   * @param minZ
+   * @param posZ
+   * @param negZ
+   * @param topGenes
+   * @param test
+   * @param fdrType
+   * @param g1
+   * @param g2
+   * @param allSeries
+   * @param rowSeries
+   * @param isLog2Data
+   * @param log2Data
+   * @param plotType
+   * @throws IOException
+   * @throws ParseException
+   */
+  public void statTestOneVsRest(DataFrame m, double alpha, double classificationAlpha, double minFold, double minZ,
+      boolean posZ, boolean negZ, int topGenes, TestType test, FDRType fdrType, XYSeriesModel allSeries,
+      XYSeriesModel rowSeries, boolean isLog2Data, boolean log2Data) {
+
+    System.err.println("aha " + allSeries.getCount());
+
+    for (XYSeries s : allSeries) {
+
+      // Make a new group from all the old groups
+
+      // Clone original
+      // XYSeries s1 = XYSeries.createXYSeries(s, Color.RED);
+
+      // Create name from union of names of other groups
+      StringBuilder buffer = new StringBuilder();
+
+      for (XYSeries st : allSeries) {
+        if (!st.equals(s)) {
+          buffer.append(TextUtils.sentenceCase(TextUtils.head(st.getName(), 5)));
+        }
+      }
+
+      XYSeries s2 = XYSeries.createXYSeries(buffer.toString(), Color.BLUE);
+
+      for (XYSeries st : allSeries) {
+        if (!st.equals(s)) {
+          s2.union(st);
+        }
+      }
+
+      SysUtils.err().println(s2.getName(), MatrixGroup.findColumnIndices(m, s2));
+
+      XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
+
+      statTest(m, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, test, fdrType, s, s2,
+          XYSeriesModel.create(newGroup), rowSeries, isLog2Data, log2Data, PlotType.NONE, false);
+
+    }
+  }
+
+  public void statTestPairwise(DataFrame m, double alpha, double classificationAlpha, double minFold, double minZ,
+      boolean posZ, boolean negZ, int topGenes, TestType test, FDRType fdrType, XYSeriesModel allSeries,
+      XYSeriesModel rowSeries, boolean isLog2Data, boolean log2Data) {
+
+    Set<XYSeries> used = new HashSet<XYSeries>();
+
+    for (XYSeries s : allSeries) {
+
+      for (XYSeries s2 : allSeries) {
+        if (!s2.equals(s) && !used.contains(s2)) {
+          XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
+
+          statTest(m, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, test, fdrType, s, s2,
+              XYSeriesModel.create(newGroup), rowSeries, isLog2Data, log2Data, PlotType.NONE, false);
+        }
+      }
+
+      used.add(s);
+    }
+  }
+
+  /**
+   * Ttest.
+   *
+   * @param m
+   *          the m
+   * @param minExp
+   *          the min exp
+   * @param alpha
+   *          the alpha
+   * @param classificationAlpha
+   *          the classification alpha
+   * @param minFold
+   *          the min fold
+   * @param minZ
+   *          the min z
+   * @param posZ
+   *          the pos z
+   * @param negZ
+   *          the neg z
+   * @param topGenes
+   *          the top genes
+   * @param collapseType
+   *          the collapse type
+   * @param rowAnnotation
+   *          the row annotation
+   * @param fdrType
+   *          the fdr type
+   * @param g1
+   *          the g1
+   * @param g2
+   *          the g2
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param isLog2Data
+   *          the is log2 data
+   * @param log2Data
+   *          the log2 data
+   * @param equalVariance
+   *          the equal variance
+   * @param plotType
+   *          the plot
+   * @param properties
+   *          the properties
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws ParseException
+   *           the parse exception
+   */
+  public void statTest(DataFrame m, double alpha, double classificationAlpha, double minFold, double minZ, boolean posZ,
+      boolean negZ, int topGenes, TestType test, FDRType fdrType, XYSeries g1, XYSeries g2, XYSeriesModel groups,
+      XYSeriesModel rowGroups, boolean isLog2Data, boolean log2Data, PlotType plotType, boolean keepHistory) {
+
+    XYSeriesGroup comparisonGroups = new XYSeriesGroup();
+    comparisonGroups.add(g1);
+    comparisonGroups.add(g2);
+
+    // DataFrame colFilteredM =
+    // history.addToHistory("Extract grouped columns",
+    // AnnotatableMatrix.copyInnerColumns(m, comparisonGroups));
+
+    DataFrame colFilteredM = m;
+
+    History history = mParent.history().keep(keepHistory);
+
+    //
+    // Remove bad gene symbols
+    //
+
+    // DataFrame mCleaned = AnnotatableMatrix.copyRows(mColumnFiltered,
+    // rowAnnotationName,
+    // "^---$",
+    // false);
+
+    // history.addToHistory("Filter Bad Gene Symbols", mCleaned);
+
+    //
+    // Log the matrix
+    //
+
+    DataFrame log2M;
+
+    if (log2Data) {
+      log2M = history.addToHistory("log2(1 + data)", MatrixOperations.log2(MatrixOperations.add(colFilteredM, 1)));
+    } else {
+      log2M = colFilteredM;
+    }
+
+    //
+    // P-values
+    //
+
+    List<Double> pValues = getP(log2M, g1, g2, test);
+
+    DataFrame pValuesM = new DataFrame(log2M);
+
+    pValuesM.setNumRowAnnotations("P-value", pValues);
+
+    // System.err.println("p " + pValues);
+    // System.err.println("p2 " +
+    // Arrays.toString(pValuesM.getRowAnnotationValues("P-value")));
+
+    // Set the p-values of genes with bad names to NaN so they can be
+    // excluded from analysis
+    // DataFrame.setAnnotation(mpvalues,
+    // "P-value",
+    // DataFrame.matchRows(mpvalues, rowAnnotation, BLANK_ROW_REGEX),
+    // Double.NaN);
+
+    history.addToHistory("Add P-values", pValuesM);
+
+    //
+    // Fold Changes
+    //
+
+    List<Double> foldChanges;
+
+    if (isLog2Data || log2Data) {
+      foldChanges = DoubleMatrix.logFoldChange(pValuesM, g1, g2);
+    } else {
+      foldChanges = DoubleMatrix.foldChange(pValuesM, g1, g2);
+    }
+
+    // filter by fold changes
+    // filter by fdr
+
+    String name = isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change";
+
+    DataFrame foldChangesM = new DataFrame(pValuesM);
+    foldChangesM.setNumRowAnnotations(name, foldChanges);
+
+    history.addToHistory(name, foldChangesM);
+
+    //
+    // Group means
+    //
+
+    DataFrame meansM = new DataFrame(foldChangesM);
+
+    meansM.setNumRowAnnotations(g1.getName() + " mean", DoubleMatrix.means(foldChangesM, g1));
+    meansM.setNumRowAnnotations(g2.getName() + " mean", DoubleMatrix.means(foldChangesM, g2));
+
+    history.addToHistory("Group Means", meansM);
+
+    //
+    // Fold change filter
+    //
+
+    double posMinFold = minFold;
+    double negMinFold = posMinFold;
+
+    if (minFold > 0) {
+      if (isLog2Data || log2Data) {
+        negMinFold = -negMinFold;
+      } else {
+        negMinFold = 1.0 / negMinFold;
+      }
+    }
+
+    List<Indexed<Integer, Double>> pFoldIndices = Statistics.outOfRange(foldChanges, negMinFold, posMinFold);
+
+    name = isLog2Data || log2Data ? "Log2 Fold Change Filter" : "Fold Change Filter";
+
+    DataFrame foldFilterM = DataFrame.copyRows(meansM, IndexedInt.indices(pFoldIndices));
+
+    history.addToHistory(name, foldFilterM);
+
+    //
+    // Collapse rows
+    //
+
+    // DataFrame collapsedM = CollapseModule.collapse(foldFilterM,
+    // rowAnnotation,
+    // g1,
+    // g2,
+    // collapseType,
+    // mParent);
+
+    double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"), fdrType);
+
+    DataFrame mfdr = new DataFrame(foldFilterM);
+    mfdr.setNumRowAnnotations("FDR", fdr);
+
+    history.addToHistory("FDR", mfdr);
+
+    // DataFrame mfdr = addFlowItem("False discovery rate",
+    // new RowDataFrameView(mcollapsed,
+    // "FDR",
+    // ArrayUtils.toObjects(fdr)));
+
+    // filter by fdr
+    List<Indexed<Integer, Double>> pValueIndices = Statistics.threshold(fdr, alpha);
+
+    DataFrame fdrFilteredM = DataFrame.copyRows(mfdr, IndexedInt.indices(pValueIndices));
+    history.addToHistory("False discovery filter", fdrFilteredM);
+
+    // DataFrame mfdrfiltered = addFlowItem("False discovery filter",
+    // new RowFilterMatrixView(mfdr,
+    // IndexedValueInt.indices(pValueIndices)));
+
+    List<Double> zscores = DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
+
+    DataFrame zscoresM = new DataFrame(fdrFilteredM);
+
+    zscoresM.setNumRowAnnotations("Z-score", zscores);
+    history.addToHistory("Z-score", zscoresM);
+
+    // DataFrame mzscores = addFlowItem("Add row z-scores",
+    // new RowDataFrameView(mfdrfiltered,
+    // "Z-score",
+    // ArrayUtils.toObjects(zscores)));
+
+    // Lets give a default classification to each row based on a p-value of 0.05 and
+    // a zscore > 1
+
+    List<String> classifications = new ArrayList<String>();
+
+    Matrix im = zscoresM.getMatrix();
+
+    for (int i = 0; i < im.getRows(); ++i) {
+      String classification = "not_expressed";
+
+      if (MatrixOperations.sumRow(im, i) > 0) {
+        classification = "not_moving";
+      }
+
+      double zscore = zscoresM.getRowAnnotationValue("Z-score", i);
+      double p = zscoresM.getRowAnnotationValue("FDR", i);
+
+      // if (p <= 0.05) {
+      if (p <= classificationAlpha) {
+        if (zscore > 0) {
+          classification = "up";
+        } else if (zscore < 0) {
+          classification = "down";
+        } else {
+          // do nothing
+        }
+      }
+
+      classifications.add(classification);
+    }
+
+    String comparison = g1.getName() + "vs" + g2.getName() + " (p <= " + classificationAlpha + ")";
+
+    DataFrame classM = new DataFrame(zscoresM);
+
+    classM.setTextRowAnnotations(comparison, classifications);
+
+    history.addToHistory("Add row classification", classM);
+
+    // DataFrame mclassification = addFlowItem("Add row classification",
+    // new RowDataFrameView(mzscores,
+    // comparison,
+    // ArrayUtils.toObjects(classifications)));
+
+    List<Indexed<Integer, Double>> zscoresIndexed = IndexedInt.index(zscores);
+
+    List<Indexed<Integer, Double>> posZScores;
+
+    if (posZ) {
+      posZScores = CollectionUtils
+          .reverseSort(CollectionUtils.subList(zscoresIndexed, MathUtils.ge(zscoresIndexed, minZ)));
+    } else {
+      posZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer, Double>>();
+    }
+
+    List<Indexed<Integer, Double>> negZScores;
+
+    if (negZ) {
+      negZScores = CollectionUtils.sort(CollectionUtils.subList(zscoresIndexed, MathUtils.lt(zscoresIndexed, -minZ)));
+    } else {
+      negZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer, Double>>();
+    }
+
+    // Filter for top genes if necessary
+
+    List<Integer> ui = Indexed.indices(posZScores);
+    List<Integer> li = Indexed.indices(negZScores);
+
+    if (topGenes != -1) {
+      ui = CollectionUtils.head(ui, topGenes);
+      li = CollectionUtils.head(li, topGenes);
+    }
+
+    // Now make a list of the new zscores in the correct order,
+    // positive decreasing, negative, decreasing
+    // List<IndexedValue<Integer, Double>> sortedZscores =
+    // CollectionUtils.append(posZScores, negZScores);
+
+    // Put the zscores in order
+
+    List<Integer> indices = CollectionUtils.append(ui, li); // IndexedValue.indices(sortedZscores);
+
+    DataFrame mDeltaSorted = DataFrame.copyRows(classM, indices);
+
+    history.addToHistory("Sort by row z-score", mDeltaSorted);
+
+    // DataFrame mDeltaSorted = addFlowItem("Sort by row z-score",
+    // new RowFilterMatrixView(mclassification, indices));
+
+    DataFrame mNormalized = MatrixOperations.groupZScore(mDeltaSorted, comparisonGroups);
+
+    history.addToHistory("Normalize expression within groups", mNormalized);
+
+    // DataFrame mNormalized = addFlowItem("Normalize expression within groups",
+    // new GroupZScoreMatrixView(mDeltaSorted, groups));
+
+    // DataFrame mMinMax = addFlowItem("Min/max threshold",
+    // "min: " + Plot.MIN_STD + ", max: "+ Plot.MAX_STD,
+    // new MinMaxBoundedMatrixView(mNormalized,
+    // Plot.MIN_STD,
+    // Plot.MAX_STD));
+
+    // DataFrame mStandardized =
+    // addFlowItem("Row normalize", new RowNormalizedMatrixView(mMinMax));
+
+    CountGroups countGroups = new CountGroups().add(new CountGroup("up", 0, ui.size() - 1))
+        .add(new CountGroup("down", ui.size(), indices.size() - 1));
+
+    if (plotType != PlotType.NONE) {
+      mParent.addToHistory(new HeatMapMatrixTransform(mParent, mNormalized, groups, comparisonGroups, rowGroups,
+          countGroups, mParent.getTransformationHistory(), new ClusterProperties()));
+    }
+
+    // Add a reference at the end so that it is easy for users to find
+    // the matrix they probably want the most
+    mParent.addToHistory("Results", mDeltaSorted);
+  }
+
+  public static List<Double> getP(DataFrame m, XYSeries g1, XYSeries g2, TestType test) {
+    List<Double> pValues;
+
+    switch (test) {
+    case MANN_WHITNEY:
+      pValues = MatrixOperations.mannWhitney(m, g1, g2);
+      break;
+    default:
+      pValues = MatrixOperations.tTest(m, g1, g2, test == TestType.TTEST_EQUAL_VARIANCE);
+    }
+
+    return pValues;
+  }
 }

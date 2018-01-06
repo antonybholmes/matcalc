@@ -36,185 +36,176 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 import edu.columbia.rdf.matcalc.figure.PlotConstants;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class HierarchicalClusteringDialog.
  */
 public class HierarchicalClusteringDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member distance combo.
-	 */
-	private ClusterDistanceMetricCombo mDistanceCombo = 
-			new ClusterDistanceMetricCombo();
-	
-	/**
-	 * The member linkage combo.
-	 */
-	private ModernComboBox mLinkageCombo =
-			new ModernComboBox();
-	
-	/**
-	 * The cluster columns check.
-	 */
-	private CheckBox mCheckClusterColumns = 
-			new ModernCheckSwitch("Cluster columns", true);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The cluster rows check.
-	 */
-	private CheckBox mCheckClusterRows = 
-			new ModernCheckSwitch("Cluster rows");
-	
-	private CheckBox mCheckShowHeatMap =
-			new ModernCheckSwitch("Show heat map", true);
-	
-	/** The m check optimal leaf order. */
-	private CheckBox mCheckOptimalLeafOrder = 
-			new ModernCheckSwitch("Optimal leaf order", true);
+  /**
+   * The member distance combo.
+   */
+  private ClusterDistanceMetricCombo mDistanceCombo = new ClusterDistanceMetricCombo();
 
-	/**
-	 * The member check plot.
-	 */
-	private CheckBox mCheckPlot = 
-			new ModernCheckSwitch(PlotConstants.MENU_PLOT, true);
+  /**
+   * The member linkage combo.
+   */
+  private ModernComboBox mLinkageCombo = new ModernComboBox();
 
-	
-	/**
-	 * Instantiates a new hierarchical clustering dialog.
-	 *
-	 * @param parent the parent
-	 */
-	public HierarchicalClusteringDialog(ModernWindow parent) {
-		super(parent, "matcalc.cluster.help.url");
-		
-		setTitle("Cluster");
-		
-		setup();
+  /**
+   * The cluster columns check.
+   */
+  private CheckBox mCheckClusterColumns = new ModernCheckSwitch("Cluster columns", true);
 
-		createUi();
-	}
+  /**
+   * The cluster rows check.
+   */
+  private CheckBox mCheckClusterRows = new ModernCheckSwitch("Cluster rows");
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		mLinkageCombo.addMenuItem("Average");
-		mLinkageCombo.addMenuItem("Complete");
-		mLinkageCombo.addMenuItem("Single");
-		mLinkageCombo.setSelectedIndex(0);
-		
-		mDistanceCombo.setSelectedIndex(3);
+  private CheckBox mCheckShowHeatMap = new ModernCheckSwitch("Show heat map", true);
 
-		setSize(480, 360);
-		
-		UI.centerWindowToScreen(this);
-	}
+  /** The m check optimal leaf order. */
+  private CheckBox mCheckOptimalLeafOrder = new ModernCheckSwitch("Optimal leaf order", true);
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		Box box = Box.createVerticalBox();
-		
+  /**
+   * The member check plot.
+   */
+  private CheckBox mCheckPlot = new ModernCheckSwitch(PlotConstants.MENU_PLOT, true);
 
-		box.add(new HExpandBox("Distance", mDistanceCombo));
-		box.add(ModernPanel.createVGap());
-		box.add(new HExpandBox("Linkage", mLinkageCombo));
-		box.add(ModernPanel.createVGap());
-		box.add(mCheckClusterRows);
-		box.add(ModernPanel.createVGap());
-		box.add(mCheckClusterColumns);
-		box.add(ModernPanel.createVGap());
-		box.add(mCheckPlot);
-		box.add(ModernPanel.createVGap());
-		box.add(mCheckShowHeatMap);
-		box.add(ModernPanel.createVGap());
-		box.add(mCheckOptimalLeafOrder);
-		
-		//box.setBorder(ModernWidget.LARGE_BORDER);
+  /**
+   * Instantiates a new hierarchical clustering dialog.
+   *
+   * @param parent
+   *          the parent
+   */
+  public HierarchicalClusteringDialog(ModernWindow parent) {
+    super(parent, "matcalc.cluster.help.url");
 
-		setDialogCardContent(box);
-	}
-	
-	/**
-	 * Gets the distance metric.
-	 *
-	 * @return the distance metric
-	 */
-	public DistanceMetric getDistanceMetric() {
-		return mDistanceCombo.getDistanceMetric();
-	}
-	
-	/**
-	 * Gets the linkage.
-	 *
-	 * @return the linkage
-	 */
-	public Linkage getLinkage() {
-		
-		Linkage linkage;
-		
-		switch (mLinkageCombo.getSelectedIndex()) {
-		case 1:
-			linkage = new CompleteLinkage();
-			break;
-		case 2:
-			linkage = new SingleLinkage();
-			break;
-		default:
-			linkage = new AverageLinkage();
-			break;
-		}
-		
-		return linkage;
-	}
+    setTitle("Cluster");
 
-	/**
-	 * Cluster rows.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean clusterRows() {
-		return mCheckClusterRows.isSelected();
-	}
-	
-	/**
-	 * Cluster columns.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean clusterColumns() {
-		return mCheckClusterColumns.isSelected();
-	}
+    setup();
 
-	/**
-	 * Gets the creates the plot.
-	 *
-	 * @return the creates the plot
-	 */
-	public boolean getCreatePlot() {
-		return mCheckPlot.isSelected();
-	}
+    createUi();
+  }
 
-	/**
-	 * Optimal leaf order.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean optimalLeafOrder() {
-		return mCheckOptimalLeafOrder.isSelected();
-	}
-	
-	public boolean getShowHeatMap() {
-		return mCheckShowHeatMap.isSelected();
-	}
+  /**
+   * Setup.
+   */
+  private void setup() {
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    mLinkageCombo.addMenuItem("Average");
+    mLinkageCombo.addMenuItem("Complete");
+    mLinkageCombo.addMenuItem("Single");
+    mLinkageCombo.setSelectedIndex(0);
+
+    mDistanceCombo.setSelectedIndex(3);
+
+    setSize(480, 360);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    Box box = Box.createVerticalBox();
+
+    box.add(new HExpandBox("Distance", mDistanceCombo));
+    box.add(ModernPanel.createVGap());
+    box.add(new HExpandBox("Linkage", mLinkageCombo));
+    box.add(ModernPanel.createVGap());
+    box.add(mCheckClusterRows);
+    box.add(ModernPanel.createVGap());
+    box.add(mCheckClusterColumns);
+    box.add(ModernPanel.createVGap());
+    box.add(mCheckPlot);
+    box.add(ModernPanel.createVGap());
+    box.add(mCheckShowHeatMap);
+    box.add(ModernPanel.createVGap());
+    box.add(mCheckOptimalLeafOrder);
+
+    // box.setBorder(ModernWidget.LARGE_BORDER);
+
+    setDialogCardContent(box);
+  }
+
+  /**
+   * Gets the distance metric.
+   *
+   * @return the distance metric
+   */
+  public DistanceMetric getDistanceMetric() {
+    return mDistanceCombo.getDistanceMetric();
+  }
+
+  /**
+   * Gets the linkage.
+   *
+   * @return the linkage
+   */
+  public Linkage getLinkage() {
+
+    Linkage linkage;
+
+    switch (mLinkageCombo.getSelectedIndex()) {
+    case 1:
+      linkage = new CompleteLinkage();
+      break;
+    case 2:
+      linkage = new SingleLinkage();
+      break;
+    default:
+      linkage = new AverageLinkage();
+      break;
+    }
+
+    return linkage;
+  }
+
+  /**
+   * Cluster rows.
+   *
+   * @return true, if successful
+   */
+  public boolean clusterRows() {
+    return mCheckClusterRows.isSelected();
+  }
+
+  /**
+   * Cluster columns.
+   *
+   * @return true, if successful
+   */
+  public boolean clusterColumns() {
+    return mCheckClusterColumns.isSelected();
+  }
+
+  /**
+   * Gets the creates the plot.
+   *
+   * @return the creates the plot
+   */
+  public boolean getCreatePlot() {
+    return mCheckPlot.isSelected();
+  }
+
+  /**
+   * Optimal leaf order.
+   *
+   * @return true, if successful
+   */
+  public boolean optimalLeafOrder() {
+    return mCheckOptimalLeafOrder.isSelected();
+  }
+
+  public boolean getShowHeatMap() {
+    return mCheckShowHeatMap.isSelected();
+  }
 }

@@ -36,93 +36,106 @@ import org.jebtk.modern.window.ModernWindow;
  * The class PlotTitleControl.
  */
 public class PlotTitleControl extends HExBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member title.
-	 */
-	private TitleProperties mTitle;
-	
-	/**
-	 * The member text field.
-	 */
-	private ModernTextField mTextField = new ModernClipboardTextField();
-	
-	/**
-	 * The class KeyEvents.
-	 */
-	private class KeyEvents implements KeyListener {
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				update();
-			}
-		}
+  /**
+   * The member title.
+   */
+  private TitleProperties mTitle;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyReleased(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+  /**
+   * The member text field.
+   */
+  private ModernTextField mTextField = new ModernClipboardTextField();
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-	
-	/**
-	 * Instantiates a new plot title control.
-	 *
-	 * @param parent the parent
-	 * @param title the title
-	 */
-	public PlotTitleControl(ModernWindow parent, TitleProperties title) {	
-		mTitle = title;
-		
-		mTextField.setText(title.getText());
-		
-		add(new ModernAutoSizeLabel("Title", ModernWidget.TINY_SIZE));
-		add(new ModernTextBorderPanel(mTextField, ModernWidget.EXTRA_LARGE_SIZE));
+  /**
+   * The class KeyEvents.
+   */
+  private class KeyEvents implements KeyListener {
 
-		mTextField.addKeyListener(new KeyEvents());
-		
-		title.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				mTextField.setText(mTitle.getText());
-			}});
-	}
-	
-	/**
-	 * Update.
-	 */
-	private void update() {
-		mTitle.setText(mTextField.getText());
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
+      if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        update();
+      }
+    }
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		update();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyReleased(KeyEvent arg0) {
+      // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyTyped(KeyEvent e) {
+      // TODO Auto-generated method stub
+
+    }
+
+  }
+
+  /**
+   * Instantiates a new plot title control.
+   *
+   * @param parent
+   *          the parent
+   * @param title
+   *          the title
+   */
+  public PlotTitleControl(ModernWindow parent, TitleProperties title) {
+    mTitle = title;
+
+    mTextField.setText(title.getText());
+
+    add(new ModernAutoSizeLabel("Title", ModernWidget.TINY_SIZE));
+    add(new ModernTextBorderPanel(mTextField, ModernWidget.EXTRA_LARGE_SIZE));
+
+    mTextField.addKeyListener(new KeyEvents());
+
+    title.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mTextField.setText(mTitle.getText());
+      }
+    });
+  }
+
+  /**
+   * Update.
+   */
+  private void update() {
+    mTitle.setText(mTextField.getText());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    update();
+  }
 
 }

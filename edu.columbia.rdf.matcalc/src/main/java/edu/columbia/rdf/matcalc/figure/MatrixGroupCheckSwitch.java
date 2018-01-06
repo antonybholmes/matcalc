@@ -18,34 +18,36 @@ package edu.columbia.rdf.matcalc.figure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.modern.button.ModernCheckSwitch;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class MatrixGroupCheckBox.
  */
 public class MatrixGroupCheckSwitch extends ModernCheckSwitch {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new matrix group check box.
-	 *
-	 * @param group the group
-	 */
-	public MatrixGroupCheckSwitch(XYSeries group) {
-		this(group, false);
-	}
+  /**
+   * Instantiates a new matrix group check box.
+   *
+   * @param group
+   *          the group
+   */
+  public MatrixGroupCheckSwitch(XYSeries group) {
+    this(group, false);
+  }
 
-	/**
-	 * Instantiates a new matrix group check switch.
-	 *
-	 * @param group the group
-	 * @param selected the selected
-	 */
-	public MatrixGroupCheckSwitch(XYSeries group, boolean selected) {
-		super(group.getName(), selected, group.getColor(), group.getColor());
-	}
+  /**
+   * Instantiates a new matrix group check switch.
+   *
+   * @param group
+   *          the group
+   * @param selected
+   *          the selected
+   */
+  public MatrixGroupCheckSwitch(XYSeries group, boolean selected) {
+    super(group.getName(), selected, group.getColor(), group.getColor());
+  }
 }

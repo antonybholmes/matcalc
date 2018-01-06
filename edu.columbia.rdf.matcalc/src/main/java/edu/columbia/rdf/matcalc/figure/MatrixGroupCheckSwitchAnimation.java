@@ -8,17 +8,17 @@ import org.jebtk.modern.widget.ModernWidget;
 
 public class MatrixGroupCheckSwitchAnimation extends CheckSwitchAnimation {
 
-	private Color mColor;
+  private Color mColor;
 
-	public MatrixGroupCheckSwitchAnimation(ModernWidget widget, Color color) {
-		super(widget);
-		
-		mColor = color;
-	}
-	
-	@Override
-	public void setSelectedColor(Graphics2D g2) {
-		g2.setColor(mColor);
-	}
+  public MatrixGroupCheckSwitchAnimation(ModernWidget widget, Color color) {
+    super(widget);
+
+    mColor = color;
+  }
+
+  @Override
+  public void setSelectedColor(Graphics2D g2) {
+    g2.setColor(mColor);
+  }
 
 }

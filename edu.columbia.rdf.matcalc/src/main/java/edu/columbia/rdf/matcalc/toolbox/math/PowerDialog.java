@@ -37,70 +37,69 @@ import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class LogDialog.
  */
 public class PowerDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
 
-	/** The m add field. */
-	private ModernCompactSpinner mAddField =
-			new ModernCompactSpinner(2, 100, 2);
-	
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new log dialog.
-	 *
-	 * @param parent the parent
-	 * @param base the base
-	 */
-	public PowerDialog(ModernWindow parent, int base) {
-		super(parent, "matcalc.modules.math.power.url");
-		
-		setTitle("Power");
+  /** The m add field. */
+  private ModernCompactSpinner mAddField = new ModernCompactSpinner(2, 100, 2);
 
-		setup(base);
+  /**
+   * Instantiates a new log dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param base
+   *          the base
+   */
+  public PowerDialog(ModernWindow parent, int base) {
+    super(parent, "matcalc.modules.math.power.url");
 
-		createUi();
-	}
+    setTitle("Power");
 
-	/**
-	 * Sets the up.
-	 *
-	 * @param base the new up
-	 */
-	private void setup(int base) {
-		mAddField.setValue(base);
-		
-		setSize(400, 160);
-		
-		UI.centerWindowToScreen(this);
-	}
+    setup(base);
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		Box box = VBox.create();
+    createUi();
+  }
 
-		box.add(new HExpandBox("Power", mAddField));
-		
-		setDialogCardContent(box);
-	}
+  /**
+   * Sets the up.
+   *
+   * @param base
+   *          the new up
+   */
+  private void setup(int base) {
+    mAddField.setValue(base);
 
-	/**
-	 * Gets the base.
-	 *
-	 * @return the base
-	 */
-	public int getBase() {
-		return mAddField.getIntValue();
-	}
+    setSize(400, 160);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    Box box = VBox.create();
+
+    box.add(new HExpandBox("Power", mAddField));
+
+    setDialogCardContent(box);
+  }
+
+  /**
+   * Gets the base.
+   *
+   * @return the base
+   */
+  public int getBase() {
+    return mAddField.getIntValue();
+  }
 }

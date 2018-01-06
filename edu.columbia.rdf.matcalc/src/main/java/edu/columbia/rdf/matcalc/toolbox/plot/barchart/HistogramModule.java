@@ -42,71 +42,78 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class HistogramModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Histogram";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Histogram";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		RibbonLargeButton button = new RibbonLargeButton("Histogram", 
-				UIService.getInstance().loadIcon("histogram", 24),
-				"Histogram",
-				"Generate a histogram.");
-		button.addClickListener(this);
-		//button.setEnabled(false);
+    RibbonLargeButton button = new RibbonLargeButton("Histogram", UIService.getInstance().loadIcon("histogram", 24),
+        "Histogram", "Generate a histogram.");
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-	/**
-	 * Creates the plot.
-	 */
-	private void createPlot() {
-		DataFrame m = mParent.getCurrentMatrix();
+  /**
+   * Creates the plot.
+   */
+  private void createPlot() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-		Figure figure = Figure.createFigure();
+    Figure figure = Figure.createFigure();
 
-		SubFigure subFigure = figure.currentSubFigure();
-		
-		Axes axes = subFigure.currentAxes();
+    SubFigure subFigure = figure.currentSubFigure();
 
-		HistBin[] hist = Statistics.histogram(m.columnToDoubleArray(0), 1);
+    Axes axes = subFigure.currentAxes();
 
-		ColorCycle colorCycle = new ColorCycle();
-		
-		Color color = colorCycle.next();
-		
-		XYSeries series = new XYSeries("Histogram", color);
-		
-		series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
-		series.getStyle().getLineStyle().setColor(color);
-		
-		PlotFactory.createHistogram(m, axes, series, hist);
+    HistBin[] hist = Statistics.histogram(m.columnToDoubleArray(0), 1);
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
+    ColorCycle colorCycle = new ColorCycle();
 
-		window.setVisible(true);
-	}
+    Color color = colorCycle.next();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		createPlot();
-	}
+    XYSeries series = new XYSeries("Histogram", color);
+
+    series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+    series.getStyle().getLineStyle().setColor(color);
+
+    PlotFactory.createHistogram(m, axes, series, hist);
+
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
+
+    window.setVisible(true);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    createPlot();
+  }
 }

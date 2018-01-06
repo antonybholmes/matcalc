@@ -31,57 +31,62 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class RadiusControl extends HBox implements KeyListener {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m properties. */
-	private Properties mProperties;
-	
-	/** The m text radius. */
-	private ModernNumericalTextField mTextRadius = 
-			new ModernNumericalTextField("150");
-	
-	/**
-	 * Instantiates a new radius control.
-	 *
-	 * @param properties the properties
-	 */
-	public RadiusControl(Properties properties) {
-		mProperties = properties;
-		
-		add(new ModernSubHeadingLabel("Radius"));
-		add(new ModernTextBorderPanel(mTextRadius, ModernWidget.STANDARD_SIZE));
-		
-		
-		mTextRadius.addKeyListener(this);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			mProperties.setProperty("venn.reference.radius", mTextRadius.getAsInt());
-		}
-	}
+  /** The m properties. */
+  private Properties mProperties;
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+  /** The m text radius. */
+  private ModernNumericalTextField mTextRadius = new ModernNumericalTextField("150");
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+  /**
+   * Instantiates a new radius control.
+   *
+   * @param properties
+   *          the properties
+   */
+  public RadiusControl(Properties properties) {
+    mProperties = properties;
+
+    add(new ModernSubHeadingLabel("Radius"));
+    add(new ModernTextBorderPanel(mTextRadius, ModernWidget.STANDARD_SIZE));
+
+    mTextRadius.addKeyListener(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+      mProperties.setProperty("venn.reference.radius", mTextRadius.getAsInt());
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyReleased(KeyEvent e) {
+    // TODO Auto-generated method stub
+
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyTyped(KeyEvent e) {
+    // TODO Auto-generated method stub
+
+  }
 
 }

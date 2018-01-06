@@ -43,106 +43,111 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The class BarChartModule.
  */
 public class BarChartModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Bar Chart";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
-		
-		RibbonLargeButton button = new RibbonLargeButton("Bar", "Chart", 
-				UIService.getInstance().loadIcon("bar_chart", 24),
-				"Bar Chart",
-				"Generate a bar chart.");
-		button.addClickListener(this);
-		//button.setEnabled(false);
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
-	
-	/**
-	 * Creates the bar chart.
-	 */
-	private void createBarChart() {
-		DataFrame m = mParent.getCurrentMatrix();
-		
-		XYSeriesGroup groups = mParent.getGroups();
-		
-		Figure figure = Figure.createFigure(); //window.getFigure();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Bar Chart";
+  }
 
-		SubFigure subFigure = figure.currentSubFigure();
-		
-		Axes axes = subFigure.currentAxes();
-		
-		ColorCycle colorCycle = new ColorCycle();
-		
-		XYSeriesGroup seriesGroup = new XYSeriesGroup();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		for (int i = 0; i < m.getCols(); ++i) {
-			Color color = null;
-			
-			// See if the column matches a group, and if so use the group's
-			// color rather than a random color
-			for (MatrixGroup group : groups) {
-				Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findColumnIndices(m, group));
-				
-				if (indices.contains(i)) {
-					color = group.getColor();
-					
-					break;
-				}
-			}
-			
-			if (color == null) {
-				color = colorCycle.next();
-			}
-			
-			XYSeries series = new XYSeries(m.getColumnName(i), color);
-			
-			series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
-			series.getStyle().getLineStyle().setColor(color);
+    RibbonLargeButton button = new RibbonLargeButton("Bar", "Chart", UIService.getInstance().loadIcon("bar_chart", 24),
+        "Bar Chart", "Generate a bar chart.");
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
-			seriesGroup.add(series);
-		}
-			
-		/*
-		for (MatrixGroup group : groups) {
-			Color color = colorCycle.next();
-			
-			XYSeries series = new XYSeries(group.getName(), color);
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-			series.getStyle().getFillStyle().setColor(color);
+  /**
+   * Creates the bar chart.
+   */
+  private void createBarChart() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-			seriesGroup.add(series);
-		}
-		*/
+    XYSeriesGroup groups = mParent.getGroups();
 
-		PlotFactory.createBarPlot(m, axes, seriesGroup);
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-		
-		window.setVisible(true);
-	}
+    SubFigure subFigure = figure.currentSubFigure();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		createBarChart();
-	}
+    Axes axes = subFigure.currentAxes();
+
+    ColorCycle colorCycle = new ColorCycle();
+
+    XYSeriesGroup seriesGroup = new XYSeriesGroup();
+
+    for (int i = 0; i < m.getCols(); ++i) {
+      Color color = null;
+
+      // See if the column matches a group, and if so use the group's
+      // color rather than a random color
+      for (MatrixGroup group : groups) {
+        Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findColumnIndices(m, group));
+
+        if (indices.contains(i)) {
+          color = group.getColor();
+
+          break;
+        }
+      }
+
+      if (color == null) {
+        color = colorCycle.next();
+      }
+
+      XYSeries series = new XYSeries(m.getColumnName(i), color);
+
+      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getLineStyle().setColor(color);
+
+      seriesGroup.add(series);
+    }
+
+    /*
+     * for (MatrixGroup group : groups) { Color color = colorCycle.next();
+     * 
+     * XYSeries series = new XYSeries(group.getName(), color);
+     * 
+     * series.getStyle().getFillStyle().setColor(color);
+     * 
+     * seriesGroup.add(series); }
+     */
+
+    PlotFactory.createBarPlot(m, axes, seriesGroup);
+
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
+
+    window.setVisible(true);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    createBarChart();
+  }
 }

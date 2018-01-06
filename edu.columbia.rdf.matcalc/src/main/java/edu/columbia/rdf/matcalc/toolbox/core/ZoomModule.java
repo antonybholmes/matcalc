@@ -20,35 +20,36 @@ import org.jebtk.modern.zoom.ZoomRibbonSection;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Can compare a column of values to another list to see what is common and
- * record this in a new column next to the reference column. Useful for
- * doing overlaps and keeping data in a specific order in a table.
+ * record this in a new column next to the reference column. Useful for doing
+ * overlaps and keeping data in a specific order in a table.
  *
  * @author Antony Holmes Holmes
  *
  */
 public class ZoomModule extends CalcModule {
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Zoom";
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		window
-		.getRibbon()
-		.getToolbar("View")
-		.add(new ZoomRibbonSection(window, window.getZoomModel()));
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Zoom";
+  }
 
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    window.getRibbon().getToolbar("View").add(new ZoomRibbonSection(window, window.getZoomModel()));
+
+  }
 }

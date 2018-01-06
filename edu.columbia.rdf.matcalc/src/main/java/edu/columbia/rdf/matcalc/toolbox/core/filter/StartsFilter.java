@@ -21,36 +21,41 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
  */
 public class StartsFilter implements Filter {
 
-	/** The m text. */
-	private String mText;
-	
-	/**
-	 * Instantiates a new starts filter.
-	 *
-	 * @param text the text
-	 */
-	public StartsFilter(String text) {
-		mText = text.toLowerCase();
-	}
+  /** The m text. */
+  private String mText;
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
-	 */
-	@Override
-	public boolean test(String text, double value) {
-		if (text != null) {
-			return text.toLowerCase().startsWith(mText);
-		} else {
-			return false;
-		}
-	}
+  /**
+   * Instantiates a new starts filter.
+   *
+   * @param text
+   *          the text
+   */
+  public StartsFilter(String text) {
+    mText = text.toLowerCase();
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Starts with";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
+   */
+  @Override
+  public boolean test(String text, double value) {
+    if (text != null) {
+      return text.toLowerCase().startsWith(mText);
+    } else {
+      return false;
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#getName()
+   */
+  @Override
+  public String getName() {
+    return "Starts with";
+  }
 
 }

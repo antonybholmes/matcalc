@@ -23,55 +23,54 @@ import org.jebtk.core.model.DoubleModel;
  */
 public class ScaleModel extends DoubleModel {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	//private double mMax;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+  // private double mMax;
 
-	/**
-	 * Instantiates a new scale model.
-	 */
-	public ScaleModel() {
-		this(3);
-	}
+  /**
+   * Instantiates a new scale model.
+   */
+  public ScaleModel() {
+    this(3);
+  }
 
-	/**
-	 * Instantiates a new scale model.
-	 *
-	 * @param v the v
-	 */
-	public ScaleModel(double v) {
-		update(v);
+  /**
+   * Instantiates a new scale model.
+   *
+   * @param v
+   *          the v
+   */
+  public ScaleModel(double v) {
+    update(v);
 
-		//mMax = max;
-	}
+    // mMax = max;
+  }
 
-	/*
-	@Override
-	public void update(double v) {
-		super.update(Mathematics.bound(v, -mMax, mMax));
-	}
-	*/
+  /*
+   * @Override public void update(double v) { super.update(Mathematics.bound(v,
+   * -mMax, mMax)); }
+   */
 
-	//public double getBaseline() {
-	//	return mMax;
-	//}
+  // public double getBaseline() {
+  // return mMax;
+  // }
 
-	/**
-	 * Gets the scale.
-	 *
-	 * @return the scale
-	 */
-	public double getScale() {
-		double v = mItem;
+  /**
+   * Gets the scale.
+   *
+   * @return the scale
+   */
+  public double getScale() {
+    double v = mItem;
 
-		if (mItem > 0) {
-			++v;
-		} else if (v < 0) {
-			v = 1.0 / (1.0 - v);
-		} else {
-			v = 1.0;
-		}
+    if (mItem > 0) {
+      ++v;
+    } else if (v < 0) {
+      v = 1.0 / (1.0 - v);
+    } else {
+      v = 1.0;
+    }
 
-		return v;
-	}
+    return v;
+  }
 }

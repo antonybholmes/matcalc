@@ -28,57 +28,49 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressi
 
 // TODO: Auto-generated Javadoc
 /**
- * Creates a ttest plot of a matrix. Attempts to reuse
- * existing plot if it still exists.
+ * Creates a ttest plot of a matrix. Attempts to reuse existing plot if it still
+ * exists.
  * 
  * @author Antony Holmes Holmes
  *
  */
 public class HeatMapMatrixTransform extends DifferentialExpressionPlotMatrixTransform {
-	
-	/**
-	 * Instantiates a new t test plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param inputMatrix the input matrix
-	 * @param groups the groups
-	 * @param comparisonGroups the comparison groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public HeatMapMatrixTransform(ModernRibbonWindow parent,
-			DataFrame inputMatrix, 
-			XYSeriesModel groups,
-			XYSeriesGroup comparisonGroups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(parent,
-				"Create Supervised Classification Plot",
-				inputMatrix,
-				groups,
-				comparisonGroups,
-				rowGroups,
-				countGroups,
-				history,
-				properties);
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
-	 */
-	@Override
-	public SupervisedPlotWindow createWindow() {
-		return new SupervisedPlotWindow((ModernRibbonWindow)mParent,
-				mMatrix,
-				mGroups,
-				mComparisonGroups,
-				mRowGroups,
-				mCountGroups,
-				mHistory,
-				mProperties);
-	}
+  /**
+   * Instantiates a new t test plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param inputMatrix
+   *          the input matrix
+   * @param groups
+   *          the groups
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public HeatMapMatrixTransform(ModernRibbonWindow parent, DataFrame inputMatrix, XYSeriesModel groups,
+      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups, List<String> history,
+      Properties properties) {
+    super(parent, "Create Supervised Classification Plot", inputMatrix, groups, comparisonGroups, rowGroups,
+        countGroups, history, properties);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
+   */
+  @Override
+  public SupervisedPlotWindow createWindow() {
+    return new SupervisedPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups, mComparisonGroups, mRowGroups,
+        mCountGroups, mHistory, mProperties);
+  }
 }

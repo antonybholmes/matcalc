@@ -25,93 +25,79 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class HeatMapPlotWindow extends HeatMapWindow  {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+public class HeatMapPlotWindow extends HeatMapWindow {
 
-	/**
-	 * Instantiates a new heat map plot window.
-	 *
-	 * @param window the window
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public HeatMapPlotWindow(ModernWindow window,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		this(window, 
-				"Heat Map", 
-				matrix, 
-				groups, 
-				rowGroups,
-				countGroups,
-				history, 
-				properties);
-	}
-	
-	/**
-	 * Instantiates a new heat map plot window.
-	 *
-	 * @param window the window
-	 * @param name the name
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public HeatMapPlotWindow(ModernWindow window,
-			String name,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(window, matrix, groups, rowGroups, countGroups, history, properties);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		setFormatPane(createFormatPane());
-	}
+  /**
+   * Instantiates a new heat map plot window.
+   *
+   * @param window
+   *          the window
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public HeatMapPlotWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Properties properties) {
+    this(window, "Heat Map", matrix, groups, rowGroups, countGroups, history, properties);
+  }
 
-	/**
-	 * Creates the format pane.
-	 *
-	 * @return the format plot pane
-	 */
-	public FormatPlotPane createFormatPane() {
-		return new HeatMapPanel(this,
-				mMatrix,
-				mGroups,
-				mRowGroups,
-				mCountGroups,
-				mHistory,
-				mZoomModel,
-				mColorMapModel,
-				mColorModel,
-				mScaleModel,
-				getTabsPane().getModel(),
-				mProperties);
-	}
+  /**
+   * Instantiates a new heat map plot window.
+   *
+   * @param window
+   *          the window
+   * @param name
+   *          the name
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public HeatMapPlotWindow(ModernWindow window, String name, DataFrame matrix, XYSeriesModel groups,
+      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
+    super(window, matrix, groups, rowGroups, countGroups, history, properties);
+
+    setFormatPane(createFormatPane());
+  }
+
+  /**
+   * Creates the format pane.
+   *
+   * @return the format plot pane
+   */
+  public FormatPlotPane createFormatPane() {
+    return new HeatMapPanel(this, mMatrix, mGroups, mRowGroups, mCountGroups, mHistory, mZoomModel, mColorMapModel,
+        mColorModel, mScaleModel, getTabsPane().getModel(), mProperties);
+  }
 }

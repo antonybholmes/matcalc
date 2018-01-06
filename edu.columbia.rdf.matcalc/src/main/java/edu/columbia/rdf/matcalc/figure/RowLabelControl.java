@@ -35,189 +35,192 @@ import org.jebtk.modern.window.ModernWindow;
  * The class RowLabelControl.
  */
 public class RowLabelControl extends VBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member show element.
-	 */
-	private ColoredPlotControl mShowElement;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member position element.
-	 */
-	private RowLabelPositionControl mPositionElement;
-	
-	/**
-	 * The member annotation map.
-	 */
-	private Map<String, ModernTwoStateWidget> mAnnotationMap =
-			new HashMap<String, ModernTwoStateWidget>();
+  /**
+   * The member show element.
+   */
+  private ColoredPlotControl mShowElement;
 
-	/** The m check features. */
-	private ModernTwoStateWidget mCheckFeatures;
+  /**
+   * The member position element.
+   */
+  private RowLabelPositionControl mPositionElement;
 
-	/**
-	 * Instantiates a new row label control.
-	 *
-	 * @param parent the parent
-	 * @param matrix the matrix
-	 * @param rowLabelPosition the row label position
-	 */
-	public RowLabelControl(ModernWindow parent,
-			DataFrame matrix,
-			RowLabelPosition rowLabelPosition) {
-		this(parent, matrix, rowLabelPosition, true, true);
-	}
-	
-	/**
-	 * Instantiates a new row label control.
-	 *
-	 * @param parent the parent
-	 * @param matrix the matrix
-	 * @param rowLabelPosition the row label position
-	 * @param show the show
-	 */
-	public RowLabelControl(ModernWindow parent,
-			DataFrame matrix,
-			RowLabelPosition rowLabelPosition,
-			boolean featureCounts,
-			boolean show) {
-		
-		mCheckFeatures = new ModernCheckSwitch("Feature Count", featureCounts);
-		add(mCheckFeatures);
-		
-		add(UI.createVGap(5));
-		
-		mShowElement = new ColoredPlotControl(parent, 
-				"Show",
-				Color.BLACK,
-				show);
-		
-		add(mShowElement);
-		
-		add(UI.createVGap(5));
-		
-		for (String name : matrix.getRowAnnotationNames()) {
-			ModernTwoStateWidget checkAnnotation = 
-					new ModernCheckSwitch(name, true);
+  /**
+   * The member annotation map.
+   */
+  private Map<String, ModernTwoStateWidget> mAnnotationMap = new HashMap<String, ModernTwoStateWidget>();
 
-			add(checkAnnotation);
-			add(UI.createVGap(5));
+  /** The m check features. */
+  private ModernTwoStateWidget mCheckFeatures;
 
-			mAnnotationMap.put(name, checkAnnotation);
-		}
-		
-		//box.setBorder(BorderService.getInstance().createLeftBorder(10));
-		
-		//add(box);
-		
-		add(UI.createVGap(10));
-		
-		mPositionElement = 
-				new RowLabelPositionControl(rowLabelPosition);
-		
-		//mPositionElement.setBorder(BorderService.getInstance().createLeftBorder(10));
-		
-		add(mPositionElement);
-		
-		mShowElement.addClickListener(this);
-		mCheckFeatures.addClickListener(this);
-		
-		update();
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mShowElement.addClickListener(l);
-		mCheckFeatures.addClickListener(l);
-		mPositionElement.addClickListener(l);
+  /**
+   * Instantiates a new row label control.
+   *
+   * @param parent
+   *          the parent
+   * @param matrix
+   *          the matrix
+   * @param rowLabelPosition
+   *          the row label position
+   */
+  public RowLabelControl(ModernWindow parent, DataFrame matrix, RowLabelPosition rowLabelPosition) {
+    this(parent, matrix, rowLabelPosition, true, true);
+  }
 
-		for (ModernTwoStateWidget c : mAnnotationMap.values()) {
-			c.addClickListener(l);
-		}
-	}
+  /**
+   * Instantiates a new row label control.
+   *
+   * @param parent
+   *          the parent
+   * @param matrix
+   *          the matrix
+   * @param rowLabelPosition
+   *          the row label position
+   * @param show
+   *          the show
+   */
+  public RowLabelControl(ModernWindow parent, DataFrame matrix, RowLabelPosition rowLabelPosition,
+      boolean featureCounts, boolean show) {
 
-	/**
-	 * Gets the position.
-	 *
-	 * @return the position
-	 */
-	public RowLabelPosition getPosition() {
-		return mPositionElement.getPosition();
-	}
+    mCheckFeatures = new ModernCheckSwitch("Feature Count", featureCounts);
+    add(mCheckFeatures);
 
-	/**
-	 * Gets the selected color.
-	 *
-	 * @return the selected color
-	 */
-	public Color getSelectedColor() {
-		return mShowElement.getSelectedColor();
-	}
+    add(UI.createVGap(5));
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mShowElement.isSelected();
-	}
+    mShowElement = new ColoredPlotControl(parent, "Show", Color.BLACK, show);
 
-	/**
-	 * Gets the show annotation.
-	 *
-	 * @param name the name
-	 * @return the show annotation
-	 */
-	public boolean getShowAnnotation(String name) {
-		return mAnnotationMap.get(name).isSelected();
-	}
-	
-	/**
-	 * Gets the show feature count.
-	 *
-	 * @return the show feature count
-	 */
-	public boolean getShowFeatureCount() {
-		return mCheckFeatures.isSelected();
-	}
+    add(mShowElement);
 
-	/**
-	 * Determines which annotations to show.
-	 *
-	 * @param showAnnotations the show annotations
-	 */
-	public void setShowAnnotations(AnnotationProperties showAnnotations) {
-		for (String name : mAnnotationMap.keySet()) {
-			showAnnotations.set(name, mAnnotationMap.get(name).isSelected());
-		}
-	}
+    add(UI.createVGap(5));
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		update();
-	}
-	
-	/**
-	 * Update.
-	 */
-	public void update() {
-		//mCheckFeatures.setEnabled(mShowElement.isSelected());
-		
-		for (ModernTwoStateWidget c : mAnnotationMap.values()) {
-			c.setEnabled(mShowElement.isSelected());
-		}
-	}
+    for (String name : matrix.getRowAnnotationNames()) {
+      ModernTwoStateWidget checkAnnotation = new ModernCheckSwitch(name, true);
+
+      add(checkAnnotation);
+      add(UI.createVGap(5));
+
+      mAnnotationMap.put(name, checkAnnotation);
+    }
+
+    // box.setBorder(BorderService.getInstance().createLeftBorder(10));
+
+    // add(box);
+
+    add(UI.createVGap(10));
+
+    mPositionElement = new RowLabelPositionControl(rowLabelPosition);
+
+    // mPositionElement.setBorder(BorderService.getInstance().createLeftBorder(10));
+
+    add(mPositionElement);
+
+    mShowElement.addClickListener(this);
+    mCheckFeatures.addClickListener(this);
+
+    update();
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mShowElement.addClickListener(l);
+    mCheckFeatures.addClickListener(l);
+    mPositionElement.addClickListener(l);
+
+    for (ModernTwoStateWidget c : mAnnotationMap.values()) {
+      c.addClickListener(l);
+    }
+  }
+
+  /**
+   * Gets the position.
+   *
+   * @return the position
+   */
+  public RowLabelPosition getPosition() {
+    return mPositionElement.getPosition();
+  }
+
+  /**
+   * Gets the selected color.
+   *
+   * @return the selected color
+   */
+  public Color getSelectedColor() {
+    return mShowElement.getSelectedColor();
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mShowElement.isSelected();
+  }
+
+  /**
+   * Gets the show annotation.
+   *
+   * @param name
+   *          the name
+   * @return the show annotation
+   */
+  public boolean getShowAnnotation(String name) {
+    return mAnnotationMap.get(name).isSelected();
+  }
+
+  /**
+   * Gets the show feature count.
+   *
+   * @return the show feature count
+   */
+  public boolean getShowFeatureCount() {
+    return mCheckFeatures.isSelected();
+  }
+
+  /**
+   * Determines which annotations to show.
+   *
+   * @param showAnnotations
+   *          the show annotations
+   */
+  public void setShowAnnotations(AnnotationProperties showAnnotations) {
+    for (String name : mAnnotationMap.keySet()) {
+      showAnnotations.set(name, mAnnotationMap.get(name).isSelected());
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    update();
+  }
+
+  /**
+   * Update.
+   */
+  public void update() {
+    // mCheckFeatures.setEnabled(mShowElement.isSelected());
+
+    for (ModernTwoStateWidget c : mAnnotationMap.values()) {
+      c.setEnabled(mShowElement.isSelected());
+    }
+  }
 }

@@ -30,89 +30,77 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapWindow;
 
 // TODO: Auto-generated Javadoc
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class ClusterPlotWindow extends HeatMapWindow  {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The constant NEXT_ID.
-	 */
-	private static final AtomicInteger NEXT_ID = new AtomicInteger(1);
-	
-	/**
-	 * The member id.
-	 */
-	private final int mId = NEXT_ID.getAndIncrement();
+public class ClusterPlotWindow extends HeatMapWindow {
 
-	/** The m row cluster. */
-	private Cluster mRowCluster;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m column cluster. */
-	private Cluster mColumnCluster;
-	
+  /**
+   * The constant NEXT_ID.
+   */
+  private static final AtomicInteger NEXT_ID = new AtomicInteger(1);
 
+  /**
+   * The member id.
+   */
+  private final int mId = NEXT_ID.getAndIncrement();
 
-	/**
-	 * Instantiates a new cluster plot window.
-	 *
-	 * @param window the window
-	 * @param matrix the matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param rowCluster the row cluster
-	 * @param columnCluster the column cluster
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public ClusterPlotWindow(ModernWindow window,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			Cluster rowCluster,
-			Cluster columnCluster,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(window, matrix, groups, rowGroups, countGroups, history, properties);
-		
-		mRowCluster = rowCluster;
-		mColumnCluster = columnCluster;
-		
-		setTitle("Clustergram " + mId + " - " + getAppInfo().getName());
-		
-		setFormatPane(createFormatPane());
-	}
+  /** The m row cluster. */
+  private Cluster mRowCluster;
 
-	/**
-	 * Creates the format pane.
-	 *
-	 * @return the format plot pane
-	 */
-	public FormatPlotPane createFormatPane() {
-		return new ClusterPanel(this,
-				mMatrix,
-				mGroups,
-				mRowGroups,
-				mRowCluster,
-				mColumnCluster,
-				mZoomModel,
-				mColorMapModel,
-				mColorModel,
-				mScaleModel,
-				getTabsPane().getModel(),
-				mCountGroups,
-				mHistory,
-				mProperties);
-	}
+  /** The m column cluster. */
+  private Cluster mColumnCluster;
+
+  /**
+   * Instantiates a new cluster plot window.
+   *
+   * @param window
+   *          the window
+   * @param matrix
+   *          the matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param rowCluster
+   *          the row cluster
+   * @param columnCluster
+   *          the column cluster
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public ClusterPlotWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      Cluster rowCluster, Cluster columnCluster, CountGroups countGroups, List<String> history, Properties properties) {
+    super(window, matrix, groups, rowGroups, countGroups, history, properties);
+
+    mRowCluster = rowCluster;
+    mColumnCluster = columnCluster;
+
+    setTitle("Clustergram " + mId + " - " + getAppInfo().getName());
+
+    setFormatPane(createFormatPane());
+  }
+
+  /**
+   * Creates the format pane.
+   *
+   * @return the format plot pane
+   */
+  public FormatPlotPane createFormatPane() {
+    return new ClusterPanel(this, mMatrix, mGroups, mRowGroups, mRowCluster, mColumnCluster, mZoomModel, mColorMapModel,
+        mColorModel, mScaleModel, getTabsPane().getModel(), mCountGroups, mHistory, mProperties);
+  }
 }

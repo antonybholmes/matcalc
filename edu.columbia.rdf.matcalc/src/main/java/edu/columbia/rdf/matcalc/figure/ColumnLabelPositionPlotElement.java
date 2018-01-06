@@ -27,54 +27,55 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
  * The class ColumnLabelPositionPlotElement.
  */
 public class ColumnLabelPositionPlotElement extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The top check.
-	 */
-	private ModernTwoStateWidget mTopCheck;
-	
-	/**
-	 * The bottom check.
-	 */
-	private ModernTwoStateWidget mBottomCheck;
-	
-	/**
-	 * Instantiates a new column label position plot element.
-	 */
-	public ColumnLabelPositionPlotElement() {
-		mTopCheck = new ModernRadioButton("Top");
-		add(mTopCheck);
-		//add(ModernPanel.createVGap());
-		mBottomCheck = new ModernRadioButton("Bottom");
-		add(mBottomCheck);
-		
-		new ModernButtonGroup(mTopCheck, mBottomCheck);
-		
-		mTopCheck.setSelected(true);
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mTopCheck.addClickListener(l);
-		mBottomCheck.addClickListener(l);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Gets the position.
-	 *
-	 * @return the position
-	 */
-	public ColumnLabelPosition getPosition() {
-		return mTopCheck.isSelected() ? ColumnLabelPosition.TOP : ColumnLabelPosition.BOTTOM;
-	}
+  /**
+   * The top check.
+   */
+  private ModernTwoStateWidget mTopCheck;
+
+  /**
+   * The bottom check.
+   */
+  private ModernTwoStateWidget mBottomCheck;
+
+  /**
+   * Instantiates a new column label position plot element.
+   */
+  public ColumnLabelPositionPlotElement() {
+    mTopCheck = new ModernRadioButton("Top");
+    add(mTopCheck);
+    // add(ModernPanel.createVGap());
+    mBottomCheck = new ModernRadioButton("Bottom");
+    add(mBottomCheck);
+
+    new ModernButtonGroup(mTopCheck, mBottomCheck);
+
+    mTopCheck.setSelected(true);
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mTopCheck.addClickListener(l);
+    mBottomCheck.addClickListener(l);
+  }
+
+  /**
+   * Gets the position.
+   *
+   * @return the position
+   */
+  public ColumnLabelPosition getPosition() {
+    return mTopCheck.isSelected() ? ColumnLabelPosition.TOP : ColumnLabelPosition.BOTTOM;
+  }
 
 }

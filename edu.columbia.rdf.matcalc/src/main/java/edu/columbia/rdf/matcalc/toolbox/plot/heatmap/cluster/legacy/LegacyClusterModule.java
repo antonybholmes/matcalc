@@ -39,318 +39,276 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.HierarchicalClusteringDialog;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Legacy cluster module using older heatmap module.
  *
  * @author Antony Holmes Holmes
  */
-public class LegacyClusterModule extends CalcModule implements ModernClickListener  {
+public class LegacyClusterModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mClusterButton = new RibbonLargeButton("Cluster", 
-			new Raster32Icon(new Cluster32VectorIcon()),
-			"Cluster",
-			"Cluster rows and columns.");
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mClusterButton = new RibbonLargeButton("Cluster",
+      new Raster32Icon(new Cluster32VectorIcon()), "Cluster", "Cluster rows and columns.");
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Cluster";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Cluster";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		window.getRibbon().getToolbar("Plot").getSection("Plot").add(mClusterButton);
+    window.getRibbon().getToolbar("Plot").getSection("Plot").add(mClusterButton);
 
-		mClusterButton.addClickListener(this);
-	}
+    mClusterButton.addClickListener(this);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		try {
-			cluster();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    try {
+      cluster();
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    }
+  }
 
-	/**
-	 * Cluster.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void cluster() throws IOException {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		if (m == null) {
-			return;
-		}
-		
-		Properties properties = new ClusterProperties();
-		
-		LegacyHeatMapModule.scaleLargeMatrixImage(m, properties);
+  /**
+   * Cluster.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void cluster() throws IOException {
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		
+    if (m == null) {
+      return;
+    }
 
-		if (mWindow.getHistoryPanel().getItemCount() == 0) {
-			return;
-		}
+    Properties properties = new ClusterProperties();
 
-		HierarchicalClusteringDialog dialog = 
-				new HierarchicalClusteringDialog(mWindow);
+    LegacyHeatMapModule.scaleLargeMatrixImage(m, properties);
 
-		dialog.setVisible(true);
+    if (mWindow.getHistoryPanel().getItemCount() == 0) {
+      return;
+    }
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
+    HierarchicalClusteringDialog dialog = new HierarchicalClusteringDialog(mWindow);
 
-		DistanceMetric distanceMetric = dialog.getDistanceMetric();
+    dialog.setVisible(true);
 
-		Linkage linkage = dialog.getLinkage();
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		properties.setProperty("plot.heatmap.visible", dialog.getShowHeatMap());
-		
-		cluster(m,
-				distanceMetric,
-				linkage, 
-				dialog.clusterRows(),
-				dialog.clusterColumns(), 
-				dialog.optimalLeafOrder(),
-				properties);
-	}
+    DistanceMetric distanceMetric = dialog.getDistanceMetric();
 
-	/**
-	 * Cluster.
-	 *
-	 * @param m the m
-	 * @param distanceMetric the distance metric
-	 * @param linkage the linkage
-	 * @param clusterRows the cluster rows
-	 * @param clusterColumns the cluster columns
-	 * @param optimalLeafOrder the optimal leaf order
-	 * @param properties the properties
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public void cluster(DataFrame m,
-			DistanceMetric distanceMetric,
-			Linkage linkage,
-			boolean clusterRows,
-			boolean clusterColumns,
-			boolean optimalLeafOrder,
-			Properties properties) throws IOException {
-		
-		cluster(mWindow,
-				m,
-				distanceMetric,
-				linkage,
-				clusterRows,
-				clusterColumns,
-				optimalLeafOrder,
-				properties);
-		
-		/*
-		if (m == null) {
-			return;
-		}
+    Linkage linkage = dialog.getLinkage();
 
-		Matrix im = m.getInnerMatrix();
+    properties.setProperty("plot.heatmap.visible", dialog.getShowHeatMap());
 
-		Cluster rowCluster = null;
-		Cluster columnCluster = null;
+    cluster(m, distanceMetric, linkage, dialog.clusterRows(), dialog.clusterColumns(), dialog.optimalLeafOrder(),
+        properties);
+  }
 
+  /**
+   * Cluster.
+   *
+   * @param m
+   *          the m
+   * @param distanceMetric
+   *          the distance metric
+   * @param linkage
+   *          the linkage
+   * @param clusterRows
+   *          the cluster rows
+   * @param clusterColumns
+   *          the cluster columns
+   * @param optimalLeafOrder
+   *          the optimal leaf order
+   * @param properties
+   *          the properties
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public void cluster(DataFrame m, DistanceMetric distanceMetric, Linkage linkage, boolean clusterRows,
+      boolean clusterColumns, boolean optimalLeafOrder, Properties properties) throws IOException {
 
-		if (clusterRows) {
-			rowCluster = HierarchicalClustering.rowCluster(im, 
-					linkage,
-					distanceMetric,
-					optimalLeafOrder);
-		}
+    cluster(mWindow, m, distanceMetric, linkage, clusterRows, clusterColumns, optimalLeafOrder, properties);
 
-		if (clusterColumns) {
-			columnCluster = HierarchicalClustering.columnCluster(im,
-					linkage,
-					distanceMetric,
-					optimalLeafOrder);
-		}
+    /*
+     * if (m == null) { return; }
+     * 
+     * Matrix im = m.getInnerMatrix();
+     * 
+     * Cluster rowCluster = null; Cluster columnCluster = null;
+     * 
+     * 
+     * if (clusterRows) { rowCluster = HierarchicalClustering.rowCluster(im,
+     * linkage, distanceMetric, optimalLeafOrder); }
+     * 
+     * if (clusterColumns) { columnCluster =
+     * HierarchicalClustering.columnCluster(im, linkage, distanceMetric,
+     * optimalLeafOrder); }
+     * 
+     * if (rowCluster == null && columnCluster == null) { return; }
+     * 
+     * List<Integer> rowOrder; List<Integer> columnOrder;
+     * 
+     * if (rowCluster != null) { rowOrder = Cluster.getLeafOrderedIds(rowCluster); }
+     * else { rowOrder = Mathematics.sequence(0, im.getRowCount() - 1); }
+     * 
+     * if (columnCluster != null) { columnOrder =
+     * Cluster.getLeafOrderedIds(columnCluster); } else { columnOrder =
+     * Mathematics.sequence(0, im.getColumnCount() - 1); }
+     * 
+     * DataFrame m2 = AnnotatableMatrix.copyInnerRows(m, rowOrder);
+     * 
+     * DataFrame m3 = AnnotatableMatrix.copyInnerColumns(m2, columnOrder);
+     * 
+     * mWindow.addToHistory("Cluster ordered matrix", m3);
+     * 
+     * // So we can plot each row using a color //RowStandardizeMatrixView
+     * normalizedMatrix = new RowStandardizeMatrixView(m);
+     * 
+     * 
+     * //System.err.println("cluster " + clusters.size());
+     * 
+     * //previewPanel.addPreview(new PreviewTablePanel("Collapsed " + fileCounter,
+     * false, collapsedFile));
+     * 
+     * System.err.println("Cluster " + clusterRows + " " + clusterColumns);
+     * 
+     * List<String> history = mWindow.getTransformationHistory();
+     * 
+     * mWindow.addToHistory(new ClusterPlotMatrixTransform(mWindow, m3,
+     * XYSeriesModel.create(mWindow.getGroups()),
+     * XYSeriesModel.create(mWindow.getRowGroups()), rowCluster, columnCluster,
+     * CountGroups.defaultGroup(m), history, properties));
+     */
+  }
 
-		if (rowCluster == null && columnCluster == null) {
-			return;
-		}
+  /**
+   * Cluster.
+   *
+   * @param window
+   *          the window
+   * @param m
+   *          the m
+   * @param distanceMetric
+   *          the distance metric
+   * @param linkage
+   *          the linkage
+   * @param clusterRows
+   *          the cluster rows
+   * @param clusterColumns
+   *          the cluster columns
+   * @param optimalLeafOrder
+   *          the optimal leaf order
+   * @param properties
+   *          the properties
+   * @return the annotation matrix
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public static DataFrame cluster(MainMatCalcWindow window, DataFrame m, DistanceMetric distanceMetric, Linkage linkage,
+      boolean clusterRows, boolean clusterColumns, boolean optimalLeafOrder, Properties properties) throws IOException {
 
-		List<Integer> rowOrder;
-		List<Integer> columnOrder;
+    if (m == null) {
+      return null;
+    }
 
-		if (rowCluster != null) {
-			rowOrder = Cluster.getLeafOrderedIds(rowCluster);
-		} else {
-			rowOrder = Mathematics.sequence(0, im.getRowCount() - 1);
-		}
+    Cluster rowCluster = null;
+    Cluster columnCluster = null;
 
-		if (columnCluster != null) {
-			columnOrder = Cluster.getLeafOrderedIds(columnCluster);
-		} else {
-			columnOrder = Mathematics.sequence(0, im.getColumnCount() - 1);
-		}
+    if (clusterRows) {
+      rowCluster = HierarchicalClustering.rowCluster(m, linkage, distanceMetric, optimalLeafOrder);
+    }
 
-		DataFrame m2 = 
-				AnnotatableMatrix.copyInnerRows(m, rowOrder);
+    if (clusterColumns) {
+      columnCluster = HierarchicalClustering.columnCluster(m, linkage, distanceMetric, optimalLeafOrder);
+    }
 
-		DataFrame m3 = 
-				AnnotatableMatrix.copyInnerColumns(m2, columnOrder);
+    if (rowCluster == null && columnCluster == null) {
+      return m;
+    }
 
-		mWindow.addToHistory("Cluster ordered matrix", m3);
+    DataFrame m2;
 
-		// So we can plot each row using a color
-		//RowStandardizeMatrixView normalizedMatrix = new RowStandardizeMatrixView(m);
+    if (rowCluster != null) {
+      List<Integer> rowOrder = Cluster.getLeafOrderedIds(rowCluster);
 
+      m2 = DataFrame.copyRows(m, rowOrder);
+    } else {
+      // rowOrder = Mathematics.sequence(0, m.getRowCount() - 1);
+      m2 = m;
+    }
 
-		//System.err.println("cluster " + clusters.size());
+    DataFrame m3;
 
-		//previewPanel.addPreview(new PreviewTablePanel("Collapsed " + fileCounter, false, collapsedFile));
+    if (columnCluster != null) {
+      List<Integer> columnOrder = Cluster.getLeafOrderedIds(columnCluster);
 
-		System.err.println("Cluster " + clusterRows + " " + clusterColumns);
+      m3 = DataFrame.copyInnerColumns(m2, columnOrder);
+    } else {
+      // columnOrder = Mathematics.sequence(0, m.getColumnCount() - 1);
+      m3 = m2;
+    }
 
-		List<String> history = mWindow.getTransformationHistory();
+    window.addToHistory("Cluster ordered matrix", m3);
 
-		mWindow.addToHistory(new ClusterPlotMatrixTransform(mWindow, 
-				m3, 
-				XYSeriesModel.create(mWindow.getGroups()), 
-				XYSeriesModel.create(mWindow.getRowGroups()),
-				rowCluster, 
-				columnCluster,
-				CountGroups.defaultGroup(m),
-				history,
-				properties));
-				*/
-	}
-	
-	/**
-	 * Cluster.
-	 *
-	 * @param window the window
-	 * @param m the m
-	 * @param distanceMetric the distance metric
-	 * @param linkage the linkage
-	 * @param clusterRows the cluster rows
-	 * @param clusterColumns the cluster columns
-	 * @param optimalLeafOrder the optimal leaf order
-	 * @param properties the properties
-	 * @return the annotation matrix
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static DataFrame cluster(MainMatCalcWindow window,
-			DataFrame m,
-			DistanceMetric distanceMetric,
-			Linkage linkage,
-			boolean clusterRows,
-			boolean clusterColumns,
-			boolean optimalLeafOrder,
-			Properties properties) throws IOException {
+    // So we can plot each row using a color
+    // RowStandardizeMatrixView normalizedMatrix = new RowStandardizeMatrixView(m);
 
-		if (m == null) {
-			return null;
-		}
+    // System.err.println("cluster " + clusters.size());
 
-		Cluster rowCluster = null;
-		Cluster columnCluster = null;
+    // previewPanel.addPreview(new PreviewTablePanel("Collapsed " + fileCounter,
+    // false, collapsedFile));
 
+    /*
+     * ClusterPlotWindow window = new ClusterPlotWindow(m, groups, rowCluster,
+     * columnCluster);
+     * 
+     * window.setVisible(true);
+     */
 
-		if (clusterRows) {
-			rowCluster = HierarchicalClustering.rowCluster(m, 
-					linkage,
-					distanceMetric,
-					optimalLeafOrder);
-		}
+    List<String> history = window.getTransformationHistory();
 
-		if (clusterColumns) {
-			columnCluster = HierarchicalClustering.columnCluster(m,
-					linkage,
-					distanceMetric,
-					optimalLeafOrder);
-		}
+    // for (int i = 0; i < m3.getColumnCount(); ++i) {
+    // System.err.println("c " + i + " " + m3.getColumnName(i));
+    // }
 
-		if (rowCluster == null && columnCluster == null) {
-			return m;
-		}
+    window.addToHistory(new ClusterPlotMatrixTransform(window, m3, XYSeriesModel.create(window.getGroups()),
+        XYSeriesModel.create(window.getRowGroups()), rowCluster, columnCluster, CountGroups.defaultGroup(m3), history,
+        properties));
 
-		DataFrame m2;
-		
-		if (rowCluster != null) {
-			List<Integer> rowOrder = Cluster.getLeafOrderedIds(rowCluster);
-			
-			m2 = DataFrame.copyRows(m, rowOrder);
-		} else {
-			//rowOrder = Mathematics.sequence(0, m.getRowCount() - 1);
-			m2 = m;
-		}
-
-		DataFrame m3;
-		
-		if (columnCluster != null) {
-			List<Integer> columnOrder = Cluster.getLeafOrderedIds(columnCluster);
-			
-			m3 = DataFrame.copyInnerColumns(m2, columnOrder);
-		} else {
-			//columnOrder = Mathematics.sequence(0, m.getColumnCount() - 1);
-			m3 = m2;
-		}
-
-		window.addToHistory("Cluster ordered matrix", m3);
-
-		// So we can plot each row using a color
-		//RowStandardizeMatrixView normalizedMatrix = new RowStandardizeMatrixView(m);
-
-
-		//System.err.println("cluster " + clusters.size());
-
-		//previewPanel.addPreview(new PreviewTablePanel("Collapsed " + fileCounter, false, collapsedFile));
-
-		/*
-		ClusterPlotWindow window = new ClusterPlotWindow(m,
-				groups,
-				rowCluster,
-				columnCluster);
-
-		window.setVisible(true);
-		 */
-
-		List<String> history = window.getTransformationHistory();
-		
-		//for (int i = 0; i < m3.getColumnCount(); ++i) {
-		//	System.err.println("c " + i + " " + m3.getColumnName(i));
-		//}
-
-		window.addToHistory(new ClusterPlotMatrixTransform(window, 
-				m3, 
-				XYSeriesModel.create(window.getGroups()), 
-				XYSeriesModel.create(window.getRowGroups()),
-				rowCluster, 
-				columnCluster,
-				CountGroups.defaultGroup(m3),
-				history,
-				properties));
-		
-		return m3;
-	}
+    return m3;
+  }
 }

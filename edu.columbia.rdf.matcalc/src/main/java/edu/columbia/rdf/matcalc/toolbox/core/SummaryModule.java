@@ -24,52 +24,60 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Split table into multiple tables by grouping column values and then create
- * a zip of the results.
+ * Split table into multiple tables by grouping column values and then create a
+ * zip of the results.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class SummaryModule extends CalcModule implements ModernClickListener  {
+public class SummaryModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Summary";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Summary";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		RibbonLargeButton button = 
-				new RibbonLargeButton("Summary", UIService.getInstance().loadIcon(TableVectorIcon.class, 24));
-		button.setToolTip("Summary", "Display a basic statistical summary of the matrix.");
-		window.getRibbon().getToolbar("Data").getSection("Tools").add(button);
+    RibbonLargeButton button = new RibbonLargeButton("Summary",
+        UIService.getInstance().loadIcon(TableVectorIcon.class, 24));
+    button.setToolTip("Summary", "Display a basic statistical summary of the matrix.");
+    window.getRibbon().getToolbar("Data").getSection("Tools").add(button);
 
-		button.addClickListener(this);
-	}
+    button.addClickListener(this);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		SummaryDialog dialog = new SummaryDialog(mWindow);
-		
-		dialog.setVisible(true);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    SummaryDialog dialog = new SummaryDialog(mWindow);
+
+    dialog.setVisible(true);
+  }
 }

@@ -31,85 +31,88 @@ import org.jebtk.modern.window.ModernWindow;
  * The class ColoredPlotControl.
  */
 public class ColoredPlotControl extends HBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check box.
-	 */
-	private ModernTwoStateWidget mCheckBox;
-	
-	/**
-	 * The member color button.
-	 */
-	private ColorSwatchButton mColorButton;
-	
-	/**
-	 * Instantiates a new colored plot control.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param color the color
-	 */
-	public ColoredPlotControl(ModernWindow parent,
-			String name, 
-			Color color) {
-		this(parent, name, color, true);
-	}
-	
-	/**
-	 * Instantiates a new colored plot control.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param color the color
-	 * @param selected the selected
-	 */
-	public ColoredPlotControl(ModernWindow parent,
-			String name, 
-			Color color,
-			boolean selected) {
-		mCheckBox = new ModernCheckSwitch(name);
-		mCheckBox.setSelected(selected);
-		
-		mColorButton = new ColorSwatchButton(parent, color);
-		
-		add(mCheckBox);
-		add(Box.createHorizontalGlue());
-		add(mColorButton);
-		
-		setAlignmentY(TOP_ALIGNMENT);
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mCheckBox.addClickListener(l);
-		mColorButton.addClickListener(l);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckBox.isSelected();
-	}
+  /**
+   * The member check box.
+   */
+  private ModernTwoStateWidget mCheckBox;
 
-	/**
-	 * Gets the selected color.
-	 *
-	 * @return the selected color
-	 */
-	public Color getSelectedColor() {
-		return isSelected() ? mColorButton.getSelectedColor() : null;
-	}
+  /**
+   * The member color button.
+   */
+  private ColorSwatchButton mColorButton;
+
+  /**
+   * Instantiates a new colored plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param color
+   *          the color
+   */
+  public ColoredPlotControl(ModernWindow parent, String name, Color color) {
+    this(parent, name, color, true);
+  }
+
+  /**
+   * Instantiates a new colored plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param color
+   *          the color
+   * @param selected
+   *          the selected
+   */
+  public ColoredPlotControl(ModernWindow parent, String name, Color color, boolean selected) {
+    mCheckBox = new ModernCheckSwitch(name);
+    mCheckBox.setSelected(selected);
+
+    mColorButton = new ColorSwatchButton(parent, color);
+
+    add(mCheckBox);
+    add(Box.createHorizontalGlue());
+    add(mColorButton);
+
+    setAlignmentY(TOP_ALIGNMENT);
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mCheckBox.addClickListener(l);
+    mColorButton.addClickListener(l);
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /**
+   * Gets the selected color.
+   *
+   * @return the selected color
+   */
+  public Color getSelectedColor() {
+    return isSelected() ? mColorButton.getSelectedColor() : null;
+  }
 
 }

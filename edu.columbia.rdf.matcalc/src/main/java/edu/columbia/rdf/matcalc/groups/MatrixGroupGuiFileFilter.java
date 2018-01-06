@@ -29,25 +29,26 @@ package edu.columbia.rdf.matcalc.groups;
 
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class MatrixGroupGuiFileFilter.
  */
 public class MatrixGroupGuiFileFilter extends GuiFileExtFilter {
-	
-	/**
-	 * Instantiates a new matrix group gui file filter.
-	 */
-	public MatrixGroupGuiFileFilter() {
-		super("groups");
-	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	public final String getDescription() {
-		return "Matrix Groups (*.group)";
-	}
+  /**
+   * Instantiates a new matrix group gui file filter.
+   */
+  public MatrixGroupGuiFileFilter() {
+    super("groups");
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  public final String getDescription() {
+    return "Matrix Groups (*.group)";
+  }
 
 }

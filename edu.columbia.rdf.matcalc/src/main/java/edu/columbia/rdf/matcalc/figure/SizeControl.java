@@ -40,102 +40,111 @@ import org.jebtk.modern.window.ModernWindow;
  * The class MarginControl.
  */
 public class SizeControl extends VBox implements KeyListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/** The m field width. */
-	private ModernTextField mFieldWidth = new ModernNumericalTextField();
-	
-	/** The m field height. */
-	private ModernTextField mFieldHeight = new ModernNumericalTextField();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m axes. */
-	private Axes mAxes;
+  /** The m field width. */
+  private ModernTextField mFieldWidth = new ModernNumericalTextField();
 
-	/**
-	 * Instantiates a new margin control.
-	 *
-	 * @param parent the parent
-	 * @param axes the axes
-	 */
-	public SizeControl(ModernWindow parent, Axes axes) {
+  /** The m field height. */
+  private ModernTextField mFieldHeight = new ModernNumericalTextField();
 
-		mAxes = axes;
+  /** The m axes. */
+  private Axes mAxes;
 
-		Box box;
-		
-		// top
-		box = HExBox.createHExBox();
-		box.add(new ModernAutoSizeLabel("Width", ModernWidget.TINY_SIZE));
-		box.add(new ModernTextBorderPanel(mFieldWidth, ModernWidget.SMALL_SIZE));
-		add(box);
-		add(ModernPanel.createVGap());
-		mFieldWidth.setText(axes.getInternalSize().getW());
-		mFieldWidth.addKeyListener(this);
+  /**
+   * Instantiates a new margin control.
+   *
+   * @param parent
+   *          the parent
+   * @param axes
+   *          the axes
+   */
+  public SizeControl(ModernWindow parent, Axes axes) {
 
-		// left
-		box = HExBox.createHExBox();
-		box.add(new ModernAutoSizeLabel("Height", ModernWidget.TINY_SIZE));
-		box.add(new ModernTextBorderPanel(mFieldHeight, ModernWidget.SMALL_SIZE));
-		add(box);
-		add(ModernPanel.createVGap());
-		mFieldHeight.setText(axes.getInternalSize().getH());
-		mFieldHeight.addKeyListener(this);
-		
-		axes.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				resize();
-			}});
-	}
-	
-	private void resize() {
-		mFieldWidth.setText(mAxes.getInternalSize().getW());
-		mFieldHeight.setText(mAxes.getInternalSize().getH());
-	}
+    mAxes = axes;
 
-	/**
-	 * Sets the margins.
-	 *
-	 * @throws ParseException the parse exception
-	 */
-	private void setSize() throws ParseException {
-		mAxes.setInternalSize(mFieldWidth.getAsInt(), 
-				mFieldHeight.getAsInt());
-	}
+    Box box;
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			try {
-				setSize();
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
+    // top
+    box = HExBox.createHExBox();
+    box.add(new ModernAutoSizeLabel("Width", ModernWidget.TINY_SIZE));
+    box.add(new ModernTextBorderPanel(mFieldWidth, ModernWidget.SMALL_SIZE));
+    add(box);
+    add(ModernPanel.createVGap());
+    mFieldWidth.setText(axes.getInternalSize().getW());
+    mFieldWidth.addKeyListener(this);
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+    // left
+    box = HExBox.createHExBox();
+    box.add(new ModernAutoSizeLabel("Height", ModernWidget.TINY_SIZE));
+    box.add(new ModernTextBorderPanel(mFieldHeight, ModernWidget.SMALL_SIZE));
+    add(box);
+    add(ModernPanel.createVGap());
+    mFieldHeight.setText(axes.getInternalSize().getH());
+    mFieldHeight.addKeyListener(this);
 
-	}
+    axes.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        resize();
+      }
+    });
+  }
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+  private void resize() {
+    mFieldWidth.setText(mAxes.getInternalSize().getW());
+    mFieldHeight.setText(mAxes.getInternalSize().getH());
+  }
 
-	}
+  /**
+   * Sets the margins.
+   *
+   * @throws ParseException
+   *           the parse exception
+   */
+  private void setSize() throws ParseException {
+    mAxes.setInternalSize(mFieldWidth.getAsInt(), mFieldHeight.getAsInt());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+      try {
+        setSize();
+      } catch (ParseException e1) {
+        e1.printStackTrace();
+      }
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyReleased(KeyEvent arg0) {
+    // TODO Auto-generated method stub
+
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+   */
+  @Override
+  public void keyTyped(KeyEvent arg0) {
+    // TODO Auto-generated method stub
+
+  }
 }

@@ -27,63 +27,65 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
  * The class RowLabelPositionControl.
  */
 public class RowLabelPositionControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member left check.
-	 */
-	private ModernTwoStateWidget mLeftCheck;
-	
-	/**
-	 * The member right check.
-	 */
-	private ModernTwoStateWidget mRightCheck;
-	
-	/**
-	 * Instantiates a new row label position control.
-	 *
-	 * @param rowLabelPosition the row label position
-	 */
-	public RowLabelPositionControl(RowLabelPosition rowLabelPosition) {
-		mLeftCheck = new ModernRadioButton("Left");
-		add(mLeftCheck);
-		//add(ModernPanel.createVGap());
-		mRightCheck = new ModernRadioButton("Right");
-		add(mRightCheck);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		ModernButtonGroup group = new ModernButtonGroup();
-		
-		group.add(mLeftCheck);
-		group.add(mRightCheck);
-		
-		if (rowLabelPosition == RowLabelPosition.LEFT) {
-			mLeftCheck.setSelected(true);
-		} else {
-			mRightCheck.setSelected(true);
-		}
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mLeftCheck.addClickListener(l);
-		mRightCheck.addClickListener(l);
-	}
+  /**
+   * The member left check.
+   */
+  private ModernTwoStateWidget mLeftCheck;
 
-	/**
-	 * Gets the position.
-	 *
-	 * @return the position
-	 */
-	public RowLabelPosition getPosition() {
-		return mLeftCheck.isSelected() ? RowLabelPosition.LEFT : RowLabelPosition.RIGHT;
-	}
+  /**
+   * The member right check.
+   */
+  private ModernTwoStateWidget mRightCheck;
+
+  /**
+   * Instantiates a new row label position control.
+   *
+   * @param rowLabelPosition
+   *          the row label position
+   */
+  public RowLabelPositionControl(RowLabelPosition rowLabelPosition) {
+    mLeftCheck = new ModernRadioButton("Left");
+    add(mLeftCheck);
+    // add(ModernPanel.createVGap());
+    mRightCheck = new ModernRadioButton("Right");
+    add(mRightCheck);
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(mLeftCheck);
+    group.add(mRightCheck);
+
+    if (rowLabelPosition == RowLabelPosition.LEFT) {
+      mLeftCheck.setSelected(true);
+    } else {
+      mRightCheck.setSelected(true);
+    }
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mLeftCheck.addClickListener(l);
+    mRightCheck.addClickListener(l);
+  }
+
+  /**
+   * Gets the position.
+   *
+   * @return the position
+   */
+  public RowLabelPosition getPosition() {
+    return mLeftCheck.isSelected() ? RowLabelPosition.LEFT : RowLabelPosition.RIGHT;
+  }
 
 }

@@ -26,20 +26,21 @@ import org.jebtk.modern.widget.ModernWidget;
  * The Class GroupsCombo.
  */
 public class GroupsCombo extends ModernComboBox {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new groups combo.
-	 *
-	 * @param groups the groups
-	 */
-	public GroupsCombo(XYSeriesGroup groups) {
-		for (MatrixGroup group : groups) {
-			addMenuItem(new GroupMenuItem(group));
-		}
-		
-		UI.setSize(this, ModernWidget.EXTRA_LARGE_SIZE);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new groups combo.
+   *
+   * @param groups
+   *          the groups
+   */
+  public GroupsCombo(XYSeriesGroup groups) {
+    for (MatrixGroup group : groups) {
+      addMenuItem(new GroupMenuItem(group));
+    }
+
+    UI.setSize(this, ModernWidget.EXTRA_LARGE_SIZE);
+  }
 }

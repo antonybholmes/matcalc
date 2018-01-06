@@ -22,7 +22,6 @@ import java.awt.Rectangle;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 import org.jebtk.modern.widget.ModernWidget;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Displays a color bar.
@@ -31,33 +30,37 @@ import org.jebtk.modern.widget.ModernWidget;
  *
  */
 public class ColorIcon extends ModernVectorIcon {
-	
-	/**
-	 * The color.
-	 */
-	private Color color;
 
+  /**
+   * The color.
+   */
+  private Color color;
 
-	/**
-	 * Instantiates a new color icon.
-	 *
-	 * @param color the color
-	 */
-	public ColorIcon(Color color) {
-		this.color = color;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.icons.ModernIcon#drawForeground(java.awt.Graphics2D, java.awt.Rectangle)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		y = (h - h / 4) / 2;
-		h = h / 4;
-		
-		g2.setColor(color);
-		g2.fillRect(x, y, w, h);
-		
-		ModernWidget.paintDarkOutline(g2, new Rectangle(x, y, w, h));
-	}
+  /**
+   * Instantiates a new color icon.
+   *
+   * @param color
+   *          the color
+   */
+  public ColorIcon(Color color) {
+    this.color = color;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.icons.ModernIcon#drawForeground(java.awt.Graphics2D,
+   * java.awt.Rectangle)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+    y = (h - h / 4) / 2;
+    h = h / 4;
+
+    g2.setColor(color);
+    g2.fillRect(x, y, w, h);
+
+    ModernWidget.paintDarkOutline(g2, new Rectangle(x, y, w, h));
+  }
 }

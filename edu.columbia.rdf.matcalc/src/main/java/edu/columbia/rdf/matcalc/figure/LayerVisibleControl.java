@@ -31,63 +31,68 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisVisibleControl.
  */
 public class LayerVisibleControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check box.
-	 */
-	private CheckBox mCheckBox;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member axis.
-	 */
-	private PlotBox mLayer;
-	
-	
-	/**
-	 * Instantiates a new axis visible control.
-	 *
-	 * @param parent the parent
-	 * @param layer the layer
-	 */
-	public LayerVisibleControl(ModernWindow parent, PlotBox layer) {
-		mLayer = layer;
-		
-		mCheckBox = new ModernCheckSwitch("Show");
-		mCheckBox.setSelected(layer.getVisible());
-		
-		add(mCheckBox);
-		add(ModernPanel.createHGap());
+  /**
+   * The member check box.
+   */
+  private CheckBox mCheckBox;
 
-		mCheckBox.addClickListener(this);
-		
-		layer.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				mCheckBox.setSelected(mLayer.getVisible());
-			}});
-	}
-	
+  /**
+   * The member axis.
+   */
+  private PlotBox mLayer;
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckBox.isSelected();
-	}
+  /**
+   * Instantiates a new axis visible control.
+   *
+   * @param parent
+   *          the parent
+   * @param layer
+   *          the layer
+   */
+  public LayerVisibleControl(ModernWindow parent, PlotBox layer) {
+    mLayer = layer;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mLayer.setVisible(mCheckBox.isSelected());
-	}
+    mCheckBox = new ModernCheckSwitch("Show");
+    mCheckBox.setSelected(layer.getVisible());
+
+    add(mCheckBox);
+    add(ModernPanel.createHGap());
+
+    mCheckBox.addClickListener(this);
+
+    layer.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mCheckBox.setSelected(mLayer.getVisible());
+      }
+    });
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mLayer.setVisible(mCheckBox.isSelected());
+  }
 
 }

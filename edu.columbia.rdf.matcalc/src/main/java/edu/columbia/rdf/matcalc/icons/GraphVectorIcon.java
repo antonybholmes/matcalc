@@ -22,7 +22,6 @@ import java.awt.geom.GeneralPath;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Help icon.
@@ -31,67 +30,71 @@ import org.jebtk.modern.graphics.icons.ModernVectorIcon;
  *
  */
 public class GraphVectorIcon extends ModernVectorIcon {
-	
-	/**
-	 * The constant SCALE.
-	 */
-	private static final double SCALE = 0.9;
-	
-	/**
-	 * The constant OFFSET.
-	 */
-	private static final double OFFSET = 0.1;
-	
-	/**
-	 * The constant COLOR1.
-	 */
-	private static final Color COLOR1 = ColorUtils.decodeHtmlColor("#0060ff22");
-	
-	/**
-	 * The constant COLOR2.
-	 */
-	private static final Color COLOR2 = ColorUtils.decodeHtmlColor("#0060ff");
 
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D, java.awt.Rectangle)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		double wf = w * SCALE;
-		double o = w * OFFSET;
-		double xf = x + (w - wf) / 2.0;
-		double yf = y + (h - wf) / 2.0;
-		
-		g2.setColor(Color.BLACK);
-		
-		g2.drawLine((int)Math.round(xf), (int)Math.round(yf + wf - o), (int)Math.round(xf + wf), (int)Math.round(yf + wf - o));
-		g2.drawLine((int)Math.round(xf + o), (int)Math.round(yf), (int)Math.round(xf + o), (int)Math.round(yf + wf));
-		
-		g2.setColor(COLOR1);
-		
-		GeneralPath gp = new GeneralPath();
-		
-		gp.moveTo(xf + o, yf + wf - o);
-		gp.lineTo(xf + wf / 4 + o, yf + wf - wf / 3 - o);
-		gp.lineTo(xf + wf / 2, y + wf - wf / 8 - o);
-		gp.lineTo(xf + wf, yf);
-		gp.lineTo(xf + wf, yf + wf - o);
-		gp.closePath();
-		
-		g2.fill(gp);
-		
-		g2.setColor(COLOR2);
-		
-		gp = new GeneralPath();
-		
-		gp.moveTo(xf + o, yf + wf - o);
-		gp.lineTo(xf + wf / 4 + o, yf + wf - wf / 3 - o);
-		gp.lineTo(xf + wf / 2, yf + wf - wf / 8 - o);
-		gp.lineTo(xf + wf, y);
-		//gp.lineTo(x + w, y + w - o);
-		//gp.closePath();
-		
-		g2.draw(gp);
-	}
+  /**
+   * The constant SCALE.
+   */
+  private static final double SCALE = 0.9;
+
+  /**
+   * The constant OFFSET.
+   */
+  private static final double OFFSET = 0.1;
+
+  /**
+   * The constant COLOR1.
+   */
+  private static final Color COLOR1 = ColorUtils.decodeHtmlColor("#0060ff22");
+
+  /**
+   * The constant COLOR2.
+   */
+  private static final Color COLOR2 = ColorUtils.decodeHtmlColor("#0060ff");
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D,
+   * java.awt.Rectangle)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+    double wf = w * SCALE;
+    double o = w * OFFSET;
+    double xf = x + (w - wf) / 2.0;
+    double yf = y + (h - wf) / 2.0;
+
+    g2.setColor(Color.BLACK);
+
+    g2.drawLine((int) Math.round(xf), (int) Math.round(yf + wf - o), (int) Math.round(xf + wf),
+        (int) Math.round(yf + wf - o));
+    g2.drawLine((int) Math.round(xf + o), (int) Math.round(yf), (int) Math.round(xf + o), (int) Math.round(yf + wf));
+
+    g2.setColor(COLOR1);
+
+    GeneralPath gp = new GeneralPath();
+
+    gp.moveTo(xf + o, yf + wf - o);
+    gp.lineTo(xf + wf / 4 + o, yf + wf - wf / 3 - o);
+    gp.lineTo(xf + wf / 2, y + wf - wf / 8 - o);
+    gp.lineTo(xf + wf, yf);
+    gp.lineTo(xf + wf, yf + wf - o);
+    gp.closePath();
+
+    g2.fill(gp);
+
+    g2.setColor(COLOR2);
+
+    gp = new GeneralPath();
+
+    gp.moveTo(xf + o, yf + wf - o);
+    gp.lineTo(xf + wf / 4 + o, yf + wf - wf / 3 - o);
+    gp.lineTo(xf + wf / 2, yf + wf - wf / 8 - o);
+    gp.lineTo(xf + wf, y);
+    // gp.lineTo(x + w, y + w - o);
+    // gp.closePath();
+
+    g2.draw(gp);
+  }
 }

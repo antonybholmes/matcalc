@@ -27,17 +27,17 @@ import org.jebtk.modern.table.ModernTableCheckboxCellRenderer;
  *
  */
 public class ColumnFilterTable extends ModernRowTable {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new column order table.
-	 */
-	public ColumnFilterTable() {
-		getRendererModel().setCol(0, new ModernTableCheckboxCellRenderer());
-		getEditorModel().setCol(0, new ModernTableCheckboxCellEditor());
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new column order table.
+   */
+  public ColumnFilterTable() {
+    getRendererModel().setCol(0, new ModernTableCheckboxCellRenderer());
+    getEditorModel().setCol(0, new ModernTableCheckboxCellEditor());
+  }
 }

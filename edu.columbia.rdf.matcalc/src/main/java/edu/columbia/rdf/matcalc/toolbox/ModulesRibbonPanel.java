@@ -26,7 +26,6 @@ import org.jebtk.modern.table.ModernRowTable;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernSubTitleLabel;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Display the program settings tree inline within the Ribbon menu.
@@ -35,64 +34,64 @@ import org.jebtk.modern.text.ModernSubTitleLabel;
  *
  */
 public class ModulesRibbonPanel extends RibbonPanelProductInfo {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member table.
-	 */
-	private ModernRowTable mTable;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member modules.
-	 */
-	private List<Module> mModules;
+  /**
+   * The member table.
+   */
+  private ModernRowTable mTable;
 
-	
-	/**
-	 * Instantiates a new modules ribbon panel.
-	 *
-	 * @param product the product
-	 * @param modules the modules
-	 */
-	public ModulesRibbonPanel(GuiAppInfo product,
-			List<Module> modules) {
-		super(product);
-		
-		mModules = modules;
+  /**
+   * The member modules.
+   */
+  private List<Module> mModules;
 
-		createUi();
-	}
+  /**
+   * Instantiates a new modules ribbon panel.
+   *
+   * @param product
+   *          the product
+   * @param modules
+   *          the modules
+   */
+  public ModulesRibbonPanel(GuiAppInfo product, List<Module> modules) {
+    super(product);
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		ModernComponent content = new ModernComponent();
-		
-		ModernAutoSizeLabel heading = new ModernSubTitleLabel("Installed Modules");
+    mModules = modules;
 
-		heading.setBorder(BorderService.getInstance().createTopBottomBorder(40, 10));
+    createUi();
+  }
 
-		content.setHeader(heading);
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    ModernComponent content = new ModernComponent();
 
-		mTable = new ModernRowTable(new ModulesTableModel(mModules));
-		mTable.setShowRowHeader(false);
-		mTable.getColumnModel().setWidth(0, 200);
-		mTable.getColumnModel().setWidth(1, 100);
-		mTable.getColumnModel().setWidth(2, 100);
-		mTable.getColumnModel().setWidth(3, 200);
-		mTable.getColumnModel().setWidth(4, 200);
-		
-		ModernScrollPane scrollPane = new ModernScrollPane(mTable);
+    ModernAutoSizeLabel heading = new ModernSubTitleLabel("Installed Modules");
 
-		content.setBody(scrollPane); //new ModernContentPanel(scrollPane));
-		
-		//setBorder(BorderService.getInstance().createTopBorder(40));
-		
-		setBody(content);
-	}
+    heading.setBorder(BorderService.getInstance().createTopBottomBorder(40, 10));
+
+    content.setHeader(heading);
+
+    mTable = new ModernRowTable(new ModulesTableModel(mModules));
+    mTable.setShowRowHeader(false);
+    mTable.getColumnModel().setWidth(0, 200);
+    mTable.getColumnModel().setWidth(1, 100);
+    mTable.getColumnModel().setWidth(2, 100);
+    mTable.getColumnModel().setWidth(3, 200);
+    mTable.getColumnModel().setWidth(4, 200);
+
+    ModernScrollPane scrollPane = new ModernScrollPane(mTable);
+
+    content.setBody(scrollPane); // new ModernContentPanel(scrollPane));
+
+    // setBorder(BorderService.getInstance().createTopBorder(40));
+
+    setBody(content);
+  }
 }

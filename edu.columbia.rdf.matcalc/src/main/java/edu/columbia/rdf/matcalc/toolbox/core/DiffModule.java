@@ -36,149 +36,153 @@ import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Can compare a column of values to another list to see what is common and
- * record this in a new column next to the reference column. Useful for
- * doing overlaps and keeping data in a specific order in a table.
+ * record this in a new column next to the reference column. Useful for doing
+ * overlaps and keeping data in a specific order in a table.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class DiffModule extends CalcModule implements ModernClickListener  {
-	/**
-	 * The constant NO_MATCH.
-	 */
-	private static final String NO_MATCH = "no_match";
+public class DiffModule extends CalcModule implements ModernClickListener {
+  /**
+   * The constant NO_MATCH.
+   */
+  private static final String NO_MATCH = "no_match";
 
-	/**
-	 * The member diff button.
-	 */
-	private RibbonLargeButton mDiffButton = 
-			new RibbonLargeButton("Diff", UIService.getInstance().loadIcon("diff", 24));
+  /**
+   * The member diff button.
+   */
+  private RibbonLargeButton mDiffButton = new RibbonLargeButton("Diff", UIService.getInstance().loadIcon("diff", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Diff";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Diff";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mDiffButton.setToolTip(new ModernToolTip("Diff", 
-				"Find differences in a column."), mWindow.getRibbon().getToolTipModel());
-		mDiffButton.setClickMessage("Diff");
+    mDiffButton.setToolTip(new ModernToolTip("Diff", "Find differences in a column."),
+        mWindow.getRibbon().getToolTipModel());
+    mDiffButton.setClickMessage("Diff");
 
-		window.getRibbon().getToolbar("Data").getSection("Match").add(mDiffButton);
+    window.getRibbon().getToolbar("Data").getSection("Match").add(mDiffButton);
 
-		mDiffButton.addClickListener(this);
+    mDiffButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("Diff")) {
-			diff();
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals("Diff")) {
+      diff();
+    }
+  }
 
-	/**
-	 * Diff.
-	 */
-	private void diff() {
-		List<Integer> columns = mWindow.getSelectedColumns();
+  /**
+   * Diff.
+   */
+  private void diff() {
+    List<Integer> columns = mWindow.getSelectedColumns();
 
+    if (columns == null || columns.size() == 0) {
+      mWindow.createDialog("You must select a column of ids to match on.", MessageDialogType.WARNING);
 
-		if (columns == null || columns.size() == 0) {
-			mWindow.createDialog("You must select a column of ids to match on.", MessageDialogType.WARNING);
-			
-			return;
-		}
-		
-		ModernTextInputDialog inputDialog = 
-				new ModernTextInputDialog(mWindow, "Diff");
+      return;
+    }
 
-		inputDialog.setVisible(true);
+    ModernTextInputDialog inputDialog = new ModernTextInputDialog(mWindow, "Diff");
 
-		if (inputDialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
-		DataFrame m = mWindow.getCurrentMatrix();
+    inputDialog.setVisible(true);
 
-		List<String> ids = getIds(inputDialog.getText());
-		
-		List<String> lids = TextUtils.toLowerCase(ids);
-		
-		Map<String, String> idMap = CollectionUtils.createMap(lids, ids);
+    if (inputDialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		int c = columns.get(0);
-		// first clone the matrix
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		DataFrame ret = 
-				DataFrame.createDataFrame(m.getRows(), m.getCols() + 1);
+    List<String> ids = getIds(inputDialog.getText());
 
-		// Copy before column
-		DataFrame.copyColumns(m, 0, c, ret);
-		
-		// Shift the rest by one column so we can insert the results
-		DataFrame.copyColumns(m, c + 1, ret, c + 2);
-		
-		ret.setColumnName(c + 1, "Diff Match");
-		
-		for (int i = 0; i < m.getRows(); ++i) {
-			String id = m.getText(i, c).toLowerCase();
-			
-			if (idMap.containsKey(id)) {
-				ret.set(i, c + 1, idMap.get(id));
-			} else {
-				ret.set(i, c + 1, NO_MATCH);
-			}
-		}
-		
-		mWindow.addToHistory("Diff", ret);
-	}
+    List<String> lids = TextUtils.toLowerCase(ids);
 
-	/**
-	 * Gets the ids.
-	 *
-	 * @param text the text
-	 * @return the ids
-	 */
-	private static List<String> getIds(String text) {
-		List<String> lines = 
-				TextUtils.fastSplit(text.trim(), TextUtils.NEW_LINE_DELIMITER);
+    Map<String, String> idMap = CollectionUtils.createMap(lids, ids);
 
-		List<String> ret = new ArrayList<String>();
+    int c = columns.get(0);
+    // first clone the matrix
 
-		for (String line : lines) {
-			line = line.replaceAll(TextUtils.COMMA_DELIMITER, TextUtils.SEMI_COLON_DELIMITER);
-			line = line.replaceAll(Affymetrix.GENE_DELIMITER, TextUtils.SEMI_COLON_DELIMITER);
+    DataFrame ret = DataFrame.createDataFrame(m.getRows(), m.getCols() + 1);
 
-			if (line.length() > 0) {
-				for (String id : TextUtils.scSplit(line)) {
-					ret.add(id);
-				}
-			}
-		}
+    // Copy before column
+    DataFrame.copyColumns(m, 0, c, ret);
 
-		return ret;
-	}
+    // Shift the rest by one column so we can insert the results
+    DataFrame.copyColumns(m, c + 1, ret, c + 2);
+
+    ret.setColumnName(c + 1, "Diff Match");
+
+    for (int i = 0; i < m.getRows(); ++i) {
+      String id = m.getText(i, c).toLowerCase();
+
+      if (idMap.containsKey(id)) {
+        ret.set(i, c + 1, idMap.get(id));
+      } else {
+        ret.set(i, c + 1, NO_MATCH);
+      }
+    }
+
+    mWindow.addToHistory("Diff", ret);
+  }
+
+  /**
+   * Gets the ids.
+   *
+   * @param text
+   *          the text
+   * @return the ids
+   */
+  private static List<String> getIds(String text) {
+    List<String> lines = TextUtils.fastSplit(text.trim(), TextUtils.NEW_LINE_DELIMITER);
+
+    List<String> ret = new ArrayList<String>();
+
+    for (String line : lines) {
+      line = line.replaceAll(TextUtils.COMMA_DELIMITER, TextUtils.SEMI_COLON_DELIMITER);
+      line = line.replaceAll(Affymetrix.GENE_DELIMITER, TextUtils.SEMI_COLON_DELIMITER);
+
+      if (line.length() > 0) {
+        for (String id : TextUtils.scSplit(line)) {
+          ret.add(id);
+        }
+      }
+    }
+
+    return ret;
+  }
 
 }

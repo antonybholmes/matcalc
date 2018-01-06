@@ -26,7 +26,6 @@ import org.jebtk.modern.menu.ModernScrollPopupMenu;
 import org.jebtk.modern.theme.ModernTheme;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to select a line style.
@@ -35,125 +34,134 @@ import org.jebtk.modern.window.ModernWindow;
  *
  */
 public class StokeStyleButton extends ControlDropDownButton implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The constant DASHED_LINE_CHANGED.
-	 */
-	private static final String DASHED_LINE_CHANGED = "dashed_line_change";
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member popup.
-	 */
-	private ModernScrollPopupMenu mPopup = null;
-	
-	/**
-	 * The member selected stroke.
-	 */
-	private StrokeStyle mSelectedStroke = StrokeStyle.SINGLE;
+  /**
+   * The constant DASHED_LINE_CHANGED.
+   */
+  private static final String DASHED_LINE_CHANGED = "dashed_line_change";
 
-	/**
-	 * Instantiates a new dashed line type button.
-	 *
-	 * @param parent the parent
-	 * @param style the style
-	 */
-	public StokeStyleButton(ModernWindow parent, StrokeStyle style) {
-		super("Dashed Line");
-		
-		mPopup = new ModernScrollPopupMenu();
-		
-		DashedLineMenuItem menuItem = new DashedLineMenuItem("Solid", ModernTheme.SINGLE_LINE_STROKE);
-		menuItem.addClickListener(this);
-		mPopup.addScrollMenuItem(menuItem);
-		
-		menuItem = new DashedLineMenuItem("Dotted", ModernTheme.DOTTED_LINE_STROKE);
-		menuItem.addClickListener(this);
-		mPopup.addScrollMenuItem(menuItem);
-		
-		menuItem = new DashedLineMenuItem("Dashed", ModernTheme.DASHED_LINE_STROKE);
-		menuItem.addClickListener(this);
-		mPopup.addScrollMenuItem(menuItem);
-		
-		menuItem = new DashedLineMenuItem("Dashed Dotted", ModernTheme.DASHED_DOTTED_LINE_STROKE);
-		menuItem.addClickListener(this);
-		mPopup.addScrollMenuItem(menuItem);
-		
-		menuItem = new DashedLineMenuItem("Long Dashed", ModernTheme.LONG_DASHED_LINE_STROKE);
-		menuItem.addClickListener(this);
-		mPopup.addScrollMenuItem(menuItem);
-		
-		
-		
-		//mPopup.addClickListener(this);
-		
-		setMenu(mPopup);
+  /**
+   * The member popup.
+   */
+  private ModernScrollPopupMenu mPopup = null;
 
-		setStroke(style);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.button.ModernDropDownButton#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawForegroundAAText(Graphics2D g2) {
-		int x = PADDING;
-		
-		int y = getHeight() / 2;
-		
-		g2.setColor(Color.BLACK);
-		g2.setStroke(StrokeStyle.getStroke(mSelectedStroke, 1));
-		g2.drawLine(x, y, x + 20, y);
-		
-		TRIANGLE_ICON.drawIcon(g2, mRect.getW() - 16, (getHeight() - 16) / 2, 16);
-	}
+  /**
+   * The member selected stroke.
+   */
+  private StrokeStyle mSelectedStroke = StrokeStyle.SINGLE;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mPressed = false;
-		mHighlight = false;
-		
-		if (e.getMessage().equals("Dashed")) {
-			mSelectedStroke = StrokeStyle.DASHED;
-		} else if (e.getMessage().equals("Dotted")) {
-			mSelectedStroke = StrokeStyle.DOTTED;
-		} else if (e.getMessage().equals("Long Dashed")) {
-			mSelectedStroke = StrokeStyle.LONG_DASH;
-		} else if (e.getMessage().equals("Dashed Dotted")) {
-			mSelectedStroke = StrokeStyle.DASHED_DOTTED;
-		} else {
-			mSelectedStroke = StrokeStyle.SINGLE;
-		}
+  /**
+   * Instantiates a new dashed line type button.
+   *
+   * @param parent
+   *          the parent
+   * @param style
+   *          the style
+   */
+  public StokeStyleButton(ModernWindow parent, StrokeStyle style) {
+    super("Dashed Line");
 
-		repaint();
-		
-		fireClicked(new ModernClickEvent(this, DASHED_LINE_CHANGED));
-	}
+    mPopup = new ModernScrollPopupMenu();
 
-	/**
-	 * Gets the selected stroke.
-	 *
-	 * @return the selected stroke
-	 */
-	public StrokeStyle getSelectedStroke() {
-		return mSelectedStroke;
-	}
+    DashedLineMenuItem menuItem = new DashedLineMenuItem("Solid", ModernTheme.SINGLE_LINE_STROKE);
+    menuItem.addClickListener(this);
+    mPopup.addScrollMenuItem(menuItem);
 
-	/**
-	 * Sets the stroke.
-	 *
-	 * @param stroke the new stroke
-	 */
-	public void setStroke(StrokeStyle stroke) {
-		mSelectedStroke = stroke;
-		
-		repaint();
-	}
+    menuItem = new DashedLineMenuItem("Dotted", ModernTheme.DOTTED_LINE_STROKE);
+    menuItem.addClickListener(this);
+    mPopup.addScrollMenuItem(menuItem);
+
+    menuItem = new DashedLineMenuItem("Dashed", ModernTheme.DASHED_LINE_STROKE);
+    menuItem.addClickListener(this);
+    mPopup.addScrollMenuItem(menuItem);
+
+    menuItem = new DashedLineMenuItem("Dashed Dotted", ModernTheme.DASHED_DOTTED_LINE_STROKE);
+    menuItem.addClickListener(this);
+    mPopup.addScrollMenuItem(menuItem);
+
+    menuItem = new DashedLineMenuItem("Long Dashed", ModernTheme.LONG_DASHED_LINE_STROKE);
+    menuItem.addClickListener(this);
+    mPopup.addScrollMenuItem(menuItem);
+
+    // mPopup.addClickListener(this);
+
+    setMenu(mPopup);
+
+    setStroke(style);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.button.ModernDropDownButton#drawForegroundAA(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawForegroundAAText(Graphics2D g2) {
+    int x = PADDING;
+
+    int y = getHeight() / 2;
+
+    g2.setColor(Color.BLACK);
+    g2.setStroke(StrokeStyle.getStroke(mSelectedStroke, 1));
+    g2.drawLine(x, y, x + 20, y);
+
+    TRIANGLE_ICON.drawIcon(g2, mRect.getW() - 16, (getHeight() - 16) / 2, 16);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mPressed = false;
+    mHighlight = false;
+
+    if (e.getMessage().equals("Dashed")) {
+      mSelectedStroke = StrokeStyle.DASHED;
+    } else if (e.getMessage().equals("Dotted")) {
+      mSelectedStroke = StrokeStyle.DOTTED;
+    } else if (e.getMessage().equals("Long Dashed")) {
+      mSelectedStroke = StrokeStyle.LONG_DASH;
+    } else if (e.getMessage().equals("Dashed Dotted")) {
+      mSelectedStroke = StrokeStyle.DASHED_DOTTED;
+    } else {
+      mSelectedStroke = StrokeStyle.SINGLE;
+    }
+
+    repaint();
+
+    fireClicked(new ModernClickEvent(this, DASHED_LINE_CHANGED));
+  }
+
+  /**
+   * Gets the selected stroke.
+   *
+   * @return the selected stroke
+   */
+  public StrokeStyle getSelectedStroke() {
+    return mSelectedStroke;
+  }
+
+  /**
+   * Sets the stroke.
+   *
+   * @param stroke
+   *          the new stroke
+   */
+  public void setStroke(StrokeStyle stroke) {
+    mSelectedStroke = stroke;
+
+    repaint();
+  }
 }

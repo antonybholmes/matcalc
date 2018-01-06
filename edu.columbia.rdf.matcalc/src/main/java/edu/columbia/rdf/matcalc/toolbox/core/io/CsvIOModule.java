@@ -28,62 +28,61 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to open and save Text files.
  *
  * @author Antony Holmes Holmes
  */
-public class CsvIOModule extends IOModule  {
-	
-	/** The Constant FILTER. */
-	private static final GuiFileExtFilter FILTER = new CsvGuiFileFilter();
+public class CsvIOModule extends IOModule {
 
-	/**
-	 * Instantiates a new csv IO module.
-	 */
-	public CsvIOModule() {
-		registerFileOpenType(FILTER);
-		registerFileSaveType(FILTER);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "CSV IO";
-	}
+  /** The Constant FILTER. */
+  private static final GuiFileExtFilter FILTER = new CsvGuiFileFilter();
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
-	 */
-	@Override
-	public DataFrame autoOpenFile(final MainMatCalcWindow window,
-			final Path file,
-			FileType type,
-			int headers,
-			int rowAnnotations,
-			String delimiter,
-			Collection<String> skipLines) throws IOException {
-		if (headers > 0) {
-			return new CsvMatrixParser(true, rowAnnotations).parse(file);
-		} else {
-			return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
-		}
-	}
-			
+  /**
+   * Instantiates a new csv IO module.
+   */
+  public CsvIOModule() {
+    registerFileOpenType(FILTER);
+    registerFileSaveType(FILTER);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
-	 */
-	@Override
-	public boolean saveFile(final MainMatCalcWindow window,
-			final Path file, 
-			final DataFrame m) throws IOException {
-		DataFrame.writeDataFrame(m, file);
-		
-		return true;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "CSV IO";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, boolean, int)
+   */
+  @Override
+  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
+      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+    if (headers > 0) {
+      return new CsvMatrixParser(true, rowAnnotations).parse(file);
+    } else {
+      return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
+   */
+  @Override
+  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+    DataFrame.writeDataFrame(m, file);
+
+    return true;
+  }
 }

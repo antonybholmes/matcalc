@@ -23,7 +23,6 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Annotate a table as to whether some values can be found in a particular
@@ -32,45 +31,54 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class VennModule extends CalcModule implements ModernClickListener  {
+public class VennModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mVennButton = new RibbonLargeButton("Venn Diagram", 
-					UIService.getInstance().loadIcon(VennIcon.class, 24));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mVennButton = new RibbonLargeButton("Venn Diagram",
+      UIService.getInstance().loadIcon(VennIcon.class, 24));
 
-	/** The m window. */
-	private MainMatCalcWindow mWindow;
+  /** The m window. */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Venn Diagram";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Venn Diagram";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		window.getRibbon().getHomeToolbar().getSection("Tools").add(mVennButton);
+    window.getRibbon().getHomeToolbar().getSection("Tools").add(mVennButton);
 
-		mVennButton.addClickListener(this);
+    mVennButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		MainVennWindow window = new MainVennWindow();
-		
-		window.setVisible(true);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    MainVennWindow window = new MainVennWindow();
+
+    window.setVisible(true);
+  }
 }

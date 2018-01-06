@@ -34,55 +34,47 @@ import org.jebtk.modern.menu.ModernPopupMenu;
  */
 public class ShapeStyleMenu extends ModernPopupMenu {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The class PeakStyleMenuItem.
-	 */
-	private class PeakStyleMenuItem extends ModernIconMenuItem {
+  /**
+   * The class PeakStyleMenuItem.
+   */
+  private class PeakStyleMenuItem extends ModernIconMenuItem {
 
-		/**
-		 * The constant serialVersionUID.
-		 */
-		private static final long serialVersionUID = 1L;
+    /**
+     * The constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 1L;
 
+    /**
+     * Instantiates a new peak style menu item.
+     *
+     * @param text
+     *          the text
+     * @param icon
+     *          the icon
+     */
+    public PeakStyleMenuItem(String text, ModernIcon icon) {
+      super(text, icon);
 
-		
-		/**
-		 * Instantiates a new peak style menu item.
-		 *
-		 * @param text the text
-		 * @param icon the icon
-		 */
-		public PeakStyleMenuItem(String text, ModernIcon icon) {
-			super(text, icon);
-			
-			//Ui.setSize(this, MENU_SIZE);
-		}
-	}
-	
-	/**
-	 * Instantiates a new shape style menu.
-	 */
-	public ShapeStyleMenu() {
-		addMenuItem(new PeakStyleMenuItem("Bar", 
-				new Raster16Icon(new ShapeBarStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Circle", 
-				new Raster16Icon(new ShapeCircleStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Cross", 
-				new Raster16Icon(new ShapeCrossStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Diamond", 
-				new Raster16Icon(new ShapeDiamondStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Minus", 
-				new Raster16Icon(new ShapeMinusStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Plus", 
-				new Raster16Icon(new ShapePlusStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Square", 
-				new Raster16Icon(new ShapeSquareStyleIcon())));
-		addMenuItem(new PeakStyleMenuItem("Triangle", 
-				new Raster16Icon(new ShapeTriangleStyleIcon())));
-	}
+      // Ui.setSize(this, MENU_SIZE);
+    }
+  }
+
+  /**
+   * Instantiates a new shape style menu.
+   */
+  public ShapeStyleMenu() {
+    addMenuItem(new PeakStyleMenuItem("Bar", new Raster16Icon(new ShapeBarStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Circle", new Raster16Icon(new ShapeCircleStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Cross", new Raster16Icon(new ShapeCrossStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Diamond", new Raster16Icon(new ShapeDiamondStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Minus", new Raster16Icon(new ShapeMinusStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Plus", new Raster16Icon(new ShapePlusStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Square", new Raster16Icon(new ShapeSquareStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Triangle", new Raster16Icon(new ShapeTriangleStyleIcon())));
+  }
 }

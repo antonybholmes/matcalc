@@ -55,323 +55,328 @@ import edu.columbia.rdf.matcalc.figure.PlotSizeRibbonSection;
  */
 public class Graph2dWindow extends FigureWindow {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	//protected MultiPlotCanvas mCanvas = new MultiPlotCanvas();
+  // protected MultiPlotCanvas mCanvas = new MultiPlotCanvas();
 
+  /** The m size model. */
+  private PlotSizeModel mSizeModel = new PlotSizeModel();
 
-	/** The m size model. */
-	private PlotSizeModel mSizeModel = new PlotSizeModel();
+  /** The m matrices. */
+  private List<DataFrame> mMatrices = new ArrayList<DataFrame>();
 
-	/** The m matrices. */
-	private List<DataFrame> mMatrices = 
-			new ArrayList<DataFrame>();
+  private FigurePanel mFigurePanel;
 
-	private FigurePanel mFigurePanel;
+  /**
+   * The class ColorMapEvents.
+   */
+  private class ColorMapEvents implements ChangeListener {
 
-	
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      // mFigure.getCurrentSubFigure().getCurrentAxes().getCurrentPlot().setColorMap(mColorMapModel.get());
 
-	/**
-	 * The class ColorMapEvents.
-	 */
-	private class ColorMapEvents implements ChangeListener {
+      mFigure.setColorMap(mColorMapModel.get());
 
-		/* (non-Javadoc)
-		 * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			//mFigure.getCurrentSubFigure().getCurrentAxes().getCurrentPlot().setColorMap(mColorMapModel.get());
+    }
+  }
 
-			mFigure.setColorMap(mColorMapModel.get());
+  /**
+   * The Class SizeEvents.
+   */
+  private class SizeEvents implements ChangeListener {
 
-		}	
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      updateSizes();
+    }
+  }
 
-	/**
-	 * The Class SizeEvents.
-	 */
-	private class SizeEvents implements ChangeListener {
+  /**
+   * The class ColorStandardizationEvents.
+   */
+  private class ColorStandardizationEvents implements ChangeListener {
 
-		/* (non-Javadoc)
-		 * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			updateSizes();
-		}	
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      normalizeMatrix();
+    }
 
-	/**
-	 * The class ColorStandardizationEvents.
-	 */
-	private class ColorStandardizationEvents implements ChangeListener {
+  }
 
-		/* (non-Javadoc)
-		 * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			normalizeMatrix();
-		}
+  /**
+   * Instantiates a new graph2d window.
+   *
+   * @param window
+   *          the window
+   * @param subFigure
+   *          the sub figure
+   */
+  public Graph2dWindow(MainMatCalcWindow window, SubFigure subFigure) {
+    this(window, Figure.createFigure().addSubFigure(subFigure));
+  }
 
-	}
+  /**
+   * Instantiates a new graph 2 d window.
+   *
+   * @param window
+   *          the window
+   * @param figure
+   *          the figure
+   */
+  public Graph2dWindow(MainMatCalcWindow window, Figure figure) {
+    this(window, figure, true);
+  }
 
-	/**
-	 * Instantiates a new graph2d window.
-	 *
-	 * @param window the window
-	 * @param subFigure the sub figure
-	 */
-	public Graph2dWindow(MainMatCalcWindow window,
-			SubFigure subFigure) {
-		this(window, Figure.createFigure().addSubFigure(subFigure));
-	}
+  /**
+   * Instantiates a new graph 2 d window.
+   *
+   * @param window
+   *          the window
+   * @param figure
+   *          the figure
+   * @param allowStyle
+   *          the allow style
+   */
+  public Graph2dWindow(MainMatCalcWindow window, Figure figure, boolean allowStyle) {
+    super(window, figure, allowStyle);
 
-	/**
-	 * Instantiates a new graph 2 d window.
-	 *
-	 * @param window the window
-	 * @param figure the figure
-	 */
-	public Graph2dWindow(MainMatCalcWindow window, Figure figure) {
-		this(window, figure, true);
-	}
-	
-	/**
-	 * Instantiates a new graph 2 d window.
-	 *
-	 * @param window the window
-	 * @param figure the figure
-	 * @param allowStyle the allow style
-	 */
-	public Graph2dWindow(MainMatCalcWindow window, 
-			Figure figure, 
-			boolean allowStyle) {
-		super(window, figure, allowStyle);
+    setup();
+  }
 
-		
-		setup();
-	}
+  /**
+   * Setup.
+   */
+  private void setup() {
+    mSizeModel.set(mFigure.currentSubFigure().currentAxes());
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		mSizeModel.set(mFigure.currentSubFigure().currentAxes());
+    mFormatPane = new AxesControlPanel(this, mFigure);
 
-		mFormatPane = new AxesControlPanel(this, mFigure);
+    mColorMapModel.addChangeListener(new ColorMapEvents());
+    mColorModel.addChangeListener(new ColorStandardizationEvents());
+    mScaleModel.addChangeListener(new ColorStandardizationEvents());
+    mSizeModel.addChangeListener(new SizeEvents());
+    // mColorMapModel.set((ColorMap)properties.getProperty("plot.colormap"));
+    // mColorModel.set((ColorStandardization)properties.getProperty("plot.color.standardization"));
 
-		mColorMapModel.addChangeListener(new ColorMapEvents());
-		mColorModel.addChangeListener(new ColorStandardizationEvents());
-		mScaleModel.addChangeListener(new ColorStandardizationEvents());
-		mSizeModel.addChangeListener(new SizeEvents());
-		//mColorMapModel.set((ColorMap)properties.getProperty("plot.colormap"));
-		//mColorModel.set((ColorStandardization)properties.getProperty("plot.color.standardization"));
+    mStyleModel.addChangeListener(new ChangeListener() {
 
-		mStyleModel.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mFigure.setStyle(mStyleModel.get());
 
-			@Override
-			public void changed(ChangeEvent e) {
-				mFigure.setStyle(mStyleModel.get());
-				
-//				for (int z : mFigure.getSubFigureZModel()) {
-//					mFigure
-//					.getSubFigureZModel()
-//					.getChild(z)
-//					.getCurrentAxes()
-//					.setStyle(mStyleModel.get());
-//				}
-			}});
-		
-		getRibbon().getToolbar("Plot").add(new LegendRibbonSection(getRibbon(), mFigure.currentSubFigure().currentAxes().getLegend()));
-		getRibbon().getToolbar("Layout").add(new PlotSizeRibbonSection(getRibbon(), mSizeModel));
-		getRibbon().getToolbar("Layout").add(new MarginsRibbonSection(getRibbon(), mSizeModel));
-		
-		addFormatPane();
+        // for (int z : mFigure.getSubFigureZModel()) {
+        // mFigure
+        // .getSubFigureZModel()
+        // .getChild(z)
+        // .getCurrentAxes()
+        // .setStyle(mStyleModel.get());
+        // }
+      }
+    });
 
-		//normalizeMatrix();
+    getRibbon().getToolbar("Plot")
+        .add(new LegendRibbonSection(getRibbon(), mFigure.currentSubFigure().currentAxes().getLegend()));
+    getRibbon().getToolbar("Layout").add(new PlotSizeRibbonSection(getRibbon(), mSizeModel));
+    getRibbon().getToolbar("Layout").add(new MarginsRibbonSection(getRibbon(), mSizeModel));
 
-		//updateSizes();
+    addFormatPane();
 
-		UI.centerWindowToScreen(this);
-	}
+    // normalizeMatrix();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.window.ModernWindow#createUi()
-	 */
-	@Override
-	public final void createUi() {
-		super.createUi();
+    // updateSizes();
 
-		//ZoomCanvas zoomCanvas = new ZoomCanvas(mFigure);
+    UI.centerWindowToScreen(this);
+  }
 
-		mFigurePanel = new FigurePanel(mFigure);
-		
-		mFigurePanel.setZoomModel(mZoomModel);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.window.ModernWindow#createUi()
+   */
+  @Override
+  public final void createUi() {
+    super.createUi();
 
-		//BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
+    // ZoomCanvas zoomCanvas = new ZoomCanvas(mFigure);
 
-		ModernScrollPane scrollPane = new ModernScrollPane(mFigurePanel)
-				.setScrollBarLocation(ScrollBarLocation.FLOATING)
-				.setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
+    mFigurePanel = new FigurePanel(mFigure);
 
-		ModernPanel panel = new ModernPanel(scrollPane, ModernWidget.BORDER);
+    mFigurePanel.setZoomModel(mZoomModel);
 
-		setCard(panel);
-	}
+    // BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-	/**
-	 * Adds the history pane to the layout if it is not already showing.
-	 */
-	private void addFormatPane() {
-		if (!getTabsPane().getModel().getRightTabs().containsTab("Format")) {
-			getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 320, 320, 600);
-		}
-	}
-	
-	/**
-	 * Removes the format pane.
-	 *
-	 * @return the graph 2 d window
-	 */
-	public Graph2dWindow removeFormatPane() {
-		getTabsPane().getModel().getRightTabs().removeTab("Format");
-		
-		return this;
-	}
+    ModernScrollPane scrollPane = new ModernScrollPane(mFigurePanel).setScrollBarLocation(ScrollBarLocation.FLOATING)
+        .setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
 
-	/**
-	 * Normalize matrix.
-	 */
-	private void normalizeMatrix() {
-		// First cache the original matrices since we are going to normalize
-		// them
-		if (mMatrices.size() == 0) {
-			for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
-				DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
-				
-				if (m != null) {
-					mMatrices.add(m);
-				}
-			}
-		}
+    ModernPanel panel = new ModernPanel(scrollPane, ModernWidget.BORDER);
 
-		
+    setCard(panel);
+  }
 
-		int c = 0;
+  /**
+   * Adds the history pane to the layout if it is not already showing.
+   */
+  private void addFormatPane() {
+    if (!getTabsPane().getModel().getRightTabs().containsTab("Format")) {
+      getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 320, 320, 600);
+    }
+  }
 
-		// Cycle through the matrices
+  /**
+   * Removes the format pane.
+   *
+   * @return the graph 2 d window
+   */
+  public Graph2dWindow removeFormatPane() {
+    getTabsPane().getModel().getRightTabs().removeTab("Format");
 
-		for (SubFigure subFigure : mFigure.getSubFigures()) { //for (int z : mFigure.getSubFigureZModel()) {
-			DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
+    return this;
+  }
 
-			if (m == null) {
-				continue;
-			}
+  /**
+   * Normalize matrix.
+   */
+  private void normalizeMatrix() {
+    // First cache the original matrices since we are going to normalize
+    // them
+    if (mMatrices.size() == 0) {
+      for (SubFigure subFigure : mFigure.getSubFigures()) { // for (int z : mFigure.getSubFigureZModel()) {
+        DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
 
-			double max = mScaleModel.get(); //mIntensityModel.getBaseline();
-			double min = -max;
+        if (m != null) {
+          mMatrices.add(m);
+        }
+      }
+    }
 
-			switch(mColorModel.get().getType()) {
-			case ZSCORE_MATRIX:
-				m = MatrixOperations.zscore(m); // new MatrixZTransformView(mMatrix);
-				break;
-			case ZSCORE_ROW:
-				m = MatrixOperations.rowZscore(m); //new RowZTransformMatrixView(mMatrix);
-				break;
-			case ZSCORE_COLUMN:
-				m = MatrixOperations.columnZscore(m); //new ColumnZTransformMatrixView(mMatrix);
-				break;
-			case NORMALIZE:
-				if (Double.isNaN(mColorModel.get().getMax())) {
-					min = MatrixOperations.min(m);
-					max = MatrixOperations.max(m);
-				} else {
-					min = mColorModel.get().getMin();
-					max = mColorModel.get().getMax();
-				}
+    int c = 0;
 
-				break;
-			default:
-				// For the scale of no standardization, i.e we do not adjust
-				// or normalize the colors, the plot range must be extremes
-				// of the matrix.
-				min = MatrixOperations.min(m);
-				max = MatrixOperations.max(m);
+    // Cycle through the matrices
 
-				break;
-			}
+    for (SubFigure subFigure : mFigure.getSubFigures()) { // for (int z : mFigure.getSubFigureZModel()) {
+      DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
 
-			//m = MatrixOperations.minMaxThreshold(m, min, max);
+      if (m == null) {
+        continue;
+      }
 
-			// Scale the min and max to reflect whether we are contracting
-			// or expanding the range
-			
+      double max = mScaleModel.get(); // mIntensityModel.getBaseline();
+      double min = -max;
 
-			if (mColorModel.get().getType() != ColorNormalizationType.NONE) {
-				//min /= scale;
-				//max /= scale;
-				
-				m = MatrixOperations.normalize(m, min, max);
-			}
+      switch (mColorModel.get().getType()) {
+      case ZSCORE_MATRIX:
+        m = MatrixOperations.zscore(m); // new MatrixZTransformView(mMatrix);
+        break;
+      case ZSCORE_ROW:
+        m = MatrixOperations.rowZscore(m); // new RowZTransformMatrixView(mMatrix);
+        break;
+      case ZSCORE_COLUMN:
+        m = MatrixOperations.columnZscore(m); // new ColumnZTransformMatrixView(mMatrix);
+        break;
+      case NORMALIZE:
+        if (Double.isNaN(mColorModel.get().getMax())) {
+          min = MatrixOperations.min(m);
+          max = MatrixOperations.max(m);
+        } else {
+          min = mColorModel.get().getMin();
+          max = mColorModel.get().getMax();
+        }
 
-			System.err.println("scale " + min + " " + max + " " + MatrixOperations.min(m));
+        break;
+      default:
+        // For the scale of no standardization, i.e we do not adjust
+        // or normalize the colors, the plot range must be extremes
+        // of the matrix.
+        min = MatrixOperations.min(m);
+        max = MatrixOperations.max(m);
 
-			// new MinMaxBoundedMatrixView(zMatrix, min, max);
+        break;
+      }
 
-			subFigure.setMatrix(m);
-			subFigure.setColorMap(mColorMapModel.get());
+      // m = MatrixOperations.minMaxThreshold(m, min, max);
 
+      // Scale the min and max to reflect whether we are contracting
+      // or expanding the range
 
+      if (mColorModel.get().getType() != ColorNormalizationType.NONE) {
+        // min /= scale;
+        // max /= scale;
 
-			//PlotFactory.createVColorBar(min, max, subFigure, axes, mColorMapModel.get());
+        m = MatrixOperations.normalize(m, min, max);
+      }
 
-			++c;
-		}
-	}
+      System.err.println("scale " + min + " " + max + " " + MatrixOperations.min(m));
 
-	/**
-	 * Update sizes.
-	 */
-	private void updateSizes() {
-		PlotBox a = mSizeModel.get();
+      // new MinMaxBoundedMatrixView(zMatrix, min, max);
 
-		Deque<PlotBox> stack = new ArrayDeque<PlotBox>(100);
-		
-		stack.push(mFigure);
-		
-		while (!stack.isEmpty()) {
-			PlotBox p = stack.pop();
-			
-			if (p instanceof Axes) {
-				((Axes)p).setInternalSize(a.getPreferredSize());
-			}
-			
-			for (PlotBox c : p) {
-				stack.push(c);
-			}
-		}
+      subFigure.setMatrix(m);
+      subFigure.setColorMap(mColorMapModel.get());
 
-		//mFigure.refresh();
-	}
+      // PlotFactory.createVColorBar(min, max, subFigure, axes, mColorMapModel.get());
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.graph2d.FigureWindow#getColorNormalizationModel()
-	 */
-	public ColorNormalizationModel getColorNormalizationModel() {
-		return mColorModel;
-	}
+      ++c;
+    }
+  }
 
-	@Override
-	public PlotBox getPlot() {
-		return mFigure;
-	}
+  /**
+   * Update sizes.
+   */
+  private void updateSizes() {
+    PlotBox a = mSizeModel.get();
 
-	public Figure getFigure() {
-		return mFigure;
-	}
+    Deque<PlotBox> stack = new ArrayDeque<PlotBox>(100);
+
+    stack.push(mFigure);
+
+    while (!stack.isEmpty()) {
+      PlotBox p = stack.pop();
+
+      if (p instanceof Axes) {
+        ((Axes) p).setInternalSize(a.getPreferredSize());
+      }
+
+      for (PlotBox c : p) {
+        stack.push(c);
+      }
+    }
+
+    // mFigure.refresh();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.graph2d.FigureWindow#getColorNormalizationModel()
+   */
+  public ColorNormalizationModel getColorNormalizationModel() {
+    return mColorModel;
+  }
+
+  @Override
+  public PlotBox getPlot() {
+    return mFigure;
+  }
+
+  public Figure getFigure() {
+    return mFigure;
+  }
 }

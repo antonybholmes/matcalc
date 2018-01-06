@@ -25,34 +25,34 @@ import org.jebtk.modern.combobox.ModernComboBox;
  * @author Antony Holmes Holmes
  */
 public class FDRComboBox extends ModernComboBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new FDR combo box.
-	 */
-	public FDRComboBox() {
-		addMenuItem("None");
-		addMenuItem("Bonferroni");
-		addMenuItem("Benjamini-Hochberg");
-	}
-	
-	/**
-	 * Gets the FDR type.
-	 *
-	 * @return the FDR type
-	 */
-	public FDRType getFDRType() {
-		switch (getSelectedIndex()) {
-		case 1:
-			return FDRType.BONFERRONI;
-		case 2:
-			return FDRType.BENJAMINI_HOCHBERG;
-		default:
-			return FDRType.NONE;
-		}
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new FDR combo box.
+   */
+  public FDRComboBox() {
+    addMenuItem("None");
+    addMenuItem("Bonferroni");
+    addMenuItem("Benjamini-Hochberg");
+  }
+
+  /**
+   * Gets the FDR type.
+   *
+   * @return the FDR type
+   */
+  public FDRType getFDRType() {
+    switch (getSelectedIndex()) {
+    case 1:
+      return FDRType.BONFERRONI;
+    case 2:
+      return FDRType.BENJAMINI_HOCHBERG;
+    default:
+      return FDRType.NONE;
+    }
+  }
 }

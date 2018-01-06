@@ -41,8 +41,6 @@ import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.list.ModernList;
 import org.jebtk.modern.list.ModernListCellRenderer;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Renders a file as a list item.
@@ -51,77 +49,71 @@ import org.jebtk.modern.list.ModernListCellRenderer;
  *
  */
 public class FilesListRenderer extends ModernListCellRenderer {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private static final int ICON_SIZE = 16;
-	
-	private static final ModernIcon DIR_ICON = 
-			UIService.getInstance().loadIcon(FolderVectorIcon.class, ICON_SIZE);
-	
-	private static final ModernIcon XLSX_ICON = 
-			UIService.getInstance().loadIcon("xlsx", ICON_SIZE);
-	
-	private static final ModernIcon FILE_ICON = 
-			UIService.getInstance().loadIcon(FileVectorIcon.class, ICON_SIZE);
 
-	
-	
-	/**
-	 * The member file.
-	 */
-	private Path mFile;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.list.ModernListIconCellRenderer#getCellRendererComponent(org.abh.lib.ui.modern.list.ModernList, java.lang.Object, boolean, boolean, boolean, int)
-	 */
-	@Override
-	public Component getCellRendererComponent(ModernList<?> list,
-			Object value,
-			boolean highlight,
-			boolean isSelected,
-			boolean hasFocus,
-			int row) {
+  private static final int ICON_SIZE = 16;
 
-		// setup
-		super.getCellRendererComponent(list, 
-				value, 
-				highlight, 
-				isSelected, 
-				hasFocus, 
-				row);
+  private static final ModernIcon DIR_ICON = UIService.getInstance().loadIcon(FolderVectorIcon.class, ICON_SIZE);
 
-		mFile = (Path)value;
+  private static final ModernIcon XLSX_ICON = UIService.getInstance().loadIcon("xlsx", ICON_SIZE);
 
-		return this;
-	}
+  private static final ModernIcon FILE_ICON = UIService.getInstance().loadIcon(FileVectorIcon.class, ICON_SIZE);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.list.ModernListIconCellRenderer#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawForegroundAAText(Graphics2D g2) {
-		int iconX = PADDING;
+  /**
+   * The member file.
+   */
+  private Path mFile;
 
-		int iconY = (getHeight() - ICON_SIZE) / 2;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.list.ModernListIconCellRenderer#
+   * getCellRendererComponent(org.abh.lib.ui.modern.list.ModernList,
+   * java.lang.Object, boolean, boolean, boolean, int)
+   */
+  @Override
+  public Component getCellRendererComponent(ModernList<?> list, Object value, boolean highlight, boolean isSelected,
+      boolean hasFocus, int row) {
 
-		if (FileUtils.isDirectory(mFile)) {
-			DIR_ICON.drawIcon(g2, iconX, iconY, ICON_SIZE);
-		} else if (PathUtils.getFileExt(mFile).contains("xls")) {
-			XLSX_ICON.drawIcon(g2, iconX, iconY, ICON_SIZE);
-		} else {
-			FILE_ICON.drawIcon(g2, iconX, iconY, ICON_SIZE);
-		}
-		
-		int x = iconX + ICON_SIZE + PADDING;
-		
-		int y = getTextYPosCenter(g2, getHeight());
+    // setup
+    super.getCellRendererComponent(list, value, highlight, isSelected, hasFocus, row);
 
-		g2.setColor(TEXT_COLOR);
+    mFile = (Path) value;
 
-		g2.drawString(PathUtils.getName(mFile), x, y);
-	}
+    return this;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.list.ModernListIconCellRenderer#drawForegroundAA(java.
+   * awt.Graphics2D)
+   */
+  @Override
+  public void drawForegroundAAText(Graphics2D g2) {
+    int iconX = PADDING;
+
+    int iconY = (getHeight() - ICON_SIZE) / 2;
+
+    if (FileUtils.isDirectory(mFile)) {
+      DIR_ICON.drawIcon(g2, iconX, iconY, ICON_SIZE);
+    } else if (PathUtils.getFileExt(mFile).contains("xls")) {
+      XLSX_ICON.drawIcon(g2, iconX, iconY, ICON_SIZE);
+    } else {
+      FILE_ICON.drawIcon(g2, iconX, iconY, ICON_SIZE);
+    }
+
+    int x = iconX + ICON_SIZE + PADDING;
+
+    int y = getTextYPosCenter(g2, getHeight());
+
+    g2.setColor(TEXT_COLOR);
+
+    g2.drawString(PathUtils.getName(mFile), x, y);
+  }
 }

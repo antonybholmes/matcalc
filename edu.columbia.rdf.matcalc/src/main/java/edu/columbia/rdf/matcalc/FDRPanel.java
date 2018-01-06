@@ -33,92 +33,86 @@ import org.jebtk.modern.widget.ModernWidget;
  * @author Antony Holmes Holmes
  */
 public class FDRPanel extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The none button.
-	 */
-	private ModernRadioButton noneButton = 
-			new ModernRadioButton("None");
-	
-	/**
-	 * The bonferroni button.
-	 */
-	private ModernRadioButton bonferroniButton = 
-			new ModernRadioButton("Bonferroni");
-	
-	/**
-	 * The bh button.
-	 */
-	private ModernRadioButton bhButton = 
-			new ModernRadioButton("Benjamini-Hochberg");
-	
-	/**
-	 * The member max p field.
-	 */
-	private ModernCompactSpinner mMaxPField = 
-			new ModernCompactSpinner(0, 1, 0.05, 0.01);
-	
-	/**
-	 * The member check p.
-	 */
-	private ModernTwoStateWidget mCheckP = 
-			new ModernCheckSwitch("Maximum p-value");
-	
-	/**
-	 * Instantiates a new FDR panel.
-	 */
-	public FDRPanel() {		
-		add(noneButton);
-		add(bonferroniButton);
-		add(bhButton);
-		
-		add(UI.createVGap(10));
-		
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		UI.setSize(mCheckP, 150, ModernWidget.WIDGET_HEIGHT);
-		
-		add(new HExpandBox(mCheckP, mMaxPField));
-		
-		ModernButtonGroup group = new ModernButtonGroup();
-		
-		group.add(noneButton);
-		group.add(bonferroniButton);
-		group.add(bhButton);
-		
-		noneButton.setSelected(true);
-	}
-	
-	/**
-	 * Gets the FDR type.
-	 *
-	 * @return the FDR type
-	 */
-	public FDRType getFDRType() {
-		if (bhButton.isSelected()) {
-			return FDRType.BENJAMINI_HOCHBERG;
-		} else if (bonferroniButton.isSelected()) {
-			return FDRType.BONFERRONI;
-		} else {
-			return FDRType.NONE;
-		}
-	}
-	
-	/**
-	 * Gets the max p.
-	 *
-	 * @return the max p
-	 */
-	public double getMaxP() {
-		if (mCheckP.isSelected()) {
-			return Double.parseDouble(mMaxPField.getText());
-		} else {
-			// No filtering
-			return 1;
-		}
-	}
+  /**
+   * The none button.
+   */
+  private ModernRadioButton noneButton = new ModernRadioButton("None");
+
+  /**
+   * The bonferroni button.
+   */
+  private ModernRadioButton bonferroniButton = new ModernRadioButton("Bonferroni");
+
+  /**
+   * The bh button.
+   */
+  private ModernRadioButton bhButton = new ModernRadioButton("Benjamini-Hochberg");
+
+  /**
+   * The member max p field.
+   */
+  private ModernCompactSpinner mMaxPField = new ModernCompactSpinner(0, 1, 0.05, 0.01);
+
+  /**
+   * The member check p.
+   */
+  private ModernTwoStateWidget mCheckP = new ModernCheckSwitch("Maximum p-value");
+
+  /**
+   * Instantiates a new FDR panel.
+   */
+  public FDRPanel() {
+    add(noneButton);
+    add(bonferroniButton);
+    add(bhButton);
+
+    add(UI.createVGap(10));
+
+    UI.setSize(mCheckP, 150, ModernWidget.WIDGET_HEIGHT);
+
+    add(new HExpandBox(mCheckP, mMaxPField));
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(noneButton);
+    group.add(bonferroniButton);
+    group.add(bhButton);
+
+    noneButton.setSelected(true);
+  }
+
+  /**
+   * Gets the FDR type.
+   *
+   * @return the FDR type
+   */
+  public FDRType getFDRType() {
+    if (bhButton.isSelected()) {
+      return FDRType.BENJAMINI_HOCHBERG;
+    } else if (bonferroniButton.isSelected()) {
+      return FDRType.BONFERRONI;
+    } else {
+      return FDRType.NONE;
+    }
+  }
+
+  /**
+   * Gets the max p.
+   *
+   * @return the max p
+   */
+  public double getMaxP() {
+    if (mCheckP.isSelected()) {
+      return Double.parseDouble(mMaxPField.getText());
+    } else {
+      // No filtering
+      return 1;
+    }
+  }
 }

@@ -27,48 +27,35 @@ import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to open and save Excel files.
  *
  * @author Antony Holmes Holmes
  */
-public abstract class XlIOModule extends IOModule  {
+public abstract class XlIOModule extends IOModule {
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
-	 */
-	@Override
-	public DataFrame openFile(final MainMatCalcWindow window,
-			final Path file,
-			FileType type,
-			int headers,
-			int rowAnnotations,
-			String delimiter,
-			Collection<String> skipLines) throws IOException {
-		
-		
-		
-		
-		ImportDialog dialog = 
-				new ImportDialog(window, 0, true, TextUtils.TAB_DELIMITER, false);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, boolean, int)
+   */
+  @Override
+  public DataFrame openFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
+      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
 
-		dialog.setVisible(true);
+    ImportDialog dialog = new ImportDialog(window, 0, true, TextUtils.TAB_DELIMITER, false);
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return null;
-		}
+    dialog.setVisible(true);
 
-		headers = dialog.getHasHeader() ? 1 : 0;
-		rowAnnotations = dialog.getRowAnnotations();
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return null;
+    }
 
-		return super.openFile(window, 
-				file,
-				type,
-				headers, 
-				rowAnnotations, 
-				delimiter,
-				skipLines);
-	}
+    headers = dialog.getHasHeader() ? 1 : 0;
+    rowAnnotations = dialog.getRowAnnotations();
+
+    return super.openFile(window, file, type, headers, rowAnnotations, delimiter, skipLines);
+  }
 }

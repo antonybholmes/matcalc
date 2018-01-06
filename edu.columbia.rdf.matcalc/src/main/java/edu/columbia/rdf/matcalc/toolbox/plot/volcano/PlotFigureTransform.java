@@ -23,7 +23,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.PlotMatrixTransform;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Transform the rows of a matrix.
@@ -32,33 +31,35 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
  *
  */
 public class PlotFigureTransform extends PlotMatrixTransform {
-	
-	/**
-	 * The member canvas.
-	 */
-	private Figure mFigure;
 
-	/**
-	 * Instantiates a new volcano plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param inputMatrix the input matrix
-	 * @param figure the canvas
-	 */
-	public PlotFigureTransform(ModernWindow parent, 
-			String name,
-			DataFrame m,
-			Figure figure) {
-		super(parent, name, m);
-		
-		mFigure = figure;
-	}
+  /**
+   * The member canvas.
+   */
+  private Figure mFigure;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
-	 */
-	@Override
-	public Graph2dWindow createWindow() {
-		return new Graph2dWindow((MainMatCalcWindow) getParent(), mFigure);
-	}
+  /**
+   * Instantiates a new volcano plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param inputMatrix
+   *          the input matrix
+   * @param figure
+   *          the canvas
+   */
+  public PlotFigureTransform(ModernWindow parent, String name, DataFrame m, Figure figure) {
+    super(parent, name, m);
+
+    mFigure = figure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
+   */
+  @Override
+  public Graph2dWindow createWindow() {
+    return new Graph2dWindow((MainMatCalcWindow) getParent(), mFigure);
+  }
 }

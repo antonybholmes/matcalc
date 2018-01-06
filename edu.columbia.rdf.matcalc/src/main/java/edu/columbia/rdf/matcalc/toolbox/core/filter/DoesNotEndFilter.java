@@ -21,36 +21,41 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
  */
 public class DoesNotEndFilter implements Filter {
 
-	/** The m text. */
-	private String mText;
-	
-	/**
-	 * Instantiates a new does not end filter.
-	 *
-	 * @param text the text
-	 */
-	public DoesNotEndFilter(String text) {
-		mText = text.toLowerCase();
-	}
+  /** The m text. */
+  private String mText;
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
-	 */
-	@Override
-	public boolean test(String text, double value) {
-		if (text != null) {
-			return !text.toLowerCase().endsWith(mText);
-		} else {
-			return false;
-		}
-	}
+  /**
+   * Instantiates a new does not end filter.
+   *
+   * @param text
+   *          the text
+   */
+  public DoesNotEndFilter(String text) {
+    mText = text.toLowerCase();
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Does not end with";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
+   */
+  @Override
+  public boolean test(String text, double value) {
+    if (text != null) {
+      return !text.toLowerCase().endsWith(mText);
+    } else {
+      return false;
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#getName()
+   */
+  @Override
+  public String getName() {
+    return "Does not end with";
+  }
 
 }

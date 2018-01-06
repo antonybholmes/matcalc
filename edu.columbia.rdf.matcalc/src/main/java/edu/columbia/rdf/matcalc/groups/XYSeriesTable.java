@@ -28,22 +28,22 @@ import org.jebtk.modern.window.ModernWindow;
  */
 public class XYSeriesTable extends ModernRowTable {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new XY series table.
-	 *
-	 * @param parent the parent
-	 */
-	public XYSeriesTable(ModernWindow parent) {
-		getRendererModel().setCol(0, new ModernTableCheckboxCellRenderer());
-		getEditorModel().setCol(0, new ModernTableCheckboxCellEditor());
-		
-		getRendererModel().setCol(2, new ModernTableColorCellRenderer());
-		getEditorModel().setCol(2, new ModernTableColorCellEditor(parent));
-		
-		
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new XY series table.
+   *
+   * @param parent
+   *          the parent
+   */
+  public XYSeriesTable(ModernWindow parent) {
+    getRendererModel().setCol(0, new ModernTableCheckboxCellRenderer());
+    getEditorModel().setCol(0, new ModernTableCheckboxCellEditor());
+
+    getRendererModel().setCol(2, new ModernTableColorCellRenderer());
+    getEditorModel().setCol(2, new ModernTableColorCellEditor(parent));
+
+  }
 
 }

@@ -33,66 +33,56 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotMatrixTra
  * @author Antony Holmes Holmes
  */
 public class ClusterPlotMatrixTransform extends HeatMapPlotMatrixTransform {
-	
-	/**
-	 * The member row cluster.
-	 */
-	private Cluster mRowCluster;
-	
-	/**
-	 * The member column cluster.
-	 */
-	private Cluster mColumnCluster;
 
+  /**
+   * The member row cluster.
+   */
+  private Cluster mRowCluster;
 
-	/**
-	 * Instantiates a new cluster plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param matrix the input matrix
-	 * @param groups the groups
-	 * @param rowGroups the row groups
-	 * @param rowCluster the row cluster
-	 * @param columnCluster the column cluster
-	 * @param countGroups the count groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public ClusterPlotMatrixTransform(ModernRibbonWindow parent,
-			DataFrame matrix, 
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			Cluster rowCluster,
-			Cluster columnCluster,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(parent, 
-				"Create Hierarchical Cluster Plot", 
-				matrix, 
-				groups, 
-				rowGroups, 
-				countGroups, 
-				history, 
-				properties);
-		
-		mRowCluster = rowCluster;
-		mColumnCluster = columnCluster;
-	}
+  /**
+   * The member column cluster.
+   */
+  private Cluster mColumnCluster;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
-	 */
-	@Override
-	public ClusterPlotWindow createWindow() {
-		return new ClusterPlotWindow((ModernRibbonWindow) mParent,
-				mMatrix,
-					mGroups,
-					mRowGroups,
-					mRowCluster,
-					mColumnCluster,
-					mCountGroups,
-					mHistory,
-					mProperties);
-	}
+  /**
+   * Instantiates a new cluster plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param matrix
+   *          the input matrix
+   * @param groups
+   *          the groups
+   * @param rowGroups
+   *          the row groups
+   * @param rowCluster
+   *          the row cluster
+   * @param columnCluster
+   *          the column cluster
+   * @param countGroups
+   *          the count groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public ClusterPlotMatrixTransform(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groups,
+      XYSeriesModel rowGroups, Cluster rowCluster, Cluster columnCluster, CountGroups countGroups, List<String> history,
+      Properties properties) {
+    super(parent, "Create Hierarchical Cluster Plot", matrix, groups, rowGroups, countGroups, history, properties);
+
+    mRowCluster = rowCluster;
+    mColumnCluster = columnCluster;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.PlotMatrixTransform#createWindow()
+   */
+  @Override
+  public ClusterPlotWindow createWindow() {
+    return new ClusterPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups, mRowGroups, mRowCluster,
+        mColumnCluster, mCountGroups, mHistory, mProperties);
+  }
 }

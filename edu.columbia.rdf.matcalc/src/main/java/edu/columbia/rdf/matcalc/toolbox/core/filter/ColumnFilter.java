@@ -37,128 +37,135 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class ColumnFilter extends HBox implements ModernClickListener {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m columns combo. */
-	//private ColumnsCombo mColumnsCombo;
-	
-	private AndOrLogicalComboBox mLogicalCombo = new AndOrLogicalComboBox();
-	
-	/** The m sort combo. */
-	private FilterCombo mFilterCombo = new FilterCombo();
-	
-	/** The m text. */
-	private ModernTextField mText = new ModernTextField();
-	
-	/** The m delete button. */
-	private ModernButton mDeleteButton = 
-			new ModernButton(UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
-	
-	/** The m listeners. */
-	private ModernClickListeners mListeners = new ModernClickListeners();
-	
-	/**
-	 * Instantiates a new column sort.
-	 *
-	 * @param m the m
-	 * @param isFirst the is first
-	 */
-	public ColumnFilter(DataFrame m, boolean isFirst) {
-		if (isFirst) {
-			add(UI.createHGap(80));
-		} else {
-			UI.setSize(mLogicalCombo, 80, ModernWidget.WIDGET_HEIGHT);
-			add(mLogicalCombo);
-		}
-		
-		add(UI.createHGap(5));
-		
-		//mColumnsCombo = new ColumnsCombo(m);
-		UI.setSize(mFilterCombo, 200, ModernWidget.WIDGET_HEIGHT);
-		add(mFilterCombo);
-		
-		add(UI.createHGap(5));
-		add(new ModernTextBorderPanel(mText, 200));
-		
-		add(UI.createHGap(5));
-		
-		add(mDeleteButton);
-		
-		setBorder(ModernWidget.BOTTOM_BORDER);
-		
-		mDeleteButton.addClickListener(this);
-		
-		mLogicalCombo.setVisible(!isFirst);
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mListeners.addClickListener(l);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mListeners.fireClicked(new ModernClickEvent(this, "delete"));
-	}
+  /** The m columns combo. */
+  // private ColumnsCombo mColumnsCombo;
 
-	/**
-	 * Disable delete.
-	 */
-	public void disableDelete() {
-		mDeleteButton.setVisible(false);
-	}
-	
-	/**
-	 * Gets the filter.
-	 *
-	 * @return the filter
-	 * @throws ParseException the parse exception
-	 */
-	public Filter getFilter() throws ParseException {
-		switch (mFilterCombo.getSelectedIndex()) {
-		case 0:
-			return new EqualsFilter(mText.getAsDouble());
-		case 1:
-			return new DoesNotEqualFilter(mText.getAsDouble());
-		case 2:
-			return new GTFilter(mText.getAsDouble());
-		case 3:
-			return new GEFilter(mText.getAsDouble());
-		case 4:
-			return new LTFilter(mText.getAsDouble());
-		case 5:
-			return new LEFilter(mText.getAsDouble());
-		case 6:
-			return new StartsFilter(mText.getText());
-		case 7:
-			return new DoesNotStartFilter(mText.getText());
-		case 8:
-			return new EndsFilter(mText.getText());
-		case 9:
-			return new DoesNotEndFilter(mText.getText());
-		case 10:
-			return new ContainsFilter(mText.getText());
-		case 11:
-			return new DoesNotContainFilter(mText.getText());
-		default:
-			return new ContainsFilter(mText.getText());
-		}
-	}
+  private AndOrLogicalComboBox mLogicalCombo = new AndOrLogicalComboBox();
 
-	/**
-	 * Gets the logical.
-	 *
-	 * @return the logical
-	 */
-	public boolean getLogical() {
-		return mLogicalCombo.getSelectedIndex() == 0;
-	}
+  /** The m sort combo. */
+  private FilterCombo mFilterCombo = new FilterCombo();
+
+  /** The m text. */
+  private ModernTextField mText = new ModernTextField();
+
+  /** The m delete button. */
+  private ModernButton mDeleteButton = new ModernButton(UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
+
+  /** The m listeners. */
+  private ModernClickListeners mListeners = new ModernClickListeners();
+
+  /**
+   * Instantiates a new column sort.
+   *
+   * @param m
+   *          the m
+   * @param isFirst
+   *          the is first
+   */
+  public ColumnFilter(DataFrame m, boolean isFirst) {
+    if (isFirst) {
+      add(UI.createHGap(80));
+    } else {
+      UI.setSize(mLogicalCombo, 80, ModernWidget.WIDGET_HEIGHT);
+      add(mLogicalCombo);
+    }
+
+    add(UI.createHGap(5));
+
+    // mColumnsCombo = new ColumnsCombo(m);
+    UI.setSize(mFilterCombo, 200, ModernWidget.WIDGET_HEIGHT);
+    add(mFilterCombo);
+
+    add(UI.createHGap(5));
+    add(new ModernTextBorderPanel(mText, 200));
+
+    add(UI.createHGap(5));
+
+    add(mDeleteButton);
+
+    setBorder(ModernWidget.BOTTOM_BORDER);
+
+    mDeleteButton.addClickListener(this);
+
+    mLogicalCombo.setVisible(!isFirst);
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mListeners.addClickListener(l);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+   * ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mListeners.fireClicked(new ModernClickEvent(this, "delete"));
+  }
+
+  /**
+   * Disable delete.
+   */
+  public void disableDelete() {
+    mDeleteButton.setVisible(false);
+  }
+
+  /**
+   * Gets the filter.
+   *
+   * @return the filter
+   * @throws ParseException
+   *           the parse exception
+   */
+  public Filter getFilter() throws ParseException {
+    switch (mFilterCombo.getSelectedIndex()) {
+    case 0:
+      return new EqualsFilter(mText.getAsDouble());
+    case 1:
+      return new DoesNotEqualFilter(mText.getAsDouble());
+    case 2:
+      return new GTFilter(mText.getAsDouble());
+    case 3:
+      return new GEFilter(mText.getAsDouble());
+    case 4:
+      return new LTFilter(mText.getAsDouble());
+    case 5:
+      return new LEFilter(mText.getAsDouble());
+    case 6:
+      return new StartsFilter(mText.getText());
+    case 7:
+      return new DoesNotStartFilter(mText.getText());
+    case 8:
+      return new EndsFilter(mText.getText());
+    case 9:
+      return new DoesNotEndFilter(mText.getText());
+    case 10:
+      return new ContainsFilter(mText.getText());
+    case 11:
+      return new DoesNotContainFilter(mText.getText());
+    default:
+      return new ContainsFilter(mText.getText());
+    }
+  }
+
+  /**
+   * Gets the logical.
+   *
+   * @return the logical
+   */
+  public boolean getLogical() {
+    return mLogicalCombo.getSelectedIndex() == 0;
+  }
 }

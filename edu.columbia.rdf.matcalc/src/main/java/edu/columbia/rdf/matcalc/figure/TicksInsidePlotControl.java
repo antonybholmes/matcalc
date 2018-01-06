@@ -28,55 +28,59 @@ import org.jebtk.modern.window.ModernWindow;
  * The class TicksInsidePlotControl.
  */
 public class TicksInsidePlotControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check box.
-	 */
-	private CheckBox mCheckBox = new ModernCheckBox("Draw Inside");
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member tick.
-	 */
-	private TickProperties mTick;
-	
-	/**
-	 * Instantiates a new ticks inside plot control.
-	 *
-	 * @param parent the parent
-	 * @param tick the tick
-	 */
-	public TicksInsidePlotControl(ModernWindow parent,
-			TickProperties tick) {
-		mTick = tick;
-		
-		mCheckBox.setSelected(mTick.getDrawInside());
-		
-		add(mCheckBox);
+  /**
+   * The member check box.
+   */
+  private CheckBox mCheckBox = new ModernCheckBox("Draw Inside");
 
-		mCheckBox.addClickListener(this);
-	}
-	
+  /**
+   * The member tick.
+   */
+  private TickProperties mTick;
 
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckBox.isSelected();
-	}
+  /**
+   * Instantiates a new ticks inside plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param tick
+   *          the tick
+   */
+  public TicksInsidePlotControl(ModernWindow parent, TickProperties tick) {
+    mTick = tick;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mTick.setDrawInside(mCheckBox.isSelected());
-	}
+    mCheckBox.setSelected(mTick.getDrawInside());
+
+    add(mCheckBox);
+
+    mCheckBox.addClickListener(this);
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mTick.setDrawInside(mCheckBox.isSelected());
+  }
 
 }

@@ -24,48 +24,59 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jebtk.modern.theme.ThemeService;
 import org.xml.sax.SAXException;
 
-
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class MainVenn.
  */
 public class MainVenn {
-	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 * @throws FontFormatException the font format exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SAXException the SAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws UnsupportedLookAndFeelException the unsupported look and feel exception
-	 */
-	public static final void main(String[] args) throws FontFormatException, IOException, SAXException, ParserConfigurationException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		ThemeService.getInstance().setTheme();
 
-		main();
-	}
+  /**
+   * The main method.
+   *
+   * @param args
+   *          the arguments
+   * @throws FontFormatException
+   *           the font format exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws SAXException
+   *           the SAX exception
+   * @throws ParserConfigurationException
+   *           the parser configuration exception
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws InstantiationException
+   *           the instantiation exception
+   * @throws IllegalAccessException
+   *           the illegal access exception
+   * @throws UnsupportedLookAndFeelException
+   *           the unsupported look and feel exception
+   */
+  public static final void main(String[] args)
+      throws FontFormatException, IOException, SAXException, ParserConfigurationException, ClassNotFoundException,
+      InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    ThemeService.getInstance().setTheme();
 
-	/**
-	 * Main.
-	 *
-	 * @throws SAXException the SAX exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ParserConfigurationException the parser configuration exception
-	 */
-	public static void main() throws SAXException, IOException, ParserConfigurationException {
-		//VennSplashScreen window = new VennSplashScreen(new VennInfo());
-		
-		//window.setVisible(true);
-		
-		MainVennWindow window = new MainVennWindow();
-		
-		window.setVisible(true);
-	}
+    main();
+  }
+
+  /**
+   * Main.
+   *
+   * @throws SAXException
+   *           the SAX exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws ParserConfigurationException
+   *           the parser configuration exception
+   */
+  public static void main() throws SAXException, IOException, ParserConfigurationException {
+    // VennSplashScreen window = new VennSplashScreen(new VennInfo());
+
+    // window.setVisible(true);
+
+    MainVennWindow window = new MainVennWindow();
+
+    window.setVisible(true);
+  }
 }

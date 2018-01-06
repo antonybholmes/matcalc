@@ -30,48 +30,54 @@ import org.jebtk.modern.text.ModernAutoSizeLabel;
  * The class LineStyleControl.
  */
 public class LegendPositionControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check box.
-	 */
-	private LegendPositionCombo mCombo = new LegendPositionCombo();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m legend. */
-	private LegendProperties mLegend;
-	
-	/**
-	 * Instantiates a new line style control.
-	 *
-	 * @param legend the legend
-	 */
-	public LegendPositionControl(LegendProperties legend) {
-		mLegend = legend;
+  /**
+   * The member check box.
+   */
+  private LegendPositionCombo mCombo = new LegendPositionCombo();
 
-		add(new ModernAutoSizeLabel("Position"));
-		add(Box.createHorizontalGlue());
-		add(mCombo);
-		
-		mCombo.addClickListener(this);
-		
-		legend.addChangeListener(new ChangeListener() {
+  /** The m legend. */
+  private LegendProperties mLegend;
 
-			@Override
-			public void changed(ChangeEvent e) {
-				mCombo.setPosition(mLegend.getPosition());
-			}});
-	}
+  /**
+   * Instantiates a new line style control.
+   *
+   * @param legend
+   *          the legend
+   */
+  public LegendPositionControl(LegendProperties legend) {
+    mLegend = legend;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mLegend.setPosition(mCombo.getPosition());
-	}
+    add(new ModernAutoSizeLabel("Position"));
+    add(Box.createHorizontalGlue());
+    add(mCombo);
+
+    mCombo.addClickListener(this);
+
+    legend.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        mCombo.setPosition(mLegend.getPosition());
+      }
+    });
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mLegend.setPosition(mCombo.getPosition());
+  }
 
 }

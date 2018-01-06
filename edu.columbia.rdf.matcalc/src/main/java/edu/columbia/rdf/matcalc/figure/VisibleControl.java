@@ -30,73 +30,80 @@ import org.jebtk.modern.window.ModernWindow;
  * The class AxisVisibleControl.
  */
 public class VisibleControl extends HBox implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member check box.
-	 */
-	private CheckBox mCheckBox;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member axis.
-	 */
-	private VisibleProperties mVp;
-	
-	
-	/**
-	 * Instantiates a new axis visible control.
-	 *
-	 * @param parent the parent
-	 * @param vp the vp
-	 */
-	public VisibleControl(ModernWindow parent, VisibleProperties vp) {
-		mCheckBox = new ModernCheckSwitch("Show");
-		
-		add(mCheckBox);
-		//setBorder(ModernWidget.BORDER);
+  /**
+   * The member check box.
+   */
+  private CheckBox mCheckBox;
 
-		mCheckBox.addClickListener(this);
-		
-		changeProperties(vp);
-		
-		mVp.addChangeListener(new ChangeListener() {
+  /**
+   * The member axis.
+   */
+  private VisibleProperties mVp;
 
-			@Override
-			public void changed(ChangeEvent e) {
-				mCheckBox.setSelected(mVp.getVisible());
-			}});
-	}
-	
-	/**
-	 * Change properties.
-	 *
-	 * @param vp the vp
-	 */
-	public void changeProperties(VisibleProperties vp) {
-		mVp = vp;
-		
-		mCheckBox.setSelected(vp.getVisible());
-	}
-	
-	/**
-	 * Checks if is selected.
-	 *
-	 * @return true, if is selected
-	 */
-	public boolean isSelected() {
-		return mCheckBox.isSelected();
-	}
+  /**
+   * Instantiates a new axis visible control.
+   *
+   * @param parent
+   *          the parent
+   * @param vp
+   *          the vp
+   */
+  public VisibleControl(ModernWindow parent, VisibleProperties vp) {
+    mCheckBox = new ModernCheckSwitch("Show");
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mVp.setVisible(mCheckBox.isSelected());
-	}
+    add(mCheckBox);
+    // setBorder(ModernWidget.BORDER);
+
+    mCheckBox.addClickListener(this);
+
+    changeProperties(vp);
+
+    mVp.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        mCheckBox.setSelected(mVp.getVisible());
+      }
+    });
+  }
+
+  /**
+   * Change properties.
+   *
+   * @param vp
+   *          the vp
+   */
+  public void changeProperties(VisibleProperties vp) {
+    mVp = vp;
+
+    mCheckBox.setSelected(vp.getVisible());
+  }
+
+  /**
+   * Checks if is selected.
+   *
+   * @return true, if is selected
+   */
+  public boolean isSelected() {
+    return mCheckBox.isSelected();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mVp.setVisible(mCheckBox.isSelected());
+  }
 
 }

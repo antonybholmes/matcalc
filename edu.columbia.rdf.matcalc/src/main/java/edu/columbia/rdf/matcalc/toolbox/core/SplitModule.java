@@ -51,262 +51,251 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.OpenMode;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Split table into multiple tables by grouping column values and then create
- * a zip of the results.
+ * Split table into multiple tables by grouping column values and then create a
+ * zip of the results.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class SplitModule extends CalcModule implements ModernClickListener  {
+public class SplitModule extends CalcModule implements ModernClickListener {
 
-	/** The Constant ICON. */
-	private static final ModernIcon ICON =
-			UIService.getInstance().loadIcon("split", 24);
+  /** The Constant ICON. */
+  private static final ModernIcon ICON = UIService.getInstance().loadIcon("split", 24);
 
-	/** The m button. */
-	private ModernDropDownButton mButton;
+  /** The m button. */
+  private ModernDropDownButton mButton;
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Split";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Split";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu popup = new ModernPopupMenu();
 
-		popup.addMenuItem(new ModernTwoLineMenuItem("Split on column values", 
-				"Split matrix by grouping rows in a column.", 
-				ICON));
-		popup.addMenuItem(new ModernTwoLineMenuItem("Split by group",
-				"Split matrix based on column groups.",
-				ICON));
+    popup.addMenuItem(
+        new ModernTwoLineMenuItem("Split on column values", "Split matrix by grouping rows in a column.", ICON));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Split by group", "Split matrix based on column groups.", ICON));
 
-		//popup.addMenuItem(new ModernMenuSeparator());
-		
-		popup.addMenuItem(new ModernMenuHelpItem("Help with splitting a matrix...",
-				"matcalc.split.help.url").setTextOffset(48));
+    // popup.addMenuItem(new ModernMenuSeparator());
 
-		mButton = new RibbonLargeDropDownButton("Split", ICON, popup);
-		mButton.setChangeText(false);
-		mButton.setToolTip("Split", "Split matrix into sub-matrices.");
+    popup.addMenuItem(
+        new ModernMenuHelpItem("Help with splitting a matrix...", "matcalc.split.help.url").setTextOffset(48));
 
-		mWindow.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
+    mButton = new RibbonLargeDropDownButton("Split", ICON, popup);
+    mButton.setChangeText(false);
+    mButton.setToolTip("Split", "Split matrix into sub-matrices.");
 
-		mButton.addClickListener(this);
-	}
+    mWindow.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		if (e.getMessage().equals("Split on column values")) {
-			try {
-				splitByColumn();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else if (e.getMessage().equals("Split by group")) {
-			try {
-				splitByGroup();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else {
-			// Do nothing
-		}
-	}
+    mButton.addClickListener(this);
+  }
 
-	/**
-	 * Split a matrix by grouping rows with the same value in a given column.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void splitByColumn() throws IOException {
-		List<Integer> columns = mWindow.getSelectedColumns();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    if (e.getMessage().equals("Split on column values")) {
+      try {
+        splitByColumn();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getMessage().equals("Split by group")) {
+      try {
+        splitByGroup();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
+    } else {
+      // Do nothing
+    }
+  }
 
-		if (columns == null || columns.size() == 0) {
-			ModernMessageDialog.createDialog(mWindow, 
-					"You must select a column to split on.", 
-					MessageDialogType.WARNING);
+  /**
+   * Split a matrix by grouping rows with the same value in a given column.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void splitByColumn() throws IOException {
+    List<Integer> columns = mWindow.getSelectedColumns();
 
-			return;
-		}
+    if (columns == null || columns.size() == 0) {
+      ModernMessageDialog.createDialog(mWindow, "You must select a column to split on.", MessageDialogType.WARNING);
 
-		SplitDialog dialog = new SplitDialog(mWindow);
+      return;
+    }
 
-		dialog.setVisible(true);
+    SplitDialog dialog = new SplitDialog(mWindow);
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    dialog.setVisible(true);
 
-		boolean openMatrices = dialog.getLoad();
-		boolean createZip = dialog.getCreateZip();
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
+    boolean openMatrices = dialog.getLoad();
+    boolean createZip = dialog.getCreateZip();
 
-		DataFrame current = mWindow.getCurrentMatrix();
+    DataFrame current = mWindow.getCurrentMatrix();
 
-		ListMultiMap<String, Integer> idMap = ArrayListMultiMap.create();
+    ListMultiMap<String, Integer> idMap = ArrayListMultiMap.create();
 
-		int c = columns.get(0);
+    int c = columns.get(0);
 
-		// first the list of ids
+    // first the list of ids
 
-		for (int i = 0; i < current.getRows(); ++i) {
-			idMap.get(current.getText(i, c)).add(i);
-		}
+    for (int i = 0; i < current.getRows(); ++i) {
+      idMap.get(current.getText(i, c)).add(i);
+    }
 
-		// Clean up the ids
-		List<String> ids = CollectionUtils.sort(idMap.keySet());
+    // Clean up the ids
+    List<String> ids = CollectionUtils.sort(idMap.keySet());
 
+    List<String> cleanedIds = Stream.of(ids).map(new Function<String, String>() {
+      @Override
+      public String apply(String item) {
+        return item.toLowerCase().replaceAll("\\.[a-z]+$", "").replaceAll("[^a-z0-9\\_\\-]", "_").replaceAll("_+", "_");
+      }
+    }).toList();
 
-		List<String> cleanedIds = Stream.of(ids)
-				.map(new Function<String, String> () {
-					@Override
-					public String apply(String item) {
-						return item
-								.toLowerCase()
-								.replaceAll("\\.[a-z]+$", "")
-								.replaceAll("[^a-z0-9\\_\\-]", "_")
-								.replaceAll("_+", "_");
-					}})
-				.toList();
+    List<DataFrame> matrices = new ArrayList<DataFrame>(ids.size());
 
+    for (String id : ids) {
+      System.err.println("split id " + id);
+      matrices.add(DataFrame.createAnnotatableMatrixFromRows(current, idMap.get(id)));
+    }
 
-		List<DataFrame> matrices = 
-				new ArrayList<DataFrame>(ids.size());
+    splitByGroup(cleanedIds, matrices, openMatrices, createZip);
+  }
 
-		for (String id : ids) {
-			System.err.println("split id " + id);
-			matrices.add(DataFrame.createAnnotatableMatrixFromRows(current, idMap.get(id)));
-		}
+  /**
+   * Split by group.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void splitByGroup() throws IOException {
+    List<XYSeries> groups = mWindow.getGroups();
 
-		splitByGroup(cleanedIds, matrices, openMatrices, createZip);
-	}
+    if (groups.size() == 0) {
+      MainMatCalcWindow.createGroupWarningDialog(mWindow);
 
-	/**
-	 * Split by group.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void splitByGroup() throws IOException {
-		List<XYSeries> groups = mWindow.getGroups();
+      return;
+    }
 
-		if (groups.size() == 0) {
-			MainMatCalcWindow.createGroupWarningDialog(mWindow);
+    SplitDialog dialog = new SplitDialog(mWindow);
 
-			return;
-		}
+    dialog.setVisible(true);
 
-		SplitDialog dialog = new SplitDialog(mWindow);
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		dialog.setVisible(true);
+    boolean openMatrices = dialog.getLoad();
+    boolean createZip = dialog.getCreateZip();
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    DataFrame current = mWindow.getCurrentMatrix();
 
-		boolean openMatrices = dialog.getLoad();
-		boolean createZip = dialog.getCreateZip();
+    List<List<Integer>> allIndices = MatrixGroup.findColumnIndices(current, groups);
 
-		DataFrame current = mWindow.getCurrentMatrix();
+    List<DataFrame> matrices = new ArrayList<DataFrame>(groups.size());
 
-		List<List<Integer>> allIndices = 
-				MatrixGroup.findColumnIndices(current, groups);
+    for (List<Integer> indices : allIndices) {
+      matrices.add(DataFrame.createAnnotatableMatrixFromCols(current, indices));
+    }
 
-		List<DataFrame> matrices = 
-				new ArrayList<DataFrame>(groups.size());
+    List<String> ids = new ArrayList<String>(groups.size());
 
-		for (List<Integer> indices : allIndices) {
-			matrices.add(DataFrame.createAnnotatableMatrixFromCols(current, indices));
-		}
+    for (XYSeries group : groups) {
+      ids.add(group.getName().toLowerCase().replaceAll("\\.[a-z]+$", "").replaceAll("[^a-z0-9\\_\\-]", "_")
+          .replaceAll("_+", "_"));
+    }
 
-		List<String> ids = new ArrayList<String>(groups.size());
+    splitByGroup(ids, matrices, openMatrices, createZip);
+  }
 
-		for (XYSeries group : groups) {
-			ids.add(group
-					.getName()
-					.toLowerCase()
-					.replaceAll("\\.[a-z]+$", "")
-					.replaceAll("[^a-z0-9\\_\\-]", "_")
-					.replaceAll("_+", "_"));
-		}
+  /**
+   * Split by group.
+   *
+   * @param ids
+   *          the ids
+   * @param matrices
+   *          the matrices
+   * @param openMatrices
+   *          the open matrices
+   * @param createZip
+   *          the create zip
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void splitByGroup(List<String> ids, List<DataFrame> matrices, boolean openMatrices, boolean createZip)
+      throws IOException {
 
-		splitByGroup(ids, matrices, openMatrices, createZip);
-	}
+    if (createZip) {
+      Path file = FileDialog.saveZipFile(mWindow, RecentFilesService.getInstance().getPwd());
 
-	/**
-	 * Split by group.
-	 *
-	 * @param ids the ids
-	 * @param matrices the matrices
-	 * @param openMatrices the open matrices
-	 * @param createZip the create zip
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void splitByGroup(List<String> ids,
-			List<DataFrame> matrices,
-			boolean openMatrices,
-			boolean createZip) throws IOException {
+      if (file != null) {
+        boolean write = true;
 
-		if (createZip) {
-			Path file = FileDialog.saveZipFile(mWindow, 
-					RecentFilesService.getInstance().getPwd());
+        if (FileUtils.exists(file)) {
+          ModernDialogStatus status = ModernMessageDialog.createFileReplaceDialog(mWindow, file);
 
+          write = status == ModernDialogStatus.OK;
+        }
 
+        if (write) {
+          List<Path> files = new ArrayList<Path>(ids.size());
 
-			if (file != null) {
-				boolean write = true;
+          for (int i = 0; i < ids.size(); ++i) {
+            String id = ids.get(i);
 
-				if (FileUtils.exists(file)) {
-					ModernDialogStatus status = ModernMessageDialog.createFileReplaceDialog(mWindow, file);
+            DataFrame m = matrices.get(i);
 
-					write = status == ModernDialogStatus.OK;
-				}
+            Path tmp = Temp.createTempFile(id + ".txt");
 
-				if (write) {
-					List<Path> files = new ArrayList<Path>(ids.size());
+            DataFrame.writeDataFrame(m, tmp);
 
-					for (int i = 0; i < ids.size(); ++i) {
-						String id = ids.get(i);
+            files.add(tmp);
+          }
 
-						DataFrame m = matrices.get(i);
+          Io.createZip(file, files);
 
-						Path tmp = Temp.createTempFile(id + ".txt");
+          ModernMessageDialog.createFileSavedDialog(mWindow, file);
+        }
+      }
+    }
 
-						DataFrame.writeDataFrame(m, tmp);
-
-						files.add(tmp);
-					}
-
-					Io.createZip(file, files);
-
-					ModernMessageDialog.createFileSavedDialog(mWindow, file);
-				}
-			}
-		}
-
-		if (openMatrices) {
-			// We elect to open the matrices into matcalc
-			mWindow.openMatrices(matrices, OpenMode.CURRENT_WINDOW);
-		}
-	}
+    if (openMatrices) {
+      // We elect to open the matrices into matcalc
+      mWindow.openMatrices(matrices, OpenMode.CURRENT_WINDOW);
+    }
+  }
 }

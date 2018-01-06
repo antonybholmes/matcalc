@@ -20,20 +20,22 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
  * The Interface Filter.
  */
 public interface Filter {
-	
-	/**
-	 * Test.
-	 *
-	 * @param text the text
-	 * @param value the value
-	 * @return true, if successful
-	 */
-	boolean test(String text, double value);
 
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	String getName();
+  /**
+   * Test.
+   *
+   * @param text
+   *          the text
+   * @param value
+   *          the value
+   * @return true, if successful
+   */
+  boolean test(String text, double value);
+
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
+  String getName();
 }

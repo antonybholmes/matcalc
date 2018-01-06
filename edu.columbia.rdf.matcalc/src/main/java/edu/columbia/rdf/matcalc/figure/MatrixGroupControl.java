@@ -27,8 +27,6 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.widget.ModernClickWidget;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Allows users to select which groups are displayed.
@@ -37,77 +35,82 @@ import org.jebtk.modern.widget.ModernClickWidget;
  */
 public class MatrixGroupControl extends VBox implements ModernClickListener {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member groups model.
-	 */
-	private XYSeriesModel mGroupsModel;
+  /**
+   * The member groups model.
+   */
+  private XYSeriesModel mGroupsModel;
 
-	/**
-	 * The button map.
-	 */
-	private Map<ModernClickWidget, XYSeries> mButtonMap = 
-			new HashMap<ModernClickWidget, XYSeries>();
+  /**
+   * The button map.
+   */
+  private Map<ModernClickWidget, XYSeries> mButtonMap = new HashMap<ModernClickWidget, XYSeries>();
 
-	/**
-	 * The class ChangeEvents.
-	 */
-	private class ChangeEvents implements ChangeListener {
+  /**
+   * The class ChangeEvents.
+   */
+  private class ChangeEvents implements ChangeListener {
 
-		/* (non-Javadoc)
-		 * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			refresh();
-		}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      refresh();
+    }
 
-	}
+  }
 
-	/**
-	 * Instantiates a new matrix group ribbon section.
-	 *
-	 * @param groupsModel the groups model
-	 */
-	public MatrixGroupControl(XYSeriesModel groupsModel) {
-		mGroupsModel = groupsModel;
+  /**
+   * Instantiates a new matrix group ribbon section.
+   *
+   * @param groupsModel
+   *          the groups model
+   */
+  public MatrixGroupControl(XYSeriesModel groupsModel) {
+    mGroupsModel = groupsModel;
 
-		groupsModel.addChangeListener(new ChangeEvents());
+    groupsModel.addChangeListener(new ChangeEvents());
 
-		ModernClickWidget button;
+    ModernClickWidget button;
 
-	
-		for (XYSeries series : groupsModel) {
-			button = new MatrixGroupCheckSwitch(series, groupsModel.getVisible(series));
-			button.addClickListener(this);
-			add(button);
+    for (XYSeries series : groupsModel) {
+      button = new MatrixGroupCheckSwitch(series, groupsModel.getVisible(series));
+      button.addClickListener(this);
+      add(button);
 
-			mButtonMap.put(button, series);
-		}
-	}
+      mButtonMap.put(button, series);
+    }
+  }
 
-	/**
-	 * Refresh.
-	 */
-	private void refresh() {
-		for (ModernClickWidget button : mButtonMap.keySet()) {
-			button.setSelected(mGroupsModel.getVisible(mButtonMap.get(button)));
-		}
-	}
+  /**
+   * Refresh.
+   */
+  private void refresh() {
+    for (ModernClickWidget button : mButtonMap.keySet()) {
+      button.setSelected(mGroupsModel.getVisible(mButtonMap.get(button)));
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		ModernClickWidget button = (ModernClickWidget)e.getSource();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    ModernClickWidget button = (ModernClickWidget) e.getSource();
 
-		XYSeries series = mButtonMap.get(button);
+    XYSeries series = mButtonMap.get(button);
 
-		mGroupsModel.setVisible(series, button.isSelected());
-	}
+    mGroupsModel.setVisible(series, button.isSelected());
+  }
 }

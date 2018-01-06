@@ -28,50 +28,52 @@ import org.jebtk.modern.window.WindowService;
  *
  */
 public abstract class PlotMatrixTransform extends MatrixTransform {
-	
-	/**
-	 * The member window reference.
-	 */
-	private String mWindowReference;
 
-	/**
-	 * Instantiates a new plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param inputMatrix the input matrix
-	 */
-	public PlotMatrixTransform(ModernWindow parent,
-			String name,
-			DataFrame inputMatrix) {
-		super(parent, name, inputMatrix);
-	}
+  /**
+   * The member window reference.
+   */
+  private String mWindowReference;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.math.matrix.transform.MatrixTransform#apply()
-	 */
-	@Override
-	public void apply() {
-		ModernWindow window = 
-				WindowService.getInstance().findByName(mWindowReference);
-		
-		if (window == null) {
-			// else create a new window
-			window = createWindow();
+  /**
+   * Instantiates a new plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param inputMatrix
+   *          the input matrix
+   */
+  public PlotMatrixTransform(ModernWindow parent, String name, DataFrame inputMatrix) {
+    super(parent, name, inputMatrix);
+  }
 
-			mWindowReference = window.getTitle();
-		}
-		
-		window.setVisible(true);
-		WindowService.setFocus(window);
-		
-		super.apply();
-	}
-	
-	/**
-	 * Creates the window.
-	 *
-	 * @return the modern window
-	 */
-	protected abstract ModernWindow createWindow();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.math.matrix.transform.MatrixTransform#apply()
+   */
+  @Override
+  public void apply() {
+    ModernWindow window = WindowService.getInstance().findByName(mWindowReference);
+
+    if (window == null) {
+      // else create a new window
+      window = createWindow();
+
+      mWindowReference = window.getTitle();
+    }
+
+    window.setVisible(true);
+    WindowService.setFocus(window);
+
+    super.apply();
+  }
+
+  /**
+   * Creates the window.
+   *
+   * @return the modern window
+   */
+  protected abstract ModernWindow createWindow();
 }

@@ -37,129 +37,126 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class ColorMapChooser extends ModernWidget {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The constant BLUE_RED.
-	 */
-	public static final String BLUE_RED = "blue_red";
-	
-	/**
-	 * The constant GREEN_RED.
-	 */
-	public static final String GREEN_RED = "green_red";
-	
-	/**
-	 * The constant BLUE_YELLOW.
-	 */
-	public static final String BLUE_YELLOW = "blue_yellow";
-	
-	/**
-	 * The check blue red.
-	 */
-	private ModernRadioButton checkBlueRed = new ModernRadioButton();
-	
-	/**
-	 * The check green red.
-	 */
-	private ModernRadioButton checkGreenRed = new ModernRadioButton();
-	
-	/**
-	 * The check blue yellow.
-	 */
-	private ModernRadioButton checkBlueYellow = new ModernRadioButton();
-	
-	/**
-	 * The check invert.
-	 */
-	private CheckBox checkInvert = new ModernCheckBox("Invert");
+  /**
+   * The constant BLUE_RED.
+   */
+  public static final String BLUE_RED = "blue_red";
 
-	
-	/**
-	 * Instantiates a new color map chooser.
-	 */
-	public ColorMapChooser() {
-		int[] rows = {WIDGET_HEIGHT};
-		int[] cols = {WIDGET_HEIGHT, 150};
-		
-		MatrixPanel matrixPanel = new MatrixPanel(rows, 
-				cols, 
-				0, 
-				0);
-		
-		ColorMapPanel panel = new ColorMapPanel(ColorMap.createBlueWhiteRedMap(false));
-		panel.setBorder(BORDER);
-		matrixPanel.add(checkBlueRed);
-		matrixPanel.add(panel);
-		
-		panel = new ColorMapPanel(ColorMap.createGreenBlackRedMap(false));
-		panel.setBorder(BORDER);
-		matrixPanel.add(checkGreenRed);
-		matrixPanel.add(panel);
-		
-		panel = new ColorMapPanel(ColorMap.createBlueYellowMap(false));
-		panel.setBorder(BORDER);
-		matrixPanel.add(checkBlueYellow);
-		matrixPanel.add(panel);
-		
-		checkBlueRed.setClickMessage(BLUE_RED);
-		checkGreenRed.setClickMessage(GREEN_RED);
-		checkBlueYellow.setClickMessage(BLUE_YELLOW);
-		
-		ModernButtonGroup group = new ModernButtonGroup();
-		
-		group.add(checkBlueRed);
-		group.add(checkGreenRed);
-		group.add(checkBlueYellow);
-		
-		checkBlueRed.setSelected(true);
-		
-		//matrixPanel.setBorder(ModernPanel.BORDER);
-		
-		add(matrixPanel, BorderLayout.CENTER);
-		add(checkInvert, BorderLayout.PAGE_END);
-		
-		setMaximumSize(new Dimension(Short.MAX_VALUE, 120));
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		checkBlueRed.addClickListener(l);
-		checkGreenRed.addClickListener(l);
-		checkBlueYellow.addClickListener(l);
-		checkInvert.addClickListener(l);
-	}
+  /**
+   * The constant GREEN_RED.
+   */
+  public static final String GREEN_RED = "green_red";
 
-	/**
-	 * Gets the invert scheme.
-	 *
-	 * @return the invert scheme
-	 */
-	public boolean getInvertScheme() {
-		return checkInvert.isSelected();
-	}
+  /**
+   * The constant BLUE_YELLOW.
+   */
+  public static final String BLUE_YELLOW = "blue_yellow";
 
-	/**
-	 * Gets the color map.
-	 *
-	 * @return the color map
-	 */
-	public ColorMap getColorMap() {
-		if (checkGreenRed.isSelected()) {
-			return ColorMap.createGreenBlackRedMap(getInvertScheme());
-		} else if (checkBlueYellow.isSelected()) {
-			return ColorMap.createBlueYellowMap(getInvertScheme());
-		} else {
-			return ColorMap.createBlueWhiteRedMap(getInvertScheme());
-		}
+  /**
+   * The check blue red.
+   */
+  private ModernRadioButton checkBlueRed = new ModernRadioButton();
 
-	}
+  /**
+   * The check green red.
+   */
+  private ModernRadioButton checkGreenRed = new ModernRadioButton();
+
+  /**
+   * The check blue yellow.
+   */
+  private ModernRadioButton checkBlueYellow = new ModernRadioButton();
+
+  /**
+   * The check invert.
+   */
+  private CheckBox checkInvert = new ModernCheckBox("Invert");
+
+  /**
+   * Instantiates a new color map chooser.
+   */
+  public ColorMapChooser() {
+    int[] rows = { WIDGET_HEIGHT };
+    int[] cols = { WIDGET_HEIGHT, 150 };
+
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, 0, 0);
+
+    ColorMapPanel panel = new ColorMapPanel(ColorMap.createBlueWhiteRedMap(false));
+    panel.setBorder(BORDER);
+    matrixPanel.add(checkBlueRed);
+    matrixPanel.add(panel);
+
+    panel = new ColorMapPanel(ColorMap.createGreenBlackRedMap(false));
+    panel.setBorder(BORDER);
+    matrixPanel.add(checkGreenRed);
+    matrixPanel.add(panel);
+
+    panel = new ColorMapPanel(ColorMap.createBlueYellowMap(false));
+    panel.setBorder(BORDER);
+    matrixPanel.add(checkBlueYellow);
+    matrixPanel.add(panel);
+
+    checkBlueRed.setClickMessage(BLUE_RED);
+    checkGreenRed.setClickMessage(GREEN_RED);
+    checkBlueYellow.setClickMessage(BLUE_YELLOW);
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(checkBlueRed);
+    group.add(checkGreenRed);
+    group.add(checkBlueYellow);
+
+    checkBlueRed.setSelected(true);
+
+    // matrixPanel.setBorder(ModernPanel.BORDER);
+
+    add(matrixPanel, BorderLayout.CENTER);
+    add(checkInvert, BorderLayout.PAGE_END);
+
+    setMaximumSize(new Dimension(Short.MAX_VALUE, 120));
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    checkBlueRed.addClickListener(l);
+    checkGreenRed.addClickListener(l);
+    checkBlueYellow.addClickListener(l);
+    checkInvert.addClickListener(l);
+  }
+
+  /**
+   * Gets the invert scheme.
+   *
+   * @return the invert scheme
+   */
+  public boolean getInvertScheme() {
+    return checkInvert.isSelected();
+  }
+
+  /**
+   * Gets the color map.
+   *
+   * @return the color map
+   */
+  public ColorMap getColorMap() {
+    if (checkGreenRed.isSelected()) {
+      return ColorMap.createGreenBlackRedMap(getInvertScheme());
+    } else if (checkBlueYellow.isSelected()) {
+      return ColorMap.createBlueYellowMap(getInvertScheme());
+    } else {
+      return ColorMap.createBlueWhiteRedMap(getInvertScheme());
+    }
+
+  }
 
 }

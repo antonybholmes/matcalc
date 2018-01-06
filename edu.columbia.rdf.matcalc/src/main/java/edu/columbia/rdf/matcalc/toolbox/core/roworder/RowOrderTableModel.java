@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.roworder;
 
-
 import java.util.List;
 
 import org.jebtk.core.Indexed;
@@ -30,169 +29,188 @@ import org.jebtk.modern.table.ModernColumnHeaderTableModel;
  *
  */
 public class RowOrderTableModel extends ModernColumnHeaderTableModel {
-	
-	/**
-	 * The constant HEADER.
-	 */
-	private static final String[] HEADER = {"", "", "Heading"};
 
-	/**
-	 * The member ids.
-	 */
-	private List<Indexed<Integer, String>> mIds;
+  /**
+   * The constant HEADER.
+   */
+  private static final String[] HEADER = { "", "", "Heading" };
 
-	/**
-	 * The member visible.
-	 */
-	private List<Boolean> mVisible;
-	
-	/**
-	 * Instantiates a new row order table model.
-	 *
-	 * @param ids the ids
-	 */
-	public RowOrderTableModel(List<Indexed<Integer, String>> ids) {
+  /**
+   * The member ids.
+   */
+  private List<Indexed<Integer, String>> mIds;
 
-		mIds = ids;
-		mVisible = CollectionUtils.replicate(true, ids.size());
+  /**
+   * The member visible.
+   */
+  private List<Boolean> mVisible;
 
-		fireDataChanged();
-	}
+  /**
+   * Instantiates a new row order table model.
+   *
+   * @param ids
+   *          the ids
+   */
+  public RowOrderTableModel(List<Indexed<Integer, String>> ids) {
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnCount()
-	 */
-	public final int getColumnCount() {
-		return HEADER.length;
-	}
+    mIds = ids;
+    mVisible = CollectionUtils.replicate(true, ids.size());
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getRowCount()
-	 */
-	public final int getRowCount() {
-		//System.out.println("row count" + rows.size());
+    fireDataChanged();
+  }
 
-		return mIds.size();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnCount()
+   */
+  public final int getColumnCount() {
+    return HEADER.length;
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
-	 */
-	@Override
-	public final List<String> getColumnAnnotationText(int column) {
-		return CollectionUtils.asList(HEADER[column]);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getRowCount()
+   */
+  public final int getRowCount() {
+    // System.out.println("row count" + rows.size());
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getValueAt(int, int)
-	 */
-	@Override
-	public final Object getValueAt(int row, int col) {
-		switch (col) {
-		case 0:
-			return mVisible.get(row);
-		case 1:
-			return mIds.get(row).getIndex() + 1;
-		case 2:
-			return mIds.get(row).getValue();
-		}
+    return mIds.size();
+  }
 
-		return null;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#setValueAt(int, int, java.lang.Object)
-	 */
-	@Override
-	public final void setValueAt(int row, int col, Object o) {
-		if (col == 0) {
-			mVisible.set(row, (Boolean)o);
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
+   */
+  @Override
+  public final List<String> getColumnAnnotationText(int column) {
+    return CollectionUtils.asList(HEADER[column]);
+  }
 
-	/**
-	 * Swap up.
-	 *
-	 * @param indices the indices
-	 */
-	public void swapUp(List<Integer> indices) {
-		
-		List<Integer> sorted = CollectionUtils.sort(indices);
-		
-		for (int i : sorted) {
-			if (i == 0) {
-				continue;
-			}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getValueAt(int, int)
+   */
+  @Override
+  public final Object getValueAt(int row, int col) {
+    switch (col) {
+    case 0:
+      return mVisible.get(row);
+    case 1:
+      return mIds.get(row).getIndex() + 1;
+    case 2:
+      return mIds.get(row).getValue();
+    }
 
-			Indexed<Integer, String> t = mIds.get(i - 1);
+    return null;
+  }
 
-			mIds.set(i - 1, mIds.get(i));
-			mIds.set(i, t);
-			
-			boolean b = mVisible.get(i - 1);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#setValueAt(int, int,
+   * java.lang.Object)
+   */
+  @Override
+  public final void setValueAt(int row, int col, Object o) {
+    if (col == 0) {
+      mVisible.set(row, (Boolean) o);
+    }
+  }
 
-			mVisible.set(i - 1, mVisible.get(i));
-			mVisible.set(i, b);
-		}
+  /**
+   * Swap up.
+   *
+   * @param indices
+   *          the indices
+   */
+  public void swapUp(List<Integer> indices) {
 
-		fireDataChanged();
-	}
+    List<Integer> sorted = CollectionUtils.sort(indices);
 
-	/**
-	 * Swap down.
-	 *
-	 * @param indices the indices
-	 */
-	public void swapDown(List<Integer> indices) {
-		//System.err.println("swap down " + indices.toString());
-		
-		List<Integer> sorted = CollectionUtils.reverseSort(indices);
-		
-		for (int i : sorted) {
-			if (i == mIds.size() - 1) {
-				continue;
-			}
+    for (int i : sorted) {
+      if (i == 0) {
+        continue;
+      }
 
-			Indexed<Integer, String> t = mIds.get(i + 1);
+      Indexed<Integer, String> t = mIds.get(i - 1);
 
-			mIds.set(i + 1, mIds.get(i));
-			mIds.set(i, t);
-			
-			
-			boolean b = mVisible.get(i + 1);
+      mIds.set(i - 1, mIds.get(i));
+      mIds.set(i, t);
 
-			mVisible.set(i + 1, mVisible.get(i));
-			mVisible.set(i, b);
-		}
+      boolean b = mVisible.get(i - 1);
 
-		fireDataChanged();
-	}
+      mVisible.set(i - 1, mVisible.get(i));
+      mVisible.set(i, b);
+    }
 
-	/**
-	 * Gets the.
-	 *
-	 * @param index the index
-	 * @return the indexed value
-	 */
-	public final Indexed<Integer, String> get(int index) {
-		return mIds.get(index);
-	}
+    fireDataChanged();
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataGridModel#getIsCellEditable(int, int)
-	 */
-	@Override
-	public boolean getIsCellEditable(int row, int column) {
-		return column == 0;
-	}
+  /**
+   * Swap down.
+   *
+   * @param indices
+   *          the indices
+   */
+  public void swapDown(List<Integer> indices) {
+    // System.err.println("swap down " + indices.toString());
 
-	/**
-	 * Gets the visible.
-	 *
-	 * @param i the i
-	 * @return the visible
-	 */
-	public boolean getVisible(int i) {
-		return mVisible.get(i);
-	}
+    List<Integer> sorted = CollectionUtils.reverseSort(indices);
+
+    for (int i : sorted) {
+      if (i == mIds.size() - 1) {
+        continue;
+      }
+
+      Indexed<Integer, String> t = mIds.get(i + 1);
+
+      mIds.set(i + 1, mIds.get(i));
+      mIds.set(i, t);
+
+      boolean b = mVisible.get(i + 1);
+
+      mVisible.set(i + 1, mVisible.get(i));
+      mVisible.set(i, b);
+    }
+
+    fireDataChanged();
+  }
+
+  /**
+   * Gets the.
+   *
+   * @param index
+   *          the index
+   * @return the indexed value
+   */
+  public final Indexed<Integer, String> get(int index) {
+    return mIds.get(index);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.dataview.ModernDataGridModel#getIsCellEditable(int,
+   * int)
+   */
+  @Override
+  public boolean getIsCellEditable(int row, int column) {
+    return column == 0;
+  }
+
+  /**
+   * Gets the visible.
+   *
+   * @param i
+   *          the i
+   * @return the visible
+   */
+  public boolean getVisible(int i) {
+    return mVisible.get(i);
+  }
 }

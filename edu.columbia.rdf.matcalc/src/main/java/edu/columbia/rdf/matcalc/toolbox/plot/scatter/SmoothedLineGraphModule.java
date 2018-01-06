@@ -43,151 +43,158 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The class SmoothedLineGraphModule.
  */
 public class SmoothedLineGraphModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
-	
-	/**
-	 * The member axes.
-	 */
-	private Axes mAxes;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Line Graph";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.CalcModule#run(java.lang.String[])
-	 */
-	public void run(String... args) {
-		plot();
-		
-		for (String a : args) {
-			CommandLineArg arg = CommandLineArg.parsePosixArg(a);
-			
-			if (arg.getLongName().equals("switch-tab")) {
-				mParent.getRibbon().changeTab("Plot");
-			} else if (arg.getLongName().equals("x-axis-name")) {
-				mAxes.getX1Axis().getTitle().setText(arg.getValue());
-			} else if (arg.getLongName().equals("y-axis-name")) {
-				mAxes.getY1Axis().getTitle().setText(arg.getValue());
-			} else if (arg.getLongName().equals("show-legend")) {
-				mAxes.getLegend().setVisible(true);
-			} else if (arg.getLongName().equals("x-min")) {
-				try {
-					mAxes.getX1Axis().setMin(TextUtils.parseDouble(arg.getValue()));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			} else if (arg.getLongName().equals("x-max")) {
-				try {
-					mAxes.getX1Axis().setMax(TextUtils.parseDouble(arg.getValue()));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			} else {
-				// do nothing
-			}
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
-		
-		RibbonLargeButton button = new RibbonLargeButton("Line", 
-				UIService.getInstance().loadIcon("line_graph", 24),
-				"Line Graph",
-				"Generate a line graph.");
-		//button.setShowText(false);
-		button.addClickListener(this);
-		//button.setEnabled(false);
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
-	
-	/**
-	 * Creates the plot.
-	 */
-	private void plot() {
-		DataFrame m = mParent.getCurrentMatrix();
+  /**
+   * The member axes.
+   */
+  private Axes mAxes;
 
-		if (m == null) {
-			showLoadMatrixError(mParent);
-			
-			return;
-		}
-		
-		Figure figure = Figure.createFigure(); //window.getFigure();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Line Graph";
+  }
 
-		SubFigure subFigure = figure.currentSubFigure();
-		
-		mAxes = subFigure.currentAxes();
-		
-		mAxes.setMargins(100);
-		
-		ColorCycle colorCycle = new ColorCycle();
-		
-		for (int i = 0; i < m.getCols(); i += 2) {
-			Color color = colorCycle.next();
-			
-			XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)), color);
-			
-			series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
-			series.getStyle().getLineStyle().setColor(color);
-			
-			PlotFactory.createSplineLinePlot(m, mAxes, series);
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.CalcModule#run(java.lang.String[])
+   */
+  public void run(String... args) {
+    plot();
 
-		mAxes.setAxisLimitsAutoRound();
+    for (String a : args) {
+      CommandLineArg arg = CommandLineArg.parsePosixArg(a);
 
-		//gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
+      if (arg.getLongName().equals("switch-tab")) {
+        mParent.getRibbon().changeTab("Plot");
+      } else if (arg.getLongName().equals("x-axis-name")) {
+        mAxes.getX1Axis().getTitle().setText(arg.getValue());
+      } else if (arg.getLongName().equals("y-axis-name")) {
+        mAxes.getY1Axis().getTitle().setText(arg.getValue());
+      } else if (arg.getLongName().equals("show-legend")) {
+        mAxes.getLegend().setVisible(true);
+      } else if (arg.getLongName().equals("x-min")) {
+        try {
+          mAxes.getX1Axis().setMin(TextUtils.parseDouble(arg.getValue()));
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
+      } else if (arg.getLongName().equals("x-max")) {
+        try {
+          mAxes.getX1Axis().setMax(TextUtils.parseDouble(arg.getValue()));
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
+      } else {
+        // do nothing
+      }
+    }
+  }
 
-		// How big to make the x axis
-		//double min = Mathematics.min(log2FoldChanges);
-		//double max = Mathematics.max(log2FoldChanges);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
+    RibbonLargeButton button = new RibbonLargeButton("Line", UIService.getInstance().loadIcon("line_graph", 24),
+        "Line Graph", "Generate a line graph.");
+    // button.setShowText(false);
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
-		//gp.getXAxis().autoSetLimits(min, max);
-		//gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
-		//mAxes.getXAxis().getTitle().setText("Series");
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
+  /**
+   * Creates the plot.
+   */
+  private void plot() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-		//min = Mathematics.min(minusLog10PValues);
-		//max = Mathematics.max(minusLog10PValues);
+    if (m == null) {
+      showLoadMatrixError(mParent);
 
-		//System.err.println("my " + min + " " + max);
+      return;
+    }
 
-		//gp.getYAxis().autoSetLimits(min, max);
-		//gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
-		//mAxes.getY1Axis().getTitle().setText("Count");
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-		//mWindow.addToHistory(new BarChartMatrixTransform(mWindow, m, canvas));
-		
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-		
-		window.setVisible(true);
-	}
+    SubFigure subFigure = figure.currentSubFigure();
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		plot();
-	}
+    mAxes = subFigure.currentAxes();
 
-	
+    mAxes.setMargins(100);
+
+    ColorCycle colorCycle = new ColorCycle();
+
+    for (int i = 0; i < m.getCols(); i += 2) {
+      Color color = colorCycle.next();
+
+      XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)), color);
+
+      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getLineStyle().setColor(color);
+
+      PlotFactory.createSplineLinePlot(m, mAxes, series);
+    }
+
+    mAxes.setAxisLimitsAutoRound();
+
+    // gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
+
+    // How big to make the x axis
+    // double min = Mathematics.min(log2FoldChanges);
+    // double max = Mathematics.max(log2FoldChanges);
+
+    // gp.getXAxis().autoSetLimits(min, max);
+    // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // inc));
+    // mAxes.getXAxis().getTitle().setText("Series");
+
+    // min = Mathematics.min(minusLog10PValues);
+    // max = Mathematics.max(minusLog10PValues);
+
+    // System.err.println("my " + min + " " + max);
+
+    // gp.getYAxis().autoSetLimits(min, max);
+    // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // inc));
+    // mAxes.getY1Axis().getTitle().setText("Count");
+
+    // mWindow.addToHistory(new BarChartMatrixTransform(mWindow, m, canvas));
+
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
+
+    window.setVisible(true);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    plot();
+  }
 
 }

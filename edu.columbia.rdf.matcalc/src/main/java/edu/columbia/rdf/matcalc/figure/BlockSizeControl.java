@@ -29,70 +29,70 @@ import org.jebtk.modern.spinner.ModernCompactSpinner;
  * The class AspectRatioControl.
  */
 public class BlockSizeControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member aspect field.
-	 */
-	private ModernCompactSpinner mXField = 
-			new ModernCompactSpinner(0.1, 100, 100, 0.1);
-	
-	/** The m Y field. */
-	private ModernCompactSpinner mYField = 
-			new ModernCompactSpinner(0.1, 100, 100, 0.1);
-	
-	/**
-	 * Instantiates a new aspect ratio control.
-	 */
-	public BlockSizeControl() {
-		this(MatrixPlotElement.DEFAULT_BLOCK);
-	}
-	
-	/**
-	 * Instantiates a new aspect ratio control.
-	 *
-	 * @param aspectRatio the aspect ratio
-	 */
-	public BlockSizeControl(IntDim dim) {
-		this(dim.getW(), dim.getH());
-	}
-	
-	public BlockSizeControl(DoubleDim dim) {
-		this(dim.getW(), dim.getH());
-	}
-	
-	public BlockSizeControl(double w, double h) {
-		
-		add(new HExpandBox("Width", mXField));
-		add(UI.createVGap(5));
-		add(new HExpandBox("Height", mYField));
-		
-		mXField.setValue(w);
-		mYField.setValue(h);
-		
-		setAlignmentY(TOP_ALIGNMENT);
-	}
-	
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addChangeListener(ChangeListener l) {
-		mXField.addChangeListener(l);
-		mYField.addChangeListener(l);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Gets the aspect ratio.
-	 *
-	 * @return the aspect ratio
-	 */
-	public DoubleDim getBlockSize() {
-		return new DoubleDim(mXField.getValue(), mYField.getValue());
-	}
+  /**
+   * The member aspect field.
+   */
+  private ModernCompactSpinner mXField = new ModernCompactSpinner(0.1, 100, 100, 0.1);
+
+  /** The m Y field. */
+  private ModernCompactSpinner mYField = new ModernCompactSpinner(0.1, 100, 100, 0.1);
+
+  /**
+   * Instantiates a new aspect ratio control.
+   */
+  public BlockSizeControl() {
+    this(MatrixPlotElement.DEFAULT_BLOCK);
+  }
+
+  /**
+   * Instantiates a new aspect ratio control.
+   *
+   * @param aspectRatio
+   *          the aspect ratio
+   */
+  public BlockSizeControl(IntDim dim) {
+    this(dim.getW(), dim.getH());
+  }
+
+  public BlockSizeControl(DoubleDim dim) {
+    this(dim.getW(), dim.getH());
+  }
+
+  public BlockSizeControl(double w, double h) {
+
+    add(new HExpandBox("Width", mXField));
+    add(UI.createVGap(5));
+    add(new HExpandBox("Height", mYField));
+
+    mXField.setValue(w);
+    mYField.setValue(h);
+
+    setAlignmentY(TOP_ALIGNMENT);
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addChangeListener(ChangeListener l) {
+    mXField.addChangeListener(l);
+    mYField.addChangeListener(l);
+  }
+
+  /**
+   * Gets the aspect ratio.
+   *
+   * @return the aspect ratio
+   */
+  public DoubleDim getBlockSize() {
+    return new DoubleDim(mXField.getValue(), mYField.getValue());
+  }
 }

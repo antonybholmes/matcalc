@@ -20,10 +20,10 @@ package edu.columbia.rdf.matcalc;
  * The Enum OpenMode.
  */
 public enum OpenMode {
-	
-	/**  Open files/matrices into current window. */
-	CURRENT_WINDOW,
-	
-	/**  Open files, matrices into new window. */
-	NEW_WINDOW
+
+  /** Open files/matrices into current window. */
+  CURRENT_WINDOW,
+
+  /** Open files, matrices into new window. */
+  NEW_WINDOW
 }

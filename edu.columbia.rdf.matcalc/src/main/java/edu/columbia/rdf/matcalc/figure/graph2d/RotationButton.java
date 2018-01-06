@@ -26,70 +26,64 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class RotationButton extends ModernDialogFlatDropDownButton {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/*
-	private class ClickEvents implements ModernClickListener {
-		@Override
-		public void clicked(ModernClickEvent e) {
-			if (e.getMessage().equals("270")) {
-				((RotationMultiIcon16)mIcon).setIcon(3);
-			} else if (e.getMessage().equals("180")) {
-				((RotationMultiIcon16)mIcon).setIcon(2);
-			} else if (e.getMessage().equals("90")) {
-				((RotationMultiIcon16)mIcon).setIcon(1);
-			} else {
-				((RotationMultiIcon16)mIcon).setIcon(0);
-			}
-			
-			repaint();
-		}
-	}
-	*/
-	
-	
-	/**
-	 * Instantiates a new rotation button.
-	 *
-	 * @param style the style
-	 */
-	public RotationButton(double style) {
-		super("0", new RotationMenu());
-		
-		//addClickListener(new ClickEvents());
-		
-		setStyle(style);
-		
-		UI.setSize(this, ModernWidget.SIZE_48);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	
-	/**
-	 * Sets the style.
-	 *
-	 * @param angle the new style
-	 */
-	public void setStyle(double angle) {
-		if (angle == Mathematics.HALF_PI) {
-			setSelectedIndex(1);
-		} else {
-			setSelectedIndex(0);
-		}
-	}
-	
-	/**
-	 * Gets the rotation.
-	 *
-	 * @return the rotation
-	 */
-	public double getRotation() {
-		if (getText().equals("90")) {
-			return Mathematics.HALF_PI;
-		} else {
-			return 0;
-		}
-	}
+  /*
+   * private class ClickEvents implements ModernClickListener {
+   * 
+   * @Override public void clicked(ModernClickEvent e) { if
+   * (e.getMessage().equals("270")) { ((RotationMultiIcon16)mIcon).setIcon(3); }
+   * else if (e.getMessage().equals("180")) {
+   * ((RotationMultiIcon16)mIcon).setIcon(2); } else if
+   * (e.getMessage().equals("90")) { ((RotationMultiIcon16)mIcon).setIcon(1); }
+   * else { ((RotationMultiIcon16)mIcon).setIcon(0); }
+   * 
+   * repaint(); } }
+   */
+
+  /**
+   * Instantiates a new rotation button.
+   *
+   * @param style
+   *          the style
+   */
+  public RotationButton(double style) {
+    super("0", new RotationMenu());
+
+    // addClickListener(new ClickEvents());
+
+    setStyle(style);
+
+    UI.setSize(this, ModernWidget.SIZE_48);
+  }
+
+  /**
+   * Sets the style.
+   *
+   * @param angle
+   *          the new style
+   */
+  public void setStyle(double angle) {
+    if (angle == Mathematics.HALF_PI) {
+      setSelectedIndex(1);
+    } else {
+      setSelectedIndex(0);
+    }
+  }
+
+  /**
+   * Gets the rotation.
+   *
+   * @return the rotation
+   */
+  public double getRotation() {
+    if (getText().equals("90")) {
+      return Mathematics.HALF_PI;
+    } else {
+      return 0;
+    }
+  }
 }

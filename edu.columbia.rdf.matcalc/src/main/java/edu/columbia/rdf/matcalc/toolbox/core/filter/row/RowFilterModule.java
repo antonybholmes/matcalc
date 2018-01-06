@@ -39,7 +39,6 @@ import org.jebtk.modern.theme.ThemeService;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Row name.
@@ -48,249 +47,245 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class RowFilterModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The button.
-	 */
-	private RibbonLargeButton button = new RibbonLargeButton(new Raster24Icon(new RotateVectorIcon(new FilterVectorIcon(ThemeService.getInstance().colors().getHighlight(8),
-			ThemeService.getInstance().colors().getHighlight(6)), 
-			-90)),
-			"Row Filter",
-			"Filter rows matching a list of values.");
-	
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow = null;
+  /**
+   * The button.
+   */
+  private RibbonLargeButton button = new RibbonLargeButton(
+      new Raster24Icon(new RotateVectorIcon(new FilterVectorIcon(ThemeService.getInstance().colors().getHighlight(8),
+          ThemeService.getInstance().colors().getHighlight(6)), -90)),
+      "Row Filter", "Filter rows matching a list of values.");
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Row Filter";
-	}
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow = null;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
-		
-		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Data").getSection("Filter").add(button);
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		filter();
-	}
-		
-	/**
-	 * Filter.
-	 */
-	public void filter() {
-		DataFrame m = mWindow.getCurrentMatrix();
-		
-		
-		MatrixRowFilterDialog dialog = new MatrixRowFilterDialog(mWindow, m);
-		
-		dialog.setVisible(true);
-		
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
-		List<Integer> rows = new ArrayList<Integer>(m.getRows());
-		
-		List<String> names = dialog.getNames();
-		List<String> missingNames = new ArrayList<String>(names.size());
-		
-		int column = dialog.getColumn();
-		
-		getRows(m,
-				dialog.getColumnText(),
-				column,
-				dialog.getExactMatch(),
-				dialog.getInList(),
-				dialog.getIncludeMissing(),
-				dialog.getCaseSensitive(),
-				names,
-				rows,
-				missingNames);
-		
-		if (rows.size() == 0) {
-			ModernMessageDialog.createWarningDialog(mWindow, 
-					"There were no rows matching your filter criteria.");
-			return;
-		}
-		
-		DataFrame ret = null;
-		
-		if (missingNames.size() > 0) {
-			// Need to insert blank rows
-			
-			ret = DataFrame.createDataFrame(rows.size() + missingNames.size(), 
-					m.getCols());
-			
-			DataFrame.copyColumnNames(m, ret);
-			DataFrame.copyRows(m, rows, ret);
-			
-			// Insert some blank rows
-			Matrix.setRowNA(rows.size(), ret.getRows() - 1, ret);
-			
-			for (int i = 0; i < missingNames.size(); ++i) {
-				ret.set(i + rows.size(), column, missingNames.get(i));
-			}
-			
-		} else {
-			ret = DataFrame.copyRows(m, rows);
-		}
-		
-		mWindow.addToHistory("Row Filter", ret);
-	}
-	
-	/**
-	 * Gets the rows.
-	 *
-	 * @param m 				The matrix to search.
-	 * @param columnText 	The
-	 * @param column 		The column to match on.
-	 * @param exactMatch 	Whether to match names exactly
-	 * 							(case insensitive).
-	 * @param inList 		Matches rows to values in names if true,
-	 * 							otherwise returns rows not matching names.
-	 * @param includeMissing Update missingNames with the list of names not
-	 * 							found in the matrix. This option is ignored if
-	 * 							inList == false.
-	 * @param caseSensitive the case sensitive
-	 * @param names 			The list of names to search for in the matrix.
-	 * @param rows 			Will be populated with the rows matching the
-	 * 							values in names.
-	 * @param missingNames 	Will be populated with those names that are
-	 * 							not found in the matrix. This list is only
-	 * 							updated if includeMissing == true and
-	 * 							inList == true.
-	 * @return the rows
-	 */
-	private static void getRows(final DataFrame m,
-			final String columnText,
-			int column,
-			boolean exactMatch,
-			boolean inList,
-			boolean includeMissing,
-			boolean caseSensitive,
-			final List<String> names,
-			List<Integer> rows,
-			List<String> missingNames) {
-		List<String> ids;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Row Filter";
+  }
 
-		int numRowAnnotations = m.getRowAnnotationNames().size();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		if (column < numRowAnnotations) {
-			// The ids we want to search are from row annotations rather than
-			// the matrix itself
-			ids = m.getRowAnnotationText(columnText);
-		} else {
-			ids = m.columnAsText(column - numRowAnnotations);
-		}
-		
-		if (!caseSensitive) {
-			ids = TextUtils.toLowerCase(ids);
-		}
-		
-		int rowCount = ids.size();
+    button.addClickListener(this);
+    mWindow.getRibbon().getToolbar("Data").getSection("Filter").add(button);
 
-		//
-		// A lookup set so we can quickly see if a row matches what we are
-		// looking for
-		
-		IterMap<String, String> nameMap = new IterHashMap<String, String>();
+  }
 
-		for (String name : names) {
-			if (caseSensitive) {
-				nameMap.put(name, name);
-			} else {
-				nameMap.put(name.toLowerCase(), name);
-			}
-		}
-		
-		// Keep track of which of the list of names we have found in the matrix
-		Set<String> foundNameSet = new HashSet<String>();
-		
-		//
-		// Matching
-		//
-		
-		if (exactMatch) {
-			if (inList) {
-				for (int i = 0; i < rowCount; ++i) {
-					String rowName = ids.get(i);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    filter();
+  }
 
-					if (rowName != null && nameMap.containsKey(rowName)) {
-						rows.add(i);
-						foundNameSet.add(nameMap.get(rowName));
-					}
-				}
-			} else {
-				for (int i = 0; i < rowCount; ++i) {
-					String rowName = ids.get(i);
+  /**
+   * Filter.
+   */
+  public void filter() {
+    DataFrame m = mWindow.getCurrentMatrix();
 
-					if (rowName != null && !nameMap.containsKey(rowName)) {
-						rows.add(i);
-					}
-				}
-			}
-		} else {
-			// Partial matching
-			
-			if (inList) {
-				for (int i = 0; i < rowCount; ++i) {
-					String rowName = ids.get(i);
+    MatrixRowFilterDialog dialog = new MatrixRowFilterDialog(mWindow, m);
 
-					if (rowName == null) {
-						continue;
-					}
+    dialog.setVisible(true);
 
-					for (String name : nameMap) {
-						if (rowName.contains(name)) {
-							rows.add(i);
-							foundNameSet.add(nameMap.get(rowName));
-							
-							break;
-						}
-					}
-				}
-			} else {
-				//for (int i = 0; i < rowCount; ++i) {
-				for (int i : Range.create(rowCount)) {
-					String rowName = ids.get(i);
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-					if (rowName == null) {
-						continue;
-					}
+    List<Integer> rows = new ArrayList<Integer>(m.getRows());
 
-					for (String name : nameMap) {
-						if (!rowName.contains(name)) {
-							rows.add(i);
-						}
-					}
-				}
-			}
-		}
+    List<String> names = dialog.getNames();
+    List<String> missingNames = new ArrayList<String>(names.size());
 
-		if (includeMissing) {
-			// Add those we did not find to the list of missing names.
-			
-			for (String name : names) {
-				if (!foundNameSet.contains(name)) {
-					missingNames.add(name);
-				}
-			}
-		}
-	}
+    int column = dialog.getColumn();
+
+    getRows(m, dialog.getColumnText(), column, dialog.getExactMatch(), dialog.getInList(), dialog.getIncludeMissing(),
+        dialog.getCaseSensitive(), names, rows, missingNames);
+
+    if (rows.size() == 0) {
+      ModernMessageDialog.createWarningDialog(mWindow, "There were no rows matching your filter criteria.");
+      return;
+    }
+
+    DataFrame ret = null;
+
+    if (missingNames.size() > 0) {
+      // Need to insert blank rows
+
+      ret = DataFrame.createDataFrame(rows.size() + missingNames.size(), m.getCols());
+
+      DataFrame.copyColumnNames(m, ret);
+      DataFrame.copyRows(m, rows, ret);
+
+      // Insert some blank rows
+      Matrix.setRowNA(rows.size(), ret.getRows() - 1, ret);
+
+      for (int i = 0; i < missingNames.size(); ++i) {
+        ret.set(i + rows.size(), column, missingNames.get(i));
+      }
+
+    } else {
+      ret = DataFrame.copyRows(m, rows);
+    }
+
+    mWindow.addToHistory("Row Filter", ret);
+  }
+
+  /**
+   * Gets the rows.
+   *
+   * @param m
+   *          The matrix to search.
+   * @param columnText
+   *          The
+   * @param column
+   *          The column to match on.
+   * @param exactMatch
+   *          Whether to match names exactly (case insensitive).
+   * @param inList
+   *          Matches rows to values in names if true, otherwise returns rows not
+   *          matching names.
+   * @param includeMissing
+   *          Update missingNames with the list of names not found in the matrix.
+   *          This option is ignored if inList == false.
+   * @param caseSensitive
+   *          the case sensitive
+   * @param names
+   *          The list of names to search for in the matrix.
+   * @param rows
+   *          Will be populated with the rows matching the values in names.
+   * @param missingNames
+   *          Will be populated with those names that are not found in the matrix.
+   *          This list is only updated if includeMissing == true and inList ==
+   *          true.
+   * @return the rows
+   */
+  private static void getRows(final DataFrame m, final String columnText, int column, boolean exactMatch,
+      boolean inList, boolean includeMissing, boolean caseSensitive, final List<String> names, List<Integer> rows,
+      List<String> missingNames) {
+    List<String> ids;
+
+    int numRowAnnotations = m.getRowAnnotationNames().size();
+
+    if (column < numRowAnnotations) {
+      // The ids we want to search are from row annotations rather than
+      // the matrix itself
+      ids = m.getRowAnnotationText(columnText);
+    } else {
+      ids = m.columnAsText(column - numRowAnnotations);
+    }
+
+    if (!caseSensitive) {
+      ids = TextUtils.toLowerCase(ids);
+    }
+
+    int rowCount = ids.size();
+
+    //
+    // A lookup set so we can quickly see if a row matches what we are
+    // looking for
+
+    IterMap<String, String> nameMap = new IterHashMap<String, String>();
+
+    for (String name : names) {
+      if (caseSensitive) {
+        nameMap.put(name, name);
+      } else {
+        nameMap.put(name.toLowerCase(), name);
+      }
+    }
+
+    // Keep track of which of the list of names we have found in the matrix
+    Set<String> foundNameSet = new HashSet<String>();
+
+    //
+    // Matching
+    //
+
+    if (exactMatch) {
+      if (inList) {
+        for (int i = 0; i < rowCount; ++i) {
+          String rowName = ids.get(i);
+
+          if (rowName != null && nameMap.containsKey(rowName)) {
+            rows.add(i);
+            foundNameSet.add(nameMap.get(rowName));
+          }
+        }
+      } else {
+        for (int i = 0; i < rowCount; ++i) {
+          String rowName = ids.get(i);
+
+          if (rowName != null && !nameMap.containsKey(rowName)) {
+            rows.add(i);
+          }
+        }
+      }
+    } else {
+      // Partial matching
+
+      if (inList) {
+        for (int i = 0; i < rowCount; ++i) {
+          String rowName = ids.get(i);
+
+          if (rowName == null) {
+            continue;
+          }
+
+          for (String name : nameMap) {
+            if (rowName.contains(name)) {
+              rows.add(i);
+              foundNameSet.add(nameMap.get(rowName));
+
+              break;
+            }
+          }
+        }
+      } else {
+        // for (int i = 0; i < rowCount; ++i) {
+        for (int i : Range.create(rowCount)) {
+          String rowName = ids.get(i);
+
+          if (rowName == null) {
+            continue;
+          }
+
+          for (String name : nameMap) {
+            if (!rowName.contains(name)) {
+              rows.add(i);
+            }
+          }
+        }
+      }
+    }
+
+    if (includeMissing) {
+      // Add those we did not find to the list of missing names.
+
+      for (String name : names) {
+        if (!foundNameSet.contains(name)) {
+          missingNames.add(name);
+        }
+      }
+    }
+  }
 }

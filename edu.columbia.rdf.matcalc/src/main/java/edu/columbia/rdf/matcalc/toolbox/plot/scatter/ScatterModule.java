@@ -41,103 +41,106 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  */
 public class ScatterModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Scatter Plot";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Scatter Plot";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		RibbonLargeButton button = new RibbonLargeButton("Scatter Plot", 
-				UIService.getInstance().loadIcon("scatter", 24),
-				"Scatter Plot",
-				"Generate a scatter plot.");
-		button.addClickListener(this);
-		//button.setEnabled(false);
+    RibbonLargeButton button = new RibbonLargeButton("Scatter Plot", UIService.getInstance().loadIcon("scatter", 24),
+        "Scatter Plot", "Generate a scatter plot.");
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-	/**
-	 * Creates the scatter.
-	 */
-	private void createScatter() {
-		DataFrame m = mParent.getCurrentMatrix();
+  /**
+   * Creates the scatter.
+   */
+  private void createScatter() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-		Figure figure = Figure.createFigure(); //window.getFigure();
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-		SubFigure subFigure = figure.currentSubFigure();
+    SubFigure subFigure = figure.currentSubFigure();
 
+    Axes axes = subFigure.currentAxes();
 
-		Axes axes = subFigure.currentAxes();
-		
-		axes.setMargins(100);
+    axes.setMargins(100);
 
-		ColorCycle colorCycle = new ColorCycle();
+    ColorCycle colorCycle = new ColorCycle();
 
-		for (int i = 0; i < m.getCols(); i += 2) {
-			Color color = colorCycle.next();
-			
-			XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)), color);
-			
-			series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
-			series.getStyle().getLineStyle().setColor(color);
-			
-			PlotFactory.createScatterPlot(m, axes, series);
-		}
-		
-		axes.setAxisLimitsAutoRound();
+    for (int i = 0; i < m.getCols(); i += 2) {
+      Color color = colorCycle.next();
 
-		//gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
+      XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)), color);
 
+      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getLineStyle().setColor(color);
 
-		// How big to make the x axis
-		//double min = Mathematics.min(log2FoldChanges);
-		//double max = Mathematics.max(log2FoldChanges);
+      PlotFactory.createScatterPlot(m, axes, series);
+    }
 
+    axes.setAxisLimitsAutoRound();
 
-		//gp.getXAxis().autoSetLimits(min, max);
-		//gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
-		axes.getX1Axis().getTitle().setText("Series");
+    // gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
 
+    // How big to make the x axis
+    // double min = Mathematics.min(log2FoldChanges);
+    // double max = Mathematics.max(log2FoldChanges);
 
-		//min = Mathematics.min(minusLog10PValues);
-		//max = Mathematics.max(minusLog10PValues);
+    // gp.getXAxis().autoSetLimits(min, max);
+    // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // inc));
+    axes.getX1Axis().getTitle().setText("Series");
 
-		//System.err.println("my " + min + " " + max);
+    // min = Mathematics.min(minusLog10PValues);
+    // max = Mathematics.max(minusLog10PValues);
 
-		//gp.getYAxis().autoSetLimits(min, max);
-		//gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-		//gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max, inc));
-		axes.getY1Axis().getTitle().setText("Count");
+    // System.err.println("my " + min + " " + max);
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
+    // gp.getYAxis().autoSetLimits(min, max);
+    // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // inc));
+    axes.getY1Axis().getTitle().setText("Count");
 
-		window.setVisible(true);
-	}
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		createScatter();
-	}
+    window.setVisible(true);
+  }
 
-
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    createScatter();
+  }
 
 }

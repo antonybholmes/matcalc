@@ -21,7 +21,6 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.table.ModernColumnHeaderTableModel;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Loads.
@@ -29,71 +28,78 @@ import org.jebtk.modern.table.ModernColumnHeaderTableModel;
  * @author Antony Holmes Holmes
  */
 public class ModulesTableModel extends ModernColumnHeaderTableModel {
-	
-	/**
-	 * The constant HEADER.
-	 */
-	private static final String[] HEADER = 
-		{"Name", "Product", "Version", "Copyright", "Description"};
-	
-	/**
-	 * The member modules.
-	 */
-	private List<Module> mModules;
-	
-	/**
-	 * Instantiates a new modules table model.
-	 *
-	 * @param modules the modules
-	 */
-	public ModulesTableModel(List<Module> modules) {
-		mModules = modules;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnCount()
-	 */
-	@Override
-	public int getColumnCount() {
-		return HEADER.length;
-	}
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getRowCount()
-	 */
-	@Override
-	public int getRowCount() {
-		return mModules.size();
-	}
+  /**
+   * The constant HEADER.
+   */
+  private static final String[] HEADER = { "Name", "Product", "Version", "Copyright", "Description" };
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getValueAt(int, int)
-	 */
-	@Override
-	public Object getValueAt(int row, int col) {
-		switch (col) {
-		case 0:
-			return mModules.get(row).getName();
-		case 1:
-			return mModules.get(row).getModuleInfo().getName();
-		case 2:
-			return mModules.get(row).getModuleInfo().getVersion().toString();
-		case 3:
-			return mModules.get(row).getModuleInfo().getCopyright();
-		case 4:
-			return mModules.get(row).getModuleInfo().getDescription();
-		default:
-			return TextUtils.EMPTY_STRING;
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
-	 */
-	@Override
-	public final List<String> getColumnAnnotationText(int column) {
-		return CollectionUtils.asList(HEADER[column]);
-	}
+  /**
+   * The member modules.
+   */
+  private List<Module> mModules;
 
-	
+  /**
+   * Instantiates a new modules table model.
+   *
+   * @param modules
+   *          the modules
+   */
+  public ModulesTableModel(List<Module> modules) {
+    mModules = modules;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnCount()
+   */
+  @Override
+  public int getColumnCount() {
+    return HEADER.length;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getRowCount()
+   */
+  @Override
+  public int getRowCount() {
+    return mModules.size();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getValueAt(int, int)
+   */
+  @Override
+  public Object getValueAt(int row, int col) {
+    switch (col) {
+    case 0:
+      return mModules.get(row).getName();
+    case 1:
+      return mModules.get(row).getModuleInfo().getName();
+    case 2:
+      return mModules.get(row).getModuleInfo().getVersion().toString();
+    case 3:
+      return mModules.get(row).getModuleInfo().getCopyright();
+    case 4:
+      return mModules.get(row).getModuleInfo().getDescription();
+    default:
+      return TextUtils.EMPTY_STRING;
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
+   */
+  @Override
+  public final List<String> getColumnAnnotationText(int column) {
+    return CollectionUtils.asList(HEADER[column]);
+  }
+
 }

@@ -35,77 +35,75 @@ import org.jebtk.modern.window.ModernWindow;
  * The class IntensityControl.
  */
 public class TreeControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member slider.
-	 */
-	private ModernCompactSpinner mSlider = 
-			new ModernCompactSpinner(1, 1000, 200);
-	
-	/** The m check visible. */
-	private ColoredPlotControl mCheckVisible;
-	
-	/** The m properties. */
-	private Properties mProperties;
 
-	/** The m prefix. */
-	private String mPrefix;
-	
-	/**
-	 * The member spinner.
-	 *
-	 * @param parent the parent
-	 * @param properties the properties
-	 * @param prefix the prefix
-	 */
-	//private ModernCompactSpinner mSpinner = 
-	//		new ModernCompactSpinner(1, 10, 3);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	public TreeControl(ModernWindow parent, Properties properties, String prefix) {
-		mPrefix = prefix;
-		mProperties = properties;
+  /**
+   * The member slider.
+   */
+  private ModernCompactSpinner mSlider = new ModernCompactSpinner(1, 1000, 200);
 
-		
-		mSlider.setValue(properties.getAsInt(prefix + ".width"));
-		
-		mCheckVisible = new ColoredPlotControl(parent, 
-				"Show",
-				properties.getAsColor(prefix + ".color"),
-				properties.getAsBool(prefix + ".visible"));
+  /** The m check visible. */
+  private ColoredPlotControl mCheckVisible;
 
-		add(mCheckVisible);
-		add(UI.createVGap(5));
-		
-		Box box = VBox.create();
-		box.add(new HExpandBox("Width", mSlider));
+  /** The m properties. */
+  private Properties mProperties;
 
-		box.add(new CheckControl(parent,
-				"Color leaves by group",
-				properties, 
-				prefix + ".leaf.color"));
-		
-		box.setBorder(BorderService.getInstance().createLeftBorder(10));
-		
-		add(box);
-		//setBorder(ModernWidget.BORDER);
-		
-		mSlider.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				mProperties.setProperty(mPrefix + ".width", mSlider.getIntValue());
-			}});
-		
-		mCheckVisible.addClickListener(new ModernClickListener() {
+  /** The m prefix. */
+  private String mPrefix;
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mProperties.setProperty(mPrefix + ".visible", mCheckVisible.isSelected());
-				mProperties.setProperty(mPrefix + ".color", mCheckVisible.getSelectedColor());
-			}});
-	}
+  /**
+   * The member spinner.
+   *
+   * @param parent
+   *          the parent
+   * @param properties
+   *          the properties
+   * @param prefix
+   *          the prefix
+   */
+  // private ModernCompactSpinner mSpinner =
+  // new ModernCompactSpinner(1, 10, 3);
+
+  public TreeControl(ModernWindow parent, Properties properties, String prefix) {
+    mPrefix = prefix;
+    mProperties = properties;
+
+    mSlider.setValue(properties.getAsInt(prefix + ".width"));
+
+    mCheckVisible = new ColoredPlotControl(parent, "Show", properties.getAsColor(prefix + ".color"),
+        properties.getAsBool(prefix + ".visible"));
+
+    add(mCheckVisible);
+    add(UI.createVGap(5));
+
+    Box box = VBox.create();
+    box.add(new HExpandBox("Width", mSlider));
+
+    box.add(new CheckControl(parent, "Color leaves by group", properties, prefix + ".leaf.color"));
+
+    box.setBorder(BorderService.getInstance().createLeftBorder(10));
+
+    add(box);
+    // setBorder(ModernWidget.BORDER);
+
+    mSlider.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mProperties.setProperty(mPrefix + ".width", mSlider.getIntValue());
+      }
+    });
+
+    mCheckVisible.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mProperties.setProperty(mPrefix + ".visible", mCheckVisible.isSelected());
+        mProperties.setProperty(mPrefix + ".color", mCheckVisible.getSelectedColor());
+      }
+    });
+  }
 }

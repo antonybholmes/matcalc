@@ -35,99 +35,98 @@ import org.jebtk.modern.text.ModernLabel;
  * @author Antony Holmes Holmes
  */
 public class GroupPanel extends HBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The group1 combo.
-	 */
-	private ModernComboBox group1Combo;
-	
-	/**
-	 * The group2 combo.
-	 */
-	private ModernComboBox group2Combo;
-	
-	/**
-	 * The check equal variance.
-	 */
-	private CheckBox checkEqualVariance = 
-			new ModernCheckBox("Equal variance");
-	
-	/**
-	 * The member groups.
-	 */
-	private XYSeriesGroup mGroups;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new group panel.
-	 *
-	 * @param groups the groups
-	 */
-	public GroupPanel(XYSeriesGroup groups) {
-		mGroups = groups;
-		
-		group1Combo = new GroupsCombo(groups);
-		group2Combo = new GroupsCombo(groups);
-		
-		group1Combo.setSelectedIndex(0);
-		group2Combo.setSelectedIndex(1);
-		
-		ModernLabel label = new ModernAutoSizeLabel("Groups");
-		label.setAlignmentY(TOP_ALIGNMENT);
-		
-		
-		add(label);
-		add(Box.createHorizontalGlue());
-		
-		Box box = VBox.create();
-		box.setAlignmentY(TOP_ALIGNMENT);
-		box.add(group1Combo);
-		box.add(ModernPanel.createVGap());
-		box.add(new ModernAutoSizeLabel("vs"));
-		box.add(ModernPanel.createVGap());
-		box.add(group2Combo);
-		
-		add(box);
-		
-		//setAlignmentY(TOP_ALIGNMENT);
-	}
-	
-	/**
-	 * Gets the equal variance.
-	 *
-	 * @return the equal variance
-	 */
-	public boolean getEqualVariance() {
-		return checkEqualVariance.isSelected();
-	}
-	
-	/**
-	 * Gets the group1.
-	 *
-	 * @return the group1
-	 */
-	public XYSeries getGroup1() {
-		if (mGroups == null || mGroups.getCount() == 0) {
-			return null;
-		}
-		
-		return mGroups.get(group1Combo.getSelectedIndex());
-	}
-	
-	/**
-	 * Gets the group2.
-	 *
-	 * @return the group2
-	 */
-	public XYSeries getGroup2() {
-		if (mGroups == null || mGroups.getCount() == 0) {
-			return null;
-		}
-		
-		return mGroups.get(group2Combo.getSelectedIndex());
-	}
+  /**
+   * The group1 combo.
+   */
+  private ModernComboBox group1Combo;
+
+  /**
+   * The group2 combo.
+   */
+  private ModernComboBox group2Combo;
+
+  /**
+   * The check equal variance.
+   */
+  private CheckBox checkEqualVariance = new ModernCheckBox("Equal variance");
+
+  /**
+   * The member groups.
+   */
+  private XYSeriesGroup mGroups;
+
+  /**
+   * Instantiates a new group panel.
+   *
+   * @param groups
+   *          the groups
+   */
+  public GroupPanel(XYSeriesGroup groups) {
+    mGroups = groups;
+
+    group1Combo = new GroupsCombo(groups);
+    group2Combo = new GroupsCombo(groups);
+
+    group1Combo.setSelectedIndex(0);
+    group2Combo.setSelectedIndex(1);
+
+    ModernLabel label = new ModernAutoSizeLabel("Groups");
+    label.setAlignmentY(TOP_ALIGNMENT);
+
+    add(label);
+    add(Box.createHorizontalGlue());
+
+    Box box = VBox.create();
+    box.setAlignmentY(TOP_ALIGNMENT);
+    box.add(group1Combo);
+    box.add(ModernPanel.createVGap());
+    box.add(new ModernAutoSizeLabel("vs"));
+    box.add(ModernPanel.createVGap());
+    box.add(group2Combo);
+
+    add(box);
+
+    // setAlignmentY(TOP_ALIGNMENT);
+  }
+
+  /**
+   * Gets the equal variance.
+   *
+   * @return the equal variance
+   */
+  public boolean getEqualVariance() {
+    return checkEqualVariance.isSelected();
+  }
+
+  /**
+   * Gets the group1.
+   *
+   * @return the group1
+   */
+  public XYSeries getGroup1() {
+    if (mGroups == null || mGroups.getCount() == 0) {
+      return null;
+    }
+
+    return mGroups.get(group1Combo.getSelectedIndex());
+  }
+
+  /**
+   * Gets the group2.
+   *
+   * @return the group2
+   */
+  public XYSeries getGroup2() {
+    if (mGroups == null || mGroups.getCount() == 0) {
+      return null;
+    }
+
+    return mGroups.get(group2Combo.getSelectedIndex());
+  }
 }

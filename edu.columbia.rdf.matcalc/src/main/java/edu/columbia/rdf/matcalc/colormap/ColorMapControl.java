@@ -34,46 +34,50 @@ import org.jebtk.modern.window.ModernWindow;
  */
 public class ColorMapControl extends HBox {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The color button.
-	 */
-	private ColorMapButton mColorMapButton;
+  /**
+   * The color button.
+   */
+  private ColorMapButton mColorMapButton;
 
-	/** The m plot. */
-	private Plot mPlot;
+  /** The m plot. */
+  private Plot mPlot;
 
-	/**
-	 * Instantiates a new line style control.
-	 *
-	 * @param parent the parent
-	 * @param plot the plot
-	 */
-	public ColorMapControl(ModernWindow parent, Plot plot) {
-		mPlot = plot;
+  /**
+   * Instantiates a new line style control.
+   *
+   * @param parent
+   *          the parent
+   * @param plot
+   *          the plot
+   */
+  public ColorMapControl(ModernWindow parent, Plot plot) {
+    mPlot = plot;
 
-		mColorMapButton = new ColorMapButton(parent, plot.getColorMap());
+    mColorMapButton = new ColorMapButton(parent, plot.getColorMap());
 
-		add(new ModernAutoSizeLabel("Color map"));
-		add(Box.createHorizontalGlue());
-		add(ModernPanel.createHGap());
-		add(mColorMapButton);
-		//setBorder(ModernWidget.BORDER);
+    add(new ModernAutoSizeLabel("Color map"));
+    add(Box.createHorizontalGlue());
+    add(ModernPanel.createHGap());
+    add(mColorMapButton);
+    // setBorder(ModernWidget.BORDER);
 
-		mColorMapButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mPlot.setColorMap(mColorMapButton.getSelectedColorMap());
-			}});
+    mColorMapButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mPlot.setColorMap(mColorMapButton.getSelectedColorMap());
+      }
+    });
 
-		plot.addChangeListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent e) {
-				mColorMapButton.setSelectedColorMap(mPlot.getColorMap());
-			}});
-	}
+    plot.addChangeListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent e) {
+        mColorMapButton.setSelectedColorMap(mPlot.getColorMap());
+      }
+    });
+  }
 }

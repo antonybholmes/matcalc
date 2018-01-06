@@ -22,18 +22,18 @@ import org.jebtk.modern.table.ModernTableCheckboxCellEditor;
  * The class ModernTableLayerCellEditor.
  */
 public class ModernTableLayerCellEditor extends ModernTableCheckboxCellEditor {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new modern table layer cell editor.
-	 */
-	public ModernTableLayerCellEditor() {
-		mRenderer = new ModernTableLayerCellRenderer();
-		
-		mRenderer.addClickListener(this);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new modern table layer cell editor.
+   */
+  public ModernTableLayerCellEditor() {
+    mRenderer = new ModernTableLayerCellRenderer();
+
+    mRenderer.addClickListener(this);
+  }
 }

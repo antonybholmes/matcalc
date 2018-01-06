@@ -26,55 +26,57 @@ import org.jebtk.modern.table.ModernTableModel;
  * The class ColumnCombo.
  */
 public class ColumnsCombo extends ModernComboBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** The Constant MAX_COLUMNS. */
-	private static final int MAX_COLUMNS = 50;
 
-	/**
-	 * Instantiates a new columns combo.
-	 */
-	public ColumnsCombo() {
-		// Do nothing
-	}
-	
-	/**
-	 * Instantiates a new columns combo.
-	 *
-	 * @param m the m
-	 */
-	public ColumnsCombo(DataFrame m) {
-		setMatrix(m);
-	}
-	
-	/**
-	 * Sets the matrix.
-	 *
-	 * @param m the new matrix
-	 */
-	public void setMatrix(DataFrame m) {
-		clear();
-		
-		for (String name : m.getRowAnnotationNames()) {
-			addScrollMenuItem(name);
-		}
-			
-		List<String> names = m.getColumnNames();
-		
-		int maxC = Math.min(m.getCols(), MAX_COLUMNS);
-		
-		for (int i = 0; i < maxC; ++i) {
-			String name = ModernTableModel.getAutoColumnHeading(i);
-			
-			if (i < names.size()) {
-				name += " - " + names.get(i);
-			}
-			
-			addScrollMenuItem(name);
-		}
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /** The Constant MAX_COLUMNS. */
+  private static final int MAX_COLUMNS = 50;
+
+  /**
+   * Instantiates a new columns combo.
+   */
+  public ColumnsCombo() {
+    // Do nothing
+  }
+
+  /**
+   * Instantiates a new columns combo.
+   *
+   * @param m
+   *          the m
+   */
+  public ColumnsCombo(DataFrame m) {
+    setMatrix(m);
+  }
+
+  /**
+   * Sets the matrix.
+   *
+   * @param m
+   *          the new matrix
+   */
+  public void setMatrix(DataFrame m) {
+    clear();
+
+    for (String name : m.getRowAnnotationNames()) {
+      addScrollMenuItem(name);
+    }
+
+    List<String> names = m.getColumnNames();
+
+    int maxC = Math.min(m.getCols(), MAX_COLUMNS);
+
+    for (int i = 0; i < maxC; ++i) {
+      String name = ModernTableModel.getAutoColumnHeading(i);
+
+      if (i < names.size()) {
+        name += " - " + names.get(i);
+      }
+
+      addScrollMenuItem(name);
+    }
+  }
 }

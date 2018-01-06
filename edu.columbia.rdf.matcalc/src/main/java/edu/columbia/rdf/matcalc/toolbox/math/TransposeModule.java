@@ -29,37 +29,43 @@ import edu.columbia.rdf.matcalc.toolbox.CalcWinModule;
  * The class ZScoreModule.
  */
 public class TransposeModule extends CalcWinModule implements ModernClickListener {
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Transpose";
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		super.init(window);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Transpose";
+  }
 
-		RibbonLargeButton button = new RibbonLargeButton(UIService.getInstance().loadIcon("transpose", 24),
-				"Transpose", 
-				"Transpose a matrix.");
-		button.addClickListener(this);
-		window.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    super.init(window);
 
-	}
+    RibbonLargeButton button = new RibbonLargeButton(UIService.getInstance().loadIcon("transpose", 24), "Transpose",
+        "Transpose a matrix.");
+    button.addClickListener(this);
+    window.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		mWindow.addToHistory("Transpose", 
-				"Transpose", 
-				(DataFrame)mWindow.getCurrentMatrix().transpose());
-	}
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    mWindow.addToHistory("Transpose", "Transpose", (DataFrame) mWindow.getCurrentMatrix().transpose());
+  }
 }

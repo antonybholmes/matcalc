@@ -20,47 +20,47 @@ package edu.columbia.rdf.matcalc.toolbox.core.collapse;
  * The enum CollapseType.
  */
 public enum CollapseType {
-	
-	/**
-	 * The none.
-	 */
-	NONE,
-	
-	/**
-	 * The max.
-	 */
-	MAX,
-	
-	/**
-	 * The min.
-	 */
-	MIN,
-	
-	/**
-	 * The max stdev.
-	 */
-	MAX_STDEV, 
-	
-	/**
-	 * The max mean.
-	 */
-	MAX_MEAN, 
-	
-	/**
-	 * The max median.
-	 */
-	MAX_MEDIAN, 
-	
-	/**
-	 * The max tstat.
-	 */
-	MAX_TSTAT,
-	
-	/**
-	 * The max interquartile range.
-	 */
-	MAX_IQR,
-	
-	/** The max quart coeff disp. */
-	MAX_QUART_COEFF_DISP
+
+  /**
+   * The none.
+   */
+  NONE,
+
+  /**
+   * The max.
+   */
+  MAX,
+
+  /**
+   * The min.
+   */
+  MIN,
+
+  /**
+   * The max stdev.
+   */
+  MAX_STDEV,
+
+  /**
+   * The max mean.
+   */
+  MAX_MEAN,
+
+  /**
+   * The max median.
+   */
+  MAX_MEDIAN,
+
+  /**
+   * The max tstat.
+   */
+  MAX_TSTAT,
+
+  /**
+   * The max interquartile range.
+   */
+  MAX_IQR,
+
+  /** The max quart coeff disp. */
+  MAX_QUART_COEFF_DISP
 }

@@ -31,81 +31,84 @@ import org.jebtk.modern.panel.VBoxAutoWidth;
  */
 public class ColumnFilters extends VBoxAutoWidth {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m M. */
-	private DataFrame mM;
-	
-	/**
-	 * Instantiates a new column sorters.
-	 *
-	 * @param m the m
-	 */
-	public ColumnFilters(DataFrame m) {
-		mM = m;
-		
-		setBorder(BorderService.getInstance().createBorder(5));
-	}
-	
-	/**
-	 * Adds the.
-	 *
-	 * @param column the column
-	 */
-	public void add(int column) {
-		ColumnFilter columnFilter;
-		
-		if (getComponentCount() == 0) {
-			columnFilter = new ColumnFilter(mM, true);
-			columnFilter.disableDelete();
-		} else {
-			columnFilter = new ColumnFilter(mM, false);
-		}
-		
-		columnFilter.addClickListener(new ModernClickListener() {
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-			@Override
-			public void clicked(ModernClickEvent e) {
-				remove((Component)e.getSource());
-				revalidate();
-				repaint();
-			}});
-		
-		add(columnFilter);
-		
-	}
+  /** The m M. */
+  private DataFrame mM;
 
-	/**
-	 * Clear.
-	 */
-	public void clear() {
-		removeAll();
-		
-		add(-1);
-		
-		revalidate();
-		repaint();
-	}
+  /**
+   * Instantiates a new column sorters.
+   *
+   * @param m
+   *          the m
+   */
+  public ColumnFilters(DataFrame m) {
+    mM = m;
 
-	/**
-	 * Gets the column filters.
-	 *
-	 * @return the column filters
-	 */
-	public List<ColumnFilter> getColumnFilters() {
-		List<ColumnFilter> ret = new ArrayList<ColumnFilter>();
-		
-		//ret.add(new TrueColumnFilter(mM, true));
-		
-		for (int i = 0; i < getComponentCount(); ++i) {
-			Component c = getComponent(i);
-			
-			if (c instanceof ColumnFilter) {
-				ret.add((ColumnFilter)c);
-			}
-		}
-		
-		return ret;
-	}
+    setBorder(BorderService.getInstance().createBorder(5));
+  }
+
+  /**
+   * Adds the.
+   *
+   * @param column
+   *          the column
+   */
+  public void add(int column) {
+    ColumnFilter columnFilter;
+
+    if (getComponentCount() == 0) {
+      columnFilter = new ColumnFilter(mM, true);
+      columnFilter.disableDelete();
+    } else {
+      columnFilter = new ColumnFilter(mM, false);
+    }
+
+    columnFilter.addClickListener(new ModernClickListener() {
+
+      @Override
+      public void clicked(ModernClickEvent e) {
+        remove((Component) e.getSource());
+        revalidate();
+        repaint();
+      }
+    });
+
+    add(columnFilter);
+
+  }
+
+  /**
+   * Clear.
+   */
+  public void clear() {
+    removeAll();
+
+    add(-1);
+
+    revalidate();
+    repaint();
+  }
+
+  /**
+   * Gets the column filters.
+   *
+   * @return the column filters
+   */
+  public List<ColumnFilter> getColumnFilters() {
+    List<ColumnFilter> ret = new ArrayList<ColumnFilter>();
+
+    // ret.add(new TrueColumnFilter(mM, true));
+
+    for (int i = 0; i < getComponentCount(); ++i) {
+      Component c = getComponent(i);
+
+      if (c instanceof ColumnFilter) {
+        ret.add((ColumnFilter) c);
+      }
+    }
+
+    return ret;
+  }
 }

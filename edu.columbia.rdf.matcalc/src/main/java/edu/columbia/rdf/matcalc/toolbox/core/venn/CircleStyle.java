@@ -20,10 +20,10 @@ package edu.columbia.rdf.matcalc.toolbox.core.venn;
  * The Enum CircleStyle.
  */
 public enum CircleStyle {
-	
-	/** The proportional. */
-	PROPORTIONAL,
-	
-	/** The uniform. */
-	UNIFORM
+
+  /** The proportional. */
+  PROPORTIONAL,
+
+  /** The uniform. */
+  UNIFORM
 }

@@ -36,8 +36,6 @@ import org.jebtk.modern.tree.ModernTreeIconTextNodeRenderer;
 import org.jebtk.modern.tree.ModernTreeNodeRenderer;
 import org.jebtk.modern.tree.Tree;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Basic renderer for displaying directories and files within the map database.
@@ -46,142 +44,139 @@ import org.jebtk.modern.tree.Tree;
  */
 public class XYSeriesTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member group.
-	 */
-	private MatrixGroup mGroup;
+  /**
+   * The member group.
+   */
+  private MatrixGroup mGroup;
 
-	/** The Constant HEIGHT. */
-	private static final int HEIGHT = 28;
+  /** The Constant HEIGHT. */
+  private static final int HEIGHT = 28;
 
+  /**
+   * public void drawBackgroundAA(Graphics2D g2) { IntRect rect = new IntRect(0,
+   * 0, getWidth(), HEIGHT);
+   * 
+   * if (mNodeIsSelected) { getWidgetRenderer().drawButton(g2, rect,
+   * RenderMode.SELECTED); } else { if (mNodeIsHighlighted) {
+   * getWidgetRenderer().drawButton(g2, rect, RenderMode.SELECTED); }
+   * 
+   * if (mIsDragToNode) { getWidgetRenderer().drawButtonOutline(g2, rect,
+   * RenderMode.SELECTED); } } }
+   */
 
-	/**
-	public void drawBackgroundAA(Graphics2D g2) {
-		IntRect rect = new IntRect(0, 0, getWidth(), HEIGHT);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#drawForegroundAA(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawNodeBranch(Graphics2D g2) {
+    if (mNode.isParent()) {
+      // Always draw the branch at the top of the expansion
+      int x = (mIconWidth - 16) / 2;
+      int y = (HEIGHT - 16) / 2;
 
-		if (mNodeIsSelected) {
-			getWidgetRenderer().drawButton(g2, rect, RenderMode.SELECTED);
-		} else {
-			if (mNodeIsHighlighted) {
-				getWidgetRenderer().drawButton(g2, rect, RenderMode.SELECTED);
-			}
+      super.drawNodeBranch(g2, x, y);
+    }
+  }
 
-			if (mIsDragToNode) {
-				getWidgetRenderer().drawButtonOutline(g2, rect, RenderMode.SELECTED);
-			}
-		}
-	}
-	*/
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeIcon(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawNodeIcon(Graphics2D g2) {
+    if (mNode.isParent() && mGroup != null) {
+      int x = (mIconWidth - 16) / 2;
+      int y = (HEIGHT - 16) / 2;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawNodeBranch(Graphics2D g2) {
-		if (mNode.isParent()) {
-			// Always draw the branch at the top of the expansion
-			int x = (mIconWidth - 16) / 2;
-			int y = (HEIGHT - 16) / 2;
+      g2.setColor(mGroup.getColor());
+      g2.fillRect(x, y, 16, 16);
 
-			super.drawNodeBranch(g2, x, y);
-		}
-	}
+      if (mNode.isExpanded()) {
+        x += 8;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeIcon(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawNodeIcon(Graphics2D g2) {
-		if (mNode.isParent() && mGroup != null) {
-			int x = (mIconWidth - 16) / 2;
-			int y = (HEIGHT - 16) / 2;
+        g2.setFont(FONT);
 
-			g2.setColor(mGroup.getColor());
-			g2.fillRect(x, y, 16, 16);
+        int p = getTextYPosCenter(g2, HEIGHT) + HEIGHT;
 
-			if (mNode.isExpanded()) {
-				x += 8;
-				
-				g2.setFont(FONT);
+        for (TreeNode<?> child : mNode) {
+          g2.drawString(getTruncatedText(g2, child.getName(), x, mRect.getW()), x, p);
 
-				int p = getTextYPosCenter(g2, HEIGHT) + HEIGHT;
+          p += HEIGHT;
+        }
+      }
+    }
+  }
 
-				for (TreeNode<?> child : mNode) {
-					g2.drawString(getTruncatedText(g2, child.getName(), x, mRect.getW()), x, p);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawNodeText(Graphics2D g2) {
+    int p = getTextYPosCenter(g2, HEIGHT); // (g2, getRect(), mNode.getName());
 
-					p += HEIGHT;
-				}
-			}
-		}
-	}
+    g2.setColor(mGroup.getColor());
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawNodeText(Graphics2D g2) {
-		int p = getTextYPosCenter(g2, HEIGHT); //(g2, getRect(), mNode.getName());
+    StringBuilder buffer = new StringBuilder(mNode.getName());
 
-		g2.setColor(mGroup.getColor());
+    if (mNode.isParent() && mGroup != null) {
+      // buffer.append(" ").append(group.getSearch());
 
-		StringBuilder buffer = new StringBuilder(mNode.getName());
+      buffer.append(" (").append(Integer.toString(mNode.getChildCount())).append(")");// group.getSearch());
 
-		if (mNode.isParent() && mGroup != null) {
-			//buffer.append(" ").append(group.getSearch());
+      g2.setFont(BOLD_FONT);
+    } else {
+      g2.setFont(FONT);
+    }
 
-			buffer.append(" (").append(Integer.toString(mNode.getChildCount())).append(")");//group.getSearch());
+    g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()), 0, p);
+  }
 
-			g2.setFont(BOLD_FONT);
-		} else {
-			g2.setFont(FONT);
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.
+   * ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean, boolean,
+   * boolean, int, int)
+   */
+  @Override
+  public ModernTreeNodeRenderer getRenderer(Tree<?> tree, TreeNode<?> node, boolean nodeIsHighlighted,
+      boolean nodeIsSelected, boolean hasFocus, boolean isDragToNode, int depth, int row) {
 
-		g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()), 0, p);
-	}
+    super.getRenderer(tree, node, nodeIsHighlighted, nodeIsSelected, hasFocus, isDragToNode, depth, row);
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean, boolean, boolean, int, int)
-	 */
-	@Override
-	public ModernTreeNodeRenderer getRenderer(Tree<?> tree,
-			TreeNode<?> node,
-			boolean nodeIsHighlighted, 
-			boolean nodeIsSelected, 
-			boolean hasFocus, 
-			boolean isDragToNode, 
-			int depth, 
-			int row) {
+    mGroup = (XYSeries) node.getValue();
 
-		super.getRenderer(tree, 
-				node, 
-				nodeIsHighlighted, 
-				nodeIsSelected, 
-				hasFocus, 
-				isDragToNode, 
-				depth, 
-				row);
+    return this;
+  }
 
-		mGroup = (XYSeries)node.getValue();
-
-		return this;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.tree.ModernTreeNodeRenderer#setSize(org.abh.common.ui.tree.Tree, org.abh.common.tree.TreeNode, int, int)
-	 */
-	@Override
-	protected void setSize(Tree<?> tree,
-			TreeNode<?> node,
-			int depth,
-			int row) {
-		// If the node is expanded, the size will be itself plus the number
-		// of children, since we use the renderer to display hidden children
-		setSize(tree.getInternalRect().getW(), 
-				HEIGHT * ((node.isExpanded() ? node.getChildCount() : 0) + 1));
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.tree.ModernTreeNodeRenderer#setSize(org.abh.common.ui.tree.
+   * Tree, org.abh.common.tree.TreeNode, int, int)
+   */
+  @Override
+  protected void setSize(Tree<?> tree, TreeNode<?> node, int depth, int row) {
+    // If the node is expanded, the size will be itself plus the number
+    // of children, since we use the renderer to display hidden children
+    setSize(tree.getInternalRect().getW(), HEIGHT * ((node.isExpanded() ? node.getChildCount() : 0) + 1));
+  }
 }

@@ -30,81 +30,81 @@ import org.jebtk.modern.widget.ModernWidget;
  * The class StandardizationChooser.
  */
 public class StandardizationChooser extends ModernWidget {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The member matrix standardize check.
-	 */
-	private ModernTwoStateWidget mMatrixStandardizeCheck = new ModernRadioButton("Matrix");
-	
-	/**
-	 * The member row standardize check.
-	 */
-	private ModernTwoStateWidget mRowStandardizeCheck = new ModernRadioButton("Row");
-	
-	/**
-	 * The member column standardize check.
-	 */
-	private ModernTwoStateWidget mColumnStandardizeCheck = new ModernRadioButton("Column");
-	
-	/**
-	 * The member none check.
-	 */
-	private ModernTwoStateWidget mNoneCheck = new ModernRadioButton("None");
 
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new standardization chooser.
-	 */
-	public StandardizationChooser() {
-		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		
-		add(mMatrixStandardizeCheck);
-		add(mRowStandardizeCheck);
-		add(mColumnStandardizeCheck);
-		add(mNoneCheck);
-		add(ModernPanel.createVGap());
-		
-		ModernButtonGroup group = new ModernButtonGroup();
-		
-		group.add(mMatrixStandardizeCheck);
-		group.add(mRowStandardizeCheck);
-		group.add(mColumnStandardizeCheck);
-		group.add(mNoneCheck);
-		
-		mRowStandardizeCheck.setSelected(true);
-	}
-	
-	/**
-	 * Gets the standardization method.
-	 *
-	 * @return the standardization method
-	 */
-	public ColorNormalizationType getStandardizationMethod() {
-		if (mMatrixStandardizeCheck.isSelected()) {
-			return ColorNormalizationType.ZSCORE_MATRIX;
-		} else if (mColumnStandardizeCheck.isSelected()) {
-			return ColorNormalizationType.ZSCORE_COLUMN;
-		} else if (mRowStandardizeCheck.isSelected()) {
-			return ColorNormalizationType.ZSCORE_ROW;
-		} else {
-			return ColorNormalizationType.NONE;
-		}
-	}
+  /**
+   * The member matrix standardize check.
+   */
+  private ModernTwoStateWidget mMatrixStandardizeCheck = new ModernRadioButton("Matrix");
 
-	/**
-	 * Adds the click listener.
-	 *
-	 * @param l the l
-	 */
-	public void addClickListener(ModernClickListener l) {
-		mMatrixStandardizeCheck.addClickListener(l);
-		mRowStandardizeCheck.addClickListener(l);
-		mColumnStandardizeCheck.addClickListener(l);
-		mNoneCheck.addClickListener(l);
-	}
+  /**
+   * The member row standardize check.
+   */
+  private ModernTwoStateWidget mRowStandardizeCheck = new ModernRadioButton("Row");
+
+  /**
+   * The member column standardize check.
+   */
+  private ModernTwoStateWidget mColumnStandardizeCheck = new ModernRadioButton("Column");
+
+  /**
+   * The member none check.
+   */
+  private ModernTwoStateWidget mNoneCheck = new ModernRadioButton("None");
+
+  /**
+   * Instantiates a new standardization chooser.
+   */
+  public StandardizationChooser() {
+    setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+    add(mMatrixStandardizeCheck);
+    add(mRowStandardizeCheck);
+    add(mColumnStandardizeCheck);
+    add(mNoneCheck);
+    add(ModernPanel.createVGap());
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(mMatrixStandardizeCheck);
+    group.add(mRowStandardizeCheck);
+    group.add(mColumnStandardizeCheck);
+    group.add(mNoneCheck);
+
+    mRowStandardizeCheck.setSelected(true);
+  }
+
+  /**
+   * Gets the standardization method.
+   *
+   * @return the standardization method
+   */
+  public ColorNormalizationType getStandardizationMethod() {
+    if (mMatrixStandardizeCheck.isSelected()) {
+      return ColorNormalizationType.ZSCORE_MATRIX;
+    } else if (mColumnStandardizeCheck.isSelected()) {
+      return ColorNormalizationType.ZSCORE_COLUMN;
+    } else if (mRowStandardizeCheck.isSelected()) {
+      return ColorNormalizationType.ZSCORE_ROW;
+    } else {
+      return ColorNormalizationType.NONE;
+    }
+  }
+
+  /**
+   * Adds the click listener.
+   *
+   * @param l
+   *          the l
+   */
+  public void addClickListener(ModernClickListener l) {
+    mMatrixStandardizeCheck.addClickListener(l);
+    mRowStandardizeCheck.addClickListener(l);
+    mColumnStandardizeCheck.addClickListener(l);
+    mNoneCheck.addClickListener(l);
+  }
 }

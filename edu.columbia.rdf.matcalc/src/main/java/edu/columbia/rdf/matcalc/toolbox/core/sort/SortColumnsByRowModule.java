@@ -37,212 +37,212 @@ import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Can compare a column of values to another list to see what is common and
- * record this in a new column next to the reference column. Useful for
- * doing overlaps and keeping data in a specific order in a table.
+ * record this in a new column next to the reference column. Useful for doing
+ * overlaps and keeping data in a specific order in a table.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class SortColumnsByRowModule extends CalcModule implements ModernClickListener  {
+public class SortColumnsByRowModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mSortButton = 
-			new RibbonLargeButton(UIService.getInstance().loadIcon("order_columns", 32));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mSortButton = new RibbonLargeButton(UIService.getInstance().loadIcon("order_columns", 32));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Sort Columns By Row";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Sort Columns By Row";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mSortButton.setToolTip(new ModernToolTip("Sort", 
-				"Sort columns."), mWindow.getRibbon().getToolTipModel());
+    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."), mWindow.getRibbon().getToolTipModel());
 
-		window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
+    window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
 
-		mSortButton.addClickListener(this);
+    mSortButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		sort();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    sort();
+  }
 
-	/**
-	 * Match.
-	 */
-	private void sort() {
-		DataFrame m = mWindow.getCurrentMatrix();
+  /**
+   * Match.
+   */
+  private void sort() {
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		List<Integer> rows = mWindow.getSelectedRows();
+    List<Integer> rows = mWindow.getSelectedRows();
 
-		if (rows.size() == 0) {
-			ModernMessageDialog.createDialog(mWindow, 
-					"You must select a row to sort on.", 
-					MessageDialogType.WARNING);
-			return;
-		}
+    if (rows.size() == 0) {
+      ModernMessageDialog.createDialog(mWindow, "You must select a row to sort on.", MessageDialogType.WARNING);
+      return;
+    }
 
-		int r = rows.get(0);
-		
-		SortColumnsByRowDialog dialog =
-				new SortColumnsByRowDialog(mWindow);
-		
-		dialog.setVisible(true);
-		
-		if (dialog.isCancelled()) {
-			return;
-		}
+    int r = rows.get(0);
 
-		if (dialog.getSortWithinGroups()) {
-			sortByRowWithinGroups(m, r, mWindow.getGroups(), dialog.getSortAsc());
-		} else {
-			sortByRow(m, r, dialog.getSortAsc());
-		}
-	}
+    SortColumnsByRowDialog dialog = new SortColumnsByRowDialog(mWindow);
 
-	/**
-	 * Sort by row.
-	 *
-	 * @param m the m
-	 * @param r the r
-	 * @param asc the asc
-	 */
-	private void sortByRow(DataFrame m, int r, boolean asc) {
+    dialog.setVisible(true);
 
+    if (dialog.isCancelled()) {
+      return;
+    }
 
-		// If a column belongs to more than one group, we
-		// will just assign it to the first group we 
-		// encounter that it belongs to. The column will
-		// then be marked as used so it cannot be put
-		// in another group. This ensures consistent ordering.
+    if (dialog.getSortWithinGroups()) {
+      sortByRowWithinGroups(m, r, mWindow.getGroups(), dialog.getSortAsc());
+    } else {
+      sortByRow(m, r, dialog.getSortAsc());
+    }
+  }
 
+  /**
+   * Sort by row.
+   *
+   * @param m
+   *          the m
+   * @param r
+   *          the r
+   * @param asc
+   *          the asc
+   */
+  private void sortByRow(DataFrame m, int r, boolean asc) {
 
+    // If a column belongs to more than one group, we
+    // will just assign it to the first group we
+    // encounter that it belongs to. The column will
+    // then be marked as used so it cannot be put
+    // in another group. This ensures consistent ordering.
 
-		List<Indexed<Integer, Double>> valueIndices = 
-				new ArrayList<Indexed<Integer, Double>>();
+    List<Indexed<Integer, Double>> valueIndices = new ArrayList<Indexed<Integer, Double>>();
 
-		for (int i = 0; i < m.getCols(); ++i) {
-			valueIndices.add(new Indexed<Integer, Double>(i, m.getValue(r, i)));
-		}
+    for (int i = 0; i < m.getCols(); ++i) {
+      valueIndices.add(new Indexed<Integer, Double>(i, m.getValue(r, i)));
+    }
 
-		// Sort largest to smallest
-		List<Indexed<Integer, Double>> sortedValues = 
-				CollectionUtils.sort(valueIndices);
-		
-		if (!asc) {
-			sortedValues = CollectionUtils.reverse(sortedValues);
-		}
+    // Sort largest to smallest
+    List<Indexed<Integer, Double>> sortedValues = CollectionUtils.sort(valueIndices);
 
-		List<Integer> columns = new ArrayList<Integer>();
+    if (!asc) {
+      sortedValues = CollectionUtils.reverse(sortedValues);
+    }
 
-		for (Indexed<Integer, Double> valueIndex : sortedValues) {
-			columns.add(valueIndex.getIndex());
-		}
+    List<Integer> columns = new ArrayList<Integer>();
 
-		output(m, columns);
-	}
+    for (Indexed<Integer, Double> valueIndex : sortedValues) {
+      columns.add(valueIndex.getIndex());
+    }
 
-	/**
-	 * Sort by row within groups.
-	 *
-	 * @param m the m
-	 * @param r the r
-	 * @param groups the groups
-	 * @param asc the asc
-	 */
-	private void sortByRowWithinGroups(DataFrame m, 
-			int r, 
-			XYSeriesGroup groups,
-			boolean asc) {
-		// If a column belongs to more than one group, we
-		// will just assign it to the first group we 
-		// encounter that it belongs to. The column will
-		// then be marked as used so it cannot be put
-		// in another group. This ensures consistent ordering.
-		Set<Integer> used = new HashSet<Integer>();
+    output(m, columns);
+  }
 
-		List<Integer> columns = new ArrayList<Integer>();
-		
-		for (MatrixGroup group : groups) {
-			List<Integer> ids = MatrixGroup.findColumnIndices(m, group);
+  /**
+   * Sort by row within groups.
+   *
+   * @param m
+   *          the m
+   * @param r
+   *          the r
+   * @param groups
+   *          the groups
+   * @param asc
+   *          the asc
+   */
+  private void sortByRowWithinGroups(DataFrame m, int r, XYSeriesGroup groups, boolean asc) {
+    // If a column belongs to more than one group, we
+    // will just assign it to the first group we
+    // encounter that it belongs to. The column will
+    // then be marked as used so it cannot be put
+    // in another group. This ensures consistent ordering.
+    Set<Integer> used = new HashSet<Integer>();
 
-			List<Indexed<Integer, Double>> valueIndices = 
-					new ArrayList<Indexed<Integer, Double>>();
+    List<Integer> columns = new ArrayList<Integer>();
 
-			for (int id : ids) {
-				if (used.contains(id)) {
-					continue;
-				}
+    for (MatrixGroup group : groups) {
+      List<Integer> ids = MatrixGroup.findColumnIndices(m, group);
 
-				valueIndices.add(new Indexed<Integer, Double>(id, m.getValue(r, id)));
+      List<Indexed<Integer, Double>> valueIndices = new ArrayList<Indexed<Integer, Double>>();
 
-				used.add(id);
-			}
+      for (int id : ids) {
+        if (used.contains(id)) {
+          continue;
+        }
 
-			// Sort largest to smallest
-			List<Indexed<Integer, Double>> sortedValues = 
-					CollectionUtils.sort(valueIndices);
+        valueIndices.add(new Indexed<Integer, Double>(id, m.getValue(r, id)));
 
-			if (!asc) {
-				sortedValues = CollectionUtils.reverse(sortedValues);
-			}
-			
-			for (Indexed<Integer, Double> valueIndex : sortedValues) {
-				columns.add(valueIndex.getIndex());
-			}
-		}
+        used.add(id);
+      }
 
-		// deal with all the other columns that are not in groups
+      // Sort largest to smallest
+      List<Indexed<Integer, Double>> sortedValues = CollectionUtils.sort(valueIndices);
 
-		for (int i = 0; i < m.getCols(); ++i) {
-			if (!used.contains(i)) {
-				columns.add(i);
-			}
-		}
-		
-		output(m, columns);
-	}
+      if (!asc) {
+        sortedValues = CollectionUtils.reverse(sortedValues);
+      }
 
-	/**
-	 * Output.
-	 *
-	 * @param m the m
-	 * @param columns the columns
-	 */
-	private void output(DataFrame m, 
-			List<Integer> columns) {
-		DataFrame ret = 
-				DataFrame.createDataFrame(m.getRows(), m.getCols());
+      for (Indexed<Integer, Double> valueIndex : sortedValues) {
+        columns.add(valueIndex.getIndex());
+      }
+    }
 
-		DataFrame.copyRowAnnotations(m, ret);
+    // deal with all the other columns that are not in groups
 
-		DataFrame.copyColumns(m, columns, ret);
+    for (int i = 0; i < m.getCols(); ++i) {
+      if (!used.contains(i)) {
+        columns.add(i);
+      }
+    }
 
-		mWindow.addToHistory("Sort matrix", ret);
-	}
+    output(m, columns);
+  }
+
+  /**
+   * Output.
+   *
+   * @param m
+   *          the m
+   * @param columns
+   *          the columns
+   */
+  private void output(DataFrame m, List<Integer> columns) {
+    DataFrame ret = DataFrame.createDataFrame(m.getRows(), m.getCols());
+
+    DataFrame.copyRowAnnotations(m, ret);
+
+    DataFrame.copyColumns(m, columns, ret);
+
+    mWindow.addToHistory("Sort matrix", ret);
+  }
 }

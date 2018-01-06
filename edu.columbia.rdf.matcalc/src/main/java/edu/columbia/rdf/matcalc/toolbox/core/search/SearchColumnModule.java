@@ -36,7 +36,6 @@ import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Annotate a table as to whether some values can be found in a particular
@@ -45,145 +44,152 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class SearchColumnModule extends CalcModule implements ModernClickListener  {
+public class SearchColumnModule extends CalcModule implements ModernClickListener {
 
-	/**
-	 * The member match button.
-	 */
-	private RibbonLargeButton mSearchButton = 
-			new RibbonLargeButton("Search Column", UIService.getInstance().loadIcon("search_column", 24));
+  /**
+   * The member match button.
+   */
+  private RibbonLargeButton mSearchButton = new RibbonLargeButton("Search Column",
+      UIService.getInstance().loadIcon("search_column", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainMatCalcWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainMatCalcWindow mWindow;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Search Column";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Search Column";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-		mSearchButton.setToolTip(new ModernToolTip("Search Column", 
-				"Search column for values."), mWindow.getRibbon().getToolTipModel());
+    mSearchButton.setToolTip(new ModernToolTip("Search Column", "Search column for values."),
+        mWindow.getRibbon().getToolTipModel());
 
-		window.getRibbon().getHomeToolbar().getSection("Search").add(mSearchButton);
+    window.getRibbon().getHomeToolbar().getSection("Search").add(mSearchButton);
 
-		mSearchButton.addClickListener(this);
+    mSearchButton.addClickListener(this);
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public final void clicked(ModernClickEvent e) {
-		search();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public final void clicked(ModernClickEvent e) {
+    search();
+  }
 
-	/**
-	 * Match.
-	 */
-	private void search() {
-		int column = mWindow.getSelectedColumn();
+  /**
+   * Match.
+   */
+  private void search() {
+    int column = mWindow.getSelectedColumn();
 
+    if (column == Integer.MIN_VALUE) {
+      ModernMessageDialog.createWarningDialog(mWindow, "You must select a column to match on.");
 
-		if (column == Integer.MIN_VALUE) {
-			ModernMessageDialog.createWarningDialog(mWindow, "You must select a column to match on.");
+      return;
+    }
 
-			return;
-		}
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		DataFrame m = mWindow.getCurrentMatrix();
+    SearchColumnDialog dialog = new SearchColumnDialog(mWindow);
 
-		SearchColumnDialog dialog = new SearchColumnDialog(mWindow);
+    dialog.setVisible(true);
 
-		dialog.setVisible(true);
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    List<String> items = dialog.getLines();
 
-		List<String> items = dialog.getLines();
+    // for case insensitive searching
+    Map<String, String> lcMap;
 
-		// for case insensitive searching
-		Map<String, String> lcMap;
+    if (dialog.caseSensitive()) {
+      lcMap = CollectionUtils.createMap(items, items);
+    } else {
+      lcMap = CollectionUtils.createMap(items, TextUtils.toLowerCase(items));
+    }
 
-		if (dialog.caseSensitive()) {
-			lcMap = CollectionUtils.createMap(items, items);
-		} else {
-			lcMap = CollectionUtils.createMap(items, TextUtils.toLowerCase(items));
-		}
+    List<Set<String>> matchMap = new ArrayList<Set<String>>(m.getRows());
 
-		List<Set<String>> matchMap = 
-				new ArrayList<Set<String>>(m.getRows());
+    for (int i = 0; i < m.getRows(); ++i) {
+      matchMap.add(new TreeSet<String>());
 
-		for (int i = 0; i < m.getRows(); ++i) {
-			matchMap.add(new TreeSet<String>());
+      String lc = m.getText(i, column);
 
-			String lc = m.getText(i, column);
+      if (!dialog.caseSensitive()) {
+        lc = lc.toLowerCase();
+      }
 
-			if (!dialog.caseSensitive()) {
-				lc = lc.toLowerCase();
-			}
+      for (String item : items) {
+        boolean match = false;
 
-			for (String item : items) {
-				boolean match = false;
-				
-				if (dialog.getInList()) {
-					if (dialog.getExact()) {
-						match = lc.equals(lcMap.get(item));
-					} else {
-						match = lc.contains(lcMap.get(item));
-					}
-				} else {
-					if (dialog.getExact()) {
-						match = !lc.equals(lcMap.get(item));
-					} else {
-						match = !lc.contains(lcMap.get(item));
-					}
-				}
-				
-				if (match) {
-					matchMap.get(i).add(item);
-				}
-			}
-		}
+        if (dialog.getInList()) {
+          if (dialog.getExact()) {
+            match = lc.equals(lcMap.get(item));
+          } else {
+            match = lc.contains(lcMap.get(item));
+          }
+        } else {
+          if (dialog.getExact()) {
+            match = !lc.equals(lcMap.get(item));
+          } else {
+            match = !lc.contains(lcMap.get(item));
+          }
+        }
 
-		DataFrame ret = DataFrame.createDataFrame(m.getRows(), 
-				m.getCols() + 2);
+        if (match) {
+          matchMap.get(i).add(item);
+        }
+      }
+    }
 
-		// Copy before column
-		DataFrame.copyColumns(m, 0, column - 1, ret);
+    DataFrame ret = DataFrame.createDataFrame(m.getRows(), m.getCols() + 2);
 
-		// Shift the rest by one column so we can insert the results
-		DataFrame.copyColumns(m, column, ret, column + 2);
+    // Copy before column
+    DataFrame.copyColumns(m, 0, column - 1, ret);
 
-		//ret.setColumnName(c + 1, "Match In " + window.getSubTitle()  + " - " + copyM.getColumnName(inputDialog.getReplaceColumn()));
-		ret.setColumnName(column, "Number Of Matches");
-		ret.setColumnName(column + 1, "Matches");
+    // Shift the rest by one column so we can insert the results
+    DataFrame.copyColumns(m, column, ret, column + 2);
 
-		for (int i = 0; i < m.getRows(); ++i) {
-			int s = matchMap.get(i).size();
+    // ret.setColumnName(c + 1, "Match In " + window.getSubTitle() + " - " +
+    // copyM.getColumnName(inputDialog.getReplaceColumn()));
+    ret.setColumnName(column, "Number Of Matches");
+    ret.setColumnName(column + 1, "Matches");
 
-			ret.set(i, column, s);
+    for (int i = 0; i < m.getRows(); ++i) {
+      int s = matchMap.get(i).size();
 
-			if (s == 0) {
-				ret.set(i, column + 1, TextUtils.NA);
-			} else {
-				ret.set(i, column + 1, TextUtils.scJoin(CollectionUtils.sort(matchMap.get(i))));
-			}
-		}
+      ret.set(i, column, s);
 
-		mWindow.addToHistory("Search Column	", ret);
-	}
+      if (s == 0) {
+        ret.set(i, column + 1, TextUtils.NA);
+      } else {
+        ret.set(i, column + 1, TextUtils.scJoin(CollectionUtils.sort(matchMap.get(i))));
+      }
+    }
+
+    mWindow.addToHistory("Search Column	", ret);
+  }
 }

@@ -23,11 +23,11 @@ import org.jebtk.modern.graphics.icons.ModernApplicationIcon;
  * The Class MatCalcIcon.
  */
 public class MatCalcIcon extends ModernApplicationIcon {
-	
-	/**
-	 * Instantiates a new mat calc icon.
-	 */
-	public MatCalcIcon() {
-		super("M", "c", ColorTheme.GREEN);
-	}
+
+  /**
+   * Instantiates a new mat calc icon.
+   */
+  public MatCalcIcon() {
+    super("M", "c", ColorTheme.GREEN);
+  }
 }

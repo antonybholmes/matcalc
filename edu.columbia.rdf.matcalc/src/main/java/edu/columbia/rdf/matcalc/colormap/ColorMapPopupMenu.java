@@ -27,132 +27,142 @@ import org.jebtk.modern.menu.ModernScrollPopupMenu;
 import org.jebtk.modern.text.ModernLabel;
 import org.jebtk.modern.window.ModernWindow;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The class ColorPopupMenu.
  */
 public class ColorMapPopupMenu extends ModernScrollPopupMenu {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m color map. */
-	private ColorMap mColorMap = null;
-	
-	/** The m color map picker. */
-	private ColorMapBlockPicker mColorMapPicker;
-	
-	/** The m parent. */
-	private ModernWindow mParent;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
+  /** The m color map. */
+  private ColorMap mColorMap = null;
 
-	/**
-	 * Instantiates a new color popup menu.
-	 *
-	 * @param parent the parent
-	 */
-	public ColorMapPopupMenu(ModernWindow parent) {
-		mParent = parent;
-		
-		setBackground(ColorPopupMenu.COLOR_PICKER_BACKGROUND);
-		
-		//setBorder(BorderFactory.createCompoundBorder(ModernWidget.LINE_BORDER, 
-		//		BorderService.getInstance().createBorder(4)));
+  /** The m color map picker. */
+  private ColorMapBlockPicker mColorMapPicker;
 
-		add(new ModernLabel("Color Maps"));
+  /** The m parent. */
+  private ModernWindow mParent;
 
-		mColorMapPicker = new ColorMapBlockPicker(5); // new ColorMapPicker(4);
+  /**
+   * Instantiates a new color popup menu.
+   *
+   * @param parent
+   *          the parent
+   */
+  public ColorMapPopupMenu(ModernWindow parent) {
+    mParent = parent;
 
-		add(mColorMapPicker);
+    setBackground(ColorPopupMenu.COLOR_PICKER_BACKGROUND);
 
+    // setBorder(BorderFactory.createCompoundBorder(ModernWidget.LINE_BORDER,
+    // BorderService.getInstance().createBorder(4)));
 
-		//addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("red", Color.RED), "Red"));
-		//addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("green", Color.GREEN), "Green"));
-		//addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("blue", Color.BLUE), "Blue"));
-		//addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("orange", Color.ORANGE), "Orange"));
-		//addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("pink", Color.PINK), "Pink"));
+    add(new ModernLabel("Color Maps"));
 
-		//add(new ModernMenuDivider());
+    mColorMapPicker = new ColorMapBlockPicker(5); // new ColorMapPicker(4);
 
-		add(new ModernIconMenuItem("More Color Maps...", 
-				UIService.getInstance().loadIcon("color_wheel", 16))
-				.setBackgroundAnimations("color-menu-fade"));
-		
-		update();
-	}
+    add(mColorMapPicker);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.menu.ModernPopup#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mColorMapPicker)) {
-			mColorMap = mColorMapPicker.getSelectedColorMap();
-		
-			super.clicked(e);
-		} else if (e.getMessage().equals("More Color Maps...")){
-			setVisible(false);
-			
-			ColorMapsDialog dialog = new ColorMapsDialog(mParent, mColorMap);
+    // addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("red",
+    // Color.RED), "Red"));
+    // addScrollMenuItem(new
+    // ColorMapMenuItem(ColorMap.createWhiteToColorMap("green", Color.GREEN),
+    // "Green"));
+    // addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("blue",
+    // Color.BLUE), "Blue"));
+    // addScrollMenuItem(new
+    // ColorMapMenuItem(ColorMap.createWhiteToColorMap("orange", Color.ORANGE),
+    // "Orange"));
+    // addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("pink",
+    // Color.PINK), "Pink"));
 
-			dialog.setVisible(true);
+    // add(new ModernMenuDivider());
 
-			if (dialog.getStatus() == ModernDialogStatus.OK) {
-				mColorMap = dialog.getColorMap();
-				
-				ColorMapService.getInstance().add(mColorMap);
-				
-				update();
-			}
-			
-			super.clicked(e);
-		}
-	}
-	
-	/**
-	 * Update.
-	 */
-	private void update() {
-		/*
-		List<ColorMap> colorMaps = new ArrayList<ColorMap>();
+    add(new ModernIconMenuItem("More Color Maps...", UIService.getInstance().loadIcon("color_wheel", 16))
+        .setBackgroundAnimations("color-menu-fade"));
 
-		colorMaps.add(ColorMapService.getInstance().get("Jet"));
-		colorMaps.add(ColorMapService.getInstance().get("Hot"));
-		colorMaps.add(ColorMapService.getInstance().get("Cool"));
-		colorMaps.add(ColorMapService.getInstance().get("Spring"));
-		colorMaps.add(ColorMapService.getInstance().get("Summer"));
-		colorMaps.add(ColorMapService.getInstance().get("Autumn"));
-		colorMaps.add(ColorMapService.getInstance().get("Winter"));
-		colorMaps.add(ColorMapService.getInstance().get("Gray"));
-		colorMaps.add(ColorMapService.getInstance().get("Blue White Red"));
-		colorMaps.add(ColorMapService.getInstance().get("Green White Red"));
-		colorMaps.add(ColorMapService.getInstance().get("Green Black Red"));
-		colorMaps.add(ColorMapService.getInstance().get("Blue Yellow"));
-		colorMaps.add(ColorMapService.getInstance().get("White Red"));
-		colorMaps.add(ColorMapService.getInstance().get("White Green"));
-		colorMaps.add(ColorMapService.getInstance().get("White Blue"));
-		colorMaps.add(ColorMap.createWhiteToColorMap("White Purple", ColorMap.PURPLE));
-		colorMaps.add(ColorMap.createWhiteToColorMap("White Orange", ColorMap.ORANGE));
-		colorMaps.add(ColorMap.createWhiteToColorMap("White Yellow", ColorMap.YELLOW));
-		colorMaps.add(ColorMap.createWhiteToColorMap("White Pink", ColorMap.PINK));
-		
-		// Add anything the user created
-		colorMaps.addAll(ColorMapService.getInstance().getUserMaps().toList());
-		*/
-		
-		mColorMapPicker.update(ColorMapService.getInstance().toList()); //colorMaps);
-	}
+    update();
+  }
 
-	/**
-	 * Gets the selected color.
-	 *
-	 * @return the selected color
-	 */
-	public ColorMap getSelectedColorMap() {
-		return mColorMap;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.menu.ModernPopup#clicked(org.abh.lib.ui.modern.event.
+   * ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mColorMapPicker)) {
+      mColorMap = mColorMapPicker.getSelectedColorMap();
+
+      super.clicked(e);
+    } else if (e.getMessage().equals("More Color Maps...")) {
+      setVisible(false);
+
+      ColorMapsDialog dialog = new ColorMapsDialog(mParent, mColorMap);
+
+      dialog.setVisible(true);
+
+      if (dialog.getStatus() == ModernDialogStatus.OK) {
+        mColorMap = dialog.getColorMap();
+
+        ColorMapService.getInstance().add(mColorMap);
+
+        update();
+      }
+
+      super.clicked(e);
+    }
+  }
+
+  /**
+   * Update.
+   */
+  private void update() {
+    /*
+     * List<ColorMap> colorMaps = new ArrayList<ColorMap>();
+     * 
+     * colorMaps.add(ColorMapService.getInstance().get("Jet"));
+     * colorMaps.add(ColorMapService.getInstance().get("Hot"));
+     * colorMaps.add(ColorMapService.getInstance().get("Cool"));
+     * colorMaps.add(ColorMapService.getInstance().get("Spring"));
+     * colorMaps.add(ColorMapService.getInstance().get("Summer"));
+     * colorMaps.add(ColorMapService.getInstance().get("Autumn"));
+     * colorMaps.add(ColorMapService.getInstance().get("Winter"));
+     * colorMaps.add(ColorMapService.getInstance().get("Gray"));
+     * colorMaps.add(ColorMapService.getInstance().get("Blue White Red"));
+     * colorMaps.add(ColorMapService.getInstance().get("Green White Red"));
+     * colorMaps.add(ColorMapService.getInstance().get("Green Black Red"));
+     * colorMaps.add(ColorMapService.getInstance().get("Blue Yellow"));
+     * colorMaps.add(ColorMapService.getInstance().get("White Red"));
+     * colorMaps.add(ColorMapService.getInstance().get("White Green"));
+     * colorMaps.add(ColorMapService.getInstance().get("White Blue"));
+     * colorMaps.add(ColorMap.createWhiteToColorMap("White Purple",
+     * ColorMap.PURPLE));
+     * colorMaps.add(ColorMap.createWhiteToColorMap("White Orange",
+     * ColorMap.ORANGE));
+     * colorMaps.add(ColorMap.createWhiteToColorMap("White Yellow",
+     * ColorMap.YELLOW)); colorMaps.add(ColorMap.createWhiteToColorMap("White Pink",
+     * ColorMap.PINK));
+     * 
+     * // Add anything the user created
+     * colorMaps.addAll(ColorMapService.getInstance().getUserMaps().toList());
+     */
+
+    mColorMapPicker.update(ColorMapService.getInstance().toList()); // colorMaps);
+  }
+
+  /**
+   * Gets the selected color.
+   *
+   * @return the selected color
+   */
+  public ColorMap getSelectedColorMap() {
+    return mColorMap;
+  }
 }

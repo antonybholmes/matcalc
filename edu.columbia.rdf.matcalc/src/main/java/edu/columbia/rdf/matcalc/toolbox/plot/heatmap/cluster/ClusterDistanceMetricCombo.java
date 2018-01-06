@@ -27,43 +27,43 @@ import org.jebtk.modern.combobox.ModernComboBox;
  * The Class ClusterDistanceMetricCombo.
  */
 public class ClusterDistanceMetricCombo extends ModernComboBox {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new cluster distance metric combo.
-	 */
-	public ClusterDistanceMetricCombo() {
-		addMenuItem("Euclidean");
-		addMenuItem("Manhattan");
-		addMenuItem("Maximum");
-		addMenuItem("Pearson");
-	}
-	
-	/**
-	 * Gets the distance metric.
-	 *
-	 * @return the distance metric
-	 */
-	public DistanceMetric getDistanceMetric() {
-		DistanceMetric distanceMetric;
-		
-		switch (getSelectedIndex()) {
-		case 0:
-			distanceMetric = new EuclideanDistanceMetric();
-			break;
-		case 1:
-			distanceMetric = new ManhattanDistanceMetric();
-			break;
-		case 2:
-			distanceMetric = new MaximumDistanceMetric();
-			break;
-		default:
-			distanceMetric = new PearsonDistanceMetric();
-			break;
-		}
-		
-		return distanceMetric;
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new cluster distance metric combo.
+   */
+  public ClusterDistanceMetricCombo() {
+    addMenuItem("Euclidean");
+    addMenuItem("Manhattan");
+    addMenuItem("Maximum");
+    addMenuItem("Pearson");
+  }
+
+  /**
+   * Gets the distance metric.
+   *
+   * @return the distance metric
+   */
+  public DistanceMetric getDistanceMetric() {
+    DistanceMetric distanceMetric;
+
+    switch (getSelectedIndex()) {
+    case 0:
+      distanceMetric = new EuclideanDistanceMetric();
+      break;
+    case 1:
+      distanceMetric = new ManhattanDistanceMetric();
+      break;
+    case 2:
+      distanceMetric = new MaximumDistanceMetric();
+      break;
+    default:
+      distanceMetric = new PearsonDistanceMetric();
+      break;
+    }
+
+    return distanceMetric;
+  }
 }

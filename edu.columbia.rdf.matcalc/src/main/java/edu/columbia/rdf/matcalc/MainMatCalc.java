@@ -23,96 +23,126 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.help.GuiAppInfo;
 
-
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The class MainMatCalc.
  */
 public class MainMatCalc {
-	
-	/**
-	 * Sets the up.
-	 *
-	 * @param moduleLoader the new up
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws FontFormatException the font format exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws UnsupportedLookAndFeelException the unsupported look and feel exception
-	 */
-	private static void setup(ModuleLoader moduleLoader) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
-		moduleLoader.loadModules();
-	}
-	
-	/**
-	 * Main.
-	 *
-	 * @param moduleLoader the module loader
-	 * @return the main mat calc window
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws FontFormatException the font format exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws UnsupportedLookAndFeelException the unsupported look and feel exception
-	 */
-	public static MainMatCalcWindow main(ModuleLoader moduleLoader) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
-		return main(new MatCalcInfo(), moduleLoader);
-	}
-	
-	/**
-	 * Main.
-	 *
-	 * @param appInfo the app info
-	 * @param moduleLoader the module loader
-	 * @return the main mat calc window
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws FontFormatException the font format exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws UnsupportedLookAndFeelException the unsupported look and feel exception
-	 */
-	public static MainMatCalcWindow main(GuiAppInfo appInfo,
-			ModuleLoader moduleLoader) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
-		setup(moduleLoader);
 
-		MainMatCalcWindow window = new MainMatCalcWindow(appInfo);
+  /**
+   * Sets the up.
+   *
+   * @param moduleLoader
+   *          the new up
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws InstantiationException
+   *           the instantiation exception
+   * @throws IllegalAccessException
+   *           the illegal access exception
+   * @throws FontFormatException
+   *           the font format exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws UnsupportedLookAndFeelException
+   *           the unsupported look and feel exception
+   */
+  private static void setup(ModuleLoader moduleLoader) throws ClassNotFoundException, InstantiationException,
+      IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
+    moduleLoader.loadModules();
+  }
 
-		window.setVisible(true);
-		
-		return window;
-	}
-	
-	
-	/**
-	 * Main.
-	 *
-	 * @param appInfo the app info
-	 * @param moduleLoader the module loader
-	 * @param m the m
-	 * @return the main mat calc window
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws FontFormatException the font format exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws UnsupportedLookAndFeelException the unsupported look and feel exception
-	 */
-	public static MainMatCalcWindow main(GuiAppInfo appInfo,
-			ModuleLoader moduleLoader,
-			DataFrame m) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
-		//AppService.getInstance().setAppName("matcalc");
-		
-		setup(moduleLoader);
-		
-		MainMatCalcWindow window = new MainMatCalcWindow(appInfo, m);
-		
-		window.setVisible(true);
-		
-		return window;
-	}
+  /**
+   * Main.
+   *
+   * @param moduleLoader
+   *          the module loader
+   * @return the main mat calc window
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws InstantiationException
+   *           the instantiation exception
+   * @throws IllegalAccessException
+   *           the illegal access exception
+   * @throws FontFormatException
+   *           the font format exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws UnsupportedLookAndFeelException
+   *           the unsupported look and feel exception
+   */
+  public static MainMatCalcWindow main(ModuleLoader moduleLoader) throws ClassNotFoundException, InstantiationException,
+      IllegalAccessException, FontFormatException, IOException, UnsupportedLookAndFeelException {
+    return main(new MatCalcInfo(), moduleLoader);
+  }
+
+  /**
+   * Main.
+   *
+   * @param appInfo
+   *          the app info
+   * @param moduleLoader
+   *          the module loader
+   * @return the main mat calc window
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws InstantiationException
+   *           the instantiation exception
+   * @throws IllegalAccessException
+   *           the illegal access exception
+   * @throws FontFormatException
+   *           the font format exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws UnsupportedLookAndFeelException
+   *           the unsupported look and feel exception
+   */
+  public static MainMatCalcWindow main(GuiAppInfo appInfo, ModuleLoader moduleLoader)
+      throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException,
+      UnsupportedLookAndFeelException {
+    setup(moduleLoader);
+
+    MainMatCalcWindow window = new MainMatCalcWindow(appInfo);
+
+    window.setVisible(true);
+
+    return window;
+  }
+
+  /**
+   * Main.
+   *
+   * @param appInfo
+   *          the app info
+   * @param moduleLoader
+   *          the module loader
+   * @param m
+   *          the m
+   * @return the main mat calc window
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws InstantiationException
+   *           the instantiation exception
+   * @throws IllegalAccessException
+   *           the illegal access exception
+   * @throws FontFormatException
+   *           the font format exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws UnsupportedLookAndFeelException
+   *           the unsupported look and feel exception
+   */
+  public static MainMatCalcWindow main(GuiAppInfo appInfo, ModuleLoader moduleLoader, DataFrame m)
+      throws ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException, IOException,
+      UnsupportedLookAndFeelException {
+    // AppService.getInstance().setAppName("matcalc");
+
+    setup(moduleLoader);
+
+    MainMatCalcWindow window = new MainMatCalcWindow(appInfo, m);
+
+    window.setVisible(true);
+
+    return window;
+  }
 }

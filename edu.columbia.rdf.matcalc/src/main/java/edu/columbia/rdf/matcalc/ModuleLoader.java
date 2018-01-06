@@ -72,101 +72,97 @@ import edu.columbia.rdf.matcalc.toolbox.supervised.SupervisedModule;
  * The Class ModuleLoader.
  */
 public class ModuleLoader {
-	
-	/** The m modules list. */
-	private List<Class<? extends Module>> mModulesList = 
-			new ArrayList<Class<? extends Module>>();
-	
-	/**
-	 * Instantiates a new module loader.
-	 */
-	public ModuleLoader() {
-		
-		
-		addModule(MatrixIOModule.class);
-		addModule(ExcelIOModule.class);
-		addModule(XLSXIOModule.class);
-		addModule(XlsIOModule.class);
-		addModule(TxtIOModule.class);
-		addModule(TsvIOModule.class);
-		addModule(CsvIOModule.class);
-		
-		
-		
-		
-		addModule(TransposeModule.class);
-		addModule(ThresholdModule.class);
-		addModule(LogModule.class);
-		addModule(PowerModule.class);
-		addModule(NormalizeModule.class);
-		addModule(ZScoreModule.class);
-		addModule(StatsModule.class);
-		
-		addModule(SortModule.class);
-		addModule(SortColumnsByRowModule.class);
-		addModule(FilterModule.class);
-		addModule(RowFilterModule.class);
-		addModule(ColumnFilterModule.class);
-		
-		addModule(SearchColumnModule.class);
-		addModule(MatchModule.class);
-		addModule(OrderColumnsModule.class);
-		
-		addModule(SummaryModule.class);
-		addModule(CollapseModule.class);
-		addModule(DuplicateModule.class);
-		addModule(SplitModule.class);
-		addModule(ExtractDataModule.class);
-		addModule(GroupModule.class);
-		addModule(ColumnAnnotationModule.class);
-		
-		addModule(RowOrderModule.class);
-		addModule(ColumnFilterModule.class);
-		
-		addModule(VennModule.class);
-		
-		addModule(PasteModule.class);
-		
-		addModule(LegacyHeatMapModule.class);
-		addModule(LegacyClusterModule.class);
-		addModule(SmoothedLineGraphModule.class);
-		//addModule(ScatterLineModule.class);
-		addModule(ScatterModule.class);
-		addModule(BarChartModule.class);
-		//addModule(BarChartHModule.class);
-		addModule(StackedBarChartModule.class);
-		addModule(HistogramModule.class);
-		//addModule(PieChartModule.class);
-		addModule(BoxWhiskerPlotModule.class);
-		addModule(BoxWhiskerScatterPlotModule.class);
-		addModule(VolcanoPlotModule.class);
-		
-		addModule(SupervisedModule.class);
-		
-		addModule(ZoomModule.class);
-		addModule(ViewModule.class);
-	}
-	
-	/**
-	 * Adds the module.
-	 *
-	 * @param c the c
-	 * @return the module loader
-	 */
-	public ModuleLoader addModule(Class<? extends Module> c) {
-		//PluginService.getInstance().addPlugin(c);
-		
-		mModulesList.add(c);
-		
-		return this;
-	}
-	
-	/**
-	 * Load modules.
-	 */
-	public void loadModules() {
-		for (Class<?> c : mModulesList) {
-			PluginService.getInstance().addPlugin(c);
-		}
-	}
+
+  /** The m modules list. */
+  private List<Class<? extends Module>> mModulesList = new ArrayList<Class<? extends Module>>();
+
+  /**
+   * Instantiates a new module loader.
+   */
+  public ModuleLoader() {
+
+    addModule(MatrixIOModule.class);
+    addModule(ExcelIOModule.class);
+    addModule(XLSXIOModule.class);
+    addModule(XlsIOModule.class);
+    addModule(TxtIOModule.class);
+    addModule(TsvIOModule.class);
+    addModule(CsvIOModule.class);
+
+    addModule(TransposeModule.class);
+    addModule(ThresholdModule.class);
+    addModule(LogModule.class);
+    addModule(PowerModule.class);
+    addModule(NormalizeModule.class);
+    addModule(ZScoreModule.class);
+    addModule(StatsModule.class);
+
+    addModule(SortModule.class);
+    addModule(SortColumnsByRowModule.class);
+    addModule(FilterModule.class);
+    addModule(RowFilterModule.class);
+    addModule(ColumnFilterModule.class);
+
+    addModule(SearchColumnModule.class);
+    addModule(MatchModule.class);
+    addModule(OrderColumnsModule.class);
+
+    addModule(SummaryModule.class);
+    addModule(CollapseModule.class);
+    addModule(DuplicateModule.class);
+    addModule(SplitModule.class);
+    addModule(ExtractDataModule.class);
+    addModule(GroupModule.class);
+    addModule(ColumnAnnotationModule.class);
+
+    addModule(RowOrderModule.class);
+    addModule(ColumnFilterModule.class);
+
+    addModule(VennModule.class);
+
+    addModule(PasteModule.class);
+
+    addModule(LegacyHeatMapModule.class);
+    addModule(LegacyClusterModule.class);
+    addModule(SmoothedLineGraphModule.class);
+    // addModule(ScatterLineModule.class);
+    addModule(ScatterModule.class);
+    addModule(BarChartModule.class);
+    // addModule(BarChartHModule.class);
+    addModule(StackedBarChartModule.class);
+    addModule(HistogramModule.class);
+    // addModule(PieChartModule.class);
+    addModule(BoxWhiskerPlotModule.class);
+    addModule(BoxWhiskerScatterPlotModule.class);
+    addModule(VolcanoPlotModule.class);
+
+    addModule(SupervisedModule.class);
+
+    addModule(ZoomModule.class);
+    addModule(ViewModule.class);
+  }
+
+  /**
+   * Adds the module.
+   *
+   * @param c
+   *          the c
+   * @return the module loader
+   */
+  public ModuleLoader addModule(Class<? extends Module> c) {
+    // PluginService.getInstance().addPlugin(c);
+
+    mModulesList.add(c);
+
+    return this;
+  }
+
+  /**
+   * Load modules.
+   */
+  public void loadModules() {
+    for (Class<?> c : mModulesList) {
+      PluginService.getInstance().addPlugin(c);
+    }
+  }
 }

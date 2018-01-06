@@ -31,58 +31,61 @@ import org.jebtk.modern.widget.ModernWidget;
  *
  */
 public class OrderRows32VectorIcon extends ModernVectorIcon {
-	
-	/**
-	 * The constant WIDTH.
-	 */
-	private static final int WIDTH = 30;
-	
-	/**
-	 * The constant SIZE.
-	 */
-	private static final int SIZE = 7;
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D, java.awt.Rectangle)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		x = x + (w - WIDTH) / 2;
-		y = y + (h - WIDTH) / 2;
-		
-		g2.setColor(ColorUtils.decodeHtmlColor("#87de87"));
-		
-		g2.fillOval(x, y, SIZE, SIZE);
-		g2.fillOval(x, y + SIZE + SIZE / 2, SIZE, SIZE);
-		g2.fillOval(x, y + 3 * SIZE, SIZE, SIZE);
-		//g2.fillOval(x, y + 4 * SIZE + SIZE / 2, SIZE, SIZE);
-		
-		
-		y = y + WIDTH / 4;
-		x = 16;
-		
-		GeneralPath gp = new GeneralPath();
-		
-		gp.moveTo(x, y);
-		
-		//across
-		gp.lineTo(x + 6, y);
-		//down
-		gp.lineTo(x + 6, y + WIDTH / 2 - 3);
-		// across
-		gp.lineTo(x + 9, y + WIDTH / 2 - 3);
-		
-		//down
-		gp.lineTo(x + 3, y + WIDTH / 2 + 3);
-		
-		gp.lineTo(x - 3, y + WIDTH / 2 - 3);
-		gp.lineTo(x, y + WIDTH / 2 - 3);
-		
-		gp.closePath();
-		
-		g2.setColor(ModernWidget.BACKGROUND_COLOR);
-		g2.fill(gp);
-		g2.setColor(ThemeService.getInstance().colors().getHighlight(6));
-		g2.draw(gp);
-	}
+
+  /**
+   * The constant WIDTH.
+   */
+  private static final int WIDTH = 30;
+
+  /**
+   * The constant SIZE.
+   */
+  private static final int SIZE = 7;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.icons.ModernIcon#drawForeground(java.awt.Graphics2D,
+   * java.awt.Rectangle)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+    x = x + (w - WIDTH) / 2;
+    y = y + (h - WIDTH) / 2;
+
+    g2.setColor(ColorUtils.decodeHtmlColor("#87de87"));
+
+    g2.fillOval(x, y, SIZE, SIZE);
+    g2.fillOval(x, y + SIZE + SIZE / 2, SIZE, SIZE);
+    g2.fillOval(x, y + 3 * SIZE, SIZE, SIZE);
+    // g2.fillOval(x, y + 4 * SIZE + SIZE / 2, SIZE, SIZE);
+
+    y = y + WIDTH / 4;
+    x = 16;
+
+    GeneralPath gp = new GeneralPath();
+
+    gp.moveTo(x, y);
+
+    // across
+    gp.lineTo(x + 6, y);
+    // down
+    gp.lineTo(x + 6, y + WIDTH / 2 - 3);
+    // across
+    gp.lineTo(x + 9, y + WIDTH / 2 - 3);
+
+    // down
+    gp.lineTo(x + 3, y + WIDTH / 2 + 3);
+
+    gp.lineTo(x - 3, y + WIDTH / 2 - 3);
+    gp.lineTo(x, y + WIDTH / 2 - 3);
+
+    gp.closePath();
+
+    g2.setColor(ModernWidget.BACKGROUND_COLOR);
+    g2.fill(gp);
+    g2.setColor(ThemeService.getInstance().colors().getHighlight(6));
+    g2.draw(gp);
+  }
 }

@@ -24,7 +24,7 @@ import org.jebtk.graphplot.plotbox.PlotBox;
  */
 public class PlotSizeModel extends ItemModel<PlotBox> {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
 }

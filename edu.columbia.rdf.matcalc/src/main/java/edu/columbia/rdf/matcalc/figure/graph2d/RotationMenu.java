@@ -27,22 +27,20 @@ import org.jebtk.modern.menu.ModernPopupMenu;
  */
 public class RotationMenu extends ModernPopupMenu {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new rotation menu.
-	 */
-	public RotationMenu() {
-		addMenuItem(new ModernIconMenuItem("0", 
-				new Raster16Icon(new ArrowRightVectorIcon())));
-		addMenuItem(new ModernIconMenuItem("90", 
-				new Raster16Icon(new ArrowDownVectorIcon())));
-		//addMenuItem(new ModernIconMenuItem("180", 
-		//		new Raster16Icon(new ArrowRightVectorIcon())));
-		//addMenuItem(new ModernIconMenuItem("270", 
-		//		new Raster16Icon(new ArrowUpVectorIcon())));
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new rotation menu.
+   */
+  public RotationMenu() {
+    addMenuItem(new ModernIconMenuItem("0", new Raster16Icon(new ArrowRightVectorIcon())));
+    addMenuItem(new ModernIconMenuItem("90", new Raster16Icon(new ArrowDownVectorIcon())));
+    // addMenuItem(new ModernIconMenuItem("180",
+    // new Raster16Icon(new ArrowRightVectorIcon())));
+    // addMenuItem(new ModernIconMenuItem("270",
+    // new Raster16Icon(new ArrowUpVectorIcon())));
+  }
 }

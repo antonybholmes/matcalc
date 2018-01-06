@@ -21,23 +21,27 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
  */
 public class TrueFilter implements Filter {
 
-	/** The Constant INSTANCE. */
-	public static final Filter INSTANCE = new TrueFilter();
+  /** The Constant INSTANCE. */
+  public static final Filter INSTANCE = new TrueFilter();
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
-	 */
-	@Override
-	public boolean test(String text, double value) {
-		return true;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#test(java.lang.String, double)
+   */
+  @Override
+  public boolean test(String text, double value) {
+    return true;
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.core.filter.Filter#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Always true";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.core.filter.Filter#getName()
+   */
+  @Override
+  public String getName() {
+    return "Always true";
+  }
 
 }

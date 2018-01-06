@@ -34,123 +34,99 @@ import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.OpenFile;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to open and save Text files.
  *
  * @author Antony Holmes Holmes
  */
-public class TxtIOModule extends IOModule  {
+public class TxtIOModule extends IOModule {
 
-	/** The Constant TXT_FILTER. */
-	private static final GuiFileExtFilter TXT_FILTER = new TxtGuiFileFilter();
+  /** The Constant TXT_FILTER. */
+  private static final GuiFileExtFilter TXT_FILTER = new TxtGuiFileFilter();
 
+  /**
+   * Instantiates a new tsv IO module.
+   */
+  public TxtIOModule() {
+    registerFileOpenType(TXT_FILTER);
+    registerFileSaveType(TXT_FILTER);
+  }
 
-	/**
-	 * Instantiates a new tsv IO module.
-	 */
-	public TxtIOModule() {
-		registerFileOpenType(TXT_FILTER);
-		registerFileSaveType(TXT_FILTER);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Txt IO";
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Txt IO";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, boolean, int)
+   */
+  @Override
+  public DataFrame openFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
+      int rowAnnotations, String delimiter, Collection<String> skipMatches) throws IOException {
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
-	 */
-	@Override
-	public DataFrame openFile(final MainMatCalcWindow window,
-			final Path file,
-			FileType type,
-			int headers,
-			int rowAnnotations,
-			String delimiter,
-			Collection<String> skipMatches) throws IOException {
+    rowAnnotations = OpenFile.estimateRowAnnotations(file, headers, skipMatches);
 
-		rowAnnotations = OpenFile.estimateRowAnnotations(file, headers, skipMatches);
-		
-		delimiter = OpenFile.guessDelimiter(file, skipMatches);
-		
-		boolean numerical = OpenFile.guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
-		
-		ImportDialog dialog = new ImportDialog(window,
-				rowAnnotations, 
-				false,
-				delimiter,
-				numerical);
+    delimiter = OpenFile.guessDelimiter(file, skipMatches);
 
-		dialog.setVisible(true);
+    boolean numerical = OpenFile.guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return null;
-		}
+    ImportDialog dialog = new ImportDialog(window, rowAnnotations, false, delimiter, numerical);
 
-		return autoOpenFile(window, 
-				file,
-				dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
-				dialog.getHasHeader() ? 1: 0,
-				dialog.getRowAnnotations(),
-				dialog.getDelimiter(),
-				dialog.getSkipLines());
-	}
+    dialog.setVisible(true);
 
-	@Override
-	public DataFrame autoOpenFile(final MainMatCalcWindow window,
-			final Path file,
-			FileType type,
-			int headers,
-			int rowAnnotations,
-			String delimiter,
-			Collection<String> skipLines) throws IOException {
-		if (delimiter.equals(",")) {
-			// Use the csv parser instead
-			if (headers > 0) {
-				return new CsvMatrixParser(true, rowAnnotations).parse(file);
-			} else {
-				return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
-			}
-		} else {
-			if (headers > 0) {
-				if (type == FileType.NUMERICAL) {
-					return new DoubleMatrixParser(true, 
-							skipLines, 
-							rowAnnotations, 
-							delimiter)
-							.parse(file);
-				} else {
-					return new MixedMatrixParser(true, 
-							skipLines, 
-							rowAnnotations, 
-							delimiter)
-							.parse(file);
-				}
-			} else {
-				return new DynamicMixedMatrixParser(skipLines, 
-						rowAnnotations, 
-						delimiter)
-						.parse(file); //return DataFrame.parseDynamicMatrix(file, hasHeader, rowAnnotations, '\t');
-			}
-		}
-	}
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return null;
+    }
 
+    return autoOpenFile(window, file, dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
+        dialog.getHasHeader() ? 1 : 0, dialog.getRowAnnotations(), dialog.getDelimiter(), dialog.getSkipLines());
+  }
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
-	 */
-	@Override
-	public boolean saveFile(final MainMatCalcWindow window,
-			final Path file, 
-			final DataFrame m) throws IOException {
-		DataFrame.writeDataFrame(m, file);
+  @Override
+  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
+      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+    if (delimiter.equals(",")) {
+      // Use the csv parser instead
+      if (headers > 0) {
+        return new CsvMatrixParser(true, rowAnnotations).parse(file);
+      } else {
+        return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
+      }
+    } else {
+      if (headers > 0) {
+        if (type == FileType.NUMERICAL) {
+          return new DoubleMatrixParser(true, skipLines, rowAnnotations, delimiter).parse(file);
+        } else {
+          return new MixedMatrixParser(true, skipLines, rowAnnotations, delimiter).parse(file);
+        }
+      } else {
+        return new DynamicMixedMatrixParser(skipLines, rowAnnotations, delimiter).parse(file); // return
+                                                                                               // DataFrame.parseDynamicMatrix(file,
+                                                                                               // hasHeader,
+                                                                                               // rowAnnotations, '\t');
+      }
+    }
+  }
 
-		return true;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
+   */
+  @Override
+  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+    DataFrame.writeDataFrame(m, file);
+
+    return true;
+  }
 }

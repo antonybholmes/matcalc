@@ -26,114 +26,114 @@ import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeRadioButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class StyleRibbonSection.
  */
 public class StyleRibbonSection extends RibbonSection implements ModernClickListener {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m proportional button. */
-	private ModernCheckButton mProportionalButton = 
-			new RibbonLargeRadioButton("Proportional", 
-					UIService.getInstance().loadIcon("proportional", 24),
-					"Proportional",
-					"Draw circles proportional to their group size.",
-					Ribbon.DEFAULT_BUTTON_SIZE);
-	
-	/** The m uniform button. */
-	private ModernCheckButton mUniformButton = 
-			new RibbonLargeRadioButton("Uniform", 
-					UIService.getInstance().loadIcon("uniform", 24),
-					"Uniform",
-					"Draw all circles the same size.",
-					Ribbon.DEFAULT_BUTTON_SIZE);
-	
-	
-	/** The m model. */
-	private StyleModel mModel;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The Class ModelEvents.
-	 */
-	private class ModelEvents implements ChangeListener {
+  /** The m proportional button. */
+  private ModernCheckButton mProportionalButton = new RibbonLargeRadioButton("Proportional",
+      UIService.getInstance().loadIcon("proportional", 24), "Proportional",
+      "Draw circles proportional to their group size.", Ribbon.DEFAULT_BUTTON_SIZE);
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			update();
-		}
-		
-	}
-	
-	/**
-	 * Instantiates a new style ribbon section.
-	 *
-	 * @param ribbon the ribbon
-	 * @param model the model
-	 */
-	public StyleRibbonSection(Ribbon ribbon, StyleModel model) {
-		super(ribbon, "Style");
-		
-		mModel = model;
-		
-		mModel.addChangeListener(new ModelEvents());
-		
-		//Box box = new RibbonStripContainer2();
-		
-		add(mUniformButton);
-		add(mProportionalButton);
-		
-		ModernButtonGroup group = new ModernButtonGroup();
+  /** The m uniform button. */
+  private ModernCheckButton mUniformButton = new RibbonLargeRadioButton("Uniform",
+      UIService.getInstance().loadIcon("uniform", 24), "Uniform", "Draw all circles the same size.",
+      Ribbon.DEFAULT_BUTTON_SIZE);
 
-		group.add(mUniformButton);
-		group.add(mProportionalButton);
+  /** The m model. */
+  private StyleModel mModel;
 
-		mUniformButton.addClickListener(this);
-		mProportionalButton.addClickListener(this);
-		
-		update();
-	}
-	
-	/**
-	 * Update.
-	 */
-	private void update() {
-		switch (mModel.get()) {
-		case UNIFORM:
-			mUniformButton.setSelected(true);
-			break;
-		default:
-			mProportionalButton.setSelected(true);
-			break;
-		}
-	}
-	
+  /**
+   * The Class ModelEvents.
+   */
+  private class ModelEvents implements ChangeListener {
 
-	/**
-	 * Change style.
-	 *
-	 * @param e the e
-	 */
-	private void changeStyle(ModernClickEvent e) {
-		if (mUniformButton.isSelected()) {
-			mModel.set(CircleStyle.UNIFORM);
-		} else {
-			mModel.set(CircleStyle.PROPORTIONAL);
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      update();
+    }
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		changeStyle(e);
-	}
+  }
+
+  /**
+   * Instantiates a new style ribbon section.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param model
+   *          the model
+   */
+  public StyleRibbonSection(Ribbon ribbon, StyleModel model) {
+    super(ribbon, "Style");
+
+    mModel = model;
+
+    mModel.addChangeListener(new ModelEvents());
+
+    // Box box = new RibbonStripContainer2();
+
+    add(mUniformButton);
+    add(mProportionalButton);
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(mUniformButton);
+    group.add(mProportionalButton);
+
+    mUniformButton.addClickListener(this);
+    mProportionalButton.addClickListener(this);
+
+    update();
+  }
+
+  /**
+   * Update.
+   */
+  private void update() {
+    switch (mModel.get()) {
+    case UNIFORM:
+      mUniformButton.setSelected(true);
+      break;
+    default:
+      mProportionalButton.setSelected(true);
+      break;
+    }
+  }
+
+  /**
+   * Change style.
+   *
+   * @param e
+   *          the e
+   */
+  private void changeStyle(ModernClickEvent e) {
+    if (mUniformButton.isSelected()) {
+      mModel.set(CircleStyle.UNIFORM);
+    } else {
+      mModel.set(CircleStyle.PROPORTIONAL);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+   * ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    changeStyle(e);
+  }
 }

@@ -26,37 +26,39 @@ import org.jebtk.modern.graphics.icons.TableVectorIcon;
  * The class ColorStandardizationMatrixIcon.
  */
 public class ColorStandardizationMatrixIcon extends TableVectorIcon {
-	
-	/**
-	 * The member color2.
-	 */
-	private Color mColor2;
 
-	/**
-	 * Instantiates a new color standardization matrix icon.
-	 */
-	public ColorStandardizationMatrixIcon() {
-		super(SettingsService.getInstance().getAsColor("theme.icons.filter-rows-icon.colors.highlight-1"));
-		
-		mColor2 = SettingsService.getInstance().getAsColor("theme.icons.filter-rows-icon.colors.highlight-2");
-	}
+  /**
+   * The member color2.
+   */
+  private Color mColor2;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.icons.TableVectorIcon#drawForeground(java.awt.Graphics2D, java.awt.Rectangle)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		super.drawIcon(g2, x, y, w, h, params);
-		
-		double wf = w * WIDTH_SCALE;
-		double hf = wf * HEIGHT_SCALE - 1;
-		
+  /**
+   * Instantiates a new color standardization matrix icon.
+   */
+  public ColorStandardizationMatrixIcon() {
+    super(SettingsService.getInstance().getAsColor("theme.icons.filter-rows-icon.colors.highlight-1"));
 
-		double b = hf * 0.25;
-		double xf = x + (w - wf) / 2.0;
-		double yf = y + b + (h - hf) / 2.0;
-		
-		g2.setColor(mColor2);
-		g2.fillRect((int)Math.round(xf) + 1, (int)Math.round(yf), (int)Math.round(wf) - 1, (int)Math.round(hf - b));
-	}
+    mColor2 = SettingsService.getInstance().getAsColor("theme.icons.filter-rows-icon.colors.highlight-2");
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.ui.ui.icons.TableVectorIcon#drawForeground(java.awt.
+   * Graphics2D, java.awt.Rectangle)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+    super.drawIcon(g2, x, y, w, h, params);
+
+    double wf = w * WIDTH_SCALE;
+    double hf = wf * HEIGHT_SCALE - 1;
+
+    double b = hf * 0.25;
+    double xf = x + (w - wf) / 2.0;
+    double yf = y + b + (h - hf) / 2.0;
+
+    g2.setColor(mColor2);
+    g2.fillRect((int) Math.round(xf) + 1, (int) Math.round(yf), (int) Math.round(wf) - 1, (int) Math.round(hf - b));
+  }
 }

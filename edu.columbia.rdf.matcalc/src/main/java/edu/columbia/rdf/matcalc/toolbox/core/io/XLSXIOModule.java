@@ -34,103 +34,87 @@ import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.OpenFile;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to open and save Excel files.
  *
  * @author Antony Holmes Holmes
  */
-public class XLSXIOModule extends XlIOModule  {
+public class XLSXIOModule extends XlIOModule {
 
-	/** The Constant FILTER. */
-	private static final GuiFileExtFilter FILTER = new XlsxGuiFileFilter();
+  /** The Constant FILTER. */
+  private static final GuiFileExtFilter FILTER = new XlsxGuiFileFilter();
 
-	/**
-	 * Instantiates a new xlsx IO module.
-	 */
-	public XLSXIOModule() {
-		registerFileOpenType(FILTER);
-		registerFileSaveType(FILTER);
-	}
+  /**
+   * Instantiates a new xlsx IO module.
+   */
+  public XLSXIOModule() {
+    registerFileOpenType(FILTER);
+    registerFileSaveType(FILTER);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Excel XLSX IO";
-	}
-	
-	@Override
-	public DataFrame openFile(final MainMatCalcWindow window,
-			final Path file,
-			FileType type,
-			int headers,
-			int rowAnnotations,
-			String delimiter,
-			Collection<String> skipLines) throws IOException {
-		
-		XLSXMetaData metaData = new XLSXMetaData(file);
-		
-		rowAnnotations = metaData.estimateRowAnnotations();
-		
-		ImportDialog dialog = new ImportDialog(window, 
-				rowAnnotations, 
-				true, 
-				delimiter, 
-				metaData.isNumerical(rowAnnotations));
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Excel XLSX IO";
+  }
 
-		dialog.setVisible(true);
+  @Override
+  public DataFrame openFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
+      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return null;
-		}
+    XLSXMetaData metaData = new XLSXMetaData(file);
 
-		headers = dialog.getHasHeader() ? 1 : 0;
-		rowAnnotations = dialog.getRowAnnotations();
+    rowAnnotations = metaData.estimateRowAnnotations();
 
-		return autoOpenFile(window, 
-				file,
-				type,
-				headers, 
-				rowAnnotations, 
-				delimiter,
-				skipLines);
-	}
+    ImportDialog dialog = new ImportDialog(window, rowAnnotations, true, delimiter,
+        metaData.isNumerical(rowAnnotations));
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, boolean, int)
-	 */
-	@Override
-	public DataFrame autoOpenFile(final MainMatCalcWindow window,
-			final Path file,
-			FileType type,
-			int headers,
-			int rowAnnotations,
-			String delimiter,
-			Collection<String> skipLines) throws IOException {
-		try {
-			//return Excel.convertXlsxToMatrix(file, 
-			//		hasHeader, 
-			//		rowAnnotations);
-			return ExcelMatrix.xlsxAsMatrix(file, 
-					headers > 0, 
-					rowAnnotations);
-		} catch (InvalidFormatException e) {
-			throw new IOException(e.getMessage());
-		}
-	}
+    dialog.setVisible(true);
 
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow, java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
-	 */
-	@Override
-	public boolean saveFile(final MainMatCalcWindow window,
-			final Path file, 
-			final DataFrame m) throws IOException {
-		Excel.writeXlsx(m, file);
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return null;
+    }
 
-		return true;
-	}
+    headers = dialog.getHasHeader() ? 1 : 0;
+    rowAnnotations = dialog.getRowAnnotations();
+
+    return autoOpenFile(window, file, type, headers, rowAnnotations, delimiter, skipLines);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#openFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, boolean, int)
+   */
+  @Override
+  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
+      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+    try {
+      // return Excel.convertXlsxToMatrix(file,
+      // hasHeader,
+      // rowAnnotations);
+      return ExcelMatrix.xlsxAsMatrix(file, headers > 0, rowAnnotations);
+    } catch (InvalidFormatException e) {
+      throw new IOException(e.getMessage());
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#saveFile(org.matcalc.MainMatCalcWindow,
+   * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
+   */
+  @Override
+  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+    Excel.writeXlsx(m, file);
+
+    return true;
+  }
 }

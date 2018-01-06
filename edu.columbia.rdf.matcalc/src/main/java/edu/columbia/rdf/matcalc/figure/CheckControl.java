@@ -29,51 +29,53 @@ import org.jebtk.modern.window.ModernWindow;
  * The class IntensityControl.
  */
 public class CheckControl extends VBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m check. */
-	private CheckBox mCheck;
-	
-	/** The m properties. */
-	private Properties mProperties;
 
-	/** The m setting. */
-	private String mSetting;
-	
-	/**
-	 * The member spinner.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param properties the properties
-	 * @param setting the setting
-	 */
-	//private ModernCompactSpinner mSpinner = 
-	//		new ModernCompactSpinner(1, 10, 3);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	public CheckControl(ModernWindow parent,
-			String name,
-			Properties properties, 
-			String setting) {
-		mSetting = setting;
-		mProperties = properties;
-		
-		mCheck = new ModernCheckSwitch(name);
-		
-		mCheck.setSelected(properties.getAsBool(setting));
+  /** The m check. */
+  private CheckBox mCheck;
 
-		add(UI.createVGap(5));
-		add(mCheck);
-		add(UI.createVGap(5));
-		
-		mCheck.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mProperties.setProperty(mSetting, mCheck.isSelected());
-			}});
-	}
+  /** The m properties. */
+  private Properties mProperties;
+
+  /** The m setting. */
+  private String mSetting;
+
+  /**
+   * The member spinner.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param properties
+   *          the properties
+   * @param setting
+   *          the setting
+   */
+  // private ModernCompactSpinner mSpinner =
+  // new ModernCompactSpinner(1, 10, 3);
+
+  public CheckControl(ModernWindow parent, String name, Properties properties, String setting) {
+    mSetting = setting;
+    mProperties = properties;
+
+    mCheck = new ModernCheckSwitch(name);
+
+    mCheck.setSelected(properties.getAsBool(setting));
+
+    add(UI.createVGap(5));
+    add(mCheck);
+    add(UI.createVGap(5));
+
+    mCheck.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mProperties.setProperty(mSetting, mCheck.isSelected());
+      }
+    });
+  }
 }

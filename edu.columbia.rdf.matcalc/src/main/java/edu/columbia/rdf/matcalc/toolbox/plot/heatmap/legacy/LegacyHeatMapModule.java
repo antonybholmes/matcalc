@@ -37,139 +37,143 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
  * The class HeatMapModule.
  */
 public class LegacyHeatMapModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Heat Map";
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.matcalc.toolbox.CalcModule#run(java.lang.String[])
-	 */
-	@Override
-	public void run(String... args) {
-		for (String arg : args) {
-			if (arg.contains("plot")) {
-				try {
-					plot();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
-		
-		RibbonLargeButton button = new RibbonLargeButton("Heat Map", 
-				UIService.getInstance().loadIcon("heatmap", 24),
-				"Heat Map",
-				"Generate a heat map.");
-		button.addClickListener(this);
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
-	
-	/**
-	 * Creates the.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void plot() throws IOException {
-		DataFrame m = mParent.getCurrentMatrix();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Heat Map";
+  }
 
-		XYSeriesModel groups = XYSeriesModel.create(mParent.getGroups());
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.matcalc.toolbox.CalcModule#run(java.lang.String[])
+   */
+  @Override
+  public void run(String... args) {
+    for (String arg : args) {
+      if (arg.contains("plot")) {
+        try {
+          plot();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
 
-		XYSeriesModel rowGroups = XYSeriesModel.create(mParent.getRowGroups());
-		
-		CountGroups countsGroup = CountGroups.defaultGroup(m);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-		List<String> history = mParent.getTransformationHistory();
-		
-		Properties p = new HeatMapProperties();
-		
-		scaleLargeMatrixImage(m, p);
-		
-		mParent.addToHistory(new HeatMapPlotMatrixTransform(mParent, 
-				m, 
-				groups, 
-				rowGroups, 
-				countsGroup,
-				history,
-				p));
-	}
+    RibbonLargeButton button = new RibbonLargeButton("Heat Map", UIService.getInstance().loadIcon("heatmap", 24),
+        "Heat Map", "Generate a heat map.");
+    button.addClickListener(this);
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		try {
-			plot();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-	}
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-	/**
-	 * Reduce plot size to cope with large matrices.
-	 * 
-	 * @param m
-	 * @param properties
-	 */
-	public static void scaleLargeMatrixImage(DataFrame m, Properties properties) {
-	
-		double w = scale(m.getCols());
-		double h = scale(m.getRows());
-		
-		if (w < 20 || h < 20) {
-			// Don't show grid
-			properties.setProperty("plot.show-grid-color", false);
-			properties.setProperty("plot.show-outline-color", false);
-		}
-		
-		if (h < 20) {
-			properties.setProperty("plot.show-feature-counts", false);
-			properties.setProperty("plot.show-row-labels", false);
-		}
-			
-		properties.setProperty("plot.block-size", new DoubleDim(w, h));
-	}
-	
-	/**
-	 * Scale the size of the plot size based on the row/col count so that the
-	 * image is not excessively large.
-	 * 
-	 * @param rows
-	 * @return
-	 */
-	public static double scale(int rows) {
-		if (rows > 20000) {
-			return 0.1;
-		} else if (rows > 10000) {
-			return 0.5;
-		} else if (rows > 2000) {
-			return 1;
-		} else if (rows > 1000) {
-			return 5;
-		} else if (rows > 500) {
-			return 10;
-		} else {
-			return 20;
-		}
-	}
+  /**
+   * Creates the.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void plot() throws IOException {
+    DataFrame m = mParent.getCurrentMatrix();
+
+    XYSeriesModel groups = XYSeriesModel.create(mParent.getGroups());
+
+    XYSeriesModel rowGroups = XYSeriesModel.create(mParent.getRowGroups());
+
+    CountGroups countsGroup = CountGroups.defaultGroup(m);
+
+    List<String> history = mParent.getTransformationHistory();
+
+    Properties p = new HeatMapProperties();
+
+    scaleLargeMatrixImage(m, p);
+
+    mParent.addToHistory(new HeatMapPlotMatrixTransform(mParent, m, groups, rowGroups, countsGroup, history, p));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    try {
+      plot();
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    }
+  }
+
+  /**
+   * Reduce plot size to cope with large matrices.
+   * 
+   * @param m
+   * @param properties
+   */
+  public static void scaleLargeMatrixImage(DataFrame m, Properties properties) {
+
+    double w = scale(m.getCols());
+    double h = scale(m.getRows());
+
+    if (w < 20 || h < 20) {
+      // Don't show grid
+      properties.setProperty("plot.show-grid-color", false);
+      properties.setProperty("plot.show-outline-color", false);
+    }
+
+    if (h < 20) {
+      properties.setProperty("plot.show-feature-counts", false);
+      properties.setProperty("plot.show-row-labels", false);
+    }
+
+    properties.setProperty("plot.block-size", new DoubleDim(w, h));
+  }
+
+  /**
+   * Scale the size of the plot size based on the row/col count so that the image
+   * is not excessively large.
+   * 
+   * @param rows
+   * @return
+   */
+  public static double scale(int rows) {
+    if (rows > 20000) {
+      return 0.1;
+    } else if (rows > 10000) {
+      return 0.5;
+    } else if (rows > 2000) {
+      return 1;
+    } else if (rows > 1000) {
+      return 5;
+    } else if (rows > 500) {
+      return 10;
+    } else {
+      return 20;
+    }
+  }
 
 }

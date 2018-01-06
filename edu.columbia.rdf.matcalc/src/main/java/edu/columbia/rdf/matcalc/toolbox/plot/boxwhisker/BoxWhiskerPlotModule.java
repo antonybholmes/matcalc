@@ -39,85 +39,91 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * The class BoxWhiskerPlotModule.
  */
 public class BoxWhiskerPlotModule extends CalcModule implements ModernClickListener {
-	
-	/**
-	 * The member parent.
-	 */
-	private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Box Whisker Plot";
-	}
+  /**
+   * The member parent.
+   */
+  private MainMatCalcWindow mParent;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mParent = window;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Box Whisker Plot";
+  }
 
-		RibbonLargeButton button = new RibbonLargeButton("Box Whisker", 
-				new Raster32Icon(new BoxWhisker32VectorIcon()),
-				"Box Whisker Plot",
-				"Generate a box whisker plot");
-		button.setShowText(false);
-		button.addClickListener(this);
-		//button.setEnabled(false);
-		
-		mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mParent = window;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		boxWhiskerPlot();
-	}
+    RibbonLargeButton button = new RibbonLargeButton("Box Whisker", new Raster32Icon(new BoxWhisker32VectorIcon()),
+        "Box Whisker Plot", "Generate a box whisker plot");
+    button.setShowText(false);
+    button.addClickListener(this);
+    // button.setEnabled(false);
 
+    mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
+  }
 
-	/**
-	 * Box whisker plot.
-	 */
-	private void boxWhiskerPlot() {
-		DataFrame m = mParent.getCurrentMatrix();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
+   * .event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    boxWhiskerPlot();
+  }
 
-		boxWhiskerPlot(m, true);
-	}
+  /**
+   * Box whisker plot.
+   */
+  private void boxWhiskerPlot() {
+    DataFrame m = mParent.getCurrentMatrix();
 
-	/**
-	 * Box whisker plot.
-	 *
-	 * @param m the m
-	 * @param plot the plot
-	 */
-	private void boxWhiskerPlot(DataFrame m, boolean plot) {
-		//Graph2dWindow window = mParent.createNewPlotWindow();
-		
-		Figure figure = Figure.createFigure(); //window.getFigure();
-		
-		SubFigure graph = figure.currentSubFigure();
+    boxWhiskerPlot(m, true);
+  }
 
-		Axes axes = graph.currentAxes();
-		
-		
-		
-		XYSeriesGroup allSeries = new XYSeriesGroup("Box Whisker");
+  /**
+   * Box whisker plot.
+   *
+   * @param m
+   *          the m
+   * @param plot
+   *          the plot
+   */
+  private void boxWhiskerPlot(DataFrame m, boolean plot) {
+    // Graph2dWindow window = mParent.createNewPlotWindow();
 
-		for (int c = 0; c < m.getCols(); ++c) {
-			XYSeries series = new XYSeries(m.getColumnName(c), Color.BLACK);
+    Figure figure = Figure.createFigure(); // window.getFigure();
 
-			allSeries.add(series);
-		}
+    SubFigure graph = figure.currentSubFigure();
 
-		PlotFactory.createBoxWhiskerPlot(m, axes, allSeries);
+    Axes axes = graph.currentAxes();
 
-		Graph2dWindow window = new Graph2dWindow(mParent, figure);
-		
-		window.setVisible(true);
-	}
+    XYSeriesGroup allSeries = new XYSeriesGroup("Box Whisker");
+
+    for (int c = 0; c < m.getCols(); ++c) {
+      XYSeries series = new XYSeries(m.getColumnName(c), Color.BLACK);
+
+      allSeries.add(series);
+    }
+
+    PlotFactory.createBoxWhiskerPlot(m, axes, allSeries);
+
+    Graph2dWindow window = new Graph2dWindow(mParent, figure);
+
+    window.setVisible(true);
+  }
 }

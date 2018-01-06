@@ -40,131 +40,143 @@ import edu.columbia.rdf.matcalc.figure.graph2d.RotationButton;
  * The class TickLabelPlotControl.
  */
 public class TickLabelPlotControl extends HBox {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member tick.
-	 */
-	private TickMarkProperties mTick;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member label field.
-	 */
-	private ModernTextField mLabelField = new ModernTextField();
+  /**
+   * The member tick.
+   */
+  private TickMarkProperties mTick;
 
-	/**
-	 * The member rotation button.
-	 */
-	private RotationButton mRotationButton;
-	
-	/**
-	 * The class RotationEvents.
-	 */
-	private class RotationEvents implements ModernClickListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			double rotation;
-			
-			if (e.getMessage().equals("90")) {
-				rotation = Mathematics.HALF_PI;
-			} else if (e.getMessage().equals("180")) {
-				rotation = Mathematics.PI;
-			} else if (e.getMessage().equals("270")) {
-				rotation = Mathematics.PI_32;
-			} else {
-				rotation = 0;
-			}
+  /**
+   * The member label field.
+   */
+  private ModernTextField mLabelField = new ModernTextField();
 
-			mTick.setRotation(rotation);
-			
-			//setColors();
-		}
-	}
-	
-	/**
-	 * The class TickLabelEvents.
-	 */
-	private class TickLabelEvents implements KeyListener {
-		
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				mTick.setLabels(TextUtils.scSplit(mLabelField.getText()));
-			}
-		}
+  /**
+   * The member rotation button.
+   */
+  private RotationButton mRotationButton;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyReleased(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+  /**
+   * The class RotationEvents.
+   */
+  private class RotationEvents implements ModernClickListener {
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyTyped(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-	}
-	
-	/**
-	 * Instantiates a new tick label plot control.
-	 *
-	 * @param parent the parent
-	 * @param tick the tick
-	 */
-	public TickLabelPlotControl(ModernWindow parent,
-			TickMarkProperties tick) {
-		mTick = tick;
-		
-		mRotationButton = new RotationButton(mTick.getRotation());
-		
-		mRotationButton.addClickListener(new ModernClickListener() {
-			@Override
-			public void clicked(ModernClickEvent e) {
-				mTick.setRotation(mRotationButton.getRotation());
-			}});
-		
-		ModernTextBorderPanel panel = new ModernTextBorderPanel(mLabelField);
-		UI.setMinMaxSize(panel, ModernWidget.MIN_SIZE, ModernWidget.MAX_SIZE);
-		
-		add(panel);
-		
-		add(ModernPanel.createHGap());
-		add(mRotationButton);
-		setBorder(ModernWidget.BORDER);
-		
-		mLabelField.addKeyListener(new TickLabelEvents());
-		
-		listTicks();
-	}
-	
-	/**
-	 * List ticks.
-	 */
-	private void listTicks() {
-		List<String> labels = new ArrayList<String>();
-		
-		for (int i = 0; i < mTick.getTickCount(); ++i) {
-			labels.add(mTick.getLabel(i));
-		}
-		
-		mLabelField.setText(TextUtils.scJoin(labels));
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      double rotation;
+
+      if (e.getMessage().equals("90")) {
+        rotation = Mathematics.HALF_PI;
+      } else if (e.getMessage().equals("180")) {
+        rotation = Mathematics.PI;
+      } else if (e.getMessage().equals("270")) {
+        rotation = Mathematics.PI_32;
+      } else {
+        rotation = 0;
+      }
+
+      mTick.setRotation(rotation);
+
+      // setColors();
+    }
+  }
+
+  /**
+   * The class TickLabelEvents.
+   */
+  private class TickLabelEvents implements KeyListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
+      if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        mTick.setLabels(TextUtils.scSplit(mLabelField.getText()));
+      }
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyReleased(KeyEvent arg0) {
+      // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+      // TODO Auto-generated method stub
+
+    }
+  }
+
+  /**
+   * Instantiates a new tick label plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param tick
+   *          the tick
+   */
+  public TickLabelPlotControl(ModernWindow parent, TickMarkProperties tick) {
+    mTick = tick;
+
+    mRotationButton = new RotationButton(mTick.getRotation());
+
+    mRotationButton.addClickListener(new ModernClickListener() {
+      @Override
+      public void clicked(ModernClickEvent e) {
+        mTick.setRotation(mRotationButton.getRotation());
+      }
+    });
+
+    ModernTextBorderPanel panel = new ModernTextBorderPanel(mLabelField);
+    UI.setMinMaxSize(panel, ModernWidget.MIN_SIZE, ModernWidget.MAX_SIZE);
+
+    add(panel);
+
+    add(ModernPanel.createHGap());
+    add(mRotationButton);
+    setBorder(ModernWidget.BORDER);
+
+    mLabelField.addKeyListener(new TickLabelEvents());
+
+    listTicks();
+  }
+
+  /**
+   * List ticks.
+   */
+  private void listTicks() {
+    List<String> labels = new ArrayList<String>();
+
+    for (int i = 0; i < mTick.getTickCount(); ++i) {
+      labels.add(mTick.getLabel(i));
+    }
+
+    mLabelField.setText(TextUtils.scJoin(labels));
+  }
 }

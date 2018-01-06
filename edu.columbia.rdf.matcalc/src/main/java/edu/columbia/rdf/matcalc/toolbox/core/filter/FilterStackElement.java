@@ -22,42 +22,45 @@ import org.jebtk.core.search.SearchStackOperator;
  * The Class FilterStackElement.
  */
 public class FilterStackElement {
-	
-	/** The op. */
-	public SearchStackOperator op = SearchStackOperator.RESULT;
-	
-	/** The result. */
-	public boolean result = true;
-	
-	/** The filter. */
-	public ColumnFilter filter = null;
-	
-	/**
-	 * Instantiates a new filter stack element.
-	 *
-	 * @param result the result
-	 */
-	public FilterStackElement(boolean result) {
-		this.op = SearchStackOperator.RESULT;
-		this.result = result;
-	}
-	
-	/**
-	 * Instantiates a new filter stack element.
-	 *
-	 * @param filter the filter
-	 */
-	public FilterStackElement(ColumnFilter filter) {
-		this.filter = filter;
-		this.op = SearchStackOperator.MATCH;
-	}
 
-	/**
-	 * Instantiates a new filter stack element.
-	 *
-	 * @param op the op
-	 */
-	public FilterStackElement(SearchStackOperator op) {
-		this.op = op;
-	}
+  /** The op. */
+  public SearchStackOperator op = SearchStackOperator.RESULT;
+
+  /** The result. */
+  public boolean result = true;
+
+  /** The filter. */
+  public ColumnFilter filter = null;
+
+  /**
+   * Instantiates a new filter stack element.
+   *
+   * @param result
+   *          the result
+   */
+  public FilterStackElement(boolean result) {
+    this.op = SearchStackOperator.RESULT;
+    this.result = result;
+  }
+
+  /**
+   * Instantiates a new filter stack element.
+   *
+   * @param filter
+   *          the filter
+   */
+  public FilterStackElement(ColumnFilter filter) {
+    this.filter = filter;
+    this.op = SearchStackOperator.MATCH;
+  }
+
+  /**
+   * Instantiates a new filter stack element.
+   *
+   * @param op
+   *          the op
+   */
+  public FilterStackElement(SearchStackOperator op) {
+    this.op = op;
+  }
 }

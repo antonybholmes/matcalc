@@ -23,20 +23,21 @@ import org.jebtk.modern.window.ModernWindow;
  * The class GridColorPlotControl.
  */
 public class GridColorPlotControl extends LineStyleControl {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new grid color plot control.
-	 *
-	 * @param parent the parent
-	 * @param grid the grid
-	 */
-	public GridColorPlotControl(ModernWindow parent,
-			GridProperties grid) {
-		super(parent, "Grid", grid);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new grid color plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param grid
+   *          the grid
+   */
+  public GridColorPlotControl(ModernWindow parent, GridProperties grid) {
+    super(parent, "Grid", grid);
+  }
 }

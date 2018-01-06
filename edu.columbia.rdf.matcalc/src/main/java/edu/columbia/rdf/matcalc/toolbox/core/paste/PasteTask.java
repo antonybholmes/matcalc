@@ -35,226 +35,216 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  */
 public class PasteTask extends SwingWorker<Void, Void> {
 
-	private List<Path> mFiles;
+  private List<Path> mFiles;
 
-	private MainMatCalcWindow mWindow;
+  private MainMatCalcWindow mWindow;
 
-	private boolean mIndexMode;
+  private boolean mIndexMode;
 
-	private String mDelimiter;
+  private String mDelimiter;
 
-	public PasteTask(MainMatCalcWindow window, 
-			List<Path> files,
-			String delimiter,
-			boolean indexMode) {
-		mWindow = window;
-		mFiles = files;
-		mDelimiter = delimiter;
-		mIndexMode = indexMode;
-	}
+  public PasteTask(MainMatCalcWindow window, List<Path> files, String delimiter, boolean indexMode) {
+    mWindow = window;
+    mFiles = files;
+    mDelimiter = delimiter;
+    mIndexMode = indexMode;
+  }
 
-	@Override
-	public Void doInBackground() {
-		try {
-			paste();
-		} catch (InvalidFormatException | ClassNotFoundException | InstantiationException | IllegalAccessException
-				| IOException | SAXException | ParserConfigurationException | ParseException | FontFormatException
-				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
+  @Override
+  public Void doInBackground() {
+    try {
+      paste();
+    } catch (InvalidFormatException | ClassNotFoundException | InstantiationException | IllegalAccessException
+        | IOException | SAXException | ParserConfigurationException | ParseException | FontFormatException
+        | UnsupportedLookAndFeelException e) {
+      e.printStackTrace();
+    }
 
-		return null;
-	}
+    return null;
+  }
 
+  private void paste() throws IOException, InvalidFormatException, ClassNotFoundException, InstantiationException,
+      IllegalAccessException, SAXException, ParserConfigurationException, ParseException, FontFormatException,
+      UnsupportedLookAndFeelException {
+    // First get all the regions to search into one sorted map
 
-	private void paste() throws IOException, InvalidFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, SAXException, ParserConfigurationException, ParseException, FontFormatException, UnsupportedLookAndFeelException {
-		// First get all the regions to search into one sorted map
+    Path pwd = RecentFilesService.getInstance().getPwd();
 
-		Path pwd = RecentFilesService.getInstance().getPwd();
+    Path file = pasteByIndex();
 
-		Path file = pasteByIndex();
+    mWindow.openFile(file);
 
-		mWindow.openFile(file);
+    // Set the pwd again so that we don't default to the tmp folder
+    // after opening the tmp file
+    RecentFilesService.getInstance().setPwd(pwd);
+  }
 
-		// Set the pwd again so that we don't default to the tmp folder
-		// after opening the tmp file
-		RecentFilesService.getInstance().setPwd(pwd);
-	}
+  private Path pasteByIndex() throws IOException {
+    String line;
+    BufferedReader reader;
+    BufferedWriter writer;
+    List<String> tokens;
+    String key;
 
-	private Path pasteByIndex() throws IOException {
-		String line;
-		BufferedReader reader;
-		BufferedWriter writer;
-		List<String> tokens;
-		String key;
+    StatusService.getInstance().setStatus("Working...");
 
-		StatusService.getInstance().setStatus("Working...");
+    CountMap<String> keyMap = new CountMap<String>();
+    List<String> keyList = new ArrayList<String>();
 
-		CountMap<String> keyMap = new CountMap<String>();
-		List<String> keyList = new ArrayList<String>();
+    int c = 0;
 
-		int c = 0;
+    for (int i = 0; i < mFiles.size(); ++i) {
+      reader = FileUtils.newBufferedReader(mFiles.get(i));
 
+      try {
+        while ((line = reader.readLine()) != null) {
+          key = TextUtils.firstSplit(line, TextUtils.TAB_DELIMITER);
 
-		for (int i = 0; i < mFiles.size(); ++i) {
-			reader = FileUtils.newBufferedReader(mFiles.get(i));
+          if (!keyMap.containsKey(key)) {
+            // Base the key list on the first file
+            if (i == 0) {
+              keyList.add(key);
+            }
+          }
 
-			try {
-				while ((line = reader.readLine()) != null) {
-					key = TextUtils.firstSplit(line, TextUtils.TAB_DELIMITER);
+          keyMap.inc(key);
 
-					if (!keyMap.containsKey(key)) {
-						// Base the key list on the first file
-						if (i == 0) {
-							keyList.add(key);
-						}
-					}
+          if (c % 100000 == 0) {
+            PasteModule.LOG.info("Processed {} records", c);
+          }
 
-					keyMap.inc(key);
+          ++c;
+        }
+      } finally {
+        reader.close();
+      }
+    }
 
-					if (c % 100000 == 0) {
-						PasteModule.LOG.info("Processed {} records", c);
-					}
+    PasteModule.LOG.info("Removing unused keys...");
 
-					++c;
-				}
-			} finally {
-				reader.close();
-			}
-		}
+    int minSize = mFiles.size();
 
+    int totalKeys = keyList.size();
 
-		PasteModule.LOG.info("Removing unused keys...");
+    for (int i = keyList.size() - 1; i >= 0; --i) {
+      if (keyMap.get(keyList.get(i)) < minSize) {
+        keyList.set(i, TextUtils.EMPTY_STRING);
+        --totalKeys;
+      }
 
-		int minSize = mFiles.size();
+      if (i % 100000 == 0) {
+        PasteModule.LOG.info("{} keys to go...", i);
+      }
+    }
 
-		int totalKeys = keyList.size();
+    PasteModule.LOG.info("Total keys {}", totalKeys);
 
-		for (int i = keyList.size() - 1; i >= 0; --i) {
-			if (keyMap.get(keyList.get(i)) < minSize) {
-				keyList.set(i, TextUtils.EMPTY_STRING);
-				--totalKeys;
-			}
+    keyMap.clear();
 
-			if (i % 100000 == 0) {
-				PasteModule.LOG.info("{} keys to go...", i);
-			}
-		}
+    int index = 0;
 
-		PasteModule.LOG.info("Total keys {}", totalKeys);
+    for (int i = 0; i < keyList.size(); ++i) {
+      key = keyList.get(i);
 
-		keyMap.clear();
+      if (!TextUtils.isNullOrEmpty(key)) {
+        keyMap.put(key, index++);
+      }
+    }
 
-		int index = 0;
+    // free the memory
+    keyList.clear();
 
-		for (int i = 0; i < keyList.size(); ++i) {
-			key = keyList.get(i);
+    Path tmp1 = Temp.generateTempFile("txt");
+    Path tmp2 = Temp.generateTempFile("txt");
 
-			if (!TextUtils.isNullOrEmpty(key)) {
-				keyMap.put(key, index++);
-			}
-		}
+    // write out the first file largely intact
 
-		// free the memory
-		keyList.clear();
-		
+    writer = FileUtils.newBufferedWriter(tmp1);
+    reader = FileUtils.newBufferedReader(mFiles.get(0));
 
-		Path tmp1 = Temp.generateTempFile("txt");
-		Path tmp2 = Temp.generateTempFile("txt");
+    try {
+      while ((line = reader.readLine()) != null) {
+        if (Io.isEmptyLine(line)) {
+          continue;
+        }
 
+        tokens = TextUtils.tabSplit(line);
 
-		// write out the first file largely intact
+        key = tokens.get(0);
 
-		writer = FileUtils.newBufferedWriter(tmp1);
-		reader = FileUtils.newBufferedReader(mFiles.get(0));
+        if (keyMap.containsKey(key)) {
+          writer.write(line);
+          writer.newLine();
+        }
+      }
+    } finally {
+      writer.close();
+      reader.close();
+    }
 
-		try {
-			while ((line = reader.readLine()) != null) {
-				if (Io.isEmptyLine(line)) {
-					continue;
-				}
+    // Stores the entries for a column
+    Map<Integer, String> columnMap = new HashMap<Integer, String>();
 
-				tokens = TextUtils.tabSplit(line);
+    for (int i = 1; i < mFiles.size(); ++i) {
+      // load the file into memory
+      // order the probes then append to the
+      // temp file
+      // rewrite the temp file with the new
+      // data then repeat for each file
 
-				key = tokens.get(0);
+      reader = FileUtils.newBufferedReader(mFiles.get(i));
 
-				if (keyMap.containsKey(key)) {
-					writer.write(line);
-					writer.newLine();
-				}
-			}
-		} finally {
-			writer.close();
-			reader.close();
-		}
+      try {
+        while ((line = reader.readLine()) != null) {
+          if (Io.isEmptyLine(line)) {
+            continue;
+          }
 
-		// Stores the entries for a column
-		Map<Integer, String> columnMap = new HashMap<Integer, String>();
+          tokens = TextUtils.tabSplit(line);
 
-		for (int i = 1; i < mFiles.size(); ++i) {
-			// load the file into memory
-			// order the probes then append to the
-			// temp file
-			// rewrite the temp file with the new
-			// data then repeat for each file
+          key = tokens.get(0);
 
-			reader = FileUtils.newBufferedReader(mFiles.get(i));
+          if (keyMap.containsKey(key)) {
+            if (mIndexMode) {
+              line = Stream.of(tokens).skip(1).asString().tabJoin();
+            }
 
-			try {
-				while ((line = reader.readLine()) != null) {
-					if (Io.isEmptyLine(line)) {
-						continue;
-					}
+            // remove the first column probe id on subsequent files
+            columnMap.put(keyMap.get(key), line);
+          }
+        }
+      } finally {
+        reader.close();
+      }
 
-					tokens = TextUtils.tabSplit(line);
+      reader = FileUtils.newBufferedReader(tmp1);
+      writer = FileUtils.newBufferedWriter(tmp2);
 
-					key = tokens.get(0);
+      try {
+        c = 0;
 
-					if (keyMap.containsKey(key)) {
-						if (mIndexMode) {
-							line = Stream.of(tokens)
-									.skip(1)
-									.asString()
-									.tabJoin();
-						}
+        // write out the original temp file plus the
+        // extension of each line
+        while ((line = reader.readLine()) != null) {
+          if (Io.isEmptyLine(line)) {
+            continue;
+          }
 
+          writer.write(line);
+          writer.write(mDelimiter);
+          writer.write(columnMap.get(c));
+          writer.newLine();
 
-						// remove the first column probe id on subsequent files
-						columnMap.put(keyMap.get(key), line);
-					}
-				}
-			} finally {
-				reader.close();
-			}
+          ++c;
+        }
+      } finally {
+        reader.close();
+        writer.close();
+      }
 
-			reader = FileUtils.newBufferedReader(tmp1);
-			writer = FileUtils.newBufferedWriter(tmp2);
+      FileUtils.mv(tmp2, tmp1);
+    }
 
-			try {
-				c = 0;
-
-				// write out the original temp file plus the
-				// extension of each line
-				while ((line = reader.readLine()) != null) {
-					if (Io.isEmptyLine(line)) {
-						continue;
-					}
-
-					writer.write(line);
-					writer.write(mDelimiter);
-					writer.write(columnMap.get(c));
-					writer.newLine();
-
-					++c;
-				}
-			} finally {
-				reader.close();
-				writer.close();
-			}
-
-			FileUtils.mv(tmp2, tmp1);
-		}
-
-		return tmp1;
-	}
+    return tmp1;
+  }
 }

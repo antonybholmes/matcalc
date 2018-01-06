@@ -30,87 +30,80 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  *
  */
 public class PasteDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/** Assume first column is common between files */
-	private CheckBox mCheckIndex = 
-			new ModernCheckSwitch("Common index", true);
-	
-	//private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
-	
-	private ChooseFilesPanel mChooseFilesPanel;
-	
-	public PasteDialog(MainMatCalcWindow parent) {
-		super(parent, "matcalc.toolbox.paste.help.url");
+  /** Assume first column is common between files */
+  private CheckBox mCheckIndex = new ModernCheckSwitch("Common index", true);
 
-		setTitle("Paste Files");
-		
-		mChooseFilesPanel = new ChooseFilesPanel(parent, 
-				AllGuiFilesFilter.INSTANCE,
-				TsvGuiFileFilter.INSTANCE);
+  // private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
 
-		setup();
+  private ChooseFilesPanel mChooseFilesPanel;
 
-		createUi();
-	}
+  public PasteDialog(MainMatCalcWindow parent) {
+    super(parent, "matcalc.toolbox.paste.help.url");
 
-	private void setup() {
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		mCheckIndex.setSelected(SettingsService
-				.getInstance()
-				.getAsBool("org.matcalc.toolbox.paste.common-index", true));
+    setTitle("Paste Files");
 
-		setSize(500, 420);
+    mChooseFilesPanel = new ChooseFilesPanel(parent, AllGuiFilesFilter.INSTANCE, TsvGuiFileFilter.INSTANCE);
 
-		UI.centerWindowToScreen(this);
-	}
+    setup();
 
-	private final void createUi() {
-		ModernComponent content = new ModernComponent();
-		
-		Box box = VBox.create();
-		box.add(UI.createVGap(10));
-		box.add(mCheckIndex);
-		
-		content.setFooter(box);
-		
-		content.setBody(mChooseFilesPanel);
-		
-		setDialogCardContent(content);
-	}
-	
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mOkButton)) {
-			if (getFiles().size() == 0) {
-				ModernMessageDialog.createWarningDialog(mParent, 
-						"You must choose at least one file.");
-				
-				return;
-			}
-			
-			SettingsService.getInstance().update("org.matcalc.toolbox.paste.common-index",
-					mCheckIndex.isSelected());
-		}
-		
-		super.clicked(e);
-	}
-	
-	public List<Path> getFiles() {
-		return mChooseFilesPanel.getFiles();
-	}
+    createUi();
+  }
 
-	/**
-	 * Returns true if one way overlap is selected.
-	 * 
-	 * @return
-	 */
-	public boolean getCommonIndex() {
-		return mCheckIndex.isSelected();
-	}
+  private void setup() {
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
 
-	public String getDelimiter() {
-		return TextUtils.TAB_DELIMITER;
-	}
+    mCheckIndex.setSelected(SettingsService.getInstance().getAsBool("org.matcalc.toolbox.paste.common-index", true));
+
+    setSize(500, 420);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  private final void createUi() {
+    ModernComponent content = new ModernComponent();
+
+    Box box = VBox.create();
+    box.add(UI.createVGap(10));
+    box.add(mCheckIndex);
+
+    content.setFooter(box);
+
+    content.setBody(mChooseFilesPanel);
+
+    setDialogCardContent(content);
+  }
+
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mOkButton)) {
+      if (getFiles().size() == 0) {
+        ModernMessageDialog.createWarningDialog(mParent, "You must choose at least one file.");
+
+        return;
+      }
+
+      SettingsService.getInstance().update("org.matcalc.toolbox.paste.common-index", mCheckIndex.isSelected());
+    }
+
+    super.clicked(e);
+  }
+
+  public List<Path> getFiles() {
+    return mChooseFilesPanel.getFiles();
+  }
+
+  /**
+   * Returns true if one way overlap is selected.
+   * 
+   * @return
+   */
+  public boolean getCommonIndex() {
+    return mCheckIndex.isSelected();
+  }
+
+  public String getDelimiter() {
+    return TextUtils.TAB_DELIMITER;
+  }
 }

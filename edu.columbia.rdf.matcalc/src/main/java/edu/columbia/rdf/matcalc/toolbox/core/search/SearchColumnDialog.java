@@ -42,121 +42,118 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * The class MatchDialog.
  */
 public class SearchColumnDialog extends ModernDialogHelpWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m check in list. */
-	private CheckBox mCheckInList = 
-			new ModernCheckSwitch("Match in list", true);
-	
-	/** The m check exact. */
-	private CheckBox mCheckExact = 
-			new ModernCheckSwitch("Match entire cell contents");
-	
-	/** The m check case. */
-	private CheckBox mCheckCase = 
-			new ModernCheckSwitch("Case sensitive");
-	
-	/** The m text. */
-	private ModernTextArea mText = new ModernTextArea();
 
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new match dialog.
-	 *
-	 * @param parent the parent
-	 */
-	public SearchColumnDialog(MainMatCalcWindow parent) {
-		super(parent, "matcalc.search-column.help.url");
-		
-		setTitle("Search Column");
-		
-		setup();
+  /** The m check in list. */
+  private CheckBox mCheckInList = new ModernCheckSwitch("Match in list", true);
 
-		createUi();
-	}
+  /** The m check exact. */
+  private CheckBox mCheckExact = new ModernCheckSwitch("Match entire cell contents");
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		setSize(640, 360);
-		
-		setResizable(true);
-		
-		UI.centerWindowToScreen(this);
-	}
-	
-	
+  /** The m check case. */
+  private CheckBox mCheckCase = new ModernCheckSwitch("Case sensitive");
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
-		
-		ModernComponent content = new ModernComponent();
-		
-		//content.setHeader(new ModernSubHeadingLabel("Search for:", BorderService.getInstance().createBottomBorder(5)));
-		
-		ModernScrollPane scrollPane = new ModernScrollPane(mText)
-				.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
-				.setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
-		
-		content.setBody(scrollPane);
-		
-		Box box = VBox.create();
-		
-		box.add(UI.createVGap(10));
-		box.add(mCheckInList);
-		box.add(UI.createVGap(5));
-		box.add(mCheckExact);
-		box.add(UI.createVGap(5));
-		box.add(mCheckCase);
-		
-		content.setFooter(box);
-		
-		setDialogCardContent(content);
-	}
-	
-	/**
-	 * Gets the window name.
-	 *
-	 * @return the window name
-	 */
-	public List<String> getLines() {
-		return mText.getLines();
-	}
+  /** The m text. */
+  private ModernTextArea mText = new ModernTextArea();
 
-	/**
-	 * Case sensitive.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean caseSensitive() {
-		return mCheckCase.isSelected();
-	}
+  /**
+   * Instantiates a new match dialog.
+   *
+   * @param parent
+   *          the parent
+   */
+  public SearchColumnDialog(MainMatCalcWindow parent) {
+    super(parent, "matcalc.search-column.help.url");
 
-	/**
-	 * Gets the in list.
-	 *
-	 * @return the in list
-	 */
-	public boolean getInList() {
-		return mCheckInList.isSelected();
-	}
-	
-	/**
-	 * Gets the exact.
-	 *
-	 * @return the exact
-	 */
-	public boolean getExact() {
-		return mCheckExact.isSelected();
-	}
+    setTitle("Search Column");
+
+    setup();
+
+    createUi();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    setSize(640, 360);
+
+    setResizable(true);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    ModernComponent content = new ModernComponent();
+
+    // content.setHeader(new ModernSubHeadingLabel("Search for:",
+    // BorderService.getInstance().createBottomBorder(5)));
+
+    ModernScrollPane scrollPane = new ModernScrollPane(mText).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
+        .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
+
+    content.setBody(scrollPane);
+
+    Box box = VBox.create();
+
+    box.add(UI.createVGap(10));
+    box.add(mCheckInList);
+    box.add(UI.createVGap(5));
+    box.add(mCheckExact);
+    box.add(UI.createVGap(5));
+    box.add(mCheckCase);
+
+    content.setFooter(box);
+
+    setDialogCardContent(content);
+  }
+
+  /**
+   * Gets the window name.
+   *
+   * @return the window name
+   */
+  public List<String> getLines() {
+    return mText.getLines();
+  }
+
+  /**
+   * Case sensitive.
+   *
+   * @return true, if successful
+   */
+  public boolean caseSensitive() {
+    return mCheckCase.isSelected();
+  }
+
+  /**
+   * Gets the in list.
+   *
+   * @return the in list
+   */
+  public boolean getInList() {
+    return mCheckInList.isSelected();
+  }
+
+  /**
+   * Gets the exact.
+   *
+   * @return the exact
+   */
+  public boolean getExact() {
+    return mCheckExact.isSelected();
+  }
 }

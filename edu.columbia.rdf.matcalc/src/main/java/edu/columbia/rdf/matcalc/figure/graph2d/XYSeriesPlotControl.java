@@ -30,39 +30,40 @@ import edu.columbia.rdf.matcalc.figure.FontControl;
  * The class XYSeriesPlotControl.
  */
 public class XYSeriesPlotControl extends ModernSubCollapsePane {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new XY series plot control.
-	 *
-	 * @param parent the parent
-	 * @param series the series
-	 */
-	public XYSeriesPlotControl(ModernWindow parent, XYSeries series) {
-		Box box = VBox.create();
-		
-		box.add(ModernPanel.createVGap());
-		box.add(new XYSeriesTitleControl(parent, series));
-		box.add(ModernPanel.createVGap());
-		box.add(new FontControl(parent, series.getFontStyle()));
-		box.add(ModernPanel.createVGap());
-		box.add(new StyleControl(parent, series.getStyle()));
-		box.add(ModernPanel.createVGap());
-		box.setBorder(BORDER);
-		addTab("Options", box);
-		
-		
-		box = VBox.create();
-		box.add(ModernPanel.createVGap());
-		box.add(new MarkerStyleControl(parent, series));
-		box.add(ModernPanel.createVGap());
-		box.add(new StyleControl(parent, series.getMarkerStyle()));
-		box.add(ModernPanel.createVGap());
-		box.setBorder(BORDER);
-		addTab("Markers", box);
-	}
+
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new XY series plot control.
+   *
+   * @param parent
+   *          the parent
+   * @param series
+   *          the series
+   */
+  public XYSeriesPlotControl(ModernWindow parent, XYSeries series) {
+    Box box = VBox.create();
+
+    box.add(ModernPanel.createVGap());
+    box.add(new XYSeriesTitleControl(parent, series));
+    box.add(ModernPanel.createVGap());
+    box.add(new FontControl(parent, series.getFontStyle()));
+    box.add(ModernPanel.createVGap());
+    box.add(new StyleControl(parent, series.getStyle()));
+    box.add(ModernPanel.createVGap());
+    box.setBorder(BORDER);
+    addTab("Options", box);
+
+    box = VBox.create();
+    box.add(ModernPanel.createVGap());
+    box.add(new MarkerStyleControl(parent, series));
+    box.add(ModernPanel.createVGap());
+    box.add(new StyleControl(parent, series.getMarkerStyle()));
+    box.add(ModernPanel.createVGap());
+    box.setBorder(BORDER);
+    addTab("Markers", box);
+  }
 }
