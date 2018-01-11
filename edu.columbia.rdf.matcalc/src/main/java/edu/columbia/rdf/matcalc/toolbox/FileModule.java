@@ -53,9 +53,20 @@ public abstract class FileModule implements NameProperty {
    * @return
    * @throws IOException
    */
-  public DataFrame openFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
-    return autoOpenFile(window, file, type, headers, rowAnnotations, delimiter, skipLines);
+  public DataFrame openFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
+    return autoOpenFile(window,
+        file,
+        type,
+        headers,
+        rowAnnotations,
+        delimiter,
+        skipLines);
   }
 
   /**
@@ -64,44 +75,45 @@ public abstract class FileModule implements NameProperty {
    * @param window
    * @param file
    * @param mFileType
-   * @param headers
-   *          How many lines represent a header.
+   * @param headers How many lines represent a header.
    * @param rowAnnotations
    * @param delimiter
-   * @param skipLines
-   *          Skip lines beginning with
+   * @param skipLines Skip lines beginning with
    * @return
    * @throws IOException
    */
-  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
     return null;
   }
 
   /**
    * Save file.
    *
-   * @param window
-   *          the window
-   * @param file
-   *          the file
-   * @param m
-   *          the m
+   * @param window the window
+   * @param file the file
+   * @param m the m
    * @return true if the file was saved or false otherwise.
    * 
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+  public boolean saveFile(final MainMatCalcWindow window,
+      final Path file,
+      final DataFrame m) throws IOException {
     return false;
   }
 
   /**
    * If this module can open a certain file type, return an ext filter so that
-   * this module is registered for the files with a given set of extensions. There
-   * can only be one module associated with a file extension. Modules are loaded
-   * in order, so if there are two modules registered for a given file type, the
-   * second will ultimately be bound to that file type.
+   * this module is registered for the files with a given set of extensions.
+   * There can only be one module associated with a file extension. Modules are
+   * loaded in order, so if there are two modules registered for a given file
+   * type, the second will ultimately be bound to that file type.
    * 
    * @return A file filter or null if the module does not open a file.
    */
@@ -116,8 +128,7 @@ public abstract class FileModule implements NameProperty {
   /**
    * Register file type.
    *
-   * @param filter
-   *          the filter
+   * @param filter the filter
    */
   public void registerFileOpenType(GuiFileExtFilter filter) {
     mOpenFileFilters.add(filter);
@@ -126,8 +137,7 @@ public abstract class FileModule implements NameProperty {
   /**
    * Register file save type.
    *
-   * @param filter
-   *          the filter
+   * @param filter the filter
    */
   public void registerFileSaveType(GuiFileExtFilter filter) {
     mSaveFileFilters.add(filter);

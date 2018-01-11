@@ -24,7 +24,6 @@ import org.jebtk.math.cluster.Linkage;
 import org.jebtk.math.cluster.SingleLinkage;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
-import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -40,7 +39,8 @@ import edu.columbia.rdf.matcalc.figure.PlotConstants;
 /**
  * The class HierarchicalClusteringDialog.
  */
-public class HierarchicalClusteringDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class HierarchicalClusteringDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -60,28 +60,31 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow impleme
   /**
    * The cluster columns check.
    */
-  private CheckBox mCheckClusterColumns = new ModernCheckSwitch("Cluster columns", true);
+  private CheckBox mCheckClusterColumns = new ModernCheckSwitch(
+      "Cluster columns", true);
 
   /**
    * The cluster rows check.
    */
   private CheckBox mCheckClusterRows = new ModernCheckSwitch("Cluster rows");
 
-  private CheckBox mCheckShowHeatMap = new ModernCheckSwitch("Show heat map", true);
+  private CheckBox mCheckShowHeatMap = new ModernCheckSwitch("Show heat map",
+      true);
 
   /** The m check optimal leaf order. */
-  private CheckBox mCheckOptimalLeafOrder = new ModernCheckSwitch("Optimal leaf order", true);
+  private CheckBox mCheckOptimalLeafOrder = new ModernCheckSwitch(
+      "Optimal leaf order", true);
 
   /**
    * The member check plot.
    */
-  private CheckBox mCheckPlot = new ModernCheckSwitch(PlotConstants.MENU_PLOT, true);
+  private CheckBox mCheckPlot = new ModernCheckSwitch(PlotConstants.MENU_PLOT,
+      true);
 
   /**
    * Instantiates a new hierarchical clustering dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public HierarchicalClusteringDialog(ModernWindow parent) {
     super(parent, "matcalc.cluster.help.url");

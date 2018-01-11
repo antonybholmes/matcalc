@@ -51,40 +51,29 @@ public class ClusterPanel extends HeatMapPanel {
   /**
    * Instantiates a new cluster panel.
    *
-   * @param window
-   *          the window
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param rowCluster
-   *          the row cluster
-   * @param columnCluster
-   *          the column cluster
-   * @param zoomModel
-   *          the zoom model
-   * @param colorMapModel
-   *          the color map model
-   * @param colorStandardizationModel
-   *          the color standardization model
-   * @param intensityModel
-   *          the intensity model
-   * @param contentModel
-   *          the content model
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param matrix the matrix
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param rowCluster the row cluster
+   * @param columnCluster the column cluster
+   * @param zoomModel the zoom model
+   * @param colorMapModel the color map model
+   * @param colorStandardizationModel the color standardization model
+   * @param intensityModel the intensity model
+   * @param contentModel the content model
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public ClusterPanel(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
-      Cluster rowCluster, Cluster columnCluster, ZoomModel zoomModel, ColorMapModel colorMapModel,
-      ColorNormalizationModel colorStandardizationModel, ScaleModel intensityModel, TabsModel contentModel,
+  public ClusterPanel(ModernRibbonWindow window, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, Cluster rowCluster,
+      Cluster columnCluster, ZoomModel zoomModel, ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel,
+      ScaleModel intensityModel, TabsModel contentModel,
       CountGroups countGroups, List<String> history, Properties properties) {
-    super(window, matrix, rowCluster, columnCluster, groups, rowGroups, countGroups, history, zoomModel, colorMapModel,
+    super(window, matrix, rowCluster, columnCluster, groups, rowGroups,
+        countGroups, history, zoomModel, colorMapModel,
         colorStandardizationModel, intensityModel, contentModel, properties);
   }
 
@@ -123,11 +112,16 @@ public class ClusterPanel extends HeatMapPanel {
    * org.graphplot.figure.heatmap.legacy.ColumnLabelProperties)
    */
   @Override
-  public PlotBox createCanvas(DataFrame m, XYSeriesGroup groupsOfInterest, XYSeriesGroup rowGroupsOfInterest,
-      MinMax norm, RowLabelProperties rowLabelProperties, ColumnLabelProperties columnLabelProperties) {
+  public PlotBox createCanvas(DataFrame m,
+      XYSeriesGroup groupsOfInterest,
+      XYSeriesGroup rowGroupsOfInterest,
+      MinMax norm,
+      RowLabelProperties rowLabelProperties,
+      ColumnLabelProperties columnLabelProperties) {
 
-    return new ClusterCanvas(m, mRowCluster, mColumnCluster, groupsOfInterest, rowGroupsOfInterest, mCountGroups,
-        mHistory, norm.getMin(), norm.getMax(), rowLabelProperties, columnLabelProperties,
+    return new ClusterCanvas(m, mRowCluster, mColumnCluster, groupsOfInterest,
+        rowGroupsOfInterest, mCountGroups, mHistory, norm.getMin(),
+        norm.getMax(), rowLabelProperties, columnLabelProperties,
         mGroupsElement.getProperties(), mProperties);
   }
 }

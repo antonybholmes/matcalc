@@ -32,10 +32,8 @@ public class GridColorPlotControl extends LineStyleControl {
   /**
    * Instantiates a new grid color plot control.
    *
-   * @param parent
-   *          the parent
-   * @param grid
-   *          the grid
+   * @param parent the parent
+   * @param grid the grid
    */
   public GridColorPlotControl(ModernWindow parent, GridProperties grid) {
     super(parent, "Grid", grid);

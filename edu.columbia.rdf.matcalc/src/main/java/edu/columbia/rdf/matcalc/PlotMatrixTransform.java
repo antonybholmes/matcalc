@@ -37,14 +37,12 @@ public abstract class PlotMatrixTransform extends MatrixTransform {
   /**
    * Instantiates a new plot matrix transform.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param inputMatrix
-   *          the input matrix
+   * @param parent the parent
+   * @param name the name
+   * @param inputMatrix the input matrix
    */
-  public PlotMatrixTransform(ModernWindow parent, String name, DataFrame inputMatrix) {
+  public PlotMatrixTransform(ModernWindow parent, String name,
+      DataFrame inputMatrix) {
     super(parent, name, inputMatrix);
   }
 
@@ -55,7 +53,8 @@ public abstract class PlotMatrixTransform extends MatrixTransform {
    */
   @Override
   public void apply() {
-    ModernWindow window = WindowService.getInstance().findByName(mWindowReference);
+    ModernWindow window = WindowService.getInstance()
+        .findByName(mWindowReference);
 
     if (window == null) {
       // else create a new window

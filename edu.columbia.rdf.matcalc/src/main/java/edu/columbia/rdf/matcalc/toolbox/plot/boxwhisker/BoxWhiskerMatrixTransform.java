@@ -40,14 +40,12 @@ public class BoxWhiskerMatrixTransform extends PlotMatrixTransform {
   /**
    * Instantiates a new box whisker matrix transform.
    *
-   * @param parent
-   *          the parent
-   * @param inputMatrix
-   *          the input matrix
-   * @param canvas
-   *          the canvas
+   * @param parent the parent
+   * @param inputMatrix the input matrix
+   * @param canvas the canvas
    */
-  public BoxWhiskerMatrixTransform(ModernWindow parent, DataFrame inputMatrix, SubFigure canvas) {
+  public BoxWhiskerMatrixTransform(ModernWindow parent, DataFrame inputMatrix,
+      SubFigure canvas) {
     super(parent, "Create Box Whisker Plot", inputMatrix);
 
     mCanvas = canvas;

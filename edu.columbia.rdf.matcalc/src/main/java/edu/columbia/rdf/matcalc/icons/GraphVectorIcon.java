@@ -59,7 +59,12 @@ public class GraphVectorIcon extends ModernVectorIcon {
    * java.awt.Rectangle)
    */
   @Override
-  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+  public void drawIcon(Graphics2D g2,
+      int x,
+      int y,
+      int w,
+      int h,
+      Object... params) {
     double wf = w * SCALE;
     double o = w * OFFSET;
     double xf = x + (w - wf) / 2.0;
@@ -67,9 +72,14 @@ public class GraphVectorIcon extends ModernVectorIcon {
 
     g2.setColor(Color.BLACK);
 
-    g2.drawLine((int) Math.round(xf), (int) Math.round(yf + wf - o), (int) Math.round(xf + wf),
+    g2.drawLine((int) Math.round(xf),
+        (int) Math.round(yf + wf - o),
+        (int) Math.round(xf + wf),
         (int) Math.round(yf + wf - o));
-    g2.drawLine((int) Math.round(xf + o), (int) Math.round(yf), (int) Math.round(xf + o), (int) Math.round(yf + wf));
+    g2.drawLine((int) Math.round(xf + o),
+        (int) Math.round(yf),
+        (int) Math.round(xf + o),
+        (int) Math.round(yf + wf));
 
     g2.setColor(COLOR1);
 

@@ -16,11 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.core.collapse;
 
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 
-import org.jebtk.core.collections.ArrayListCreator;
-import org.jebtk.core.collections.DefaultHashMap;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
@@ -47,7 +43,8 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
   /**
    * The member match button.
    */
-  private RibbonLargeButton mCollapseButton = new RibbonLargeButton(UIService.getInstance().loadIcon("collapse", 24));
+  private RibbonLargeButton mCollapseButton = new RibbonLargeButton(
+      UIService.getInstance().loadIcon("collapse", 24));
 
   /**
    * The member window.
@@ -67,7 +64,8 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -76,7 +74,8 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
 
     mCollapseButton.setToolTip("Collapse", "Collapse rows on a column.");
 
-    window.getRibbon().getToolbar("Data").getSection("Tools").add(mCollapseButton);
+    window.getRibbon().getToolbar("Data").getSection("Tools")
+        .add(mCollapseButton);
 
     mCollapseButton.addClickListener(this);
   }
@@ -85,8 +84,8 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -100,8 +99,7 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
   /**
    * Match.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void collapse() throws ParseException {
     DataFrame m = mWindow.getCurrentMatrix();
@@ -114,7 +112,12 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
       return;
     }
 
-    collapse(m, dialog.getCollapseName(), dialog.getGroup1(), dialog.getGroup2(), dialog.getCollapseType(), mWindow);
+    collapse(m,
+        dialog.getCollapseName(),
+        dialog.getGroup1(),
+        dialog.getGroup2(),
+        dialog.getCollapseType(),
+        mWindow);
 
     // mWindow.addToHistory("Duplicate rows", m);
     // mWindow.addToHistory("Collapse rows", mcollapsed);
@@ -123,74 +126,83 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
   /**
    * Collapse the rows in a matrix.
    *
-   * @param m
-   *          the m
-   * @param rowAnnotationCollapseName
-   *          the row annotation collapse name
-   * @param group1
-   *          the group1
-   * @param group2
-   *          the group2
-   * @param type
-   *          the type
-   * @param window
-   *          the window
+   * @param m the m
+   * @param rowAnnotationCollapseName the row annotation collapse name
+   * @param group1 the group1
+   * @param group2 the group2
+   * @param type the type
+   * @param window the window
    * @return the annotation matrix
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
-  public static DataFrame collapse(DataFrame m, String rowAnnotationCollapseName, MatrixGroup group1,
-      MatrixGroup group2, CollapseType type, MainMatCalcWindow window) throws ParseException {
+  public static DataFrame collapse(DataFrame m,
+      String rowAnnotationCollapseName,
+      MatrixGroup group1,
+      MatrixGroup group2,
+      CollapseType type,
+      MainMatCalcWindow window) throws ParseException {
 
     DataFrame ret = null;
 
     switch (type) {
     case MAX:
-      ret = MatrixOperations.collapseMax(m, rowAnnotationCollapseName); // new CollapseMaxMatrixView(m,
+      ret = MatrixOperations.collapseMax(m, rowAnnotationCollapseName); // new
+                                                                        // CollapseMaxMatrixView(m,
                                                                         // rowAnnotationCollapseName);
       break;
     case MIN:
-      ret = MatrixOperations.collapseMin(m, rowAnnotationCollapseName); // new CollapseMinMatrixView(m,
+      ret = MatrixOperations.collapseMin(m, rowAnnotationCollapseName); // new
+                                                                        // CollapseMinMatrixView(m,
                                                                         // rowAnnotationCollapseName);
       break;
     case MAX_STDEV:
-      ret = MatrixOperations.collapseMaxStdDev(m, rowAnnotationCollapseName); // new CollapseMaxStdDevMatrixView(m,
+      ret = MatrixOperations.collapseMaxStdDev(m, rowAnnotationCollapseName); // new
+                                                                              // CollapseMaxStdDevMatrixView(m,
                                                                               // rowAnnotationCollapseName);
       break;
     case MAX_MEAN:
       ret = MatrixOperations.addRowMeans(m);
       window.addToHistory("Add Mean", ret);
-      ret = MatrixOperations.collapseMaxMean(m, rowAnnotationCollapseName); // new CollapseMaxMeanMatrixView(m,
+      ret = MatrixOperations.collapseMaxMean(m, rowAnnotationCollapseName); // new
+                                                                            // CollapseMaxMeanMatrixView(m,
                                                                             // rowAnnotationCollapseName);
       break;
     case MAX_MEDIAN:
       ret = MatrixOperations.addRowMedians(m);
       window.addToHistory("Add Median", ret);
-      ret = MatrixOperations.collapseMaxMedian(ret, rowAnnotationCollapseName); // return new
+      ret = MatrixOperations.collapseMaxMedian(ret, rowAnnotationCollapseName); // return
+                                                                                // new
                                                                                 // CollapseMaxMedianMatrixView(m,
                                                                                 // rowAnnotationCollapseName);
       break;
     case MAX_TSTAT:
       ret = MatrixOperations.addTStat(m, group1, group2);
       window.addToHistory("Add T-Stats", ret);
-      ret = MatrixOperations.collapseMaxTStat(ret, rowAnnotationCollapseName); // return new CollapseTTestMatrixView(m,
-                                                                               // rowAnnotationCollapseName, group1,
+      ret = MatrixOperations.collapseMaxTStat(ret, rowAnnotationCollapseName); // return
+                                                                               // new
+                                                                               // CollapseTTestMatrixView(m,
+                                                                               // rowAnnotationCollapseName,
+                                                                               // group1,
                                                                                // group2);
       break;
     case MAX_IQR:
       ret = MatrixOperations.addIQR(m);
       window.addToHistory("Add IQR", ret);
-      ret = MatrixOperations.collapseMaxIQR(ret, rowAnnotationCollapseName); // return new CollapseTTestMatrixView(m,
-                                                                             // rowAnnotationCollapseName, group1,
+      ret = MatrixOperations.collapseMaxIQR(ret, rowAnnotationCollapseName); // return
+                                                                             // new
+                                                                             // CollapseTTestMatrixView(m,
+                                                                             // rowAnnotationCollapseName,
+                                                                             // group1,
                                                                              // group2);
       break;
     case MAX_QUART_COEFF_DISP:
       ret = MatrixOperations.addQuartCoeffDisp(m);
       window.addToHistory("Add QuartCoeffDisp", ret);
-      ret = MatrixOperations.collapseMaxQuartCoeffDisp(ret, rowAnnotationCollapseName); // return new
-                                                                                        // CollapseTTestMatrixView(m,
-                                                                                        // rowAnnotationCollapseName,
-                                                                                        // group1, group2);
+      ret = MatrixOperations.collapseMaxQuartCoeffDisp(ret,
+          rowAnnotationCollapseName); // return new
+                                      // CollapseTTestMatrixView(m,
+                                      // rowAnnotationCollapseName,
+                                      // group1, group2);
       break;
     default:
       ret = m;

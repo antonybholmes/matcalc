@@ -33,8 +33,7 @@ public class MatCalcHistoryPanel extends ModernHistoryPanel<MatrixTransform> {
   /**
    * Instantiates a new mat calc history panel.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public MatCalcHistoryPanel(ModernWindow parent) {
     super(parent);
@@ -45,8 +44,7 @@ public class MatCalcHistoryPanel extends ModernHistoryPanel<MatrixTransform> {
   /**
    * Search.
    *
-   * @param text
-   *          the text
+   * @param text the text
    * @return the int
    */
   public int search(String text) {

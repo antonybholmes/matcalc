@@ -23,7 +23,6 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.ColorCycle;
 import org.jebtk.graphplot.PlotFactory;
 import org.jebtk.graphplot.figure.Axes;
-import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
@@ -66,7 +65,8 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.CalcModule#run(java.lang.String[])
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.CalcModule#run(java.lang.String[])
    */
   public void run(String... args) {
     createPlot();
@@ -91,14 +91,16 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Line", UIService.getInstance().loadIcon("line_graph", 24), "Line",
+    RibbonLargeButton button = new RibbonLargeButton("Line",
+        UIService.getInstance().loadIcon("line_graph", 24), "Line",
         "Generate a line graph.");
     button.setShowText(false);
     button.addClickListener(this);
@@ -124,9 +126,12 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
     for (int j = 0; j < m.getCols(); j += 2) {
       Color color = colorCycle.next();
 
-      XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(j), m.getColumnName(j + 1)), color);
+      XYSeries series = new XYSeries(
+          TextUtils.commonPrefix(m.getColumnName(j), m.getColumnName(j + 1)),
+          color);
 
-      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getFillStyle()
+          .setColor(ColorUtils.getTransparentColor50(color));
       series.getStyle().getLineStyle().setColor(color);
 
       PlotFactory.createLinePlot(m, mAxes, series);
@@ -134,7 +139,8 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
 
     mAxes.setAxisLimitsAutoRound();
 
-    System.err.println("a " + mAxes.getMargins() + " sf" + subFigure.getMargins() + " f" + figure.getMargins());
+    System.err.println("a " + mAxes.getMargins() + " sf"
+        + subFigure.getMargins() + " f" + figure.getMargins());
 
     // gp.getPlotLayout().setPlotSize(new Dimension(800, 800));
 
@@ -144,7 +150,8 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
 
     // gp.getXAxis().autoSetLimits(min, max);
     // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     // mAxes.getXAxis().getTitle().setText("Series");
 
@@ -155,7 +162,8 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
 
     // gp.getYAxis().autoSetLimits(min, max);
     // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     // mAxes.getY1Axis().getTitle().setText("Count");
 
@@ -170,8 +178,8 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

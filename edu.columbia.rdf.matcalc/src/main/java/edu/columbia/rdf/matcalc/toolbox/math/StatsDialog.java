@@ -58,10 +58,8 @@ public class StatsDialog extends ModernDialogTaskWindow {
   /**
    * Instantiates a new modern int input dialog.
    *
-   * @param parent
-   *          the parent
-   * @param checked
-   *          the checked
+   * @param parent the parent
+   * @param checked the checked
    */
   public StatsDialog(MainMatCalcWindow parent, String name, double value) {
     super(parent, ModernDialogTaskType.CLOSE);
@@ -90,7 +88,8 @@ public class StatsDialog extends ModernDialogTaskWindow {
     Box box = VBox.create();
 
     box.add(new HExpandBox(getTitle(),
-        new ModernTextBorderPanel(new ModernClipboardNumericalTextField(Mathematics.round(mValue, 4), false), 120)));
+        new ModernTextBorderPanel(new ModernClipboardNumericalTextField(
+            Mathematics.round(mValue, 4), false), 120)));
 
     setDialogCardContent(box);
   }

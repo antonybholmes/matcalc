@@ -28,7 +28,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class AxisVisibleControl.
  */
-public class PlotLayerVisibleControl extends HBox implements ModernClickListener, ChangeListener {
+public class PlotLayerVisibleControl extends HBox
+    implements ModernClickListener, ChangeListener {
 
   /**
    * The constant serialVersionUID.
@@ -48,10 +49,8 @@ public class PlotLayerVisibleControl extends HBox implements ModernClickListener
   /**
    * Instantiates a new axis visible control.
    *
-   * @param parent
-   *          the parent
-   * @param layer
-   *          the layer
+   * @param parent the parent
+   * @param layer the layer
    */
   public PlotLayerVisibleControl(ModernWindow parent, PlotBox layer) {
     mLayer = layer;
@@ -80,8 +79,8 @@ public class PlotLayerVisibleControl extends HBox implements ModernClickListener
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

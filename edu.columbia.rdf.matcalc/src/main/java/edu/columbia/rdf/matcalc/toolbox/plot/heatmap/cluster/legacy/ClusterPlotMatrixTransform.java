@@ -47,29 +47,22 @@ public class ClusterPlotMatrixTransform extends HeatMapPlotMatrixTransform {
   /**
    * Instantiates a new cluster plot matrix transform.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the input matrix
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param rowCluster
-   *          the row cluster
-   * @param columnCluster
-   *          the column cluster
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param matrix the input matrix
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param rowCluster the row cluster
+   * @param columnCluster the column cluster
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public ClusterPlotMatrixTransform(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groups,
-      XYSeriesModel rowGroups, Cluster rowCluster, Cluster columnCluster, CountGroups countGroups, List<String> history,
+  public ClusterPlotMatrixTransform(ModernRibbonWindow parent, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, Cluster rowCluster,
+      Cluster columnCluster, CountGroups countGroups, List<String> history,
       Properties properties) {
-    super(parent, "Create Hierarchical Cluster Plot", matrix, groups, rowGroups, countGroups, history, properties);
+    super(parent, "Create Hierarchical Cluster Plot", matrix, groups, rowGroups,
+        countGroups, history, properties);
 
     mRowCluster = rowCluster;
     mColumnCluster = columnCluster;
@@ -82,7 +75,8 @@ public class ClusterPlotMatrixTransform extends HeatMapPlotMatrixTransform {
    */
   @Override
   public ClusterPlotWindow createWindow() {
-    return new ClusterPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups, mRowGroups, mRowCluster,
-        mColumnCluster, mCountGroups, mHistory, mProperties);
+    return new ClusterPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups,
+        mRowGroups, mRowCluster, mColumnCluster, mCountGroups, mHistory,
+        mProperties);
   }
 }

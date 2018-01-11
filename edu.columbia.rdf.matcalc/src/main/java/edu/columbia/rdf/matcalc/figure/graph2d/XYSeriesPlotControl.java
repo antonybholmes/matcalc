@@ -39,10 +39,8 @@ public class XYSeriesPlotControl extends ModernSubCollapsePane {
   /**
    * Instantiates a new XY series plot control.
    *
-   * @param parent
-   *          the parent
-   * @param series
-   *          the series
+   * @param parent the parent
+   * @param series the series
    */
   public XYSeriesPlotControl(ModernWindow parent, XYSeries series) {
     Box box = VBox.create();

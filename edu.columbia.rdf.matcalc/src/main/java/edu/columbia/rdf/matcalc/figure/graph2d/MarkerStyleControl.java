@@ -67,8 +67,8 @@ public class MarkerStyleControl extends HBox {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -103,15 +103,14 @@ public class MarkerStyleControl extends HBox {
   /**
    * Instantiates a new shape style control.
    *
-   * @param parent
-   *          the parent
-   * @param series
-   *          the series
+   * @param parent the parent
+   * @param series the series
    */
   public MarkerStyleControl(ModernWindow parent, XYSeries series) {
     mSeries = series;
 
-    mSizeSpinner = new ModernCompactSpinner(1, 100, series.getMarker().getSize());
+    mSizeSpinner = new ModernCompactSpinner(1, 100,
+        series.getMarker().getSize());
     UI.setSize(mSizeSpinner, ModernWidget.TINY_SIZE);
 
     mShapeButton = new ShapeStyleButton(series.getMarker().getType());

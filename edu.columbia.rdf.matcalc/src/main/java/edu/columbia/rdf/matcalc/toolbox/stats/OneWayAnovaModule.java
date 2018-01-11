@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.toolbox.stats;
 import org.apache.commons.math3.distribution.FDistribution;
 import org.jebtk.core.Mathematics;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -32,7 +31,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 /**
  * The class OneWayAnovaModule.
  */
-public class OneWayAnovaModule extends CalcModule implements ModernClickListener {
+public class OneWayAnovaModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -52,7 +52,8 @@ public class OneWayAnovaModule extends CalcModule implements ModernClickListener
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -60,18 +61,20 @@ public class OneWayAnovaModule extends CalcModule implements ModernClickListener
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("One-way ANOVA",
-        UIService.getInstance().loadIcon("calculator", 24), "One-way ANOVA", "One-way analysis of variance.");
+        UIService.getInstance().loadIcon("calculator", 24), "One-way ANOVA",
+        "One-way analysis of variance.");
     button.addClickListener(this);
 
-    mParent.getRibbon().getToolbar("Statistics").getSection("Statistics").add(button);
+    mParent.getRibbon().getToolbar("Statistics").getSection("Statistics")
+        .add(button);
   }
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -210,7 +213,8 @@ public class OneWayAnovaModule extends CalcModule implements ModernClickListener
 
     double p = 1.0 - dist.cumulativeProbability(f);
 
-    System.err.println("treat " + treatSS + " " + treatDegFree + "  " + treatMS + " " + f + " " + p);
+    System.err.println("treat " + treatSS + " " + treatDegFree + "  " + treatMS
+        + " " + f + " " + p);
     System.err.println("err " + errSS + " " + errDegFree + "  " + errMS);
     System.err.println("total " + totalSS + " " + totalDegFree);
 

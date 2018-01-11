@@ -64,16 +64,23 @@ public class TsvIOModule extends IOModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
 
     if (headers > 0) {
-      return new DoubleMatrixParser(true, skipLines, rowAnnotations, delimiter).parse(file);
+      return new DoubleMatrixParser(true, skipLines, rowAnnotations, delimiter)
+          .parse(file);
     } else {
-      return new DynamicMixedMatrixParser(skipLines, rowAnnotations, delimiter).parse(file); // return
-                                                                                             // DataFrame.parseDynamicMatrix(file,
-                                                                                             // hasHeader,
-                                                                                             // rowAnnotations, '\t');
+      return new DynamicMixedMatrixParser(skipLines, rowAnnotations, delimiter)
+          .parse(file); // return
+                        // DataFrame.parseDynamicMatrix(file,
+                        // hasHeader,
+                        // rowAnnotations, '\t');
     }
   }
 
@@ -84,7 +91,9 @@ public class TsvIOModule extends IOModule {
    * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
    */
   @Override
-  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+  public boolean saveFile(final MainMatCalcWindow window,
+      final Path file,
+      final DataFrame m) throws IOException {
     DataFrame.writeDataFrame(m, file);
 
     return true;

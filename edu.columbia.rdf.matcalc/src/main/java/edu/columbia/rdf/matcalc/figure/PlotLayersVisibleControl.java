@@ -47,10 +47,8 @@ public class PlotLayersVisibleControl extends VBox {
   /**
    * Instantiates a new layers panel.
    *
-   * @param parent
-   *          the parent
-   * @param plot
-   *          the plot
+   * @param parent the parent
+   * @param plot the plot
    */
   public PlotLayersVisibleControl(ModernWindow parent, Plot plot) {
     for (PlotBox child : plot) {

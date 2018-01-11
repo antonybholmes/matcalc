@@ -51,7 +51,8 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
    * The button.
    */
   private RibbonLargeButton button = new RibbonLargeButton(
-      new Raster24Icon(new RotateVectorIcon(new FilterVectorIcon(ThemeService.getInstance().colors().getHighlight(8),
+      new Raster24Icon(new RotateVectorIcon(new FilterVectorIcon(
+          ThemeService.getInstance().colors().getHighlight(8),
           ThemeService.getInstance().colors().getHighlight(6)), -90)),
       "Row Filter", "Filter rows matching a list of values.");
 
@@ -73,7 +74,8 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -89,8 +91,8 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -118,11 +120,20 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
 
     int column = dialog.getColumn();
 
-    getRows(m, dialog.getColumnText(), column, dialog.getExactMatch(), dialog.getInList(), dialog.getIncludeMissing(),
-        dialog.getCaseSensitive(), names, rows, missingNames);
+    getRows(m,
+        dialog.getColumnText(),
+        column,
+        dialog.getExactMatch(),
+        dialog.getInList(),
+        dialog.getIncludeMissing(),
+        dialog.getCaseSensitive(),
+        names,
+        rows,
+        missingNames);
 
     if (rows.size() == 0) {
-      ModernMessageDialog.createWarningDialog(mWindow, "There were no rows matching your filter criteria.");
+      ModernMessageDialog.createWarningDialog(mWindow,
+          "There were no rows matching your filter criteria.");
       return;
     }
 
@@ -131,7 +142,8 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
     if (missingNames.size() > 0) {
       // Need to insert blank rows
 
-      ret = DataFrame.createDataFrame(rows.size() + missingNames.size(), m.getCols());
+      ret = DataFrame.createDataFrame(rows.size() + missingNames.size(),
+          m.getCols());
 
       DataFrame.copyColumnNames(m, ret);
       DataFrame.copyRows(m, rows, ret);
@@ -153,34 +165,31 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
   /**
    * Gets the rows.
    *
-   * @param m
-   *          The matrix to search.
-   * @param columnText
-   *          The
-   * @param column
-   *          The column to match on.
-   * @param exactMatch
-   *          Whether to match names exactly (case insensitive).
-   * @param inList
-   *          Matches rows to values in names if true, otherwise returns rows not
-   *          matching names.
-   * @param includeMissing
-   *          Update missingNames with the list of names not found in the matrix.
-   *          This option is ignored if inList == false.
-   * @param caseSensitive
-   *          the case sensitive
-   * @param names
-   *          The list of names to search for in the matrix.
-   * @param rows
-   *          Will be populated with the rows matching the values in names.
-   * @param missingNames
-   *          Will be populated with those names that are not found in the matrix.
-   *          This list is only updated if includeMissing == true and inList ==
-   *          true.
+   * @param m The matrix to search.
+   * @param columnText The
+   * @param column The column to match on.
+   * @param exactMatch Whether to match names exactly (case insensitive).
+   * @param inList Matches rows to values in names if true, otherwise returns
+   *          rows not matching names.
+   * @param includeMissing Update missingNames with the list of names not found
+   *          in the matrix. This option is ignored if inList == false.
+   * @param caseSensitive the case sensitive
+   * @param names The list of names to search for in the matrix.
+   * @param rows Will be populated with the rows matching the values in names.
+   * @param missingNames Will be populated with those names that are not found
+   *          in the matrix. This list is only updated if includeMissing == true
+   *          and inList == true.
    * @return the rows
    */
-  private static void getRows(final DataFrame m, final String columnText, int column, boolean exactMatch,
-      boolean inList, boolean includeMissing, boolean caseSensitive, final List<String> names, List<Integer> rows,
+  private static void getRows(final DataFrame m,
+      final String columnText,
+      int column,
+      boolean exactMatch,
+      boolean inList,
+      boolean includeMissing,
+      boolean caseSensitive,
+      final List<String> names,
+      List<Integer> rows,
       List<String> missingNames) {
     List<String> ids;
 

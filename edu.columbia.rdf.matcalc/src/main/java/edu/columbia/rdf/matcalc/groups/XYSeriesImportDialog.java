@@ -63,7 +63,8 @@ import org.jebtk.modern.window.ModernWindow;
  *
  * @author Antony Holmes Holmes
  */
-public class XYSeriesImportDialog extends ModernDialogWindow implements ModernClickListener {
+public class XYSeriesImportDialog extends ModernDialogWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -90,7 +91,8 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
       UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /** The m clear filter button. */
-  private ModernButton mClearFilterButton = new ModernDialogFlatButton("Clear Filter",
+  private ModernButton mClearFilterButton = new ModernDialogFlatButton(
+      "Clear Filter",
       UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
 
   /** The m groups matrix. */
@@ -112,7 +114,8 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
   private Set<String> mFilteredNames = null;
 
   /** The m check complementary group. */
-  private CheckBox mCheckComplementaryGroup = new ModernCheckBox("Complementary groups", true);
+  private CheckBox mCheckComplementaryGroup = new ModernCheckBox(
+      "Complementary groups", true);
 
   /** The m sample map. */
   private Map<String, Set<String>> mSampleMap;
@@ -129,14 +132,12 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
   /**
    * Instantiates a new XY series dialog.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param groupsMatrix
-   *          the groups matrix
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param groupsMatrix the groups matrix
    */
-  public XYSeriesImportDialog(ModernWindow parent, DataFrame matrix, DataFrame groupsMatrix) {
+  public XYSeriesImportDialog(ModernWindow parent, DataFrame matrix,
+      DataFrame groupsMatrix) {
     super(parent);
 
     mMatrix = matrix;
@@ -296,8 +297,8 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
        * 
        * box2.add(checkUse); box2.add(Ui.createHGap(5));
        * 
-       * ColorSwatchButton colorButton = new ColorSwatchButton(getParentWindow(),
-       * series.getColor());
+       * ColorSwatchButton colorButton = new
+       * ColorSwatchButton(getParentWindow(), series.getColor());
        * 
        * box2.add(colorButton);
        * 
@@ -322,8 +323,8 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   public final void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
@@ -353,7 +354,8 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
         if (mCheckComplementaryGroup.isSelected()) {
           XYSeries s2 = new XYSeries("Non " + series.getName(), Color.WHITE);
 
-          Set<Integer> columns = CollectionUtils.toSet(XYSeries.findColumnIndices(mMatrix, series));
+          Set<Integer> columns = CollectionUtils
+              .toSet(XYSeries.findColumnIndices(mMatrix, series));
 
           for (int j = 0; j < mMatrix.getCols(); ++j) {
             if (!columns.contains(j)) {
@@ -367,8 +369,8 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
     }
 
     /*
-     * for (String name : mFilteredNames) { if (mUseMap.get(name).isSelected()) {
-     * XYSeries series = mSeriesMap.get(name);
+     * for (String name : mFilteredNames) { if (mUseMap.get(name).isSelected())
+     * { XYSeries series = mSeriesMap.get(name);
      * 
      * series.setColor(mColorMap.get(name).getSelectedColor());
      * 
@@ -396,13 +398,12 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
   /**
    * Filter.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws InvalidFormatException
-   *           the invalid format exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws InvalidFormatException the invalid format exception
    */
   private void filter() throws IOException, InvalidFormatException {
-    Path file = ExcelDialog.open(getParentWindow()).xlsx().getFile(RecentFilesService.getInstance().getPwd());
+    Path file = ExcelDialog.open(getParentWindow()).xlsx()
+        .getFile(RecentFilesService.getInstance().getPwd());
 
     if (file == null) {
       return;
@@ -451,8 +452,7 @@ public class XYSeriesImportDialog extends ModernDialogWindow implements ModernCl
   /**
    * Creates the sample regex.
    *
-   * @param name
-   *          the name
+   * @param name the name
    * @return the string
    */
   private static String createSampleRegex(String name) {

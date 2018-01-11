@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
 
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.CsvDynamicMatrixParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.io.CsvGuiFileFilter;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
@@ -64,8 +64,13 @@ public class CsvIOModule extends IOModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
     if (headers > 0) {
       return new CsvMatrixParser(true, rowAnnotations).parse(file);
     } else {
@@ -80,7 +85,9 @@ public class CsvIOModule extends IOModule {
    * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
    */
   @Override
-  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+  public boolean saveFile(final MainMatCalcWindow window,
+      final Path file,
+      final DataFrame m) throws IOException {
     DataFrame.writeDataFrame(m, file);
 
     return true;

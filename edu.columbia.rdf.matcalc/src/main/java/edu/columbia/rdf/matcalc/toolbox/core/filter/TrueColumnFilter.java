@@ -29,10 +29,8 @@ public class TrueColumnFilter extends ColumnFilter {
   /**
    * Instantiates a new true column filter.
    *
-   * @param m
-   *          the m
-   * @param isFirst
-   *          the is first
+   * @param m the m
+   * @param isFirst the is first
    */
   public TrueColumnFilter(DataFrame m, boolean isFirst) {
     super(m, isFirst);

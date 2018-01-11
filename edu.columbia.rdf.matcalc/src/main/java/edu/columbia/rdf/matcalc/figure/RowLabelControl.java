@@ -62,31 +62,25 @@ public class RowLabelControl extends VBox implements ModernClickListener {
   /**
    * Instantiates a new row label control.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param rowLabelPosition
-   *          the row label position
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param rowLabelPosition the row label position
    */
-  public RowLabelControl(ModernWindow parent, DataFrame matrix, RowLabelPosition rowLabelPosition) {
+  public RowLabelControl(ModernWindow parent, DataFrame matrix,
+      RowLabelPosition rowLabelPosition) {
     this(parent, matrix, rowLabelPosition, true, true);
   }
 
   /**
    * Instantiates a new row label control.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param rowLabelPosition
-   *          the row label position
-   * @param show
-   *          the show
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param rowLabelPosition the row label position
+   * @param show the show
    */
-  public RowLabelControl(ModernWindow parent, DataFrame matrix, RowLabelPosition rowLabelPosition,
-      boolean featureCounts, boolean show) {
+  public RowLabelControl(ModernWindow parent, DataFrame matrix,
+      RowLabelPosition rowLabelPosition, boolean featureCounts, boolean show) {
 
     mCheckFeatures = new ModernCheckSwitch("Feature Count", featureCounts);
     add(mCheckFeatures);
@@ -129,8 +123,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mShowElement.addClickListener(l);
@@ -172,8 +165,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
   /**
    * Gets the show annotation.
    *
-   * @param name
-   *          the name
+   * @param name the name
    * @return the show annotation
    */
   public boolean getShowAnnotation(String name) {
@@ -192,8 +184,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
   /**
    * Determines which annotations to show.
    *
-   * @param showAnnotations
-   *          the show annotations
+   * @param showAnnotations the show annotations
    */
   public void setShowAnnotations(AnnotationProperties showAnnotations) {
     for (String name : mAnnotationMap.keySet()) {
@@ -205,8 +196,8 @@ public class RowLabelControl extends VBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

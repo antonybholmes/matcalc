@@ -41,7 +41,8 @@ public class HeatMapProperties extends Properties {
    * Instantiates a new heat map properties.
    */
   public HeatMapProperties() {
-    setProperty("plot.row-label-max-chars", SettingsService.getInstance().getAsInt("plot.row-label-max-chars"));
+    setProperty("plot.row-label-max-chars",
+        SettingsService.getInstance().getAsInt("plot.row-label-max-chars"));
 
     setProperty("plot.border-color", Color.BLACK);
     setProperty("plot.grid-color", ModernWidget.LINE_COLOR);
@@ -56,7 +57,8 @@ public class HeatMapProperties extends Properties {
     setProperty("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
     setProperty("plot.show-row-labels", true);
     setProperty("plot.show-feature-counts", true);
-    setProperty("plot.color.standardization", ColorNormalizationType.ZSCORE_ROW);
+    setProperty("plot.color.standardization",
+        ColorNormalizationType.ZSCORE_ROW);
     setProperty("plot.color.intensity", 0);
     setProperty("plot.tree.hoz.width", 200);
     setProperty("plot.tree.hoz.visible", true);

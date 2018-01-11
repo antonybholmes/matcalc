@@ -46,11 +46,9 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.ArrowDownVectorIcon;
 import org.jebtk.modern.graphics.icons.ArrowUpVectorIcon;
-import org.jebtk.modern.graphics.icons.CheckVectorIcon;
 import org.jebtk.modern.graphics.icons.OpenFolderVectorIcon;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
-import org.jebtk.modern.panel.ModernContentPanel;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
@@ -65,7 +63,8 @@ import org.jebtk.modern.window.ModernWindow;
  * @author Antony Holmes Holmes
  *
  */
-public class ColumnFilterDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class ColumnFilterDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -85,12 +84,14 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
   /**
    * The member up button.
    */
-  private ModernButton mUpButton = new ModernButton(UIService.getInstance().loadIcon(ArrowUpVectorIcon.class, 16));
+  private ModernButton mUpButton = new ModernButton(
+      UIService.getInstance().loadIcon(ArrowUpVectorIcon.class, 16));
 
   /**
    * The member down button.
    */
-  private ModernButton mDownButton = new ModernButton(UIService.getInstance().loadIcon(ArrowDownVectorIcon.class, 16));
+  private ModernButton mDownButton = new ModernButton(
+      UIService.getInstance().loadIcon(ArrowDownVectorIcon.class, 16));
 
   /**
    * The member alphabetical button.
@@ -118,10 +119,8 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
   /**
    * Instantiates a new column order dialog.
    *
-   * @param parent
-   *          the parent
-   * @param m
-   *          the m
+   * @param parent the parent
+   * @param m the m
    */
   public ColumnFilterDialog(ModernWindow parent, DataFrame m) {
     super(parent, "matcalc.filter.columns.help.url");
@@ -142,7 +141,8 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
     // scrollPane.setViewportBorder(BorderFactory.createEmptyBorder());
     // scrollPane.getViewport().setBackground(Color.WHITE);
 
-    content.setBody(new ModernScrollPane(mTable).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
+    content.setBody(new ModernScrollPane(mTable)
+        .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
         .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS));
 
     Box box = VBox.create();
@@ -186,8 +186,7 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
   /**
    * Load ids.
    *
-   * @param ids
-   *          the ids
+   * @param ids the ids
    */
   private void loadIds(List<Indexed<Integer, String>> ids) {
     loadIds(ids, null);
@@ -196,12 +195,11 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
   /**
    * Load ids.
    *
-   * @param ids
-   *          the ids
-   * @param visibleMap
-   *          the visible map
+   * @param ids the ids
+   * @param visibleMap the visible map
    */
-  private void loadIds(List<Indexed<Integer, String>> ids, Map<Integer, Boolean> visibleMap) {
+  private void loadIds(List<Indexed<Integer, String>> ids,
+      Map<Integer, Boolean> visibleMap) {
     mModel = new ColumnFilterTableModel(ids, visibleMap);
 
     mTable.setModel(mModel);
@@ -215,8 +213,8 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -346,14 +344,14 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
   /**
    * Sort by external id list.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws InvalidFormatException
-   *           the invalid format exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws InvalidFormatException the invalid format exception
    */
-  private void sortByExternalIdList() throws IOException, InvalidFormatException {
+  private void sortByExternalIdList()
+      throws IOException, InvalidFormatException {
 
-    Path file = ExcelUI.openExcelFileDialog(mParent, RecentFilesService.getInstance().getPwd());
+    Path file = ExcelUI.openExcelFileDialog(mParent,
+        RecentFilesService.getInstance().getPwd());
 
     if (file != null) {
       sortByExternalIdList(file);
@@ -363,14 +361,12 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
   /**
    * Sort by external id list.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws InvalidFormatException
-   *           the invalid format exception
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws InvalidFormatException the invalid format exception
    */
-  private void sortByExternalIdList(Path file) throws IOException, InvalidFormatException {
+  private void sortByExternalIdList(Path file)
+      throws IOException, InvalidFormatException {
     // BufferedReader reader = FileUtils.newBufferedReader(file);
     // String line;
 
@@ -395,7 +391,8 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow implements Modern
 
     Set<Integer> used = new HashSet<Integer>();
 
-    // List<IndexedValue<Integer, String>> indexedRows = mModel.getIndexedRows();
+    // List<IndexedValue<Integer, String>> indexedRows =
+    // mModel.getIndexedRows();
 
     // Map<String, Collection<IndexedValue<Integer, String>>> indexedRowMap =
     // IndexedValue.listToMap(indexedRows);

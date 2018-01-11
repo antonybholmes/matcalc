@@ -29,7 +29,8 @@ import org.jebtk.modern.ribbon.RibbonSection;
  * @author Antony Holmes Holmes
  *
  */
-public class Graph2dStyleRibbonSection extends RibbonSection implements ModernClickListener {
+public class Graph2dStyleRibbonSection extends RibbonSection
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -51,9 +52,9 @@ public class Graph2dStyleRibbonSection extends RibbonSection implements ModernCl
    * RibbonLargeRadioButton2("Joined", new Raster24Icon(new JoinedStyleIcon()),
    * "Style Joined", "Peaks are drawn as a continuous line.");
    * 
-   * private ModernCheckButton mLinesButton = new RibbonLargeRadioButton2("Line",
-   * new Raster24Icon(new LinesStyleIcon()), "Style Line",
-   * "Peaks are drawn as lines.");
+   * private ModernCheckButton mLinesButton = new
+   * RibbonLargeRadioButton2("Line", new Raster24Icon(new LinesStyleIcon()),
+   * "Style Line", "Peaks are drawn as lines.");
    * 
    * private ModernCheckButton mBarsButton = new RibbonLargeRadioButton2("Bars",
    * new Raster24Icon(new BarsStyleIcon()), "Style Bars",
@@ -73,12 +74,11 @@ public class Graph2dStyleRibbonSection extends RibbonSection implements ModernCl
   /**
    * Instantiates a new graph2d style ribbon section2.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param styleModel
-   *          the style model
+   * @param ribbon the ribbon
+   * @param styleModel the style model
    */
-  public Graph2dStyleRibbonSection(Ribbon ribbon, Graph2dStyleModel styleModel) {
+  public Graph2dStyleRibbonSection(Ribbon ribbon,
+      Graph2dStyleModel styleModel) {
     super(ribbon, "Style");
 
     mStyleModel = styleModel;
@@ -95,12 +95,13 @@ public class Graph2dStyleRibbonSection extends RibbonSection implements ModernCl
      * ModernButtonGroup group = new ModernButtonGroup();
      * 
      * group.add(mJoinedFilledButton); group.add(mJoinedFilledTransButton);
-     * group.add(mJoinedButton); group.add(mLinesButton); group.add(mBarsButton);
+     * group.add(mJoinedButton); group.add(mLinesButton);
+     * group.add(mBarsButton);
      * 
      * mJoinedFilledButton.addClickListener(this);
      * mJoinedFilledTransButton.addClickListener(this);
-     * mJoinedButton.addClickListener(this); mLinesButton.addClickListener(this);
-     * mBarsButton.addClickListener(this);
+     * mJoinedButton.addClickListener(this);
+     * mLinesButton.addClickListener(this); mBarsButton.addClickListener(this);
      */
 
     mButton.addClickListener(this);
@@ -141,8 +142,7 @@ public class Graph2dStyleRibbonSection extends RibbonSection implements ModernCl
   /**
    * Change.
    *
-   * @param e
-   *          the e
+   * @param e the e
    */
   private void change(ModernClickEvent e) {
     if (e.getMessage().equals("Filled")) {
@@ -166,11 +166,12 @@ public class Graph2dStyleRibbonSection extends RibbonSection implements ModernCl
     }
 
     /*
-     * if (mJoinedFilledButton.isSelected()) { mStyleModel.set(PeakStyle.FILLED); }
-     * else if (mJoinedButton.isSelected()) { mStyleModel.set(PeakStyle.JOINED); }
-     * else if (mLinesButton.isSelected()) { mStyleModel.set(PeakStyle.LINES); }
-     * else if (mBarsButton.isSelected()) { mStyleModel.set(PeakStyle.BARS); } else
-     * { mStyleModel.set(PeakStyle.FILLED_TRANS); }
+     * if (mJoinedFilledButton.isSelected()) {
+     * mStyleModel.set(PeakStyle.FILLED); } else if (mJoinedButton.isSelected())
+     * { mStyleModel.set(PeakStyle.JOINED); } else if
+     * (mLinesButton.isSelected()) { mStyleModel.set(PeakStyle.LINES); } else if
+     * (mBarsButton.isSelected()) { mStyleModel.set(PeakStyle.BARS); } else {
+     * mStyleModel.set(PeakStyle.FILLED_TRANS); }
      */
   }
 
@@ -178,8 +179,8 @@ public class Graph2dStyleRibbonSection extends RibbonSection implements ModernCl
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

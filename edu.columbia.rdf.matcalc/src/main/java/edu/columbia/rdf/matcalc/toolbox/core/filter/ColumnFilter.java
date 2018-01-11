@@ -52,7 +52,8 @@ public class ColumnFilter extends HBox implements ModernClickListener {
   private ModernTextField mText = new ModernTextField();
 
   /** The m delete button. */
-  private ModernButton mDeleteButton = new ModernButton(UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
+  private ModernButton mDeleteButton = new ModernButton(
+      UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
 
   /** The m listeners. */
   private ModernClickListeners mListeners = new ModernClickListeners();
@@ -60,10 +61,8 @@ public class ColumnFilter extends HBox implements ModernClickListener {
   /**
    * Instantiates a new column sort.
    *
-   * @param m
-   *          the m
-   * @param isFirst
-   *          the is first
+   * @param m the m
+   * @param isFirst the is first
    */
   public ColumnFilter(DataFrame m, boolean isFirst) {
     if (isFirst) {
@@ -96,8 +95,7 @@ public class ColumnFilter extends HBox implements ModernClickListener {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mListeners.addClickListener(l);
@@ -106,9 +104,8 @@ public class ColumnFilter extends HBox implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -126,8 +123,7 @@ public class ColumnFilter extends HBox implements ModernClickListener {
    * Gets the filter.
    *
    * @return the filter
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public Filter getFilter() throws ParseException {
     switch (mFilterCombo.getSelectedIndex()) {

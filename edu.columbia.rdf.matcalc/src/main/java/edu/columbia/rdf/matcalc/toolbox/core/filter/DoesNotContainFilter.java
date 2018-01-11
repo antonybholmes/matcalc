@@ -27,8 +27,7 @@ public class DoesNotContainFilter implements Filter {
   /**
    * Instantiates a new does not contain filter.
    *
-   * @param text
-   *          the text
+   * @param text the text
    */
   public DoesNotContainFilter(String text) {
     mText = text.toLowerCase();

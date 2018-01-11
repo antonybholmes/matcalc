@@ -63,27 +63,20 @@ public class ClusterPlotWindow extends HeatMapWindow {
   /**
    * Instantiates a new cluster plot window.
    *
-   * @param window
-   *          the window
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param rowCluster
-   *          the row cluster
-   * @param columnCluster
-   *          the column cluster
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param matrix the matrix
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param rowCluster the row cluster
+   * @param columnCluster the column cluster
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public ClusterPlotWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
-      Cluster rowCluster, Cluster columnCluster, CountGroups countGroups, List<String> history, Properties properties) {
+  public ClusterPlotWindow(ModernWindow window, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, Cluster rowCluster,
+      Cluster columnCluster, CountGroups countGroups, List<String> history,
+      Properties properties) {
     super(window, matrix, groups, rowGroups, countGroups, history, properties);
 
     mRowCluster = rowCluster;
@@ -100,7 +93,8 @@ public class ClusterPlotWindow extends HeatMapWindow {
    * @return the format plot pane
    */
   public FormatPlotPane createFormatPane() {
-    return new ClusterPanel(this, mMatrix, mGroups, mRowGroups, mRowCluster, mColumnCluster, mZoomModel, mColorMapModel,
-        mColorModel, mScaleModel, getTabsPane().getModel(), mCountGroups, mHistory, mProperties);
+    return new ClusterPanel(this, mMatrix, mGroups, mRowGroups, mRowCluster,
+        mColumnCluster, mZoomModel, mColorMapModel, mColorModel, mScaleModel,
+        getTabsPane().getModel(), mCountGroups, mHistory, mProperties);
   }
 }

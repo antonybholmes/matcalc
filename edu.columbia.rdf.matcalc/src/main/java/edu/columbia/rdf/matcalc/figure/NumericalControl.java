@@ -41,14 +41,10 @@ public class NumericalControl extends HBox {
   /**
    * Instantiates a new numerical control.
    *
-   * @param name
-   *          the name
-   * @param min
-   *          the min
-   * @param max
-   *          the max
-   * @param value
-   *          the value
+   * @param name the name
+   * @param min the min
+   * @param max the max
+   * @param value the value
    */
   public NumericalControl(String name, int min, int max, int value) {
     field = new ModernCompactSpinner(min, max, value);
@@ -61,8 +57,7 @@ public class NumericalControl extends HBox {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addChangeListener(ChangeListener l) {
     field.addChangeListener(l);

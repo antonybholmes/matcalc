@@ -32,10 +32,8 @@ public class AxisLinePlotControl extends LineStyleControl {
   /**
    * Instantiates a new axis line plot control.
    *
-   * @param parent
-   *          the parent
-   * @param axis
-   *          the axis
+   * @param parent the parent
+   * @param axis the axis
    */
   public AxisLinePlotControl(ModernWindow parent, Axis axis) {
     super(parent, "Axis", axis.getLineStyle());

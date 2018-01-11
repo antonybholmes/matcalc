@@ -33,7 +33,6 @@ import java.nio.file.Path;
 
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.graphics.icons.FileVectorIcon;
 import org.jebtk.modern.graphics.icons.FolderVectorIcon;
@@ -57,11 +56,14 @@ public class FilesListRenderer extends ModernListCellRenderer {
 
   private static final int ICON_SIZE = 16;
 
-  private static final ModernIcon DIR_ICON = UIService.getInstance().loadIcon(FolderVectorIcon.class, ICON_SIZE);
+  private static final ModernIcon DIR_ICON = UIService.getInstance()
+      .loadIcon(FolderVectorIcon.class, ICON_SIZE);
 
-  private static final ModernIcon XLSX_ICON = UIService.getInstance().loadIcon("xlsx", ICON_SIZE);
+  private static final ModernIcon XLSX_ICON = UIService.getInstance()
+      .loadIcon("xlsx", ICON_SIZE);
 
-  private static final ModernIcon FILE_ICON = UIService.getInstance().loadIcon(FileVectorIcon.class, ICON_SIZE);
+  private static final ModernIcon FILE_ICON = UIService.getInstance()
+      .loadIcon(FileVectorIcon.class, ICON_SIZE);
 
   /**
    * The member file.
@@ -76,11 +78,20 @@ public class FilesListRenderer extends ModernListCellRenderer {
    * java.lang.Object, boolean, boolean, boolean, int)
    */
   @Override
-  public Component getCellRendererComponent(ModernList<?> list, Object value, boolean highlight, boolean isSelected,
-      boolean hasFocus, int row) {
+  public Component getCellRendererComponent(ModernList<?> list,
+      Object value,
+      boolean highlight,
+      boolean isSelected,
+      boolean hasFocus,
+      int row) {
 
     // setup
-    super.getCellRendererComponent(list, value, highlight, isSelected, hasFocus, row);
+    super.getCellRendererComponent(list,
+        value,
+        highlight,
+        isSelected,
+        hasFocus,
+        row);
 
     mFile = (Path) value;
 
@@ -91,8 +102,8 @@ public class FilesListRenderer extends ModernListCellRenderer {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.list.ModernListIconCellRenderer#drawForegroundAA(java.
-   * awt.Graphics2D)
+   * org.abh.lib.ui.modern.list.ModernListIconCellRenderer#drawForegroundAA(
+   * java. awt.Graphics2D)
    */
   @Override
   public void drawForegroundAAText(Graphics2D g2) {

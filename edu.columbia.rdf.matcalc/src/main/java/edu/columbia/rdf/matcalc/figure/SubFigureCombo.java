@@ -32,8 +32,7 @@ public class SubFigureCombo extends ModernComboBox {
   /**
    * Instantiates a new figure combo.
    *
-   * @param figure
-   *          the figure
+   * @param figure the figure
    */
   public SubFigureCombo(Figure figure) {
     for (String name : figure.getNames()) {

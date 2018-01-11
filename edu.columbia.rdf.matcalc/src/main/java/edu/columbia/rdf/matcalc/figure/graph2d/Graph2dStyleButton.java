@@ -43,8 +43,8 @@ public class Graph2dStyleButton extends ModernDialogFlatDropDownIconButton {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -53,11 +53,13 @@ public class Graph2dStyleButton extends ModernDialogFlatDropDownIconButton {
        * ((Graph2dStyleMultiIcon16)mIcon).setIcon(0); } else if
        * (getText().equals("Filled Transparent")) {
        * ((Graph2dStyleMultiIcon16)mIcon).setIcon(1); } else if
-       * (getText().equals("Joined")) { ((Graph2dStyleMultiIcon16)mIcon).setIcon(2); }
-       * else if (getText().equals("Lines")) {
+       * (getText().equals("Joined")) {
+       * ((Graph2dStyleMultiIcon16)mIcon).setIcon(2); } else if
+       * (getText().equals("Lines")) {
        * ((Graph2dStyleMultiIcon16)mIcon).setIcon(3); } else if
-       * (getText().equals("Bars")) { ((Graph2dStyleMultiIcon16)mIcon).setIcon(4); }
-       * else if (getText().equals("Scatter")) {
+       * (getText().equals("Bars")) {
+       * ((Graph2dStyleMultiIcon16)mIcon).setIcon(4); } else if
+       * (getText().equals("Scatter")) {
        * ((Graph2dStyleMultiIcon16)mIcon).setIcon(5); } else {
        * ((Graph2dStyleMultiIcon16)mIcon).setIcon(0); }
        */
@@ -88,8 +90,7 @@ public class Graph2dStyleButton extends ModernDialogFlatDropDownIconButton {
   /**
    * Sets the icon.
    *
-   * @param index
-   *          the new icon
+   * @param index the new icon
    */
   private void setIcon(int index) {
     ((Graph2dStyleMultiIcon16) mIcon).setIcon(index);
@@ -104,16 +105,15 @@ public class Graph2dStyleButton extends ModernDialogFlatDropDownIconButton {
    */
   /*
    * @Override public void drawBackground(Graphics2D g2) { if(mHighlight ||
-   * mPopupShown) { paintHighlightedOutlined(g2, getRect()); } else if(hasFocus())
-   * { paintOutlinedFocused(g2, getRect()); } else { paintOutlined(g2, getRect());
-   * } }
+   * mPopupShown) { paintHighlightedOutlined(g2, getRect()); } else
+   * if(hasFocus()) { paintOutlinedFocused(g2, getRect()); } else {
+   * paintOutlined(g2, getRect()); } }
    */
 
   /**
    * Instantiates a new graph2d style button.
    *
-   * @param style
-   *          the style
+   * @param style the style
    */
   public Graph2dStyleButton(PlotStyle style) {
     super(new Graph2dStyleMultiIcon16(), new Graph2dStyleMenu());
@@ -128,8 +128,7 @@ public class Graph2dStyleButton extends ModernDialogFlatDropDownIconButton {
   /**
    * Sets the style.
    *
-   * @param style
-   *          the new style
+   * @param style the new style
    */
   public void setStyle(PlotStyle style) {
 

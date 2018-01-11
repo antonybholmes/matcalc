@@ -27,8 +27,7 @@ public class ContainsFilter implements Filter {
   /**
    * Instantiates a new contains filter.
    *
-   * @param text
-   *          the text
+   * @param text the text
    */
   public ContainsFilter(String text) {
     mText = text.toLowerCase();

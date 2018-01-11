@@ -40,8 +40,7 @@ public class XYSeriesTableModel extends ModernTableModel {
   /**
    * Instantiates a new XY series table model.
    *
-   * @param allSeries
-   *          the all series
+   * @param allSeries the all series
    */
   public XYSeriesTableModel(List<XYSeries> allSeries) {
     mAllSeries = allSeries;
@@ -118,8 +117,7 @@ public class XYSeriesTableModel extends ModernTableModel {
   /**
    * Gets the column annotations.
    *
-   * @param column
-   *          the column
+   * @param column the column
    * @return the column annotations
    */
   public List<? extends Object> getColumnAnnotations(int column) {
@@ -129,8 +127,7 @@ public class XYSeriesTableModel extends ModernTableModel {
   /**
    * Checks if is selected.
    *
-   * @param i
-   *          the i
+   * @param i the i
    * @return true, if is selected
    */
   public boolean isSelected(int i) {
@@ -140,8 +137,7 @@ public class XYSeriesTableModel extends ModernTableModel {
   /**
    * Gets the series.
    *
-   * @param i
-   *          the i
+   * @param i the i
    * @return the series
    */
   public XYSeries getSeries(int i) {

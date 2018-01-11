@@ -27,8 +27,7 @@ public class LTFilter implements Filter {
   /**
    * Instantiates a new LT filter.
    *
-   * @param v
-   *          the v
+   * @param v the v
    */
   public LTFilter(double v) {
     mV = v;

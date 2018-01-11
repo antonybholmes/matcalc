@@ -39,7 +39,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 /**
  * The class ScatterLineModule.
  */
-public class ScatterLineModule extends CalcModule implements ModernClickListener {
+public class ScatterLineModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -59,7 +60,8 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -67,8 +69,8 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Scatter Line Graph",
-        UIService.getInstance().loadIcon("scatter_line_graph", 24), "Scatter Line Graph",
-        "Generate a scatter line graph.");
+        UIService.getInstance().loadIcon("scatter_line_graph", 24),
+        "Scatter Line Graph", "Generate a scatter line graph.");
     button.addClickListener(this);
     button.setEnabled(false);
 
@@ -92,9 +94,12 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
     for (int i = 0; i < m.getCols(); i += 2) {
       Color color = colorCycle.next();
 
-      XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)), color);
+      XYSeries series = new XYSeries(
+          TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)),
+          color);
 
-      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getFillStyle()
+          .setColor(ColorUtils.getTransparentColor50(color));
       series.getStyle().getLineStyle().setColor(color);
 
       PlotFactory.createScatterLinePlot(m, axes, series);
@@ -110,7 +115,8 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
 
     // gp.getXAxis().autoSetLimits(min, max);
     // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     axes.getX1Axis().getTitle().setText("Series");
 
@@ -121,7 +127,8 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
 
     // gp.getYAxis().autoSetLimits(min, max);
     // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     axes.getY1Axis().getTitle().setText("Count");
 
@@ -134,8 +141,8 @@ public class ScatterLineModule extends CalcModule implements ModernClickListener
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

@@ -86,7 +86,8 @@ public class ColorMapChooser extends ModernWidget {
 
     MatrixPanel matrixPanel = new MatrixPanel(rows, cols, 0, 0);
 
-    ColorMapPanel panel = new ColorMapPanel(ColorMap.createBlueWhiteRedMap(false));
+    ColorMapPanel panel = new ColorMapPanel(
+        ColorMap.createBlueWhiteRedMap(false));
     panel.setBorder(BORDER);
     matrixPanel.add(checkBlueRed);
     matrixPanel.add(panel);
@@ -124,8 +125,7 @@ public class ColorMapChooser extends ModernWidget {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     checkBlueRed.addClickListener(l);

@@ -42,7 +42,8 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * The class MatchDialog.
  */
-public class SortDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class SortDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -63,12 +64,9 @@ public class SortDialog extends ModernDialogHelpWindow implements ModernClickLis
   /**
    * Instantiates a new match dialog.
    *
-   * @param parent
-   *          the parent
-   * @param m
-   *          the m
-   * @param c
-   *          the c
+   * @param parent the parent
+   * @param m the m
+   * @param c the c
    */
   public SortDialog(MainMatCalcWindow parent, DataFrame m, int c) {
     super(parent, "matcalc.sort.help.url");

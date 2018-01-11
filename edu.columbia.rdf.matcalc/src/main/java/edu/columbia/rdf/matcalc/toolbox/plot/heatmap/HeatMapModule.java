@@ -48,8 +48,10 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
   private MainMatCalcWindow mParent;
 
   /** The maps. */
-  private static ColorMap[] MAPS = { ColorMapService.getInstance().get("white_red"),
-      ColorMapService.getInstance().get("white_green"), ColorMapService.getInstance().get("white_blue"),
+  private static ColorMap[] MAPS = {
+      ColorMapService.getInstance().get("white_red"),
+      ColorMapService.getInstance().get("white_green"),
+      ColorMapService.getInstance().get("white_blue"),
       ColorMap.createWhiteToColorMap("white_orange", Color.ORANGE),
       ColorMap.createWhiteToColorMap("white_pink", Color.PINK),
       ColorMap.createWhiteToColorMap("white_gray", Color.GRAY),
@@ -86,15 +88,17 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Heat Map", UIService.getInstance().loadIcon("heatmap", 24),
-        "Heat Map", "Generate a heat map.");
+    RibbonLargeButton button = new RibbonLargeButton("Heat Map",
+        UIService.getInstance().loadIcon("heatmap", 24), "Heat Map",
+        "Generate a heat map.");
     button.addClickListener(this);
 
     mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
@@ -103,8 +107,7 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
   /**
    * Creates the.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void plot() throws IOException {
     Figure figure = Figure.createFigure();
@@ -153,8 +156,8 @@ public class HeatMapModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

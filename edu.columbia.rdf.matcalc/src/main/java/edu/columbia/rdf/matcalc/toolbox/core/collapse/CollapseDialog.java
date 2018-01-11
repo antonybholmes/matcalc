@@ -27,7 +27,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class CollapseDialog.
  */
-public class CollapseDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class CollapseDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -52,14 +53,12 @@ public class CollapseDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * Instantiates a new collapse dialog.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param groups the groups
    */
-  public CollapseDialog(ModernWindow parent, DataFrame matrix, XYSeriesGroup groups) {
+  public CollapseDialog(ModernWindow parent, DataFrame matrix,
+      XYSeriesGroup groups) {
     super(parent, "matcalc.modules.collapse.help.url");
 
     setTitle("Collapse Rows");

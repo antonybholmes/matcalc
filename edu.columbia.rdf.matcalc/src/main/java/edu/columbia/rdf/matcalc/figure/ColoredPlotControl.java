@@ -50,12 +50,9 @@ public class ColoredPlotControl extends HBox {
   /**
    * Instantiates a new colored plot control.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param color
-   *          the color
+   * @param parent the parent
+   * @param name the name
+   * @param color the color
    */
   public ColoredPlotControl(ModernWindow parent, String name, Color color) {
     this(parent, name, color, true);
@@ -64,16 +61,13 @@ public class ColoredPlotControl extends HBox {
   /**
    * Instantiates a new colored plot control.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param color
-   *          the color
-   * @param selected
-   *          the selected
+   * @param parent the parent
+   * @param name the name
+   * @param color the color
+   * @param selected the selected
    */
-  public ColoredPlotControl(ModernWindow parent, String name, Color color, boolean selected) {
+  public ColoredPlotControl(ModernWindow parent, String name, Color color,
+      boolean selected) {
     mCheckBox = new ModernCheckSwitch(name);
     mCheckBox.setSelected(selected);
 
@@ -89,8 +83,7 @@ public class ColoredPlotControl extends HBox {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mCheckBox.addClickListener(l);

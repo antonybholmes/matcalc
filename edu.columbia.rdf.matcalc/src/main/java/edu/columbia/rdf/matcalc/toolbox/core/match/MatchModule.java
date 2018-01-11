@@ -22,7 +22,6 @@ import java.util.Set;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -55,8 +54,8 @@ public class MatchModule extends CalcModule implements ModernClickListener {
   /**
    * The member match button.
    */
-  private RibbonLargeButton mMatchButton = new RibbonLargeButton("Match In Files",
-      UIService.getInstance().loadIcon("match", 24));
+  private RibbonLargeButton mMatchButton = new RibbonLargeButton(
+      "Match In Files", UIService.getInstance().loadIcon("match", 24));
 
   /**
    * The member window.
@@ -76,14 +75,17 @@ public class MatchModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mMatchButton.setToolTip(new ModernToolTip("Match", "Find matches between columns in two files."),
+    mMatchButton.setToolTip(
+        new ModernToolTip("Match",
+            "Find matches between columns in two files."),
         mWindow.getRibbon().getToolTipModel());
 
     window.getRibbon().getHomeToolbar().getSection("Search").add(mMatchButton);
@@ -96,8 +98,8 @@ public class MatchModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -113,7 +115,9 @@ public class MatchModule extends CalcModule implements ModernClickListener {
     List<Integer> columns = mWindow.getSelectedColumns();
 
     if (columns == null || columns.size() == 0) {
-      ModernMessageDialog.createDialog(mWindow, "You must select a column to match on.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mWindow,
+          "You must select a column to match on.",
+          MessageDialogType.WARNING);
       return;
     }
 
@@ -129,7 +133,8 @@ public class MatchModule extends CalcModule implements ModernClickListener {
       return;
     }
 
-    MainMatCalcWindow window = (MainMatCalcWindow) WindowService.getInstance().findByName(inputDialog.getWindowName());
+    MainMatCalcWindow window = (MainMatCalcWindow) WindowService.getInstance()
+        .findByName(inputDialog.getWindowName());
 
     DataFrame copyM = window.getCurrentMatrix();
 
@@ -137,7 +142,8 @@ public class MatchModule extends CalcModule implements ModernClickListener {
 
     List<String> values = copyM.columnAsText(inputDialog.getReplaceColumn());
 
-    Map<String, Set<String>> idMap = CollectionUtils.createMapSet(TextUtils.toLowerCase(ids), values);
+    Map<String, Set<String>> idMap = CollectionUtils
+        .createMapSet(TextUtils.toLowerCase(ids), values);
 
     DataFrame ret = DataFrame.createDataFrame(m.getRows(), m.getCols() + 2);
 
@@ -151,14 +157,17 @@ public class MatchModule extends CalcModule implements ModernClickListener {
     // copyM.getColumnName(inputDialog.getReplaceColumn()));
     ret.setColumnName(c + 1, "Number Of Matches");
     ret.setColumnName(c + 2,
-        "Matches From " + window.getSubTitle() + " - " + copyM.getColumnName(inputDialog.getReplaceColumn()));
+        "Matches From " + window.getSubTitle() + " - "
+            + copyM.getColumnName(inputDialog.getReplaceColumn()));
 
     for (int i = 0; i < m.getRows(); ++i) {
       String id = m.getText(i, c).toLowerCase();
 
       if (idMap.containsKey(id)) {
         ret.set(i, c + 1, idMap.get(id).size());
-        ret.set(i, c + 2, TextUtils.scJoin(CollectionUtils.sort(idMap.get(id))));
+        ret.set(i,
+            c + 2,
+            TextUtils.scJoin(CollectionUtils.sort(idMap.get(id))));
       } else {
         ret.set(i, c + 1, 0);
         ret.set(i, c + 2, NO_MATCH);

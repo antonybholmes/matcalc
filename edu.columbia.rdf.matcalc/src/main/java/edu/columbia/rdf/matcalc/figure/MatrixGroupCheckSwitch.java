@@ -32,8 +32,7 @@ public class MatrixGroupCheckSwitch extends ModernCheckSwitch {
   /**
    * Instantiates a new matrix group check box.
    *
-   * @param group
-   *          the group
+   * @param group the group
    */
   public MatrixGroupCheckSwitch(XYSeries group) {
     this(group, false);
@@ -42,10 +41,8 @@ public class MatrixGroupCheckSwitch extends ModernCheckSwitch {
   /**
    * Instantiates a new matrix group check switch.
    *
-   * @param group
-   *          the group
-   * @param selected
-   *          the selected
+   * @param group the group
+   * @param selected the selected
    */
   public MatrixGroupCheckSwitch(XYSeries group, boolean selected) {
     super(group.getName(), selected, group.getColor(), group.getColor());

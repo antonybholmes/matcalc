@@ -50,7 +50,8 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -59,16 +60,18 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
 
     ModernPopupMenu popup = new ModernPopupMenu();
 
-    popup.addMenuItem(
-        new ModernTwoLineMenuItem("Matrix", "Z-score matrix.", UIService.getInstance().loadIcon("z_score", 32)));
-    popup
-        .addMenuItem(new ModernTwoLineMenuItem("Row", "Row z-score.", UIService.getInstance().loadIcon("z_score", 32)));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Matrix", "Z-score matrix.",
+        UIService.getInstance().loadIcon("z_score", 32)));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Row", "Row z-score.",
+        UIService.getInstance().loadIcon("z_score", 32)));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Z-score", popup);
+    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Z-score",
+        popup);
     button.setChangeText(false);
     button.setToolTip("Z-score", "Z-score functions.");
-    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions")
+        .add(button);
     button.addClickListener(this);
 
   }
@@ -77,19 +80,23 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getMessage().equals("Matrix")) {
-      mWindow.addToHistory("z-score", "z-score", MatrixOperations.zscore(mWindow.getCurrentMatrix())); // new
-                                                                                                       // ZScoreMatrixTransform(this,
-                                                                                                       // getCurrentMatrix()));
+      mWindow.addToHistory("z-score",
+          "z-score",
+          MatrixOperations.zscore(mWindow.getCurrentMatrix())); // new
+                                                                // ZScoreMatrixTransform(this,
+                                                                // getCurrentMatrix()));
     } else if (e.getMessage().equals("Row z-score")) {
-      mWindow.addToHistory("Row z-score", "Row z-score", MatrixOperations.rowZscore(mWindow.getCurrentMatrix())); // addFlowItem(new
-                                                                                                                  // ZScoreRowsMatrixTransform(this,
-                                                                                                                  // getCurrentMatrix()));
+      mWindow.addToHistory("Row z-score",
+          "Row z-score",
+          MatrixOperations.rowZscore(mWindow.getCurrentMatrix())); // addFlowItem(new
+                                                                   // ZScoreRowsMatrixTransform(this,
+                                                                   // getCurrentMatrix()));
     } else {
       // do nothing
     }

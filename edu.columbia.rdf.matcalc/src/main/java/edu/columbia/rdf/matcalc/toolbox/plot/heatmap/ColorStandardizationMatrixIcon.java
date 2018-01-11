@@ -36,9 +36,11 @@ public class ColorStandardizationMatrixIcon extends TableVectorIcon {
    * Instantiates a new color standardization matrix icon.
    */
   public ColorStandardizationMatrixIcon() {
-    super(SettingsService.getInstance().getAsColor("theme.icons.filter-rows-icon.colors.highlight-1"));
+    super(SettingsService.getInstance()
+        .getAsColor("theme.icons.filter-rows-icon.colors.highlight-1"));
 
-    mColor2 = SettingsService.getInstance().getAsColor("theme.icons.filter-rows-icon.colors.highlight-2");
+    mColor2 = SettingsService.getInstance()
+        .getAsColor("theme.icons.filter-rows-icon.colors.highlight-2");
   }
 
   /*
@@ -48,7 +50,12 @@ public class ColorStandardizationMatrixIcon extends TableVectorIcon {
    * Graphics2D, java.awt.Rectangle)
    */
   @Override
-  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+  public void drawIcon(Graphics2D g2,
+      int x,
+      int y,
+      int w,
+      int h,
+      Object... params) {
     super.drawIcon(g2, x, y, w, h, params);
 
     double wf = w * WIDTH_SCALE;
@@ -59,6 +66,9 @@ public class ColorStandardizationMatrixIcon extends TableVectorIcon {
     double yf = y + b + (h - hf) / 2.0;
 
     g2.setColor(mColor2);
-    g2.fillRect((int) Math.round(xf) + 1, (int) Math.round(yf), (int) Math.round(wf) - 1, (int) Math.round(hf - b));
+    g2.fillRect((int) Math.round(xf) + 1,
+        (int) Math.round(yf),
+        (int) Math.round(wf) - 1,
+        (int) Math.round(hf - b));
   }
 }

@@ -71,23 +71,17 @@ public abstract class HeatMapWindow extends FigureWindow {
   /**
    * Instantiates a new heat map window.
    *
-   * @param window
-   *          the window
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the all groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param matrix the matrix
+   * @param groups the all groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public HeatMapWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
-      CountGroups countGroups, List<String> history, Properties properties) {
+  public HeatMapWindow(ModernWindow window, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Properties properties) {
     super(window, null);
 
     setMatrix(matrix);
@@ -103,8 +97,7 @@ public abstract class HeatMapWindow extends FigureWindow {
   /**
    * Sets the matrix.
    *
-   * @param matrix
-   *          the new matrix
+   * @param matrix the new matrix
    */
   public void setMatrix(DataFrame matrix) {
     mMatrix = matrix;
@@ -113,14 +106,17 @@ public abstract class HeatMapWindow extends FigureWindow {
   /**
    * Sets the format pane.
    *
-   * @param formatPane
-   *          the new format pane
+   * @param formatPane the new format pane
    */
   public void setFormatPane(FormatPlotPane formatPane) {
     mFormatPane = formatPane;
 
     getTabsPane().getModel().getRightTabs().clear();
-    getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
+    getTabsPane().addRightTab("Format",
+        new CloseableHTab("Format", mFormatPane, getTabsPane()),
+        300,
+        200,
+        500);
 
     mFormatPane.update();
   }
@@ -138,8 +134,7 @@ public abstract class HeatMapWindow extends FigureWindow {
   /**
    * Sets the color map.
    *
-   * @param colormap
-   *          the new color map
+   * @param colormap the new color map
    */
   public void setColorMap(ColorMap colormap) {
     if (colormap != null) {

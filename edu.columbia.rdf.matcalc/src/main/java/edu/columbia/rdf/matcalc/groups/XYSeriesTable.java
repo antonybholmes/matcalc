@@ -34,8 +34,7 @@ public class XYSeriesTable extends ModernRowTable {
   /**
    * Instantiates a new XY series table.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public XYSeriesTable(ModernWindow parent) {
     getRendererModel().setCol(0, new ModernTableCheckboxCellRenderer());

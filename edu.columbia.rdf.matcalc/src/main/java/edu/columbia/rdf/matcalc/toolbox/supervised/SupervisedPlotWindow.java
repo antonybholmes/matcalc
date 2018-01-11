@@ -43,27 +43,20 @@ public class SupervisedPlotWindow extends DifferentialExpressionPlotWindow {
   /**
    * Instantiates a new t test plot window.
    *
-   * @param window
-   *          the window
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
-   * @param comparisonGroups
-   *          the comparison groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param matrix the matrix
+   * @param groups the groups
+   * @param comparisonGroups the comparison groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public SupervisedPlotWindow(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups,
-      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups, List<String> history,
+  public SupervisedPlotWindow(ModernRibbonWindow window, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesGroup comparisonGroups,
+      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history,
       Properties properties) {
-    super(window, "Supervised Classification", matrix, groups, comparisonGroups, rowGroups, countGroups, history,
-        properties);
+    super(window, "Supervised Classification", matrix, groups, comparisonGroups,
+        rowGroups, countGroups, history, properties);
   }
 }

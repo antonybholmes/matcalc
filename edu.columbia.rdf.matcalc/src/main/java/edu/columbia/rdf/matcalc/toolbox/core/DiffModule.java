@@ -23,7 +23,6 @@ import org.jebtk.bioinformatics.Affymetrix;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -54,7 +53,8 @@ public class DiffModule extends CalcModule implements ModernClickListener {
   /**
    * The member diff button.
    */
-  private RibbonLargeButton mDiffButton = new RibbonLargeButton("Diff", UIService.getInstance().loadIcon("diff", 24));
+  private RibbonLargeButton mDiffButton = new RibbonLargeButton("Diff",
+      UIService.getInstance().loadIcon("diff", 24));
 
   /**
    * The member window.
@@ -74,14 +74,16 @@ public class DiffModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mDiffButton.setToolTip(new ModernToolTip("Diff", "Find differences in a column."),
+    mDiffButton.setToolTip(
+        new ModernToolTip("Diff", "Find differences in a column."),
         mWindow.getRibbon().getToolTipModel());
     mDiffButton.setClickMessage("Diff");
 
@@ -95,8 +97,8 @@ public class DiffModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -112,12 +114,14 @@ public class DiffModule extends CalcModule implements ModernClickListener {
     List<Integer> columns = mWindow.getSelectedColumns();
 
     if (columns == null || columns.size() == 0) {
-      mWindow.createDialog("You must select a column of ids to match on.", MessageDialogType.WARNING);
+      mWindow.createDialog("You must select a column of ids to match on.",
+          MessageDialogType.WARNING);
 
       return;
     }
 
-    ModernTextInputDialog inputDialog = new ModernTextInputDialog(mWindow, "Diff");
+    ModernTextInputDialog inputDialog = new ModernTextInputDialog(mWindow,
+        "Diff");
 
     inputDialog.setVisible(true);
 
@@ -162,18 +166,20 @@ public class DiffModule extends CalcModule implements ModernClickListener {
   /**
    * Gets the ids.
    *
-   * @param text
-   *          the text
+   * @param text the text
    * @return the ids
    */
   private static List<String> getIds(String text) {
-    List<String> lines = TextUtils.fastSplit(text.trim(), TextUtils.NEW_LINE_DELIMITER);
+    List<String> lines = TextUtils.fastSplit(text.trim(),
+        TextUtils.NEW_LINE_DELIMITER);
 
     List<String> ret = new ArrayList<String>();
 
     for (String line : lines) {
-      line = line.replaceAll(TextUtils.COMMA_DELIMITER, TextUtils.SEMI_COLON_DELIMITER);
-      line = line.replaceAll(Affymetrix.GENE_DELIMITER, TextUtils.SEMI_COLON_DELIMITER);
+      line = line.replaceAll(TextUtils.COMMA_DELIMITER,
+          TextUtils.SEMI_COLON_DELIMITER);
+      line = line.replaceAll(Affymetrix.GENE_DELIMITER,
+          TextUtils.SEMI_COLON_DELIMITER);
 
       if (line.length() > 0) {
         for (String id : TextUtils.scSplit(line)) {

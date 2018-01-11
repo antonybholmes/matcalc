@@ -39,8 +39,7 @@ public class ColorIcon extends ModernVectorIcon {
   /**
    * Instantiates a new color icon.
    *
-   * @param color
-   *          the color
+   * @param color the color
    */
   public ColorIcon(Color color) {
     this.color = color;
@@ -54,7 +53,12 @@ public class ColorIcon extends ModernVectorIcon {
    * java.awt.Rectangle)
    */
   @Override
-  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+  public void drawIcon(Graphics2D g2,
+      int x,
+      int y,
+      int w,
+      int h,
+      Object... params) {
     y = (h - h / 4) / 2;
     h = h / 4;
 

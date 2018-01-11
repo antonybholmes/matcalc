@@ -39,17 +39,20 @@ public class StandardizationChooser extends ModernWidget {
   /**
    * The member matrix standardize check.
    */
-  private ModernTwoStateWidget mMatrixStandardizeCheck = new ModernRadioButton("Matrix");
+  private ModernTwoStateWidget mMatrixStandardizeCheck = new ModernRadioButton(
+      "Matrix");
 
   /**
    * The member row standardize check.
    */
-  private ModernTwoStateWidget mRowStandardizeCheck = new ModernRadioButton("Row");
+  private ModernTwoStateWidget mRowStandardizeCheck = new ModernRadioButton(
+      "Row");
 
   /**
    * The member column standardize check.
    */
-  private ModernTwoStateWidget mColumnStandardizeCheck = new ModernRadioButton("Column");
+  private ModernTwoStateWidget mColumnStandardizeCheck = new ModernRadioButton(
+      "Column");
 
   /**
    * The member none check.
@@ -98,8 +101,7 @@ public class StandardizationChooser extends ModernWidget {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mMatrixStandardizeCheck.addClickListener(l);

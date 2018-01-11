@@ -65,11 +65,14 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
     /**
      * The member check plot.
      */
-    private CheckBox mCheckPlot = new ModernCheckSwitch(PlotConstants.MENU_CREATE_PLOT, true);
+    private CheckBox mCheckPlot = new ModernCheckSwitch(
+        PlotConstants.MENU_CREATE_PLOT, true);
 
-    private ModernRadioButton mHeatMapRadio = new ModernRadioButton("Heat map", true);
+    private ModernRadioButton mHeatMapRadio = new ModernRadioButton("Heat map",
+        true);
 
-    private ModernRadioButton mVolcanoRadio = new ModernRadioButton("Volcano plot");
+    private ModernRadioButton mVolcanoRadio = new ModernRadioButton(
+        "Volcano plot");
 
     public PlotTypePanel() {
       add(mCheckPlot);
@@ -99,16 +102,20 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
   /**
    * The member check is log2.
    */
-  private ModernTwoStateWidget mCheckIsLog2 = new ModernCheckSwitch(PlotConstants.MENU_IS_LOG_TRANSFORMED);
+  private ModernTwoStateWidget mCheckIsLog2 = new ModernCheckSwitch(
+      PlotConstants.MENU_IS_LOG_TRANSFORMED);
 
   /**
    * The member check log2.
    */
-  private ModernTwoStateWidget mCheckLog2 = new ModernCheckSwitch(PlotConstants.MENU_LOG_TRANSFORM);
+  private ModernTwoStateWidget mCheckLog2 = new ModernCheckSwitch(
+      PlotConstants.MENU_LOG_TRANSFORM);
 
-  private ModernRadioButton mCheckOneOne = new ModernRadioButton("One vs One", true);
+  private ModernRadioButton mCheckOneOne = new ModernRadioButton("One vs One",
+      true);
 
-  private ModernRadioButton mCheckOneRest = new ModernRadioButton("One vs Rest");
+  private ModernRadioButton mCheckOneRest = new ModernRadioButton(
+      "One vs Rest");
 
   private ModernRadioButton mCheckPairwise = new ModernRadioButton("Pairwise");
 
@@ -120,7 +127,8 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
   /**
    * The check reset.
    */
-  private CheckBox mCheckReset = new ModernCheckSwitch(PlotConstants.MENU_RESET_HISTORY);
+  private CheckBox mCheckReset = new ModernCheckSwitch(
+      PlotConstants.MENU_RESET_HISTORY);
 
   private CheckBox mCheckHistory = new ModernCheckSwitch("Keep history", true);
 
@@ -156,7 +164,8 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
   // new ModernCompactSpinner(1, 10000, 1);
 
   /** The m up down P field. */
-  private ModernCompactSpinner mUpDownPField = new ModernCompactSpinner(0, 1, 0.05, 0.01);
+  private ModernCompactSpinner mUpDownPField = new ModernCompactSpinner(0, 1,
+      0.05, 0.01);
 
   private TestCombo mTestCombo = new TestCombo();
 
@@ -165,15 +174,14 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
   /**
    * Instantiates a new t test dialog.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param groups the groups
    */
-  public SupervisedDialog(ModernWindow parent, DataFrame matrix, XYSeriesGroup groups) {
-    super(parent, "Supervised Classification", "matcalc.ttest.help.url", ModernDialogTaskType.OK_CANCEL);
+  public SupervisedDialog(ModernWindow parent, DataFrame matrix,
+      XYSeriesGroup groups) {
+    super(parent, "Supervised Classification", "matcalc.ttest.help.url",
+        ModernDialogTaskType.OK_CANCEL);
 
     mGroups = groups;
     mMatrix = matrix;
@@ -289,7 +297,8 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
       List<Integer> i1 = MatrixGroup.findColumnIndices(mMatrix, g1);
 
       if (i1.size() < 3) {
-        ModernMessageDialog.createWarningDialog(mParent, "There must be at least 3 samples in " + g1.getName());
+        ModernMessageDialog.createWarningDialog(mParent,
+            "There must be at least 3 samples in " + g1.getName());
 
         return;
       }
@@ -299,7 +308,8 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
       List<Integer> i2 = MatrixGroup.findColumnIndices(mMatrix, g2);
 
       if (i2.size() < 3) {
-        ModernMessageDialog.createWarningDialog(mParent, "There must be at least 3 samples in " + g2.getName());
+        ModernMessageDialog.createWarningDialog(mParent,
+            "There must be at least 3 samples in " + g2.getName());
 
         return;
       }
@@ -394,8 +404,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
    * Gets the min exp.
    *
    * @return the min exp
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   // public double getMinExp() {
   // return mExpressionField.getValue();

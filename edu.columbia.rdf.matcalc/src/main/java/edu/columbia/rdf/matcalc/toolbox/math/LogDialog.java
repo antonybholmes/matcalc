@@ -44,7 +44,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class LogDialog.
  */
-public class LogDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class LogDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -88,17 +89,14 @@ public class LogDialog extends ModernDialogHelpWindow implements ModernClickList
   /**
    * Instantiates a new log dialog.
    *
-   * @param parent
-   *          the parent
-   * @param min
-   *          the min
-   * @param base
-   *          the base
-   * @param natural
-   *          the natural
+   * @param parent the parent
+   * @param min the min
+   * @param base the base
+   * @param natural the natural
    */
   public LogDialog(ModernWindow parent, double min, int base, boolean natural) {
-    super(parent, "matcalc.modules.math.log.url", ModernDialogTaskType.OK_CANCEL);
+    super(parent, "matcalc.modules.math.log.url",
+        ModernDialogTaskType.OK_CANCEL);
 
     setTitle("Logarithm Options");
 
@@ -110,12 +108,9 @@ public class LogDialog extends ModernDialogHelpWindow implements ModernClickList
   /**
    * Sets the up.
    *
-   * @param min
-   *          the new up
-   * @param base
-   *          the base
-   * @param natural
-   *          the natural
+   * @param min the new up
+   * @param base the base
+   * @param natural the natural
    */
   private void setup(double min, int base, boolean natural) {
 

@@ -23,7 +23,6 @@ import java.util.Map;
 import org.jebtk.core.collections.UniqueArrayList;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -70,17 +69,20 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mCollapseButton.setToolTip(new ModernToolTip("Unique", "Collapse rows on a column."),
+    mCollapseButton.setToolTip(
+        new ModernToolTip("Unique", "Collapse rows on a column."),
         mWindow.getRibbon().getToolTipModel());
 
-    window.getRibbon().getToolbar("Transform").getSection("Duplicate").add(mCollapseButton);
+    window.getRibbon().getToolbar("Transform").getSection("Duplicate")
+        .add(mCollapseButton);
 
     mCollapseButton.addClickListener(this);
   }
@@ -89,8 +91,8 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -106,7 +108,9 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
     List<Integer> columns = mWindow.getSelectedColumns();
 
     if (columns == null || columns.size() == 0) {
-      ModernMessageDialog.createDialog(mWindow, "You must select a column of to match on.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mWindow,
+          "You must select a column of to match on.",
+          MessageDialogType.WARNING);
     }
 
     DataFrame m = mWindow.getCurrentMatrix();
@@ -156,7 +160,8 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
       List<Integer> indices = rows.get(ids.get(row));
 
       for (int column = 0; column < m.getCols(); ++column) {
-        // StringBuilder buffer = new StringBuilder(m.getText(indices.get(0), column));
+        // StringBuilder buffer = new StringBuilder(m.getText(indices.get(0),
+        // column));
 
         List<String> items = new UniqueArrayList<String>(indices.size());
 
@@ -182,7 +187,8 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
       ret.set(row, c, ids.get(row));
     }
 
-    // System.err.println("size " + ret.getColumnCount() + " " + ret.getRowCount());
+    // System.err.println("size " + ret.getColumnCount() + " " +
+    // ret.getRowCount());
 
     // mWindow.addToHistory("Duplicate rows", m);
     mWindow.addToHistory("Duplicate rows", ret);

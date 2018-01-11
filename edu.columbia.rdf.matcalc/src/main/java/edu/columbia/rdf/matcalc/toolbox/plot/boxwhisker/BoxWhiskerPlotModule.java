@@ -38,7 +38,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 /**
  * The class BoxWhiskerPlotModule.
  */
-public class BoxWhiskerPlotModule extends CalcModule implements ModernClickListener {
+public class BoxWhiskerPlotModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -58,15 +59,17 @@ public class BoxWhiskerPlotModule extends CalcModule implements ModernClickListe
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Box Whisker", new Raster32Icon(new BoxWhisker32VectorIcon()),
-        "Box Whisker Plot", "Generate a box whisker plot");
+    RibbonLargeButton button = new RibbonLargeButton("Box Whisker",
+        new Raster32Icon(new BoxWhisker32VectorIcon()), "Box Whisker Plot",
+        "Generate a box whisker plot");
     button.setShowText(false);
     button.addClickListener(this);
     // button.setEnabled(false);
@@ -78,8 +81,8 @@ public class BoxWhiskerPlotModule extends CalcModule implements ModernClickListe
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -98,10 +101,8 @@ public class BoxWhiskerPlotModule extends CalcModule implements ModernClickListe
   /**
    * Box whisker plot.
    *
-   * @param m
-   *          the m
-   * @param plot
-   *          the plot
+   * @param m the m
+   * @param plot the plot
    */
   private void boxWhiskerPlot(DataFrame m, boolean plot) {
     // Graph2dWindow window = mParent.createNewPlotWindow();

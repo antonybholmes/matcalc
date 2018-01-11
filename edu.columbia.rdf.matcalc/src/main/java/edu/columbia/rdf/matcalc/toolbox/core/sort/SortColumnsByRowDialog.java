@@ -31,7 +31,8 @@ import org.jebtk.modern.window.ModernWindow;
  *
  * @author Antony Holmes Holmes
  */
-public class SortColumnsByRowDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class SortColumnsByRowDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -49,8 +50,7 @@ public class SortColumnsByRowDialog extends ModernDialogHelpWindow implements Mo
   /**
    * Instantiates a new sort column groups by row dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public SortColumnsByRowDialog(ModernWindow parent) {
     super(parent, "matcalc.modules.sort-col-by-row.help.url");

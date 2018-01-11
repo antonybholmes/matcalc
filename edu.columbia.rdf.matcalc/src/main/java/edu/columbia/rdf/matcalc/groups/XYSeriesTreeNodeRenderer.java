@@ -91,8 +91,8 @@ public class XYSeriesTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeIcon(java.awt.
-   * Graphics2D)
+   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeIcon(java.
+   * awt. Graphics2D)
    */
   @Override
   public void drawNodeIcon(Graphics2D g2) {
@@ -111,7 +111,9 @@ public class XYSeriesTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
         int p = getTextYPosCenter(g2, HEIGHT) + HEIGHT;
 
         for (TreeNode<?> child : mNode) {
-          g2.drawString(getTruncatedText(g2, child.getName(), x, mRect.getW()), x, p);
+          g2.drawString(getTruncatedText(g2, child.getName(), x, mRect.getW()),
+              x,
+              p);
 
           p += HEIGHT;
         }
@@ -123,8 +125,8 @@ public class XYSeriesTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.awt.
-   * Graphics2D)
+   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.
+   * awt. Graphics2D)
    */
   @Override
   public void drawNodeText(Graphics2D g2) {
@@ -137,29 +139,44 @@ public class XYSeriesTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
     if (mNode.isParent() && mGroup != null) {
       // buffer.append(" ").append(group.getSearch());
 
-      buffer.append(" (").append(Integer.toString(mNode.getChildCount())).append(")");// group.getSearch());
+      buffer.append(" (").append(Integer.toString(mNode.getChildCount()))
+          .append(")");// group.getSearch());
 
       g2.setFont(BOLD_FONT);
     } else {
       g2.setFont(FONT);
     }
 
-    g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()), 0, p);
+    g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()),
+        0,
+        p);
   }
 
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.
-   * ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean, boolean,
-   * boolean, int, int)
+   * @see org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.
+   * common. ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean,
+   * boolean, boolean, int, int)
    */
   @Override
-  public ModernTreeNodeRenderer getRenderer(Tree<?> tree, TreeNode<?> node, boolean nodeIsHighlighted,
-      boolean nodeIsSelected, boolean hasFocus, boolean isDragToNode, int depth, int row) {
+  public ModernTreeNodeRenderer getRenderer(Tree<?> tree,
+      TreeNode<?> node,
+      boolean nodeIsHighlighted,
+      boolean nodeIsSelected,
+      boolean hasFocus,
+      boolean isDragToNode,
+      int depth,
+      int row) {
 
-    super.getRenderer(tree, node, nodeIsHighlighted, nodeIsSelected, hasFocus, isDragToNode, depth, row);
+    super.getRenderer(tree,
+        node,
+        nodeIsHighlighted,
+        nodeIsSelected,
+        hasFocus,
+        isDragToNode,
+        depth,
+        row);
 
     mGroup = (XYSeries) node.getValue();
 
@@ -170,13 +187,14 @@ public class XYSeriesTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.tree.ModernTreeNodeRenderer#setSize(org.abh.common.ui.tree.
-   * Tree, org.abh.common.tree.TreeNode, int, int)
+   * org.abh.common.ui.tree.ModernTreeNodeRenderer#setSize(org.abh.common.ui.
+   * tree. Tree, org.abh.common.tree.TreeNode, int, int)
    */
   @Override
   protected void setSize(Tree<?> tree, TreeNode<?> node, int depth, int row) {
     // If the node is expanded, the size will be itself plus the number
     // of children, since we use the renderer to display hidden children
-    setSize(tree.getInternalRect().getW(), HEIGHT * ((node.isExpanded() ? node.getChildCount() : 0) + 1));
+    setSize(tree.getInternalRect().getW(),
+        HEIGHT * ((node.isExpanded() ? node.getChildCount() : 0) + 1));
   }
 }

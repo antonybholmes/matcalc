@@ -35,8 +35,7 @@ public class FilterStackElement {
   /**
    * Instantiates a new filter stack element.
    *
-   * @param result
-   *          the result
+   * @param result the result
    */
   public FilterStackElement(boolean result) {
     this.op = SearchStackOperator.RESULT;
@@ -46,8 +45,7 @@ public class FilterStackElement {
   /**
    * Instantiates a new filter stack element.
    *
-   * @param filter
-   *          the filter
+   * @param filter the filter
    */
   public FilterStackElement(ColumnFilter filter) {
     this.filter = filter;
@@ -57,8 +55,7 @@ public class FilterStackElement {
   /**
    * Instantiates a new filter stack element.
    *
-   * @param op
-   *          the op
+   * @param op the op
    */
   public FilterStackElement(SearchStackOperator op) {
     this.op = op;

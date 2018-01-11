@@ -47,8 +47,7 @@ public class RotationButton extends ModernDialogFlatDropDownButton {
   /**
    * Instantiates a new rotation button.
    *
-   * @param style
-   *          the style
+   * @param style the style
    */
   public RotationButton(double style) {
     super("0", new RotationMenu());
@@ -63,8 +62,7 @@ public class RotationButton extends ModernDialogFlatDropDownButton {
   /**
    * Sets the style.
    *
-   * @param angle
-   *          the new style
+   * @param angle the new style
    */
   public void setStyle(double angle) {
     if (angle == Mathematics.HALF_PI) {

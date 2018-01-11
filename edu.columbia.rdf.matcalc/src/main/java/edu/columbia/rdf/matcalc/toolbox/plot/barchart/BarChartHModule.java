@@ -62,7 +62,8 @@ public class BarChartHModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -70,8 +71,8 @@ public class BarChartHModule extends CalcModule implements ModernClickListener {
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Bar", "Chart",
-        UIService.getInstance().loadIcon("bar_chart_h", 24), "Horizontal Bar Chart",
-        "Generate a horizontal bar chart.");
+        UIService.getInstance().loadIcon("bar_chart_h", 24),
+        "Horizontal Bar Chart", "Generate a horizontal bar chart.");
     button.addClickListener(this);
     // button.setEnabled(false);
 
@@ -102,7 +103,8 @@ public class BarChartHModule extends CalcModule implements ModernClickListener {
       // See if the column matches a group, and if so use the group's
       // color rather than a random color
       for (MatrixGroup group : groups) {
-        Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findColumnIndices(m, group));
+        Set<Integer> indices = CollectionUtils
+            .unique(MatrixGroup.findColumnIndices(m, group));
 
         if (indices.contains(i)) {
           color = group.getColor();
@@ -117,7 +119,8 @@ public class BarChartHModule extends CalcModule implements ModernClickListener {
 
       XYSeries series = new XYSeries(m.getColumnName(i), color);
 
-      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getFillStyle()
+          .setColor(ColorUtils.getTransparentColor50(color));
       series.getStyle().getLineStyle().setColor(color);
 
       seriesGroup.add(series);
@@ -134,8 +137,8 @@ public class BarChartHModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

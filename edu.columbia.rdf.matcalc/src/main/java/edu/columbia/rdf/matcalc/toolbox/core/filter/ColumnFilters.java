@@ -40,8 +40,7 @@ public class ColumnFilters extends VBoxAutoWidth {
   /**
    * Instantiates a new column sorters.
    *
-   * @param m
-   *          the m
+   * @param m the m
    */
   public ColumnFilters(DataFrame m) {
     mM = m;
@@ -52,8 +51,7 @@ public class ColumnFilters extends VBoxAutoWidth {
   /**
    * Adds the.
    *
-   * @param column
-   *          the column
+   * @param column the column
    */
   public void add(int column) {
     ColumnFilter columnFilter;

@@ -53,39 +53,29 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
   /**
    * Instantiates a new pattern discovery panel.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
-   * @param comparisonGroups
-   *          the comparison groups
-   * @param rowGroups
-   *          the row groups
-   * @param zoomModel
-   *          the zoom model
-   * @param colorMapModel
-   *          the color map model
-   * @param colorStandardizationModel
-   *          the color standardization model
-   * @param intensityModel
-   *          the intensity model
-   * @param contentModel
-   *          the content model
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param groups the groups
+   * @param comparisonGroups the comparison groups
+   * @param rowGroups the row groups
+   * @param zoomModel the zoom model
+   * @param colorMapModel the color map model
+   * @param colorStandardizationModel the color standardization model
+   * @param intensityModel the intensity model
+   * @param contentModel the content model
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public DifferentialExpressionPanel(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groups,
-      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, ZoomModel zoomModel, ColorMapModel colorMapModel,
-      ColorNormalizationModel colorStandardizationModel, ScaleModel intensityModel, TabsModel contentModel,
+  public DifferentialExpressionPanel(ModernRibbonWindow parent,
+      DataFrame matrix, XYSeriesModel groups, XYSeriesGroup comparisonGroups,
+      XYSeriesModel rowGroups, ZoomModel zoomModel, ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel,
+      ScaleModel intensityModel, TabsModel contentModel,
       CountGroups countGroups, List<String> history, Properties properties) {
-    super(parent, matrix, groups, rowGroups, countGroups, history, zoomModel, colorMapModel, colorStandardizationModel,
-        intensityModel, contentModel, properties);
+    super(parent, matrix, groups, rowGroups, countGroups, history, zoomModel,
+        colorMapModel, colorStandardizationModel, intensityModel, contentModel,
+        properties);
 
     mComparisonGroups = comparisonGroups;
   }
@@ -99,14 +89,17 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
    * org.graphplot.figure.series.XYSeriesGroup, double, double)
    */
   @Override
-  public DataFrame createMatrix(DataFrame m, XYSeriesGroup groupsOfInterest, XYSeriesGroup rowGroupsOfInterest,
+  public DataFrame createMatrix(DataFrame m,
+      XYSeriesGroup groupsOfInterest,
+      XYSeriesGroup rowGroupsOfInterest,
       MinMax norm) {
     // First zscore
     DataFrame ret = groupZScoreMatrix(m, mComparisonGroups, groupsOfInterest);
 
     ret = DataFrame.copyColumns(ret, groupsOfInterest);
 
-    // System.err.println("copy " + ret.getColumnNames() + " " + ret.getRowCount());
+    // System.err.println("copy " + ret.getColumnNames() + " " +
+    // ret.getRowCount());
 
     // zscore the matrix
     // DataFrame zMatrix =
@@ -116,13 +109,15 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
     // mComparisonGroups,
     // groupsOfInterest);
 
-    if (mColorStandardizationModel.get().getType() != ColorNormalizationType.NONE) {
+    if (mColorStandardizationModel.get()
+        .getType() != ColorNormalizationType.NONE) {
       // min /= scale;
       // max /= scale;
 
       ret = MatrixOperations.normalize(ret, norm);
 
-      // System.err.println("ret " + ret.getColumnNames() + " " + ret.getRowCount());
+      // System.err.println("ret " + ret.getColumnNames() + " " +
+      // ret.getRowCount());
     }
 
     return ret;
@@ -130,8 +125,8 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 
   /*
    * @Override public ModernPlotCanvas createCanvas(DataFrame m, XYSeriesGroup
-   * groupsOfInterest, XYSeriesGroup rowGroupsOfInterest, double min, double max,
-   * ColorMap colorMap, RowLabelProperties rowLabelProperties,
+   * groupsOfInterest, XYSeriesGroup rowGroupsOfInterest, double min, double
+   * max, ColorMap colorMap, RowLabelProperties rowLabelProperties,
    * ColumnLabelProperties columnLabelProperties) { return new
    * DifferentialExpressionCanvas(m, groupsOfInterest, null, colorMap, min, max,
    * rowLabelProperties, columnLabelProperties, mGroupsElement.getProperties(),
@@ -141,17 +136,14 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
   /**
    * Group Z score matrix.
    *
-   * @param <X>
-   *          the generic type
-   * @param m
-   *          the m
-   * @param comparisonGroups
-   *          the comparison groups
-   * @param groups
-   *          the groups
+   * @param <X> the generic type
+   * @param m the m
+   * @param comparisonGroups the comparison groups
+   * @param groups the groups
    * @return the annotation matrix
    */
-  public static <X extends MatrixGroup> DataFrame groupZScoreMatrix(DataFrame m, XYSeriesGroup comparisonGroups,
+  public static <X extends MatrixGroup> DataFrame groupZScoreMatrix(DataFrame m,
+      XYSeriesGroup comparisonGroups,
       List<X> groups) {
 
     DataFrame ret = DataFrame.createNumericalMatrix(m);
@@ -160,7 +152,8 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
     // DataFrame.copyRowAnnotations(m, ret);
 
     // We normalize the comparison groups separately to the the others
-    List<List<Integer>> comparisonIndices = MatrixGroup.findColumnIndices(m, comparisonGroups);
+    List<List<Integer>> comparisonIndices = MatrixGroup.findColumnIndices(m,
+        comparisonGroups);
 
     /// for (XYSeries g : comparisonGroups) {
     // System.err.println("used " + g.getName());
@@ -227,12 +220,13 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
     // Normalize the comparisons
 
     /*
-     * for (int i = 0; i < m.getRowCount(); ++i) { double mean = 0; double sd = 0;
+     * for (int i = 0; i < m.getRowCount(); ++i) { double mean = 0; double sd =
+     * 0;
      * 
      * int groupCount = 0;
      * 
-     * for (List<Integer> indices : comparisonIndices) { if (indices.size() == 0) {
-     * continue; }
+     * for (List<Integer> indices : comparisonIndices) { if (indices.size() ==
+     * 0) { continue; }
      * 
      * List<Double> d1 = new ArrayList<Double>(indices.size());
      * 
@@ -245,11 +239,11 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
      * 
      * mean /= groupCount; sd /= groupCount;
      * 
-     * // Normalize the values for (List<Integer> indices : comparisonIndices) { if
-     * (indices.size() == 0) { continue; }
+     * // Normalize the values for (List<Integer> indices : comparisonIndices) {
+     * if (indices.size() == 0) { continue; }
      * 
-     * for (int c : indices) { ret.setValue(i, c, (m.getValue(i, c) - mean) / sd); }
-     * } }
+     * for (int c : indices) { ret.setValue(i, c, (m.getValue(i, c) - mean) /
+     * sd); } } }
      */
 
     return ret;

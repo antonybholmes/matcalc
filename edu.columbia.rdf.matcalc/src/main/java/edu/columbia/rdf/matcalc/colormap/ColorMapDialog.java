@@ -48,7 +48,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class ColorDialog.
  */
-public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class ColorMapDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -67,13 +68,15 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * The member html color panel.
    */
-  private ModernCompactSpinner mTextColors = new ModernCompactSpinner(1, 256, 65);
+  private ModernCompactSpinner mTextColors = new ModernCompactSpinner(1, 256,
+      65);
 
   /** The m color map editor. */
   private ColorMapEditPanel mColorMapEditor;
 
   /** The m text name. */
-  private ModernTextField mTextName = new ModernTextField(TextUtils.EMPTY_STRING);
+  private ModernTextField mTextName = new ModernTextField(
+      TextUtils.EMPTY_STRING);
 
   /*
    * private class AlphaSpinEvents implements ModernClickListener {
@@ -94,8 +97,7 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * Instantiates a new color dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public ColorMapDialog(ModernWindow parent) {
     super(parent, "matcalc.color-map.help.url");
@@ -106,10 +108,8 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * Instantiates a new color map dialog.
    *
-   * @param parent
-   *          the parent
-   * @param colorMap
-   *          the color map
+   * @param parent the parent
+   * @param colorMap the color map
    */
   public ColorMapDialog(ModernWindow parent, ColorMap colorMap) {
     this(parent);
@@ -122,20 +122,24 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
     case 5:
       mCheckFiveColor.setSelected(true);
       mColorMapEditor.setColors(colorMap.getAnchorColors().getAnchorColor(0),
-          colorMap.getAnchorColors().getAnchorColor(1), colorMap.getAnchorColors().getAnchorColor(2),
-          colorMap.getAnchorColors().getAnchorColor(3), colorMap.getAnchorColors().getAnchorColor(4),
+          colorMap.getAnchorColors().getAnchorColor(1),
+          colorMap.getAnchorColors().getAnchorColor(2),
+          colorMap.getAnchorColors().getAnchorColor(3),
+          colorMap.getAnchorColors().getAnchorColor(4),
           mTextColors.getIntValue());
       break;
     case 3:
       mCheckThreeColor.setSelected(true);
       mColorMapEditor.setColors(colorMap.getAnchorColors().getAnchorColor(0),
-          colorMap.getAnchorColors().getAnchorColor(1), colorMap.getAnchorColors().getAnchorColor(2),
+          colorMap.getAnchorColors().getAnchorColor(1),
+          colorMap.getAnchorColors().getAnchorColor(2),
           mTextColors.getIntValue());
       break;
     default:
       mCheckTwoColor.setSelected(true);
       mColorMapEditor.setColors(colorMap.getAnchorColors().getAnchorColor(0),
-          colorMap.getAnchorColors().getAnchorColor(1), mTextColors.getIntValue());
+          colorMap.getAnchorColors().getAnchorColor(1),
+          mTextColors.getIntValue());
       break;
     }
   }
@@ -176,7 +180,12 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
     box1.add(UI.createVGap(20));
 
     mColorMapEditor = new ColorMapEditPanel(mParent);
-    mColorMapEditor.setColors(ColorMap.BLUE, Color.CYAN, ColorMap.GREEN, ColorMap.YELLOW, Color.RED, 65);
+    mColorMapEditor.setColors(ColorMap.BLUE,
+        Color.CYAN,
+        ColorMap.GREEN,
+        ColorMap.YELLOW,
+        Color.RED,
+        65);
 
     box1.add(mColorMapEditor);
 
@@ -194,7 +203,8 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
 
       @Override
       public void clicked(ModernClickEvent e) {
-        mColorMapEditor.setColors(ColorMapType.TWO_COLOR, mTextColors.getIntValue());
+        mColorMapEditor.setColors(ColorMapType.TWO_COLOR,
+            mTextColors.getIntValue());
       }
     });
 
@@ -202,7 +212,8 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
 
       @Override
       public void clicked(ModernClickEvent e) {
-        mColorMapEditor.setColors(ColorMapType.THREE_COLOR, mTextColors.getIntValue());
+        mColorMapEditor.setColors(ColorMapType.THREE_COLOR,
+            mTextColors.getIntValue());
       }
     });
 
@@ -210,7 +221,8 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
 
       @Override
       public void clicked(ModernClickEvent e) {
-        mColorMapEditor.setColors(ColorMapType.FIVE_COLOR, mTextColors.getIntValue());
+        mColorMapEditor.setColors(ColorMapType.FIVE_COLOR,
+            mTextColors.getIntValue());
       }
     });
 
@@ -259,8 +271,8 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -269,7 +281,8 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
       String name = mTextName.getText();
 
       if (name.length() == 0) {
-        ModernMessageDialog.createWarningDialog(mParent, "The color map must have a name.");
+        ModernMessageDialog.createWarningDialog(mParent,
+            "The color map must have a name.");
 
         return;
       }
@@ -291,6 +304,7 @@ public class ColorMapDialog extends ModernDialogHelpWindow implements ModernClic
    * @return the color
    */
   public ColorMap getColorMap() {
-    return new ColorMap(mTextName.getText(), mColorMapEditor.getColorMap(), false);
+    return new ColorMap(mTextName.getText(), mColorMapEditor.getColorMap(),
+        false);
   }
 }

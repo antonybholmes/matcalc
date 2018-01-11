@@ -12,7 +12,6 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.io.ReaderUtils;
-import org.jebtk.core.text.RegexUtils;
 import org.jebtk.core.text.Splitter;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.XLSXMetaData;
@@ -52,10 +51,8 @@ public class OpenFile {
   /**
    * Instantiates a new open file.
    *
-   * @param window
-   *          the window
-   * @param file
-   *          the file
+   * @param window the window
+   * @param file the file
    */
   public OpenFile(MainMatCalcWindow window, Path file) {
     this(window, CollectionUtils.asList(file));
@@ -64,10 +61,8 @@ public class OpenFile {
   /**
    * Instantiates a new open file.
    *
-   * @param window
-   *          the window
-   * @param files
-   *          the files
+   * @param window the window
+   * @param files the files
    */
   public OpenFile(MainMatCalcWindow window, Collection<Path> files) {
     mWindow = window;
@@ -77,10 +72,8 @@ public class OpenFile {
   /**
    * Instantiates a new open file.
    *
-   * @param openFile
-   *          the open file
-   * @param file
-   *          the file
+   * @param openFile the open file
+   * @param file the file
    */
   public OpenFile(OpenFile openFile, Path file) {
     this(openFile, CollectionUtils.asList(file));
@@ -89,8 +82,7 @@ public class OpenFile {
   /**
    * Instantiates a new open file.
    *
-   * @param openFile
-   *          the open file
+   * @param openFile the open file
    */
   public OpenFile(OpenFile openFile) {
     this(openFile, openFile.mFiles);
@@ -99,10 +91,8 @@ public class OpenFile {
   /**
    * Instantiates a new open file.
    *
-   * @param openFile
-   *          the open file
-   * @param files
-   *          the files
+   * @param openFile the open file
+   * @param files the files
    */
   public OpenFile(OpenFile openFile, Collection<Path> files) {
     mWindow = openFile.mWindow;
@@ -124,8 +114,7 @@ public class OpenFile {
    * Open.
    *
    * @return true, if successful
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public boolean open() throws IOException {
     boolean status = false;
@@ -135,9 +124,7 @@ public class OpenFile {
         MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
         window.setVisible(true);
 
-        OpenFile of = new OpenFile(this, file, window);
-
-        of.open();
+        new OpenFile(this, file, window).open();
 
         status |= false;
       } else {
@@ -146,15 +133,19 @@ public class OpenFile {
         FileModule module = mWindow.getFileModule(ext);
 
         if (module != null) {
-          DataFrame m = module.openFile(mWindow, file, mFileType, mHeaders, mRowAnnotations, mDelimiter, mSkipLines);
+          DataFrame m = module.openFile(mWindow,
+              file,
+              mFileType,
+              mHeaders,
+              mRowAnnotations,
+              mDelimiter,
+              mSkipLines);
 
           mWindow.openMatrix(file, m);
 
           RecentFilesService.getInstance().add(file);
 
           status |= true;
-        } else {
-          status |= false;
         }
       }
     }
@@ -166,8 +157,7 @@ public class OpenFile {
    * Auto open.
    *
    * @return true, if successful
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public boolean autoOpen() throws IOException {
     boolean status = false;
@@ -189,14 +179,17 @@ public class OpenFile {
         FileModule module = mWindow.mOpenFileModuleMap.get(ext);
 
         if (module != null) {
-          DataFrame m = module.autoOpenFile(mWindow, file, mFileType, mHeaders, mRowAnnotations, mDelimiter,
+          DataFrame m = module.autoOpenFile(mWindow,
+              file,
+              mFileType,
+              mHeaders,
+              mRowAnnotations,
+              mDelimiter,
               mSkipLines);
 
           mWindow.openMatrix(file, m);
 
           status |= true;
-        } else {
-          status |= false;
         }
       }
     }
@@ -207,8 +200,7 @@ public class OpenFile {
   /**
    * Open mode.
    *
-   * @param openMode
-   *          the open mode
+   * @param openMode the open mode
    * @return the open file
    */
   public OpenFile openMode(OpenMode openMode) {
@@ -226,8 +218,7 @@ public class OpenFile {
   /**
    * Headers.
    *
-   * @param headers
-   *          the headers
+   * @param headers the headers
    * @return the open file
    */
   public OpenFile headers(int headers) {
@@ -248,8 +239,7 @@ public class OpenFile {
   /**
    * Specify the number of row annotations.
    *
-   * @param headers
-   *          the number of row annotations.
+   * @param headers the number of row annotations.
    * 
    * @return
    */
@@ -262,8 +252,7 @@ public class OpenFile {
   /**
    * Specify the delimiter. The default is the tab character.
    *
-   * @param delimiter
-   *          the delimiter
+   * @param delimiter the delimiter
    * @return the open file
    */
   public OpenFile delimiter(String delimiter) {
@@ -280,8 +269,7 @@ public class OpenFile {
    * Specify lines that can be skipped at the beginning of the file e.g. for
    * example # or %.
    * 
-   * @param skipLines
-   *          the characters that can be skipped.
+   * @param skipLines the characters that can be skipped.
    * @return the open file
    */
   public OpenFile skipLines(Collection<String> skipLines) {
@@ -293,13 +281,12 @@ public class OpenFile {
   /**
    * Guess the file delimiter.
    *
-   * @param file
-   *          the file
+   * @param file the file
    * @return the string
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static String guessDelimiter(Path file, Collection<String> skipMatches) throws IOException {
+  public static String guessDelimiter(Path file, Collection<String> skipMatches)
+      throws IOException {
     //
     // Work out if we need to skip annotation rows that should be
     // ignored
@@ -357,7 +344,10 @@ public class OpenFile {
    * @return
    * @throws IOException
    */
-  public static boolean guessNumerical(Path file, int headers, String delimiter, int rowAnnotations,
+  public static boolean guessNumerical(Path file,
+      int headers,
+      String delimiter,
+      int rowAnnotations,
       Collection<String> skipMatches) throws IOException {
     //
     // Work out if we need to skip annotation rows that should be
@@ -383,8 +373,11 @@ public class OpenFile {
     return TextUtils.areNumbers(CollectionUtils.tail(tokens, rowAnnotations));
   }
 
-  public static int estimateRowAnnotations(Path file, int headers, Collection<String> skipLines) throws IOException {
-    if (BioPathUtils.ext().xlsx().test(file) || BioPathUtils.ext().xls().test(file)) {
+  public static int estimateRowAnnotations(Path file,
+      int headers,
+      Collection<String> skipLines) throws IOException {
+    if (BioPathUtils.ext().xlsx().test(file)
+        || BioPathUtils.ext().xls().test(file)) {
       return 0;
     }
 

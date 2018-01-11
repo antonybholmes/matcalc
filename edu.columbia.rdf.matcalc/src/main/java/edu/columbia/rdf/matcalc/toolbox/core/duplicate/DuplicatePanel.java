@@ -43,16 +43,14 @@ public class DuplicatePanel extends VBox {
   /**
    * The member header combo.
    *
-   * @param matrix
-   *          the matrix
+   * @param matrix the matrix
    */
   // private MatrixRowAnnotationCombo mHeaderCombo;
 
   /**
    * Instantiates a new duplicate panel.
    *
-   * @param matrix
-   *          the matrix
+   * @param matrix the matrix
    */
   public DuplicatePanel(DataFrame matrix) {
     // ModernLabel label = new ModernLabel("ID", ModernWidget.STANDARD_SIZE);
@@ -69,7 +67,8 @@ public class DuplicatePanel extends VBox {
 
     // add(Ui.createVGap(20));
 
-    add(new HExpandBox("Delimiter", new ModernTextBorderPanel(mTextDelimiter, ModernWidget.STANDARD_SIZE)));
+    add(new HExpandBox("Delimiter",
+        new ModernTextBorderPanel(mTextDelimiter, ModernWidget.STANDARD_SIZE)));
 
   }
 

@@ -36,7 +36,8 @@ import org.jebtk.modern.widget.ModernClickWidget;
 /**
  * The class GridLocationPicker.
  */
-public class LegendPositionPicker extends ModernClickWidget implements RibbonModeProperty, TextProperty {
+public class LegendPositionPicker extends ModernClickWidget
+    implements RibbonModeProperty, TextProperty {
 
   /**
    * The constant serialVersionUID.
@@ -81,7 +82,8 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -156,8 +158,8 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
+     * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.
+     * MouseEvent)
      */
     @Override
     public void mouseDragged(MouseEvent arg0) {
@@ -168,7 +170,8 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
     /*
      * (non-Javadoc)
      * 
-     * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
+     * @see
+     * java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
      */
     @Override
     public void mouseMoved(MouseEvent e) {
@@ -190,8 +193,7 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
   /**
    * Instantiates a new legend position picker.
    *
-   * @param legend
-   *          the legend
+   * @param legend the legend
    */
   public LegendPositionPicker(LegendProperties legend) {
     mLegend = legend;
@@ -200,14 +202,15 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
     addMouseListener(new MouseEvents());
     addMouseMotionListener(new MouseMotionEvents());
 
-    UI.setSize(this, WIDTH * 3 + GAP * 2 + DOUBLE_PADDING, Ribbon.COMPACT_BUTTON_HEIGHT);
+    UI.setSize(this,
+        WIDTH * 3 + GAP * 2 + DOUBLE_PADDING,
+        Ribbon.COMPACT_BUTTON_HEIGHT);
   }
 
   /**
    * Sets the position.
    *
-   * @param position
-   *          the new position
+   * @param position the new position
    */
   private void setPosition(GridLocation position) {
     mPosition = position;
@@ -228,7 +231,8 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.common.ui.ui.ModernWidget#drawForegroundAA(java.awt.Graphics2D)
+   * @see
+   * org.abh.common.ui.ui.ModernWidget#drawForegroundAA(java.awt.Graphics2D)
    */
   public void drawForegroundAAText(Graphics2D g2) {
     int x = PADDING;
@@ -321,8 +325,8 @@ public class LegendPositionPicker extends ModernClickWidget implements RibbonMod
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.ribbon.RibbonModeProperty#setMode(org.abh.common.ui.ui.
-   * ribbon.RibbonMode)
+   * org.abh.common.ui.ui.ribbon.RibbonModeProperty#setMode(org.abh.common.ui.
+   * ui. ribbon.RibbonMode)
    */
   @Override
   public void setSize(RibbonSize mode) {

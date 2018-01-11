@@ -89,7 +89,8 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   private CheckBox mRegexCheck = new ModernCheckSwitch("Regular expression");
 
   /** The m check case sensitive. */
-  private CheckBox mCheckCaseSensitive = new ModernCheckSwitch("Case sensitive");
+  private CheckBox mCheckCaseSensitive = new ModernCheckSwitch(
+      "Case sensitive");
 
   /**
    * The member color button.
@@ -156,8 +157,7 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new XY series dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public XYSeriesDialog(ModernWindow parent) {
     this(parent, new XYSeries("New Group", ColorUtils.randomColor()));
@@ -166,10 +166,8 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new XY series dialog.
    *
-   * @param parent
-   *          the parent
-   * @param names
-   *          the names
+   * @param parent the parent
+   * @param names the names
    */
   public XYSeriesDialog(ModernWindow parent, List<String> names) {
     super(parent, HELP_URL);
@@ -184,10 +182,8 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new XY series dialog.
    *
-   * @param parent
-   *          the parent
-   * @param group
-   *          the group
+   * @param parent the parent
+   * @param group the group
    */
   public XYSeriesDialog(ModernWindow parent, XYSeries group) {
     super(parent, HELP_URL);
@@ -204,8 +200,7 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   /**
    * Setup.
    *
-   * @param names
-   *          the new up
+   * @param names the new up
    */
   private void setup(List<String> names) {
     mSearchField = new ModernInputExtPanel(mParent, "", ",");
@@ -295,8 +290,8 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -323,13 +318,18 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
       if (mRegexCheck.isSelected()) {
         regex = RegexUtils.compile(t, !mCheckCaseSensitive.isSelected());
       } else {
-        regex = RegexUtils.literal(t, !mCheckCaseSensitive.isSelected()); // = ".*" + t + ".*";
+        regex = RegexUtils.literal(t, !mCheckCaseSensitive.isSelected()); // =
+                                                                          // ".*"
+                                                                          // + t
+                                                                          // +
+                                                                          // ".*";
       }
 
       regexes.add(regex);
     }
 
-    System.err.println("change group g " + mNameField.getText() + " " + regexes);
+    System.err
+        .println("change group g " + mNameField.getText() + " " + regexes);
 
     mGroup.setName(mNameField.getText());
     mGroup.setColor(mColorButton.getSelectedColor());
@@ -341,13 +341,12 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   /**
    * Load.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws InvalidFormatException
-   *           the invalid format exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws InvalidFormatException the invalid format exception
    */
   private void load() throws IOException, InvalidFormatException {
-    Path file = ExcelDialog.open(getParentWindow()).xlsx().getFile(RecentFilesService.getInstance().getPwd());
+    Path file = ExcelDialog.open(getParentWindow()).xlsx()
+        .getFile(RecentFilesService.getInstance().getPwd());
 
     if (file == null) {
       return;

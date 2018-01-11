@@ -74,7 +74,8 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy.ClusterCanva
 /**
  * The class HeatMapPanel.
  */
-public class HeatMapPanel extends FormatPlotPane implements ModernClickListener, ChangeListener {
+public class HeatMapPanel extends FormatPlotPane
+    implements ModernClickListener, ChangeListener {
 
   /**
    * The constant serialVersionUID.
@@ -127,7 +128,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
   /**
    * The member check show legend.
    */
-  protected ModernTwoStateWidget mCheckShowLegend = new ModernCheckSwitch("Legend", true);
+  protected ModernTwoStateWidget mCheckShowLegend = new ModernCheckSwitch(
+      "Legend", true);
 
   /** The m check show. */
   private ModernTwoStateWidget mCheckShow;
@@ -198,75 +200,54 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
   /**
    * Instantiates a new heat map panel.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param groupsModel
-   *          the groups model
-   * @param rowGroupsModel
-   *          the row groups model
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param zoomModel
-   *          the zoom model
-   * @param colorMapModel
-   *          the color map model
-   * @param colorStandardizationModel
-   *          the color standardization model
-   * @param scaleModel
-   *          the scale model
-   * @param contentModel
-   *          the content model
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param groupsModel the groups model
+   * @param rowGroupsModel the row groups model
+   * @param countGroups the count groups
+   * @param history the history
+   * @param zoomModel the zoom model
+   * @param colorMapModel the color map model
+   * @param colorStandardizationModel the color standardization model
+   * @param scaleModel the scale model
+   * @param contentModel the content model
+   * @param properties the properties
    */
-  public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groupsModel,
-      XYSeriesModel rowGroupsModel, CountGroups countGroups, List<String> history, ZoomModel zoomModel,
-      ColorMapModel colorMapModel, ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
+  public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix,
+      XYSeriesModel groupsModel, XYSeriesModel rowGroupsModel,
+      CountGroups countGroups, List<String> history, ZoomModel zoomModel,
+      ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
       TabsModel contentModel, Properties properties) {
-    this(parent, matrix, null, null, groupsModel, rowGroupsModel, countGroups, history, zoomModel, colorMapModel,
-        colorStandardizationModel, scaleModel, contentModel, properties);
+    this(parent, matrix, null, null, groupsModel, rowGroupsModel, countGroups,
+        history, zoomModel, colorMapModel, colorStandardizationModel,
+        scaleModel, contentModel, properties);
   }
 
   /**
    * Instantiates a new heat map panel.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param rowCluster
-   *          the row cluster
-   * @param columnCluster
-   *          the column cluster
-   * @param groupsModel
-   *          the groups model
-   * @param rowGroupsModel
-   *          the row groups model
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param zoomModel
-   *          the zoom model
-   * @param colorMapModel
-   *          the color map model
-   * @param colorStandardizationModel
-   *          the color standardization model
-   * @param scaleModel
-   *          the scale model
-   * @param contentModel
-   *          the content model
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param rowCluster the row cluster
+   * @param columnCluster the column cluster
+   * @param groupsModel the groups model
+   * @param rowGroupsModel the row groups model
+   * @param countGroups the count groups
+   * @param history the history
+   * @param zoomModel the zoom model
+   * @param colorMapModel the color map model
+   * @param colorStandardizationModel the color standardization model
+   * @param scaleModel the scale model
+   * @param contentModel the content model
+   * @param properties the properties
    */
-  public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix, Cluster rowCluster, Cluster columnCluster,
-      XYSeriesModel groupsModel, XYSeriesModel rowGroupsModel, CountGroups countGroups, List<String> history,
-      ZoomModel zoomModel, ColorMapModel colorMapModel, ColorNormalizationModel colorStandardizationModel,
-      ScaleModel scaleModel, TabsModel contentModel, Properties properties) {
+  public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix,
+      Cluster rowCluster, Cluster columnCluster, XYSeriesModel groupsModel,
+      XYSeriesModel rowGroupsModel, CountGroups countGroups,
+      List<String> history, ZoomModel zoomModel, ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
+      TabsModel contentModel, Properties properties) {
     mParent = parent;
     // mContent = contentModel;
 
@@ -295,7 +276,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 
     box = VBox.create();
 
-    mCheckShow = new ModernCheckSwitch("Show", properties.getAsBool("plot.heatmap.visible"));
+    mCheckShow = new ModernCheckSwitch("Show",
+        properties.getAsBool("plot.heatmap.visible"));
     mCheckShow.addClickListener(this);
     mCheckShow.setAlignmentY(TOP_ALIGNMENT);
     box.add(mCheckShow);
@@ -305,21 +287,24 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
     // Box box2 = VBox.create();
     // box2.setBorder(BorderService.getInstance().createLeftBorder(10));
 
-    mGridElement = new ColoredPlotControl(parent, "Grid", properties.getAsColor("plot.grid-color"),
+    mGridElement = new ColoredPlotControl(parent, "Grid",
+        properties.getAsColor("plot.grid-color"),
         properties.getAsBool("plot.show-grid-color"));
     mGridElement.addClickListener(this);
     box.add(mGridElement);
 
     box.add(ModernPanel.createVGap());
 
-    mOutlineElement = new ColoredPlotControl(parent, "Outline", properties.getAsColor("plot.outline-color"),
+    mOutlineElement = new ColoredPlotControl(parent, "Outline",
+        properties.getAsColor("plot.outline-color"),
         properties.getAsBool("plot.show-outline-color"));
     mOutlineElement.addClickListener(this);
     box.add(mOutlineElement);
 
     box.add(ModernPanel.createVGap());
 
-    mBorderElement = new ColoredPlotControl(parent, "Border", properties.getAsColor("plot.border-color"),
+    mBorderElement = new ColoredPlotControl(parent, "Border",
+        properties.getAsColor("plot.border-color"),
         properties.getAsBool("plot.border-color-enabled"));
     mBorderElement.addClickListener(this);
     box.add(mBorderElement);
@@ -335,7 +320,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
     rightPanel.addTab(PlotConstants.LABEL_HEATMAP, box, true);
 
     box = VBox.create();
-    mAspectRatioElement = new BlockSizeControl((DoubleDim) properties.getProperty("plot.block-size"));
+    mAspectRatioElement = new BlockSizeControl(
+        (DoubleDim) properties.getProperty("plot.block-size"));
     mAspectRatioElement.addChangeListener(this);
     box.add(mAspectRatioElement);
     box.setBorder(LARGE_BORDER);
@@ -374,7 +360,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
     box = VBox.create();
 
     mRowsElement = new RowLabelControl(parent, matrix, RowLabelPosition.RIGHT,
-        properties.getAsBool("plot.show-feature-counts"), properties.getAsBool("plot.show-row-labels"));
+        properties.getAsBool("plot.show-feature-counts"),
+        properties.getAsBool("plot.show-row-labels"));
 
     box.add(mRowsElement);
 
@@ -408,7 +395,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 
     // box2 = VBox.create();
 
-    box.add(new CheckControl(parent, "Color by group", properties, "plot.labels.color-by-group"));
+    box.add(new CheckControl(parent, "Color by group", properties,
+        "plot.labels.color-by-group"));
 
     // box.add(UI.createVGap(5));
 
@@ -494,7 +482,10 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
       }
     }
 
-    DataFrame m = createMatrix(mMatrix, seriesOfInterest, rowSeriesOfInterest, norm);
+    DataFrame m = createMatrix(mMatrix,
+        seriesOfInterest,
+        rowSeriesOfInterest,
+        norm);
 
     display(m, seriesOfInterest, rowSeriesOfInterest, norm);
   }
@@ -502,34 +493,31 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
   /**
    * Create a matrix (normalize for coloring etc) without filtering groups.
    *
-   * @param m
-   *          the m
-   * @param min
-   *          the min
-   * @param max
-   *          the max
+   * @param m the m
+   * @param min the min
+   * @param max the max
    * @return the annotation matrix
    */
   public DataFrame createMatrix(DataFrame m, MinMax norm) {
-    return createMatrix(m, XYSeriesGroup.EMPTY_GROUP, XYSeriesGroup.EMPTY_GROUP, norm);
+    return createMatrix(m,
+        XYSeriesGroup.EMPTY_GROUP,
+        XYSeriesGroup.EMPTY_GROUP,
+        norm);
   }
 
   /**
    * Creates the matrix.
    *
-   * @param m
-   *          the m
-   * @param groupsOfInterest
-   *          the groups of interest
-   * @param rowGroupsOfInterest
-   *          the row groups of interest
-   * @param min
-   *          the min
-   * @param max
-   *          the max
+   * @param m the m
+   * @param groupsOfInterest the groups of interest
+   * @param rowGroupsOfInterest the row groups of interest
+   * @param min the min
+   * @param max the max
    * @return the annotation matrix
    */
-  public DataFrame createMatrix(DataFrame m, XYSeriesGroup groupsOfInterest, XYSeriesGroup rowGroupsOfInterest,
+  public DataFrame createMatrix(DataFrame m,
+      XYSeriesGroup groupsOfInterest,
+      XYSeriesGroup rowGroupsOfInterest,
       MinMax norm) {
     DataFrame ret = m;
 
@@ -544,10 +532,12 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
       ret = MatrixOperations.zscore(ret); // new MatrixZTransformView(mMatrix);
       break;
     case ZSCORE_ROW:
-      ret = MatrixOperations.rowZscore(ret); // new RowZTransformMatrixView(mMatrix);
+      ret = MatrixOperations.rowZscore(ret); // new
+                                             // RowZTransformMatrixView(mMatrix);
       break;
     case ZSCORE_COLUMN:
-      ret = MatrixOperations.columnZscore(ret); // new ColumnZTransformMatrixView(mMatrix);
+      ret = MatrixOperations.columnZscore(ret); // new
+                                                // ColumnZTransformMatrixView(mMatrix);
       break;
     case NORMALIZE:
       if (Double.isNaN(mColorStandardizationModel.get().getMax())) {
@@ -574,7 +564,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
       ret = DataFrame.copyColumns(ret, groupsOfInterest);
     }
 
-    if (mColorStandardizationModel.get().getType() != ColorNormalizationType.NONE) {
+    if (mColorStandardizationModel.get()
+        .getType() != ColorNormalizationType.NONE) {
       // min /= scale;
       // max /= scale;
 
@@ -587,18 +578,16 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
   /**
    * Display.
    *
-   * @param m
-   *          the m
-   * @param groupsOfInterest
-   *          the groups of interest
-   * @param rowGroupsOfInterest
-   *          the row groups of interest
-   * @param min
-   *          the min
-   * @param max
-   *          the max
+   * @param m the m
+   * @param groupsOfInterest the groups of interest
+   * @param rowGroupsOfInterest the row groups of interest
+   * @param min the min
+   * @param max the max
    */
-  public void display(DataFrame m, XYSeriesGroup groupsOfInterest, XYSeriesGroup rowGroupsOfInterest, MinMax norm) {
+  public void display(DataFrame m,
+      XYSeriesGroup groupsOfInterest,
+      XYSeriesGroup rowGroupsOfInterest,
+      MinMax norm) {
     ColorMap colorMap = mColorMapModel.get();
 
     RowLabelProperties rowLabelProperties = new RowLabelProperties();
@@ -621,27 +610,40 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 
     columnLabelProperties.position = mColumnLabelPositionElement.getPosition();
 
-    mProperties.updateProperty("plot.show-legend", mGroupsElement.getShowLegend());
+    mProperties.updateProperty("plot.show-legend",
+        mGroupsElement.getShowLegend());
 
-    mProperties.updateProperty("plot.grid-color", mGridElement.getSelectedColor());
-    mProperties.updateProperty("plot.show-grid-color", mGridElement.isSelected());
+    mProperties.updateProperty("plot.grid-color",
+        mGridElement.getSelectedColor());
+    mProperties.updateProperty("plot.show-grid-color",
+        mGridElement.isSelected());
 
-    mProperties.updateProperty("plot.outline-color", mOutlineElement.getSelectedColor());
-    mProperties.updateProperty("plot.show-outline-color", mOutlineElement.isSelected());
+    mProperties.updateProperty("plot.outline-color",
+        mOutlineElement.getSelectedColor());
+    mProperties.updateProperty("plot.show-outline-color",
+        mOutlineElement.isSelected());
 
-    mProperties.updateProperty("plot.border-color", mBorderElement.getSelectedColor());
-    mProperties.updateProperty("plot.show-border-color", mBorderElement.isSelected());
+    mProperties.updateProperty("plot.border-color",
+        mBorderElement.getSelectedColor());
+    mProperties.updateProperty("plot.show-border-color",
+        mBorderElement.isSelected());
 
     // mProperties.updateProperty("plot.aspect-ratio",
     // mAspectRatioElement.getAspectRatio());
 
-    mProperties.updateProperty("plot.block-size", mAspectRatioElement.getBlockSize());
+    mProperties.updateProperty("plot.block-size",
+        mAspectRatioElement.getBlockSize());
 
     mProperties.updateProperty("plot.colormap", colorMap);
 
     mProperties.updateProperty("plot.heatmap.visible", mCheckShow.isSelected());
 
-    mCanvas = createCanvas(m, groupsOfInterest, rowGroupsOfInterest, norm, rowLabelProperties, columnLabelProperties);
+    mCanvas = createCanvas(m,
+        groupsOfInterest,
+        rowGroupsOfInterest,
+        norm,
+        rowLabelProperties,
+        columnLabelProperties);
 
     display(mCanvas);
   }
@@ -649,34 +651,31 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
   /**
    * Creates the canvas.
    *
-   * @param m
-   *          the m
-   * @param groupsOfInterest
-   *          the groups of interest
-   * @param rowGroupsOfInterest
-   *          the row groups of interest
-   * @param min
-   *          the min
-   * @param max
-   *          the max
-   * @param rowLabelProperties
-   *          the row label properties
-   * @param columnLabelProperties
-   *          the column label properties
+   * @param m the m
+   * @param groupsOfInterest the groups of interest
+   * @param rowGroupsOfInterest the row groups of interest
+   * @param min the min
+   * @param max the max
+   * @param rowLabelProperties the row label properties
+   * @param columnLabelProperties the column label properties
    * @return the modern plot canvas
    */
-  public PlotBox createCanvas(DataFrame m, XYSeriesGroup groupsOfInterest, XYSeriesGroup rowGroupsOfInterest,
-      MinMax norm, RowLabelProperties rowLabelProperties, ColumnLabelProperties columnLabelProperties) {
-    return new ClusterCanvas(m, mRowCluster, mColumnCluster, groupsOfInterest, rowGroupsOfInterest, mCountGroups,
-        mHistory, norm.getMin(), norm.getMax(), rowLabelProperties, columnLabelProperties,
+  public PlotBox createCanvas(DataFrame m,
+      XYSeriesGroup groupsOfInterest,
+      XYSeriesGroup rowGroupsOfInterest,
+      MinMax norm,
+      RowLabelProperties rowLabelProperties,
+      ColumnLabelProperties columnLabelProperties) {
+    return new ClusterCanvas(m, mRowCluster, mColumnCluster, groupsOfInterest,
+        rowGroupsOfInterest, mCountGroups, mHistory, norm.getMin(),
+        norm.getMax(), rowLabelProperties, columnLabelProperties,
         mGroupsElement.getProperties(), mProperties);
   }
 
   /**
    * Display.
    *
-   * @param canvas
-   *          the canvas
+   * @param canvas the canvas
    */
   public void display(PlotBox canvas) {
     PlotBoxPanel panel = new PlotBoxPanel(canvas);
@@ -685,7 +684,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
 
     // BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-    ModernScrollPane scrollPane = new ModernScrollPane(panel).setVScrollBarLocation(ScrollBarLocation.FLOATING)
+    ModernScrollPane scrollPane = new ModernScrollPane(panel)
+        .setVScrollBarLocation(ScrollBarLocation.FLOATING)
         .setHScrollBarLocation(ScrollBarLocation.FLOATING);
 
     mParent.setCard(scrollPane);
@@ -705,8 +705,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -716,7 +716,8 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+   * @see
+   * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
    */
   @Override
   public void changed(ChangeEvent e) {

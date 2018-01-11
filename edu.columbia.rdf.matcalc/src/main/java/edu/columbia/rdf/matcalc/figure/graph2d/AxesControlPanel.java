@@ -53,10 +53,8 @@ public class AxesControlPanel extends FormatPlotPane {
   /**
    * Instantiates a new axes control panel.
    *
-   * @param parent
-   *          the parent
-   * @param figure
-   *          the figure
+   * @param parent the parent
+   * @param figure the figure
    */
   public AxesControlPanel(ModernRibbonWindow parent, Figure figure) {
     mParent = parent;
@@ -115,7 +113,8 @@ public class AxesControlPanel extends FormatPlotPane {
         AbstractCollapsePane plotsCollapsePane = new ModernSubCollapsePane();
 
         for (Plot plot : axes.getPlots()) {
-          plotsCollapsePane.addTab(plot.getName(), new PlotControl(mParent, plot));
+          plotsCollapsePane.addTab(plot.getName(),
+              new PlotControl(mParent, plot));
         }
 
         axisCollapsePane.addTab("Plots", plotsCollapsePane, true);
@@ -130,7 +129,8 @@ public class AxesControlPanel extends FormatPlotPane {
 
     // figuresCollapsePane.setBorder(RIGHT_BORDER);
     ModernScrollPane scrollPane = new ModernScrollPane(figuresCollapsePane);
-    scrollPane.setScrollBarPolicy(ScrollBarPolicy.NEVER, ScrollBarPolicy.AUTO_SHOW);
+    scrollPane.setScrollBarPolicy(ScrollBarPolicy.NEVER,
+        ScrollBarPolicy.AUTO_SHOW);
     scrollPane.setBorder(BORDER);
     setBody(scrollPane);
   }

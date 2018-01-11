@@ -47,19 +47,16 @@ public class CheckControl extends VBox {
   /**
    * The member spinner.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param properties
-   *          the properties
-   * @param setting
-   *          the setting
+   * @param parent the parent
+   * @param name the name
+   * @param properties the properties
+   * @param setting the setting
    */
   // private ModernCompactSpinner mSpinner =
   // new ModernCompactSpinner(1, 10, 3);
 
-  public CheckControl(ModernWindow parent, String name, Properties properties, String setting) {
+  public CheckControl(ModernWindow parent, String name, Properties properties,
+      String setting) {
     mSetting = setting;
     mProperties = properties;
 

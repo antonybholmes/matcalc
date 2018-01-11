@@ -36,10 +36,12 @@ public class AspectRatioControl extends VBox {
   /**
    * The member aspect field.
    */
-  private ModernCompactSpinner mXField = new ModernCompactSpinner(1, 100, 100, "%");
+  private ModernCompactSpinner mXField = new ModernCompactSpinner(1, 100, 100,
+      "%");
 
   /** The m Y field. */
-  private ModernCompactSpinner mYField = new ModernCompactSpinner(1, 100, 100, "%");
+  private ModernCompactSpinner mYField = new ModernCompactSpinner(1, 100, 100,
+      "%");
 
   /**
    * Instantiates a new aspect ratio control.
@@ -51,8 +53,7 @@ public class AspectRatioControl extends VBox {
   /**
    * Instantiates a new aspect ratio control.
    *
-   * @param aspectRatio
-   *          the aspect ratio
+   * @param aspectRatio the aspect ratio
    */
   public AspectRatioControl(AspectRatio aspectRatio) {
 
@@ -69,8 +70,7 @@ public class AspectRatioControl extends VBox {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addChangeListener(ChangeListener l) {
     mXField.addChangeListener(l);
@@ -83,7 +83,8 @@ public class AspectRatioControl extends VBox {
    * @return the aspect ratio
    */
   public AspectRatio getAspectRatio() {
-    return new AspectRatio(mXField.getIntValue() / 100.0, mYField.getIntValue() / 100.0);
+    return new AspectRatio(mXField.getIntValue() / 100.0,
+        mYField.getIntValue() / 100.0);
   }
 
 }

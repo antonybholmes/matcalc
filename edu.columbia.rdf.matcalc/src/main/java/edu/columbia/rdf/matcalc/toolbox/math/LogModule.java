@@ -38,7 +38,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class LogModule extends CalcModule implements ModernClickListener {
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance().loadIcon("log", 24);
+  private static final ModernIcon ICON = UIService.getInstance().loadIcon("log",
+      24);
 
   /**
    * The member window.
@@ -58,7 +59,8 @@ public class LogModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -70,37 +72,46 @@ public class LogModule extends CalcModule implements ModernClickListener {
      * UIService.getInstance().loadIcon("log", 32), "Log 2",
      * "Log 2 transform the expression values in the matrix.");
      * button.addClickListener(this);
-     * mWindow.getRibbon().getToolbar("Transform").getSection("Log").add(button);
+     * mWindow.getRibbon().getToolbar("Transform").getSection("Log").add(button)
+     * ;
      * 
      * button = new RibbonLargeButton("Log 10",
      * UIService.getInstance().loadIcon("log", 32), "Log 10",
      * "Log 10 transform the expression values in the matrix.");
      * button.addClickListener(this);
-     * mWindow.getRibbon().getToolbar("Transform").getSection("Log").add(button);
+     * mWindow.getRibbon().getToolbar("Transform").getSection("Log").add(button)
+     * ;
      * 
-     * button = new RibbonLargeButton("Ln", UIService.getInstance().loadIcon("log",
-     * 32), "Ln",
+     * button = new RibbonLargeButton("Ln",
+     * UIService.getInstance().loadIcon("log", 32), "Ln",
      * "Log e (natural log) transform the expression values in the matrix.");
      * button.addClickListener(this);
-     * mWindow.getRibbon().getToolbar("Transform").getSection("Log").add(button);
+     * mWindow.getRibbon().getToolbar("Transform").getSection("Log").add(button)
+     * ;
      */
 
     ModernPopupMenu popup = new ModernPopupMenu();
 
-    popup.addMenuItem(new ModernTwoLineMenuItem("Log 2", "Log 2 tranform.", ICON));
-    popup.addMenuItem(new ModernTwoLineMenuItem("Log 10", "Log 10 tranform.", ICON));
-    popup.addMenuItem(new ModernTwoLineMenuItem("Ln", "Natural log tranform.", ICON));
+    popup.addMenuItem(
+        new ModernTwoLineMenuItem("Log 2", "Log 2 tranform.", ICON));
+    popup.addMenuItem(
+        new ModernTwoLineMenuItem("Log 10", "Log 10 tranform.", ICON));
+    popup.addMenuItem(
+        new ModernTwoLineMenuItem("Ln", "Natural log tranform.", ICON));
 
     // popup.addMenuItem(new ModernMenuSeparator());
 
-    popup.addMenuItem(new ModernMenuHelpItem("Help with log transforming a matrix...", "matcalc.modules.math.log.url")
-        .setTextOffset(48));
+    popup.addMenuItem(
+        new ModernMenuHelpItem("Help with log transforming a matrix...",
+            "matcalc.modules.math.log.url").setTextOffset(48));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeOptionalDropDownButton button = new RibbonLargeOptionalDropDownButton("Log(m)", popup);
+    RibbonLargeOptionalDropDownButton button = new RibbonLargeOptionalDropDownButton(
+        "Log(m)", popup);
     button.setToolTip("Log", "Log transform a matrix.");
 
-    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions")
+        .add(button);
 
     button.addClickListener(this);
   }
@@ -109,36 +120,42 @@ public class LogModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getMessage().equals("Log 10")) {
-      mWindow.addToHistory("log10", "log10", log10(mWindow, mWindow.getCurrentMatrix(), 1)); // new
-                                                                                             // Log10MatrixTransform(this,
-                                                                                             // getCurrentMatrix(), 1));
+      mWindow.addToHistory("log10",
+          "log10",
+          log10(mWindow, mWindow.getCurrentMatrix(), 1)); // new
+                                                          // Log10MatrixTransform(this,
+                                                          // getCurrentMatrix(),
+                                                          // 1));
     } else if (e.getMessage().equals("Ln")) {
-      mWindow.addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1)); // new
-                                                                                    // NaturalLogMatrixTransform(this,
-                                                                                    // getCurrentMatrix(), 1));
+      mWindow
+          .addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1)); // new
+                                                                                 // NaturalLogMatrixTransform(this,
+                                                                                 // getCurrentMatrix(),
+                                                                                 // 1));
     } else {
-      mWindow.addToHistory("log2", "log2", log2(mWindow, mWindow.getCurrentMatrix(), 1));
+      mWindow.addToHistory("log2",
+          "log2",
+          log2(mWindow, mWindow.getCurrentMatrix(), 1));
     }
   }
 
   /**
    * Log2.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param min
-   *          the min
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param min the min
    * @return the annotation matrix
    */
-  public static DataFrame log2(ModernWindow parent, DataFrame matrix, double min) {
+  public static DataFrame log2(ModernWindow parent,
+      DataFrame matrix,
+      double min) {
     LogDialog dialog = new LogDialog(parent, min, 2, false);
 
     dialog.setVisible(true);
@@ -149,15 +166,14 @@ public class LogModule extends CalcModule implements ModernClickListener {
   /**
    * Log10.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param min
-   *          the min
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param min the min
    * @return the annotation matrix
    */
-  public static DataFrame log10(ModernWindow parent, DataFrame matrix, double min) {
+  public static DataFrame log10(ModernWindow parent,
+      DataFrame matrix,
+      double min) {
     LogDialog dialog = new LogDialog(parent, min, 10, false);
 
     dialog.setVisible(true);
@@ -168,15 +184,14 @@ public class LogModule extends CalcModule implements ModernClickListener {
   /**
    * Ln.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param min
-   *          the min
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param min the min
    * @return the annotation matrix
    */
-  public static DataFrame ln(ModernWindow parent, DataFrame matrix, double min) {
+  public static DataFrame ln(ModernWindow parent,
+      DataFrame matrix,
+      double min) {
     LogDialog dialog = new LogDialog(parent, min, 2, true);
 
     dialog.setVisible(true);
@@ -187,15 +202,14 @@ public class LogModule extends CalcModule implements ModernClickListener {
   /**
    * Log.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param dialog
-   *          the dialog
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param dialog the dialog
    * @return the annotation matrix
    */
-  public static DataFrame log(ModernWindow parent, DataFrame matrix, LogDialog dialog) {
+  public static DataFrame log(ModernWindow parent,
+      DataFrame matrix,
+      LogDialog dialog) {
 
     if (dialog.getStatus() == ModernDialogStatus.OK) {
       DataFrame m;

@@ -30,7 +30,6 @@ import org.jebtk.core.io.Temp;
 import org.jebtk.core.stream.Stream;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernDropDownButton;
@@ -62,7 +61,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class SplitModule extends CalcModule implements ModernClickListener {
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance().loadIcon("split", 24);
+  private static final ModernIcon ICON = UIService.getInstance()
+      .loadIcon("split", 24);
 
   /** The m button. */
   private ModernDropDownButton mButton;
@@ -85,7 +85,8 @@ public class SplitModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -94,14 +95,15 @@ public class SplitModule extends CalcModule implements ModernClickListener {
 
     ModernPopupMenu popup = new ModernPopupMenu();
 
-    popup.addMenuItem(
-        new ModernTwoLineMenuItem("Split on column values", "Split matrix by grouping rows in a column.", ICON));
-    popup.addMenuItem(new ModernTwoLineMenuItem("Split by group", "Split matrix based on column groups.", ICON));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Split on column values",
+        "Split matrix by grouping rows in a column.", ICON));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Split by group",
+        "Split matrix based on column groups.", ICON));
 
     // popup.addMenuItem(new ModernMenuSeparator());
 
-    popup.addMenuItem(
-        new ModernMenuHelpItem("Help with splitting a matrix...", "matcalc.split.help.url").setTextOffset(48));
+    popup.addMenuItem(new ModernMenuHelpItem("Help with splitting a matrix...",
+        "matcalc.split.help.url").setTextOffset(48));
 
     mButton = new RibbonLargeDropDownButton("Split", ICON, popup);
     mButton.setChangeText(false);
@@ -116,8 +118,8 @@ public class SplitModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -141,14 +143,15 @@ public class SplitModule extends CalcModule implements ModernClickListener {
   /**
    * Split a matrix by grouping rows with the same value in a given column.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void splitByColumn() throws IOException {
     List<Integer> columns = mWindow.getSelectedColumns();
 
     if (columns == null || columns.size() == 0) {
-      ModernMessageDialog.createDialog(mWindow, "You must select a column to split on.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mWindow,
+          "You must select a column to split on.",
+          MessageDialogType.WARNING);
 
       return;
     }
@@ -179,18 +182,21 @@ public class SplitModule extends CalcModule implements ModernClickListener {
     // Clean up the ids
     List<String> ids = CollectionUtils.sort(idMap.keySet());
 
-    List<String> cleanedIds = Stream.of(ids).map(new Function<String, String>() {
-      @Override
-      public String apply(String item) {
-        return item.toLowerCase().replaceAll("\\.[a-z]+$", "").replaceAll("[^a-z0-9\\_\\-]", "_").replaceAll("_+", "_");
-      }
-    }).toList();
+    List<String> cleanedIds = Stream.of(ids)
+        .map(new Function<String, String>() {
+          @Override
+          public String apply(String item) {
+            return item.toLowerCase().replaceAll("\\.[a-z]+$", "")
+                .replaceAll("[^a-z0-9\\_\\-]", "_").replaceAll("_+", "_");
+          }
+        }).toList();
 
     List<DataFrame> matrices = new ArrayList<DataFrame>(ids.size());
 
     for (String id : ids) {
       System.err.println("split id " + id);
-      matrices.add(DataFrame.createAnnotatableMatrixFromRows(current, idMap.get(id)));
+      matrices.add(
+          DataFrame.createAnnotatableMatrixFromRows(current, idMap.get(id)));
     }
 
     splitByGroup(cleanedIds, matrices, openMatrices, createZip);
@@ -199,8 +205,7 @@ public class SplitModule extends CalcModule implements ModernClickListener {
   /**
    * Split by group.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void splitByGroup() throws IOException {
     List<XYSeries> groups = mWindow.getGroups();
@@ -224,7 +229,8 @@ public class SplitModule extends CalcModule implements ModernClickListener {
 
     DataFrame current = mWindow.getCurrentMatrix();
 
-    List<List<Integer>> allIndices = MatrixGroup.findColumnIndices(current, groups);
+    List<List<Integer>> allIndices = MatrixGroup.findColumnIndices(current,
+        groups);
 
     List<DataFrame> matrices = new ArrayList<DataFrame>(groups.size());
 
@@ -235,8 +241,8 @@ public class SplitModule extends CalcModule implements ModernClickListener {
     List<String> ids = new ArrayList<String>(groups.size());
 
     for (XYSeries group : groups) {
-      ids.add(group.getName().toLowerCase().replaceAll("\\.[a-z]+$", "").replaceAll("[^a-z0-9\\_\\-]", "_")
-          .replaceAll("_+", "_"));
+      ids.add(group.getName().toLowerCase().replaceAll("\\.[a-z]+$", "")
+          .replaceAll("[^a-z0-9\\_\\-]", "_").replaceAll("_+", "_"));
     }
 
     splitByGroup(ids, matrices, openMatrices, createZip);
@@ -245,28 +251,27 @@ public class SplitModule extends CalcModule implements ModernClickListener {
   /**
    * Split by group.
    *
-   * @param ids
-   *          the ids
-   * @param matrices
-   *          the matrices
-   * @param openMatrices
-   *          the open matrices
-   * @param createZip
-   *          the create zip
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param ids the ids
+   * @param matrices the matrices
+   * @param openMatrices the open matrices
+   * @param createZip the create zip
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void splitByGroup(List<String> ids, List<DataFrame> matrices, boolean openMatrices, boolean createZip)
-      throws IOException {
+  private void splitByGroup(List<String> ids,
+      List<DataFrame> matrices,
+      boolean openMatrices,
+      boolean createZip) throws IOException {
 
     if (createZip) {
-      Path file = FileDialog.saveZipFile(mWindow, RecentFilesService.getInstance().getPwd());
+      Path file = FileDialog.saveZipFile(mWindow,
+          RecentFilesService.getInstance().getPwd());
 
       if (file != null) {
         boolean write = true;
 
         if (FileUtils.exists(file)) {
-          ModernDialogStatus status = ModernMessageDialog.createFileReplaceDialog(mWindow, file);
+          ModernDialogStatus status = ModernMessageDialog
+              .createFileReplaceDialog(mWindow, file);
 
           write = status == ModernDialogStatus.OK;
         }

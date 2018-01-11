@@ -53,10 +53,8 @@ public class ModulesRibbonPanel extends RibbonPanelProductInfo {
   /**
    * Instantiates a new modules ribbon panel.
    *
-   * @param product
-   *          the product
-   * @param modules
-   *          the modules
+   * @param product the product
+   * @param modules the modules
    */
   public ModulesRibbonPanel(GuiAppInfo product, List<Module> modules) {
     super(product);
@@ -74,7 +72,8 @@ public class ModulesRibbonPanel extends RibbonPanelProductInfo {
 
     ModernAutoSizeLabel heading = new ModernSubTitleLabel("Installed Modules");
 
-    heading.setBorder(BorderService.getInstance().createTopBottomBorder(40, 10));
+    heading
+        .setBorder(BorderService.getInstance().createTopBottomBorder(40, 10));
 
     content.setHeader(heading);
 

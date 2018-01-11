@@ -20,9 +20,9 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.List;
 
+import org.jebtk.bioinformatics.ui.groups.GroupsModel;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.collections.CollectionUtils;
-import org.jebtk.bioinformatics.ui.groups.GroupsModel;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.widget.ModernWidget;
 
@@ -153,9 +153,9 @@ public class ProportionalVennCanvas extends VennCanvas {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.matcalc.toolbox.core.venn.VennCanvas#setGroups(org.jebtk.bioinformatics.
-   * ui.groups.GroupsModel, org.matcalc.toolbox.core.venn.CircleStyle)
+   * @see org.matcalc.toolbox.core.venn.VennCanvas#setGroups(org.jebtk.
+   * bioinformatics. ui.groups.GroupsModel,
+   * org.matcalc.toolbox.core.venn.CircleStyle)
    */
   public void setGroups(GroupsModel groups, CircleStyle style) {
     if (groups == null || groups.size() == 0) {
@@ -197,15 +197,18 @@ public class ProportionalVennCanvas extends VennCanvas {
 
       mD1 = mR1 * 2;
     } else {
-      mIntersection12 = CollectionUtils.iterIntersect(mGroups.get(0), mGroups.get(1));
+      mIntersection12 = CollectionUtils.iterIntersect(mGroups.get(0),
+          mGroups.get(1));
 
       mP12 = (double) mIntersection12.size() / (double) mGroups.get(0).size();
 
       if (mCount == 3) {
-        mIntersection13 = CollectionUtils.iterIntersect(mGroups.get(0), mGroups.get(2));
+        mIntersection13 = CollectionUtils.iterIntersect(mGroups.get(0),
+            mGroups.get(2));
         mP13 = (double) mIntersection13.size() / (double) mGroups.get(0).size();
 
-        mIntersection23 = CollectionUtils.iterIntersect(mGroups.get(1), mGroups.get(2));
+        mIntersection23 = CollectionUtils.iterIntersect(mGroups.get(1),
+            mGroups.get(2));
         mP23 = (double) mIntersection23.size() / (double) mGroups.get(1).size();
       }
 
@@ -251,28 +254,40 @@ public class ProportionalVennCanvas extends VennCanvas {
     }
 
     if (mCount == 2) {
-      mIntersection1 = CollectionUtils.iterCompliment(mGroups.get(0), mGroups.get(1));
-      mIntersection2 = CollectionUtils.iterCompliment(mGroups.get(1), mGroups.get(0));
+      mIntersection1 = CollectionUtils.iterCompliment(mGroups.get(0),
+          mGroups.get(1));
+      mIntersection2 = CollectionUtils.iterCompliment(mGroups.get(1),
+          mGroups.get(0));
     }
 
     if (mCount == 3) {
       mIntersection123 = CollectionUtils.iterIntersect(mGroups.get(0),
           CollectionUtils.iterIntersect(mGroups.get(1), mGroups.get(2)));
 
-      mIntersection12 = CollectionUtils.compliment(mIntersection12, mIntersection123);
-      mIntersection13 = CollectionUtils.compliment(mIntersection13, mIntersection123);
-      mIntersection23 = CollectionUtils.compliment(mIntersection23, mIntersection123);
+      mIntersection12 = CollectionUtils.compliment(mIntersection12,
+          mIntersection123);
+      mIntersection13 = CollectionUtils.compliment(mIntersection13,
+          mIntersection123);
+      mIntersection23 = CollectionUtils.compliment(mIntersection23,
+          mIntersection123);
 
-      mIntersection1 = CollectionUtils.compliment(CollectionUtils.iterToList(mGroups.get(0)),
-          CollectionUtils.union(mIntersection12, CollectionUtils.union(mIntersection13, mIntersection123)));
+      mIntersection1 = CollectionUtils.compliment(
+          CollectionUtils.iterToList(mGroups.get(0)),
+          CollectionUtils.union(mIntersection12,
+              CollectionUtils.union(mIntersection13, mIntersection123)));
 
-      mIntersection2 = CollectionUtils.compliment(CollectionUtils.iterToList(mGroups.get(1)),
-          CollectionUtils.union(mIntersection12, CollectionUtils.union(mIntersection23, mIntersection123)));
+      mIntersection2 = CollectionUtils.compliment(
+          CollectionUtils.iterToList(mGroups.get(1)),
+          CollectionUtils.union(mIntersection12,
+              CollectionUtils.union(mIntersection23, mIntersection123)));
 
-      mIntersection3 = CollectionUtils.compliment(CollectionUtils.iterToList(mGroups.get(2)),
-          CollectionUtils.union(mIntersection13, CollectionUtils.union(mIntersection23, mIntersection123)));
+      mIntersection3 = CollectionUtils.compliment(
+          CollectionUtils.iterToList(mGroups.get(2)),
+          CollectionUtils.union(mIntersection13,
+              CollectionUtils.union(mIntersection23, mIntersection123)));
 
-      // System.err.println("i32 " + mIntersection13 + " " + mIntersection23 + " " +
+      // System.err.println("i32 " + mIntersection13 + " " + mIntersection23 + "
+      // " +
       // mIntersection123);
       // System.err.println("i3 " + mIntersection3 + " " +
       // CollectionUtils.iterToList(mGroups.get(2)).size());
@@ -376,8 +391,7 @@ public class ProportionalVennCanvas extends VennCanvas {
   /**
    * Plot one circle.
    *
-   * @param g2
-   *          the g 2
+   * @param g2 the g 2
    */
   private void plotOneCircle(Graphics2D g2) {
     g2.setFont(PLOT_FONT);
@@ -411,8 +425,7 @@ public class ProportionalVennCanvas extends VennCanvas {
   /**
    * Plot two circles.
    *
-   * @param g2
-   *          the g 2
+   * @param g2 the g 2
    */
   private void plotTwoCircles(Graphics2D g2) {
     // overlap in terms of g1
@@ -431,7 +444,8 @@ public class ProportionalVennCanvas extends VennCanvas {
 
       // g2.setColor(Color.BLACK);
 
-      String text = Integer.toString(mGroups.get(0).size() - mIntersection12.size());
+      String text = Integer
+          .toString(mGroups.get(0).size() - mIntersection12.size());
 
       int textX = ModernWidget.leftAlignTextX(g2, text, mP1.x);
       int textY = ModernWidget.centerTextAboutY(g2, mP1.y);
@@ -467,7 +481,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       textY = ModernWidget.centerTextAboutY(g2, mP2.y);
       g2.drawString(text, textX, textY);
 
-      textX = Math.max(mP1.x, mP2.x - (int) (Math.sqrt(mR2 * mR2 - mHalfChord12 * mHalfChord12)));
+      textX = Math.max(mP1.x,
+          mP2.x - (int) (Math.sqrt(mR2 * mR2 - mHalfChord12 * mHalfChord12)));
 
       textX = ModernWidget.centerTextAboutX(g2, text, textX);
       textY = ModernWidget.centerTextAboutY(g2, mP2.y);
@@ -487,7 +502,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       g2.setColor(mGroups.get(0).getColor());
       g2.drawOval(mP1.x - r, mP1.y - r, d, d);
 
-      String text = Integer.toString(mGroups.get(0).size() - mIntersection12.size());
+      String text = Integer
+          .toString(mGroups.get(0).size() - mIntersection12.size());
 
       int textX = ModernWidget.leftAlignTextX(g2, text, mP1.x);
       int textY = ModernWidget.centerTextAboutY(g2, mP1.y);
@@ -556,8 +572,7 @@ public class ProportionalVennCanvas extends VennCanvas {
   /**
    * Plot three circles.
    *
-   * @param g2
-   *          the g 2
+   * @param g2 the g 2
    */
   private void plotThreeCircles(Graphics2D g2) {
 
@@ -572,7 +587,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       g2.drawOval(mP1.x - r, mP1.y - r, d, d);
 
       String text = Integer
-          .toString(mGroups.get(0).size() - mIntersection12.size() - mIntersection13.size() - mIntersection123.size());
+          .toString(mGroups.get(0).size() - mIntersection12.size()
+              - mIntersection13.size() - mIntersection123.size());
 
       int textX = ModernWidget.leftAlignTextX(g2, text, mP1.x);
       int textY = ModernWidget.centerTextAboutY(g2, mP1.y);
@@ -597,8 +613,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       g2.drawOval(mP2.x - r, mP2.y - r, d, d);
 
       // g2.setColor(Color.BLACK);
-      text = Integer
-          .toString(mGroups.get(1).size() - mIntersection12.size() - mIntersection23.size() - mIntersection123.size());
+      text = Integer.toString(mGroups.get(1).size() - mIntersection12.size()
+          - mIntersection23.size() - mIntersection123.size());
 
       textX = mP2.x; // ModernWidget.centerTextAboutX(g2, text, x);
 
@@ -622,8 +638,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       g2.setColor(mGroups.get(2).getColor());
       g2.drawOval(mP3.x - r, mP3.y - r, d, d);
 
-      text = Integer
-          .toString(mGroups.get(2).size() - mIntersection13.size() - mIntersection23.size() - mIntersection123.size());
+      text = Integer.toString(mGroups.get(2).size() - mIntersection13.size()
+          - mIntersection23.size() - mIntersection123.size());
 
       textX = mP3.x; // ModernWidget.centerTextAboutX(g2, text, x);
       textY = ModernWidget.centerTextAboutY(g2, mP3.y);
@@ -670,7 +686,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       // g2.setColor(Color.BLACK);
 
       String text = Integer
-          .toString(mGroups.get(0).size() - mIntersection12.size() - mIntersection13.size() - mIntersection123.size());
+          .toString(mGroups.get(0).size() - mIntersection12.size()
+              - mIntersection13.size() - mIntersection123.size());
 
       int textX = ModernWidget.centerTextAboutX(g2, text, mP1.x);
       int textY = ModernWidget.centerTextAboutY(g2, mP1.y);
@@ -685,8 +702,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       g2.drawOval(mP2.x - r, mP2.y - r, d, d);
 
       // g2.setColor(Color.BLACK);
-      text = Integer
-          .toString(mGroups.get(1).size() - mIntersection12.size() - mIntersection23.size() - mIntersection123.size());
+      text = Integer.toString(mGroups.get(1).size() - mIntersection12.size()
+          - mIntersection23.size() - mIntersection123.size());
 
       textX = ModernWidget.centerTextAboutX(g2, text, mP2.x);
       textY = ModernWidget.centerTextAboutY(g2, mP2.y);
@@ -701,8 +718,8 @@ public class ProportionalVennCanvas extends VennCanvas {
       g2.drawOval(mP3.x - r, mP3.y - r, d, d);
 
       // g2.setColor(Color.BLACK);
-      text = Integer
-          .toString(mGroups.get(2).size() - mIntersection13.size() - mIntersection23.size() - mIntersection123.size());
+      text = Integer.toString(mGroups.get(2).size() - mIntersection13.size()
+          - mIntersection23.size() - mIntersection123.size());
 
       textX = ModernWidget.centerTextAboutX(g2, text, mP3.x);
       textY = ModernWidget.centerTextAboutY(g2, mP3.y);
@@ -802,8 +819,7 @@ public class ProportionalVennCanvas extends VennCanvas {
   /**
    * The maximum size of any of the groups.
    *
-   * @param groups
-   *          the groups
+   * @param groups the groups
    * @return the double
    */
   private static double maxSize(GroupsModel groups) {
@@ -819,12 +835,9 @@ public class ProportionalVennCanvas extends VennCanvas {
   /**
    * Determine the distance between the centers of the circles.
    *
-   * @param ai
-   *          Area of intersection.
-   * @param r1
-   *          the r 1
-   * @param r2
-   *          the r 2
+   * @param ai Area of intersection.
+   * @param r1 the r 1
+   * @param r2 the r 2
    * @return the double
    */
   private static double solveD(double ai, double r1, double r2) {
@@ -849,8 +862,10 @@ public class ProportionalVennCanvas extends VennCanvas {
     while (d > dmin) {
       d2sq = d * d;
 
-      a = r2sq * Math.acos((d2sq + r2sq - r1sq) / (2 * d * r2)) + r1sq * Math.acos((d2sq + r1sq - r2sq) / (2 * d * r1))
-          - 0.5 * Math.sqrt((-d + r2 + r1) * (d + r2 - r1) * (d - r2 + r1) * (d + r2 + r1));
+      a = r2sq * Math.acos((d2sq + r2sq - r1sq) / (2 * d * r2))
+          + r1sq * Math.acos((d2sq + r1sq - r2sq) / (2 * d * r1))
+          - 0.5 * Math.sqrt(
+              (-d + r2 + r1) * (d + r2 - r1) * (d - r2 + r1) * (d + r2 + r1));
 
       if (a >= ai) {
         return d;
@@ -858,7 +873,8 @@ public class ProportionalVennCanvas extends VennCanvas {
 
       d -= D_INC;
 
-      // System.err.println("d " + d + " " + a + " " + ai + " " + r1 + " " + r2);
+      // System.err.println("d " + d + " " + a + " " + ai + " " + r1 + " " +
+      // r2);
     }
 
     // Favor the overlap being slightly too large rather than too small.
@@ -868,16 +884,14 @@ public class ProportionalVennCanvas extends VennCanvas {
   /**
    * Gets the chord size.
    *
-   * @param d
-   *          the d
-   * @param r1
-   *          the r 1
-   * @param r2
-   *          the r 2
+   * @param d the d
+   * @param r1 the r 1
+   * @param r2 the r 2
    * @return the chord size
    */
   private static double getChordSize(double d, double r1, double r2) {
-    return 1.0 / d * Math.sqrt((-d + r2 - r1) * (-d - r2 + r1) * (-d + r2 + r1) * (d + r2 + r1));
+    return 1.0 / d * Math
+        .sqrt((-d + r2 - r1) * (-d - r2 + r1) * (-d + r2 + r1) * (d + r2 + r1));
   }
 
   /**

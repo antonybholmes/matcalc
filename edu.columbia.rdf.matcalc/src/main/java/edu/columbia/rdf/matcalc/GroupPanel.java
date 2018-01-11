@@ -64,8 +64,7 @@ public class GroupPanel extends HBox {
   /**
    * Instantiates a new group panel.
    *
-   * @param groups
-   *          the groups
+   * @param groups the groups
    */
   public GroupPanel(XYSeriesGroup groups) {
     mGroups = groups;

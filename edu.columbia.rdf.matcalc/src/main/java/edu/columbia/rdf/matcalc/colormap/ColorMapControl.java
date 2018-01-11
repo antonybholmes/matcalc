@@ -22,7 +22,6 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.graphics.ModernCanvasListener;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
@@ -50,10 +49,8 @@ public class ColorMapControl extends HBox {
   /**
    * Instantiates a new line style control.
    *
-   * @param parent
-   *          the parent
-   * @param plot
-   *          the plot
+   * @param parent the parent
+   * @param plot the plot
    */
   public ColorMapControl(ModernWindow parent, Plot plot) {
     mPlot = plot;

@@ -41,10 +41,8 @@ public class PlotControl extends ModernSubCollapsePane {
   /**
    * Instantiates a new axis plot control.
    *
-   * @param parent
-   *          the parent
-   * @param plot
-   *          the plot
+   * @param parent the parent
+   * @param plot the plot
    */
   public PlotControl(ModernWindow parent, Plot plot) {
     Box box = VBox.create();

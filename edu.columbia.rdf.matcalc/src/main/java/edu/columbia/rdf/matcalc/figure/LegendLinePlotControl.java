@@ -32,10 +32,8 @@ public class LegendLinePlotControl extends LineStyleControl {
   /**
    * Instantiates a new axis line plot control.
    *
-   * @param parent
-   *          the parent
-   * @param legend
-   *          the legend
+   * @param parent the parent
+   * @param legend the legend
    */
   public LegendLinePlotControl(ModernWindow parent, LegendProperties legend) {
     super(parent, "Border", legend.getStyle().getLineStyle());

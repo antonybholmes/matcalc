@@ -105,8 +105,7 @@ public class NaturalSorter implements Comparator<String> {
    * Returns true if the char is a space or zero since we ignore leading runs of
    * these characters.
    *
-   * @param c
-   *          the c
+   * @param c the c
    * @return true, if is leading
    */
   private static boolean isLeading(char c) {
@@ -118,14 +117,10 @@ public class NaturalSorter implements Comparator<String> {
    * numerical sort comparison. The prefix of both strings is by definition the
    * same so it cannot be used for sorting.
    *
-   * @param a
-   *          String a.
-   * @param ai
-   *          The index in a where to begin.
-   * @param b
-   *          String b.
-   * @param bi
-   *          The index in b where to begin.
+   * @param a String a.
+   * @param ai The index in a where to begin.
+   * @param b String b.
+   * @param bi The index in b where to begin.
    * @return the int
    */
   private int compareNumericalSuffixes(char[] a, int ai, char[] b, int bi) {
@@ -178,10 +173,8 @@ public class NaturalSorter implements Comparator<String> {
    * Returns a char from a char array or 0 if the bounds of the array are
    * exceeded. Guaranteed to return a value rather than throwing an exception.
    *
-   * @param s
-   *          the s
-   * @param i
-   *          the i
+   * @param s the s
+   * @param i the i
    * @return the char
    */
   private static char charAt(final char[] s, int i) {

@@ -51,8 +51,7 @@ public class XYSeriesXmlHandler extends DefaultHandler {
   /**
    * Instantiates a new key xml handler.
    *
-   * @param groups
-   *          the groups
+   * @param groups the groups
    */
   public XYSeriesXmlHandler(Collection<XYSeries> groups) {
     mGroups = groups;
@@ -64,7 +63,10 @@ public class XYSeriesXmlHandler extends DefaultHandler {
    * @see org.xml.sax.helpers.DefaultHandler#startElement(java.lang.String,
    * java.lang.String, java.lang.String, org.xml.sax.Attributes)
    */
-  public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+  public void startElement(String uri,
+      String localName,
+      String qName,
+      Attributes attributes) throws SAXException {
 
     if (qName.equals("group")) {
       mName = attributes.getValue("name");
@@ -85,7 +87,8 @@ public class XYSeriesXmlHandler extends DefaultHandler {
    * java.lang.String, java.lang.String)
    */
   @Override
-  public void endElement(String uri, String localName, String qName) throws SAXException {
+  public void endElement(String uri, String localName, String qName)
+      throws SAXException {
     if (qName.equals("group")) {
       mGroups.add(new XYSeries(mName, RegexUtils.compile(mRegexes), mColor));
     } else if (qName.equals("search")) {

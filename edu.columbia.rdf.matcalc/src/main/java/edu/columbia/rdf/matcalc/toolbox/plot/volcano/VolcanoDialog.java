@@ -44,7 +44,8 @@ import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
 /**
  * The class VolcanoDialog.
  */
-public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class VolcanoDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -54,7 +55,8 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
   /**
    * The check log2.
    */
-  private CheckBox checkLog2 = new ModernCheckSwitch(PlotConstants.MENU_LOG_TRANSFORM, true);
+  private CheckBox checkLog2 = new ModernCheckSwitch(
+      PlotConstants.MENU_LOG_TRANSFORM, true);
 
   /**
    * The member group1 combo.
@@ -74,14 +76,16 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
   /**
    * The check plot.
    */
-  private CheckBox checkPlot = new ModernCheckSwitch(PlotConstants.MENU_CREATE_PLOT, true);
+  private CheckBox checkPlot = new ModernCheckSwitch(
+      PlotConstants.MENU_CREATE_PLOT, true);
 
   private TestCombo mTestCombo = new TestCombo();
 
   /**
    * The check reset.
    */
-  private CheckBox checkReset = new ModernCheckBox(PlotConstants.MENU_RESET_HISTORY, true);
+  private CheckBox checkReset = new ModernCheckBox(
+      PlotConstants.MENU_RESET_HISTORY, true);
 
   /**
    * The member fdr panel.
@@ -96,14 +100,12 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
   /**
    * Instantiates a new volcano dialog.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
+   * @param parent the parent
+   * @param matrix the matrix
+   * @param groups the groups
    */
-  public VolcanoDialog(ModernWindow parent, DataFrame matrix, XYSeriesGroup groups) {
+  public VolcanoDialog(ModernWindow parent, DataFrame matrix,
+      XYSeriesGroup groups) {
     super(parent, "matcalc.modules.volcano.help.url");
 
     setTitle("Volcano Plot");
@@ -138,10 +140,8 @@ public class VolcanoDialog extends ModernDialogHelpWindow implements ModernClick
   /**
    * Load groups.
    *
-   * @param groups
-   *          the groups
-   * @param combo
-   *          the combo
+   * @param groups the groups
+   * @param combo the combo
    */
   private void loadGroups(XYSeriesGroup groups, ModernComboBox combo) {
     for (XYSeries group : groups) {

@@ -76,7 +76,8 @@ public class ScaleControl extends HBox implements ChangeListener {
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -106,8 +107,7 @@ public class ScaleControl extends HBox implements ChangeListener {
   /**
    * Instantiates a new intensity control.
    *
-   * @param intensity
-   *          the intensity
+   * @param intensity the intensity
    */
   public ScaleControl(double intensity) {
     init();
@@ -118,8 +118,7 @@ public class ScaleControl extends HBox implements ChangeListener {
   /**
    * Instantiates a new scale control.
    *
-   * @param intensityModel
-   *          the intensity model
+   * @param intensityModel the intensity model
    */
   public ScaleControl(ScaleModel intensityModel) {
     mScaleModel = intensityModel;
@@ -135,7 +134,8 @@ public class ScaleControl extends HBox implements ChangeListener {
    * Inits the.
    */
   private void init() {
-    mSlider = new ScaleSpinner(3); // new ModernOrbSlider(3, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    mSlider = new ScaleSpinner(3); // new ModernOrbSlider(3, 0.25, 0.5, 1, 2, 3,
+                                   // 4, 5, 6, 7, 8, 9, 10);
 
     // Ui.setSize(mSlider, 80, ModernWidget.WIDGET_HEIGHT);
 
@@ -184,8 +184,7 @@ public class ScaleControl extends HBox implements ChangeListener {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mListeners.addClickListener(l);
@@ -202,8 +201,8 @@ public class ScaleControl extends HBox implements ChangeListener {
     /*
      * double v = mSpinner.getValue();
      * 
-     * if (v > 0) { ++v; } else if (v < 0) { v = 1.0 / (1.0 - v); } else { v = 1.0;
-     * }
+     * if (v > 0) { ++v; } else if (v < 0) { v = 1.0 / (1.0 - v); } else { v =
+     * 1.0; }
      * 
      * return v;
      */
@@ -216,8 +215,8 @@ public class ScaleControl extends HBox implements ChangeListener {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+   * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.
+   * ChangeEvent)
    */
   @Override
   public void changed(ChangeEvent e) {

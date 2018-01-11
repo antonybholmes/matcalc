@@ -61,7 +61,8 @@ import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
 /**
  * The class OneWayAnovaModule.
  */
-public class SupervisedModule extends CalcModule implements ModernClickListener {
+public class SupervisedModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -81,26 +82,29 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Supervised", new Raster32Icon(new DiffExp32VectorIcon()),
+    RibbonLargeButton button = new RibbonLargeButton("Supervised",
+        new Raster32Icon(new DiffExp32VectorIcon()),
         "Supervised Classification", "Supervised classification.");
     button.addClickListener(this);
 
-    mParent.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
+    mParent.getRibbon().getToolbar("Classification").getSection("Classifier")
+        .add(button);
   }
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -116,12 +120,9 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
   /**
    * Ttest.
    *
-   * @param properties
-   *          the properties
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param properties the properties
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
   private void classification() throws IOException, ParseException {
     DataFrame m = mParent.getCurrentMatrix();
@@ -140,7 +141,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
     XYSeriesModel rowGroups = XYSeriesModel.create(mParent.getRowGroups());
 
-    SupervisedDialog dialog = new SupervisedDialog(mParent, m, mParent.getGroups());
+    SupervisedDialog dialog = new SupervisedDialog(mParent, m,
+        mParent.getGroups());
 
     dialog.setVisible(true);
 
@@ -182,29 +184,77 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
     TestType testType = dialog.getTest();
 
-    DataFrame collapsedM = CollapseModule.collapse(m, collapseName, g1, g2, collapseType, mParent);
+    DataFrame collapsedM = CollapseModule
+        .collapse(m, collapseName, g1, g2, collapseType, mParent);
 
     switch (plotType) {
     case VOLCANO:
-      VolcanoPlotModule.volcanoPlot(mParent, collapsedM, alpha, TestType.TTEST_UNEQUAL_VARIANCE, fdrType, g1, g2,
-          !dialog.getIsLog2Transformed() || dialog.getLog2Transform(), true);
+      VolcanoPlotModule.volcanoPlot(mParent,
+          collapsedM,
+          alpha,
+          TestType.TTEST_UNEQUAL_VARIANCE,
+          fdrType,
+          g1,
+          g2,
+          !dialog.getIsLog2Transformed() || dialog.getLog2Transform(),
+          true);
 
       break;
     default:
       switch (comparisonType) {
       case ONE_VS_REST:
-        statTestOneVsRest(collapsedM, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, testType,
-            fdrType, groups, rowGroups, isLog2, log2Data);
+        statTestOneVsRest(collapsedM,
+            alpha,
+            classificationAlpha,
+            minFold,
+            minZ,
+            posZ,
+            negZ,
+            topGenes,
+            testType,
+            fdrType,
+            groups,
+            rowGroups,
+            isLog2,
+            log2Data);
 
         break;
       case PAIRWISE:
-        statTestPairwise(collapsedM, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, testType, fdrType,
-            groups, rowGroups, isLog2, log2Data);
+        statTestPairwise(collapsedM,
+            alpha,
+            classificationAlpha,
+            minFold,
+            minZ,
+            posZ,
+            negZ,
+            topGenes,
+            testType,
+            fdrType,
+            groups,
+            rowGroups,
+            isLog2,
+            log2Data);
 
         break;
       default:
-        statTest(collapsedM, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, testType, fdrType, g1, g2,
-            groups, rowGroups, isLog2, log2Data, plotType, keepHistory);
+        statTest(collapsedM,
+            alpha,
+            classificationAlpha,
+            minFold,
+            minZ,
+            posZ,
+            negZ,
+            topGenes,
+            testType,
+            fdrType,
+            g1,
+            g2,
+            groups,
+            rowGroups,
+            isLog2,
+            log2Data,
+            plotType,
+            keepHistory);
 
         break;
       }
@@ -234,9 +284,20 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
    * @throws IOException
    * @throws ParseException
    */
-  public void statTestOneVsRest(DataFrame m, double alpha, double classificationAlpha, double minFold, double minZ,
-      boolean posZ, boolean negZ, int topGenes, TestType test, FDRType fdrType, XYSeriesModel allSeries,
-      XYSeriesModel rowSeries, boolean isLog2Data, boolean log2Data) {
+  public void statTestOneVsRest(DataFrame m,
+      double alpha,
+      double classificationAlpha,
+      double minFold,
+      double minZ,
+      boolean posZ,
+      boolean negZ,
+      int topGenes,
+      TestType test,
+      FDRType fdrType,
+      XYSeriesModel allSeries,
+      XYSeriesModel rowSeries,
+      boolean isLog2Data,
+      boolean log2Data) {
 
     System.err.println("aha " + allSeries.getCount());
 
@@ -252,7 +313,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
       for (XYSeries st : allSeries) {
         if (!st.equals(s)) {
-          buffer.append(TextUtils.sentenceCase(TextUtils.head(st.getName(), 5)));
+          buffer
+              .append(TextUtils.sentenceCase(TextUtils.head(st.getName(), 5)));
         }
       }
 
@@ -264,19 +326,47 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
         }
       }
 
-      SysUtils.err().println(s2.getName(), MatrixGroup.findColumnIndices(m, s2));
+      SysUtils.err().println(s2.getName(),
+          MatrixGroup.findColumnIndices(m, s2));
 
       XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
 
-      statTest(m, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, test, fdrType, s, s2,
-          XYSeriesModel.create(newGroup), rowSeries, isLog2Data, log2Data, PlotType.NONE, false);
+      statTest(m,
+          alpha,
+          classificationAlpha,
+          minFold,
+          minZ,
+          posZ,
+          negZ,
+          topGenes,
+          test,
+          fdrType,
+          s,
+          s2,
+          XYSeriesModel.create(newGroup),
+          rowSeries,
+          isLog2Data,
+          log2Data,
+          PlotType.NONE,
+          false);
 
     }
   }
 
-  public void statTestPairwise(DataFrame m, double alpha, double classificationAlpha, double minFold, double minZ,
-      boolean posZ, boolean negZ, int topGenes, TestType test, FDRType fdrType, XYSeriesModel allSeries,
-      XYSeriesModel rowSeries, boolean isLog2Data, boolean log2Data) {
+  public void statTestPairwise(DataFrame m,
+      double alpha,
+      double classificationAlpha,
+      double minFold,
+      double minZ,
+      boolean posZ,
+      boolean negZ,
+      int topGenes,
+      TestType test,
+      FDRType fdrType,
+      XYSeriesModel allSeries,
+      XYSeriesModel rowSeries,
+      boolean isLog2Data,
+      boolean log2Data) {
 
     Set<XYSeries> used = new HashSet<XYSeries>();
 
@@ -286,8 +376,24 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
         if (!s2.equals(s) && !used.contains(s2)) {
           XYSeriesGroup newGroup = new XYSeriesGroup(s, s2);
 
-          statTest(m, alpha, classificationAlpha, minFold, minZ, posZ, negZ, topGenes, test, fdrType, s, s2,
-              XYSeriesModel.create(newGroup), rowSeries, isLog2Data, log2Data, PlotType.NONE, false);
+          statTest(m,
+              alpha,
+              classificationAlpha,
+              minFold,
+              minZ,
+              posZ,
+              negZ,
+              topGenes,
+              test,
+              fdrType,
+              s,
+              s2,
+              XYSeriesModel.create(newGroup),
+              rowSeries,
+              isLog2Data,
+              log2Data,
+              PlotType.NONE,
+              false);
         }
       }
 
@@ -298,56 +404,48 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
   /**
    * Ttest.
    *
-   * @param m
-   *          the m
-   * @param minExp
-   *          the min exp
-   * @param alpha
-   *          the alpha
-   * @param classificationAlpha
-   *          the classification alpha
-   * @param minFold
-   *          the min fold
-   * @param minZ
-   *          the min z
-   * @param posZ
-   *          the pos z
-   * @param negZ
-   *          the neg z
-   * @param topGenes
-   *          the top genes
-   * @param collapseType
-   *          the collapse type
-   * @param rowAnnotation
-   *          the row annotation
-   * @param fdrType
-   *          the fdr type
-   * @param g1
-   *          the g1
-   * @param g2
-   *          the g2
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param isLog2Data
-   *          the is log2 data
-   * @param log2Data
-   *          the log2 data
-   * @param equalVariance
-   *          the equal variance
-   * @param plotType
-   *          the plot
-   * @param properties
-   *          the properties
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param m the m
+   * @param minExp the min exp
+   * @param alpha the alpha
+   * @param classificationAlpha the classification alpha
+   * @param minFold the min fold
+   * @param minZ the min z
+   * @param posZ the pos z
+   * @param negZ the neg z
+   * @param topGenes the top genes
+   * @param collapseType the collapse type
+   * @param rowAnnotation the row annotation
+   * @param fdrType the fdr type
+   * @param g1 the g1
+   * @param g2 the g2
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param isLog2Data the is log2 data
+   * @param log2Data the log2 data
+   * @param equalVariance the equal variance
+   * @param plotType the plot
+   * @param properties the properties
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public void statTest(DataFrame m, double alpha, double classificationAlpha, double minFold, double minZ, boolean posZ,
-      boolean negZ, int topGenes, TestType test, FDRType fdrType, XYSeries g1, XYSeries g2, XYSeriesModel groups,
-      XYSeriesModel rowGroups, boolean isLog2Data, boolean log2Data, PlotType plotType, boolean keepHistory) {
+  public void statTest(DataFrame m,
+      double alpha,
+      double classificationAlpha,
+      double minFold,
+      double minZ,
+      boolean posZ,
+      boolean negZ,
+      int topGenes,
+      TestType test,
+      FDRType fdrType,
+      XYSeries g1,
+      XYSeries g2,
+      XYSeriesModel groups,
+      XYSeriesModel rowGroups,
+      boolean isLog2Data,
+      boolean log2Data,
+      PlotType plotType,
+      boolean keepHistory) {
 
     XYSeriesGroup comparisonGroups = new XYSeriesGroup();
     comparisonGroups.add(g1);
@@ -379,7 +477,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     DataFrame log2M;
 
     if (log2Data) {
-      log2M = history.addToHistory("log2(1 + data)", MatrixOperations.log2(MatrixOperations.add(colFilteredM, 1)));
+      log2M = history.addToHistory("log2(1 + data)",
+          MatrixOperations.log2(MatrixOperations.add(colFilteredM, 1)));
     } else {
       log2M = colFilteredM;
     }
@@ -435,8 +534,10 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
 
     DataFrame meansM = new DataFrame(foldChangesM);
 
-    meansM.setNumRowAnnotations(g1.getName() + " mean", DoubleMatrix.means(foldChangesM, g1));
-    meansM.setNumRowAnnotations(g2.getName() + " mean", DoubleMatrix.means(foldChangesM, g2));
+    meansM.setNumRowAnnotations(g1.getName() + " mean",
+        DoubleMatrix.means(foldChangesM, g1));
+    meansM.setNumRowAnnotations(g2.getName() + " mean",
+        DoubleMatrix.means(foldChangesM, g2));
 
     history.addToHistory("Group Means", meansM);
 
@@ -455,11 +556,14 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
       }
     }
 
-    List<Indexed<Integer, Double>> pFoldIndices = Statistics.outOfRange(foldChanges, negMinFold, posMinFold);
+    List<Indexed<Integer, Double>> pFoldIndices = Statistics
+        .outOfRange(foldChanges, negMinFold, posMinFold);
 
-    name = isLog2Data || log2Data ? "Log2 Fold Change Filter" : "Fold Change Filter";
+    name = isLog2Data || log2Data ? "Log2 Fold Change Filter"
+        : "Fold Change Filter";
 
-    DataFrame foldFilterM = DataFrame.copyRows(meansM, IndexedInt.indices(pFoldIndices));
+    DataFrame foldFilterM = DataFrame.copyRows(meansM,
+        IndexedInt.indices(pFoldIndices));
 
     history.addToHistory(name, foldFilterM);
 
@@ -474,7 +578,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     // collapseType,
     // mParent);
 
-    double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"), fdrType);
+    double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"),
+        fdrType);
 
     DataFrame mfdr = new DataFrame(foldFilterM);
     mfdr.setNumRowAnnotations("FDR", fdr);
@@ -487,9 +592,11 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     // ArrayUtils.toObjects(fdr)));
 
     // filter by fdr
-    List<Indexed<Integer, Double>> pValueIndices = Statistics.threshold(fdr, alpha);
+    List<Indexed<Integer, Double>> pValueIndices = Statistics.threshold(fdr,
+        alpha);
 
-    DataFrame fdrFilteredM = DataFrame.copyRows(mfdr, IndexedInt.indices(pValueIndices));
+    DataFrame fdrFilteredM = DataFrame.copyRows(mfdr,
+        IndexedInt.indices(pValueIndices));
     history.addToHistory("False discovery filter", fdrFilteredM);
 
     // DataFrame mfdrfiltered = addFlowItem("False discovery filter",
@@ -508,7 +615,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     // "Z-score",
     // ArrayUtils.toObjects(zscores)));
 
-    // Lets give a default classification to each row based on a p-value of 0.05 and
+    // Lets give a default classification to each row based on a p-value of 0.05
+    // and
     // a zscore > 1
 
     List<String> classifications = new ArrayList<String>();
@@ -539,7 +647,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
       classifications.add(classification);
     }
 
-    String comparison = g1.getName() + "vs" + g2.getName() + " (p <= " + classificationAlpha + ")";
+    String comparison = g1.getName() + "vs" + g2.getName() + " (p <= "
+        + classificationAlpha + ")";
 
     DataFrame classM = new DataFrame(zscoresM);
 
@@ -557,18 +666,21 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     List<Indexed<Integer, Double>> posZScores;
 
     if (posZ) {
-      posZScores = CollectionUtils
-          .reverseSort(CollectionUtils.subList(zscoresIndexed, MathUtils.ge(zscoresIndexed, minZ)));
+      posZScores = CollectionUtils.reverseSort(CollectionUtils
+          .subList(zscoresIndexed, MathUtils.ge(zscoresIndexed, minZ)));
     } else {
-      posZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer, Double>>();
+      posZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
+                                            // Double>>();
     }
 
     List<Indexed<Integer, Double>> negZScores;
 
     if (negZ) {
-      negZScores = CollectionUtils.sort(CollectionUtils.subList(zscoresIndexed, MathUtils.lt(zscoresIndexed, -minZ)));
+      negZScores = CollectionUtils.sort(CollectionUtils.subList(zscoresIndexed,
+          MathUtils.lt(zscoresIndexed, -minZ)));
     } else {
-      negZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer, Double>>();
+      negZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
+                                            // Double>>();
     }
 
     // Filter for top genes if necessary
@@ -597,7 +709,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     // DataFrame mDeltaSorted = addFlowItem("Sort by row z-score",
     // new RowFilterMatrixView(mclassification, indices));
 
-    DataFrame mNormalized = MatrixOperations.groupZScore(mDeltaSorted, comparisonGroups);
+    DataFrame mNormalized = MatrixOperations.groupZScore(mDeltaSorted,
+        comparisonGroups);
 
     history.addToHistory("Normalize expression within groups", mNormalized);
 
@@ -613,12 +726,14 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     // DataFrame mStandardized =
     // addFlowItem("Row normalize", new RowNormalizedMatrixView(mMinMax));
 
-    CountGroups countGroups = new CountGroups().add(new CountGroup("up", 0, ui.size() - 1))
+    CountGroups countGroups = new CountGroups()
+        .add(new CountGroup("up", 0, ui.size() - 1))
         .add(new CountGroup("down", ui.size(), indices.size() - 1));
 
     if (plotType != PlotType.NONE) {
-      mParent.addToHistory(new HeatMapMatrixTransform(mParent, mNormalized, groups, comparisonGroups, rowGroups,
-          countGroups, mParent.getTransformationHistory(), new ClusterProperties()));
+      mParent.addToHistory(new HeatMapMatrixTransform(mParent, mNormalized,
+          groups, comparisonGroups, rowGroups, countGroups,
+          mParent.getTransformationHistory(), new ClusterProperties()));
     }
 
     // Add a reference at the end so that it is easy for users to find
@@ -626,7 +741,10 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
     mParent.addToHistory("Results", mDeltaSorted);
   }
 
-  public static List<Double> getP(DataFrame m, XYSeries g1, XYSeries g2, TestType test) {
+  public static List<Double> getP(DataFrame m,
+      XYSeries g1,
+      XYSeries g2,
+      TestType test) {
     List<Double> pValues;
 
     switch (test) {
@@ -634,7 +752,8 @@ public class SupervisedModule extends CalcModule implements ModernClickListener 
       pValues = MatrixOperations.mannWhitney(m, g1, g2);
       break;
     default:
-      pValues = MatrixOperations.tTest(m, g1, g2, test == TestType.TTEST_EQUAL_VARIANCE);
+      pValues = MatrixOperations
+          .tTest(m, g1, g2, test == TestType.TTEST_EQUAL_VARIANCE);
     }
 
     return pValues;

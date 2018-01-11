@@ -89,17 +89,20 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * The member load button.
    */
-  private ModernButton mLoadButton = new ModernButton(UIService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
+  private ModernButton mLoadButton = new ModernButton(
+      UIService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
 
   /**
    * The member save button.
    */
-  private ModernButton mSaveButton = new ModernButton(UIService.getInstance().loadIcon(SaveBwVectorIcon.class, 16));
+  private ModernButton mSaveButton = new ModernButton(
+      UIService.getInstance().loadIcon(SaveBwVectorIcon.class, 16));
 
   /**
    * The member add button.
    */
-  private ModernButton mAddButton = new ModernButton(UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
+  private ModernButton mAddButton = new ModernButton(
+      UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
   /** The m import button. */
   private ModernButton mImportButton = new ModernButton("Import");
@@ -107,7 +110,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * The member remove button.
    */
-  private ModernButton mRemoveButton = new ModernButton(UIService.getInstance().loadIcon("trash_bw", 16));
+  private ModernButton mRemoveButton = new ModernButton(
+      UIService.getInstance().loadIcon("trash_bw", 16));
 
   // private ModernButton clearButton =
   // new ModernButton(UIResources.getInstance().loadIcon("clear", 16));
@@ -132,8 +136,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -160,8 +164,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -186,8 +190,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -204,8 +208,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -228,8 +232,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -246,8 +250,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -264,8 +268,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.tree.TreeEventListener#treeNodeDragged(org.abh.lib.ui.
-     * modern.tree.ModernTreeEvent)
+     * org.abh.lib.ui.modern.tree.TreeEventListener#treeNodeDragged(org.abh.lib.
+     * ui. modern.tree.ModernTreeEvent)
      */
     @Override
     public void treeNodeDragged(ModernTreeEvent e) {
@@ -277,8 +281,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.tree.TreeEventListener#treeNodeDoubleClicked(org.abh.
-     * lib.ui.modern.tree.ModernTreeEvent)
+     * org.abh.lib.ui.modern.tree.TreeEventListener#treeNodeDoubleClicked(org.
+     * abh. lib.ui.modern.tree.ModernTreeEvent)
      */
     @Override
     public void treeNodeDoubleClicked(ModernTreeEvent e) {
@@ -289,8 +293,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.tree.TreeEventListener#treeNodeClicked(org.abh.lib.ui.
-     * modern.tree.ModernTreeEvent)
+     * org.abh.lib.ui.modern.tree.TreeEventListener#treeNodeClicked(org.abh.lib.
+     * ui. modern.tree.ModernTreeEvent)
      */
     @Override
     public void treeNodeClicked(ModernTreeEvent e) {
@@ -303,8 +307,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Instantiates a new column group tree panel.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public ColumnGroupTreePanel(MainMatCalcWindow parent) {
     mParent = parent;
@@ -317,8 +320,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Sets the matrix.
    *
-   * @param matrix
-   *          the new matrix
+   * @param matrix the new matrix
    */
   public void setMatrix(DataFrame matrix) {
     mMatrix = matrix;
@@ -342,7 +344,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
     // scrollPane.setViewportBorder(BorderFactory.createEmptyBorder());
     // scrollPane.getViewport().setBackground(Color.WHITE);
 
-    setBody(scrollPane); // new ModernLineBorderPanel(new ModernComponent(scrollPane, BORDER)));
+    setBody(scrollPane); // new ModernLineBorderPanel(new
+                         // ModernComponent(scrollPane, BORDER)));
 
     Box box = HBox.create();
 
@@ -427,19 +430,20 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Load groups.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
-  public void loadGroups() throws IOException, SAXException, ParserConfigurationException, ParseException {
+  public void loadGroups() throws IOException, SAXException,
+      ParserConfigurationException, ParseException {
     Path file = FileDialog.open(mParent)
-        .filter(new AllMatrixGroupGuiFileFilter(), new MatrixGrpjGuiFileFilter(), new MatrixGrpxGuiFileFilter(),
-            new MatrixGroupGuiFileFilter(), new MatrixGrp2GuiFileFilter(), new AllGuiFilesFilter())
+        .filter(new AllMatrixGroupGuiFileFilter(),
+            new MatrixGrpjGuiFileFilter(),
+            new MatrixGrpxGuiFileFilter(),
+            new MatrixGroupGuiFileFilter(),
+            new MatrixGrp2GuiFileFilter(),
+            new AllGuiFilesFilter())
         .getFile(RecentFilesService.getInstance().getPwd());
 
     if (file == null) {
@@ -458,16 +462,13 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Load grpx files.
    *
-   * @param file
-   *          the file
-   * @throws SAXException
-   *           the SAX exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param file the file
+   * @throws SAXException the SAX exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  protected synchronized void loadXml(Path file) throws SAXException, IOException, ParserConfigurationException {
+  protected synchronized void loadXml(Path file)
+      throws SAXException, IOException, ParserConfigurationException {
     List<XYSeries> groups = new ArrayList<XYSeries>();
 
     SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -483,14 +484,12 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Load json.
    *
-   * @param file
-   *          the file
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  protected synchronized void loadJson(Path file) throws ParseException, IOException {
+  protected synchronized void loadJson(Path file)
+      throws ParseException, IOException {
     Json json = new JsonParser().parse(file);
 
     List<XYSeries> groups = new ArrayList<XYSeries>();
@@ -513,7 +512,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
 
       // System.err.println("case " + caseSensitive);
 
-      groups.add(new XYSeries(name, RegexUtils.compile(regexes), caseSensitive, color));
+      groups.add(new XYSeries(name, RegexUtils.compile(regexes), caseSensitive,
+          color));
     }
 
     addGroups(groups);
@@ -522,10 +522,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Load groups.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public void loadGroups(Path file) throws IOException {
     List<XYSeries> groups = XYSeries.loadSeries(file, mMatrix);
@@ -538,14 +536,12 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Save groups.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  public void saveGroups() throws IOException, TransformerException, ParserConfigurationException {
+  public void saveGroups()
+      throws IOException, TransformerException, ParserConfigurationException {
     Path file = FileDialog.save(mParent).filter(new MatrixGrpjGuiFileFilter())
         .getFile(RecentFilesService.getInstance().getPwd());
 
@@ -554,7 +550,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
     }
 
     if (FileUtils.exists(file)) {
-      ModernDialogStatus status = ModernMessageDialog.createFileReplaceDialog(mParent, file);
+      ModernDialogStatus status = ModernMessageDialog
+          .createFileReplaceDialog(mParent, file);
 
       if (status == ModernDialogStatus.CANCEL) {
         saveGroups();
@@ -579,8 +576,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Sets the groups.
    *
-   * @param groups
-   *          the new groups
+   * @param groups the new groups
    */
   public void setGroups(Collection<XYSeries> groups) {
     createTree(groups, true);
@@ -589,8 +585,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Adds the groups.
    *
-   * @param groups
-   *          the groups
+   * @param groups the groups
    */
   public void addGroups(Collection<XYSeries> groups) {
     createTree(groups, false);
@@ -599,10 +594,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Creates the tree.
    *
-   * @param groups
-   *          the groups
-   * @param clear
-   *          the clear
+   * @param groups the groups
+   * @param clear the clear
    */
   protected void createTree(Collection<XYSeries> groups, boolean clear) {
 
@@ -616,10 +609,12 @@ public class ColumnGroupTreePanel extends ModernComponent {
     }
 
     for (XYSeries group : groups) {
-      TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(), group);
+      TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(),
+          group);
 
       for (int i : XYSeries.findColumnIndices(mMatrix, group)) {
-        TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(mMatrix.getColumnName(i));
+        TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(
+            mMatrix.getColumnName(i));
 
         // Don't render the children, the parent will. This is
         // because we allow dragging and we don't want users to
@@ -640,10 +635,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Creates the tree.
    *
-   * @param group
-   *          the group
-   * @param clear
-   *          the clear
+   * @param group the group
+   * @param clear the clear
    */
   protected void createTree(XYSeries group, boolean clear) {
 
@@ -656,11 +649,13 @@ public class ColumnGroupTreePanel extends ModernComponent {
       root = mTree.getRoot();
     }
 
-    TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(), group);
+    TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(),
+        group);
 
     for (int i : XYSeries.findColumnIndices(mMatrix, group)) {
 
-      TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(mMatrix.getColumnName(i));
+      TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(
+          mMatrix.getColumnName(i));
 
       // Don't render the children, the parent will. This is
       // because we allow dragging and we don't want users to
@@ -697,8 +692,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Adds the group.
    *
-   * @param group
-   *          the group
+   * @param group the group
    */
   protected void addGroup(XYSeries group) {
     createTree(group, false);
@@ -707,21 +701,25 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Import groups.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws InvalidFormatException
-   *           the invalid format exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws InvalidFormatException the invalid format exception
    */
   private void importGroups() throws IOException, InvalidFormatException {
-    Path file = ExcelUI.openExcelFileDialog(mParent, RecentFilesService.getInstance().getPwd());
+    Path file = ExcelUI.openExcelFileDialog(mParent,
+        RecentFilesService.getInstance().getPwd());
 
     if (file == null) {
       return;
     }
 
-    DataFrame groupsMatrix = Excel.convertToMatrix(file, true, TextUtils.emptyList(), 0, TextUtils.TAB_DELIMITER);
+    DataFrame groupsMatrix = Excel.convertToMatrix(file,
+        true,
+        TextUtils.emptyList(),
+        0,
+        TextUtils.TAB_DELIMITER);
 
-    XYSeriesImportDialog dialog = new XYSeriesImportDialog(mParent, mMatrix, groupsMatrix);
+    XYSeriesImportDialog dialog = new XYSeriesImportDialog(mParent, mMatrix,
+        groupsMatrix);
 
     dialog.setVisible(true);
 
@@ -744,7 +742,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
       return;
     }
 
-    XYSeriesDialog dialog = new XYSeriesDialog(mParent, mTree.getSelectedNode().getValue());
+    XYSeriesDialog dialog = new XYSeriesDialog(mParent,
+        mTree.getSelectedNode().getValue());
 
     dialog.setVisible(true);
 
@@ -759,8 +758,10 @@ public class ColumnGroupTreePanel extends ModernComponent {
    * Clear.
    */
   private void clear() {
-    ModernDialogStatus status = ModernMessageDialog.createDialog(mParent, mParent.getAppInfo().getName(),
-        "Are you sure you want to clear all groups?", MessageDialogType.WARNING_OK_CANCEL);
+    ModernDialogStatus status = ModernMessageDialog.createDialog(mParent,
+        mParent.getAppInfo().getName(),
+        "Are you sure you want to clear all groups?",
+        MessageDialogType.WARNING_OK_CANCEL);
 
     if (status == ModernDialogStatus.OK) {
       mTree.getRoot().clear();
@@ -771,8 +772,10 @@ public class ColumnGroupTreePanel extends ModernComponent {
    * Removes the.
    */
   private void remove() {
-    ModernDialogStatus status = ModernMessageDialog.createDialog(mParent, mParent.getAppInfo().getName(),
-        "Are you sure you want to remove the selected groups?", MessageDialogType.WARNING_OK_CANCEL);
+    ModernDialogStatus status = ModernMessageDialog.createDialog(mParent,
+        mParent.getAppInfo().getName(),
+        "Are you sure you want to remove the selected groups?",
+        MessageDialogType.WARNING_OK_CANCEL);
 
     if (status == ModernDialogStatus.OK) {
       for (TreeNode<XYSeries> node : mTree.getSelectedNodes()) {

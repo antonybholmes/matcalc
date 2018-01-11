@@ -37,8 +37,7 @@ public class ScaleModel extends DoubleModel {
   /**
    * Instantiates a new scale model.
    *
-   * @param v
-   *          the v
+   * @param v the v
    */
   public ScaleModel(double v) {
     update(v);

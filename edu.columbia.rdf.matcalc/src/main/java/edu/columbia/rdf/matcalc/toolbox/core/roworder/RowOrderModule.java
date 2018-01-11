@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.toolbox.core.roworder;
 import java.util.List;
 
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -40,7 +39,8 @@ public class RowOrderModule extends CalcModule implements ModernClickListener {
   /**
    * The button.
    */
-  private RibbonLargeButton button = new RibbonLargeButton(new Raster32Icon(new OrderRows32VectorIcon()), "Row Order",
+  private RibbonLargeButton button = new RibbonLargeButton(
+      new Raster32Icon(new OrderRows32VectorIcon()), "Row Order",
       "Order rows.");
 
   /**
@@ -61,7 +61,8 @@ public class RowOrderModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -77,8 +78,8 @@ public class RowOrderModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

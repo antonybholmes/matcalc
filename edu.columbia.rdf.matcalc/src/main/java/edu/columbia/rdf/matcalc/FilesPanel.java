@@ -38,8 +38,10 @@ public class FilesPanel extends ModernComponent implements ChangeListener {
     mList.setCellRenderer(new FilesListRenderer());
     mList.setModel(mListModel);
 
-    setBody(new ModernScrollPane(mList).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
-        .setVerticalScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW).setVScrollBarLocation(ScrollBarLocation.FLOATING));
+    setBody(new ModernScrollPane(mList)
+        .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
+        .setVerticalScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW)
+        .setVScrollBarLocation(ScrollBarLocation.FLOATING));
 
     // setBorder(BORDER);
 

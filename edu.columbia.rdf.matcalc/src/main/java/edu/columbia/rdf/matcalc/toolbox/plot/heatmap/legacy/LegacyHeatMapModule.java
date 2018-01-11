@@ -36,7 +36,8 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 /**
  * The class HeatMapModule.
  */
-public class LegacyHeatMapModule extends CalcModule implements ModernClickListener {
+public class LegacyHeatMapModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -74,15 +75,17 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Heat Map", UIService.getInstance().loadIcon("heatmap", 24),
-        "Heat Map", "Generate a heat map.");
+    RibbonLargeButton button = new RibbonLargeButton("Heat Map",
+        UIService.getInstance().loadIcon("heatmap", 24), "Heat Map",
+        "Generate a heat map.");
     button.addClickListener(this);
 
     mParent.getRibbon().getToolbar("Plot").getSection("Plot").add(button);
@@ -91,8 +94,7 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
   /**
    * Creates the.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void plot() throws IOException {
     DataFrame m = mParent.getCurrentMatrix();
@@ -109,15 +111,16 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
 
     scaleLargeMatrixImage(m, p);
 
-    mParent.addToHistory(new HeatMapPlotMatrixTransform(mParent, m, groups, rowGroups, countsGroup, history, p));
+    mParent.addToHistory(new HeatMapPlotMatrixTransform(mParent, m, groups,
+        rowGroups, countsGroup, history, p));
   }
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -154,8 +157,8 @@ public class LegacyHeatMapModule extends CalcModule implements ModernClickListen
   }
 
   /**
-   * Scale the size of the plot size based on the row/col count so that the image
-   * is not excessively large.
+   * Scale the size of the plot size based on the row/col count so that the
+   * image is not excessively large.
    * 
    * @param rows
    * @return

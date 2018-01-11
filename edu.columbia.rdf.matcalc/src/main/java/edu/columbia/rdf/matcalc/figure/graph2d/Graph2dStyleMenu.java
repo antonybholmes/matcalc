@@ -60,10 +60,8 @@ public class Graph2dStyleMenu extends ModernPopupMenu {
     /**
      * Instantiates a new peak style menu item.
      *
-     * @param text
-     *          the text
-     * @param icon
-     *          the icon
+     * @param text the text
+     * @param icon the icon
      */
     public PeakStyleMenuItem(String text, ModernIcon icon) {
       super(text, icon);
@@ -77,15 +75,23 @@ public class Graph2dStyleMenu extends ModernPopupMenu {
    * Instantiates a new graph2d style menu.
    */
   public Graph2dStyleMenu() {
-    addMenuItem(new PeakStyleMenuItem("Joined", new Raster32Icon(new JoinedStyleIcon())));
-    addMenuItem(new PeakStyleMenuItem("Joined Smooth", new Raster32Icon(new JoinedSmoothStyleIcon())));
-    addMenuItem(new PeakStyleMenuItem("Filled", new Raster32Icon(new JoinedFilledTransStyleIcon())));
-    addMenuItem(new PeakStyleMenuItem("Filled Smooth", new Raster32Icon(new JoinedSmoothFilledStyleIcon())));
-    addMenuItem(new PeakStyleMenuItem("Lines", new Raster32Icon(new LinesStyleIcon())));
-    addMenuItem(new PeakStyleMenuItem("Bars", new Raster32Icon(new BarsStyleIcon())));
-    addMenuItem(new PeakStyleMenuItem("Scatter", new Raster32Icon(new ScatterStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Joined",
+        new Raster32Icon(new JoinedStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Joined Smooth",
+        new Raster32Icon(new JoinedSmoothStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Filled",
+        new Raster32Icon(new JoinedFilledTransStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Filled Smooth",
+        new Raster32Icon(new JoinedSmoothFilledStyleIcon())));
+    addMenuItem(
+        new PeakStyleMenuItem("Lines", new Raster32Icon(new LinesStyleIcon())));
+    addMenuItem(
+        new PeakStyleMenuItem("Bars", new Raster32Icon(new BarsStyleIcon())));
+    addMenuItem(new PeakStyleMenuItem("Scatter",
+        new Raster32Icon(new ScatterStyleIcon())));
 
     // TODO: replace icon
-    addMenuItem(new PeakStyleMenuItem("Heat Map", new Raster32Icon(new HeatMap32VectorIcon())));
+    addMenuItem(new PeakStyleMenuItem("Heat Map",
+        new Raster32Icon(new HeatMap32VectorIcon())));
   }
 }

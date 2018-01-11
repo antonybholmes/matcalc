@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox.math;
 
 import java.text.ParseException;
 
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.MatrixTransforms;
@@ -57,7 +56,8 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -66,18 +66,23 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
 
     ModernPopupMenu popup = new ModernPopupMenu();
 
-    popup.addMenuItem(new ModernTwoLineMenuItem("Min", "Ensure each cell has a minimum value.",
+    popup.addMenuItem(new ModernTwoLineMenuItem("Min",
+        "Ensure each cell has a minimum value.",
         UIService.getInstance().loadIcon("min", 32)));
-    popup.addMenuItem(new ModernTwoLineMenuItem("Min/Max", "Threshold all values between maximum and maximum.",
+    popup.addMenuItem(new ModernTwoLineMenuItem("Min/Max",
+        "Threshold all values between maximum and maximum.",
         UIService.getInstance().loadIcon("min_max", 32)));
-    popup.addMenuItem(new ModernTwoLineMenuItem("Min Shift", "Shift all values to be >= 0.",
-        UIService.getInstance().loadIcon("min_shift", 32)));
+    popup.addMenuItem(
+        new ModernTwoLineMenuItem("Min Shift", "Shift all values to be >= 0.",
+            UIService.getInstance().loadIcon("min_shift", 32)));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Threshold", popup);
+    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton(
+        "Threshold", popup);
     button.setChangeText(false);
     button.setToolTip("Threshold", "Threshold functions.");
-    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions")
+        .add(button);
     button.addClickListener(this);
   }
 
@@ -85,26 +90,31 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
     DataFrame m = mWindow.getCurrentMatrix();
 
     if (e.getMessage().equals("Min")) {
-      mWindow.addToHistory("Minimum Threshold", MatrixTransforms.minThreshold(mWindow, m, 1));
+      mWindow.addToHistory("Minimum Threshold",
+          MatrixTransforms.minThreshold(mWindow, m, 1));
     } else if (e.getMessage().equals("Min/Max")) {
-      mWindow.addToHistory("Minimum Threshold", MatrixTransforms.minMaxThreshold(mWindow, m, 1, 10000)); // addFlowItem(new
-                                                                                                         // MinMaxMatrixTransform(this,
-                                                                                                         // getCurrentMatrix(),
-                                                                                                         // 1, 10000));
+      mWindow.addToHistory("Minimum Threshold",
+          MatrixTransforms.minMaxThreshold(mWindow, m, 1, 10000)); // addFlowItem(new
+                                                                   // MinMaxMatrixTransform(this,
+                                                                   // getCurrentMatrix(),
+                                                                   // 1,
+                                                                   // 10000));
     } else if (e.getMessage().equals("Min Shift")) {
-      minShift(); // mWindow.addToHistory("Min Shift", MatrixTransforms.subtract(mWindow, m, 1));
+      minShift(); // mWindow.addToHistory("Min Shift",
+                  // MatrixTransforms.subtract(mWindow, m, 1));
     } else if (e.getMessage().equals("Median Shift")) {
-      mWindow.addToHistory("Median Shift", MatrixOperations.divide(m, MatrixOperations.median(m))); // .collapseMaxMedian(m,
-                                                                                                    // rowAnnotation)MatrixTransforms.medianShift(mWindow,
-                                                                                                    // m));
+      mWindow.addToHistory("Median Shift",
+          MatrixOperations.divide(m, MatrixOperations.median(m))); // .collapseMaxMedian(m,
+                                                                   // rowAnnotation)MatrixTransforms.medianShift(mWindow,
+                                                                   // m));
     } else {
 
     }
@@ -113,8 +123,7 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
   /**
    * Min shift.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void minShift() {
     DataFrame m = mWindow.getCurrentMatrix();
@@ -123,7 +132,8 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
 
     System.err.println("min " + min);
 
-    ModernInputDialog dialog = new ModernInputDialog(mWindow, "Minimum", "Minimum Expression", "1");
+    ModernInputDialog dialog = new ModernInputDialog(mWindow, "Minimum",
+        "Minimum Expression", "1");
 
     dialog.setVisible(true);
 
@@ -133,7 +143,8 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
 
     double add = Double.parseDouble(dialog.getText());
 
-    DataFrame ret = MatrixOperations.add(MatrixOperations.subtract(m, min), add);
+    DataFrame ret = MatrixOperations.add(MatrixOperations.subtract(m, min),
+        add);
 
     mWindow.addToHistory("Minimum Threshold", ret);
   }

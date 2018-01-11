@@ -96,10 +96,8 @@ public class PlotTitleControl extends HExBox implements ModernClickListener {
   /**
    * Instantiates a new plot title control.
    *
-   * @param parent
-   *          the parent
-   * @param title
-   *          the title
+   * @param parent the parent
+   * @param title the title
    */
   public PlotTitleControl(ModernWindow parent, TitleProperties title) {
     mTitle = title;
@@ -130,8 +128,8 @@ public class PlotTitleControl extends HExBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

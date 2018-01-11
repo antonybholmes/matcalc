@@ -59,8 +59,7 @@ public class FigureDialog extends ModernDialogTaskWindow {
   /**
    * Instantiates a new figure dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public FigureDialog(ModernWindow parent) {
     super(parent);

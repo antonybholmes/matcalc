@@ -94,10 +94,8 @@ public class XYSeriesTitleControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new XY series title control.
    *
-   * @param parent
-   *          the parent
-   * @param series
-   *          the series
+   * @param parent the parent
+   * @param series the series
    */
   public XYSeriesTitleControl(ModernWindow parent, XYSeries series) {
     mSeries = series;
@@ -126,8 +124,8 @@ public class XYSeriesTitleControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

@@ -48,28 +48,20 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow {
   /**
    * Instantiates a new pattern discovery plot window.
    *
-   * @param window
-   *          the window
-   * @param name
-   *          the name
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the all groups
-   * @param comparisonGroups
-   *          the comparison groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param name the name
+   * @param matrix the matrix
+   * @param groups the all groups
+   * @param comparisonGroups the comparison groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public DifferentialExpressionPlotWindow(ModernRibbonWindow window, String name, DataFrame matrix,
-      XYSeriesModel groups, XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups,
-      List<String> history, Properties properties) {
+  public DifferentialExpressionPlotWindow(ModernRibbonWindow window,
+      String name, DataFrame matrix, XYSeriesModel groups,
+      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Properties properties) {
     super(window, matrix, groups, rowGroups, countGroups, history, properties);
 
     mComparisonGroups = comparisonGroups;
@@ -78,7 +70,8 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow {
   }
 
   /*
-   * @Override public void setMatrix(DataFrame matrix) { super.setMatrix(matrix);
+   * @Override public void setMatrix(DataFrame matrix) {
+   * super.setMatrix(matrix);
    * 
    * setFormatPane(); }
    */
@@ -96,7 +89,9 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow {
    * @return the format plot pane
    */
   public FormatPlotPane createFormatPane() {
-    return new DifferentialExpressionPanel(this, mMatrix, mGroups, mComparisonGroups, mRowGroups, mZoomModel,
-        mColorMapModel, mColorModel, mScaleModel, getTabsPane().getModel(), mCountGroups, mHistory, mProperties);
+    return new DifferentialExpressionPanel(this, mMatrix, mGroups,
+        mComparisonGroups, mRowGroups, mZoomModel, mColorMapModel, mColorModel,
+        mScaleModel, getTabsPane().getModel(), mCountGroups, mHistory,
+        mProperties);
   }
 }

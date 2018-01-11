@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.roworder;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -31,9 +30,7 @@ import org.jebtk.core.Indexed;
 import org.jebtk.core.IndexedInt;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.FileUtils;
-import org.jebtk.core.io.Io;
 import org.jebtk.core.io.TokenFunction;
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
@@ -66,7 +63,8 @@ import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
  * 
  * @author Antony Holmes Holmes
  */
-public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class RowOrderDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -86,12 +84,14 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * The member up button.
    */
-  private ModernButton mUpButton = new ModernButton(UIService.getInstance().loadIcon(ArrowUpVectorIcon.class, 16));
+  private ModernButton mUpButton = new ModernButton(
+      UIService.getInstance().loadIcon(ArrowUpVectorIcon.class, 16));
 
   /**
    * The member down button.
    */
-  private ModernButton mDownButton = new ModernButton(UIService.getInstance().loadIcon(ArrowDownVectorIcon.class, 16));
+  private ModernButton mDownButton = new ModernButton(
+      UIService.getInstance().loadIcon(ArrowDownVectorIcon.class, 16));
 
   /**
    * The member alphabetical button.
@@ -124,8 +124,8 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -137,10 +137,8 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * Instantiates a new row order dialog.
    *
-   * @param parent
-   *          the parent
-   * @param m
-   *          the m
+   * @param parent the parent
+   * @param m the m
    */
   public RowOrderDialog(ModernWindow parent, DataFrame m) {
     super(parent, "matcalc.modules.row-order.help.url");
@@ -173,7 +171,8 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
     // scrollPane.setViewportBorder(BorderFactory.createEmptyBorder());
     // scrollPane.getViewport().setBackground(Color.WHITE);
 
-    content.setBody(new ModernScrollPane(mTable).setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS));
+    content.setBody(new ModernScrollPane(mTable)
+        .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS));
 
     box = VBox.create();
 
@@ -214,8 +213,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * Load ids.
    *
-   * @param ids
-   *          the ids
+   * @param ids the ids
    */
   private void loadIds(List<Indexed<Integer, String>> ids) {
     mModel = new RowOrderTableModel(ids);
@@ -231,8 +229,8 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -345,12 +343,12 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * Sort by external id list.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void sortByExternalIdList() throws IOException {
 
-    Path file = FileDialog.open(mParent).all().getFile(RecentFilesService.getInstance().getPwd());
+    Path file = FileDialog.open(mParent).all()
+        .getFile(RecentFilesService.getInstance().getPwd());
 
     if (file == null) {
       return;
@@ -362,10 +360,8 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
   /**
    * Sort by external id list.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void sortByExternalIdList(Path file) throws IOException {
     final List<String> ids = new ArrayList<String>();
@@ -415,11 +411,13 @@ public class RowOrderDialog extends ModernDialogHelpWindow implements ModernClic
     if (mColumnsCombo.getSelectedIndex() < numRowAnnotations) {
       // filter on row annotation
 
-      loadIds(IndexedInt.index(mM.getRowAnnotationText(mColumnsCombo.getText())));
+      loadIds(
+          IndexedInt.index(mM.getRowAnnotationText(mColumnsCombo.getText())));
     } else {
       // filter on column
 
-      loadIds(IndexedInt.index(mM.columnAsText(mColumnsCombo.getSelectedIndex() - numRowAnnotations)));
+      loadIds(IndexedInt.index(mM
+          .columnAsText(mColumnsCombo.getSelectedIndex() - numRowAnnotations)));
     }
 
   }

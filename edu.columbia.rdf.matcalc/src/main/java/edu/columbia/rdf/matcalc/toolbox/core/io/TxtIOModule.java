@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
 
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.CsvDynamicMatrixParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrixParser;
 import org.jebtk.math.matrix.DynamicMixedMatrixParser;
 import org.jebtk.math.matrix.MixedMatrixParser;
@@ -70,16 +70,24 @@ public class TxtIOModule extends IOModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame openFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipMatches) throws IOException {
+  public DataFrame openFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipMatches) throws IOException {
 
-    rowAnnotations = OpenFile.estimateRowAnnotations(file, headers, skipMatches);
+    rowAnnotations = OpenFile
+        .estimateRowAnnotations(file, headers, skipMatches);
 
     delimiter = OpenFile.guessDelimiter(file, skipMatches);
 
-    boolean numerical = OpenFile.guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
+    boolean numerical = OpenFile
+        .guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
 
-    ImportDialog dialog = new ImportDialog(window, rowAnnotations, false, delimiter, numerical);
+    ImportDialog dialog = new ImportDialog(window, rowAnnotations, false,
+        delimiter, numerical);
 
     dialog.setVisible(true);
 
@@ -87,13 +95,23 @@ public class TxtIOModule extends IOModule {
       return null;
     }
 
-    return autoOpenFile(window, file, dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
-        dialog.getHasHeader() ? 1 : 0, dialog.getRowAnnotations(), dialog.getDelimiter(), dialog.getSkipLines());
+    return autoOpenFile(window,
+        file,
+        dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
+        dialog.getHasHeader() ? 1 : 0,
+        dialog.getRowAnnotations(),
+        dialog.getDelimiter(),
+        dialog.getSkipLines());
   }
 
   @Override
-  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
     if (delimiter.equals(",")) {
       // Use the csv parser instead
       if (headers > 0) {
@@ -104,15 +122,18 @@ public class TxtIOModule extends IOModule {
     } else {
       if (headers > 0) {
         if (type == FileType.NUMERICAL) {
-          return new DoubleMatrixParser(true, skipLines, rowAnnotations, delimiter).parse(file);
+          return new DoubleMatrixParser(true, skipLines, rowAnnotations,
+              delimiter).parse(file);
         } else {
-          return new MixedMatrixParser(true, skipLines, rowAnnotations, delimiter).parse(file);
+          return new MixedMatrixParser(true, skipLines, rowAnnotations,
+              delimiter).parse(file);
         }
       } else {
-        return new DynamicMixedMatrixParser(skipLines, rowAnnotations, delimiter).parse(file); // return
-                                                                                               // DataFrame.parseDynamicMatrix(file,
-                                                                                               // hasHeader,
-                                                                                               // rowAnnotations, '\t');
+        return new DynamicMixedMatrixParser(skipLines, rowAnnotations,
+            delimiter).parse(file); // return
+                                    // DataFrame.parseDynamicMatrix(file,
+                                    // hasHeader,
+                                    // rowAnnotations, '\t');
       }
     }
   }
@@ -124,7 +145,9 @@ public class TxtIOModule extends IOModule {
    * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
    */
   @Override
-  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+  public boolean saveFile(final MainMatCalcWindow window,
+      final Path file,
+      final DataFrame m) throws IOException {
     DataFrame.writeDataFrame(m, file);
 
     return true;

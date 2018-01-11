@@ -41,7 +41,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class LogDialog.
  */
-public class PowerDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class PowerDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -54,10 +55,8 @@ public class PowerDialog extends ModernDialogHelpWindow implements ModernClickLi
   /**
    * Instantiates a new log dialog.
    *
-   * @param parent
-   *          the parent
-   * @param base
-   *          the base
+   * @param parent the parent
+   * @param base the base
    */
   public PowerDialog(ModernWindow parent, int base) {
     super(parent, "matcalc.modules.math.power.url");
@@ -72,8 +71,7 @@ public class PowerDialog extends ModernDialogHelpWindow implements ModernClickLi
   /**
    * Sets the up.
    *
-   * @param base
-   *          the new up
+   * @param base the new up
    */
   private void setup(int base) {
     mAddField.setValue(base);

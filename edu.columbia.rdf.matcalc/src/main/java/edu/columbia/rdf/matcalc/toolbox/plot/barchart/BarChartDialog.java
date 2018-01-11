@@ -34,7 +34,8 @@ import edu.columbia.rdf.matcalc.MatrixRowAnnotationCombo;
 /**
  * The class BarChartDialog.
  */
-public class BarChartDialog extends ModernDialogTaskWindow implements ModernClickListener {
+public class BarChartDialog extends ModernDialogTaskWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -49,10 +50,8 @@ public class BarChartDialog extends ModernDialogTaskWindow implements ModernClic
   /**
    * Instantiates a new bar chart dialog.
    *
-   * @param parent
-   *          the parent
-   * @param m
-   *          the m
+   * @param parent the parent
+   * @param m the m
    */
   public BarChartDialog(ModernWindow parent, DataFrame m) {
     super(parent);
@@ -93,7 +92,8 @@ public class BarChartDialog extends ModernDialogTaskWindow implements ModernClic
 
     MatrixPanel matrixPanel;
 
-    matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Row Annotation"));
     matrixPanel.add(mRowCombo);

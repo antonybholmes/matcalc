@@ -47,8 +47,7 @@ public class LegendPositionControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new line style control.
    *
-   * @param legend
-   *          the legend
+   * @param legend the legend
    */
   public LegendPositionControl(LegendProperties legend) {
     mLegend = legend;
@@ -72,8 +71,8 @@ public class LegendPositionControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

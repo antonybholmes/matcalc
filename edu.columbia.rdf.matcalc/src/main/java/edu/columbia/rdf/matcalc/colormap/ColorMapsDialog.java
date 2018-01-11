@@ -48,7 +48,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class ColorDialog.
  */
-public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class ColorMapsDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -66,7 +67,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
       UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
   /** The m delete button. */
-  private ModernButton mDeleteButton = new ModernButton(UI.MENU_DELETE, UIService.getInstance().loadIcon("delete", 16));
+  private ModernButton mDeleteButton = new ModernButton(UI.MENU_DELETE,
+      UIService.getInstance().loadIcon("delete", 16));
 
   /** The m color map. */
   private ColorMap mColorMap;
@@ -74,10 +76,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
   /**
    * Instantiates a new color dialog.
    *
-   * @param parent
-   *          the parent
-   * @param colorMap
-   *          the color map
+   * @param parent the parent
+   * @param colorMap the color map
    */
   public ColorMapsDialog(ModernWindow parent, ColorMap colorMap) {
     super(parent, "matcalc.color-maps.help.url");
@@ -113,7 +113,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
 
     box1.setBody(scrollPane);
 
-    setContent(new CardPanel(new ModernComponent(box1, ModernWidget.QUAD_BORDER)));
+    setContent(
+        new CardPanel(new ModernComponent(box1, ModernWidget.QUAD_BORDER)));
 
     mAddButton.addClickListener(new ModernClickListener() {
 
@@ -172,8 +173,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -181,7 +182,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
       mColorMap = (ColorMap) mTable.getValueAt(mTable.getSelectedRow(), 0);
 
       if (mColorMap == null) {
-        ModernMessageDialog.createWarningDialog(mParent, "You must select a color map.");
+        ModernMessageDialog.createWarningDialog(mParent,
+            "You must select a color map.");
 
         return;
       }
@@ -194,16 +196,18 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
    * Delete.
    */
   private void delete() {
-    List<Integer> indices = CollectionUtils
-        .reverse(CollectionUtils.sort(CollectionUtils.toList(mTable.getRowModel().getSelectionModel())));
+    List<Integer> indices = CollectionUtils.reverse(CollectionUtils.sort(
+        CollectionUtils.toList(mTable.getRowModel().getSelectionModel())));
 
     if (indices.size() > 0) {
       ModernDialogStatus status = ModernMessageDialog.createDialog(mParent,
-          "Are you sure you want to delete the selected color maps?", MessageDialogType.WARNING_OK_CANCEL);
+          "Are you sure you want to delete the selected color maps?",
+          MessageDialogType.WARNING_OK_CANCEL);
 
       if (status == ModernDialogStatus.OK) {
         for (int i : indices) {
-          ColorMapService.getInstance().remove((String) mTable.getValueAt(i, 1));
+          ColorMapService.getInstance()
+              .remove((String) mTable.getValueAt(i, 1));
         }
       }
 
@@ -227,7 +231,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
         ColorMapService.getInstance().add(dialog.getColorMap());
       } else {
         ModernMessageDialog.createWarningDialog(mParent,
-            "'" + colorMap.getName() + "' is already in use. Please choose another name.");
+            "'" + colorMap.getName()
+                + "' is already in use. Please choose another name.");
       }
     }
   }
@@ -236,7 +241,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
    * Edits the.
    */
   private void edit() {
-    ColorMap colorMap = (ColorMap) mTable.getValueAt(mTable.getSelectedRow(), 0);
+    ColorMap colorMap = (ColorMap) mTable.getValueAt(mTable.getSelectedRow(),
+        0);
 
     if (colorMap != null) {
       ColorMapDialog dialog = new ColorMapDialog(mParent, colorMap);
@@ -251,7 +257,8 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
           ColorMapService.getInstance().add(dialog.getColorMap());
         } else {
           ModernMessageDialog.createWarningDialog(mParent,
-              "'" + colorMap.getName() + "' is already in use. Please choose another name.");
+              "'" + colorMap.getName()
+                  + "' is already in use. Please choose another name.");
         }
       }
     }
@@ -263,6 +270,7 @@ public class ColorMapsDialog extends ModernDialogHelpWindow implements ModernCli
    * @return the color
    */
   public ColorMap getColorMap() {
-    return mColorMap;// new ColorMap(mTextName.getText(), mColorMapEditor.getColorMap(), false);
+    return mColorMap;// new ColorMap(mTextName.getText(),
+                     // mColorMapEditor.getColorMap(), false);
   }
 }

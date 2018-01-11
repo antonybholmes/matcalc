@@ -61,10 +61,8 @@ public class SummaryDialog extends ModernDialogTaskWindow {
   /**
    * Instantiates a new modern int input dialog.
    *
-   * @param parent
-   *          the parent
-   * @param checked
-   *          the checked
+   * @param parent the parent
+   * @param checked the checked
    */
   public SummaryDialog(MainMatCalcWindow parent) {
     super(parent, false, ModernDialogTaskType.CLOSE);
@@ -99,20 +97,39 @@ public class SummaryDialog extends ModernDialogTaskWindow {
 
     Box box = VBox.create();
 
-    box.add(new HExpandBox("Min", new ModernTextBorderPanel(
-        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.min(m), 4), false), 120)));
+    box.add(
+        new HExpandBox("Min",
+            new ModernTextBorderPanel(
+                new ModernClipboardNumericalTextField(
+                    Mathematics.round(MatrixOperations.min(m), 4), false),
+                120)));
     box.add(UI.createVGap(ModernWidget.PADDING));
-    box.add(new HExpandBox("Max", new ModernTextBorderPanel(
-        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.max(m), 4), false), 120)));
+    box.add(
+        new HExpandBox("Max",
+            new ModernTextBorderPanel(
+                new ModernClipboardNumericalTextField(
+                    Mathematics.round(MatrixOperations.max(m), 4), false),
+                120)));
     box.add(UI.createVGap(ModernWidget.PADDING));
-    box.add(new HExpandBox("Sum", new ModernTextBorderPanel(
-        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.sum(m), 4), false), 120)));
+    box.add(
+        new HExpandBox("Sum",
+            new ModernTextBorderPanel(
+                new ModernClipboardNumericalTextField(
+                    Mathematics.round(MatrixOperations.sum(m), 4), false),
+                120)));
     box.add(UI.createVGap(ModernWidget.PADDING));
-    box.add(new HExpandBox("Mean", new ModernTextBorderPanel(
-        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.mean(m), 4), false), 120)));
+    box.add(
+        new HExpandBox("Mean",
+            new ModernTextBorderPanel(
+                new ModernClipboardNumericalTextField(
+                    Mathematics.round(MatrixOperations.mean(m), 4), false),
+                120)));
     box.add(UI.createVGap(ModernWidget.PADDING));
-    box.add(new HExpandBox("Median", new ModernTextBorderPanel(
-        new ModernClipboardNumericalTextField(Mathematics.round(MatrixOperations.median(m), 4), false), 120)));
+    box.add(new HExpandBox("Median",
+        new ModernTextBorderPanel(
+            new ModernClipboardNumericalTextField(
+                Mathematics.round(MatrixOperations.median(m), 4), false),
+            120)));
 
     setDialogCardContent(box);
   }

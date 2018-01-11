@@ -44,48 +44,36 @@ public class HeatMapPlotWindow extends HeatMapWindow {
   /**
    * Instantiates a new heat map plot window.
    *
-   * @param window
-   *          the window
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param matrix the matrix
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public HeatMapPlotWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
-      CountGroups countGroups, List<String> history, Properties properties) {
-    this(window, "Heat Map", matrix, groups, rowGroups, countGroups, history, properties);
+  public HeatMapPlotWindow(ModernWindow window, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Properties properties) {
+    this(window, "Heat Map", matrix, groups, rowGroups, countGroups, history,
+        properties);
   }
 
   /**
    * Instantiates a new heat map plot window.
    *
-   * @param window
-   *          the window
-   * @param name
-   *          the name
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param name the name
+   * @param matrix the matrix
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public HeatMapPlotWindow(ModernWindow window, String name, DataFrame matrix, XYSeriesModel groups,
-      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
+  public HeatMapPlotWindow(ModernWindow window, String name, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Properties properties) {
     super(window, matrix, groups, rowGroups, countGroups, history, properties);
 
     setFormatPane(createFormatPane());
@@ -97,7 +85,8 @@ public class HeatMapPlotWindow extends HeatMapWindow {
    * @return the format plot pane
    */
   public FormatPlotPane createFormatPane() {
-    return new HeatMapPanel(this, mMatrix, mGroups, mRowGroups, mCountGroups, mHistory, mZoomModel, mColorMapModel,
-        mColorModel, mScaleModel, getTabsPane().getModel(), mProperties);
+    return new HeatMapPanel(this, mMatrix, mGroups, mRowGroups, mCountGroups,
+        mHistory, mZoomModel, mColorMapModel, mColorModel, mScaleModel,
+        getTabsPane().getModel(), mProperties);
   }
 }

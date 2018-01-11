@@ -45,13 +45,15 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
  *
  * @author Antony Holmes Holmes
  */
-public class LegacyClusterModule extends CalcModule implements ModernClickListener {
+public class LegacyClusterModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member match button.
    */
   private RibbonLargeButton mClusterButton = new RibbonLargeButton("Cluster",
-      new Raster32Icon(new Cluster32VectorIcon()), "Cluster", "Cluster rows and columns.");
+      new Raster32Icon(new Cluster32VectorIcon()), "Cluster",
+      "Cluster rows and columns.");
 
   /**
    * The member window.
@@ -71,14 +73,16 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    window.getRibbon().getToolbar("Plot").getSection("Plot").add(mClusterButton);
+    window.getRibbon().getToolbar("Plot").getSection("Plot")
+        .add(mClusterButton);
 
     mClusterButton.addClickListener(this);
   }
@@ -87,8 +91,8 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -102,8 +106,7 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
   /**
    * Cluster.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void cluster() throws IOException {
     DataFrame m = mWindow.getCurrentMatrix();
@@ -120,7 +123,8 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
       return;
     }
 
-    HierarchicalClusteringDialog dialog = new HierarchicalClusteringDialog(mWindow);
+    HierarchicalClusteringDialog dialog = new HierarchicalClusteringDialog(
+        mWindow);
 
     dialog.setVisible(true);
 
@@ -134,34 +138,43 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
 
     properties.setProperty("plot.heatmap.visible", dialog.getShowHeatMap());
 
-    cluster(m, distanceMetric, linkage, dialog.clusterRows(), dialog.clusterColumns(), dialog.optimalLeafOrder(),
+    cluster(m,
+        distanceMetric,
+        linkage,
+        dialog.clusterRows(),
+        dialog.clusterColumns(),
+        dialog.optimalLeafOrder(),
         properties);
   }
 
   /**
    * Cluster.
    *
-   * @param m
-   *          the m
-   * @param distanceMetric
-   *          the distance metric
-   * @param linkage
-   *          the linkage
-   * @param clusterRows
-   *          the cluster rows
-   * @param clusterColumns
-   *          the cluster columns
-   * @param optimalLeafOrder
-   *          the optimal leaf order
-   * @param properties
-   *          the properties
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param m the m
+   * @param distanceMetric the distance metric
+   * @param linkage the linkage
+   * @param clusterRows the cluster rows
+   * @param clusterColumns the cluster columns
+   * @param optimalLeafOrder the optimal leaf order
+   * @param properties the properties
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public void cluster(DataFrame m, DistanceMetric distanceMetric, Linkage linkage, boolean clusterRows,
-      boolean clusterColumns, boolean optimalLeafOrder, Properties properties) throws IOException {
+  public void cluster(DataFrame m,
+      DistanceMetric distanceMetric,
+      Linkage linkage,
+      boolean clusterRows,
+      boolean clusterColumns,
+      boolean optimalLeafOrder,
+      Properties properties) throws IOException {
 
-    cluster(mWindow, m, distanceMetric, linkage, clusterRows, clusterColumns, optimalLeafOrder, properties);
+    cluster(mWindow,
+        m,
+        distanceMetric,
+        linkage,
+        clusterRows,
+        clusterColumns,
+        optimalLeafOrder,
+        properties);
 
     /*
      * if (m == null) { return; }
@@ -182,8 +195,9 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
      * 
      * List<Integer> rowOrder; List<Integer> columnOrder;
      * 
-     * if (rowCluster != null) { rowOrder = Cluster.getLeafOrderedIds(rowCluster); }
-     * else { rowOrder = Mathematics.sequence(0, im.getRowCount() - 1); }
+     * if (rowCluster != null) { rowOrder =
+     * Cluster.getLeafOrderedIds(rowCluster); } else { rowOrder =
+     * Mathematics.sequence(0, im.getRowCount() - 1); }
      * 
      * if (columnCluster != null) { columnOrder =
      * Cluster.getLeafOrderedIds(columnCluster); } else { columnOrder =
@@ -201,8 +215,8 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
      * 
      * //System.err.println("cluster " + clusters.size());
      * 
-     * //previewPanel.addPreview(new PreviewTablePanel("Collapsed " + fileCounter,
-     * false, collapsedFile));
+     * //previewPanel.addPreview(new PreviewTablePanel("Collapsed " +
+     * fileCounter, false, collapsedFile));
      * 
      * System.err.println("Cluster " + clusterRows + " " + clusterColumns);
      * 
@@ -218,28 +232,25 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
   /**
    * Cluster.
    *
-   * @param window
-   *          the window
-   * @param m
-   *          the m
-   * @param distanceMetric
-   *          the distance metric
-   * @param linkage
-   *          the linkage
-   * @param clusterRows
-   *          the cluster rows
-   * @param clusterColumns
-   *          the cluster columns
-   * @param optimalLeafOrder
-   *          the optimal leaf order
-   * @param properties
-   *          the properties
+   * @param window the window
+   * @param m the m
+   * @param distanceMetric the distance metric
+   * @param linkage the linkage
+   * @param clusterRows the cluster rows
+   * @param clusterColumns the cluster columns
+   * @param optimalLeafOrder the optimal leaf order
+   * @param properties the properties
    * @return the annotation matrix
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static DataFrame cluster(MainMatCalcWindow window, DataFrame m, DistanceMetric distanceMetric, Linkage linkage,
-      boolean clusterRows, boolean clusterColumns, boolean optimalLeafOrder, Properties properties) throws IOException {
+  public static DataFrame cluster(MainMatCalcWindow window,
+      DataFrame m,
+      DistanceMetric distanceMetric,
+      Linkage linkage,
+      boolean clusterRows,
+      boolean clusterColumns,
+      boolean optimalLeafOrder,
+      Properties properties) throws IOException {
 
     if (m == null) {
       return null;
@@ -249,11 +260,13 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
     Cluster columnCluster = null;
 
     if (clusterRows) {
-      rowCluster = HierarchicalClustering.rowCluster(m, linkage, distanceMetric, optimalLeafOrder);
+      rowCluster = HierarchicalClustering
+          .rowCluster(m, linkage, distanceMetric, optimalLeafOrder);
     }
 
     if (clusterColumns) {
-      columnCluster = HierarchicalClustering.columnCluster(m, linkage, distanceMetric, optimalLeafOrder);
+      columnCluster = HierarchicalClustering
+          .columnCluster(m, linkage, distanceMetric, optimalLeafOrder);
     }
 
     if (rowCluster == null && columnCluster == null) {
@@ -285,7 +298,8 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
     window.addToHistory("Cluster ordered matrix", m3);
 
     // So we can plot each row using a color
-    // RowStandardizeMatrixView normalizedMatrix = new RowStandardizeMatrixView(m);
+    // RowStandardizeMatrixView normalizedMatrix = new
+    // RowStandardizeMatrixView(m);
 
     // System.err.println("cluster " + clusters.size());
 
@@ -305,9 +319,10 @@ public class LegacyClusterModule extends CalcModule implements ModernClickListen
     // System.err.println("c " + i + " " + m3.getColumnName(i));
     // }
 
-    window.addToHistory(new ClusterPlotMatrixTransform(window, m3, XYSeriesModel.create(window.getGroups()),
-        XYSeriesModel.create(window.getRowGroups()), rowCluster, columnCluster, CountGroups.defaultGroup(m3), history,
-        properties));
+    window.addToHistory(new ClusterPlotMatrixTransform(window, m3,
+        XYSeriesModel.create(window.getGroups()),
+        XYSeriesModel.create(window.getRowGroups()), rowCluster, columnCluster,
+        CountGroups.defaultGroup(m3), history, properties));
 
     return m3;
   }

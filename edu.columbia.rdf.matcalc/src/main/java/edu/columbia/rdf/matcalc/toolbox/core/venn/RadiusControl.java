@@ -38,13 +38,13 @@ public class RadiusControl extends HBox implements KeyListener {
   private Properties mProperties;
 
   /** The m text radius. */
-  private ModernNumericalTextField mTextRadius = new ModernNumericalTextField("150");
+  private ModernNumericalTextField mTextRadius = new ModernNumericalTextField(
+      "150");
 
   /**
    * Instantiates a new radius control.
    *
-   * @param properties
-   *          the properties
+   * @param properties the properties
    */
   public RadiusControl(Properties properties) {
     mProperties = properties;

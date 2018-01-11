@@ -19,20 +19,16 @@ import java.util.List;
 
 import javax.swing.Box;
 
-import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.panel.ModernLineBorderPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
-import org.jebtk.modern.text.ModernSubHeadingLabel;
 import org.jebtk.modern.text.ModernTextArea;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -41,7 +37,8 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * The class MatchDialog.
  */
-public class SearchColumnDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class SearchColumnDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -52,7 +49,8 @@ public class SearchColumnDialog extends ModernDialogHelpWindow implements Modern
   private CheckBox mCheckInList = new ModernCheckSwitch("Match in list", true);
 
   /** The m check exact. */
-  private CheckBox mCheckExact = new ModernCheckSwitch("Match entire cell contents");
+  private CheckBox mCheckExact = new ModernCheckSwitch(
+      "Match entire cell contents");
 
   /** The m check case. */
   private CheckBox mCheckCase = new ModernCheckSwitch("Case sensitive");
@@ -63,8 +61,7 @@ public class SearchColumnDialog extends ModernDialogHelpWindow implements Modern
   /**
    * Instantiates a new match dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public SearchColumnDialog(MainMatCalcWindow parent) {
     super(parent, "matcalc.search-column.help.url");
@@ -102,7 +99,8 @@ public class SearchColumnDialog extends ModernDialogHelpWindow implements Modern
     // content.setHeader(new ModernSubHeadingLabel("Search for:",
     // BorderService.getInstance().createBottomBorder(5)));
 
-    ModernScrollPane scrollPane = new ModernScrollPane(mText).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
+    ModernScrollPane scrollPane = new ModernScrollPane(mText)
+        .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
         .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
 
     content.setBody(scrollPane);

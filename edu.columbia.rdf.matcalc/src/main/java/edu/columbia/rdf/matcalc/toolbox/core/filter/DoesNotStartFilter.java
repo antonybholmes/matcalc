@@ -27,8 +27,7 @@ public class DoesNotStartFilter implements Filter {
   /**
    * Instantiates a new does not start filter.
    *
-   * @param text
-   *          the text
+   * @param text the text
    */
   public DoesNotStartFilter(String text) {
     mText = text.toLowerCase();

@@ -145,8 +145,7 @@ public class ModuleLoader {
   /**
    * Adds the module.
    *
-   * @param c
-   *          the c
+   * @param c the c
    * @return the module loader
    */
   public ModuleLoader addModule(Class<? extends Module> c) {

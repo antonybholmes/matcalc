@@ -83,7 +83,7 @@ import org.jebtk.modern.io.OpenRibbonPanel;
 import org.jebtk.modern.io.RecentFilesModel;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.io.SaveAsRibbonPanel;
-import org.jebtk.modern.panel.CardPanel;
+import org.jebtk.modern.panel.Card;
 import org.jebtk.modern.ribbon.QuickAccessButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
@@ -121,7 +121,8 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  *
  */
 public class MainMatCalcWindow extends ModernRibbonWindow
-    implements ModernWindowConstructor, ModernClickListener, ModernSelectionListener, MatrixTransformListener {
+    implements ModernWindowConstructor, ModernClickListener,
+    ModernSelectionListener, MatrixTransformListener {
 
   /**
    * The constant serialVersionUID.
@@ -216,7 +217,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * The constant LOG.
    */
-  private static final Logger LOG = LoggerFactory.getLogger(MainMatCalcWindow.class);
+  private static final Logger LOG = LoggerFactory
+      .getLogger(MainMatCalcWindow.class);
 
   /** The Constant INVALID_COLUMN. */
   public static final int INVALID_COLUMN = Integer.MIN_VALUE;
@@ -234,8 +236,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
   private DirPanel mDirPanel;
 
-  private static final boolean AUTO_SHOW_FILES_PANE = SettingsService.getInstance()
-      .getAsBool("matcalc.files-pane.auto-show");
+  private static final boolean AUTO_SHOW_FILES_PANE = SettingsService
+      .getInstance().getAsBool("matcalc.files-pane.auto-show");
 
   /**
    * The class MouseEvents.
@@ -277,10 +279,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     /**
      * Instantiates a new export call back.
      *
-     * @param file
-     *          the file
-     * @param pwd
-     *          the pwd
+     * @param file the file
+     * @param pwd the pwd
      */
     public ExportCallBack(Path file, Path pwd) {
       mFile = file;
@@ -291,8 +291,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.dialog.DialogEventListener#statusChanged(org.abh.lib.ui
-     * .modern.dialog.DialogEvent)
+     * org.abh.lib.ui.modern.dialog.DialogEventListener#statusChanged(org.abh.
+     * lib.ui .modern.dialog.DialogEvent)
      */
     @Override
     public void statusChanged(DialogEvent e) {
@@ -416,8 +416,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Instantiates a new main mat calc window.
    *
-   * @param appInfo
-   *          the app info
+   * @param appInfo the app info
    */
   public MainMatCalcWindow(GuiAppInfo appInfo) {
     super(appInfo);
@@ -434,10 +433,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Instantiates a new main mat calc window.
    *
-   * @param appInfo
-   *          the app info
-   * @param m
-   *          the m
+   * @param appInfo the app info
+   * @param m the m
    */
   public MainMatCalcWindow(GuiAppInfo appInfo, DataFrame m) {
     super(appInfo);
@@ -456,10 +453,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Setup.
    *
-   * @throws InstantiationException
-   *           the instantiation exception
-   * @throws IllegalAccessException
-   *           the illegal access exception
+   * @throws InstantiationException the instantiation exception
+   * @throws IllegalAccessException the illegal access exception
    */
   private void setup() throws InstantiationException, IllegalAccessException {
     mFindDialog = new FindReplaceDialog(this);
@@ -487,17 +482,20 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
     JComponent content = (JComponent) getContentPane();
 
-    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "open");
+    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+        KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK),
+        "open");
     content.getActionMap().put("open", new OpenAction());
 
-    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "save");
+    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+        KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK),
+        "save");
 
     content.getActionMap().put("save", new SaveAction());
 
-    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), "find");
+    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+        KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK),
+        "find");
     content.getActionMap().put("find", new FindAction());
 
     // When user clicks on file in file list, open it
@@ -532,12 +530,11 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Load external modules.
    *
-   * @throws InstantiationException
-   *           the instantiation exception
-   * @throws IllegalAccessException
-   *           the illegal access exception
+   * @throws InstantiationException the instantiation exception
+   * @throws IllegalAccessException the illegal access exception
    */
-  private void loadModules() throws InstantiationException, IllegalAccessException {
+  private void loadModules()
+      throws InstantiationException, IllegalAccessException {
     Module module;
 
     for (Plugin plugin : PluginService.getInstance()) {
@@ -555,10 +552,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Run module.
    *
-   * @param module
-   *          the module
-   * @param args
-   *          the args
+   * @param module the module
+   * @param args the args
    * @return true, if successful
    */
   public boolean runModule(String module, String... args) {
@@ -591,8 +586,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Register modules that deal with opening and saving files.
    * 
-   * @param module
-   *          A file module.
+   * @param module A file module.
    */
   private void addFileModule(FileModule module) {
     for (GuiFileExtFilter filter : module.getOpenFileFilters()) {
@@ -643,13 +637,15 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     // public static final ModernIcon QUICK_OPEN_16_ICON = new Raster16Icon(new
     // QuickOpen16VectorIcon());
 
-    ModernButtonWidget button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
+    ModernButtonWidget button = new QuickAccessButton(
+        UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage("Open");
     button.setToolTip(new ModernToolTip("Open", "Open an expression matrix."));
     button.addClickListener(this);
     addQuickAccessButton(button);
 
-    button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+    button = new QuickAccessButton(
+        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip(new ModernToolTip("Save", "Save the current table."));
     button.addClickListener(this);
@@ -705,19 +701,22 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
     // addFilesPane();
 
-    getIconTabs().addTab("Files", new IconTabsFolderIcon(), new TabPanel("Files", mFilesPanel));
+    getIconTabs().addTab("Files",
+        new IconTabsFolderIcon(),
+        new TabPanel("Files", mFilesPanel));
   }
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
-    if (e.getMessage().equals(UI.MENU_OPEN) || e.getMessage().equals(UI.MENU_BROWSE)
+    if (e.getMessage().equals(UI.MENU_OPEN)
+        || e.getMessage().equals(UI.MENU_BROWSE)
         || e.getMessage().startsWith("Other...")) {
       try {
         browseForFile();
@@ -744,7 +743,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
       }
     } else if (e.getMessage().equals(OpenRibbonPanel.FILE_SELECTED)) {
       try {
-        openFile(mOpenPanel.getSelectedFile()).open();
+        openFile(mOpenPanel.getSelectedFile());
       } catch (IOException e1) {
         e1.printStackTrace();
       }
@@ -793,13 +792,17 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     } else if (e.getMessage().equals("History Pane")) {
       addHistoryPane();
     } else if (e.getMessage().equals("z-score")) {
-      addToHistory("z-score", "z-score", MatrixOperations.zscore(getCurrentMatrix())); // new
-                                                                                       // ZScoreMatrixTransform(this,
-                                                                                       // getCurrentMatrix()));
+      addToHistory("z-score",
+          "z-score",
+          MatrixOperations.zscore(getCurrentMatrix())); // new
+                                                        // ZScoreMatrixTransform(this,
+                                                        // getCurrentMatrix()));
     } else if (e.getMessage().equals("Row z-score")) {
-      addToHistory("Row z-score", "Row z-score", MatrixOperations.rowZscore(getCurrentMatrix())); // addFlowItem(new
-                                                                                                  // ZScoreRowsMatrixTransform(this,
-                                                                                                  // getCurrentMatrix()));
+      addToHistory("Row z-score",
+          "Row z-score",
+          MatrixOperations.rowZscore(getCurrentMatrix())); // addFlowItem(new
+                                                           // ZScoreRowsMatrixTransform(this,
+                                                           // getCurrentMatrix()));
       // new StdDevFilterMatrixTransform(this, getCurrentMatrix(), 1.5));
     } else if (e.getMessage().equals(UI.MENU_ABOUT)) {
       ModernAboutDialog.show(this, getAppInfo());
@@ -869,8 +872,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Search history.
    *
-   * @param text
-   *          the text
+   * @param text the text
    * @return the int
    */
   public int searchHistory(String text) {
@@ -884,10 +886,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Adds the to history.
    *
-   * @param name
-   *          the name
-   * @param matrix
-   *          the matrix
+   * @param name the name
+   * @param matrix the matrix
    * @return the annotation matrix
    */
   public DataFrame addToHistory(String name, DataFrame matrix) {
@@ -901,15 +901,14 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Adds the to history.
    *
-   * @param name
-   *          the name
-   * @param description
-   *          the description
-   * @param matrix
-   *          the matrix
+   * @param name the name
+   * @param description the description
+   * @param matrix the matrix
    * @return the annotation matrix
    */
-  public DataFrame addToHistory(String name, String description, DataFrame matrix) {
+  public DataFrame addToHistory(String name,
+      String description,
+      DataFrame matrix) {
     if (matrix == null) {
       return null;
     }
@@ -920,15 +919,14 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Adds the to history.
    *
-   * @param name
-   *          the name
-   * @param matrix
-   *          the matrix
-   * @param selectedIndex
-   *          the selected index
+   * @param name the name
+   * @param matrix the matrix
+   * @param selectedIndex the selected index
    * @return the annotation matrix
    */
-  public DataFrame addToHistory(String name, DataFrame matrix, int selectedIndex) {
+  public DataFrame addToHistory(String name,
+      DataFrame matrix,
+      int selectedIndex) {
     if (matrix == null) {
       return null;
     }
@@ -939,29 +937,28 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Adds the to history.
    *
-   * @param name
-   *          the name
-   * @param description
-   *          the description
-   * @param matrix
-   *          the matrix
-   * @param selectedIndex
-   *          the selected index
+   * @param name the name
+   * @param description the description
+   * @param matrix the matrix
+   * @param selectedIndex the selected index
    * @return the annotation matrix
    */
-  public DataFrame addToHistory(String name, String description, DataFrame matrix, int selectedIndex) {
+  public DataFrame addToHistory(String name,
+      String description,
+      DataFrame matrix,
+      int selectedIndex) {
     if (matrix == null) {
       return null;
     }
 
-    return addToHistory(selectedIndex, new MatrixTransform(this, name, description, matrix));
+    return addToHistory(selectedIndex,
+        new MatrixTransform(this, name, description, matrix));
   }
 
   /**
    * Add a pipeline step to the workflow.
    *
-   * @param transform
-   *          the transform
+   * @param transform the transform
    * @return the annotation matrix
    */
   public DataFrame addToHistory(MatrixTransform transform) {
@@ -971,10 +968,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Adds the to history.
    *
-   * @param transform
-   *          the transform
-   * @param selectedIndex
-   *          the selected index
+   * @param transform the transform
+   * @param selectedIndex the selected index
    * @return the annotation matrix
    */
   public DataFrame addToHistory(int selectedIndex, MatrixTransform transform) {
@@ -1014,11 +1009,14 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     List<String> history = new ArrayList<String>();
 
     for (int i = 1; i < mHistoryPanel.getItemCount(); ++i) {
-      StringBuilder buffer = new StringBuilder(mHistoryPanel.getValueAt(i).getName());
+      StringBuilder buffer = new StringBuilder(
+          mHistoryPanel.getValueAt(i).getName());
 
-      if (!mHistoryPanel.getValueAt(i).getDescription().equals(mHistoryPanel.getValueAt(i).getName())
+      if (!mHistoryPanel.getValueAt(i).getDescription()
+          .equals(mHistoryPanel.getValueAt(i).getName())
           && !mHistoryPanel.getValueAt(i).getName().contains("Plot")) {
-        buffer.append(" (").append(mHistoryPanel.getValueAt(i).getDescription()).append(")");
+        buffer.append(" (").append(mHistoryPanel.getValueAt(i).getDescription())
+            .append(")");
       }
 
       history.add(buffer.toString());
@@ -1030,17 +1028,18 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Open column groups.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void openColumnGroups() throws IOException {
     if (mFilesModel.size() == 0) {
-      ModernMessageDialog.createWarningDialog(this, "Please open an expression file.");
+      ModernMessageDialog.createWarningDialog(this,
+          "Please open an expression file.");
 
       return;
     }
 
-    Path file = FileDialog.open(this).all().getFile(RecentFilesService.getInstance().getPwd());
+    Path file = FileDialog.open(this).all()
+        .getFile(RecentFilesService.getInstance().getPwd());
 
     if (file == null) {
       return;
@@ -1052,17 +1051,18 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Open row groups.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void openRowGroups() throws IOException {
     if (mFilesModel.size() == 0) {
-      ModernMessageDialog.createWarningDialog(this, "Please open an expression file.");
+      ModernMessageDialog.createWarningDialog(this,
+          "Please open an expression file.");
 
       return;
     }
 
-    Path file = FileDialog.open(this).all().getFile(RecentFilesService.getInstance().getPwd());
+    Path file = FileDialog.open(this).all()
+        .getFile(RecentFilesService.getInstance().getPwd());
 
     if (file == null) {
       return;
@@ -1074,96 +1074,78 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Browse for file.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws InvalidFormatException
-   *           the invalid format exception
-   * @throws ParseException
-   *           the parse exception
-   * @throws ClassNotFoundException
-   *           the class not found exception
-   * @throws InstantiationException
-   *           the instantiation exception
-   * @throws IllegalAccessException
-   *           the illegal access exception
-   * @throws FontFormatException
-   *           the font format exception
-   * @throws UnsupportedLookAndFeelException
-   *           the unsupported look and feel exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws InvalidFormatException the invalid format exception
+   * @throws ParseException the parse exception
+   * @throws ClassNotFoundException the class not found exception
+   * @throws InstantiationException the instantiation exception
+   * @throws IllegalAccessException the illegal access exception
+   * @throws FontFormatException the font format exception
+   * @throws UnsupportedLookAndFeelException the unsupported look and feel
+   *           exception
    */
-  private void browseForFile() throws IOException, SAXException, ParserConfigurationException, InvalidFormatException,
-      ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FontFormatException,
-      UnsupportedLookAndFeelException {
+  private void browseForFile() throws IOException, SAXException,
+      ParserConfigurationException, InvalidFormatException, ParseException,
+      ClassNotFoundException, InstantiationException, IllegalAccessException,
+      FontFormatException, UnsupportedLookAndFeelException {
     browseForFile(RecentFilesService.getInstance().getPwd());
   }
 
   /**
    * Browse for file.
    *
-   * @param pwd
-   *          the working directory
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws InvalidFormatException
-   *           the invalid format exception
-   * @throws ParseException
-   *           the parse exception
-   * @throws ClassNotFoundException
-   *           the class not found exception
-   * @throws InstantiationException
-   *           the instantiation exception
-   * @throws IllegalAccessException
-   *           the illegal access exception
-   * @throws FontFormatException
-   *           the font format exception
-   * @throws UnsupportedLookAndFeelException
-   *           the unsupported look and feel exception
+   * @param pwd the working directory
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws InvalidFormatException the invalid format exception
+   * @throws ParseException the parse exception
+   * @throws ClassNotFoundException the class not found exception
+   * @throws InstantiationException the instantiation exception
+   * @throws IllegalAccessException the illegal access exception
+   * @throws FontFormatException the font format exception
+   * @throws UnsupportedLookAndFeelException the unsupported look and feel
+   *           exception
    */
-  private void browseForFile(Path pwd) throws IOException, SAXException, ParserConfigurationException,
-      InvalidFormatException, ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException,
+  private void browseForFile(Path pwd) throws IOException, SAXException,
+      ParserConfigurationException, InvalidFormatException, ParseException,
+      ClassNotFoundException, InstantiationException, IllegalAccessException,
       FontFormatException, UnsupportedLookAndFeelException {
-    openFile(FileDialog.openFile(this, pwd, mOpenFileFilters)).open();
+    openFiles(FileDialog.openFiles(this, pwd, mOpenFileFilters));
   }
 
   public void open(Path file) throws IOException {
-    openFile(file).open();
+    openFile(file);
   }
 
   /**
    * Open file.
    *
-   * @param file
-   *          the file
+   * @param file the file
    * @return the open file
+   * @throws IOException
    */
-  public OpenFile openFile(Path file) {
-    return openFiles(CollectionUtils.asList(file.toAbsolutePath()));
+  public void openFile(Path file) throws IOException {
+    openFiles(CollectionUtils.asList(file.toAbsolutePath()));
   }
 
   /**
    * Open files.
    *
-   * @param files
-   *          the files
+   * @param files the files
    * @return the open file
+   * @throws IOException
    */
-  public OpenFile openFiles(Collection<Path> files) {
-    return new OpenFile(this, files);
+  public void openFiles(Collection<Path> files) throws IOException {
+    new OpenFile(this, files).open();
   }
 
   /**
    * Creates a new MatCalc window and opens the matrix in it.
    *
-   * @param m
-   *          the m
+   * @param m the m
    */
   public void openMatrixInNewWindow(DataFrame m) {
     MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
@@ -1177,8 +1159,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Create a new MatCalc window and open the matrices in it.
    *
-   * @param matrices
-   *          the matrices
+   * @param matrices the matrices
    */
   public void openMatricesInNewWindow(List<DataFrame> matrices) {
     MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
@@ -1209,22 +1190,19 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Open matrix.
    *
-   * @param m
-   *          the m
+   * @param m the m
    */
   public void openMatrix(DataFrame m) {
     openMatrix(m, OpenMode.CURRENT_WINDOW);
   }
 
   /**
-   * Load a matrix into the main window. If there is a currently loaded matrix, a
-   * new window will be created. To add a matrix to the existing history of this
-   * window, use addToHistory().
+   * Load a matrix into the main window. If there is a currently loaded matrix,
+   * a new window will be created. To add a matrix to the existing history of
+   * this window, use addToHistory().
    *
-   * @param m
-   *          the m
-   * @param openMode
-   *          the open mode
+   * @param m the m
+   * @param openMode the open mode
    */
   public void openMatrix(DataFrame m, OpenMode openMode) {
     if (mMatrices.size() > 0 && openMode == OpenMode.NEW_WINDOW) {
@@ -1249,8 +1227,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Open matrices.
    *
-   * @param matrices
-   *          the matrices
+   * @param matrices the matrices
    */
   public void openMatrices(List<DataFrame> matrices) {
     openMatrices(matrices, OpenMode.CURRENT_WINDOW);
@@ -1259,10 +1236,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Open matrices.
    *
-   * @param matrices
-   *          the matrices
-   * @param openMode
-   *          the open mode
+   * @param matrices the matrices
+   * @param openMode the open mode
    */
   public void openMatrices(List<DataFrame> matrices, OpenMode openMode) {
     if (mMatrices.size() > 0 && openMode == OpenMode.NEW_WINDOW) {
@@ -1323,10 +1298,11 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /*
    * private void addGroupsPane() { if (mInputFiles.size() == 0) { return; }
    * 
-   * if (mContentPane.getModel().getLeftTabs().containsTab("Groups")) { return; }
+   * if (mContentPane.getModel().getLeftTabs().containsTab("Groups")) { return;
+   * }
    * 
-   * mContentPane.getModel().addLeft(new SizableContentPane("Groups", mGroupPanel,
-   * 250, 200, 500)); }
+   * mContentPane.getModel().addLeft(new SizableContentPane("Groups",
+   * mGroupPanel, 250, 200, 500)); }
    */
 
   /**
@@ -1342,16 +1318,15 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     splitPane.addComponent(mGroupPanel, 0.4);
     splitPane.addComponent(mHistoryPanel, 0.5);
 
-    getTabsPane().getModel().addRightTab("History", new HTab("Groups", splitPane), 250, 200, 500);
+    getTabsPane().getModel()
+        .addRightTab("History", new HTab("Groups", splitPane), 250, 200, 500);
   }
 
   /**
    * Export.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
    */
   private void export() throws IOException, TranscoderException {
     export(RecentFilesService.getInstance().getPwd());
@@ -1360,18 +1335,16 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Export.
    *
-   * @param pwd
-   *          the working directory
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
+   * @param pwd the working directory
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
    */
   private void export(Path pwd) throws IOException, TranscoderException {
     DataFrame matrix = getCurrentMatrix();
 
     if (matrix == null) {
-      ModernMessageDialog.createWarningDialog(this, "Please open an expression file.");
+      ModernMessageDialog.createWarningDialog(this,
+          "Please open an expression file.");
 
       return;
     }
@@ -1382,12 +1355,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Export matrix.
    *
-   * @param pwd
-   *          the pwd
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
+   * @param pwd the pwd
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
    */
   private void exportMatrix(Path pwd) throws IOException, TranscoderException {
     DataFrame matrix = getCurrentMatrix();
@@ -1401,18 +1371,20 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     /*
      * if (mInputFiles.size() > 0) { file = FileDialog.save(this).filter(new
      * XlsxGuiFileFilter(), new TsvGuiFileFilter(), new GctGuiFileFilter(), new
-     * EstGuiFileFilter()).suggested(PathUtils.getNameNoExt(mInputFile)).getFile(pwd
-     * ); } else { file = FileDialog.save(this).filter(new XlsxGuiFileFilter(), new
-     * TsvGuiFileFilter(), new GctGuiFileFilter(), new
+     * EstGuiFileFilter()).suggested(PathUtils.getNameNoExt(mInputFile)).getFile
+     * (pwd ); } else { file = FileDialog.save(this).filter(new
+     * XlsxGuiFileFilter(), new TsvGuiFileFilter(), new GctGuiFileFilter(), new
      * EstGuiFileFilter()).getFile(pwd); }
      */
 
     if (mFilesModel.size() > 0) {
-      file = FileDialog.save(this).filter(mSaveFileFilters).setDefaultFilter("txt") // PathUtils.getFileExt(mInputFile))
-                                                                                    // //"txt")
+      file = FileDialog.save(this).filter(mSaveFileFilters)
+          .setDefaultFilter("txt") // PathUtils.getFileExt(mInputFile))
+                                   // //"txt")
           .suggested(PathUtils.getNameNoExt(getInputFile())).getFile(pwd);
     } else {
-      file = FileDialog.save(this).filter(mSaveFileFilters).setDefaultFilter("txt").getFile(pwd);
+      file = FileDialog.save(this).filter(mSaveFileFilters)
+          .setDefaultFilter("txt").getFile(pwd);
     }
 
     if (file == null) {
@@ -1420,7 +1392,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     }
 
     if (FileUtils.exists(file)) {
-      ModernMessageDialog.createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
+      ModernMessageDialog
+          .createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
     } else {
       save(file);
     }
@@ -1429,10 +1402,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Save.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void save(Path file) throws IOException {
     DataFrame matrix = getCurrentMatrix();
@@ -1449,11 +1420,12 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
     /*
      * if (ext.equals("gct")) { GctMatrix.writeGctMatrix(matrix, file);
-     * RecentFilesService.getInstance().add(file); } else if (ext.equals("est")) {
-     * // Use version 2 as more flexible DataFrame.writeEstMatrixV2(matrix, file);
-     * RecentFilesService.getInstance().add(file); } else if (ext.equals("xlsx")) {
-     * Excel.writeXlsx(matrix, file); RecentFilesService.getInstance().add(file); }
-     * else { // txt DataFrame.writeDataMatrix(matrix, file);
+     * RecentFilesService.getInstance().add(file); } else if (ext.equals("est"))
+     * { // Use version 2 as more flexible DataFrame.writeEstMatrixV2(matrix,
+     * file); RecentFilesService.getInstance().add(file); } else if
+     * (ext.equals("xlsx")) { Excel.writeXlsx(matrix, file);
+     * RecentFilesService.getInstance().add(file); } else { // txt
+     * DataFrame.writeDataMatrix(matrix, file);
      * RecentFilesService.getInstance().add(file); }
      */
 
@@ -1511,7 +1483,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * 
    * boolean isLog2Data = false; boolean log2Data = false;
    * //dialog.getLog2Transform(); boolean equalVariance = false;
-   * //dialog.getEqualVariance(); boolean plot = false; //dialog.getCreatePlot();
+   * //dialog.getEqualVariance(); boolean plot = false;
+   * //dialog.getCreatePlot();
    * 
    * 
    * foldChange(m, minExp, g1, g2, isLog2Data, log2Data, equalVariance, plot,
@@ -1521,31 +1494,21 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Fold change.
    *
-   * @param m
-   *          the m
-   * @param minExp
-   *          the min exp
-   * @param g1
-   *          the g1
-   * @param g2
-   *          the g2
-   * @param isLog2Data
-   *          the is log2 data
-   * @param log2Data
-   *          the log2 data
-   * @param equalVariance
-   *          the equal variance
-   * @param plot
-   *          the plot
-   * @param properties
-   *          the properties
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param m the m
+   * @param minExp the min exp
+   * @param g1 the g1
+   * @param g2 the g2
+   * @param isLog2Data the is log2 data
+   * @param log2Data the log2 data
+   * @param equalVariance the equal variance
+   * @param plot the plot
+   * @param properties the properties
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   /*
-   * public void foldChange(DataFrame m, double minExp, XYSeries g1, XYSeries g2,
-   * boolean isLog2Data, boolean log2Data, boolean equalVariance, boolean plot,
-   * Properties properties) throws IOException {
+   * public void foldChange(DataFrame m, double minExp, XYSeries g1, XYSeries
+   * g2, boolean isLog2Data, boolean log2Data, boolean equalVariance, boolean
+   * plot, Properties properties) throws IOException {
    * 
    * XYSeriesGroup groups = new XYSeriesGroup(); groups.add(g1); groups.add(g2);
    * 
@@ -1613,8 +1576,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * 
    * List<Integer> indices = IndexedValue.indices(sortedZscores);
    * 
-   * DataFrame mDeltaSorted = AnnotatableMatrix.copyInnerRows(mzscores, indices);
-   * addToHistory("Sort by row z-score", mDeltaSorted); //new
+   * DataFrame mDeltaSorted = AnnotatableMatrix.copyInnerRows(mzscores,
+   * indices); addToHistory("Sort by row z-score", mDeltaSorted); //new
    * RowFilterMatrixView(mzscores, indices));
    * 
    * 
@@ -1635,17 +1598,15 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * 
    * List<String> history = getTransformationHistory();
    * 
-   * addToHistory(new TTestPlotMatrixTransform(this, mNormalized, groups, history,
-   * properties)); }
+   * addToHistory(new TTestPlotMatrixTransform(this, mNormalized, groups,
+   * history, properties)); }
    */
 
   /**
    * Generate a heatmap from the current matrix.
    *
-   * @param properties
-   *          the properties
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param properties the properties
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   /*
    * public void heatMap(Properties properties) throws IOException { if
@@ -1753,8 +1714,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernSelectionListener#selectionChanged(org.abh.
-   * lib.event.ChangeEvent)
+   * org.abh.lib.ui.modern.event.ModernSelectionListener#selectionChanged(org.
+   * abh. lib.event.ChangeEvent)
    */
   @Override
   public void selectionChanged(ChangeEvent e) {
@@ -1803,8 +1764,10 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
   @Override
   public void setCard(Component c) {
-    getTabsPane().getModel().setCenterTab(
-        new ModernComponent(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)), ModernWidget.BORDER));
+    getTabsPane().getModel()
+        .setCenterTab(new ModernComponent(
+            new Card(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)),
+            ModernWidget.BORDER));
   }
 
   /*
@@ -1880,7 +1843,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * @return the selected columns
    */
   public List<Integer> getSelectedColumns() {
-    System.err.println("selected columns " + CollectionUtils.toList(mMatrixTable.getColumnModel().getSelectionModel()));
+    System.err.println("selected columns " + CollectionUtils
+        .toList(mMatrixTable.getColumnModel().getSelectionModel()));
 
     if (mMatrixTable == null) {
       return Collections.emptyList();
@@ -1937,11 +1901,12 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Creates the group warning dialog.
    *
-   * @param window
-   *          the window
+   * @param window the window
    */
   public static void createGroupWarningDialog(ModernWindow window) {
-    ModernMessageDialog.createDialog(window, MainMatCalcWindow.CREATE_GROUPS_MESSAGE, MessageDialogType.WARNING);
+    ModernMessageDialog.createDialog(window,
+        MainMatCalcWindow.CREATE_GROUPS_MESSAGE,
+        MessageDialogType.WARNING);
   }
 
   /**

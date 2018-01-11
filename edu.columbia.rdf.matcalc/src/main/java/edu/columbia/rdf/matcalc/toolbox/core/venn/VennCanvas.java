@@ -18,10 +18,10 @@ package edu.columbia.rdf.matcalc.toolbox.core.venn;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
+import org.jebtk.bioinformatics.ui.groups.GroupsModel;
 import org.jebtk.core.Properties;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
-import org.jebtk.bioinformatics.ui.groups.GroupsModel;
 import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.ImageUtils;
@@ -52,8 +52,8 @@ public abstract class VennCanvas extends ModernPlotCanvas {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+     * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.
+     * ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -74,10 +74,8 @@ public abstract class VennCanvas extends ModernPlotCanvas {
   /**
    * Sets the groups.
    *
-   * @param groups
-   *          the groups
-   * @param style
-   *          the style
+   * @param groups the groups
+   * @param style the style
    */
   public void setGroups(GroupsModel groups, CircleStyle style) {
     mGroups = groups;
@@ -114,10 +112,8 @@ public abstract class VennCanvas extends ModernPlotCanvas {
   /**
    * Aa plot.
    *
-   * @param g2
-   *          the g 2
-   * @param context
-   *          the context
+   * @param g2 the g 2
+   * @param context the context
    */
   public void aaPlot(Graphics2D g2, DrawingContext context) {
 
@@ -133,10 +129,8 @@ public abstract class VennCanvas extends ModernPlotCanvas {
   /**
    * Draw plot.
    *
-   * @param g2Temp
-   *          the g 2 temp
-   * @param context
-   *          the context
+   * @param g2Temp the g 2 temp
+   * @param context the context
    */
   public void drawPlot(Graphics2D g2Temp, DrawingContext context) {
     // do nothing

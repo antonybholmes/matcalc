@@ -33,7 +33,8 @@ import org.jebtk.modern.window.ModernWindow;
  * @author Antony Holmes Holmes
  *
  */
-public class StokeStyleButton extends ControlDropDownButton implements ModernClickListener {
+public class StokeStyleButton extends ControlDropDownButton
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -58,17 +59,16 @@ public class StokeStyleButton extends ControlDropDownButton implements ModernCli
   /**
    * Instantiates a new dashed line type button.
    *
-   * @param parent
-   *          the parent
-   * @param style
-   *          the style
+   * @param parent the parent
+   * @param style the style
    */
   public StokeStyleButton(ModernWindow parent, StrokeStyle style) {
     super("Dashed Line");
 
     mPopup = new ModernScrollPopupMenu();
 
-    DashedLineMenuItem menuItem = new DashedLineMenuItem("Solid", ModernTheme.SINGLE_LINE_STROKE);
+    DashedLineMenuItem menuItem = new DashedLineMenuItem("Solid",
+        ModernTheme.SINGLE_LINE_STROKE);
     menuItem.addClickListener(this);
     mPopup.addScrollMenuItem(menuItem);
 
@@ -80,11 +80,13 @@ public class StokeStyleButton extends ControlDropDownButton implements ModernCli
     menuItem.addClickListener(this);
     mPopup.addScrollMenuItem(menuItem);
 
-    menuItem = new DashedLineMenuItem("Dashed Dotted", ModernTheme.DASHED_DOTTED_LINE_STROKE);
+    menuItem = new DashedLineMenuItem("Dashed Dotted",
+        ModernTheme.DASHED_DOTTED_LINE_STROKE);
     menuItem.addClickListener(this);
     mPopup.addScrollMenuItem(menuItem);
 
-    menuItem = new DashedLineMenuItem("Long Dashed", ModernTheme.LONG_DASHED_LINE_STROKE);
+    menuItem = new DashedLineMenuItem("Long Dashed",
+        ModernTheme.LONG_DASHED_LINE_STROKE);
     menuItem.addClickListener(this);
     mPopup.addScrollMenuItem(menuItem);
 
@@ -119,8 +121,8 @@ public class StokeStyleButton extends ControlDropDownButton implements ModernCli
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -156,8 +158,7 @@ public class StokeStyleButton extends ControlDropDownButton implements ModernCli
   /**
    * Sets the stroke.
    *
-   * @param stroke
-   *          the new stroke
+   * @param stroke the new stroke
    */
   public void setStroke(StrokeStyle stroke) {
     mSelectedStroke = stroke;

@@ -39,7 +39,8 @@ import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
 /**
  * The class MatchDialog.
  */
-public class MatchDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class MatchDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -90,12 +91,13 @@ public class MatchDialog extends ModernDialogHelpWindow implements ModernClickLi
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
-      mWindow = (MainMatCalcWindow) WindowService.getInstance().findByName(mMatchCombo.getText());
+      mWindow = (MainMatCalcWindow) WindowService.getInstance()
+          .findByName(mMatchCombo.getText());
       mMatchMatrix = mWindow.getCurrentMatrix();
 
       mMatchColumnCombo.setMatrix(mMatchMatrix);
@@ -107,12 +109,9 @@ public class MatchDialog extends ModernDialogHelpWindow implements ModernClickLi
   /**
    * Instantiates a new match dialog.
    *
-   * @param parent
-   *          the parent
-   * @param m
-   *          the m
-   * @param c
-   *          the c
+   * @param parent the parent
+   * @param m the m
+   * @param c the c
    */
   public MatchDialog(MainMatCalcWindow parent, DataFrame m, int c) {
     super(parent, "matcalc.match-in-files.help.url");
@@ -155,7 +154,8 @@ public class MatchDialog extends ModernDialogHelpWindow implements ModernClickLi
 
     MatrixPanel matrixPanel;
 
-    matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Source Table"));
     matrixPanel.add(new ModernLabelBold(mWindow.getSubTitle()));

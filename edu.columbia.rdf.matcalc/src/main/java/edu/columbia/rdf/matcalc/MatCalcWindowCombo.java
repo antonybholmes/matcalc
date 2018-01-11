@@ -37,7 +37,8 @@ public class MatCalcWindowCombo extends ModernComboBox {
   /**
    * The constant SIZE.
    */
-  private static final Dimension SIZE = new Dimension(400, ModernWidget.WIDGET_HEIGHT);
+  private static final Dimension SIZE = new Dimension(400,
+      ModernWidget.WIDGET_HEIGHT);
 
   /**
    * Instantiates a new mat calc window combo.

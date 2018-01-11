@@ -76,14 +76,12 @@ public class ColorMapRibbonSection extends RibbonSection {
   /**
    * Instantiates a new color map ribbon section.
    *
-   * @param parent
-   *          the parent
-   * @param colorMapModel
-   *          the model
-   * @param scaleModel
-   *          the scale model
+   * @param parent the parent
+   * @param colorMapModel the model
+   * @param scaleModel the scale model
    */
-  public ColorMapRibbonSection(ModernRibbonWindow parent, ColorMapModel colorMapModel, ScaleModel scaleModel) {
+  public ColorMapRibbonSection(ModernRibbonWindow parent,
+      ColorMapModel colorMapModel, ScaleModel scaleModel) {
     super(parent.getRibbon(), "Color Map");
 
     mColorMapModel = colorMapModel;
@@ -121,9 +119,9 @@ public class ColorMapRibbonSection extends RibbonSection {
      * choicePanel.add(mBlueYellowButton); group.add(mBlueYellowButton);
      * 
      * mWhiteRedButton = new RibbonChoiceButton(new Raster48Icon(new
-     * ColorMapIcon(ColorMapService.getInstance().get("white_red"))), "White Red");
-     * mWhiteRedButton.addClickListener(this); choicePanel.add(mWhiteRedButton);
-     * group.add(mWhiteRedButton);
+     * ColorMapIcon(ColorMapService.getInstance().get("white_red"))),
+     * "White Red"); mWhiteRedButton.addClickListener(this);
+     * choicePanel.add(mWhiteRedButton); group.add(mWhiteRedButton);
      * 
      * mWhiteBlueButton = new RibbonChoiceButton(new Raster48Icon(new
      * ColorMapIcon(ColorMapService.getInstance().get("white_blue"))),
@@ -167,14 +165,16 @@ public class ColorMapRibbonSection extends RibbonSection {
     mInvertButton.addClickListener(new ModernClickListener() {
       @Override
       public void clicked(ModernClickEvent e) {
-        mColorMapModel.set(new ColorMap(mColorMapButton.getSelectedColorMap(), true));
+        mColorMapModel
+            .set(new ColorMap(mColorMapButton.getSelectedColorMap(), true));
       }
     });
 
     mScaleSpinner.addChangeListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent e) {
-        mScaleModel.set(mScaleSpinner.getValue()); // Math.pow(2, mScaleSpinner.getValue()));
+        mScaleModel.set(mScaleSpinner.getValue()); // Math.pow(2,
+                                                   // mScaleSpinner.getValue()));
       }
     });
 

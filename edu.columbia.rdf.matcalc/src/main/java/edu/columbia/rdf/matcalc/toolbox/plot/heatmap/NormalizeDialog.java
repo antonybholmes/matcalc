@@ -57,9 +57,11 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
    */
   private ModernRadioButton mRadioFixed = new ModernRadioButton("Fixed");
 
-  private ModernTextField mTextAutoMin = new ModernClipboardNumericalTextField(-1);
+  private ModernTextField mTextAutoMin = new ModernClipboardNumericalTextField(
+      -1);
 
-  private ModernTextField mTextAutoMax = new ModernClipboardNumericalTextField(-1);
+  private ModernTextField mTextAutoMax = new ModernClipboardNumericalTextField(
+      -1);
 
   private ModernTextField mTextMin = new ModernClipboardNumericalTextField(-1);
 
@@ -68,8 +70,7 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
   /**
    * Instantiates a new figure dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public NormalizeDialog(ModernWindow parent) {
     super(parent);
@@ -86,12 +87,15 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
    * Setup.
    */
   private void setup() {
-    mTextMin.setText(SettingsService.getInstance().getAsDouble("org.matcalc.figure.heatmap.normalize.min", 0));
-    mTextMax.setText(SettingsService.getInstance().getAsDouble("org.matcalc.figure.heatmap.normalize.max", 1));
+    mTextMin.setText(SettingsService.getInstance()
+        .getAsDouble("org.matcalc.figure.heatmap.normalize.min", 0));
+    mTextMax.setText(SettingsService.getInstance()
+        .getAsDouble("org.matcalc.figure.heatmap.normalize.max", 1));
 
     new ModernButtonGroup(mRadioFixed, mRadioAuto);
 
-    if (SettingsService.getInstance().getAsBool("org.matcalc.figure.heatmap.normalize.mode.auto", true)) {
+    if (SettingsService.getInstance()
+        .getAsBool("org.matcalc.figure.heatmap.normalize.mode.auto", true)) {
       mRadioAuto.doClick();
     } else {
       mRadioFixed.doClick();
@@ -137,11 +141,17 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
-      SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.min", mTextMin.getAsDouble());
+      SettingsService.getInstance().set(
+          "org.matcalc.figure.heatmap.normalize.min",
+          mTextMin.getAsDouble());
 
-      SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.max", mTextMax.getAsDouble());
+      SettingsService.getInstance().set(
+          "org.matcalc.figure.heatmap.normalize.max",
+          mTextMax.getAsDouble());
 
-      SettingsService.getInstance().set("org.matcalc.figure.heatmap.normalize.mode.auto", mRadioAuto.isSelected());
+      SettingsService.getInstance().set(
+          "org.matcalc.figure.heatmap.normalize.mode.auto",
+          mRadioAuto.isSelected());
     }
 
     super.clicked(e);

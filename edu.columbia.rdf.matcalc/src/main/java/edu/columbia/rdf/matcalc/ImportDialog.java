@@ -42,7 +42,8 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
  *
  * @author Antony Holmes Holmes
  */
-public class ImportDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class ImportDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -58,18 +59,22 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
    * The member check header.
    */
   private CheckBox mCheckHeader = new ModernCheckSwitch("Header text rows",
-      SettingsService.getInstance().getAsBool("matcalc.import.file.has-header"));
+      SettingsService.getInstance()
+          .getAsBool("matcalc.import.file.has-header"));
 
   /** The m check skip. */
-  private CheckBox mCheckSkip = new ModernCheckSwitch("Skip lines starting with", true); // SettingsService.getInstance().getAsBool("matcalc.import.file.skip.lines"));
+  private CheckBox mCheckSkip = new ModernCheckSwitch(
+      "Skip lines starting with", true); // SettingsService.getInstance().getAsBool("matcalc.import.file.skip.lines"));
 
   /** The m field skip. */
   private ModernTextField mFieldSkip = new ModernClipboardTextField(
-      SettingsService.getInstance().getAsString("matcalc.import.file.skip.matches"));
+      SettingsService.getInstance()
+          .getAsString("matcalc.import.file.skip.matches"));
 
   private CheckBox mNumericalCheck = new ModernCheckSwitch("Numerical", true);
 
-  private CheckBox mTextColsCheck = new ModernCheckSwitch("Header text columns", true);
+  private CheckBox mTextColsCheck = new ModernCheckSwitch("Header text columns",
+      true);
 
   /** The m delimiter combo. */
   private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
@@ -79,16 +84,13 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
   /**
    * Instantiates a new row annotation dialog.
    *
-   * @param parent
-   *          the parent
-   * @param rowAnnotations
-   *          the row annotations
-   * @param isExcel
-   *          the is excel
-   * @param delimiter
-   *          the delimiter
+   * @param parent the parent
+   * @param rowAnnotations the row annotations
+   * @param isExcel the is excel
+   * @param delimiter the delimiter
    */
-  public ImportDialog(ModernWindow parent, int rowAnnotations, boolean isExcel, String delimiter, boolean isNumerical) {
+  public ImportDialog(ModernWindow parent, int rowAnnotations, boolean isExcel,
+      String delimiter, boolean isNumerical) {
     super(parent, "matcalc.import.help.url");
 
     setTitle("Import");
@@ -119,8 +121,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
   /**
    * Creates the ui.
    *
-   * @param isExcel
-   *          the is excel
+   * @param isExcel the is excel
    */
   private final void createUi(boolean isExcel) {
     // this.getContentPane().add(new JLabel("Change " +
@@ -133,7 +134,8 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
 
     if (!isExcel) {
       box.add(UI.createVGap(5));
-      box.add(new HExpandBox(mCheckSkip, new ModernTextBorderPanel(mFieldSkip, 80)));
+      box.add(new HExpandBox(mCheckSkip,
+          new ModernTextBorderPanel(mFieldSkip, 80)));
       box.add(UI.createVGap(5));
       box.add(new HExpandBox("Delimiter", mDelimiterCombo));
     }
@@ -153,17 +155,20 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
-      SettingsService.getInstance().update("matcalc.import.file.has-header", mCheckHeader.isSelected());
+      SettingsService.getInstance().update("matcalc.import.file.has-header",
+          mCheckHeader.isSelected());
 
-      SettingsService.getInstance().update("matcalc.import.file.skip.lines", mCheckSkip.isSelected());
+      SettingsService.getInstance().update("matcalc.import.file.skip.lines",
+          mCheckSkip.isSelected());
 
-      SettingsService.getInstance().update("matcalc.import.file.skip.matches", mFieldSkip.getText());
+      SettingsService.getInstance().update("matcalc.import.file.skip.matches",
+          mFieldSkip.getText());
     }
 
     super.clicked(e);

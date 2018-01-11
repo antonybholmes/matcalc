@@ -38,25 +38,30 @@ public class FilterPanel extends VBox {
   /**
    * The member check pos z.
    */
-  private ModernTwoStateWidget mCheckPosZ = new ModernCheckSwitch("Positive z-scores", true);
+  private ModernTwoStateWidget mCheckPosZ = new ModernCheckSwitch(
+      "Positive z-scores", true);
 
   /**
    * The member check neg z.
    */
-  private ModernTwoStateWidget mCheckNegZ = new ModernCheckSwitch("Negative z-scores", true);
+  private ModernTwoStateWidget mCheckNegZ = new ModernCheckSwitch(
+      "Negative z-scores", true);
 
   /**
    * The member min zscore.
    */
-  private OptionalEntry mMinZscore = new OptionalEntry("Minimum absolute z-score", 1.0, false);
+  private OptionalEntry mMinZscore = new OptionalEntry(
+      "Minimum absolute z-score", 1.0, false);
 
   /**
    * The member min fold.
    */
-  private OptionalEntry mMinFold = new OptionalEntry("Minimum fold change", 1.0, false);
+  private OptionalEntry mMinFold = new OptionalEntry("Minimum fold change", 1.0,
+      false);
 
   /** The m top genes. */
-  private OptionalEntry mTopGenes = new OptionalEntry("Show top genes only", 10, false);
+  private OptionalEntry mTopGenes = new OptionalEntry("Show top genes only", 10,
+      false);
 
   /**
    * Instantiates a new filter panel.

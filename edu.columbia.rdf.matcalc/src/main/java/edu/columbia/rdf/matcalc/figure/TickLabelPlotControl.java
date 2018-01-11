@@ -70,8 +70,8 @@ public class TickLabelPlotControl extends HBox {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -136,10 +136,8 @@ public class TickLabelPlotControl extends HBox {
   /**
    * Instantiates a new tick label plot control.
    *
-   * @param parent
-   *          the parent
-   * @param tick
-   *          the tick
+   * @param parent the parent
+   * @param tick the tick
    */
   public TickLabelPlotControl(ModernWindow parent, TickMarkProperties tick) {
     mTick = tick;

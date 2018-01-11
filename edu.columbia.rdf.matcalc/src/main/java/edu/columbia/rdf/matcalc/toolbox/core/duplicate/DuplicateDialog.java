@@ -25,7 +25,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class DuplicateDialog.
  */
-public class DuplicateDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class DuplicateDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -45,10 +46,8 @@ public class DuplicateDialog extends ModernDialogHelpWindow implements ModernCli
   /**
    * Instantiates a new duplicate dialog.
    *
-   * @param parent
-   *          the parent
-   * @param matrix
-   *          the matrix
+   * @param parent the parent
+   * @param matrix the matrix
    */
   public DuplicateDialog(ModernWindow parent, DataFrame matrix) {
     super(parent, "matcalc.modules.duplicate.help.url");

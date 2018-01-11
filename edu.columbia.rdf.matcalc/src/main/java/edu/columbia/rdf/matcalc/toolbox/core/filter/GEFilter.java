@@ -27,8 +27,7 @@ public class GEFilter implements Filter {
   /**
    * Instantiates a new GE filter.
    *
-   * @param v
-   *          the v
+   * @param v the v
    */
   public GEFilter(double v) {
     mV = v;

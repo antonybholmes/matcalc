@@ -43,8 +43,8 @@ public class ShapeStyleButton extends ModernDialogFlatDropDownIconButton {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -75,8 +75,7 @@ public class ShapeStyleButton extends ModernDialogFlatDropDownIconButton {
   /**
    * Instantiates a new shape style button.
    *
-   * @param style
-   *          the style
+   * @param style the style
    */
   public ShapeStyleButton(ShapeStyle style) {
     super(new ShapeStyleMultiIcon16(), new ShapeStyleMenu());
@@ -91,8 +90,7 @@ public class ShapeStyleButton extends ModernDialogFlatDropDownIconButton {
   /**
    * Sets the style.
    *
-   * @param style
-   *          the new style
+   * @param style the new style
    */
   public void setType(ShapeStyle style) {
     switch (style) {
@@ -129,8 +127,7 @@ public class ShapeStyleButton extends ModernDialogFlatDropDownIconButton {
   /**
    * Change type.
    *
-   * @param style
-   *          the style
+   * @param style the style
    */
   public void changeType(ShapeStyle style) {
 

@@ -19,9 +19,11 @@ import org.jebtk.modern.window.ModernWindow;
 public class DirPanel extends ModernComponent {
   private static final long serialVersionUID = 1L;
 
-  private ModernFileCrumb mFileCrumb = new ModernFileCrumb(RecentFilesService.getInstance().getPwd());
+  private ModernFileCrumb mFileCrumb = new ModernFileCrumb(
+      RecentFilesService.getInstance().getPwd());
 
-  private ModernButton mDirButton = new ModernButton(UIService.getInstance().loadIcon(FolderVectorIcon.class, 16));
+  private ModernButton mDirButton = new ModernButton(
+      UIService.getInstance().loadIcon(FolderVectorIcon.class, 16));
 
   private PwdModel mModel;
 

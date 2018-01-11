@@ -28,14 +28,13 @@ public class ScaleSpinner extends ModernCompactSpinner {
   private static final long serialVersionUID = 1L;
 
   /** The Constant STEPS. */
-  private static final double[] STEPS = { 0.1, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-      19, 20 };
+  private static final double[] STEPS = { 0.1, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7,
+      8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
   /**
    * Instantiates a new scale spinner.
    *
-   * @param value
-   *          the value
+   * @param value the value
    */
   public ScaleSpinner(double value) {
     super(value, STEPS);

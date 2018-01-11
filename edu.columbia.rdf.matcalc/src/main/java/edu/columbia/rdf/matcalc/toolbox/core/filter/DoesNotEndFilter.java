@@ -27,8 +27,7 @@ public class DoesNotEndFilter implements Filter {
   /**
    * Instantiates a new does not end filter.
    *
-   * @param text
-   *          the text
+   * @param text the text
    */
   public DoesNotEndFilter(String text) {
     mText = text.toLowerCase();

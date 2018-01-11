@@ -72,10 +72,8 @@ public class MarginControl extends VBox implements KeyListener {
   /**
    * Instantiates a new margin control.
    *
-   * @param parent
-   *          the parent
-   * @param layer
-   *          the layer
+   * @param parent the parent
+   * @param layer the layer
    */
   public MarginControl(ModernWindow parent, PlotBox layer) {
 
@@ -143,11 +141,13 @@ public class MarginControl extends VBox implements KeyListener {
   /**
    * Sets the margins.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void setMargins() throws ParseException {
-    mLayer.setMargins(mFieldTop.getAsInt(), mFieldLeft.getAsInt(), mFieldBottom.getAsInt(), mFieldRight.getAsInt());
+    mLayer.setMargins(mFieldTop.getAsInt(),
+        mFieldLeft.getAsInt(),
+        mFieldBottom.getAsInt(),
+        mFieldRight.getAsInt());
   }
 
   /*

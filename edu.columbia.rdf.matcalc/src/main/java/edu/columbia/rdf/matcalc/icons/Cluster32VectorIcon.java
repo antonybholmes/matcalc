@@ -56,8 +56,7 @@ public class Cluster32VectorIcon extends ModernVectorIcon {
   /**
    * Instantiates a new cluster32 vector icon.
    *
-   * @param barColor
-   *          the bar color
+   * @param barColor the bar color
    */
   public Cluster32VectorIcon(Color barColor) {
     this.barColor = barColor;
@@ -71,7 +70,12 @@ public class Cluster32VectorIcon extends ModernVectorIcon {
    * java.awt.Rectangle)
    */
   @Override
-  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+  public void drawIcon(Graphics2D g2,
+      int x,
+      int y,
+      int w,
+      int h,
+      Object... params) {
     x = x + 2;
 
     g2.setColor(LINE_COLOR);

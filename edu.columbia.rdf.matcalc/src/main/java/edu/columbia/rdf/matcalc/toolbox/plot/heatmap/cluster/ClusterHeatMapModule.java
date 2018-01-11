@@ -38,7 +38,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 /**
  * The class ClusterHeatMapModule.
  */
-public class ClusterHeatMapModule extends CalcModule implements ModernClickListener {
+public class ClusterHeatMapModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -58,7 +59,8 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -66,7 +68,8 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Cluster Heat Map",
-        UIService.getInstance().loadIcon(Cluster32VectorIcon.class, 24), "Heat Map", "Generate a cluster heat map.");
+        UIService.getInstance().loadIcon(Cluster32VectorIcon.class, 24),
+        "Heat Map", "Generate a cluster heat map.");
     button.addClickListener(this);
 
     // button.setEnabled(false);
@@ -78,7 +81,8 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
    * Creates the.
    */
   private void create() {
-    HierarchicalClusteringDialog dialog = new HierarchicalClusteringDialog(mParent);
+    HierarchicalClusteringDialog dialog = new HierarchicalClusteringDialog(
+        mParent);
 
     dialog.setVisible(true);
 
@@ -94,29 +98,33 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
 
     boolean plot = dialog.getCreatePlot();
 
-    cluster(m, distanceMetric, linkage, dialog.clusterRows(), dialog.clusterColumns(), dialog.optimalLeafOrder(), plot);
+    cluster(m,
+        distanceMetric,
+        linkage,
+        dialog.clusterRows(),
+        dialog.clusterColumns(),
+        dialog.optimalLeafOrder(),
+        plot);
   }
 
   /**
    * Cluster.
    *
-   * @param m
-   *          the m
-   * @param distanceMetric
-   *          the distance metric
-   * @param linkage
-   *          the linkage
-   * @param clusterRows
-   *          the cluster rows
-   * @param clusterColumns
-   *          the cluster columns
-   * @param optimalLeafOrder
-   *          the optimal leaf order
-   * @param showHeatmap
-   *          the show heatmap
+   * @param m the m
+   * @param distanceMetric the distance metric
+   * @param linkage the linkage
+   * @param clusterRows the cluster rows
+   * @param clusterColumns the cluster columns
+   * @param optimalLeafOrder the optimal leaf order
+   * @param showHeatmap the show heatmap
    */
-  public void cluster(DataFrame m, DistanceMetric distanceMetric, Linkage linkage, boolean clusterRows,
-      boolean clusterColumns, boolean optimalLeafOrder, boolean showHeatmap) {
+  public void cluster(DataFrame m,
+      DistanceMetric distanceMetric,
+      Linkage linkage,
+      boolean clusterRows,
+      boolean clusterColumns,
+      boolean optimalLeafOrder,
+      boolean showHeatmap) {
 
     if (m == null) {
       return;
@@ -126,11 +134,13 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
     Cluster columnCluster = null;
 
     if (clusterRows) {
-      rowCluster = HierarchicalClustering.rowCluster(m, linkage, distanceMetric, optimalLeafOrder);
+      rowCluster = HierarchicalClustering
+          .rowCluster(m, linkage, distanceMetric, optimalLeafOrder);
     }
 
     if (clusterColumns) {
-      columnCluster = HierarchicalClustering.columnCluster(m, linkage, distanceMetric, optimalLeafOrder);
+      columnCluster = HierarchicalClustering
+          .columnCluster(m, linkage, distanceMetric, optimalLeafOrder);
     }
 
     if (rowCluster == null && columnCluster == null) {
@@ -150,7 +160,11 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
 
     SubFigure subFigure = figure.currentSubFigure();
 
-    PlotFactory.createClusterHeatMap(m, subFigure, mParent.getGroups(), rowCluster, columnCluster);
+    PlotFactory.createClusterHeatMap(m,
+        subFigure,
+        mParent.getGroups(),
+        rowCluster,
+        columnCluster);
 
     Graph2dWindow window = new Graph2dWindow(mParent, figure);
 
@@ -161,8 +175,8 @@ public class ClusterHeatMapModule extends CalcModule implements ModernClickListe
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

@@ -74,8 +74,8 @@ public class FillStyleControl extends HBox implements ModernClickListener {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -104,10 +104,8 @@ public class FillStyleControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new fill control.
    *
-   * @param parent
-   *          the parent
-   * @param fill
-   *          the fill
+   * @param parent the parent
+   * @param fill the fill
    */
   public FillStyleControl(ModernWindow parent, FillProperties fill) {
     this(parent, "Fill", fill);
@@ -116,14 +114,12 @@ public class FillStyleControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new fill control.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param fill
-   *          the fill
+   * @param parent the parent
+   * @param name the name
+   * @param fill the fill
    */
-  public FillStyleControl(ModernWindow parent, String name, FillProperties fill) {
+  public FillStyleControl(ModernWindow parent, String name,
+      FillProperties fill) {
     mFillStyle = fill;
 
     mCheckBox = new ModernCheckSwitch(name);
@@ -174,8 +170,8 @@ public class FillStyleControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

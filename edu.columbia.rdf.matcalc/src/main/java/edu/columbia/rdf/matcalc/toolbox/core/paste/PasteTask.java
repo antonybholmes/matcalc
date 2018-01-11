@@ -43,7 +43,8 @@ public class PasteTask extends SwingWorker<Void, Void> {
 
   private String mDelimiter;
 
-  public PasteTask(MainMatCalcWindow window, List<Path> files, String delimiter, boolean indexMode) {
+  public PasteTask(MainMatCalcWindow window, List<Path> files, String delimiter,
+      boolean indexMode) {
     mWindow = window;
     mFiles = files;
     mDelimiter = delimiter;
@@ -54,18 +55,20 @@ public class PasteTask extends SwingWorker<Void, Void> {
   public Void doInBackground() {
     try {
       paste();
-    } catch (InvalidFormatException | ClassNotFoundException | InstantiationException | IllegalAccessException
-        | IOException | SAXException | ParserConfigurationException | ParseException | FontFormatException
-        | UnsupportedLookAndFeelException e) {
+    } catch (InvalidFormatException | ClassNotFoundException
+        | InstantiationException | IllegalAccessException | IOException
+        | SAXException | ParserConfigurationException | ParseException
+        | FontFormatException | UnsupportedLookAndFeelException e) {
       e.printStackTrace();
     }
 
     return null;
   }
 
-  private void paste() throws IOException, InvalidFormatException, ClassNotFoundException, InstantiationException,
-      IllegalAccessException, SAXException, ParserConfigurationException, ParseException, FontFormatException,
-      UnsupportedLookAndFeelException {
+  private void paste() throws IOException, InvalidFormatException,
+      ClassNotFoundException, InstantiationException, IllegalAccessException,
+      SAXException, ParserConfigurationException, ParseException,
+      FontFormatException, UnsupportedLookAndFeelException {
     // First get all the regions to search into one sorted map
 
     Path pwd = RecentFilesService.getInstance().getPwd();

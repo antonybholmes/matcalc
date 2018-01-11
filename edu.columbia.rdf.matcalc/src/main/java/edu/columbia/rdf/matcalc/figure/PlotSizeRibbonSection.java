@@ -45,12 +45,14 @@ public class PlotSizeRibbonSection extends RibbonSection {
   /**
    * The member w field.
    */
-  private ModernCompactSpinner mWField = new ModernCompactSpinner(1, 10000, 100, false);
+  private ModernCompactSpinner mWField = new ModernCompactSpinner(1, 10000, 100,
+      false);
 
   /**
    * The member h field.
    */
-  private ModernCompactSpinner mHField = new ModernCompactSpinner(1, 10000, 100, false);
+  private ModernCompactSpinner mHField = new ModernCompactSpinner(1, 10000, 100,
+      false);
 
   /** The m model. */
   private PlotSizeModel mModel;
@@ -97,10 +99,8 @@ public class PlotSizeRibbonSection extends RibbonSection {
   /**
    * Instantiates a new plot size ribbon section.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public PlotSizeRibbonSection(Ribbon ribbon, PlotSizeModel model) {
     super(ribbon, "Plot Size");

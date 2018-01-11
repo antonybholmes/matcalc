@@ -37,10 +37,8 @@ public class StyleControl extends VBox {
   /**
    * Instantiates a new XY series plot control.
    *
-   * @param parent
-   *          the parent
-   * @param style
-   *          the style
+   * @param parent the parent
+   * @param style the style
    */
   public StyleControl(ModernWindow parent, StyleProperties style) {
     add(new LineStyleControl(parent, style.getLineStyle()));

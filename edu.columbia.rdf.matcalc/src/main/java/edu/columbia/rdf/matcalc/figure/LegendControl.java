@@ -34,10 +34,8 @@ public class LegendControl extends VBox {
   /**
    * Instantiates a new axis plot control.
    *
-   * @param parent
-   *          the parent
-   * @param legend
-   *          the legend
+   * @param parent the parent
+   * @param legend the legend
    */
   public LegendControl(ModernWindow parent, LegendProperties legend) {
     add(new VisibleControl(parent, legend));

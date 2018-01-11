@@ -45,7 +45,8 @@ public class ColumnSort extends HBox implements ModernClickListener {
   private SortOrderCombo mSortCombo = new SortOrderCombo();
 
   /** The m delete button. */
-  private ModernButton mDeleteButton = new ModernButton(UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
+  private ModernButton mDeleteButton = new ModernButton(
+      UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
 
   /** The m listeners. */
   private ModernClickListeners mListeners = new ModernClickListeners();
@@ -53,10 +54,8 @@ public class ColumnSort extends HBox implements ModernClickListener {
   /**
    * Instantiates a new column sort.
    *
-   * @param m
-   *          the m
-   * @param label
-   *          the label
+   * @param m the m
+   * @param label the label
    */
   public ColumnSort(DataFrame m, String label) {
     add(new ModernAutoSizeLabel(label, 60));
@@ -84,10 +83,8 @@ public class ColumnSort extends HBox implements ModernClickListener {
   /**
    * Instantiates a new column sort.
    *
-   * @param m
-   *          the m
-   * @param c
-   *          the c
+   * @param m the m
+   * @param c the c
    */
   public ColumnSort(DataFrame m, int c) {
     this(m, c, true);
@@ -96,12 +93,9 @@ public class ColumnSort extends HBox implements ModernClickListener {
   /**
    * Instantiates a new column sort.
    *
-   * @param m
-   *          the m
-   * @param c
-   *          the c
-   * @param asc
-   *          the asc
+   * @param m the m
+   * @param c the c
+   * @param asc the asc
    */
   public ColumnSort(DataFrame m, int c, boolean asc) {
     this(m, "Sort by", c, asc);
@@ -110,12 +104,9 @@ public class ColumnSort extends HBox implements ModernClickListener {
   /**
    * Instantiates a new column sort.
    *
-   * @param m
-   *          the m
-   * @param label
-   *          the label
-   * @param c
-   *          the c
+   * @param m the m
+   * @param label the label
+   * @param c the c
    */
   public ColumnSort(DataFrame m, String label, int c) {
     this(m, label, c, true);
@@ -124,14 +115,10 @@ public class ColumnSort extends HBox implements ModernClickListener {
   /**
    * Instantiates a new column sort.
    *
-   * @param m
-   *          the m
-   * @param label
-   *          the label
-   * @param c
-   *          the c
-   * @param asc
-   *          the asc
+   * @param m the m
+   * @param label the label
+   * @param c the c
+   * @param asc the asc
    */
   public ColumnSort(DataFrame m, String label, int c, boolean asc) {
     this(m, label);
@@ -146,8 +133,7 @@ public class ColumnSort extends HBox implements ModernClickListener {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mListeners.addClickListener(l);
@@ -156,9 +142,8 @@ public class ColumnSort extends HBox implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

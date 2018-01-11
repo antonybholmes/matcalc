@@ -65,10 +65,8 @@ public class LegendRibbonSection extends RibbonSection {
   /**
    * Instantiates a new legend ribbon section.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param legend
-   *          the legend
+   * @param ribbon the ribbon
+   * @param legend the legend
    */
   public LegendRibbonSection(Ribbon ribbon, LegendProperties legend) {
     super(ribbon, "Legend");
@@ -83,8 +81,10 @@ public class LegendRibbonSection extends RibbonSection {
     add(legendPositionPicker);
 
     mShowButton.setSelected(legend.getVisible());
-    mShowBorderButton.setSelected(legend.getStyle().getLineStyle().getVisible());
-    mShowBackgroundButton.setSelected(legend.getStyle().getFillStyle().getVisible());
+    mShowBorderButton
+        .setSelected(legend.getStyle().getLineStyle().getVisible());
+    mShowBackgroundButton
+        .setSelected(legend.getStyle().getFillStyle().getVisible());
     mInsideButton.setSelected(legend.isInside());
 
     mShowButton.addClickListener(new ModernClickListener() {
@@ -97,14 +97,16 @@ public class LegendRibbonSection extends RibbonSection {
     mShowBorderButton.addClickListener(new ModernClickListener() {
       @Override
       public void clicked(ModernClickEvent e) {
-        mLegend.getStyle().getLineStyle().setVisible(mShowBorderButton.isSelected());
+        mLegend.getStyle().getLineStyle()
+            .setVisible(mShowBorderButton.isSelected());
       }
     });
 
     mShowBackgroundButton.addClickListener(new ModernClickListener() {
       @Override
       public void clicked(ModernClickEvent e) {
-        mLegend.getStyle().getFillStyle().setVisible(mShowBackgroundButton.isSelected());
+        mLegend.getStyle().getFillStyle()
+            .setVisible(mShowBackgroundButton.isSelected());
       }
     });
 
@@ -119,8 +121,10 @@ public class LegendRibbonSection extends RibbonSection {
       @Override
       public void changed(ChangeEvent e) {
         mShowButton.setSelected(mLegend.getVisible());
-        mShowBorderButton.setSelected(mLegend.getStyle().getLineStyle().getVisible());
-        mShowBackgroundButton.setSelected(mLegend.getStyle().getFillStyle().getVisible());
+        mShowBorderButton
+            .setSelected(mLegend.getStyle().getLineStyle().getVisible());
+        mShowBackgroundButton
+            .setSelected(mLegend.getStyle().getFillStyle().getVisible());
       }
     });
   }

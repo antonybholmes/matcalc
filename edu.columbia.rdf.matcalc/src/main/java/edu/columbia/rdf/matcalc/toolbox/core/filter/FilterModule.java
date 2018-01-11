@@ -25,7 +25,6 @@ import org.jebtk.core.collections.BooleanFixedStack;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.search.SearchStackOperator;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -55,7 +54,8 @@ public class FilterModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mFilterButton = new RibbonLargeButton("Filter",
-      new Raster24Icon(new FilterVectorIcon(ThemeService.getInstance().colors().getColorHighlight(8),
+      new Raster24Icon(new FilterVectorIcon(
+          ThemeService.getInstance().colors().getColorHighlight(8),
           ThemeService.getInstance().colors().getColorHighlight(6))));
 
   /**
@@ -76,17 +76,20 @@ public class FilterModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mFilterButton.setToolTip(new ModernToolTip("Filter", "Filter rows in columns."),
+    mFilterButton.setToolTip(
+        new ModernToolTip("Filter", "Filter rows in columns."),
         mWindow.getRibbon().getToolTipModel());
 
-    window.getRibbon().getToolbar("Data").getSection("Filter").add(mFilterButton);
+    window.getRibbon().getToolbar("Data").getSection("Filter")
+        .add(mFilterButton);
 
     mFilterButton.addClickListener(this);
 
@@ -96,8 +99,8 @@ public class FilterModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -111,8 +114,7 @@ public class FilterModule extends CalcModule implements ModernClickListener {
   /**
    * Match.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void filter() throws ParseException {
     DataFrame m = mWindow.getCurrentMatrix();
@@ -120,7 +122,9 @@ public class FilterModule extends CalcModule implements ModernClickListener {
     List<Integer> columns = mWindow.getSelectedColumns();
 
     if (columns.size() == 0) {
-      ModernMessageDialog.createDialog(mWindow, "You must select a column to match on.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mWindow,
+          "You must select a column to match on.",
+          MessageDialogType.WARNING);
       return;
     }
 
@@ -180,7 +184,8 @@ public class FilterModule extends CalcModule implements ModernClickListener {
     }
 
     // Reverse the stack to get the evaluation order
-    List<FilterStackElement> operators = CollectionUtils.reverse(CollectionUtils.toList(stack));
+    List<FilterStackElement> operators = CollectionUtils
+        .reverse(CollectionUtils.toList(stack));
 
     // Create a master list of rows in sorted order
     List<Integer> rows = new ArrayList<Integer>(m.getRows());

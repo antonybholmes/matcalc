@@ -30,7 +30,8 @@ public class VennInfo extends GuiAppInfo {
    */
   public VennInfo() {
     super("Venn", new AppVersion(2), "Copyright (C) 2016 Antony Holmes",
-        UIService.getInstance().loadIcon(VennIcon.class, 32), UIService.getInstance().loadIcon(VennIcon.class, 128),
+        UIService.getInstance().loadIcon(VennIcon.class, 32),
+        UIService.getInstance().loadIcon(VennIcon.class, 128),
         "Create Venn diagrams.");
   }
 

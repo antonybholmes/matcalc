@@ -46,16 +46,17 @@ public class MatrixGroupCheckBox extends ModernCheckBox {
   private Color mLightColor;
 
   /** The Constant GRAY1. */
-  private static final Color GRAY1 = ThemeService.getInstance().colors().getHighlight(3);
+  private static final Color GRAY1 = ThemeService.getInstance().colors()
+      .getHighlight(3);
 
   /** The Constant GRAY2. */
-  private static final Color GRAY2 = ThemeService.getInstance().colors().getHighlight(5);
+  private static final Color GRAY2 = ThemeService.getInstance().colors()
+      .getHighlight(5);
 
   /**
    * Instantiates a new matrix group check box.
    *
-   * @param group
-   *          the group
+   * @param group the group
    */
   public MatrixGroupCheckBox(XYSeries group) {
     this(group, false);
@@ -64,10 +65,8 @@ public class MatrixGroupCheckBox extends ModernCheckBox {
   /**
    * Instantiates a new matrix group check box.
    *
-   * @param group
-   *          the group
-   * @param selected
-   *          the selected
+   * @param group the group
+   * @param selected the selected
    */
   public MatrixGroupCheckBox(XYSeries group, boolean selected) {
     super(group.getName(), selected);
@@ -75,7 +74,9 @@ public class MatrixGroupCheckBox extends ModernCheckBox {
     mColor = group.getColor();
     mLightColor = ColorUtils.getTransparentColor50(mColor);
 
-    UI.setSize(this, ModernButton.getButtonWidth(getFont(), mText1) + 42, ModernButton.getButtonHeight());
+    UI.setSize(this,
+        ModernButton.getButtonWidth(getFont(), mText1) + 42,
+        ModernButton.getButtonHeight());
   }
 
   /*

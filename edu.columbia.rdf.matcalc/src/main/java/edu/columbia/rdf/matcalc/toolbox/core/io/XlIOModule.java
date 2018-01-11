@@ -42,10 +42,16 @@ public abstract class XlIOModule extends IOModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame openFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame openFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
 
-    ImportDialog dialog = new ImportDialog(window, 0, true, TextUtils.TAB_DELIMITER, false);
+    ImportDialog dialog = new ImportDialog(window, 0, true,
+        TextUtils.TAB_DELIMITER, false);
 
     dialog.setVisible(true);
 
@@ -56,6 +62,12 @@ public abstract class XlIOModule extends IOModule {
     headers = dialog.getHasHeader() ? 1 : 0;
     rowAnnotations = dialog.getRowAnnotations();
 
-    return super.openFile(window, file, type, headers, rowAnnotations, delimiter, skipLines);
+    return super.openFile(window,
+        file,
+        type,
+        headers,
+        rowAnnotations,
+        delimiter,
+        skipLines);
   }
 }

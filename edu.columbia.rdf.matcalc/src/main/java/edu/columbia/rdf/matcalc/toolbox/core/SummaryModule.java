@@ -52,7 +52,8 @@ public class SummaryModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -61,7 +62,8 @@ public class SummaryModule extends CalcModule implements ModernClickListener {
 
     RibbonLargeButton button = new RibbonLargeButton("Summary",
         UIService.getInstance().loadIcon(TableVectorIcon.class, 24));
-    button.setToolTip("Summary", "Display a basic statistical summary of the matrix.");
+    button.setToolTip("Summary",
+        "Display a basic statistical summary of the matrix.");
     window.getRibbon().getToolbar("Data").getSection("Tools").add(button);
 
     button.addClickListener(this);
@@ -71,8 +73,8 @@ public class SummaryModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {

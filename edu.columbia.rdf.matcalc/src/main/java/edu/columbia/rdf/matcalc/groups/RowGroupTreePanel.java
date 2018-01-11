@@ -42,8 +42,7 @@ public class RowGroupTreePanel extends ColumnGroupTreePanel {
   /**
    * Instantiates a new row group tree panel.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public RowGroupTreePanel(MainMatCalcWindow parent) {
     super(parent);
@@ -94,10 +93,12 @@ public class RowGroupTreePanel extends ColumnGroupTreePanel {
     }
 
     for (XYSeries group : groups) {
-      TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(), group);
+      TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(),
+          group);
 
       for (int i : XYSeries.findRowIndices(mMatrix, group)) {
-        TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(mMatrix.getRowName(i));
+        TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(
+            mMatrix.getRowName(i));
 
         groupNode.addChild(childNode);
       }

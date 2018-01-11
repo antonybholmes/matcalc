@@ -27,8 +27,7 @@ public class EndsFilter implements Filter {
   /**
    * Instantiates a new ends filter.
    *
-   * @param text
-   *          the text
+   * @param text the text
    */
   public EndsFilter(String text) {
     mText = text.toLowerCase();

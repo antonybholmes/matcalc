@@ -41,8 +41,11 @@ public class PasteModule extends CalcModule implements ModernClickListener {
 
     ModernClickWidget button;
 
-    button = new RibbonLargeButton(UIService.getInstance().loadIcon("paste_files", 24));
-    button.setToolTip(new ModernToolTip("Paste Files", "Paste multiple files column wise."), ribbon.getToolTipModel());
+    button = new RibbonLargeButton(
+        UIService.getInstance().loadIcon("paste_files", 24));
+    button.setToolTip(
+        new ModernToolTip("Paste Files", "Paste multiple files column wise."),
+        ribbon.getToolTipModel());
     button.addClickListener(this);
     ribbon.getToolbar("Data").getSection("Tools").add(button);
   }
@@ -67,7 +70,8 @@ public class PasteModule extends CalcModule implements ModernClickListener {
       return;
     }
 
-    PasteTask task = new PasteTask(mWindow, files, dialog.getDelimiter(), dialog.getCommonIndex());
+    PasteTask task = new PasteTask(mWindow, files, dialog.getDelimiter(),
+        dialog.getCommonIndex());
 
     task.doInBackground();
   }

@@ -62,15 +62,17 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Pie", "Chart", UIService.getInstance().loadIcon("pie_chart", 24),
-        "Pie Chart", "Generate a pie chart.");
+    RibbonLargeButton button = new RibbonLargeButton("Pie", "Chart",
+        UIService.getInstance().loadIcon("pie_chart", 24), "Pie Chart",
+        "Generate a pie chart.");
     button.addClickListener(this);
     // button.setEnabled(false);
 
@@ -103,7 +105,8 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
       // See if the column matches a group, and if so use the group's
       // color rather than a random color
       for (MatrixGroup group : groups) {
-        Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findColumnIndices(m, group));
+        Set<Integer> indices = CollectionUtils
+            .unique(MatrixGroup.findColumnIndices(m, group));
 
         if (indices.contains(i)) {
           color = group.getColor();
@@ -118,7 +121,8 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
 
       XYSeries series = new XYSeries(name, color);
 
-      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getFillStyle()
+          .setColor(ColorUtils.getTransparentColor50(color));
       series.getStyle().getLineStyle().setColor(color);
 
       allSeries.add(series);
@@ -134,7 +138,8 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
 
     // gp.getXAxis().autoSetLimits(min, max);
     // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     // axes.getX1Axis().getTitle().setText("Series");
 
@@ -145,7 +150,8 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
 
     // gp.getYAxis().autoSetLimits(min, max);
     // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     // axes.getY1Axis().getTitle().setText("Count");
 
@@ -160,8 +166,8 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

@@ -16,10 +16,8 @@ public class History {
   /**
    * Instantiates a new open file.
    *
-   * @param window
-   *          the window
-   * @param file
-   *          the file
+   * @param window the window
+   * @param file the file
    */
   public History(MainMatCalcWindow window) {
     mWindow = window;
@@ -43,10 +41,8 @@ public class History {
   /**
    * Adds the to history.
    *
-   * @param name
-   *          the name
-   * @param matrix
-   *          the matrix
+   * @param name the name
+   * @param matrix the matrix
    * @return the annotation matrix
    */
   public DataFrame addToHistory(String name, DataFrame matrix) {
@@ -60,34 +56,33 @@ public class History {
   /**
    * Adds the to history.
    *
-   * @param name
-   *          the name
-   * @param description
-   *          the description
-   * @param matrix
-   *          the matrix
+   * @param name the name
+   * @param description the description
+   * @param matrix the matrix
    * @return the annotation matrix
    */
-  public DataFrame addToHistory(String name, String description, DataFrame matrix) {
+  public DataFrame addToHistory(String name,
+      String description,
+      DataFrame matrix) {
     if (matrix == null) {
       return null;
     }
 
-    return addToHistory(new MatrixTransform(mWindow, name, description, matrix));
+    return addToHistory(
+        new MatrixTransform(mWindow, name, description, matrix));
   }
 
   /**
    * Adds the to history.
    *
-   * @param name
-   *          the name
-   * @param matrix
-   *          the matrix
-   * @param selectedIndex
-   *          the selected index
+   * @param name the name
+   * @param matrix the matrix
+   * @param selectedIndex the selected index
    * @return the annotation matrix
    */
-  public DataFrame addToHistory(String name, DataFrame matrix, int selectedIndex) {
+  public DataFrame addToHistory(String name,
+      DataFrame matrix,
+      int selectedIndex) {
     if (matrix == null) {
       return null;
     }
@@ -95,12 +90,16 @@ public class History {
     return addToHistory(name, name, matrix, selectedIndex);
   }
 
-  public DataFrame addToHistory(String name, String description, DataFrame matrix, int selectedIndex) {
+  public DataFrame addToHistory(String name,
+      String description,
+      DataFrame matrix,
+      int selectedIndex) {
     if (matrix == null) {
       return null;
     }
 
-    return addToHistory(selectedIndex, new MatrixTransform(mWindow, name, description, matrix));
+    return addToHistory(selectedIndex,
+        new MatrixTransform(mWindow, name, description, matrix));
   }
 
   public DataFrame addToHistory(MatrixTransform transform) {

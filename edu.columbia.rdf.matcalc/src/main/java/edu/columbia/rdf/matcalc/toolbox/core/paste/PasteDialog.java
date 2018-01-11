@@ -29,7 +29,8 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * @author Antony Holmes Holmes
  *
  */
-public class PasteDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class PasteDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
   private static final long serialVersionUID = 1L;
 
   /** Assume first column is common between files */
@@ -44,7 +45,8 @@ public class PasteDialog extends ModernDialogHelpWindow implements ModernClickLi
 
     setTitle("Paste Files");
 
-    mChooseFilesPanel = new ChooseFilesPanel(parent, AllGuiFilesFilter.INSTANCE, TsvGuiFileFilter.INSTANCE);
+    mChooseFilesPanel = new ChooseFilesPanel(parent, AllGuiFilesFilter.INSTANCE,
+        TsvGuiFileFilter.INSTANCE);
 
     setup();
 
@@ -54,7 +56,8 @@ public class PasteDialog extends ModernDialogHelpWindow implements ModernClickLi
   private void setup() {
     addWindowListener(new WindowWidgetFocusEvents(mOkButton));
 
-    mCheckIndex.setSelected(SettingsService.getInstance().getAsBool("org.matcalc.toolbox.paste.common-index", true));
+    mCheckIndex.setSelected(SettingsService.getInstance()
+        .getAsBool("org.matcalc.toolbox.paste.common-index", true));
 
     setSize(500, 420);
 
@@ -79,12 +82,15 @@ public class PasteDialog extends ModernDialogHelpWindow implements ModernClickLi
   public void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
       if (getFiles().size() == 0) {
-        ModernMessageDialog.createWarningDialog(mParent, "You must choose at least one file.");
+        ModernMessageDialog.createWarningDialog(mParent,
+            "You must choose at least one file.");
 
         return;
       }
 
-      SettingsService.getInstance().update("org.matcalc.toolbox.paste.common-index", mCheckIndex.isSelected());
+      SettingsService.getInstance().update(
+          "org.matcalc.toolbox.paste.common-index",
+          mCheckIndex.isSelected());
     }
 
     super.clicked(e);

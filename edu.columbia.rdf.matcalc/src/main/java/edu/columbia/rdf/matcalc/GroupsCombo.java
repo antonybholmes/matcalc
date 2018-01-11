@@ -33,8 +33,7 @@ public class GroupsCombo extends ModernComboBox {
   /**
    * Instantiates a new groups combo.
    *
-   * @param groups
-   *          the groups
+   * @param groups the groups
    */
   public GroupsCombo(XYSeriesGroup groups) {
     for (MatrixGroup group : groups) {

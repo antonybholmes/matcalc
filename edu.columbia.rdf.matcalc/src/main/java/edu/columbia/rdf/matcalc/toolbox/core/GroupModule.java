@@ -24,7 +24,6 @@ import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -70,7 +69,8 @@ public class GroupModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -89,8 +89,8 @@ public class GroupModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -112,13 +112,15 @@ public class GroupModule extends CalcModule implements ModernClickListener {
     List<Integer> columns = mWindow.getSelectedColumns();
 
     if (columns.size() < 2) {
-      ModernMessageDialog.createWarningDialog(mWindow, "You must select an index column and a values column.");
+      ModernMessageDialog.createWarningDialog(mWindow,
+          "You must select an index column and a values column.");
 
       return;
     }
 
-    Map<String, Set<String>> idMap = DefaultTreeMap.create(new TreeSetCreator<String>()); // new TreeMap<String,
-                                                                                          // Set<String>>();
+    Map<String, Set<String>> idMap = DefaultTreeMap
+        .create(new TreeSetCreator<String>()); // new TreeMap<String,
+                                               // Set<String>>();
 
     for (int i = 0; i < m.getRows(); ++i) {
       String id = m.getText(i, columns.get(0));

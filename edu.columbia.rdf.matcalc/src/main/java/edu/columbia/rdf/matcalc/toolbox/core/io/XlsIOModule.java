@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.math.external.microsoft.Excel;
@@ -65,8 +64,13 @@ public class XlsIOModule extends XlIOModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
     try {
       return Excel.convertXlsToMatrix(file, headers > 0, rowAnnotations);
     } catch (InvalidFormatException e) {
@@ -81,7 +85,9 @@ public class XlsIOModule extends XlIOModule {
    * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
    */
   @Override
-  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+  public boolean saveFile(final MainMatCalcWindow window,
+      final Path file,
+      final DataFrame m) throws IOException {
     Excel.writeXls(m, file);
 
     return true;

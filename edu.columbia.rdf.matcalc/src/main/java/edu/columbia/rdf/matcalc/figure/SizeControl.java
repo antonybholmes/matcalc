@@ -24,7 +24,6 @@ import javax.swing.Box;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.figure.Axes;
-import org.jebtk.modern.graphics.ModernCanvasListener;
 import org.jebtk.modern.panel.HExBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
@@ -58,10 +57,8 @@ public class SizeControl extends VBox implements KeyListener {
   /**
    * Instantiates a new margin control.
    *
-   * @param parent
-   *          the parent
-   * @param axes
-   *          the axes
+   * @param parent the parent
+   * @param axes the axes
    */
   public SizeControl(ModernWindow parent, Axes axes) {
 
@@ -103,8 +100,7 @@ public class SizeControl extends VBox implements KeyListener {
   /**
    * Sets the margins.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void setSize() throws ParseException {
     mAxes.setInternalSize(mFieldWidth.getAsInt(), mFieldHeight.getAsInt());

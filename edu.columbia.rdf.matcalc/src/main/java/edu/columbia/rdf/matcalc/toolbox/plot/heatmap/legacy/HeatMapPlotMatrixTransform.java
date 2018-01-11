@@ -62,48 +62,36 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
   /**
    * Instantiates a new heat map plot matrix transform.
    *
-   * @param parent
-   *          the parent
-   * @param inputMatrix
-   *          the input matrix
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param inputMatrix the input matrix
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public HeatMapPlotMatrixTransform(MainMatCalcWindow parent, DataFrame inputMatrix, XYSeriesModel groups,
-      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
-    this(parent, "Create Heat Map Plot", inputMatrix, groups, rowGroups, countGroups, history, properties);
+  public HeatMapPlotMatrixTransform(MainMatCalcWindow parent,
+      DataFrame inputMatrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Properties properties) {
+    this(parent, "Create Heat Map Plot", inputMatrix, groups, rowGroups,
+        countGroups, history, properties);
   }
 
   /**
    * Instantiates a new heat map plot matrix transform.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param inputMatrix
-   *          the input matrix
-   * @param groups
-   *          the groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param name the name
+   * @param inputMatrix the input matrix
+   * @param groups the groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public HeatMapPlotMatrixTransform(ModernRibbonWindow parent, String name, DataFrame inputMatrix, XYSeriesModel groups,
-      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
+  public HeatMapPlotMatrixTransform(ModernRibbonWindow parent, String name,
+      DataFrame inputMatrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Properties properties) {
     super(parent, name, inputMatrix);
 
     mGroups = groups;
@@ -120,7 +108,7 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
    */
   @Override
   public ModernWindow createWindow() {
-    return new HeatMapPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups, mRowGroups, mCountGroups, mHistory,
-        mProperties);
+    return new HeatMapPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups,
+        mRowGroups, mCountGroups, mHistory, mProperties);
   }
 }

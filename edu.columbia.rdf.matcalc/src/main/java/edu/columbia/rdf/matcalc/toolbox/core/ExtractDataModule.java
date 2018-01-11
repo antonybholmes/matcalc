@@ -50,10 +50,12 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class ExtractDataModule extends CalcModule implements ModernClickListener {
+public class ExtractDataModule extends CalcModule
+    implements ModernClickListener {
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance().loadIcon("extract", 24);
+  private static final ModernIcon ICON = UIService.getInstance()
+      .loadIcon("extract", 24);
 
   /**
    * The member window.
@@ -76,7 +78,8 @@ public class ExtractDataModule extends CalcModule implements ModernClickListener
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -90,18 +93,21 @@ public class ExtractDataModule extends CalcModule implements ModernClickListener
 
     ModernPopupMenu popup = new ModernPopupMenu();
 
-    popup.addMenuItem(new ModernTwoLineMenuItem("Numerical", "Extract numerical data from matrix.", ICON));
-    popup.addMenuItem(new ModernTwoLineMenuItem("Text", "Extract text data from matrix.", ICON));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Numerical",
+        "Extract numerical data from matrix.", ICON));
+    popup.addMenuItem(new ModernTwoLineMenuItem("Text",
+        "Extract text data from matrix.", ICON));
 
     // popup.addMenuItem(new ModernMenuSeparator());
 
     popup.addMenuItem(
-        new ModernMenuHelpItem("Help with extracting numbers or text...", "matcalc.data-extraction.help.url")
-            .setTextOffset(48));
+        new ModernMenuHelpItem("Help with extracting numbers or text...",
+            "matcalc.data-extraction.help.url").setTextOffset(48));
 
     mButton = new RibbonLargeDropDownButton("Extract", ICON, popup);
     mButton.setChangeText(false);
-    mButton.setToolTip("Extract Data", "Extract numbers or text from a matrix.");
+    mButton.setToolTip("Extract Data",
+        "Extract numbers or text from a matrix.");
 
     mWindow.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
 
@@ -112,8 +118,8 @@ public class ExtractDataModule extends CalcModule implements ModernClickListener
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {

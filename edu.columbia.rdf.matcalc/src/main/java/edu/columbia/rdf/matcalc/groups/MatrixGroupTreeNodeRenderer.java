@@ -42,7 +42,8 @@ import org.jebtk.modern.tree.Tree;
  *
  * @author Antony Holmes Holmes
  */
-public class MatrixGroupTreeNodeRenderer extends ModernTreeIconTextNodeRenderer {
+public class MatrixGroupTreeNodeRenderer
+    extends ModernTreeIconTextNodeRenderer {
 
   /**
    * The constant serialVersionUID.
@@ -73,8 +74,8 @@ public class MatrixGroupTreeNodeRenderer extends ModernTreeIconTextNodeRenderer 
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.awt.
-   * Graphics2D)
+   * org.abh.common.ui.tree.ModernTreeIconTextNodeRenderer#drawNodeText(java.
+   * awt. Graphics2D)
    */
   @Override
   public void drawNodeText(Graphics2D g2) {
@@ -87,29 +88,44 @@ public class MatrixGroupTreeNodeRenderer extends ModernTreeIconTextNodeRenderer 
     if (mNode.isParent() && mGroup != null) {
       // buffer.append(" ").append(group.getSearch());
 
-      buffer.append(" (").append(Integer.toString(mNode.getChildCount())).append(")");// group.getSearch());
+      buffer.append(" (").append(Integer.toString(mNode.getChildCount()))
+          .append(")");// group.getSearch());
 
       g2.setFont(BOLD_FONT);
     } else {
       g2.setFont(FONT);
     }
 
-    g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()), 0, p.y);
+    g2.drawString(getTruncatedText(g2, buffer.toString(), 0, mRect.getW()),
+        0,
+        p.y);
   }
 
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.
-   * ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean, boolean,
-   * boolean, int, int)
+   * @see org.abh.common.ui.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.
+   * common. ui.ui.tree.Tree, org.abh.lib.tree.TreeNode, boolean, boolean,
+   * boolean, boolean, int, int)
    */
   @Override
-  public ModernTreeNodeRenderer getRenderer(Tree<?> tree, TreeNode<?> node, boolean nodeIsHighlighted,
-      boolean nodeIsSelected, boolean hasFocus, boolean isDragToNode, int depth, int row) {
+  public ModernTreeNodeRenderer getRenderer(Tree<?> tree,
+      TreeNode<?> node,
+      boolean nodeIsHighlighted,
+      boolean nodeIsSelected,
+      boolean hasFocus,
+      boolean isDragToNode,
+      int depth,
+      int row) {
 
-    super.getRenderer(tree, node, nodeIsHighlighted, nodeIsSelected, hasFocus, isDragToNode, depth, row);
+    super.getRenderer(tree,
+        node,
+        nodeIsHighlighted,
+        nodeIsSelected,
+        hasFocus,
+        isDragToNode,
+        depth,
+        row);
 
     mGroup = (MatrixGroup) node.getValue();
 

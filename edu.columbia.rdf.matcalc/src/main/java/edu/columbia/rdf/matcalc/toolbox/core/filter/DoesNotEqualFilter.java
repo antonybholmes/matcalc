@@ -27,8 +27,7 @@ public class DoesNotEqualFilter implements Filter {
   /**
    * Instantiates a new does not equal filter.
    *
-   * @param v
-   *          the v
+   * @param v the v
    */
   public DoesNotEqualFilter(double v) {
     mV = v;

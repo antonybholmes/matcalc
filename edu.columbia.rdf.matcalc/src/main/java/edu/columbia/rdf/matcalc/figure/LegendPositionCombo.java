@@ -49,8 +49,7 @@ public class LegendPositionCombo extends ModernComboBox {
   /**
    * Sets the position.
    *
-   * @param p
-   *          the new position
+   * @param p the new position
    */
   public void setPosition(GridLocation p) {
     // Change the position, but do not trigger click event

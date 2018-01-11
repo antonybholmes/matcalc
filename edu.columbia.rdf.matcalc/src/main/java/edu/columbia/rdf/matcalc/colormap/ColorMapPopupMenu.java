@@ -50,8 +50,7 @@ public class ColorMapPopupMenu extends ModernScrollPopupMenu {
   /**
    * Instantiates a new color popup menu.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public ColorMapPopupMenu(ModernWindow parent) {
     mParent = parent;
@@ -67,23 +66,27 @@ public class ColorMapPopupMenu extends ModernScrollPopupMenu {
 
     add(mColorMapPicker);
 
-    // addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("red",
+    // addScrollMenuItem(new
+    // ColorMapMenuItem(ColorMap.createWhiteToColorMap("red",
     // Color.RED), "Red"));
     // addScrollMenuItem(new
     // ColorMapMenuItem(ColorMap.createWhiteToColorMap("green", Color.GREEN),
     // "Green"));
-    // addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("blue",
+    // addScrollMenuItem(new
+    // ColorMapMenuItem(ColorMap.createWhiteToColorMap("blue",
     // Color.BLUE), "Blue"));
     // addScrollMenuItem(new
     // ColorMapMenuItem(ColorMap.createWhiteToColorMap("orange", Color.ORANGE),
     // "Orange"));
-    // addScrollMenuItem(new ColorMapMenuItem(ColorMap.createWhiteToColorMap("pink",
+    // addScrollMenuItem(new
+    // ColorMapMenuItem(ColorMap.createWhiteToColorMap("pink",
     // Color.PINK), "Pink"));
 
     // add(new ModernMenuDivider());
 
-    add(new ModernIconMenuItem("More Color Maps...", UIService.getInstance().loadIcon("color_wheel", 16))
-        .setBackgroundAnimations("color-menu-fade"));
+    add(new ModernIconMenuItem("More Color Maps...",
+        UIService.getInstance().loadIcon("color_wheel", 16))
+            .setBackgroundAnimations("color-menu-fade"));
 
     update();
   }
@@ -147,7 +150,8 @@ public class ColorMapPopupMenu extends ModernScrollPopupMenu {
      * colorMaps.add(ColorMap.createWhiteToColorMap("White Orange",
      * ColorMap.ORANGE));
      * colorMaps.add(ColorMap.createWhiteToColorMap("White Yellow",
-     * ColorMap.YELLOW)); colorMaps.add(ColorMap.createWhiteToColorMap("White Pink",
+     * ColorMap.YELLOW));
+     * colorMaps.add(ColorMap.createWhiteToColorMap("White Pink",
      * ColorMap.PINK));
      * 
      * // Add anything the user created

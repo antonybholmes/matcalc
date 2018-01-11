@@ -54,10 +54,8 @@ public class Graph2dStyleControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new graph2d style control.
    *
-   * @param parent
-   *          the parent
-   * @param axes
-   *          the axes
+   * @param parent the parent
+   * @param axes the axes
    */
   public Graph2dStyleControl(ModernWindow parent, Axes axes) {
 
@@ -76,8 +74,8 @@ public class Graph2dStyleControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

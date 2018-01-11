@@ -49,8 +49,7 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
   /**
    * Instantiates a new column filter table model.
    *
-   * @param ids
-   *          the ids
+   * @param ids the ids
    */
   public ColumnFilterTableModel(List<Indexed<Integer, String>> ids) {
     this(ids, null);
@@ -59,12 +58,11 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
   /**
    * Instantiates a new column order table model.
    *
-   * @param ids
-   *          the ids
-   * @param visibleMap
-   *          the visible map
+   * @param ids the ids
+   * @param visibleMap the visible map
    */
-  public ColumnFilterTableModel(List<Indexed<Integer, String>> ids, Map<Integer, Boolean> visibleMap) {
+  public ColumnFilterTableModel(List<Indexed<Integer, String>> ids,
+      Map<Integer, Boolean> visibleMap) {
 
     mIds = ids;
     mVisible = CollectionUtils.replicate(true, ids.size());
@@ -102,7 +100,8 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
+   * @see
+   * org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
    */
   @Override
   public final List<String> getColumnAnnotationText(int column) {
@@ -145,8 +144,7 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
   /**
    * Swap up.
    *
-   * @param indices
-   *          the indices
+   * @param indices the indices
    */
   public void swapUp(List<Integer> indices) {
 
@@ -174,8 +172,7 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
   /**
    * Swap down.
    *
-   * @param indices
-   *          the indices
+   * @param indices the indices
    */
   public void swapDown(List<Integer> indices) {
     // System.err.println("swap down " + indices.toString());
@@ -204,8 +201,7 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
   /**
    * Gets the.
    *
-   * @param index
-   *          the index
+   * @param index the index
    * @return the indexed value
    */
   public final Indexed<Integer, String> get(int index) {
@@ -236,8 +232,7 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
   /**
    * Gets the visible.
    *
-   * @param i
-   *          the i
+   * @param i the i
    * @return the visible
    */
   public boolean getVisible(int i) {

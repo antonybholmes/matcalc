@@ -41,7 +41,8 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * The class MatchDialog.
  */
-public class FilterDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class FilterDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -62,12 +63,9 @@ public class FilterDialog extends ModernDialogHelpWindow implements ModernClickL
   /**
    * Instantiates a new match dialog.
    *
-   * @param parent
-   *          the parent
-   * @param m
-   *          the m
-   * @param c
-   *          the c
+   * @param parent the parent
+   * @param m the m
+   * @param c the c
    */
   public FilterDialog(MainMatCalcWindow parent, DataFrame m, int c) {
     super(parent, "matcalc.filter.help.url");
@@ -130,7 +128,8 @@ public class FilterDialog extends ModernDialogHelpWindow implements ModernClickL
     content.setHeader(box);
 
     ModernScrollPane scrollPane = new ModernScrollPane(mContentPanel)
-        .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER).setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
+        .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
+        .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
 
     content.setBody(scrollPane);
 

@@ -32,7 +32,8 @@ public class ModulesTableModel extends ModernColumnHeaderTableModel {
   /**
    * The constant HEADER.
    */
-  private static final String[] HEADER = { "Name", "Product", "Version", "Copyright", "Description" };
+  private static final String[] HEADER = { "Name", "Product", "Version",
+      "Copyright", "Description" };
 
   /**
    * The member modules.
@@ -42,8 +43,7 @@ public class ModulesTableModel extends ModernColumnHeaderTableModel {
   /**
    * Instantiates a new modules table model.
    *
-   * @param modules
-   *          the modules
+   * @param modules the modules
    */
   public ModulesTableModel(List<Module> modules) {
     mModules = modules;
@@ -95,7 +95,8 @@ public class ModulesTableModel extends ModernColumnHeaderTableModel {
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
+   * @see
+   * org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
    */
   @Override
   public final List<String> getColumnAnnotationText(int column) {

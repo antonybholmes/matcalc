@@ -27,8 +27,7 @@ public class StartsFilter implements Filter {
   /**
    * Instantiates a new starts filter.
    *
-   * @param text
-   *          the text
+   * @param text the text
    */
   public StartsFilter(String text) {
     mText = text.toLowerCase();

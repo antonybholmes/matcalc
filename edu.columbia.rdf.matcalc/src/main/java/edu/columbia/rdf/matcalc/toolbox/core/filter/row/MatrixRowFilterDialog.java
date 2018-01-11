@@ -41,7 +41,6 @@ import org.jebtk.modern.graphics.icons.PlusVectorIcon;
 import org.jebtk.modern.io.FileDialog;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
-import org.jebtk.modern.panel.ModernContentPanel;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
@@ -59,7 +58,8 @@ import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
 /**
  * The class MatrixRowFilterDialog.
  */
-public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements ModernClickListener {
+public class MatrixRowFilterDialog extends ModernDialogHelpWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -82,18 +82,22 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
   /**
    * The member check exact.
    */
-  private ModernTwoStateWidget mCheckExact = new ModernCheckSwitch("Match entire cell contents", false);
+  private ModernTwoStateWidget mCheckExact = new ModernCheckSwitch(
+      "Match entire cell contents", false);
 
   /**
    * The member check in list.
    */
-  private ModernTwoStateWidget mCheckInList = new ModernCheckSwitch("Find in list", true);
+  private ModernTwoStateWidget mCheckInList = new ModernCheckSwitch(
+      "Find in list", true);
 
   /** The m check missing. */
-  private ModernTwoStateWidget mCheckMissing = new ModernCheckSwitch("Include missing entries");
+  private ModernTwoStateWidget mCheckMissing = new ModernCheckSwitch(
+      "Include missing entries");
 
   /** The m check case. */
-  private ModernTwoStateWidget mCheckCase = new ModernCheckSwitch("Case sensitive");
+  private ModernTwoStateWidget mCheckCase = new ModernCheckSwitch(
+      "Case sensitive");
 
   /**
    * The add button.
@@ -111,8 +115,8 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
   /**
    * The clear button.
    */
-  private ModernButton mClearButton = new ModernButton(UI.MENU_CLEAR, UIService.getInstance().loadIcon("clear", 16),
-      80);
+  private ModernButton mClearButton = new ModernButton(UI.MENU_CLEAR,
+      UIService.getInstance().loadIcon("clear", 16), 80);
 
   /**
    * The import button.
@@ -144,8 +148,8 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-     * .event.ModernClickEvent)
+     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+     * modern .event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -157,10 +161,8 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
   /**
    * Instantiates a new matrix row filter dialog.
    *
-   * @param parent
-   *          the parent
-   * @param m
-   *          the m
+   * @param parent the parent
+   * @param m the m
    */
   public MatrixRowFilterDialog(ModernWindow parent, DataFrame m) {
     super(parent, "matcalc.filter.rows.help.url");
@@ -169,13 +171,16 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
 
     mM = m;
 
-    mCheckMissing.setSelected(SettingsService.getInstance().getAsBool("matcalc.modules.rowfilter.include-missing"));
+    mCheckMissing.setSelected(SettingsService.getInstance()
+        .getAsBool("matcalc.modules.rowfilter.include-missing"));
 
     mCheckMissing.addClickListener(new ModernClickListener() {
 
       @Override
       public void clicked(ModernClickEvent e) {
-        SettingsService.getInstance().update("matcalc.modules.rowfilter.include-missing", mCheckMissing.isSelected());
+        SettingsService.getInstance().update(
+            "matcalc.modules.rowfilter.include-missing",
+            mCheckMissing.isSelected());
       }
     });
 
@@ -230,9 +235,11 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
     box.setBorder(ModernPanel.LARGE_BORDER);
     content.setHeader(box);
 
-    // content.setBody(new ModernLineBorderPanel(new ModernScrollPane(mRowList)));
+    // content.setBody(new ModernLineBorderPanel(new
+    // ModernScrollPane(mRowList)));
 
-    ModernScrollPane scrollPane = new ModernScrollPane(mIdTextBox).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
+    ModernScrollPane scrollPane = new ModernScrollPane(mIdTextBox)
+        .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
         .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
 
     content.setBody(scrollPane);
@@ -278,7 +285,8 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
     // "Remove selected row identifiers from the list.");
     // mRemoveButton.addClickListener(this);
 
-    mClearButton.setToolTip("Clear All Ids", "Remove all row identifiers from the list.");
+    mClearButton.setToolTip("Clear All Ids",
+        "Remove all row identifiers from the list.");
     mClearButton.addClickListener(this);
   }
 
@@ -286,8 +294,8 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -351,10 +359,8 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
   /**
    * Import ids.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws InvalidFormatException
-   *           the invalid format exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws InvalidFormatException the invalid format exception
    */
   private void importIds() throws IOException, InvalidFormatException {
 
@@ -369,12 +375,9 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
   /**
    * Import ids.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws InvalidFormatException
-   *           the invalid format exception
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws InvalidFormatException the invalid format exception
    */
   private void importIds(Path file) throws IOException, InvalidFormatException {
     /*
@@ -412,15 +415,15 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow implements Mod
     } else {
       // filter on column
 
-      loadIds(mM.columnAsText(mColumnsCombo.getSelectedIndex() - numRowAnnotations));
+      loadIds(mM
+          .columnAsText(mColumnsCombo.getSelectedIndex() - numRowAnnotations));
     }
   }
 
   /**
    * Load ids.
    *
-   * @param ids
-   *          the ids
+   * @param ids the ids
    */
   private void loadIds(List<String> ids) {
     /*

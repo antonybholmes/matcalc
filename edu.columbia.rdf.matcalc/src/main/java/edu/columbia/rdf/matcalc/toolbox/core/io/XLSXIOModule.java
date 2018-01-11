@@ -20,7 +20,6 @@ import java.nio.file.Path;
 import java.util.Collection;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.external.microsoft.ExcelMatrix;
 import org.jebtk.math.external.microsoft.XLSXMetaData;
@@ -32,7 +31,6 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.OpenFile;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -64,15 +62,20 @@ public class XLSXIOModule extends XlIOModule {
   }
 
   @Override
-  public DataFrame openFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame openFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
 
     XLSXMetaData metaData = new XLSXMetaData(file);
 
     rowAnnotations = metaData.estimateRowAnnotations();
 
-    ImportDialog dialog = new ImportDialog(window, rowAnnotations, true, delimiter,
-        metaData.isNumerical(rowAnnotations));
+    ImportDialog dialog = new ImportDialog(window, rowAnnotations, true,
+        delimiter, metaData.isNumerical(rowAnnotations));
 
     dialog.setVisible(true);
 
@@ -83,7 +86,13 @@ public class XLSXIOModule extends XlIOModule {
     headers = dialog.getHasHeader() ? 1 : 0;
     rowAnnotations = dialog.getRowAnnotations();
 
-    return autoOpenFile(window, file, type, headers, rowAnnotations, delimiter, skipLines);
+    return autoOpenFile(window,
+        file,
+        type,
+        headers,
+        rowAnnotations,
+        delimiter,
+        skipLines);
   }
 
   /*
@@ -93,8 +102,13 @@ public class XLSXIOModule extends XlIOModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame autoOpenFile(final MainMatCalcWindow window, final Path file, FileType type, int headers,
-      int rowAnnotations, String delimiter, Collection<String> skipLines) throws IOException {
+  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+      final Path file,
+      FileType type,
+      int headers,
+      int rowAnnotations,
+      String delimiter,
+      Collection<String> skipLines) throws IOException {
     try {
       // return Excel.convertXlsxToMatrix(file,
       // hasHeader,
@@ -112,7 +126,9 @@ public class XLSXIOModule extends XlIOModule {
    * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
    */
   @Override
-  public boolean saveFile(final MainMatCalcWindow window, final Path file, final DataFrame m) throws IOException {
+  public boolean saveFile(final MainMatCalcWindow window,
+      final Path file,
+      final DataFrame m) throws IOException {
     Excel.writeXlsx(m, file);
 
     return true;

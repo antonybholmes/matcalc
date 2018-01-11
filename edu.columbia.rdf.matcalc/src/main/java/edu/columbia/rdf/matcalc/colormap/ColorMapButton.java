@@ -34,7 +34,8 @@ import org.jebtk.modern.window.ModernWindow;
  * @author Antony Holmes Holmes
  *
  */
-public class ColorMapButton extends ControlDropDownButton implements ModernClickListener {
+public class ColorMapButton extends ControlDropDownButton
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -52,8 +53,7 @@ public class ColorMapButton extends ControlDropDownButton implements ModernClick
   /**
    * Instantiates a new color map button.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public ColorMapButton(ModernWindow parent) {
     this(parent, ColorMapService.getInstance().get("Jet"));
@@ -62,10 +62,8 @@ public class ColorMapButton extends ControlDropDownButton implements ModernClick
   /**
    * Instantiates a new color swatch button.
    *
-   * @param parent
-   *          the parent
-   * @param colorMap
-   *          the color map
+   * @param parent the parent
+   * @param colorMap the color map
    */
   public ColorMapButton(ModernWindow parent, ColorMap colorMap) {
     super("Color Map");
@@ -90,17 +88,17 @@ public class ColorMapButton extends ControlDropDownButton implements ModernClick
    */
   /*
    * @Override public void drawBackground(Graphics2D g2) { if(mHighlight ||
-   * mPopupShown) { paintHighlightedOutlined(g2, getRect()); } else if(hasFocus())
-   * { paintOutlinedFocused(g2, getRect()); } else { paintOutlined(g2, getRect());
-   * } }
+   * mPopupShown) { paintHighlightedOutlined(g2, getRect()); } else
+   * if(hasFocus()) { paintOutlinedFocused(g2, getRect()); } else {
+   * paintOutlined(g2, getRect()); } }
    */
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.button.ModernDropDownButton#drawForegroundAA(java.awt.
-   * Graphics2D)
+   * org.abh.lib.ui.modern.button.ModernDropDownButton#drawForegroundAA(java.
+   * awt. Graphics2D)
    */
   @Override
   public void drawForegroundAAText(Graphics2D g2) {
@@ -110,8 +108,8 @@ public class ColorMapButton extends ControlDropDownButton implements ModernClick
 
     int w = 16;
 
-    LinearGradientPaint paint = mColorMap.getAnchorColors().toGradientPaint(new Point2D.Float(x, 0),
-        new Point2D.Float(x + w, 0));
+    LinearGradientPaint paint = mColorMap.getAnchorColors()
+        .toGradientPaint(new Point2D.Float(x, 0), new Point2D.Float(x + w, 0));
 
     g2.setPaint(paint);
 
@@ -120,7 +118,8 @@ public class ColorMapButton extends ControlDropDownButton implements ModernClick
     /*
      * double c = 0; double inc = (mColorMap.getColorCount() - 1) / (double)w;
      * 
-     * for (int i = 0; i < w; ++i) { g2.setColor(mColorMap.getColorByIndex((int)c));
+     * for (int i = 0; i < w; ++i) {
+     * g2.setColor(mColorMap.getColorByIndex((int)c));
      * 
      * g2.drawLine(x, y, x, y + 16);
      * 
@@ -142,8 +141,8 @@ public class ColorMapButton extends ControlDropDownButton implements ModernClick
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -171,8 +170,7 @@ public class ColorMapButton extends ControlDropDownButton implements ModernClick
   /**
    * Sets the selected color map.
    *
-   * @param colorMap
-   *          the new selected color map
+   * @param colorMap the new selected color map
    */
   public void setSelectedColorMap(ColorMap colorMap) {
     mColorMap = colorMap;

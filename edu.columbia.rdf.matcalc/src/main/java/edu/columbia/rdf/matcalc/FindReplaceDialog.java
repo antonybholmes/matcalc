@@ -58,7 +58,8 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
  * @author Antony Holmes Holmes
  *
  */
-public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEventListener {
+public class FindReplaceDialog extends ModernDialogTaskWindow
+    implements TabEventListener {
 
   /**
    * The constant serialVersionUID.
@@ -73,7 +74,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
   /**
    * The member replace all button.
    */
-  private ModernButton mReplaceAllButton = new ModernDialogButton("Replace All");
+  private ModernButton mReplaceAllButton = new ModernDialogButton(
+      "Replace All");
 
   /**
    * The member replace button.
@@ -98,22 +100,26 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
   /**
    * The member check find case sensitive.
    */
-  private CheckBox mCheckFindCaseSensitive = new ModernCheckBox("Case sensitive");
+  private CheckBox mCheckFindCaseSensitive = new ModernCheckBox(
+      "Case sensitive");
 
   /**
    * The member check find entire cell.
    */
-  private CheckBox mCheckFindEntireCell = new ModernCheckBox("Match entire cell contents");
+  private CheckBox mCheckFindEntireCell = new ModernCheckBox(
+      "Match entire cell contents");
 
   /**
    * The member check replace case sensitive.
    */
-  private CheckBox mCheckReplaceCaseSensitive = new ModernCheckBox("Case sensitive");
+  private CheckBox mCheckReplaceCaseSensitive = new ModernCheckBox(
+      "Case sensitive");
 
   /**
    * The member check replace entire cell.
    */
-  private CheckBox mCheckReplaceEntireCell = new ModernCheckBox("Match entire cell contents");
+  private CheckBox mCheckReplaceEntireCell = new ModernCheckBox(
+      "Match entire cell contents");
 
   /**
    * The member m.
@@ -178,8 +184,7 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
   /**
    * Instantiates a new find replace dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public FindReplaceDialog(ModernWindow parent) {
     super(parent, false, ModernDialogTaskType.CLOSE);
@@ -229,7 +234,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
     int[] rows = { ModernButton.getButtonHeight() };
     int[] cols = { 100, 300 };
 
-    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Find what:"));
     matrixPanel.add(new ModernTextBorderPanel(mFindField));
@@ -250,7 +256,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
 
     box = VBox.create();
 
-    matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Find what:"));
     matrixPanel.add(new ModernTextBorderPanel(mReplaceFindField));
@@ -270,7 +277,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
 
     mGroupTabsModel.addTab("REPLACE", box);
 
-    content.setBody(new ModernComponent(new TabsViewPanel(mGroupTabsModel), ModernWidget.TOP_BORDER));
+    content.setBody(new ModernComponent(new TabsViewPanel(mGroupTabsModel),
+        ModernWidget.TOP_BORDER));
 
     setContent(content);
 
@@ -290,8 +298,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   public final void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mFindNextButton)) {
@@ -317,11 +325,16 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
       text = mReplaceFindField.getText();
     }
 
-    MatrixCellRef cell = DataFrame.find(mM, text, mCheckFindCaseSensitive.isSelected(),
-        mCheckFindEntireCell.isSelected(), mStartCell);
+    MatrixCellRef cell = DataFrame.find(mM,
+        text,
+        mCheckFindCaseSensitive.isSelected(),
+        mCheckFindEntireCell.isSelected(),
+        mStartCell);
 
     if (cell == null) {
-      ModernMessageDialog.createDialog(mParent, "No matches were found.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mParent,
+          "No matches were found.",
+          MessageDialogType.WARNING);
 
       return;
     }
@@ -344,7 +357,9 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
    */
   private void replace() {
     if (mStartCell == null) {
-      ModernMessageDialog.createDialog(mParent, "Cannot find a match.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mParent,
+          "Cannot find a match.",
+          MessageDialogType.WARNING);
 
       return;
     }
@@ -354,10 +369,12 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
     if (mCheckReplaceCaseSensitive.isSelected()) {
       pattern = Pattern.compile(mReplaceFindField.getText());
     } else {
-      pattern = Pattern.compile(mReplaceFindField.getText(), Pattern.CASE_INSENSITIVE);
+      pattern = Pattern.compile(mReplaceFindField.getText(),
+          Pattern.CASE_INSENSITIVE);
     }
 
-    String ret = pattern.matcher(mM.getText(mStartCell.row, mStartCell.column)).replaceAll(mReplaceField.getText());
+    String ret = pattern.matcher(mM.getText(mStartCell.row, mStartCell.column))
+        .replaceAll(mReplaceField.getText());
 
     System.err.println(ret + " " + pattern);
 
@@ -368,11 +385,16 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
    * Replace all.
    */
   private void replaceAll() {
-    List<MatrixCellRef> cells = DataFrame.findAll(mM, mReplaceFindField.getText(),
-        mCheckReplaceCaseSensitive.isSelected(), mCheckReplaceEntireCell.isSelected(), mStartCell);
+    List<MatrixCellRef> cells = DataFrame.findAll(mM,
+        mReplaceFindField.getText(),
+        mCheckReplaceCaseSensitive.isSelected(),
+        mCheckReplaceEntireCell.isSelected(),
+        mStartCell);
 
     if (cells.size() == 0) {
-      ModernMessageDialog.createDialog(mParent, "Cannot find a match.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mParent,
+          "Cannot find a match.",
+          MessageDialogType.WARNING);
 
       return;
     }
@@ -382,17 +404,20 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
     if (mCheckReplaceCaseSensitive.isSelected()) {
       pattern = Pattern.compile(mReplaceFindField.getText());
     } else {
-      pattern = Pattern.compile(mReplaceFindField.getText(), Pattern.CASE_INSENSITIVE);
+      pattern = Pattern.compile(mReplaceFindField.getText(),
+          Pattern.CASE_INSENSITIVE);
     }
 
     for (MatrixCellRef cell : cells) {
-      String ret = pattern.matcher(mM.getText(cell.row, cell.column)).replaceAll(mReplaceField.getText());
+      String ret = pattern.matcher(mM.getText(cell.row, cell.column))
+          .replaceAll(mReplaceField.getText());
 
       mM.set(cell.row, cell.column, ret);
     }
 
     ModernMessageDialog.createDialog(mParent,
-        cells.size() > 1 ? cells.size() + " replacements were made." : "1 replacements was made.",
+        cells.size() > 1 ? cells.size() + " replacements were made."
+            : "1 replacements was made.",
         MessageDialogType.INFORMATION);
   }
 
@@ -417,10 +442,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
   /**
    * Sets the visible.
    *
-   * @param m
-   *          the m
-   * @param table
-   *          the table
+   * @param m the m
+   * @param table the table
    */
   public void setVisible(DataFrame m, MatrixTable table) {
     mM = m;
@@ -444,9 +467,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.lib.ui.modern.tabs.TabEventListener#tabChanged(org.abh.lib.ui.modern.
-   * tabs.TabEvent)
+   * @see org.abh.lib.ui.modern.tabs.TabEventListener#tabChanged(org.abh.lib.ui.
+   * modern. tabs.TabEvent)
    */
   @Override
   public void tabChanged(TabEvent e) {
@@ -472,9 +494,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.lib.ui.modern.tabs.TabEventListener#tabRemoved(org.abh.lib.ui.modern.
-   * tabs.TabEvent)
+   * @see org.abh.lib.ui.modern.tabs.TabEventListener#tabRemoved(org.abh.lib.ui.
+   * modern. tabs.TabEvent)
    */
   @Override
   public void tabRemoved(TabEvent e) {
@@ -485,9 +506,8 @@ public class FindReplaceDialog extends ModernDialogTaskWindow implements TabEven
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.lib.ui.modern.tabs.TabEventListener#tabResized(org.abh.lib.ui.modern.
-   * tabs.TabEvent)
+   * @see org.abh.lib.ui.modern.tabs.TabEventListener#tabResized(org.abh.lib.ui.
+   * modern. tabs.TabEvent)
    */
   @Override
   public void tabResized(TabEvent e) {

@@ -28,7 +28,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcWinModule;
 /**
  * The class ZScoreModule.
  */
-public class TransposeModule extends CalcWinModule implements ModernClickListener {
+public class TransposeModule extends CalcWinModule
+    implements ModernClickListener {
 
   /*
    * (non-Javadoc)
@@ -43,17 +44,20 @@ public class TransposeModule extends CalcWinModule implements ModernClickListene
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     super.init(window);
 
-    RibbonLargeButton button = new RibbonLargeButton(UIService.getInstance().loadIcon("transpose", 24), "Transpose",
+    RibbonLargeButton button = new RibbonLargeButton(
+        UIService.getInstance().loadIcon("transpose", 24), "Transpose",
         "Transpose a matrix.");
     button.addClickListener(this);
-    window.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+    window.getRibbon().getToolbar("Formulas").getSection("Functions")
+        .add(button);
 
   }
 
@@ -61,11 +65,13 @@ public class TransposeModule extends CalcWinModule implements ModernClickListene
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
-    mWindow.addToHistory("Transpose", "Transpose", (DataFrame) mWindow.getCurrentMatrix().transpose());
+    mWindow.addToHistory("Transpose",
+        "Transpose",
+        (DataFrame) mWindow.getCurrentMatrix().transpose());
   }
 }

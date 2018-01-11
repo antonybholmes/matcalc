@@ -36,8 +36,7 @@ public class MatrixRowAnnotationCombo extends ModernComboBox {
   /**
    * Instantiates a new matrix row annotation combo.
    *
-   * @param matrix
-   *          the matrix
+   * @param matrix the matrix
    */
   public MatrixRowAnnotationCombo(DataFrame matrix) {
     for (String name : matrix.getRowAnnotationNames()) {

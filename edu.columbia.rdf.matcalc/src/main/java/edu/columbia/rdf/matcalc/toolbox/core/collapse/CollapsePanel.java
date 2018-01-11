@@ -43,7 +43,8 @@ public class CollapsePanel extends VBox {
   // private ModernRadioButton mMinButton = new ModernRadioButton("Min");
   // private ModernRadioButton mMaxStdButton = new ModernRadioButton("Max Std
   // Dev");
-  // private ModernRadioButton mMaxMeanButton = new ModernRadioButton("Max Mean");
+  // private ModernRadioButton mMaxMeanButton = new ModernRadioButton("Max
+  // Mean");
   // private ModernRadioButton mMaxMedianButton = new ModernRadioButton("Max
   // Median");
 
@@ -65,10 +66,8 @@ public class CollapsePanel extends VBox {
   /**
    * Instantiates a new collapse panel.
    *
-   * @param matrix
-   *          the matrix
-   * @param groups
-   *          the groups
+   * @param matrix the matrix
+   * @param groups the groups
    */
   public CollapsePanel(DataFrame matrix, XYSeriesGroup groups) {
     mHeaderCombo = new MatrixRowAnnotationCombo(matrix);

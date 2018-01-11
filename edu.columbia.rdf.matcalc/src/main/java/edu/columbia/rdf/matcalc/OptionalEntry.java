@@ -81,12 +81,9 @@ public class OptionalEntry extends HBox {
   /**
    * Instantiates a new optional entry.
    *
-   * @param name
-   *          the name
-   * @param value
-   *          the value
-   * @param checked
-   *          the checked
+   * @param name the name
+   * @param value the value
+   * @param checked the checked
    */
   public OptionalEntry(String name, double value, boolean checked) {
     mCheckBox = new ModernCheckSwitch(name, checked);
@@ -115,8 +112,7 @@ public class OptionalEntry extends HBox {
    * Gets the value.
    *
    * @return the value
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public double getValue() throws ParseException {
     return mText.getValue();
@@ -126,8 +122,7 @@ public class OptionalEntry extends HBox {
    * Gets the int value.
    *
    * @return the int value
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public int getIntValue() throws ParseException {
     return mText.getIntValue();

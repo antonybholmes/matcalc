@@ -66,15 +66,14 @@ public class LineStyleControl extends HBox implements ModernClickListener {
   private StokeStyleButton mStrokeButton;
 
   /** The m text width. */
-  private ModernCompactSpinner mTextWidth = new ModernCompactSpinner(1, 1000, 1);
+  private ModernCompactSpinner mTextWidth = new ModernCompactSpinner(1, 1000,
+      1);
 
   /**
    * Instantiates a new line style control.
    *
-   * @param parent
-   *          the parent
-   * @param lineStyle
-   *          the line style
+   * @param parent the parent
+   * @param lineStyle the line style
    */
   public LineStyleControl(ModernWindow parent, LineProperties lineStyle) {
     this(parent, "Line", lineStyle);
@@ -83,14 +82,12 @@ public class LineStyleControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new line style control.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param lineStyle
-   *          the line style
+   * @param parent the parent
+   * @param name the name
+   * @param lineStyle the line style
    */
-  public LineStyleControl(ModernWindow parent, String name, LineProperties lineStyle) {
+  public LineStyleControl(ModernWindow parent, String name,
+      LineProperties lineStyle) {
 
     mLineStyle = lineStyle;
 
@@ -139,13 +136,13 @@ public class LineStyleControl extends HBox implements ModernClickListener {
   /**
    * Sets the stroke.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public void setStroke() throws ParseException {
     mLineStyle.updateColor(mColorButton.getSelectedColor());
 
-    mLineStyle.updateStroke(mStrokeButton.getSelectedStroke(), mTextWidth.getIntValue());
+    mLineStyle.updateStroke(mStrokeButton.getSelectedStroke(),
+        mTextWidth.getIntValue());
 
     mLineStyle.setVisible(mCheckBox.isSelected());
   }
@@ -154,8 +151,8 @@ public class LineStyleControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

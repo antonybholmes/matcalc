@@ -41,8 +41,7 @@ public class GroupMenuItem extends ModernIconMenuItem {
   /**
    * Instantiates a new group menu item.
    *
-   * @param group
-   *          the group
+   * @param group the group
    */
   public GroupMenuItem(MatrixGroup group) {
     super(group.getName());
@@ -53,7 +52,8 @@ public class GroupMenuItem extends ModernIconMenuItem {
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.lib.ui.modern.menu.ModernIconMenuItem#drawForegroundAA(java.awt.
+   * @see
+   * org.abh.lib.ui.modern.menu.ModernIconMenuItem#drawForegroundAA(java.awt.
    * Graphics2D)
    */
   @Override

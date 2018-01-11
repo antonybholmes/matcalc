@@ -63,8 +63,7 @@ public class DelimiterCombo extends ModernComboBox {
   /**
    * Set the default delimiter.
    *
-   * @param delimiter
-   *          the new delimiter
+   * @param delimiter the new delimiter
    */
   public void setDelimiter(String delimiter) {
     if (delimiter.equals(" ")) {

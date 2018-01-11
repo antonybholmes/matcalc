@@ -27,8 +27,7 @@ public class EqualsFilter implements Filter {
   /**
    * Instantiates a new equals filter.
    *
-   * @param v
-   *          the v
+   * @param v the v
    */
   public EqualsFilter(double v) {
     mV = v;

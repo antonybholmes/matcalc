@@ -47,15 +47,18 @@ public class GroupsPlotControl extends VBox {
   /**
    * The check color.
    */
-  private ModernTwoStateWidget mCheckColor = new ModernCheckSwitch("Show", true);
+  private ModernTwoStateWidget mCheckColor = new ModernCheckSwitch("Show",
+      true);
 
   /**
    * The check grid.
    */
-  private ModernTwoStateWidget mCheckGrid = new ModernCheckSwitch("Grid", false);
+  private ModernTwoStateWidget mCheckGrid = new ModernCheckSwitch("Grid",
+      false);
 
   /** The m check legend. */
-  private ModernTwoStateWidget mCheckLegend = new ModernCheckSwitch("Legend", true);
+  private ModernTwoStateWidget mCheckLegend = new ModernCheckSwitch("Legend",
+      true);
 
   /**
    * The check border.
@@ -80,17 +83,16 @@ public class GroupsPlotControl extends VBox {
   /**
    * Instantiates a new groups plot control.
    *
-   * @param parent
-   *          the parent
-   * @param color
-   *          the color
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param color the color
+   * @param properties the properties
    */
-  public GroupsPlotControl(ModernWindow parent, Color color, Properties properties) {
+  public GroupsPlotControl(ModernWindow parent, Color color,
+      Properties properties) {
 
     /*
-     * if (labelOption) { mLabelColorButton = new ColorSwatchButton(parent, color);
+     * if (labelOption) { mLabelColorButton = new ColorSwatchButton(parent,
+     * color);
      * 
      * add(new HExpandBox(mCheckShow, mLabelColorButton));
      * 
@@ -121,8 +123,7 @@ public class GroupsPlotControl extends VBox {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     // mCheckShow.addClickListener(l);

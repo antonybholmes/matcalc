@@ -86,7 +86,8 @@ public class LimitsPlotControl extends VBox {
         return;
       }
 
-      mAxis.setLimits(Double.parseDouble(mMinTextField.getText()), Double.parseDouble(mMaxTextField.getText()));
+      mAxis.setLimits(Double.parseDouble(mMinTextField.getText()),
+          Double.parseDouble(mMaxTextField.getText()));
     }
 
     /*
@@ -105,10 +106,8 @@ public class LimitsPlotControl extends VBox {
   /**
    * Instantiates a new limits plot control.
    *
-   * @param parent
-   *          the parent
-   * @param axis
-   *          the axis
+   * @param parent the parent
+   * @param axis the axis
    */
   public LimitsPlotControl(ModernWindow parent, Axis axis) {
     mAxis = axis;

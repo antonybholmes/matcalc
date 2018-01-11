@@ -45,8 +45,7 @@ public class ColumnsCombo extends ModernComboBox {
   /**
    * Instantiates a new columns combo.
    *
-   * @param m
-   *          the m
+   * @param m the m
    */
   public ColumnsCombo(DataFrame m) {
     setMatrix(m);
@@ -55,8 +54,7 @@ public class ColumnsCombo extends ModernComboBox {
   /**
    * Sets the matrix.
    *
-   * @param m
-   *          the new matrix
+   * @param m the new matrix
    */
   public void setMatrix(DataFrame m) {
     clear();

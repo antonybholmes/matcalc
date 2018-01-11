@@ -46,8 +46,7 @@ public class RowLabelPositionControl extends VBox {
   /**
    * Instantiates a new row label position control.
    *
-   * @param rowLabelPosition
-   *          the row label position
+   * @param rowLabelPosition the row label position
    */
   public RowLabelPositionControl(RowLabelPosition rowLabelPosition) {
     mLeftCheck = new ModernRadioButton("Left");
@@ -71,8 +70,7 @@ public class RowLabelPositionControl extends VBox {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mLeftCheck.addClickListener(l);
@@ -85,7 +83,8 @@ public class RowLabelPositionControl extends VBox {
    * @return the position
    */
   public RowLabelPosition getPosition() {
-    return mLeftCheck.isSelected() ? RowLabelPosition.LEFT : RowLabelPosition.RIGHT;
+    return mLeftCheck.isSelected() ? RowLabelPosition.LEFT
+        : RowLabelPosition.RIGHT;
   }
 
 }

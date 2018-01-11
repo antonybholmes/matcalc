@@ -29,7 +29,8 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  * extend the functionality of the base MatCalc application. Modules can access
  * the current matrix and add new matrices to the work flow as well as provide
  */
-public abstract class Module extends FileModule implements Iterable<FileModule> {
+public abstract class Module extends FileModule
+    implements Iterable<FileModule> {
 
   private List<FileModule> mFileModules = new ArrayList<FileModule>();
 
@@ -53,16 +54,14 @@ public abstract class Module extends FileModule implements Iterable<FileModule> 
    * Each module is given access to the app so that it can manipulate the UI and
    * add new functions.
    *
-   * @param window
-   *          the window
+   * @param window the window
    */
   public abstract void init(MainMatCalcWindow window);
 
   /**
    * Should run itself.
    *
-   * @param args
-   *          the args
+   * @param args the args
    */
   public abstract void run(String... args);
 }

@@ -49,10 +49,8 @@ public class VisibleControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new axis visible control.
    *
-   * @param parent
-   *          the parent
-   * @param vp
-   *          the vp
+   * @param parent the parent
+   * @param vp the vp
    */
   public VisibleControl(ModernWindow parent, VisibleProperties vp) {
     mCheckBox = new ModernCheckSwitch("Show");
@@ -76,8 +74,7 @@ public class VisibleControl extends HBox implements ModernClickListener {
   /**
    * Change properties.
    *
-   * @param vp
-   *          the vp
+   * @param vp the vp
    */
   public void changeProperties(VisibleProperties vp) {
     mVp = vp;
@@ -98,8 +95,8 @@ public class VisibleControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

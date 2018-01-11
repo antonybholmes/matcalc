@@ -37,12 +37,9 @@ public class AxisControl extends ModernSubCollapsePane {
   /**
    * Instantiates a new axis plot control.
    *
-   * @param parent
-   *          the parent
-   * @param axis
-   *          the axis
-   * @param editLimits
-   *          the edit limits
+   * @param parent the parent
+   * @param axis the axis
+   * @param editLimits the edit limits
    */
   public AxisControl(ModernWindow parent, Axis axis, boolean editLimits) {
 
@@ -73,11 +70,13 @@ public class AxisControl extends ModernSubCollapsePane {
 
     box = VBox.create();
 
-    box.add(new TickColorPlotControl(parent, "Major", axis.getTicks().getMajorTicks()));
+    box.add(new TickColorPlotControl(parent, "Major",
+        axis.getTicks().getMajorTicks()));
 
     box.add(ModernPanel.createVGap());
 
-    box.add(new TickColorPlotControl(parent, "Minor", axis.getTicks().getMinorTicks()));
+    box.add(new TickColorPlotControl(parent, "Minor",
+        axis.getTicks().getMinorTicks()));
 
     box.add(ModernPanel.createVGap());
 
@@ -87,11 +86,13 @@ public class AxisControl extends ModernSubCollapsePane {
     addTab("Ticks", box);
 
     box = VBox.create();
-    box.add(new VisibleControl(parent, axis.getTicks().getMajorTicks().getFontStyle()));
+    box.add(new VisibleControl(parent,
+        axis.getTicks().getMajorTicks().getFontStyle()));
     box.add(ModernPanel.createVGap());
     box.add(new TickLabelPlotControl(parent, axis.getTicks().getMajorTicks()));
     box.add(ModernPanel.createVGap());
-    box.add(new FontControl(parent, axis.getTicks().getMajorTicks().getFontStyle()));
+    box.add(new FontControl(parent,
+        axis.getTicks().getMajorTicks().getFontStyle()));
     box.setBorder(BORDER);
 
     addTab("Tick Labels", box);

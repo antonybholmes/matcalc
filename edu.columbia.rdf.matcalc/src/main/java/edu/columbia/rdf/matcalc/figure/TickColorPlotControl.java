@@ -57,21 +57,20 @@ public class TickColorPlotControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new tick color plot control.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param tick
-   *          the tick
+   * @param parent the parent
+   * @param name the name
+   * @param tick the tick
    */
-  public TickColorPlotControl(ModernWindow parent, String name, TickMarkProperties tick) {
+  public TickColorPlotControl(ModernWindow parent, String name,
+      TickMarkProperties tick) {
 
     mTick = tick;
 
     mCheckVisible = new ModernCheckBox(name);
     mCheckVisible.setSelected(tick.getLineStyle().getVisible());
 
-    mColorButton = new ColorSwatchButton(parent, tick.getLineStyle().getColor());
+    mColorButton = new ColorSwatchButton(parent,
+        tick.getLineStyle().getColor());
 
     add(mCheckVisible);
     add(Box.createHorizontalGlue());
@@ -117,8 +116,8 @@ public class TickColorPlotControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

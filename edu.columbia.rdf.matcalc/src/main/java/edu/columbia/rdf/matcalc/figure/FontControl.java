@@ -73,8 +73,8 @@ public class FontControl extends VBox {
   /**
    * The underline button.
    */
-  private ModernCheckButton mUnderlineButton = new ModernCheckButton(
-      UIService.getInstance().loadIcon("font_underline", UIService.ICON_SIZE_16));
+  private ModernCheckButton mUnderlineButton = new ModernCheckButton(UIService
+      .getInstance().loadIcon("font_underline", UIService.ICON_SIZE_16));
 
   /** The m properties. */
   private FontProperties mProperties;
@@ -85,10 +85,8 @@ public class FontControl extends VBox {
   /**
    * Instantiates a new tick color plot control.
    *
-   * @param parent
-   *          the parent
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param properties the properties
    */
   public FontControl(ModernWindow parent, FontProperties properties) {
     mProperties = properties;
@@ -174,8 +172,10 @@ public class FontControl extends VBox {
     mFontSizesCombo.setText(Integer.toString(mProperties.getFont().getSize()));
     mBoldButton.setSelected(mProperties.getFont().isBold());
     mItalicButton.setSelected(mProperties.getFont().isItalic());
-    mUnderlineButton.setSelected(mProperties.getFont().getAttributes().containsKey(TextAttribute.UNDERLINE)
-        && mProperties.getFont().getAttributes().get(TextAttribute.UNDERLINE).equals(TextAttribute.UNDERLINE_ON));
+    mUnderlineButton.setSelected(mProperties.getFont().getAttributes()
+        .containsKey(TextAttribute.UNDERLINE)
+        && mProperties.getFont().getAttributes().get(TextAttribute.UNDERLINE)
+            .equals(TextAttribute.UNDERLINE_ON));
     mColorButton.setSelectedColor(mProperties.getColor());
   }
 
@@ -186,13 +186,17 @@ public class FontControl extends VBox {
     Font font = null;
 
     if (mBoldButton.isSelected() && mItalicButton.isSelected()) {
-      font = new Font(mProperties.getFont().getFamily(), Font.BOLD | Font.ITALIC, mProperties.getFont().getSize());
+      font = new Font(mProperties.getFont().getFamily(),
+          Font.BOLD | Font.ITALIC, mProperties.getFont().getSize());
     } else if (mBoldButton.isSelected()) {
-      font = new Font(mProperties.getFont().getFamily(), Font.BOLD, mProperties.getFont().getSize());
+      font = new Font(mProperties.getFont().getFamily(), Font.BOLD,
+          mProperties.getFont().getSize());
     } else if (mItalicButton.isSelected()) {
-      font = new Font(mProperties.getFont().getFamily(), Font.ITALIC, mProperties.getFont().getSize());
+      font = new Font(mProperties.getFont().getFamily(), Font.ITALIC,
+          mProperties.getFont().getSize());
     } else {
-      font = new Font(mProperties.getFont().getFamily(), Font.PLAIN, mProperties.getFont().getSize());
+      font = new Font(mProperties.getFont().getFamily(), Font.PLAIN,
+          mProperties.getFont().getSize());
     }
 
     if (mUnderlineButton.isSelected()) {

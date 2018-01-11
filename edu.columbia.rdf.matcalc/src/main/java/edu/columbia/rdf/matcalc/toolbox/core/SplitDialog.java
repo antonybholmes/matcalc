@@ -62,8 +62,7 @@ public class SplitDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new split dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public SplitDialog(ModernWindow parent) {
     this(parent, false);
@@ -72,10 +71,8 @@ public class SplitDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new modern int input dialog.
    *
-   * @param parent
-   *          the parent
-   * @param checked
-   *          the checked
+   * @param parent the parent
+   * @param checked the checked
    */
   public SplitDialog(ModernWindow parent, boolean checked) {
     super(parent, ModernDialogTaskType.OK_CANCEL);

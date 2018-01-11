@@ -27,8 +27,7 @@ public class GTFilter implements Filter {
   /**
    * Instantiates a new GT filter.
    *
-   * @param v
-   *          the v
+   * @param v the v
    */
   public GTFilter(double v) {
     mV = v;

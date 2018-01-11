@@ -53,7 +53,8 @@ public class StatsModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -73,10 +74,12 @@ public class StatsModule extends CalcModule implements ModernClickListener {
     popup.addMenuItem(new ModernIconMenuItem("Row modes"));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton("Statistics", popup);
+    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton(
+        "Statistics", popup);
     button.setChangeText(false);
     button.setToolTip("Statistics", "Statistical functions.");
-    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions").add(button);
+    mWindow.getRibbon().getToolbar("Formulas").getSection("Functions")
+        .add(button);
     button.addClickListener(this);
   }
 
@@ -84,8 +87,8 @@ public class StatsModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -123,8 +126,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
   /**
    * Min shift.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void mean() {
     DataFrame m = mWindow.getCurrentMatrix();

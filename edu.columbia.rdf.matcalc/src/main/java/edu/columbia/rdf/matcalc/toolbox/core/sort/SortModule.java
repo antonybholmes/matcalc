@@ -25,7 +25,6 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -50,7 +49,8 @@ public class SortModule extends CalcModule implements ModernClickListener {
   /**
    * The member match button.
    */
-  private RibbonLargeButton mSortButton = new RibbonLargeButton("Sort", UIService.getInstance().loadIcon("sort", 24));
+  private RibbonLargeButton mSortButton = new RibbonLargeButton("Sort",
+      UIService.getInstance().loadIcon("sort", 24));
 
   /**
    * The member window.
@@ -70,14 +70,16 @@ public class SortModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."), mWindow.getRibbon().getToolTipModel());
+    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."),
+        mWindow.getRibbon().getToolTipModel());
 
     window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
 
@@ -89,8 +91,8 @@ public class SortModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -139,13 +141,15 @@ public class SortModule extends CalcModule implements ModernClickListener {
       for (List<Integer> ids : sortedIds) {
         // Sort the lists by key
 
-        Map<String, Set<Integer>> sortMap = DefaultTreeMap.create(new TreeSetCreator<Integer>());
+        Map<String, Set<Integer>> sortMap = DefaultTreeMap
+            .create(new TreeSetCreator<Integer>());
 
         for (int id : ids) {
           sortMap.get(m.getText(id, c)).add(id);
         }
 
-        List<String> sortedKeys = CollectionUtils.sort(sortMap.keySet(), NaturalSorter.INSTANCE);
+        List<String> sortedKeys = CollectionUtils.sort(sortMap.keySet(),
+            NaturalSorter.INSTANCE);
 
         if (!sorter.getSortAsc()) {
           sortedKeys = CollectionUtils.reverse(sortedKeys);

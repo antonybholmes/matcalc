@@ -47,10 +47,8 @@ public class PlotVisibleControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new axis visible control.
    *
-   * @param parent
-   *          the parent
-   * @param plot
-   *          the plot
+   * @param parent the parent
+   * @param plot the plot
    */
   public PlotVisibleControl(ModernWindow parent, Plot plot) {
     mPlot = plot;
@@ -77,8 +75,8 @@ public class PlotVisibleControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

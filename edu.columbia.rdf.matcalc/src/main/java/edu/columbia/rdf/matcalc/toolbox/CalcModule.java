@@ -74,8 +74,7 @@ public abstract class CalcModule extends Module {
   /**
    * Show a standard error telling user to load a file.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public static final void showLoadMatrixError(ModernWindow window) {
     ModernMessageDialog.createWarningDialog(window, LOAD_MATRIX_MESSAGE);
@@ -84,15 +83,14 @@ public abstract class CalcModule extends Module {
   /**
    * Find columns.
    *
-   * @param w
-   *          the w
-   * @param m
-   *          the m
-   * @param terms
-   *          the terms
+   * @param w the w
+   * @param m the m
+   * @param terms the terms
    * @return the map
    */
-  protected static Map<String, Integer> findColumns(MainMatCalcWindow w, DataFrame m, String... terms) {
+  protected static Map<String, Integer> findColumns(MainMatCalcWindow w,
+      DataFrame m,
+      String... terms) {
 
     Map<String, Integer> indexMap = DataFrame.findColumns(m, terms);
 
@@ -108,8 +106,12 @@ public abstract class CalcModule extends Module {
     if (found) {
       return indexMap;
     } else {
-      ModernMessageDialog.createWarningDialog(w, "The matrix must include columns named "
-          + TextUtils.formattedList(CollectionUtils.sort(CollectionUtils.unique(terms))) + ".");
+      ModernMessageDialog
+          .createWarningDialog(w,
+              "The matrix must include columns named "
+                  + TextUtils.formattedList(
+                      CollectionUtils.sort(CollectionUtils.unique(terms)))
+                  + ".");
 
       return null;
     }

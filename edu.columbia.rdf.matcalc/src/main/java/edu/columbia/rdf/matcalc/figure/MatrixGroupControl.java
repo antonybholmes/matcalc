@@ -58,7 +58,8 @@ public class MatrixGroupControl extends VBox implements ModernClickListener {
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -70,8 +71,7 @@ public class MatrixGroupControl extends VBox implements ModernClickListener {
   /**
    * Instantiates a new matrix group ribbon section.
    *
-   * @param groupsModel
-   *          the groups model
+   * @param groupsModel the groups model
    */
   public MatrixGroupControl(XYSeriesModel groupsModel) {
     mGroupsModel = groupsModel;
@@ -81,7 +81,8 @@ public class MatrixGroupControl extends VBox implements ModernClickListener {
     ModernClickWidget button;
 
     for (XYSeries series : groupsModel) {
-      button = new MatrixGroupCheckSwitch(series, groupsModel.getVisible(series));
+      button = new MatrixGroupCheckSwitch(series,
+          groupsModel.getVisible(series));
       button.addClickListener(this);
       add(button);
 
@@ -102,8 +103,8 @@ public class MatrixGroupControl extends VBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

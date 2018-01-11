@@ -27,8 +27,7 @@ public class LEFilter implements Filter {
   /**
    * Instantiates a new LE filter.
    *
-   * @param v
-   *          the v
+   * @param v the v
    */
   public LEFilter(double v) {
     mV = v;

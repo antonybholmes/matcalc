@@ -61,8 +61,7 @@ public class ColumnLabelPositionPlotElement extends VBox {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mTopCheck.addClickListener(l);
@@ -75,7 +74,8 @@ public class ColumnLabelPositionPlotElement extends VBox {
    * @return the position
    */
   public ColumnLabelPosition getPosition() {
-    return mTopCheck.isSelected() ? ColumnLabelPosition.TOP : ColumnLabelPosition.BOTTOM;
+    return mTopCheck.isSelected() ? ColumnLabelPosition.TOP
+        : ColumnLabelPosition.BOTTOM;
   }
 
 }

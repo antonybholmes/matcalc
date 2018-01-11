@@ -30,20 +30,22 @@ import org.jebtk.modern.ribbon.RibbonSection;
 /**
  * The Class StyleRibbonSection.
  */
-public class StyleRibbonSection extends RibbonSection implements ModernClickListener {
+public class StyleRibbonSection extends RibbonSection
+    implements ModernClickListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
 
   /** The m proportional button. */
-  private ModernCheckButton mProportionalButton = new RibbonLargeRadioButton("Proportional",
-      UIService.getInstance().loadIcon("proportional", 24), "Proportional",
-      "Draw circles proportional to their group size.", Ribbon.DEFAULT_BUTTON_SIZE);
+  private ModernCheckButton mProportionalButton = new RibbonLargeRadioButton(
+      "Proportional", UIService.getInstance().loadIcon("proportional", 24),
+      "Proportional", "Draw circles proportional to their group size.",
+      Ribbon.DEFAULT_BUTTON_SIZE);
 
   /** The m uniform button. */
-  private ModernCheckButton mUniformButton = new RibbonLargeRadioButton("Uniform",
-      UIService.getInstance().loadIcon("uniform", 24), "Uniform", "Draw all circles the same size.",
-      Ribbon.DEFAULT_BUTTON_SIZE);
+  private ModernCheckButton mUniformButton = new RibbonLargeRadioButton(
+      "Uniform", UIService.getInstance().loadIcon("uniform", 24), "Uniform",
+      "Draw all circles the same size.", Ribbon.DEFAULT_BUTTON_SIZE);
 
   /** The m model. */
   private StyleModel mModel;
@@ -56,8 +58,8 @@ public class StyleRibbonSection extends RibbonSection implements ModernClickList
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+     * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.
+     * ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -69,10 +71,8 @@ public class StyleRibbonSection extends RibbonSection implements ModernClickList
   /**
    * Instantiates a new style ribbon section.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public StyleRibbonSection(Ribbon ribbon, StyleModel model) {
     super(ribbon, "Style");
@@ -114,8 +114,7 @@ public class StyleRibbonSection extends RibbonSection implements ModernClickList
   /**
    * Change style.
    *
-   * @param e
-   *          the e
+   * @param e the e
    */
   private void changeStyle(ModernClickEvent e) {
     if (mUniformButton.isSelected()) {
@@ -128,9 +127,8 @@ public class StyleRibbonSection extends RibbonSection implements ModernClickList
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

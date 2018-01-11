@@ -24,10 +24,8 @@ public interface Filter {
   /**
    * Test.
    *
-   * @param text
-   *          the text
-   * @param value
-   *          the value
+   * @param text the text
+   * @param value the value
    * @return true, if successful
    */
   boolean test(String text, double value);

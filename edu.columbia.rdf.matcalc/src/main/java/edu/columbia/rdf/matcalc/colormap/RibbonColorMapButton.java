@@ -39,7 +39,8 @@ import org.jebtk.modern.window.ModernWindow;
  * @author Antony Holmes Holmes
  *
  */
-public class RibbonColorMapButton extends RibbonLargeDropDownButton implements ModernClickListener {
+public class RibbonColorMapButton extends RibbonLargeDropDownButton
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -59,8 +60,7 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
   /**
    * Instantiates a new ribbon color map button.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public RibbonColorMapButton(ModernWindow parent) {
     this(parent, ColorMapService.getInstance().get("Jet"));
@@ -69,13 +69,12 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
   /**
    * Instantiates a new color swatch button.
    *
-   * @param parent
-   *          the parent
-   * @param colorMap
-   *          the color map
+   * @param parent the parent
+   * @param colorMap the color map
    */
   public RibbonColorMapButton(ModernWindow parent, ColorMap colorMap) {
-    super("Color Map", new ColorMapIcon(colorMap), new ColorMapPopupMenu(parent));
+    super("Color Map", new ColorMapIcon(colorMap),
+        new ColorMapPopupMenu(parent));
 
     mPopup = (ColorMapPopupMenu) mMenu;
 
@@ -98,17 +97,17 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
    */
   /*
    * @Override public void drawBackground(Graphics2D g2) { if(mHighlight ||
-   * mPopupShown) { paintHighlightedOutlined(g2, getRect()); } else if(hasFocus())
-   * { paintOutlinedFocused(g2, getRect()); } else { paintOutlined(g2, getRect());
-   * } }
+   * mPopupShown) { paintHighlightedOutlined(g2, getRect()); } else
+   * if(hasFocus()) { paintOutlinedFocused(g2, getRect()); } else {
+   * paintOutlined(g2, getRect()); } }
    */
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.button.ModernDropDownButton#drawForegroundAA(java.awt.
-   * Graphics2D)
+   * org.abh.lib.ui.modern.button.ModernDropDownButton#drawForegroundAA(java.
+   * awt. Graphics2D)
    */
   @Override
   public void drawForegroundAAText(Graphics2D g2) {
@@ -116,7 +115,8 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
 
     int y = (getHeight() - MAP_SIZE.getH()) / 2;
 
-    LinearGradientPaint paint = mColorMap.getAnchorColors().toGradientPaint(new Point2D.Float(x, 0),
+    LinearGradientPaint paint = mColorMap.getAnchorColors().toGradientPaint(
+        new Point2D.Float(x, 0),
         new Point2D.Float(x + MAP_SIZE.getW(), 0));
 
     g2.setPaint(paint);
@@ -128,9 +128,9 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
      * try { g2Temp.setPaint(paint); g2Temp.fillRect(x, y, MAP_SIZE.getW(),
      * MAP_SIZE.getH()); //g2Temp.fillRect(x, y, w, MAP_SIZE);
      * 
-     * //g2Temp.setColor(LIGHT_LINE_COLOR); //g2Temp.drawRect(x, y, MAP_SIZE.getW(),
-     * MAP_SIZE.getH()); //g2Temp.drawRect(x, y, w, MAP_SIZE); } finally {
-     * g2Temp.dispose(); }
+     * //g2Temp.setColor(LIGHT_LINE_COLOR); //g2Temp.drawRect(x, y,
+     * MAP_SIZE.getW(), MAP_SIZE.getH()); //g2Temp.drawRect(x, y, w, MAP_SIZE);
+     * } finally { g2Temp.dispose(); }
      */
 
     /*
@@ -145,7 +145,8 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
     /*
      * double c = 0; double inc = (mColorMap.getColorCount() - 1) / (double)w;
      * 
-     * for (int i = 0; i < w; ++i) { g2.setColor(mColorMap.getColorByIndex((int)c));
+     * for (int i = 0; i < w; ++i) {
+     * g2.setColor(mColorMap.getColorByIndex((int)c));
      * 
      * g2.drawLine(x, y, x, y + 16);
      * 
@@ -160,16 +161,16 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
     // g2.setColor(ThemeService.getInstance().colors().getHighlight(4));
     // g2.drawRect(x, y, 32, Resources.ICON_SIZE_16);
 
-    UIService.getInstance().loadIcon(TriangleDownVectorIcon.class, 16).drawIcon(g2, getWidth() - 16,
-        (getHeight() - 16) / 2, 16);
+    UIService.getInstance().loadIcon(TriangleDownVectorIcon.class, 16)
+        .drawIcon(g2, getWidth() - 16, (getHeight() - 16) / 2, 16);
   }
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -197,8 +198,7 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton implements M
   /**
    * Sets the selected color map.
    *
-   * @param colorMap
-   *          the new selected color map
+   * @param colorMap the new selected color map
    */
   public void setSelectedColorMap(ColorMap colorMap) {
     mColorMap = colorMap;

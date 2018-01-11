@@ -41,8 +41,8 @@ public class Graph2dStyleRibbonButton extends RibbonLargeDropDownButton {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -82,8 +82,7 @@ public class Graph2dStyleRibbonButton extends RibbonLargeDropDownButton {
   /**
    * Sets the icon.
    *
-   * @param index
-   *          the new icon
+   * @param index the new icon
    */
   private void setIcon(int index) {
     ((Graph2dStyleMultiIcon24) mIcon).setIcon(index);

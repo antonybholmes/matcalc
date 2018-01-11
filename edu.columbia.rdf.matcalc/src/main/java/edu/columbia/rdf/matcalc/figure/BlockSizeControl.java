@@ -38,10 +38,12 @@ public class BlockSizeControl extends VBox {
   /**
    * The member aspect field.
    */
-  private ModernCompactSpinner mXField = new ModernCompactSpinner(0.1, 100, 100, 0.1);
+  private ModernCompactSpinner mXField = new ModernCompactSpinner(0.1, 100, 100,
+      0.1);
 
   /** The m Y field. */
-  private ModernCompactSpinner mYField = new ModernCompactSpinner(0.1, 100, 100, 0.1);
+  private ModernCompactSpinner mYField = new ModernCompactSpinner(0.1, 100, 100,
+      0.1);
 
   /**
    * Instantiates a new aspect ratio control.
@@ -53,8 +55,7 @@ public class BlockSizeControl extends VBox {
   /**
    * Instantiates a new aspect ratio control.
    *
-   * @param aspectRatio
-   *          the aspect ratio
+   * @param aspectRatio the aspect ratio
    */
   public BlockSizeControl(IntDim dim) {
     this(dim.getW(), dim.getH());
@@ -79,8 +80,7 @@ public class BlockSizeControl extends VBox {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addChangeListener(ChangeListener l) {
     mXField.addChangeListener(l);

@@ -40,11 +40,17 @@ public class FillPatternMenu extends ModernPopupMenu {
    * Instantiates a new fill pattern menu.
    */
   public FillPatternMenu() {
-    addMenuItem(new ModernIconMenuItem("Solid", new Raster16Icon(new FillPatternSolidIcon())));
-    addMenuItem(new ModernIconMenuItem("Cross", new Raster16Icon(new FillPatternCrossIcon())));
-    addMenuItem(new ModernIconMenuItem("Back", new Raster16Icon(new FillPatternBackIcon())));
-    addMenuItem(new ModernIconMenuItem("Forward", new Raster16Icon(new FillPatternForwardIcon())));
-    addMenuItem(new ModernIconMenuItem("Vert", new Raster16Icon(new FillPatternVertIcon())));
-    addMenuItem(new ModernIconMenuItem("Hoz", new Raster16Icon(new FillPatternHozIcon())));
+    addMenuItem(new ModernIconMenuItem("Solid",
+        new Raster16Icon(new FillPatternSolidIcon())));
+    addMenuItem(new ModernIconMenuItem("Cross",
+        new Raster16Icon(new FillPatternCrossIcon())));
+    addMenuItem(new ModernIconMenuItem("Back",
+        new Raster16Icon(new FillPatternBackIcon())));
+    addMenuItem(new ModernIconMenuItem("Forward",
+        new Raster16Icon(new FillPatternForwardIcon())));
+    addMenuItem(new ModernIconMenuItem("Vert",
+        new Raster16Icon(new FillPatternVertIcon())));
+    addMenuItem(new ModernIconMenuItem("Hoz",
+        new Raster16Icon(new FillPatternHozIcon())));
   }
 }

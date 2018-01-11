@@ -42,7 +42,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 /**
  * The class StackedBarChartModule.
  */
-public class StackedBarChartModule extends CalcModule implements ModernClickListener {
+public class StackedBarChartModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -62,7 +63,8 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -70,8 +72,8 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Stacked", "Bar Chart",
-        UIService.getInstance().loadIcon("stacked_bar_chart", 24), "Stacked Bar Chart",
-        "Generate a stacked bar chart.");
+        UIService.getInstance().loadIcon("stacked_bar_chart", 24),
+        "Stacked Bar Chart", "Generate a stacked bar chart.");
     button.addClickListener(this);
     // button.setEnabled(false);
 
@@ -102,7 +104,8 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
       // See if the column matches a group, and if so use the group's
       // color rather than a random color
       for (MatrixGroup group : groups) {
-        Set<Integer> indices = CollectionUtils.unique(MatrixGroup.findRowIndices(m, group));
+        Set<Integer> indices = CollectionUtils
+            .unique(MatrixGroup.findRowIndices(m, group));
 
         if (indices.contains(i)) {
           color = group.getColor();
@@ -117,7 +120,8 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
 
       XYSeries series = new XYSeries(m.getRowName(i), color);
 
-      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getFillStyle()
+          .setColor(ColorUtils.getTransparentColor50(color));
       series.getStyle().getLineStyle().setColor(color);
 
       seriesGroup.add(series);
@@ -133,7 +137,8 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
 
     // gp.getXAxis().autoSetLimits(min, max);
     // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     axes.getX1Axis().getTitle().setText("Series");
 
@@ -144,7 +149,8 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
 
     // gp.getYAxis().autoSetLimits(min, max);
     // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
 
     axes.getY1Axis().getTitle().setText("Count");
@@ -157,8 +163,8 @@ public class StackedBarChartModule extends CalcModule implements ModernClickList
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

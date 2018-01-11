@@ -24,7 +24,6 @@ import java.util.TreeSet;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -44,13 +43,14 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class SearchColumnModule extends CalcModule implements ModernClickListener {
+public class SearchColumnModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member match button.
    */
-  private RibbonLargeButton mSearchButton = new RibbonLargeButton("Search Column",
-      UIService.getInstance().loadIcon("search_column", 24));
+  private RibbonLargeButton mSearchButton = new RibbonLargeButton(
+      "Search Column", UIService.getInstance().loadIcon("search_column", 24));
 
   /**
    * The member window.
@@ -70,14 +70,16 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mSearchButton.setToolTip(new ModernToolTip("Search Column", "Search column for values."),
+    mSearchButton.setToolTip(
+        new ModernToolTip("Search Column", "Search column for values."),
         mWindow.getRibbon().getToolTipModel());
 
     window.getRibbon().getHomeToolbar().getSection("Search").add(mSearchButton);
@@ -90,8 +92,8 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -105,7 +107,8 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
     int column = mWindow.getSelectedColumn();
 
     if (column == Integer.MIN_VALUE) {
-      ModernMessageDialog.createWarningDialog(mWindow, "You must select a column to match on.");
+      ModernMessageDialog.createWarningDialog(mWindow,
+          "You must select a column to match on.");
 
       return;
     }
@@ -186,7 +189,9 @@ public class SearchColumnModule extends CalcModule implements ModernClickListene
       if (s == 0) {
         ret.set(i, column + 1, TextUtils.NA);
       } else {
-        ret.set(i, column + 1, TextUtils.scJoin(CollectionUtils.sort(matchMap.get(i))));
+        ret.set(i,
+            column + 1,
+            TextUtils.scJoin(CollectionUtils.sort(matchMap.get(i))));
       }
     }
 

@@ -16,7 +16,6 @@
 package edu.columbia.rdf.matcalc.toolbox.core.filter.column;
 
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -34,13 +33,15 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  *
  * @author Antony Holmes Holmes
  */
-public class ColumnFilterModule extends CalcModule implements ModernClickListener {
+public class ColumnFilterModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The button.
    */
   private RibbonLargeButton mButton = new RibbonLargeButton(
-      new Raster24Icon(new FilterVectorIcon(ThemeService.getInstance().colors().getHighlight(8),
+      new Raster24Icon(new FilterVectorIcon(
+          ThemeService.getInstance().colors().getHighlight(8),
           ThemeService.getInstance().colors().getHighlight(6))),
       "Filter Columns", "Filter columns.");
 
@@ -62,7 +63,8 @@ public class ColumnFilterModule extends CalcModule implements ModernClickListene
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -78,8 +80,8 @@ public class ColumnFilterModule extends CalcModule implements ModernClickListene
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

@@ -47,22 +47,26 @@ public class FDRPanel extends VBox {
   /**
    * The bonferroni button.
    */
-  private ModernRadioButton bonferroniButton = new ModernRadioButton("Bonferroni");
+  private ModernRadioButton bonferroniButton = new ModernRadioButton(
+      "Bonferroni");
 
   /**
    * The bh button.
    */
-  private ModernRadioButton bhButton = new ModernRadioButton("Benjamini-Hochberg");
+  private ModernRadioButton bhButton = new ModernRadioButton(
+      "Benjamini-Hochberg");
 
   /**
    * The member max p field.
    */
-  private ModernCompactSpinner mMaxPField = new ModernCompactSpinner(0, 1, 0.05, 0.01);
+  private ModernCompactSpinner mMaxPField = new ModernCompactSpinner(0, 1, 0.05,
+      0.01);
 
   /**
    * The member check p.
    */
-  private ModernTwoStateWidget mCheckP = new ModernCheckSwitch("Maximum p-value");
+  private ModernTwoStateWidget mCheckP = new ModernCheckSwitch(
+      "Maximum p-value");
 
   /**
    * Instantiates a new FDR panel.

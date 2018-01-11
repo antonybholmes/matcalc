@@ -43,10 +43,8 @@ public class DashedLineMenuItem extends ModernMenuItem {
   /**
    * Construct a new menu item with a given name for a given line style.
    *
-   * @param name
-   *          the name
-   * @param stroke
-   *          the stroke
+   * @param name the name
+   * @param stroke the stroke
    */
   public DashedLineMenuItem(String name, Stroke stroke) {
     super(name);

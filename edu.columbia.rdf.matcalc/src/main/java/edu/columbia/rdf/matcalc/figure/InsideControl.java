@@ -50,10 +50,8 @@ public class InsideControl extends HBox implements ModernClickListener {
   /**
    * Instantiates a new axis visible control.
    *
-   * @param parent
-   *          the parent
-   * @param layer
-   *          the layer
+   * @param parent the parent
+   * @param layer the layer
    */
   public InsideControl(ModernWindow parent, LocationProperties layer) {
     mLayer = layer;
@@ -87,8 +85,8 @@ public class InsideControl extends HBox implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

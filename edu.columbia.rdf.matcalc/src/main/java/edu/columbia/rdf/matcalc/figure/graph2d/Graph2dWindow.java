@@ -78,7 +78,8 @@ public class Graph2dWindow extends FigureWindow {
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -97,7 +98,8 @@ public class Graph2dWindow extends FigureWindow {
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -113,7 +115,8 @@ public class Graph2dWindow extends FigureWindow {
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -125,10 +128,8 @@ public class Graph2dWindow extends FigureWindow {
   /**
    * Instantiates a new graph2d window.
    *
-   * @param window
-   *          the window
-   * @param subFigure
-   *          the sub figure
+   * @param window the window
+   * @param subFigure the sub figure
    */
   public Graph2dWindow(MainMatCalcWindow window, SubFigure subFigure) {
     this(window, Figure.createFigure().addSubFigure(subFigure));
@@ -137,10 +138,8 @@ public class Graph2dWindow extends FigureWindow {
   /**
    * Instantiates a new graph 2 d window.
    *
-   * @param window
-   *          the window
-   * @param figure
-   *          the figure
+   * @param window the window
+   * @param figure the figure
    */
   public Graph2dWindow(MainMatCalcWindow window, Figure figure) {
     this(window, figure, true);
@@ -149,14 +148,12 @@ public class Graph2dWindow extends FigureWindow {
   /**
    * Instantiates a new graph 2 d window.
    *
-   * @param window
-   *          the window
-   * @param figure
-   *          the figure
-   * @param allowStyle
-   *          the allow style
+   * @param window the window
+   * @param figure the figure
+   * @param allowStyle the allow style
    */
-  public Graph2dWindow(MainMatCalcWindow window, Figure figure, boolean allowStyle) {
+  public Graph2dWindow(MainMatCalcWindow window, Figure figure,
+      boolean allowStyle) {
     super(window, figure, allowStyle);
 
     setup();
@@ -193,10 +190,12 @@ public class Graph2dWindow extends FigureWindow {
       }
     });
 
-    getRibbon().getToolbar("Plot")
-        .add(new LegendRibbonSection(getRibbon(), mFigure.currentSubFigure().currentAxes().getLegend()));
-    getRibbon().getToolbar("Layout").add(new PlotSizeRibbonSection(getRibbon(), mSizeModel));
-    getRibbon().getToolbar("Layout").add(new MarginsRibbonSection(getRibbon(), mSizeModel));
+    getRibbon().getToolbar("Plot").add(new LegendRibbonSection(getRibbon(),
+        mFigure.currentSubFigure().currentAxes().getLegend()));
+    getRibbon().getToolbar("Layout")
+        .add(new PlotSizeRibbonSection(getRibbon(), mSizeModel));
+    getRibbon().getToolbar("Layout")
+        .add(new MarginsRibbonSection(getRibbon(), mSizeModel));
 
     addFormatPane();
 
@@ -224,7 +223,8 @@ public class Graph2dWindow extends FigureWindow {
 
     // BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-    ModernScrollPane scrollPane = new ModernScrollPane(mFigurePanel).setScrollBarLocation(ScrollBarLocation.FLOATING)
+    ModernScrollPane scrollPane = new ModernScrollPane(mFigurePanel)
+        .setScrollBarLocation(ScrollBarLocation.FLOATING)
         .setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
 
     ModernPanel panel = new ModernPanel(scrollPane, ModernWidget.BORDER);
@@ -237,7 +237,11 @@ public class Graph2dWindow extends FigureWindow {
    */
   private void addFormatPane() {
     if (!getTabsPane().getModel().getRightTabs().containsTab("Format")) {
-      getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 320, 320, 600);
+      getTabsPane().addRightTab("Format",
+          new CloseableHTab("Format", mFormatPane, getTabsPane()),
+          320,
+          320,
+          600);
     }
   }
 
@@ -259,7 +263,9 @@ public class Graph2dWindow extends FigureWindow {
     // First cache the original matrices since we are going to normalize
     // them
     if (mMatrices.size() == 0) {
-      for (SubFigure subFigure : mFigure.getSubFigures()) { // for (int z : mFigure.getSubFigureZModel()) {
+      for (SubFigure subFigure : mFigure.getSubFigures()) { // for (int z :
+                                                            // mFigure.getSubFigureZModel())
+                                                            // {
         DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
 
         if (m != null) {
@@ -272,7 +278,9 @@ public class Graph2dWindow extends FigureWindow {
 
     // Cycle through the matrices
 
-    for (SubFigure subFigure : mFigure.getSubFigures()) { // for (int z : mFigure.getSubFigureZModel()) {
+    for (SubFigure subFigure : mFigure.getSubFigures()) { // for (int z :
+                                                          // mFigure.getSubFigureZModel())
+                                                          // {
       DataFrame m = subFigure.currentAxes().currentPlot().getMatrix();
 
       if (m == null) {
@@ -287,10 +295,12 @@ public class Graph2dWindow extends FigureWindow {
         m = MatrixOperations.zscore(m); // new MatrixZTransformView(mMatrix);
         break;
       case ZSCORE_ROW:
-        m = MatrixOperations.rowZscore(m); // new RowZTransformMatrixView(mMatrix);
+        m = MatrixOperations.rowZscore(m); // new
+                                           // RowZTransformMatrixView(mMatrix);
         break;
       case ZSCORE_COLUMN:
-        m = MatrixOperations.columnZscore(m); // new ColumnZTransformMatrixView(mMatrix);
+        m = MatrixOperations.columnZscore(m); // new
+                                              // ColumnZTransformMatrixView(mMatrix);
         break;
       case NORMALIZE:
         if (Double.isNaN(mColorModel.get().getMax())) {
@@ -324,14 +334,16 @@ public class Graph2dWindow extends FigureWindow {
         m = MatrixOperations.normalize(m, min, max);
       }
 
-      System.err.println("scale " + min + " " + max + " " + MatrixOperations.min(m));
+      System.err
+          .println("scale " + min + " " + max + " " + MatrixOperations.min(m));
 
       // new MinMaxBoundedMatrixView(zMatrix, min, max);
 
       subFigure.setMatrix(m);
       subFigure.setColorMap(mColorMapModel.get());
 
-      // PlotFactory.createVColorBar(min, max, subFigure, axes, mColorMapModel.get());
+      // PlotFactory.createVColorBar(min, max, subFigure, axes,
+      // mColorMapModel.get());
 
       ++c;
     }

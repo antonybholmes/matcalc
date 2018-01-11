@@ -37,10 +37,8 @@ public class AxesControl extends VBox {
   /**
    * Instantiates a new axis plot control.
    *
-   * @param parent
-   *          the parent
-   * @param axes
-   *          the axes
+   * @param parent the parent
+   * @param axes the axes
    */
   public AxesControl(ModernWindow parent, Axes axes) {
     add(new LayerVisibleControl(parent, axes));

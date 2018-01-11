@@ -45,22 +45,26 @@ public class MarginsRibbonSection extends RibbonSection {
   /**
    * The member t field.
    */
-  private ModernCompactSpinner mTField = new ModernCompactSpinner(1, 10000, 100, false);
+  private ModernCompactSpinner mTField = new ModernCompactSpinner(1, 10000, 100,
+      false);
 
   /**
    * The member l field.
    */
-  private ModernCompactSpinner mLField = new ModernCompactSpinner(1, 10000, 100, false);
+  private ModernCompactSpinner mLField = new ModernCompactSpinner(1, 10000, 100,
+      false);
 
   /**
    * The member b field.
    */
-  private ModernCompactSpinner mBField = new ModernCompactSpinner(1, 10000, 100, false);
+  private ModernCompactSpinner mBField = new ModernCompactSpinner(1, 10000, 100,
+      false);
 
   /**
    * The member r field.
    */
-  private ModernCompactSpinner mRField = new ModernCompactSpinner(1, 10000, 100, false);
+  private ModernCompactSpinner mRField = new ModernCompactSpinner(1, 10000, 100,
+      false);
 
   /** The m model. */
   private PlotSizeModel mModel;
@@ -107,10 +111,8 @@ public class MarginsRibbonSection extends RibbonSection {
   /**
    * Instantiates a new plot size ribbon section.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public MarginsRibbonSection(Ribbon ribbon, PlotSizeModel model) {
     super(ribbon, "Margins");

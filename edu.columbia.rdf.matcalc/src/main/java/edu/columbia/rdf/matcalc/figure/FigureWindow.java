@@ -69,7 +69,8 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
  * @author Antony Holmes Holmes
  *
  */
-public abstract class FigureWindow extends ModernRibbonWindow implements ModernWindowConstructor, ModernClickListener {
+public abstract class FigureWindow extends ModernRibbonWindow
+    implements ModernWindowConstructor, ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -148,10 +149,8 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
     /**
      * Instantiates a new export call back.
      *
-     * @param file
-     *          the file
-     * @param pwd
-     *          the pwd
+     * @param file the file
+     * @param pwd the pwd
      */
     public ExportCallBack(Path file, Path pwd) {
       mFile = file;
@@ -162,8 +161,8 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.dialog.DialogEventListener#statusChanged(org.abh.common.
-     * ui.ui.dialog.DialogEvent)
+     * org.abh.common.ui.ui.dialog.DialogEventListener#statusChanged(org.abh.
+     * common. ui.ui.dialog.DialogEvent)
      */
     @Override
     public void statusChanged(DialogEvent e) {
@@ -186,8 +185,7 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
   /**
    * Instantiates a new figure window.
    *
-   * @param window
-   *          the window
+   * @param window the window
    */
   public FigureWindow(ModernWindow window, Figure figure) {
     this(window, figure, true);
@@ -196,12 +194,9 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
   /**
    * Instantiates a new figure window.
    *
-   * @param window
-   *          the window
-   * @param figure
-   *          the figure
-   * @param allowStyle
-   *          the allow style
+   * @param window the window
+   * @param figure the figure
+   * @param allowStyle the allow style
    */
   public FigureWindow(ModernWindow window, Figure figure, boolean allowStyle) {
     super(window.getAppInfo());
@@ -251,7 +246,8 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
     // Ribbon2 ribbon = new Ribbon2();
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
-    button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+    button = new QuickAccessButton(
+        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip(new ModernToolTip("Save", "Save the current image."));
     button.addClickListener(this);
@@ -260,18 +256,23 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
     getRibbon().getToolbar("Plot").add(new ClipboardRibbonSection(getRibbon()));
 
     if (mAllowStyle) {
-      getRibbon().getToolbar("Plot").add(new Graph2dStyleRibbonSection(getRibbon(), mStyleModel));
+      getRibbon().getToolbar("Plot")
+          .add(new Graph2dStyleRibbonSection(getRibbon(), mStyleModel));
     }
 
-    getRibbon().getToolbar("Color").addSection(new ColorMapRibbonSection(this, mColorMapModel, mScaleModel));
-    getRibbon().getToolbar("Color").addSection(new ColorStandardizationRibbonSection(this, getRibbon(), mColorModel));
+    getRibbon().getToolbar("Color").addSection(
+        new ColorMapRibbonSection(this, mColorMapModel, mScaleModel));
+    getRibbon().getToolbar("Color").addSection(
+        new ColorStandardizationRibbonSection(this, getRibbon(), mColorModel));
 
-    button = new RibbonLargeButton("Format", new Raster32Icon(new FormatPlot32VectorIcon()));
+    button = new RibbonLargeButton("Format",
+        new Raster32Icon(new FormatPlot32VectorIcon()));
     button.addClickListener(this);
     getRibbon().getToolbar("View").getSection("Show").add(button);
 
     getRibbon().getToolbar("View").add(new ZoomRibbonSection(this, mZoomModel));
-    getRibbon().getToolbar("View").add(new WindowRibbonSection(this, getRibbon()));
+    getRibbon().getToolbar("View")
+        .add(new WindowRibbonSection(this, getRibbon()));
 
     getRibbon().setSelectedIndex(0);
   }
@@ -289,8 +290,8 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -329,16 +330,18 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
       return;
     }
 
-    getTabsPane().addRightTab("Format", new CloseableHTab("Format", mFormatPane, getTabsPane()), 300, 200, 500);
+    getTabsPane().addRightTab("Format",
+        new CloseableHTab("Format", mFormatPane, getTabsPane()),
+        300,
+        200,
+        500);
   }
 
   /**
    * Export.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
    */
   private void export() throws IOException, TranscoderException {
     export(RecentFilesService.getInstance().getPwd());
@@ -347,12 +350,9 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
   /**
    * Export.
    *
-   * @param pwd
-   *          the pwd
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
+   * @param pwd the pwd
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
    */
   private void export(Path pwd) throws IOException, TranscoderException {
     Path file = Image.saveFile(this, pwd);
@@ -364,7 +364,8 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
     if (FileUtils.exists(file)) {
       // createFileExistsDialog(file, new ExportCallBack(file, pwd));
 
-      ModernMessageDialog.createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
+      ModernMessageDialog
+          .createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
     } else {
       save(file);
     }
@@ -373,12 +374,9 @@ public abstract class FigureWindow extends ModernRibbonWindow implements ModernW
   /**
    * Save.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
    */
   private void save(Path file) throws IOException, TranscoderException {
     Image.write(getPlot(), file);

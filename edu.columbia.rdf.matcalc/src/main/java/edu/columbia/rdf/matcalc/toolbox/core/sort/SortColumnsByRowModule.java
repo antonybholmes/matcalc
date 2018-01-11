@@ -24,7 +24,6 @@ import org.jebtk.core.Indexed;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
@@ -46,12 +45,14 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class SortColumnsByRowModule extends CalcModule implements ModernClickListener {
+public class SortColumnsByRowModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member match button.
    */
-  private RibbonLargeButton mSortButton = new RibbonLargeButton(UIService.getInstance().loadIcon("order_columns", 32));
+  private RibbonLargeButton mSortButton = new RibbonLargeButton(
+      UIService.getInstance().loadIcon("order_columns", 32));
 
   /**
    * The member window.
@@ -71,14 +72,16 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."), mWindow.getRibbon().getToolTipModel());
+    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."),
+        mWindow.getRibbon().getToolTipModel());
 
     window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
 
@@ -90,8 +93,8 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -107,7 +110,9 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
     List<Integer> rows = mWindow.getSelectedRows();
 
     if (rows.size() == 0) {
-      ModernMessageDialog.createDialog(mWindow, "You must select a row to sort on.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mWindow,
+          "You must select a row to sort on.",
+          MessageDialogType.WARNING);
       return;
     }
 
@@ -131,12 +136,9 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
   /**
    * Sort by row.
    *
-   * @param m
-   *          the m
-   * @param r
-   *          the r
-   * @param asc
-   *          the asc
+   * @param m the m
+   * @param r the r
+   * @param asc the asc
    */
   private void sortByRow(DataFrame m, int r, boolean asc) {
 
@@ -153,7 +155,8 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
     }
 
     // Sort largest to smallest
-    List<Indexed<Integer, Double>> sortedValues = CollectionUtils.sort(valueIndices);
+    List<Indexed<Integer, Double>> sortedValues = CollectionUtils
+        .sort(valueIndices);
 
     if (!asc) {
       sortedValues = CollectionUtils.reverse(sortedValues);
@@ -171,16 +174,15 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
   /**
    * Sort by row within groups.
    *
-   * @param m
-   *          the m
-   * @param r
-   *          the r
-   * @param groups
-   *          the groups
-   * @param asc
-   *          the asc
+   * @param m the m
+   * @param r the r
+   * @param groups the groups
+   * @param asc the asc
    */
-  private void sortByRowWithinGroups(DataFrame m, int r, XYSeriesGroup groups, boolean asc) {
+  private void sortByRowWithinGroups(DataFrame m,
+      int r,
+      XYSeriesGroup groups,
+      boolean asc) {
     // If a column belongs to more than one group, we
     // will just assign it to the first group we
     // encounter that it belongs to. The column will
@@ -206,7 +208,8 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
       }
 
       // Sort largest to smallest
-      List<Indexed<Integer, Double>> sortedValues = CollectionUtils.sort(valueIndices);
+      List<Indexed<Integer, Double>> sortedValues = CollectionUtils
+          .sort(valueIndices);
 
       if (!asc) {
         sortedValues = CollectionUtils.reverse(sortedValues);
@@ -231,10 +234,8 @@ public class SortColumnsByRowModule extends CalcModule implements ModernClickLis
   /**
    * Output.
    *
-   * @param m
-   *          the m
-   * @param columns
-   *          the columns
+   * @param m the m
+   * @param columns the columns
    */
   private void output(DataFrame m, List<Integer> columns) {
     DataFrame ret = DataFrame.createDataFrame(m.getRows(), m.getCols());

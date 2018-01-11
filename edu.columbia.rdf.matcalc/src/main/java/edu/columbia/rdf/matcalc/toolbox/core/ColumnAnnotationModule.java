@@ -16,7 +16,6 @@
 package edu.columbia.rdf.matcalc.toolbox.core;
 
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -35,12 +34,14 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class ColumnAnnotationModule extends CalcModule implements ModernClickListener {
+public class ColumnAnnotationModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member split button.
    */
-  private RibbonLargeButton mButton = new RibbonLargeButton(UIService.getInstance().loadIcon("annotation", 24));
+  private RibbonLargeButton mButton = new RibbonLargeButton(
+      UIService.getInstance().loadIcon("annotation", 24));
 
   /**
    * The member window.
@@ -60,14 +61,16 @@ public class ColumnAnnotationModule extends CalcModule implements ModernClickLis
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mButton.setToolTip("Column Annotation", "Adjust which columns are annotation columns.");
+    mButton.setToolTip("Column Annotation",
+        "Adjust which columns are annotation columns.");
 
     window.getRibbon().getToolbar("Data").getSection("Tools").add(mButton);
 
@@ -79,8 +82,8 @@ public class ColumnAnnotationModule extends CalcModule implements ModernClickLis
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -94,7 +97,9 @@ public class ColumnAnnotationModule extends CalcModule implements ModernClickLis
     int c = mWindow.getSelectedColumn();
 
     if (c == Integer.MIN_VALUE) {
-      ModernMessageDialog.createDialog(mWindow, "You must select a column.", MessageDialogType.WARNING);
+      ModernMessageDialog.createDialog(mWindow,
+          "You must select a column.",
+          MessageDialogType.WARNING);
 
       return;
     }

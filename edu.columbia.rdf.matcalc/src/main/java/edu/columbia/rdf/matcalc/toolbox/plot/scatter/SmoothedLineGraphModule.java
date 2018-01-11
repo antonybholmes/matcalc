@@ -24,7 +24,6 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.ColorCycle;
 import org.jebtk.graphplot.PlotFactory;
 import org.jebtk.graphplot.figure.Axes;
-import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
@@ -42,7 +41,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 /**
  * The class SmoothedLineGraphModule.
  */
-public class SmoothedLineGraphModule extends CalcModule implements ModernClickListener {
+public class SmoothedLineGraphModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -67,7 +67,8 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.CalcModule#run(java.lang.String[])
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.CalcModule#run(java.lang.String[])
    */
   public void run(String... args) {
     plot();
@@ -104,15 +105,17 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Line", UIService.getInstance().loadIcon("line_graph", 24),
-        "Line Graph", "Generate a line graph.");
+    RibbonLargeButton button = new RibbonLargeButton("Line",
+        UIService.getInstance().loadIcon("line_graph", 24), "Line Graph",
+        "Generate a line graph.");
     // button.setShowText(false);
     button.addClickListener(this);
     // button.setEnabled(false);
@@ -145,9 +148,12 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
     for (int i = 0; i < m.getCols(); i += 2) {
       Color color = colorCycle.next();
 
-      XYSeries series = new XYSeries(TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)), color);
+      XYSeries series = new XYSeries(
+          TextUtils.commonPrefix(m.getColumnName(i), m.getColumnName(i + 1)),
+          color);
 
-      series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+      series.getStyle().getFillStyle()
+          .setColor(ColorUtils.getTransparentColor50(color));
       series.getStyle().getLineStyle().setColor(color);
 
       PlotFactory.createSplineLinePlot(m, mAxes, series);
@@ -163,7 +169,8 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
 
     // gp.getXAxis().autoSetLimits(min, max);
     // gp.getXAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getXAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     // mAxes.getXAxis().getTitle().setText("Series");
 
@@ -174,7 +181,8 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
 
     // gp.getYAxis().autoSetLimits(min, max);
     // gp.getYAxis().getMajorTicks().set(Linspace.evenlySpaced(min, max, inc));
-    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min, max,
+    // gp.getYAxis().getMajorTickMarks().setNumbers(Linspace.evenlySpaced(min,
+    // max,
     // inc));
     // mAxes.getY1Axis().getTitle().setText("Count");
 
@@ -189,8 +197,8 @@ public class SmoothedLineGraphModule extends CalcModule implements ModernClickLi
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

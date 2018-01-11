@@ -63,10 +63,8 @@ public class HeatMapControl extends Box {
   /**
    * Instantiates a new heat map control.
    *
-   * @param parent
-   *          the parent
-   * @param show
-   *          the show
+   * @param parent the parent
+   * @param show the show
    */
   public HeatMapControl(ModernWindow parent, boolean show) {
     super(BoxLayout.PAGE_AXIS);
@@ -94,8 +92,7 @@ public class HeatMapControl extends Box {
   /**
    * Adds the click listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addClickListener(ModernClickListener l) {
     mCheckShow.addClickListener(l);
@@ -106,8 +103,7 @@ public class HeatMapControl extends Box {
   /**
    * Adds the change listener.
    *
-   * @param l
-   *          the l
+   * @param l the l
    */
   public void addChangeListener(ChangeListener l) {
     mAspectRatioElement.addChangeListener(l);

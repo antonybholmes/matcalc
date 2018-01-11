@@ -34,33 +34,27 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressi
  * @author Antony Holmes Holmes
  *
  */
-public class HeatMapMatrixTransform extends DifferentialExpressionPlotMatrixTransform {
+public class HeatMapMatrixTransform
+    extends DifferentialExpressionPlotMatrixTransform {
 
   /**
    * Instantiates a new t test plot matrix transform.
    *
-   * @param parent
-   *          the parent
-   * @param inputMatrix
-   *          the input matrix
-   * @param groups
-   *          the groups
-   * @param comparisonGroups
-   *          the comparison groups
-   * @param rowGroups
-   *          the row groups
-   * @param countGroups
-   *          the count groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param parent the parent
+   * @param inputMatrix the input matrix
+   * @param groups the groups
+   * @param comparisonGroups the comparison groups
+   * @param rowGroups the row groups
+   * @param countGroups the count groups
+   * @param history the history
+   * @param properties the properties
    */
-  public HeatMapMatrixTransform(ModernRibbonWindow parent, DataFrame inputMatrix, XYSeriesModel groups,
-      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups, List<String> history,
-      Properties properties) {
-    super(parent, "Create Supervised Classification Plot", inputMatrix, groups, comparisonGroups, rowGroups,
-        countGroups, history, properties);
+  public HeatMapMatrixTransform(ModernRibbonWindow parent,
+      DataFrame inputMatrix, XYSeriesModel groups,
+      XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Properties properties) {
+    super(parent, "Create Supervised Classification Plot", inputMatrix, groups,
+        comparisonGroups, rowGroups, countGroups, history, properties);
   }
 
   /*
@@ -70,7 +64,8 @@ public class HeatMapMatrixTransform extends DifferentialExpressionPlotMatrixTran
    */
   @Override
   public SupervisedPlotWindow createWindow() {
-    return new SupervisedPlotWindow((ModernRibbonWindow) mParent, mMatrix, mGroups, mComparisonGroups, mRowGroups,
-        mCountGroups, mHistory, mProperties);
+    return new SupervisedPlotWindow((ModernRibbonWindow) mParent, mMatrix,
+        mGroups, mComparisonGroups, mRowGroups, mCountGroups, mHistory,
+        mProperties);
   }
 }

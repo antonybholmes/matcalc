@@ -36,8 +36,10 @@ public class RotationMenu extends ModernPopupMenu {
    * Instantiates a new rotation menu.
    */
   public RotationMenu() {
-    addMenuItem(new ModernIconMenuItem("0", new Raster16Icon(new ArrowRightVectorIcon())));
-    addMenuItem(new ModernIconMenuItem("90", new Raster16Icon(new ArrowDownVectorIcon())));
+    addMenuItem(new ModernIconMenuItem("0",
+        new Raster16Icon(new ArrowRightVectorIcon())));
+    addMenuItem(new ModernIconMenuItem("90",
+        new Raster16Icon(new ArrowDownVectorIcon())));
     // addMenuItem(new ModernIconMenuItem("180",
     // new Raster16Icon(new ArrowRightVectorIcon())));
     // addMenuItem(new ModernIconMenuItem("270",

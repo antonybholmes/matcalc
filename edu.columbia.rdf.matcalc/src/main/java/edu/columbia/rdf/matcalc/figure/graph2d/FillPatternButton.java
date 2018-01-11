@@ -43,8 +43,8 @@ public class FillPatternButton extends ModernDialogFlatDropDownIconButton {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -69,8 +69,7 @@ public class FillPatternButton extends ModernDialogFlatDropDownIconButton {
   /**
    * Instantiates a new fill pattern button.
    *
-   * @param style
-   *          the style
+   * @param style the style
    */
   public FillPatternButton(FillPattern style) {
     super(new FillPatternMultiIcon16(), new FillPatternMenu());
@@ -85,8 +84,7 @@ public class FillPatternButton extends ModernDialogFlatDropDownIconButton {
   /**
    * Sets the style.
    *
-   * @param style
-   *          the new style
+   * @param style the new style
    */
   public void setStyle(FillPattern style) {
     switch (style) {

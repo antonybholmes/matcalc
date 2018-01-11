@@ -38,7 +38,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 /**
  * The class BoxWhiskerPlotModule.
  */
-public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernClickListener {
+public class BoxWhiskerScatterPlotModule extends CalcModule
+    implements ModernClickListener {
 
   /**
    * The member parent.
@@ -58,7 +59,8 @@ public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernCli
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -66,8 +68,8 @@ public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernCli
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Box Whisker Scatter",
-        new Raster32Icon(new BoxWhiskerScatter32VectorIcon()), "Box Whisker Scatter Plot",
-        "Generate a box whisker scatter plot");
+        new Raster32Icon(new BoxWhiskerScatter32VectorIcon()),
+        "Box Whisker Scatter Plot", "Generate a box whisker scatter plot");
     button.addClickListener(this);
     // button.setEnabled(false);
 
@@ -78,8 +80,8 @@ public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernCli
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -98,10 +100,8 @@ public class BoxWhiskerScatterPlotModule extends CalcModule implements ModernCli
   /**
    * Box whisker plot.
    *
-   * @param m
-   *          the m
-   * @param plot
-   *          the plot
+   * @param m the m
+   * @param plot the plot
    */
   private void boxWhiskerPlot(DataFrame m, boolean plot) {
     Figure figure = Figure.createFigure(); // window.getFigure();

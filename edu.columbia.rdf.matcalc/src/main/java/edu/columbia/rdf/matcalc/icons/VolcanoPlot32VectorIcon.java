@@ -49,7 +49,12 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
    * java.awt.Rectangle)
    */
   @Override
-  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+  public void drawIcon(Graphics2D g2,
+      int x,
+      int y,
+      int w,
+      int h,
+      Object... params) {
     x = x + WIDTH / 2;
     y = y + WIDTH / 2;
 
@@ -127,8 +132,8 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
     /*
      * g2.setColor(Color.BLACK); g2.setStroke(ModernTheme.QUAD_LINE_STROKE);
      * 
-     * g2.drawArc(x, y, WIDTH / 2, WIDTH, 0, 90); g2.drawArc(x + WIDTH / 2, y, WIDTH
-     * / 2, WIDTH, 90, 90);
+     * g2.drawArc(x, y, WIDTH / 2, WIDTH, 0, 90); g2.drawArc(x + WIDTH / 2, y,
+     * WIDTH / 2, WIDTH, 90, 90);
      */
 
     /*
@@ -139,33 +144,33 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
      * g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - SIZE - SIZE / 2, SIZE, SIZE);
      * g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - SIZE - SIZE / 2, SIZE, SIZE);
      * 
-     * g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE); g2.fillOval(x -
-     * SIZE / 2, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE); g2.fillOval(x + SIZE / 2, y
-     * + WIDTH / 2 - 2 * SIZE, SIZE, SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 2
-     * * SIZE, SIZE, SIZE);
+     * g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x + SIZE, y + WIDTH / 2 - 2 * SIZE, SIZE, SIZE);
      * 
      * 
-     * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2,
-     * SIZE, SIZE);
+     * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE / 2,
+     * SIZE, SIZE); g2.fillOval(x - SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE / 2,
+     * SIZE, SIZE); g2.fillOval(x - SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE /
+     * 2, SIZE, SIZE); g2.fillOval(x + SIZE / 2, y + WIDTH / 2 - 2 * SIZE - SIZE
+     * / 2, SIZE, SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 2 * SIZE - SIZE /
+     * 2, SIZE, SIZE); g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 2 * SIZE
+     * - SIZE / 2, SIZE, SIZE);
      * 
      * g2.setColor(ThemeService.getInstance().getThemeColor(3));
      * 
      * 
      * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
-     * g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE); g2.fillOval(x -
-     * SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE); g2.fillOval(x + SIZE + SIZE / 2,
-     * y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x - SIZE, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
+     * g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 3 * SIZE, SIZE, SIZE);
      * 
-     * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x - SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2, SIZE,
-     * SIZE); g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 3 * SIZE - SIZE / 2,
-     * SIZE, SIZE);
+     * g2.fillOval(x - SIZE - SIZE / 2, y + WIDTH / 2 - 3 * SIZE - SIZE / 2,
+     * SIZE, SIZE); g2.fillOval(x + SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2,
+     * SIZE, SIZE); g2.fillOval(x - SIZE, y + WIDTH / 2 - 3 * SIZE - SIZE / 2,
+     * SIZE, SIZE); g2.fillOval(x + SIZE + SIZE / 2, y + WIDTH / 2 - 3 * SIZE -
+     * SIZE / 2, SIZE, SIZE);
      * 
      * g2.fillOval(x - 2 * SIZE, y + WIDTH / 2 - 5 * SIZE, SIZE, SIZE);
      * g2.fillOval(x + 2 * SIZE, y + WIDTH / 2 - 5 * SIZE, SIZE, SIZE);

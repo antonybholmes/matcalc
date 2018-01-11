@@ -27,7 +27,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The class TicksInsidePlotControl.
  */
-public class TicksInsidePlotControl extends HBox implements ModernClickListener {
+public class TicksInsidePlotControl extends HBox
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -47,10 +48,8 @@ public class TicksInsidePlotControl extends HBox implements ModernClickListener 
   /**
    * Instantiates a new ticks inside plot control.
    *
-   * @param parent
-   *          the parent
-   * @param tick
-   *          the tick
+   * @param parent the parent
+   * @param tick the tick
    */
   public TicksInsidePlotControl(ModernWindow parent, TickProperties tick) {
     mTick = tick;
@@ -75,8 +74,8 @@ public class TicksInsidePlotControl extends HBox implements ModernClickListener 
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

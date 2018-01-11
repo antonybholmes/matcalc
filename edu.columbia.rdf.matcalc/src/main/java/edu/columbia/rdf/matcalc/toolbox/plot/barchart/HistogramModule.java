@@ -60,15 +60,17 @@ public class HistogramModule extends CalcModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
     mParent = window;
 
-    RibbonLargeButton button = new RibbonLargeButton("Histogram", UIService.getInstance().loadIcon("histogram", 24),
-        "Histogram", "Generate a histogram.");
+    RibbonLargeButton button = new RibbonLargeButton("Histogram",
+        UIService.getInstance().loadIcon("histogram", 24), "Histogram",
+        "Generate a histogram.");
     button.addClickListener(this);
     // button.setEnabled(false);
 
@@ -95,7 +97,8 @@ public class HistogramModule extends CalcModule implements ModernClickListener {
 
     XYSeries series = new XYSeries("Histogram", color);
 
-    series.getStyle().getFillStyle().setColor(ColorUtils.getTransparentColor50(color));
+    series.getStyle().getFillStyle()
+        .setColor(ColorUtils.getTransparentColor50(color));
     series.getStyle().getLineStyle().setColor(color);
 
     PlotFactory.createHistogram(m, axes, series, hist);
@@ -109,8 +112,8 @@ public class HistogramModule extends CalcModule implements ModernClickListener {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.modern
-   * .event.ModernClickEvent)
+   * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
+   * modern .event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

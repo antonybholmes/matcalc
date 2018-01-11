@@ -44,12 +44,14 @@ public class ViewModule extends CalcModule {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
   public void init(MainMatCalcWindow window) {
-    window.getRibbon().getToolbar("View").add(new WindowRibbonSection(window, window.getRibbon()));
+    window.getRibbon().getToolbar("View")
+        .add(new WindowRibbonSection(window, window.getRibbon()));
 
   }
 }

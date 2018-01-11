@@ -24,6 +24,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.apache.batik.transcoder.TranscoderException;
+import org.jebtk.bioinformatics.ui.groups.Group;
+import org.jebtk.bioinformatics.ui.groups.GroupsGuiFileFilter;
+import org.jebtk.bioinformatics.ui.groups.GroupsModel;
+import org.jebtk.bioinformatics.ui.groups.GroupsPanel;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.event.ChangeEvent;
@@ -32,10 +36,6 @@ import org.jebtk.core.geom.IntPos2D;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.text.Join;
-import org.jebtk.bioinformatics.ui.groups.Group;
-import org.jebtk.bioinformatics.ui.groups.GroupsGuiFileFilter;
-import org.jebtk.bioinformatics.ui.groups.GroupsModel;
-import org.jebtk.bioinformatics.ui.groups.GroupsPanel;
 import org.jebtk.graphplot.Image;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
@@ -94,7 +94,8 @@ import org.slf4j.LoggerFactory;
 /**
  * The Class MainVennWindow.
  */
-public class MainVennWindow extends ModernRibbonWindow implements ModernClickListener, ModernSelectionListener {
+public class MainVennWindow extends ModernRibbonWindow
+    implements ModernClickListener, ModernSelectionListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -108,7 +109,8 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
   // private ModernStatusBar mStatusBar = new ModernStatusBar();
 
   /** The Constant LOG. */
-  private static final Logger LOG = LoggerFactory.getLogger(MainVennWindow.class);
+  private static final Logger LOG = LoggerFactory
+      .getLogger(MainVennWindow.class);
 
   /** The m content pane. */
   private ModernHContentPane mContentPane = new ModernHContentPane();
@@ -151,10 +153,8 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
     /**
      * Instantiates a new export call back.
      *
-     * @param file
-     *          the file
-     * @param pwd
-     *          the pwd
+     * @param file the file
+     * @param pwd the pwd
      */
     public ExportCallBack(Path file, Path pwd) {
       mFile = file;
@@ -165,8 +165,8 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.
-     * dialog.DialogEvent)
+     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common
+     * .ui. dialog.DialogEvent)
      */
     @Override
     public void statusChanged(DialogEvent e) {
@@ -194,8 +194,8 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+     * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.
+     * ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -212,24 +212,28 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseClicked(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseClicked(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseClicked(CanvasMouseEvent e) {
       IntPos2D p = e.getScaledPos();
 
       boolean in1 = mVennCanvas.getP1() != null
-          ? Mathematics.getEuclidianD(mVennCanvas.getP1(), p) <= mVennCanvas.getR1()
+          ? Mathematics.getEuclidianD(mVennCanvas.getP1(), p) <= mVennCanvas
+              .getR1()
           : false;
       boolean in2 = mVennCanvas.getP2() != null
-          ? Mathematics.getEuclidianD(mVennCanvas.getP2(), p) <= mVennCanvas.getR2()
+          ? Mathematics.getEuclidianD(mVennCanvas.getP2(), p) <= mVennCanvas
+              .getR2()
           : false;
       boolean in3 = mVennCanvas.getP3() != null
-          ? Mathematics.getEuclidianD(mVennCanvas.getP3(), p) <= mVennCanvas.getR3()
+          ? Mathematics.getEuclidianD(mVennCanvas.getP3(), p) <= mVennCanvas
+              .getR3()
           : false;
 
-      // System.err.println(in1 + " " + in2 + " " + in3 + " " + mVennCanvas.getP1() +
+      // System.err.println(in1 + " " + in2 + " " + in3 + " " +
+      // mVennCanvas.getP1() +
       // " " + p + " " + mVennCanvas.getR2());
 
       List<String> lines = new ArrayList<String>();
@@ -237,40 +241,70 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
       if (in1 && in2 && in3) {
         lines.addAll(CollectionUtils.toString(mVennCanvas.getI123()));
 
-        mOverlapLabel.setText(
-            Join.onSpace().values("Values in", mGroupsModel.get(0).getName(), "and", mGroupsModel.get(1).getName(),
-                "and", mGroupsModel.get(2).getName(), "only (" + lines.size() + "):").toString());
+        mOverlapLabel.setText(Join.onSpace()
+            .values("Values in",
+                mGroupsModel.get(0).getName(),
+                "and",
+                mGroupsModel.get(1).getName(),
+                "and",
+                mGroupsModel.get(2).getName(),
+                "only (" + lines.size() + "):")
+            .toString());
       } else if (in1 && in2) {
         lines.addAll(CollectionUtils.toString(mVennCanvas.getI12()));
 
-        mOverlapLabel.setText(Join.onSpace().values("Values in", mGroupsModel.get(0).getName(), "and",
-            mGroupsModel.get(1).getName(), "only (" + lines.size() + "):").toString());
+        mOverlapLabel.setText(Join.onSpace()
+            .values("Values in",
+                mGroupsModel.get(0).getName(),
+                "and",
+                mGroupsModel.get(1).getName(),
+                "only (" + lines.size() + "):")
+            .toString());
 
       } else if (in1 && in3) {
         lines.addAll(CollectionUtils.toString(mVennCanvas.getI13()));
 
-        mOverlapLabel.setText(Join.onSpace().values("Values in", mGroupsModel.get(0).getName(), "and",
-            mGroupsModel.get(2).getName(), "only (" + lines.size() + "):").toString());
+        mOverlapLabel.setText(Join.onSpace()
+            .values("Values in",
+                mGroupsModel.get(0).getName(),
+                "and",
+                mGroupsModel.get(2).getName(),
+                "only (" + lines.size() + "):")
+            .toString());
       } else if (in2 && in3) {
         lines.addAll(CollectionUtils.toString(mVennCanvas.getI23()));
 
-        mOverlapLabel.setText(Join.onSpace().values("Values in", mGroupsModel.get(1).getName(), "and",
-            mGroupsModel.get(2).getName(), "only (" + lines.size() + "):").toString());
+        mOverlapLabel.setText(Join.onSpace()
+            .values("Values in",
+                mGroupsModel.get(1).getName(),
+                "and",
+                mGroupsModel.get(2).getName(),
+                "only (" + lines.size() + "):")
+            .toString());
       } else if (in1) {
         lines.addAll(CollectionUtils.toString(mVennCanvas.getI1()));
 
         mOverlapLabel.setText(Join.onSpace()
-            .values("Values in", mGroupsModel.get(0).getName(), "only (" + lines.size() + "):").toString());
+            .values("Values in",
+                mGroupsModel.get(0).getName(),
+                "only (" + lines.size() + "):")
+            .toString());
       } else if (in2) {
         lines.addAll(CollectionUtils.toString(mVennCanvas.getI2()));
 
         mOverlapLabel.setText(Join.onSpace()
-            .values("Values in", mGroupsModel.get(1).getName(), "only (" + lines.size() + "):").toString());
+            .values("Values in",
+                mGroupsModel.get(1).getName(),
+                "only (" + lines.size() + "):")
+            .toString());
       } else if (in3) {
         lines.addAll(CollectionUtils.toString(mVennCanvas.getI3()));
 
         mOverlapLabel.setText(Join.onSpace()
-            .values("Values in", mGroupsModel.get(2).getName(), "only (" + lines.size() + "):").toString());
+            .values("Values in",
+                mGroupsModel.get(2).getName(),
+                "only (" + lines.size() + "):")
+            .toString());
       } else {
         // Do nothing
       }
@@ -291,12 +325,9 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
   /**
    * Instantiates a new main venn window.
    *
-   * @param group1
-   *          the group 1
-   * @param group2
-   *          the group 2
-   * @param style
-   *          the style
+   * @param group1 the group 1
+   * @param group2 the group 2
+   * @param style the style
    */
   public MainVennWindow(Group group1, Group group2, CircleStyle style) {
     super(new VennInfo());
@@ -312,16 +343,13 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
   /**
    * Instantiates a new main venn window.
    *
-   * @param group1
-   *          the group 1
-   * @param group2
-   *          the group 2
-   * @param group3
-   *          the group 3
-   * @param style
-   *          the style
+   * @param group1 the group 1
+   * @param group2 the group 2
+   * @param group3 the group 3
+   * @param style the style
    */
-  public MainVennWindow(Group group1, Group group2, Group group3, CircleStyle style) {
+  public MainVennWindow(Group group1, Group group2, Group group3,
+      CircleStyle style) {
     super(new VennInfo());
 
     setup();
@@ -377,23 +405,27 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
     getRibbonMenu().addSeparator();
 
     ribbonMenuItem = new RibbonMenuItem(UI.MENU_INFO);
-    getRibbonMenu().addTabbedMenuItem(ribbonMenuItem, new RibbonPanelProductInfo(getAppInfo()));
+    getRibbonMenu().addTabbedMenuItem(ribbonMenuItem,
+        new RibbonPanelProductInfo(getAppInfo()));
 
     ribbonMenuItem = new RibbonMenuItem(UI.MENU_SETTINGS);
-    getRibbonMenu().addTabbedMenuItem(ribbonMenuItem, new ModernOptionsRibbonPanel(getAppInfo()));
+    getRibbonMenu().addTabbedMenuItem(ribbonMenuItem,
+        new ModernOptionsRibbonPanel(getAppInfo()));
 
     getRibbonMenu().addClickListener(this);
 
     // Ribbon2 ribbon = new Ribbon2();
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
-    ModernButtonWidget button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
+    ModernButtonWidget button = new QuickAccessButton(
+        UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage("Open");
     button.setToolTip(new ModernToolTip("Open", "Open a gene list."));
     button.addClickListener(this);
     addQuickAccessButton(button);
 
-    button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+    button = new QuickAccessButton(
+        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip(new ModernToolTip("Save", "Save the current gene list."));
     button.addClickListener(this);
@@ -401,9 +433,11 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
 
     // home
 
-    getRibbon().getHomeToolbar().addSection(new ClipboardRibbonSection(getRibbon()));
+    getRibbon().getHomeToolbar()
+        .addSection(new ClipboardRibbonSection(getRibbon()));
 
-    getRibbon().getHomeToolbar().addSection(new StyleRibbonSection(getRibbon(), mStyleModel));
+    getRibbon().getHomeToolbar()
+        .addSection(new StyleRibbonSection(getRibbon(), mStyleModel));
 
     /*
      * toolbarSection = new RibbonSection("Data");
@@ -474,7 +508,8 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
 
     // BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-    ModernScrollPane scrollPane1 = new ModernScrollPane(mVennCanvas).setScrollBarLocation(ScrollBarLocation.FLOATING);
+    ModernScrollPane scrollPane1 = new ModernScrollPane(mVennCanvas)
+        .setScrollBarLocation(ScrollBarLocation.FLOATING);
 
     ModernComponent panel = new ModernComponent();
 
@@ -482,15 +517,21 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
 
     ModernScrollPane scrollPane2 = new ModernScrollPane(mTextValues)
         .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-    panel.setBody(new ModernComponent(scrollPane1, BorderService.getInstance().createTopBorder(10)));
+    panel.setBody(new ModernComponent(scrollPane1,
+        BorderService.getInstance().createTopBorder(10)));
 
     ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
 
-    splitPane.addComponent(
-        new ModernComponent(new CardPanel(new ModernPanel(panel, ModernWidget.BORDER)), ModernWidget.DOUBLE_BORDER),
-        0.7);
-    splitPane.addComponent(new ModernComponent(new CardPanel(new ModernPanel(scrollPane2, ModernWidget.BORDER)),
-        ModernWidget.DOUBLE_BORDER), 0.3);
+    splitPane.addComponent(new ModernComponent(
+        new CardPanel(new ModernPanel(panel, ModernWidget.BORDER)),
+        ModernWidget.DOUBLE_BORDER), 0.7);
+    splitPane
+        .addComponent(
+            new ModernComponent(
+                new CardPanel(
+                    new ModernPanel(scrollPane2, ModernWidget.BORDER)),
+                ModernWidget.DOUBLE_BORDER),
+            0.3);
 
     // splitPane.setDividerLocation(600);
 
@@ -513,7 +554,8 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
       return;
     }
 
-    SizableContentPane sizePane = new SizableContentPane("Groups", mGroupsPanel, 300, 300, 500);
+    SizableContentPane sizePane = new SizableContentPane("Groups", mGroupsPanel,
+        300, 300, 500);
 
     mContentPane.getModel().addLeftTab(sizePane);
   }
@@ -526,21 +568,21 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
       return;
     }
 
-    mContentPane.getModel().getRightTabs()
-        .addTab(new SizableContentPane("Format Plot", new HTab("Format Plot", mFormatPane), 300, 200, 500));
+    mContentPane.getModel().getRightTabs().addTab(new SizableContentPane(
+        "Format Plot", new HTab("Format Plot", mFormatPane), 300, 200, 500));
 
   }
 
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
-    if (e.getMessage().equals(UI.MENU_OPEN) || e.getMessage().equals(UI.MENU_BROWSE)
+    if (e.getMessage().equals(UI.MENU_OPEN)
+        || e.getMessage().equals(UI.MENU_BROWSE)
         || e.getMessage().startsWith("Other...")) {
       try {
         browseForFile();
@@ -596,8 +638,7 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
   /**
    * Browse for file.
    *
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
   private void browseForFile() throws Exception {
     browseForFile(RecentFilesService.getInstance().getPwd());
@@ -606,22 +647,19 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
   /**
    * Browse for file.
    *
-   * @param workingDirectory
-   *          the working directory
-   * @throws Exception
-   *           the exception
+   * @param workingDirectory the working directory
+   * @throws Exception the exception
    */
   private void browseForFile(Path workingDirectory) throws Exception {
-    openFile(FileDialog.openFile(this, workingDirectory, new GroupsGuiFileFilter()));
+    openFile(
+        FileDialog.openFile(this, workingDirectory, new GroupsGuiFileFilter()));
   }
 
   /**
    * Open file.
    *
-   * @param file
-   *          the file
-   * @throws Exception
-   *           the exception
+   * @param file the file
+   * @throws Exception the exception
    */
   private void openFile(Path file) throws Exception {
     if (file == null) {
@@ -631,7 +669,8 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
     LOG.info("Open file {}...", file);
 
     if (!FileUtils.exists(file)) {
-      ModernMessageDialog.createFileDoesNotExistDialog(this, getAppInfo().getName(), file);
+      ModernMessageDialog
+          .createFileDoesNotExistDialog(this, getAppInfo().getName(), file);
 
       return;
     }
@@ -650,44 +689,42 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
   /**
    * Export.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void export() throws IOException, TranscoderException, TransformerException, ParserConfigurationException {
+  private void export() throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException {
     export(RecentFilesService.getInstance().getPwd());
   }
 
   /**
    * Export.
    *
-   * @param pwd
-   *          the pwd
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param pwd the pwd
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void export(Path pwd)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException {
-    Path file = FileDialog.saveFile(this, pwd, new SvgGuiFileFilter(), new PngGuiFileFilter(), new PdfGuiFileFilter(),
-        new JpgGuiFileFilter(), new GroupsGuiFileFilter());
+  private void export(Path pwd) throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException {
+    Path file = FileDialog.saveFile(this,
+        pwd,
+        new SvgGuiFileFilter(),
+        new PngGuiFileFilter(),
+        new PdfGuiFileFilter(),
+        new JpgGuiFileFilter(),
+        new GroupsGuiFileFilter());
 
     if (file == null) {
       return;
     }
 
     if (FileUtils.exists(file)) {
-      ModernMessageDialog.createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
+      ModernMessageDialog
+          .createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
     } else {
       save(file);
     }
@@ -696,19 +733,14 @@ public class MainVennWindow extends ModernRibbonWindow implements ModernClickLis
   /**
    * Save.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void save(Path file)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException {
+  private void save(Path file) throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException {
     if (file == null) {
       return;
     }

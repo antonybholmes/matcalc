@@ -40,14 +40,12 @@ public class PlotFigureTransform extends PlotMatrixTransform {
   /**
    * Instantiates a new volcano plot matrix transform.
    *
-   * @param parent
-   *          the parent
-   * @param inputMatrix
-   *          the input matrix
-   * @param figure
-   *          the canvas
+   * @param parent the parent
+   * @param inputMatrix the input matrix
+   * @param figure the canvas
    */
-  public PlotFigureTransform(ModernWindow parent, String name, DataFrame m, Figure figure) {
+  public PlotFigureTransform(ModernWindow parent, String name, DataFrame m,
+      Figure figure) {
     super(parent, name, m);
 
     mFigure = figure;

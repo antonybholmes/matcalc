@@ -27,7 +27,6 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.HExpandBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
 // TODO: Auto-generated Javadoc
@@ -58,23 +57,22 @@ public class TreeControl extends VBox {
   /**
    * The member spinner.
    *
-   * @param parent
-   *          the parent
-   * @param properties
-   *          the properties
-   * @param prefix
-   *          the prefix
+   * @param parent the parent
+   * @param properties the properties
+   * @param prefix the prefix
    */
   // private ModernCompactSpinner mSpinner =
   // new ModernCompactSpinner(1, 10, 3);
 
-  public TreeControl(ModernWindow parent, Properties properties, String prefix) {
+  public TreeControl(ModernWindow parent, Properties properties,
+      String prefix) {
     mPrefix = prefix;
     mProperties = properties;
 
     mSlider.setValue(properties.getAsInt(prefix + ".width"));
 
-    mCheckVisible = new ColoredPlotControl(parent, "Show", properties.getAsColor(prefix + ".color"),
+    mCheckVisible = new ColoredPlotControl(parent, "Show",
+        properties.getAsColor(prefix + ".color"),
         properties.getAsBool(prefix + ".visible"));
 
     add(mCheckVisible);
@@ -83,7 +81,8 @@ public class TreeControl extends VBox {
     Box box = VBox.create();
     box.add(new HExpandBox("Width", mSlider));
 
-    box.add(new CheckControl(parent, "Color leaves by group", properties, prefix + ".leaf.color"));
+    box.add(new CheckControl(parent, "Color leaves by group", properties,
+        prefix + ".leaf.color"));
 
     box.setBorder(BorderService.getInstance().createLeftBorder(10));
 
@@ -101,8 +100,10 @@ public class TreeControl extends VBox {
 
       @Override
       public void clicked(ModernClickEvent e) {
-        mProperties.setProperty(mPrefix + ".visible", mCheckVisible.isSelected());
-        mProperties.setProperty(mPrefix + ".color", mCheckVisible.getSelectedColor());
+        mProperties.setProperty(mPrefix + ".visible",
+            mCheckVisible.isSelected());
+        mProperties.setProperty(mPrefix + ".color",
+            mCheckVisible.getSelectedColor());
       }
     });
   }
