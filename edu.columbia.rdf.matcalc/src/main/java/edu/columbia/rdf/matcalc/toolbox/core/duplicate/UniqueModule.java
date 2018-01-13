@@ -78,8 +78,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
     mWindow = window;
 
     mCollapseButton.setToolTip(
-        new ModernToolTip("Unique", "Collapse rows on a column."),
-        mWindow.getRibbon().getToolTipModel());
+        new ModernToolTip("Unique", "Collapse rows on a column."));
 
     window.getRibbon().getToolbar("Transform").getSection("Duplicate")
         .add(mCollapseButton);

@@ -124,7 +124,7 @@ public class ImportDialog extends ModernDialogHelpWindow
    * @param isExcel the is excel
    */
   private final void createUi(boolean isExcel) {
-    // this.getContentPane().add(new JLabel("Change " +
+    // this.getWindowContentPanel().add(new JLabel("Change " +
     // getProductDetails().getProductName() + " settings", JLabel.LEFT),
     // BorderLayout.PAGE_START);
 

@@ -21,9 +21,9 @@ import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 import org.jebtk.modern.menu.ModernTwoLineMenuItem;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -61,7 +61,7 @@ public class PowerModule extends CalcModule implements ModernClickListener {
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu2 popup = new ModernPopupMenu2();
 
     popup.addMenuItem(
         new ModernTwoLineMenuItem("m^x", "Compute the xth power of each cell.",
@@ -74,7 +74,7 @@ public class PowerModule extends CalcModule implements ModernClickListener {
             UIService.getInstance().loadIcon("em", 24)));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton(
+    RibbonLargeDropDownButton2 button = new RibbonLargeDropDownButton2(
         UIService.getInstance().loadIcon("xy", 24), popup);
     button.setChangeText(false);
     button.setToolTip("Power", "Power functions.");

@@ -480,7 +480,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
     mHistoryPanel.addSelectionListener(this);
 
-    JComponent content = (JComponent) getContentPane();
+    JComponent content = (JComponent) getWindowContentPanel();
 
     content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
         KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK),

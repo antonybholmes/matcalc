@@ -55,11 +55,7 @@ public class GroupsPlotControl extends VBox {
    */
   private ModernTwoStateWidget mCheckGrid = new ModernCheckSwitch("Grid",
       false);
-
-  /** The m check legend. */
-  private ModernTwoStateWidget mCheckLegend = new ModernCheckSwitch("Legend",
-      true);
-
+  
   /**
    * The check border.
    */
@@ -108,11 +104,6 @@ public class GroupsPlotControl extends VBox {
     mGridColorButton = new ColorSwatchButton(parent, color);
     add(new HExpandBox(mCheckGrid, mGridColorButton));
 
-    add(UI.createVGap(5));
-    add(mCheckLegend);
-
-    mCheckLegend.setSelected(properties.getAsBool("plot.show-legend"));
-
     // mBorderColorButton = new ColorSwatchButton(parent, color);
     // box.add(new HExpandBox(mGheckBorder, mBorderColorButton));
     // box.setBorder(BorderService.getInstance().createLeftBorder(10));
@@ -133,7 +124,6 @@ public class GroupsPlotControl extends VBox {
     // mBorderColorButton.addClickListener(l);
     mCheckGrid.addClickListener(l);
     mGridColorButton.addClickListener(l);
-    mCheckLegend.addClickListener(l);
   }
 
   /**
@@ -215,14 +205,5 @@ public class GroupsPlotControl extends VBox {
    */
   public Color getBorderColor() {
     return mBorderColorButton.getSelectedColor();
-  }
-
-  /**
-   * Gets the show legend.
-   *
-   * @return the show legend
-   */
-  public Object getShowLegend() {
-    return mCheckLegend.isSelected();
   }
 }

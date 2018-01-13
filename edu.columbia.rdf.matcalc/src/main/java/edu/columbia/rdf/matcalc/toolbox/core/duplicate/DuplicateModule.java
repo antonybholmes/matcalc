@@ -72,8 +72,7 @@ public class DuplicateModule extends CalcModule implements ModernClickListener {
     mWindow = window;
 
     mDuplicateButton.setToolTip(
-        new ModernToolTip("Duplicate", "Duplicate rows."),
-        mWindow.getRibbon().getToolTipModel());
+        new ModernToolTip("Duplicate", "Duplicate rows."));
 
     window.getRibbon().getToolbar("Data").getSection("Tools")
         .add(mDuplicateButton);

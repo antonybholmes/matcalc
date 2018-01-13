@@ -23,9 +23,9 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.help.ModernMenuHelpItem;
-import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 import org.jebtk.modern.menu.ModernTwoLineMenuItem;
-import org.jebtk.modern.ribbon.RibbonLargeOptionalDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeOptionalDropDownButton2;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -90,7 +90,7 @@ public class LogModule extends CalcModule implements ModernClickListener {
      * ;
      */
 
-    ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu2 popup = new ModernPopupMenu2();
 
     popup.addMenuItem(
         new ModernTwoLineMenuItem("Log 2", "Log 2 tranform.", ICON));
@@ -106,7 +106,7 @@ public class LogModule extends CalcModule implements ModernClickListener {
             "matcalc.modules.math.log.url").setTextOffset(48));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeOptionalDropDownButton button = new RibbonLargeOptionalDropDownButton(
+    RibbonLargeOptionalDropDownButton2 button = new RibbonLargeOptionalDropDownButton2(
         "Log(m)", popup);
     button.setToolTip("Log", "Log transform a matrix.");
 
@@ -128,20 +128,16 @@ public class LogModule extends CalcModule implements ModernClickListener {
     if (e.getMessage().equals("Log 10")) {
       mWindow.addToHistory("log10",
           "log10",
-          log10(mWindow, mWindow.getCurrentMatrix(), 1)); // new
-                                                          // Log10MatrixTransform(this,
-                                                          // getCurrentMatrix(),
-                                                          // 1));
+          log10(mWindow, mWindow.getCurrentMatrix(), 1));
     } else if (e.getMessage().equals("Ln")) {
       mWindow
-          .addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1)); // new
-                                                                                 // NaturalLogMatrixTransform(this,
-                                                                                 // getCurrentMatrix(),
-                                                                                 // 1));
-    } else {
+          .addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1));
+    } else if (e.getMessage().equals("Log 2")) {
       mWindow.addToHistory("log2",
           "log2",
           log2(mWindow, mWindow.getCurrentMatrix(), 1));
+    } else {
+      // Do nothing
     }
   }
 

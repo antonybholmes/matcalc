@@ -80,8 +80,7 @@ public class SortColumnsByRowModule extends CalcModule
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."),
-        mWindow.getRibbon().getToolTipModel());
+    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."));
 
     window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
 

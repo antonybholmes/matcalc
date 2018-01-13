@@ -125,11 +125,6 @@ public class HeatMapPanel extends FormatPlotPane
    */
   protected ColoredPlotControl mColumnsElement;
 
-  /**
-   * The member check show legend.
-   */
-  protected ModernTwoStateWidget mCheckShowLegend = new ModernCheckSwitch(
-      "Legend", true);
 
   /** The m check show. */
   private ModernTwoStateWidget mCheckShow;
@@ -328,10 +323,16 @@ public class HeatMapPanel extends FormatPlotPane
     rightPanel.addTab(PlotConstants.LABEL_BLOCK_SIZE, box, true);
 
     box = VBox.create();
-    box.add(mCheckShowLegend);
-    box.add(ModernPanel.createVGap());
     mScaleElement = new ScaleControl(scaleModel);
     box.add(mScaleElement);
+    box.add(UI.createVGap(10));
+    box.add(new CheckControl(parent, "Legend", properties,
+        "plot.show-legend"));
+    box.add(new CheckControl(parent, "Color Bar", properties,
+        "plot.show-colorbar"));
+    box.add(new CheckControl(parent, "Summary", properties,
+        "plot.show-summary"));
+    
     box.setBorder(LARGE_BORDER);
     rightPanel.addTab(PlotConstants.LABEL_LEGEND, box, true);
 
@@ -437,7 +438,6 @@ public class HeatMapPanel extends FormatPlotPane
                                                    // ModernScrollPane(rightPanel).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER));
 
     mGroupsElement.addClickListener(this);
-    mCheckShowLegend.addClickListener(this);
     // standardizationChooser.addClickListener(this);
     // mIntensityElement.addClickListener(this);
     mColumnLabelPositionElement.addClickListener(this);
@@ -610,8 +610,6 @@ public class HeatMapPanel extends FormatPlotPane
 
     columnLabelProperties.position = mColumnLabelPositionElement.getPosition();
 
-    mProperties.updateProperty("plot.show-legend",
-        mGroupsElement.getShowLegend());
 
     mProperties.updateProperty("plot.grid-color",
         mGridElement.getSelectedColor());

@@ -53,6 +53,8 @@ public class HeatMapProperties extends Properties {
     setProperty("plot.show-outline-color", true);
     setProperty("plot.colormap", ColorMap.createBlueWhiteRedMap());
     setProperty("plot.show-legend", true);
+    setProperty("plot.show-colorbar", true);
+    setProperty("plot.show-summary", true);
     setProperty("plot.aspect-ratio", new AspectRatio());
     setProperty("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
     setProperty("plot.show-row-labels", true);

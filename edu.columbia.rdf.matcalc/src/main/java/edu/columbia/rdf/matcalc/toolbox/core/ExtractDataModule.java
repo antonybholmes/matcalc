@@ -34,9 +34,9 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.help.ModernMenuHelpItem;
-import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 import org.jebtk.modern.menu.ModernTwoLineMenuItem;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
@@ -63,7 +63,7 @@ public class ExtractDataModule extends CalcModule
   private MainMatCalcWindow mWindow;
 
   /** The m button. */
-  private ModernDropDownButton mButton;
+  private RibbonLargeDropDownButton2 mButton;
 
   /*
    * (non-Javadoc)
@@ -91,7 +91,7 @@ public class ExtractDataModule extends CalcModule
     // mMinExpButton.addClickListener(this);
     // mWindow.getRibbon().getToolbar("Bioinformatics").getSection("Expression").add(mMinExpButton);
 
-    ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu2 popup = new ModernPopupMenu2();
 
     popup.addMenuItem(new ModernTwoLineMenuItem("Numerical",
         "Extract numerical data from matrix.", ICON));
@@ -104,7 +104,7 @@ public class ExtractDataModule extends CalcModule
         new ModernMenuHelpItem("Help with extracting numbers or text...",
             "matcalc.data-extraction.help.url").setTextOffset(48));
 
-    mButton = new RibbonLargeDropDownButton("Extract", ICON, popup);
+    mButton = new RibbonLargeDropDownButton2("Extract", ICON, popup);
     mButton.setChangeText(false);
     mButton.setToolTip("Extract Data",
         "Extract numbers or text from a matrix.");

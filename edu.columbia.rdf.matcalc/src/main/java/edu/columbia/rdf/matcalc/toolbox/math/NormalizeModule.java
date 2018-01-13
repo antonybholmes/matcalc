@@ -20,9 +20,9 @@ import org.jebtk.modern.UIService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 import org.jebtk.modern.menu.ModernTwoLineMenuItem;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcWinModule;
@@ -56,7 +56,7 @@ public class NormalizeModule extends CalcWinModule
   public void init(MainMatCalcWindow window) {
     super.init(window);
 
-    ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu2 popup = new ModernPopupMenu2();
 
     popup.addMenuItem(new ModernTwoLineMenuItem("Normalize",
         "Normalize values between 0 and 1.",
@@ -68,7 +68,7 @@ public class NormalizeModule extends CalcWinModule
         "Median ratios.", UIService.getInstance().loadIcon("normalize", 32)));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton(
+    RibbonLargeDropDownButton2 button = new RibbonLargeDropDownButton2(
         "Normalize", UIService.getInstance().loadIcon("normalize", 32), popup);
     button.setChangeText(false);
     button.setToolTip("Normalize", "Normalization functions.");

@@ -78,8 +78,7 @@ public class SortModule extends CalcModule implements ModernClickListener {
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."),
-        mWindow.getRibbon().getToolTipModel());
+    mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."));
 
     window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
 

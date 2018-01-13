@@ -85,8 +85,7 @@ public class MatchModule extends CalcModule implements ModernClickListener {
 
     mMatchButton.setToolTip(
         new ModernToolTip("Match",
-            "Find matches between columns in two files."),
-        mWindow.getRibbon().getToolTipModel());
+            "Find matches between columns in two files."));
 
     window.getRibbon().getHomeToolbar().getSection("Search").add(mMatchButton);
 

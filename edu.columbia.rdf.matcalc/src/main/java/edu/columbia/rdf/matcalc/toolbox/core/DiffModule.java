@@ -83,8 +83,7 @@ public class DiffModule extends CalcModule implements ModernClickListener {
     mWindow = window;
 
     mDiffButton.setToolTip(
-        new ModernToolTip("Diff", "Find differences in a column."),
-        mWindow.getRibbon().getToolTipModel());
+        new ModernToolTip("Diff", "Find differences in a column."));
     mDiffButton.setClickMessage("Diff");
 
     window.getRibbon().getToolbar("Data").getSection("Match").add(mDiffButton);

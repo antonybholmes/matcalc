@@ -435,15 +435,20 @@ public class ClusterCanvas extends PlotBoxRow {
 
       rowBox.addChild(element);
       rowBox.addChild(emptyVBox);
+    }
+    
+    if (properties.getAsBool("plot.show-colorbar")) {
       element = new ColorBar(colorMap, min, max,
           new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
       rowBox.addChild(element);
-
       rowLabelsBox.addChild(emptyVBox);
     }
 
-    element = new MatrixSummaryPlotElement(matrix, history, aspectRatio, 400);
-    rowBox.addChild(element);
+    if (properties.getAsBool("plot.show-summary")) {
+      element = new MatrixSummaryPlotElement(matrix, history, aspectRatio, 400);
+      rowBox.addChild(element);
+      rowLabelsBox.addChild(emptyVBox);
+    }
 
     columnBox.addChild(rowBox);
 

@@ -79,8 +79,7 @@ public class SearchColumnModule extends CalcModule
     mWindow = window;
 
     mSearchButton.setToolTip(
-        new ModernToolTip("Search Column", "Search column for values."),
-        mWindow.getRibbon().getToolTipModel());
+        new ModernToolTip("Search Column", "Search column for values."));
 
     window.getRibbon().getHomeToolbar().getSection("Search").add(mSearchButton);
 

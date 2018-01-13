@@ -350,16 +350,20 @@ public class HeatMapCanvas extends PlotBoxRow {
           groups);
       rowBox.addChild(element);
       rowBox.addChild(emptyVBox);
+    }
+    
+    if ((boolean) properties.getProperty("plot.show-colorbar")) {
       element = new ColorBar(colorMap, min, max,
           new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
       rowBox.addChild(element);
-
       rowLabelsBox.addChild(emptyVBox);
     }
 
-    element = new MatrixSummaryPlotElement(matrix, history, aspectRatio, 400);
-
-    rowBox.addChild(element);
+    if ((boolean) properties.getProperty("plot.show-legend")) {
+      element = new MatrixSummaryPlotElement(matrix, history, aspectRatio, 400);
+      rowBox.addChild(element);
+      rowLabelsBox.addChild(emptyVBox);
+    }
 
     columnBox.addChild(rowBox);
 

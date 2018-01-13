@@ -44,8 +44,7 @@ public class PasteModule extends CalcModule implements ModernClickListener {
     button = new RibbonLargeButton(
         UIService.getInstance().loadIcon("paste_files", 24));
     button.setToolTip(
-        new ModernToolTip("Paste Files", "Paste multiple files column wise."),
-        ribbon.getToolTipModel());
+        new ModernToolTip("Paste Files", "Paste multiple files column wise."));
     button.addClickListener(this);
     ribbon.getToolbar("Data").getSection("Tools").add(button);
   }

@@ -42,9 +42,9 @@ import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.help.ModernMenuHelpItem;
 import org.jebtk.modern.io.FileDialog;
 import org.jebtk.modern.io.RecentFilesService;
-import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 import org.jebtk.modern.menu.ModernTwoLineMenuItem;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.OpenMode;
@@ -65,7 +65,7 @@ public class SplitModule extends CalcModule implements ModernClickListener {
       .loadIcon("split", 24);
 
   /** The m button. */
-  private ModernDropDownButton mButton;
+  private RibbonLargeDropDownButton2 mButton;
 
   /**
    * The member window.
@@ -93,7 +93,7 @@ public class SplitModule extends CalcModule implements ModernClickListener {
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu2 popup = new ModernPopupMenu2();
 
     popup.addMenuItem(new ModernTwoLineMenuItem("Split on column values",
         "Split matrix by grouping rows in a column.", ICON));
@@ -105,7 +105,7 @@ public class SplitModule extends CalcModule implements ModernClickListener {
     popup.addMenuItem(new ModernMenuHelpItem("Help with splitting a matrix...",
         "matcalc.split.help.url").setTextOffset(48));
 
-    mButton = new RibbonLargeDropDownButton("Split", ICON, popup);
+    mButton = new RibbonLargeDropDownButton2("Split", ICON, popup);
     mButton.setChangeText(false);
     mButton.setToolTip("Split", "Split matrix into sub-matrices.");
 

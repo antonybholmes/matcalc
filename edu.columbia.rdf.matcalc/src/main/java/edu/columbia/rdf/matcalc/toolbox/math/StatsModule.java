@@ -22,8 +22,8 @@ import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.menu.ModernIconMenuItem;
-import org.jebtk.modern.menu.ModernPopupMenu;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.menu.ModernPopupMenu2;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
@@ -61,7 +61,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
   public void init(MainMatCalcWindow window) {
     mWindow = window;
 
-    ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu2 popup = new ModernPopupMenu2();
 
     popup.addMenuItem(new ModernIconMenuItem("Matrix sum"));
     popup.addMenuItem(new ModernIconMenuItem("Matrix mean"));
@@ -74,7 +74,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
     popup.addMenuItem(new ModernIconMenuItem("Row modes"));
 
     // The default behaviour is to do a log2 transform.
-    RibbonLargeDropDownButton button = new RibbonLargeDropDownButton(
+    RibbonLargeDropDownButton2 button = new RibbonLargeDropDownButton2(
         "Statistics", popup);
     button.setChangeText(false);
     button.setToolTip("Statistics", "Statistical functions.");

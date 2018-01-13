@@ -85,8 +85,7 @@ public class FilterModule extends CalcModule implements ModernClickListener {
     mWindow = window;
 
     mFilterButton.setToolTip(
-        new ModernToolTip("Filter", "Filter rows in columns."),
-        mWindow.getRibbon().getToolTipModel());
+        new ModernToolTip("Filter", "Filter rows in columns."));
 
     window.getRibbon().getToolbar("Data").getSection("Filter")
         .add(mFilterButton);
