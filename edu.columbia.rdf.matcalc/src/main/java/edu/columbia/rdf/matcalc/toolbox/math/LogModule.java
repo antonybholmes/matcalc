@@ -125,6 +125,8 @@ public class LogModule extends CalcModule implements ModernClickListener {
    */
   @Override
   public void clicked(ModernClickEvent e) {
+    System.err.println("sdfdsf " + e.getMessage());
+    
     if (e.getMessage().equals("Log 10")) {
       mWindow.addToHistory("log10",
           "log10",
@@ -132,12 +134,10 @@ public class LogModule extends CalcModule implements ModernClickListener {
     } else if (e.getMessage().equals("Ln")) {
       mWindow
           .addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1));
-    } else if (e.getMessage().equals("Log 2")) {
+    } else {
       mWindow.addToHistory("log2",
           "log2",
           log2(mWindow, mWindow.getCurrentMatrix(), 1));
-    } else {
-      // Do nothing
     }
   }
 

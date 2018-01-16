@@ -199,7 +199,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 
     addWindowListener(new WindowWidgetFocusEvents(mOkButton));
 
-    setSize(640, 420);
+    setSize(640, 480);
 
     UI.centerWindowToScreen(this);
   }
