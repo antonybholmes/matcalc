@@ -34,7 +34,7 @@ import org.jebtk.modern.graphics.icons.FilterVectorIcon;
 import org.jebtk.modern.graphics.icons.Raster24Icon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.theme.ThemeService;
-import org.jebtk.modern.widget.tooltip.ModernToolTip;
+import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;

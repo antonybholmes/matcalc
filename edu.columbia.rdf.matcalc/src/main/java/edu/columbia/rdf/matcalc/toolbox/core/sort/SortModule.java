@@ -30,7 +30,7 @@ import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
-import org.jebtk.modern.widget.tooltip.ModernToolTip;
+import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
