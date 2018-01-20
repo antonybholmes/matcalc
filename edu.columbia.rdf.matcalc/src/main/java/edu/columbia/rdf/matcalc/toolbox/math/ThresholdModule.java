@@ -70,7 +70,7 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
         "Ensure each cell has a minimum value.",
         UIService.getInstance().loadIcon("min", 32)));
     popup.addMenuItem(new ModernTwoLineMenuItem("Min/Max",
-        "Threshold all values between maximum and maximum.",
+        "Threshold all values between min and max.",
         UIService.getInstance().loadIcon("min_max", 32)));
     popup.addMenuItem(
         new ModernTwoLineMenuItem("Min Shift", "Shift all values to be >= 0.",
