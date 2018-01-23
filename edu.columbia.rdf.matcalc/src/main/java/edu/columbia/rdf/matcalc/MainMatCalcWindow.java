@@ -89,11 +89,10 @@ import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.splitpane.ModernVSplitPaneLine;
 import org.jebtk.modern.table.ModernSpreadsheetBar;
+import org.jebtk.modern.tabs.BottomTabsPanel;
 import org.jebtk.modern.tabs.IconTabsFolderIcon;
-import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabPanel;
 import org.jebtk.modern.tabs.TabsModel;
-import org.jebtk.modern.tooltip.ModernToolTip;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.window.ModernWindow;
@@ -640,14 +639,14 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     ModernButtonWidget button = new QuickAccessButton(
         UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage("Open");
-    button.setToolTip(new ModernToolTip("Open", "Open an expression matrix."));
+    button.setToolTip("Open", "Open an expression matrix.");
     button.addClickListener(this);
     addQuickAccessButton(button);
 
     button = new QuickAccessButton(
         UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
-    button.setToolTip(new ModernToolTip("Save", "Save the current table."));
+    button.setToolTip("Save", "Save the current table.");
     button.addClickListener(this);
     addQuickAccessButton(button);
 
@@ -787,10 +786,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow
       } catch (TranscoderException e1) {
         e1.printStackTrace();
       }
-    } else if (e.getMessage().equals("Groups Pane")) {
-      // addGroupsPane();
-    } else if (e.getMessage().equals("History Pane")) {
-      addHistoryPane();
     } else if (e.getMessage().equals("z-score")) {
       addToHistory("z-score",
           "z-score",
@@ -1273,23 +1268,30 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * Creates the groups panel.
    */
   private void createGroupsPanel() {
-    // DataFrame m = getCurrentMatrix();
-
-    mColumnGroupsPanel = new ColumnGroupTreePanel(this);
+    if (getTabsPane().getModel().getRightTabs().containsTab("History")) {
+      return;
+    }
+    
+    mColumnGroupsPanel = new ColumnGroupTreePanel(this, "Columns");
     mRowGroupsPanel = new RowGroupTreePanel(this);
 
     TabsModel groupTabsModel = new TabsModel();
-    groupTabsModel.addTab("ROWS", mRowGroupsPanel);
-    groupTabsModel.addTab("COLUMNS", mColumnGroupsPanel);
+    groupTabsModel.addTab("Rows", mRowGroupsPanel);
+    groupTabsModel.addTab("Columns", mColumnGroupsPanel);
+    groupTabsModel.addTab("History", mHistoryPanel);
 
-    mGroupPanel = new SegmentTabsPanel(groupTabsModel, 80, 20);
+    mGroupPanel = new BottomTabsPanel(groupTabsModel, 70, 20);
+    
+    
 
     // Show the column groups by default
     groupTabsModel.changeTab(1);
+    
+    getTabsPane().getModel().addRightTab("History", mGroupPanel, 250, 200, 500);
 
     // addGroupsPane();
 
-    addHistoryPane();
+    //addHistoryPane();
   }
 
   /**

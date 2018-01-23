@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.Box;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -48,6 +47,7 @@ import org.jebtk.math.ui.matrix.AllMatrixGroupGuiFileFilter;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
+import org.jebtk.modern.contentpane.HTabToolbar;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -59,8 +59,6 @@ import org.jebtk.modern.graphics.icons.SaveBwVectorIcon;
 import org.jebtk.modern.io.AllGuiFilesFilter;
 import org.jebtk.modern.io.FileDialog;
 import org.jebtk.modern.io.RecentFilesService;
-import org.jebtk.modern.panel.HBox;
-import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.tree.ModernTree;
@@ -309,10 +307,10 @@ public class ColumnGroupTreePanel extends ModernComponent {
    *
    * @param parent the parent
    */
-  public ColumnGroupTreePanel(MainMatCalcWindow parent) {
+  public ColumnGroupTreePanel(MainMatCalcWindow parent, String title) {
     mParent = parent;
 
-    setup();
+    setup(title);
 
     // setGroups(matrix.getColumnGroups());
   }
@@ -329,8 +327,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * Setup.
    */
-  private void setup() {
-
+  private void setup(String title) {
     mTree.setDragEnabled(true);
 
     mTree.setNodeRenderer(new XYSeriesTreeNodeRenderer());
@@ -347,39 +344,21 @@ public class ColumnGroupTreePanel extends ModernComponent {
     setBody(scrollPane); // new ModernLineBorderPanel(new
                          // ModernComponent(scrollPane, BORDER)));
 
-    Box box = HBox.create();
+    HTabToolbar toolbar = new HTabToolbar(title);
 
     mLoadButton.setToolTip("Load groups", "Load groups from file.");
-    box.add(mLoadButton);
-
-    box.add(ModernPanel.createHGap());
-
-    // mImportButton.setToolTip("Import", "Import groups.");
-    // box.add(mImportButton);
-
-    // box.add(ModernPanel.createHGap());
-
+    toolbar.add(mLoadButton);
+    //toolbar.add(ModernPanel.createHGap());
     mSaveButton.setToolTip("Save groups", "Save groups to file.");
-    box.add(mSaveButton);
-
-    box.add(ModernPanel.createHGap());
-
+    toolbar.add(mSaveButton);
+    //toolbar.add(ModernPanel.createHGap());
     mAddButton.setToolTip("Add group", "Add a new group.");
-    box.add(mAddButton);
-
-    box.add(ModernPanel.createHGap());
-
+    toolbar.add(mAddButton);
+    //toolbar.add(ModernPanel.createHGap());
     mRemoveButton.setToolTip("Remove groups", "Remove selected groups.");
-    box.add(mRemoveButton);
-
-    // box.add(Box.createHorizontalGlue());
-    box.add(ModernPanel.createHGap());
-
-    // clearButton.setToolTip("Clear Groups", "Remove all groups.");
-    // box.add(clearButton);
-
-    box.setBorder(BOTTOM_BORDER);
-    setHeader(box);
+    toolbar.add(mRemoveButton);
+    
+    setHeader(toolbar);
 
     setBorder(BORDER);
 

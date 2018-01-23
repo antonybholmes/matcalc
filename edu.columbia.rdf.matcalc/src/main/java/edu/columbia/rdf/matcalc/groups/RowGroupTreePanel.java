@@ -25,6 +25,7 @@ import org.jebtk.core.tree.TreeRootNode;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.modern.text.ModernSubHeadingLabel;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
@@ -45,7 +46,7 @@ public class RowGroupTreePanel extends ColumnGroupTreePanel {
    * @param parent the parent
    */
   public RowGroupTreePanel(MainMatCalcWindow parent) {
-    super(parent);
+    super(parent, "Rows");
   }
 
   /*
