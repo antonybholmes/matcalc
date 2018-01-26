@@ -129,7 +129,7 @@ public class LogDialog extends ModernDialogHelpWindow
       mBaseField.setValue(base);
     }
 
-    setSize(420, 360);
+    setSize(420, 380);
 
     UI.centerWindowToScreen(this);
   }

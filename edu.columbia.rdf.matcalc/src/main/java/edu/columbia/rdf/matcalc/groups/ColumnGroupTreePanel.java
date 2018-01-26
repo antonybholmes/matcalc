@@ -47,7 +47,7 @@ import org.jebtk.math.ui.matrix.AllMatrixGroupGuiFileFilter;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
-import org.jebtk.modern.contentpane.HTabToolbar;
+import org.jebtk.modern.contentpane.VTabToolbar;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -344,7 +344,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
     setBody(scrollPane); // new ModernLineBorderPanel(new
                          // ModernComponent(scrollPane, BORDER)));
 
-    HTabToolbar toolbar = new HTabToolbar(title);
+    VTabToolbar toolbar = new VTabToolbar(title);
 
     mLoadButton.setToolTip("Load groups", "Load groups from file.");
     toolbar.add(mLoadButton);

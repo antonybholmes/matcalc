@@ -19,13 +19,13 @@ import org.jebtk.graphplot.icons.Graph2dStyleMultiIcon24;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.ModernScaleIcon;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 // TODO: Auto-generated Javadoc
 /**
  * The class Graph2dStyleRibbonButton.
  */
-public class Graph2dStyleRibbonButton extends RibbonLargeDropDownButton {
+public class Graph2dStyleRibbonButton extends RibbonLargeDropDownButton2 {
 
   /**
    * The constant serialVersionUID.

@@ -1274,10 +1274,23 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     
     mColumnGroupsPanel = new ColumnGroupTreePanel(this, "Columns");
     mRowGroupsPanel = new RowGroupTreePanel(this);
+    
+    ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
 
+    splitPane.addComponent(mRowGroupsPanel, 0.3);
+    splitPane.addComponent(mColumnGroupsPanel, 0.5);
+   
+
+    //TabsModel groupTabsModel = new TabsModel();
+    //groupTabsModel.addTab("Rows", mRowGroupsPanel);
+    //groupTabsModel.addTab("Columns", mColumnGroupsPanel);
+    
+    //SegmentTabsPanel tabsPanel = new SegmentTabsPanel(groupTabsModel, 60);
+    
+    //groupTabsModel.changeTab(1);
+    
     TabsModel groupTabsModel = new TabsModel();
-    groupTabsModel.addTab("Rows", mRowGroupsPanel);
-    groupTabsModel.addTab("Columns", mColumnGroupsPanel);
+    groupTabsModel.addTab("Labels", splitPane);
     groupTabsModel.addTab("History", mHistoryPanel);
 
     mGroupPanel = new BottomTabsPanel(groupTabsModel, 70, 20);
@@ -1285,7 +1298,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     
 
     // Show the column groups by default
-    groupTabsModel.changeTab(1);
+    groupTabsModel.changeTab(0);
     
     getTabsPane().getModel().addRightTab("History", mGroupPanel, 250, 200, 500);
 

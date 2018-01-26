@@ -29,13 +29,13 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.graphics.icons.Raster32Icon;
 import org.jebtk.modern.menu.ModernIconMenuItem;
-import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 
 // TODO: Auto-generated Javadoc
 /**
  * The class Graph2dStyleMenu.
  */
-public class Graph2dStyleMenu extends ModernPopupMenu {
+public class Graph2dStyleMenu extends ModernPopupMenu2 {
 
   /**
    * The constant serialVersionUID.
