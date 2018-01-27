@@ -299,8 +299,6 @@ public class SupervisedModule extends CalcModule
       boolean isLog2Data,
       boolean log2Data) {
 
-    System.err.println("aha " + allSeries.getCount());
-
     for (XYSeries s : allSeries) {
 
       // Make a new group from all the old groups
@@ -647,7 +645,7 @@ public class SupervisedModule extends CalcModule
       classifications.add(classification);
     }
 
-    String comparison = g1.getName() + "vs" + g2.getName() + " (p <= "
+    String comparison = g1.getName() + "_vs_" + g2.getName() + " (p <= "
         + classificationAlpha + ")";
 
     DataFrame classM = new DataFrame(zscoresM);

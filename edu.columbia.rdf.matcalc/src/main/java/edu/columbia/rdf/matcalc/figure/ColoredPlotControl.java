@@ -22,6 +22,7 @@ import javax.swing.Box;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.color.ColorSwatchButton;
+import org.jebtk.modern.graphics.color.ColorSwatchButton2;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.window.ModernWindow;
@@ -45,7 +46,7 @@ public class ColoredPlotControl extends HBox {
   /**
    * The member color button.
    */
-  private ColorSwatchButton mColorButton;
+  private ColorSwatchButton2 mColorButton;
 
   /**
    * Instantiates a new colored plot control.
@@ -71,7 +72,7 @@ public class ColoredPlotControl extends HBox {
     mCheckBox = new ModernCheckSwitch(name);
     mCheckBox.setSelected(selected);
 
-    mColorButton = new ColorSwatchButton(parent, color);
+    mColorButton = new ColorSwatchButton2(parent, color);
 
     add(mCheckBox);
     add(Box.createHorizontalGlue());

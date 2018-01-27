@@ -42,7 +42,7 @@ public abstract class FormatPlotPane extends ModernComponent {
   public FormatPlotPane() {
     setBody(new SegmentTabsPanel(mGroupTabsModel, 80, 20));
 
-    // setBorder(BORDER);
+    setBorder(BORDER);
   }
 
   /**

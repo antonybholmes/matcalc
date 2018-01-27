@@ -336,7 +336,7 @@ public class HeatMapPanel extends FormatPlotPane
     box.setBorder(LARGE_BORDER);
     rightPanel.addTab(PlotConstants.LABEL_LEGEND, box, true);
 
-    mGroupTabsModel.addTab("HEAT MAP", rightPanel);
+    mGroupTabsModel.addTab("Plot", rightPanel);
 
     // TEST
     // JScrollPane s = new JScrollPane(box);
@@ -370,7 +370,7 @@ public class HeatMapPanel extends FormatPlotPane
 
     rightPanel.addTab("Row Labels", box, true);
 
-    mGroupTabsModel.addTab("ROWS", rightPanel); // new
+    mGroupTabsModel.addTab("Rows", rightPanel); // new
                                                 // ModernScrollPane(rightPanel).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER));
 
     //
@@ -434,7 +434,7 @@ public class HeatMapPanel extends FormatPlotPane
 
     rightPanel.addTab("Groups", box, true);
 
-    mGroupTabsModel.addTab("COLUMNS", rightPanel); // new
+    mGroupTabsModel.addTab("Columns", rightPanel); // new
                                                    // ModernScrollPane(rightPanel).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER));
 
     mGroupsElement.addClickListener(this);

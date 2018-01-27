@@ -89,8 +89,8 @@ import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.splitpane.ModernVSplitPaneLine;
 import org.jebtk.modern.table.ModernSpreadsheetBar;
-import org.jebtk.modern.tabs.BottomTabsPanel;
 import org.jebtk.modern.tabs.IconTabsFolderIcon;
+import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabPanel;
 import org.jebtk.modern.tabs.TabsModel;
 import org.jebtk.modern.widget.ModernWidget;
@@ -1290,11 +1290,11 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     //groupTabsModel.changeTab(1);
     
     TabsModel groupTabsModel = new TabsModel();
-    groupTabsModel.addTab("Labels", splitPane);
+    groupTabsModel.addTab("Groups", splitPane);
     groupTabsModel.addTab("History", mHistoryPanel);
 
-    mGroupPanel = new BottomTabsPanel(groupTabsModel, 70, 20);
-    
+    mGroupPanel = new SegmentTabsPanel(groupTabsModel, 70, 5);
+    mGroupPanel.setBorder(ModernWidget.LEFT_RIGHT_BORDER);
     
 
     // Show the column groups by default
@@ -1779,10 +1779,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
   @Override
   public void setCard(Component c) {
-    getTabsPane().getModel()
-        .setCenterTab(new ModernComponent(
-            new Card(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)),
-            ModernWidget.BORDER));
+    //setCenterTab(new ModernBorderPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)));
+    
+    setCenterTab(new Card(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)));
   }
 
   /*
