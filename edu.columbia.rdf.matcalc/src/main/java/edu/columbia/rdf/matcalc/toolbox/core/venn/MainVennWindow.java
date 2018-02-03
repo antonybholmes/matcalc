@@ -55,7 +55,7 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.event.ModernSelectionListener;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
-import org.jebtk.modern.graphics.ModernCanvasMouseAdapter;
+import org.jebtk.modern.graphics.CanvasMouseAdapter;
 import org.jebtk.modern.graphics.icons.QuickOpenVectorIcon;
 import org.jebtk.modern.graphics.icons.QuickSaveVectorIcon;
 import org.jebtk.modern.help.ModernAboutDialog;
@@ -206,7 +206,7 @@ public class MainVennWindow extends ModernRibbonWindow
   /**
    * The Class MouseEvents.
    */
-  private class MouseEvents extends ModernCanvasMouseAdapter {
+  private class MouseEvents extends CanvasMouseAdapter {
 
     /*
      * (non-Javadoc)
