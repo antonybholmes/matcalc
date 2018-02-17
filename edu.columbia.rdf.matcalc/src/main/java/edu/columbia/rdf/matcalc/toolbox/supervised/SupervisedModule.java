@@ -17,6 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.supervised;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,11 @@ import java.util.Set;
 
 import org.jebtk.core.Indexed;
 import org.jebtk.core.IndexedInt;
+import org.jebtk.core.cli.CommandLineArg;
+import org.jebtk.core.cli.CommandLineArgs;
+import org.jebtk.core.cli.Options;
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.sys.SysUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroup;
@@ -37,6 +42,7 @@ import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.MathUtils;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrix;
+import org.jebtk.math.matrix.DoubleMatrixParser;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
@@ -47,6 +53,8 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.Raster32Icon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.columbia.rdf.matcalc.History;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -62,12 +70,15 @@ import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
  * The class OneWayAnovaModule.
  */
 public class SupervisedModule extends CalcModule
-    implements ModernClickListener {
+implements ModernClickListener {
 
   /**
    * The member parent.
    */
   private MainMatCalcWindow mParent;
+
+  private static final Logger LOG = LoggerFactory
+      .getLogger(SupervisedModule.class);
 
   /*
    * (non-Javadoc)
@@ -77,6 +88,120 @@ public class SupervisedModule extends CalcModule
   @Override
   public String getName() {
     return "Supervised";
+  }
+
+  @Override
+  public void run(String... args) throws IOException {
+    String mode = "ttest";
+    Path file = null;
+    Path groupFile = null;
+    String prefix = TextUtils.EMPTY_STRING;
+
+    double alpha = 1;
+    double classificationAlpha = 0.05;
+    int topGenes = -1;
+    double minFold = 0;
+    double minZ = 0;
+    boolean posZ = true;
+    boolean negZ = true;
+    TestType test = TestType.TTEST_UNEQUAL_VARIANCE;
+    FDRType fdrType = FDRType.BENJAMINI_HOCHBERG;
+    boolean isLog2Data = true;
+
+    Options options = new Options()
+        .add('f', "file", true)
+        .add('m', "mode", true)
+        .add('g', "group-file", true)
+        .add('p', "prefix", true);
+
+    CommandLineArgs cmdArgs = CommandLineArgs.parse(options, args);
+
+
+    for (CommandLineArg cmdArg : cmdArgs) {
+      switch (cmdArg.getShortName()) {
+      case 'f':
+        file = PathUtils.getPath(cmdArg.getValue());
+      case 'm':
+        mode = cmdArg.getValue();
+        break;
+      case 'g':
+        groupFile = PathUtils.getPath(cmdArg.getValue());
+      case 'p':
+        prefix = cmdArg.getValue();
+      }
+    }
+
+    String name = PathUtils.getNameNoExt(file);
+
+    Path dir = PathUtils.getDir(file);
+
+    DataFrame m = new DoubleMatrixParser(true, TextUtils.EMPTY_LIST, 1, TextUtils.TAB_DELIMITER)
+        .parse(file);
+
+    List<XYSeries> groups = XYSeries.loadJson(groupFile);
+
+    if (mode.equals("ttest")) {
+      cliTTest(name,
+          m,
+          groups,
+          alpha,
+          classificationAlpha,
+          topGenes,
+          minFold,
+          minZ,
+          posZ,
+          negZ,
+          test,
+          fdrType,
+          isLog2Data,
+          prefix,
+          dir);
+    }
+  }
+
+  private static void cliTTest(String name,
+      DataFrame m,
+      List<XYSeries> groups,
+      double alpha,
+      double classificationAlpha,
+      int topGenes,
+      double minFold,
+      double minZ,
+      boolean posZ,
+      boolean negZ,
+      TestType test,
+      FDRType fdrType,
+      boolean isLog2Data,
+      String prefix,
+      Path dir) throws IOException {
+    for (int i = 0; i < groups.size(); ++i) {
+      XYSeries g1 = groups.get(i);
+
+      for (int j = i + 1; j < groups.size(); ++j) {
+        XYSeries g2 = groups.get(j);
+
+        Path out = dir.resolve(name + "_" + prefix + "_" + g1.getName().toLowerCase() + "_" + g2.getName().toLowerCase() + "_ttest.txt");
+
+        LOG.info("Writing {}...", out);
+
+        DataFrame ret = ttest(m,
+            alpha,
+            classificationAlpha,
+            minFold,
+            minZ,
+            posZ,
+            negZ,
+            topGenes,
+            test,
+            fdrType,
+            g1,
+            g2,
+            isLog2Data);
+
+
+        DataFrame.writeDataFrame(ret, out);
+      }
+    }
   }
 
   /*
@@ -96,7 +221,7 @@ public class SupervisedModule extends CalcModule
     button.addClickListener(this);
 
     mParent.getRibbon().getToolbar("Classification").getSection("Classifier")
-        .add(button);
+    .add(button);
   }
 
   /*
@@ -312,7 +437,7 @@ public class SupervisedModule extends CalcModule
       for (XYSeries st : allSeries) {
         if (!st.equals(s)) {
           buffer
-              .append(TextUtils.sentenceCase(TextUtils.head(st.getName(), 5)));
+          .append(TextUtils.sentenceCase(TextUtils.head(st.getName(), 5)));
         }
       }
 
@@ -668,7 +793,7 @@ public class SupervisedModule extends CalcModule
           .subList(zscoresIndexed, MathUtils.ge(zscoresIndexed, minZ)));
     } else {
       posZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
-                                            // Double>>();
+      // Double>>();
     }
 
     List<Indexed<Integer, Double>> negZScores;
@@ -678,7 +803,7 @@ public class SupervisedModule extends CalcModule
           MathUtils.lt(zscoresIndexed, -minZ)));
     } else {
       negZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
-                                            // Double>>();
+      // Double>>();
     }
 
     // Filter for top genes if necessary
@@ -739,6 +864,264 @@ public class SupervisedModule extends CalcModule
     mParent.addToHistory("Results", mDeltaSorted);
   }
 
+
+
+  public static DataFrame ttest(DataFrame m,
+      double alpha,
+      double classificationAlpha,
+      double minFold,
+      double minZ,
+      boolean posZ,
+      boolean negZ,
+      int topGenes,
+      TestType test,
+      FDRType fdrType,
+      XYSeries g1,
+      XYSeries g2,
+      boolean isLog2Data) {
+
+    XYSeriesGroup comparisonGroups = new XYSeriesGroup();
+    comparisonGroups.add(g1);
+    comparisonGroups.add(g2);
+
+    // DataFrame colFilteredM =
+    // history.addToHistory("Extract grouped columns",
+    // AnnotatableMatrix.copyInnerColumns(m, comparisonGroups));
+
+    //
+    // Remove bad gene symbols
+    //
+
+    // DataFrame mCleaned = AnnotatableMatrix.copyRows(mColumnFiltered,
+    // rowAnnotationName,
+    // "^---$",
+    // false);
+
+    // history.addToHistory("Filter Bad Gene Symbols", mCleaned);
+
+    //
+    // P-values
+    //
+
+    List<Double> pValues = getP(m, g1, g2, test);
+
+    DataFrame pValuesM = new DataFrame(m);
+
+    pValuesM.setNumRowAnnotations("P-value", pValues);
+
+    //System.err.println("p " + pValues);
+    // System.err.println("p2 " +
+    // Arrays.toString(pValuesM.getRowAnnotationValues("P-value")));
+
+    // Set the p-values of genes with bad names to NaN so they can be
+    // excluded from analysis
+    // DataFrame.setAnnotation(mpvalues,
+    // "P-value",
+    // DataFrame.matchRows(mpvalues, rowAnnotation, BLANK_ROW_REGEX),
+    // Double.NaN);
+
+    //
+    // Fold Changes
+    //
+
+    List<Double> foldChanges;
+
+    if (isLog2Data) {
+      foldChanges = DoubleMatrix.logFoldChange(pValuesM, g1, g2);
+    } else {
+      foldChanges = DoubleMatrix.foldChange(pValuesM, g1, g2);
+    }
+
+    // filter by fold changes
+    // filter by fdr
+
+    DataFrame foldChangesM = new DataFrame(pValuesM);
+
+    foldChangesM.setNumRowAnnotations(isLog2Data ? "Log2 Fold Change" : "Fold Change", foldChanges);
+
+    //
+    // Group means
+    //
+
+    DataFrame meansM = new DataFrame(foldChangesM);
+
+    meansM.setNumRowAnnotations(g1.getName() + " mean",
+        DoubleMatrix.means(foldChangesM, g1));
+    meansM.setNumRowAnnotations(g2.getName() + " mean",
+        DoubleMatrix.means(foldChangesM, g2));
+
+    //
+    // Fold change filter
+    //
+
+    double posMinFold = minFold;
+    double negMinFold = posMinFold;
+
+    if (minFold > 0) {
+      if (isLog2Data) {
+        negMinFold = -negMinFold;
+      } else {
+        negMinFold = 1.0 / negMinFold;
+      }
+    }
+
+    List<Indexed<Integer, Double>> pFoldIndices = Statistics
+        .outOfRange(foldChanges, negMinFold, posMinFold);
+
+    DataFrame foldFilterM = DataFrame.copyRows(meansM,
+        IndexedInt.indices(pFoldIndices));
+
+    //
+    // Collapse rows
+    //
+
+    // DataFrame collapsedM = CollapseModule.collapse(foldFilterM,
+    // rowAnnotation,
+    // g1,
+    // g2,
+    // collapseType,
+    // mParent);
+
+    double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"),
+        fdrType);
+
+    DataFrame mfdr = new DataFrame(foldFilterM);
+    mfdr.setNumRowAnnotations("FDR", fdr);
+
+    // DataFrame mfdr = addFlowItem("False discovery rate",
+    // new RowDataFrameView(mcollapsed,
+    // "FDR",
+    // ArrayUtils.toObjects(fdr)));
+
+    // filter by fdr
+    List<Indexed<Integer, Double>> pValueIndices = Statistics.threshold(fdr,
+        alpha);
+
+    DataFrame fdrFilteredM = DataFrame.copyRows(mfdr,
+        IndexedInt.indices(pValueIndices));
+    // DataFrame mfdrfiltered = addFlowItem("False discovery filter",
+    // new RowFilterMatrixView(mfdr,
+    // IndexedValueInt.indices(pValueIndices)));
+
+    List<Double> zscores = DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
+
+    DataFrame zscoresM = new DataFrame(fdrFilteredM);
+
+    zscoresM.setNumRowAnnotations("Z-score", zscores);
+
+    // DataFrame mzscores = addFlowItem("Add row z-scores",
+    // new RowDataFrameView(mfdrfiltered,
+    // "Z-score",
+    // ArrayUtils.toObjects(zscores)));
+
+    // Lets give a default classification to each row based on a p-value of 0.05
+    // and
+    // a zscore > 1
+
+    List<String> classifications = new ArrayList<String>();
+
+    Matrix im = zscoresM.getMatrix();
+
+    for (int i = 0; i < im.getRows(); ++i) {
+      String classification = "not_expressed";
+
+      if (MatrixOperations.sumRow(im, i) > 0) {
+        classification = "not_moving";
+      }
+
+      double zscore = zscoresM.getRowAnnotationValue("Z-score", i);
+      double p = zscoresM.getRowAnnotationValue("FDR", i);
+
+      // if (p <= 0.05) {
+      if (p <= classificationAlpha) {
+        if (zscore > 0) {
+          classification = "up";
+        } else if (zscore < 0) {
+          classification = "down";
+        } else {
+          // do nothing
+        }
+      }
+
+      classifications.add(classification);
+    }
+
+    String comparison = g1.getName() + "_vs_" + g2.getName() + " (p <= "
+        + classificationAlpha + ")";
+
+    DataFrame classM = new DataFrame(zscoresM);
+
+    classM.setTextRowAnnotations(comparison, classifications);
+
+    // DataFrame mclassification = addFlowItem("Add row classification",
+    // new RowDataFrameView(mzscores,
+    // comparison,
+    // ArrayUtils.toObjects(classifications)));
+
+    List<Indexed<Integer, Double>> zscoresIndexed = IndexedInt.index(zscores);
+
+    List<Indexed<Integer, Double>> posZScores;
+
+    if (posZ) {
+      posZScores = CollectionUtils.reverseSort(CollectionUtils
+          .subList(zscoresIndexed, MathUtils.ge(zscoresIndexed, minZ)));
+    } else {
+      posZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
+      // Double>>();
+    }
+
+    List<Indexed<Integer, Double>> negZScores;
+
+    if (negZ) {
+      negZScores = CollectionUtils.sort(CollectionUtils.subList(zscoresIndexed,
+          MathUtils.lt(zscoresIndexed, -minZ)));
+    } else {
+      negZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
+      // Double>>();
+    }
+
+    // Filter for top genes if necessary
+
+    List<Integer> ui = Indexed.indices(posZScores);
+    List<Integer> li = Indexed.indices(negZScores);
+
+    if (topGenes != -1) {
+      ui = CollectionUtils.head(ui, topGenes);
+      li = CollectionUtils.head(li, topGenes);
+    }
+
+    // Now make a list of the new zscores in the correct order,
+    // positive decreasing, negative, decreasing
+    // List<IndexedValue<Integer, Double>> sortedZscores =
+    // CollectionUtils.append(posZScores, negZScores);
+
+    // Put the zscores in order
+
+    List<Integer> indices = CollectionUtils.append(ui, li); // IndexedValue.indices(sortedZscores);
+
+    DataFrame mDeltaSorted = DataFrame.copyRows(classM, indices);
+
+    // DataFrame mDeltaSorted = addFlowItem("Sort by row z-score",
+    // new RowFilterMatrixView(mclassification, indices));
+
+    DataFrame mNormalized = MatrixOperations.groupZScore(mDeltaSorted,
+        comparisonGroups);
+
+    // DataFrame mNormalized = addFlowItem("Normalize expression within groups",
+    // new GroupZScoreMatrixView(mDeltaSorted, groups));
+
+    // DataFrame mMinMax = addFlowItem("Min/max threshold",
+    // "min: " + Plot.MIN_STD + ", max: "+ Plot.MAX_STD,
+    // new MinMaxBoundedMatrixView(mNormalized,
+    // Plot.MIN_STD,
+    // Plot.MAX_STD));
+
+    // DataFrame mStandardized =
+    // addFlowItem("Row normalize", new RowNormalizedMatrixView(mMinMax));
+
+    return mDeltaSorted;
+  }
+
   public static List<Double> getP(DataFrame m,
       XYSeries g1,
       XYSeries g2,
@@ -751,7 +1134,7 @@ public class SupervisedModule extends CalcModule
       break;
     default:
       pValues = MatrixOperations
-          .tTest(m, g1, g2, test == TestType.TTEST_EQUAL_VARIANCE);
+      .tTest(m, g1, g2, test == TestType.TTEST_EQUAL_VARIANCE);
     }
 
     return pValues;

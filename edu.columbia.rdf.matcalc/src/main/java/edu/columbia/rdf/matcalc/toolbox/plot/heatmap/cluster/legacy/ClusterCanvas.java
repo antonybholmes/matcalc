@@ -175,7 +175,6 @@ public class ClusterCanvas extends PlotBoxRow {
     int treeWidthV = properties.getAsInt("plot.tree.vert.width");
     boolean treeVisV = properties.getAsBool("plot.tree.vert.visible");
 
-    System.err.println("dsdsd " + rowLabelProperties.showFeatureCounts);
 
     if (rowLabelProperties.showFeatureCounts
         && rowLabelProperties.position == RowLabelPosition.RIGHT

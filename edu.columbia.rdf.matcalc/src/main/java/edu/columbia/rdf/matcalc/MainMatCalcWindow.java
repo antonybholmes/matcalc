@@ -554,8 +554,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * @param module the module
    * @param args the args
    * @return true, if successful
+   * @throws IOException 
    */
-  public boolean runModule(String module, String... args) {
+  public boolean runModule(String module, String... args) throws IOException {
     System.err.println("run module " + module + " " + args);
 
     if (mModuleMap.containsKey(module)) {

@@ -467,35 +467,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  protected synchronized void loadJson(Path file)
-      throws ParseException, IOException {
-    Json json = new JsonParser().parse(file);
-
-    List<XYSeries> groups = new ArrayList<XYSeries>();
-
-    for (Json group : json) {
-      String name = group.getAsString("name");
-      Color color = group.getAsColor("color");
-
-      boolean caseSensitive = false;
-
-      if (group.containsKey("case-sensitive")) {
-        caseSensitive = group.getAsBool("case-sensitive");
-      }
-
-      List<String> regexes = new ArrayList<String>();
-
-      for (Json search : group.get("searches")) {
-        regexes.add(search.getAsString());
-      }
-
-      // System.err.println("case " + caseSensitive);
-
-      groups.add(new XYSeries(name, RegexUtils.compile(regexes), caseSensitive,
-          color));
-    }
-
-    addGroups(groups);
+  protected synchronized void loadJson(Path file) throws IOException {
+    addGroups(XYSeries.loadJson(file));
   }
 
   /**

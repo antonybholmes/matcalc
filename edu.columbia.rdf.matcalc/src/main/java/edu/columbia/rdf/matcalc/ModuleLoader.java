@@ -148,11 +148,13 @@ public class ModuleLoader {
    * @param c the c
    * @return the module loader
    */
-  public ModuleLoader addModule(Class<? extends Module> c) {
+  public ModuleLoader addModule(Class<? extends Module> m) {
     // PluginService.getInstance().addPlugin(c);
 
-    mModulesList.add(c);
+    mModulesList.add(m);
 
+    ModuleService.getInstance().add(m);
+    
     return this;
   }
 

@@ -15,6 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -62,6 +63,7 @@ public abstract class Module extends FileModule
    * Should run itself.
    *
    * @param args the args
+   * @throws IOException 
    */
-  public abstract void run(String... args);
+  public abstract void run(String... args) throws IOException;
 }

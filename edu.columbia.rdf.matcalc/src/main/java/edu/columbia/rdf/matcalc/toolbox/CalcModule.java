@@ -15,6 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.jebtk.core.collections.CollectionUtils;
@@ -67,7 +68,7 @@ public abstract class CalcModule extends Module {
    * @see edu.columbia.rdf.apps.matcalc.modules.Module#run(java.lang.String[])
    */
   @Override
-  public void run(String... args) {
+  public void run(String... args) throws IOException {
     // Do nothing
   }
 

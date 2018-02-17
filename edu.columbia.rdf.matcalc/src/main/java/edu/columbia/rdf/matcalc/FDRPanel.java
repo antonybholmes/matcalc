@@ -65,8 +65,7 @@ public class FDRPanel extends VBox {
   /**
    * The member check p.
    */
-  private ModernTwoStateWidget mCheckP = new ModernCheckSwitch(
-      "Maximum p-value");
+  private ModernTwoStateWidget mCheckP = new ModernCheckSwitch("Maximum p-value");
 
   /**
    * Instantiates a new FDR panel.
