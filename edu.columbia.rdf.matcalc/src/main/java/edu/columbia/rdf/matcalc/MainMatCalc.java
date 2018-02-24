@@ -41,7 +41,7 @@ public class MainMatCalc {
    * @throws UnsupportedLookAndFeelException the unsupported look and feel
    *           exception
    */
-  private static void setup(ModuleLoader moduleLoader)
+  private static void setup(BasicModuleLoader moduleLoader)
       throws ClassNotFoundException, InstantiationException,
       IllegalAccessException, FontFormatException, IOException,
       UnsupportedLookAndFeelException {
@@ -61,7 +61,7 @@ public class MainMatCalc {
    * @throws UnsupportedLookAndFeelException the unsupported look and feel
    *           exception
    */
-  public static MainMatCalcWindow main(ModuleLoader moduleLoader)
+  public static MainMatCalcWindow main(BasicModuleLoader moduleLoader)
       throws ClassNotFoundException, InstantiationException,
       IllegalAccessException, FontFormatException, IOException,
       UnsupportedLookAndFeelException {
@@ -83,7 +83,7 @@ public class MainMatCalc {
    *           exception
    */
   public static MainMatCalcWindow main(GuiAppInfo appInfo,
-      ModuleLoader moduleLoader) throws ClassNotFoundException,
+      BasicModuleLoader moduleLoader) throws ClassNotFoundException,
       InstantiationException, IllegalAccessException, FontFormatException,
       IOException, UnsupportedLookAndFeelException {
     setup(moduleLoader);
@@ -94,6 +94,8 @@ public class MainMatCalc {
 
     return window;
   }
+  
+  
 
   /**
    * Main.
@@ -111,7 +113,7 @@ public class MainMatCalc {
    *           exception
    */
   public static MainMatCalcWindow main(GuiAppInfo appInfo,
-      ModuleLoader moduleLoader,
+      BasicModuleLoader moduleLoader,
       DataFrame m) throws ClassNotFoundException, InstantiationException,
       IllegalAccessException, FontFormatException, IOException,
       UnsupportedLookAndFeelException {
@@ -120,6 +122,35 @@ public class MainMatCalc {
     setup(moduleLoader);
 
     MainMatCalcWindow window = new MainMatCalcWindow(appInfo, m);
+
+    window.setVisible(true);
+
+    return window;
+  }
+  
+  public static MainMatCalcWindow main(GuiAppInfo appInfo,
+      BasicModuleLoader moduleLoader,
+      MatCalcProperties props) throws ClassNotFoundException, InstantiationException,
+      IllegalAccessException, FontFormatException, IOException,
+      UnsupportedLookAndFeelException {
+    // AppService.getInstance().setAppName("matcalc");
+
+    setup(moduleLoader);
+
+    MainMatCalcWindow window = new MainMatCalcWindow(appInfo, props);
+
+    window.setVisible(true);
+
+    return window;
+  }
+  
+  public static MainMatCalcWindow main(GuiAppInfo appInfo,
+      MatCalcProperties props) throws ClassNotFoundException, InstantiationException,
+      IllegalAccessException, FontFormatException, IOException,
+      UnsupportedLookAndFeelException {
+    // AppService.getInstance().setAppName("matcalc");
+
+    MainMatCalcWindow window = new MainMatCalcWindow(appInfo, props);
 
     window.setVisible(true);
 

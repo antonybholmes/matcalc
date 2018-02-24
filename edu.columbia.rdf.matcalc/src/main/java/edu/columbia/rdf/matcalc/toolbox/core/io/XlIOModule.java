@@ -26,6 +26,7 @@ import org.jebtk.modern.dialog.ModernDialogStatus;
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
+import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,7 +34,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  *
  * @author Antony Holmes Holmes
  */
-public abstract class XlIOModule extends IOModule {
+public abstract class XlIOModule extends CalcModule {
 
   /*
    * (non-Javadoc)
@@ -70,4 +71,9 @@ public abstract class XlIOModule extends IOModule {
         delimiter,
         skipLines);
   }
+  
+  //@Override
+  //public boolean showIOFilterUI() {
+  //  return false;
+  //}
 }

@@ -18,7 +18,7 @@ import org.jebtk.math.external.microsoft.XLSXMetaData;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.io.RecentFilesService;
 
-import edu.columbia.rdf.matcalc.toolbox.FileModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The Class OpenFile.
@@ -130,9 +130,11 @@ public class OpenFile {
       } else {
         String ext = PathUtils.getFileExt(file);
 
-        FileModule module = mWindow.getFileModule(ext);
+        List<Module> modules = mWindow.getFileModules(ext);
 
-        if (module != null) {
+        for (Module module : modules) {
+          System.err.println("sdsdf " + module.getName() + " " + ext);
+
           DataFrame m = module.openFile(mWindow,
               file,
               mFileType,
@@ -141,11 +143,15 @@ public class OpenFile {
               mDelimiter,
               mSkipLines);
 
-          mWindow.openMatrix(file, m);
+          if (m != null) {
+            mWindow.openMatrix(file, m);
 
-          RecentFilesService.getInstance().add(file);
+            RecentFilesService.getInstance().add(file);
 
-          status |= true;
+            status |= true;
+
+            break;
+          }
         }
       }
     }
@@ -176,9 +182,9 @@ public class OpenFile {
       } else {
         String ext = PathUtils.getFileExt(file);
 
-        FileModule module = mWindow.mOpenFileModuleMap.get(ext);
+        List<Module> modules = mWindow.mOpenFileModuleMap.get(ext);
 
-        if (module != null) {
+        for (Module module : modules) {
           DataFrame m = module.autoOpenFile(mWindow,
               file,
               mFileType,
@@ -187,9 +193,13 @@ public class OpenFile {
               mDelimiter,
               mSkipLines);
 
-          mWindow.openMatrix(file, m);
+          if (m != null) {
+            mWindow.openMatrix(file, m);
 
-          status |= true;
+            status |= true;
+
+            break;
+          }
         }
       }
     }

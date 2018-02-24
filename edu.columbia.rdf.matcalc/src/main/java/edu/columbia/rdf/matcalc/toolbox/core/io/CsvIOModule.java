@@ -27,6 +27,7 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
+import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,7 +35,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  *
  * @author Antony Holmes Holmes
  */
-public class CsvIOModule extends IOModule {
+public class CsvIOModule extends CalcModule {
 
   /** The Constant FILTER. */
   private static final GuiFileExtFilter FILTER = new CsvGuiFileFilter();

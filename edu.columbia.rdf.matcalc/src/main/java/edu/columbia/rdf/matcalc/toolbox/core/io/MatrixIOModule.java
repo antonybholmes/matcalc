@@ -18,6 +18,8 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 import org.jebtk.bioinformatics.ui.filters.MatrixFilesGuiFileExtFilter;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
+import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+
 // TODO: Auto-generated Javadoc
 /**
  * Allow users to open from a core matrix file. This is a partial module.
@@ -27,7 +29,7 @@ import org.jebtk.modern.io.GuiFileExtFilter;
  * @author Antony Holmes Holmes
  *
  */
-public class MatrixIOModule extends IOModule {
+public class MatrixIOModule extends CalcModule {
 
   /** The Constant FILTER. */
   private static final GuiFileExtFilter FILTER = new MatrixFilesGuiFileExtFilter();

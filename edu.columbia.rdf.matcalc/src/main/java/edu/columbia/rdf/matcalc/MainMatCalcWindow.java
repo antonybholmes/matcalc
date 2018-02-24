@@ -40,9 +40,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.jebtk.core.Plugin;
-import org.jebtk.core.PluginService;
+import org.jebtk.core.collections.ArrayListCreator;
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.collections.DefaultHashMap;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.io.FileUtils;
@@ -52,7 +53,6 @@ import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.EditableMatrixTableModel;
 import org.jebtk.math.ui.matrix.MatrixTable;
 import org.jebtk.math.ui.matrix.MatrixTableModel;
@@ -63,8 +63,6 @@ import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButtonWidget;
-import org.jebtk.modern.clipboard.ClipboardRibbonSection;
-import org.jebtk.modern.contentpane.HTab;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
 import org.jebtk.modern.dialog.MessageDialogType;
@@ -107,7 +105,6 @@ import org.xml.sax.SAXException;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 import edu.columbia.rdf.matcalc.groups.ColumnGroupTreePanel;
 import edu.columbia.rdf.matcalc.groups.RowGroupTreePanel;
-import edu.columbia.rdf.matcalc.toolbox.FileModule;
 import edu.columbia.rdf.matcalc.toolbox.Module;
 
 // TODO: Auto-generated Javadoc
@@ -120,8 +117,8 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  *
  */
 public class MainMatCalcWindow extends ModernRibbonWindow
-    implements ModernWindowConstructor, ModernClickListener,
-    ModernSelectionListener, MatrixTransformListener {
+implements ModernWindowConstructor, ModernClickListener,
+ModernSelectionListener, MatrixTransformListener {
 
   /**
    * The constant serialVersionUID.
@@ -131,7 +128,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * The constant CREATE_GROUPS_MESSAGE.
    */
-  public static final String CREATE_GROUPS_MESSAGE = "You must load or create some groups.";
+  public static final String CREATE_GROUPS_MESSAGE = 
+      "You must load or create some groups.";
 
   /**
    * The member input file.
@@ -197,19 +195,24 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * The member module map.
    */
-  private Map<String, Module> mModuleMap = new HashMap<String, Module>();
+  private Map<String, Module> mModuleMap = 
+      new HashMap<String, Module>();
 
   /** The m open file filters. */
-  private List<GuiFileExtFilter> mOpenFileFilters = new ArrayList<GuiFileExtFilter>();
+  private List<GuiFileExtFilter> mOpenFileFilters = 
+      new ArrayList<GuiFileExtFilter>();
 
   /** Modules associated with opening files with a given extension. */
-  protected Map<String, FileModule> mOpenFileModuleMap = new HashMap<String, FileModule>();
+  protected IterMap<String, List<Module>> mOpenFileModuleMap = 
+      DefaultHashMap.create(new ArrayListCreator<Module>());
 
   /** The m save file filters. */
-  private List<GuiFileExtFilter> mSaveFileFilters = new ArrayList<GuiFileExtFilter>();
+  private List<GuiFileExtFilter> mSaveFileFilters = 
+      new ArrayList<GuiFileExtFilter>();
 
   /** The m save file module map. */
-  private Map<String, FileModule> mSaveFileModuleMap = new HashMap<String, FileModule>();
+  private Map<String, List<Module>> mSaveFileModuleMap = 
+      DefaultHashMap.create(new ArrayListCreator<Module>());
 
   // private ModernScrollPane mTableScrollPane;
 
@@ -237,6 +240,10 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
   private static final boolean AUTO_SHOW_FILES_PANE = SettingsService
       .getInstance().getAsBool("matcalc.files-pane.auto-show");
+
+  private TabsModel mRightTabsModel = new TabsModel();
+
+  private MatCalcProperties mProperties = new MatCalcProperties();
 
   /**
    * The class MouseEvents.
@@ -418,7 +425,13 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * @param appInfo the app info
    */
   public MainMatCalcWindow(GuiAppInfo appInfo) {
+    this(appInfo, new MatCalcProperties());
+  }
+
+  public MainMatCalcWindow(GuiAppInfo appInfo, MatCalcProperties props) {
     super(appInfo);
+
+    mProperties = props;
 
     try {
       setup();
@@ -436,6 +449,12 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * @param m the m
    */
   public MainMatCalcWindow(GuiAppInfo appInfo, DataFrame m) {
+    this(appInfo, m, new MatCalcProperties());
+  }
+
+  public MainMatCalcWindow(GuiAppInfo appInfo, 
+      DataFrame m, 
+      MatCalcProperties props) {
     super(appInfo);
 
     try {
@@ -456,6 +475,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * @throws IllegalAccessException the illegal access exception
    */
   private void setup() throws InstantiationException, IllegalAccessException {
+    mColumnGroupsPanel = new ColumnGroupTreePanel(this, "Columns");
+    mRowGroupsPanel = new RowGroupTreePanel(this);
+    
     mFindDialog = new FindReplaceDialog(this);
 
     mHistoryPanel = new MatCalcHistoryPanel(this);
@@ -470,7 +492,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     createUi();
 
     loadModules();
-    addModulesUI();
+    createModulesUI();
 
     mHistoryPanel.setRowHeight(48);
     mHistoryPanel.setCellRenderer(new MatrixTransformCellRenderer());
@@ -536,11 +558,13 @@ public class MainMatCalcWindow extends ModernRibbonWindow
       throws InstantiationException, IllegalAccessException {
     Module module;
 
-    for (Plugin plugin : PluginService.getInstance()) {
+    //for (Plugin plugin : PluginService.getInstance()) {
 
-      System.err.println("Loading plugin " + plugin.getName());
+    for (String name : ModuleService.getInstance()) {
 
-      module = (Module) plugin.getPluginClass().newInstance();
+      System.err.println("Loading plugin " + name);
+
+      module = ModuleService.getInstance().instance(name); //(Module) plugin.getPluginClass().newInstance();
 
       mModules.add(module);
 
@@ -571,15 +595,15 @@ public class MainMatCalcWindow extends ModernRibbonWindow
   /**
    * Allow modules to initialize and customize the UI.
    */
-  private void addModulesUI() {
+  private void createModulesUI() {
     for (Module module : mModules) {
       module.init(this);
 
-      addFileModule(module);
+      addIOModule(module);
 
-      for (FileModule fileModule : module) {
-        addFileModule(fileModule);
-      }
+      //for (Module fileModule : modules) {
+      //  addIOModule(fileModule);
+      //}
     }
   }
 
@@ -588,24 +612,33 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * 
    * @param module A file module.
    */
-  private void addFileModule(FileModule module) {
+  private void addIOModule(Module module) {
     for (GuiFileExtFilter filter : module.getOpenFileFilters()) {
-      mOpenFileFilters.add(filter);
-
+      // Only show file filter in UI selection tools when requested, otherwise
+      // register module as an IO listener.
+      if (module.showIOFilterUI()) {
+        mOpenFileFilters.add(filter);
+      }
+      
       // Track what this module can
       for (String ext : filter.getExtensions()) {
-        mOpenFileModuleMap.put(ext, module);
+        mOpenFileModuleMap.get(ext).add(module);
       }
     }
 
     for (GuiFileExtFilter filter : module.getSaveFileFilters()) {
-      mSaveFileFilters.add(filter);
+      if (module.showIOFilterUI()) {
+        mSaveFileFilters.add(filter);
+      }
 
       // Track what this module can
       for (String ext : filter.getExtensions()) {
-        mSaveFileModuleMap.put(ext, module);
+        mSaveFileModuleMap.get(ext).add(module);
       }
     }
+
+    Collections.sort(mOpenFileFilters);
+    Collections.sort(mSaveFileFilters);
   }
 
   /*
@@ -640,7 +673,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     ModernButtonWidget button = new QuickAccessButton(
         UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage("Open");
-    button.setToolTip("Open", "Open an expression matrix.");
+    button.setToolTip("Open", "Open a file.");
     button.addClickListener(this);
     addQuickAccessButton(button);
 
@@ -651,7 +684,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     button.addClickListener(this);
     addQuickAccessButton(button);
 
-    getRibbon().getHomeToolbar().add(new ClipboardRibbonSection(getRibbon()));
 
     //
     // Plot
@@ -689,21 +721,112 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    * @see org.abh.lib.ui.modern.window.ModernWindow#createUi()
    */
   public final void createUi() {
-    setContentHeader(mDirPanel);
+    if (mProperties.getAsBool("matcalc.ui.files.enabled")) {
+      setContentHeader(mDirPanel);
+    }
 
-    setCard(new ModernComponent());
+    setTable(new ModernComponent());
 
     ModernStatusZoomSlider slider = new ModernStatusZoomSlider(mZoomModel);
 
     getStatusBar().addRight(slider);
 
-    createGroupsPanel();
+    createTabs();
+  }
 
-    // addFilesPane();
+  private void createTabs() {
+    createLeftTabs();
+    createRightTabs();
+  }
 
-    getIconTabs().addTab("Files",
-        new IconTabsFolderIcon(),
-        new TabPanel("Files", mFilesPanel));
+
+
+  private void createLeftTabs() {
+    if (mProperties.getAsBool("matcalc.ui.left-tabs.enabled")) {
+      createFilesTabs();
+    }
+  }
+
+  private void createFilesTabs() {
+    if (mProperties.getAsBool("matcalc.ui.files.enabled")) {
+      getIconTabs().addTab("Files",
+          new IconTabsFolderIcon(),
+          new TabPanel("Files", mFilesPanel));
+    }
+  }
+
+  private void createRightTabs() {
+    if (mProperties.getAsBool("matcalc.ui.right-tabs.enabled")) {
+      mGroupPanel = new SegmentTabsPanel(mRightTabsModel, 70, 5);
+      mGroupPanel.setBorder(ModernWidget.LEFT_RIGHT_BORDER);
+      getTabsPane().getModel().addRightTab("History", mGroupPanel, 250, 200, 500);
+
+
+      createGroupsPanel();
+      addHistoryPane();
+
+      // Show the column groups by default
+      mRightTabsModel.changeTab(0);
+    }
+  }
+
+
+  /**
+   * Creates the groups panel.
+   */
+  private void createGroupsPanel() {
+    if (mProperties.getAsBool("matcalc.ui.groups.enabled")) {
+      ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
+
+      splitPane.addComponent(mRowGroupsPanel, 0.3);
+      splitPane.addComponent(mColumnGroupsPanel, 0.5);
+
+
+      //TabsModel groupTabsModel = new TabsModel();
+      //groupTabsModel.addTab("Rows", mRowGroupsPanel);
+      //groupTabsModel.addTab("Columns", mColumnGroupsPanel);
+
+      //SegmentTabsPanel tabsPanel = new SegmentTabsPanel(groupTabsModel, 60);
+
+      //groupTabsModel.changeTab(1);
+
+
+      mRightTabsModel.addTab("Groups", splitPane);
+    }
+  }
+
+  /**
+   * Adds the group pane to the layout if it is not already showing.
+   */
+  /*
+   * private void addGroupsPane() { if (mInputFiles.size() == 0) { return; }
+   * 
+   * if (mContentPane.getModel().getLeftTabs().containsTab("Groups")) { return;
+   * }
+   * 
+   * mContentPane.getModel().addLeft(new SizableContentPane("Groups",
+   * mGroupPanel, 250, 200, 500)); }
+   */
+
+  /**
+   * Adds the history pane to the layout if it is not already showing.
+   */
+  private void addHistoryPane() {
+    if (mProperties.getAsBool("matcalc.ui.history.enabled")) {
+      mRightTabsModel.addTab("History", mHistoryPanel);
+    }
+
+    //    if (getTabsPane().getModel().getRightTabs().containsTab("History")) {
+    //      return;
+    //    }
+    //
+    //    ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
+    //
+    //    splitPane.addComponent(mGroupPanel, 0.4);
+    //    splitPane.addComponent(mHistoryPanel, 0.5);
+    //
+    //    getTabsPane().getModel()
+    //        .addRightTab("History", new HTab("Groups", splitPane), 250, 200, 500);
   }
 
   /*
@@ -787,19 +910,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow
       } catch (TranscoderException e1) {
         e1.printStackTrace();
       }
-    } else if (e.getMessage().equals("z-score")) {
-      addToHistory("z-score",
-          "z-score",
-          MatrixOperations.zscore(getCurrentMatrix())); // new
-                                                        // ZScoreMatrixTransform(this,
-                                                        // getCurrentMatrix()));
-    } else if (e.getMessage().equals("Row z-score")) {
-      addToHistory("Row z-score",
-          "Row z-score",
-          MatrixOperations.rowZscore(getCurrentMatrix())); // addFlowItem(new
-                                                           // ZScoreRowsMatrixTransform(this,
-                                                           // getCurrentMatrix()));
-      // new StdDevFilterMatrixTransform(this, getCurrentMatrix(), 1.5));
     } else if (e.getMessage().equals(UI.MENU_ABOUT)) {
       ModernAboutDialog.show(this, getAppInfo());
     } else if (e.getMessage().equals(UI.MENU_EXIT)) {
@@ -1012,7 +1122,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
           .equals(mHistoryPanel.getValueAt(i).getName())
           && !mHistoryPanel.getValueAt(i).getName().contains("Plot")) {
         buffer.append(" (").append(mHistoryPanel.getValueAt(i).getDescription())
-            .append(")");
+        .append(")");
       }
 
       history.add(buffer.toString());
@@ -1083,9 +1193,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    *           exception
    */
   private void browseForFile() throws IOException, SAXException,
-      ParserConfigurationException, InvalidFormatException, ParseException,
-      ClassNotFoundException, InstantiationException, IllegalAccessException,
-      FontFormatException, UnsupportedLookAndFeelException {
+  ParserConfigurationException, InvalidFormatException, ParseException,
+  ClassNotFoundException, InstantiationException, IllegalAccessException,
+  FontFormatException, UnsupportedLookAndFeelException {
     browseForFile(RecentFilesService.getInstance().getPwd());
   }
 
@@ -1106,9 +1216,9 @@ public class MainMatCalcWindow extends ModernRibbonWindow
    *           exception
    */
   private void browseForFile(Path pwd) throws IOException, SAXException,
-      ParserConfigurationException, InvalidFormatException, ParseException,
-      ClassNotFoundException, InstantiationException, IllegalAccessException,
-      FontFormatException, UnsupportedLookAndFeelException {
+  ParserConfigurationException, InvalidFormatException, ParseException,
+  ClassNotFoundException, InstantiationException, IllegalAccessException,
+  FontFormatException, UnsupportedLookAndFeelException {
     openFiles(FileDialog.openFiles(this, pwd, mOpenFileFilters));
   }
 
@@ -1265,78 +1375,6 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     }
   }
 
-  /**
-   * Creates the groups panel.
-   */
-  private void createGroupsPanel() {
-    if (getTabsPane().getModel().getRightTabs().containsTab("History")) {
-      return;
-    }
-    
-    mColumnGroupsPanel = new ColumnGroupTreePanel(this, "Columns");
-    mRowGroupsPanel = new RowGroupTreePanel(this);
-    
-    ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
-
-    splitPane.addComponent(mRowGroupsPanel, 0.3);
-    splitPane.addComponent(mColumnGroupsPanel, 0.5);
-   
-
-    //TabsModel groupTabsModel = new TabsModel();
-    //groupTabsModel.addTab("Rows", mRowGroupsPanel);
-    //groupTabsModel.addTab("Columns", mColumnGroupsPanel);
-    
-    //SegmentTabsPanel tabsPanel = new SegmentTabsPanel(groupTabsModel, 60);
-    
-    //groupTabsModel.changeTab(1);
-    
-    TabsModel groupTabsModel = new TabsModel();
-    groupTabsModel.addTab("Groups", splitPane);
-    groupTabsModel.addTab("History", mHistoryPanel);
-
-    mGroupPanel = new SegmentTabsPanel(groupTabsModel, 70, 5);
-    mGroupPanel.setBorder(ModernWidget.LEFT_RIGHT_BORDER);
-    
-
-    // Show the column groups by default
-    groupTabsModel.changeTab(0);
-    
-    getTabsPane().getModel().addRightTab("History", mGroupPanel, 250, 200, 500);
-
-    // addGroupsPane();
-
-    //addHistoryPane();
-  }
-
-  /**
-   * Adds the group pane to the layout if it is not already showing.
-   */
-  /*
-   * private void addGroupsPane() { if (mInputFiles.size() == 0) { return; }
-   * 
-   * if (mContentPane.getModel().getLeftTabs().containsTab("Groups")) { return;
-   * }
-   * 
-   * mContentPane.getModel().addLeft(new SizableContentPane("Groups",
-   * mGroupPanel, 250, 200, 500)); }
-   */
-
-  /**
-   * Adds the history pane to the layout if it is not already showing.
-   */
-  private void addHistoryPane() {
-    if (getTabsPane().getModel().getRightTabs().containsTab("History")) {
-      return;
-    }
-
-    ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
-
-    splitPane.addComponent(mGroupPanel, 0.4);
-    splitPane.addComponent(mHistoryPanel, 0.5);
-
-    getTabsPane().getModel()
-        .addRightTab("History", new HTab("Groups", splitPane), 250, 200, 500);
-  }
 
   /**
    * Export.
@@ -1396,7 +1434,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     if (mFilesModel.size() > 0) {
       file = FileDialog.save(this).filter(mSaveFileFilters)
           .setDefaultFilter("txt") // PathUtils.getFileExt(mInputFile))
-                                   // //"txt")
+          // //"txt")
           .suggested(PathUtils.getNameNoExt(getInputFile())).getFile(pwd);
     } else {
       file = FileDialog.save(this).filter(mSaveFileFilters)
@@ -1409,7 +1447,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
     if (FileUtils.exists(file)) {
       ModernMessageDialog
-          .createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
+      .createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
     } else {
       save(file);
     }
@@ -1428,10 +1466,12 @@ public class MainMatCalcWindow extends ModernRibbonWindow
 
     boolean status = false;
 
-    FileModule module = mSaveFileModuleMap.get(ext);
+    List<Module> modules = mSaveFileModuleMap.get(ext);
 
-    if (module != null) {
-      status = module.saveFile(this, file, matrix);
+    for (Module module : modules) {
+      if (module != null) {
+        status |= module.saveFile(this, file, matrix);
+      }
     }
 
     /*
@@ -1772,20 +1812,21 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     c.setBody(mTableScrollPane);
     // c.setBorder(ModernWidget.DOUBLE_BORDER);
 
-    setCard(c);
+    setTable(c);
 
     // Highlight A1
     mMatrixTable.getCellSelectionModel().setSelection(0, 0);
   }
 
-  @Override
-  public void setCard(Component c) {
-    //setCenterTab(new ModernBorderPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)));
-    
-    setCenterTab(new Card(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)));
+  private void setTable(Component c) {
+    if (mProperties.getAsBool("matcalc.ui.table.drop-shadow.enabled")) {
+      setCenterTab(new Card(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)));
+    } else {
+      setPanel(c);
+    }
   }
 
-  /*
+  /**
    * (non-Javadoc)
    * 
    * @see org.abh.lib.ui.math.matrix.transform.MatrixTransformListener#
@@ -1933,7 +1974,7 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     return mZoomModel;
   }
 
-  public FileModule getFileModule(String ext) {
+  public List<Module> getFileModules(String ext) {
     return mOpenFileModuleMap.get(ext);
   }
 }

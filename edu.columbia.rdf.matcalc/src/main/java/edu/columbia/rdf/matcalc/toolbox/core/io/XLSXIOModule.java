@@ -133,4 +133,10 @@ public class XLSXIOModule extends XlIOModule {
 
     return true;
   }
+  
+  @Override
+  public boolean showIOFilterUI() {
+    // Respond to file events
+    return false;
+  }
 }

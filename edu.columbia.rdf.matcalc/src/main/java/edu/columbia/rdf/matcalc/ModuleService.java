@@ -16,9 +16,11 @@
 package edu.columbia.rdf.matcalc;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.jebtk.core.collections.IterTreeMap;
+import org.jebtk.core.collections.UniqueArrayList;
 import org.jebtk.core.text.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +62,8 @@ public class ModuleService implements Iterable<String> {
   
   private Map<String, Module> mInstanceMap = 
       new IterTreeMap<String, Module>();
+  
+  private List<String> mNames = new UniqueArrayList<String>();
 
   /**
    * Instantiates a new plugin service.
@@ -85,7 +89,12 @@ public class ModuleService implements Iterable<String> {
   public void add(String name, Class<? extends Module> m) {
     LOG.info("Adding module {}", name);
     
-    mPluginMap.put(name.toLowerCase(), m);
+    name = name.toLowerCase();
+    
+    mPluginMap.put(name, m);
+    
+    // Iterate over plugins in the order added.
+    mNames.add(name);
   }
 
   /*
@@ -95,7 +104,7 @@ public class ModuleService implements Iterable<String> {
    */
   @Override
   public Iterator<String> iterator() {
-    return mPluginMap.keySet().iterator();
+    return mNames.iterator();
   }
 
   public Module instance(String name) throws InstantiationException, IllegalAccessException {
@@ -110,5 +119,11 @@ public class ModuleService implements Iterable<String> {
 
   public Class<? extends Module> get(String name) {
     return mPluginMap.get(name.toLowerCase());
+  }
+
+  public void add(ModuleLoader loader) {
+    for (Class<? extends Module> m : loader) {
+      ModuleService.getInstance().add(m);
+    }
   }
 }

@@ -33,6 +33,7 @@ import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.OpenFile;
+import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,7 +41,7 @@ import edu.columbia.rdf.matcalc.OpenFile;
  *
  * @author Antony Holmes Holmes
  */
-public class TxtIOModule extends IOModule {
+public class TxtIOModule extends CalcModule {
 
   /** The Constant TXT_FILTER. */
   private static final GuiFileExtFilter TXT_FILTER = new TxtGuiFileFilter();

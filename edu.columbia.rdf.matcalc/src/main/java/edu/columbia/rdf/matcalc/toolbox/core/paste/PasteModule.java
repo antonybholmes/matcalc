@@ -24,11 +24,6 @@ public class PasteModule extends CalcModule implements ModernClickListener {
   private MainMatCalcWindow mWindow;
 
   @Override
-  public void run(String... args) {
-    // Do nothing
-  }
-
-  @Override
   public String getName() {
     return "Paste";
   }

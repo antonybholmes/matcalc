@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016, Antony Holmes
+false * Copyright (C) 2016, Antony Holmes
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

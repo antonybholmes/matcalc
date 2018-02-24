@@ -27,6 +27,7 @@ import org.jebtk.modern.io.TsvGuiFileFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
+import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,7 +35,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
  *
  * @author Antony Holmes Holmes
  */
-public class TsvIOModule extends IOModule {
+public class TsvIOModule extends CalcModule {
 
   /** The Constant TXT_FILTER. */
   private static final GuiFileExtFilter TSV_FILTER = new TsvGuiFileFilter();
