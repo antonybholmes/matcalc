@@ -85,17 +85,9 @@ public class SmoothedLineGraphModule extends CalcModule
       } else if (arg.getLongName().equals("show-legend")) {
         mAxes.getLegend().setVisible(true);
       } else if (arg.getLongName().equals("x-min")) {
-        try {
-          mAxes.getX1Axis().setMin(TextUtils.parseDouble(arg.getValue()));
-        } catch (ParseException e) {
-          e.printStackTrace();
-        }
+        mAxes.getX1Axis().setMin(TextUtils.parseDouble(arg.getValue()));
       } else if (arg.getLongName().equals("x-max")) {
-        try {
-          mAxes.getX1Axis().setMax(TextUtils.parseDouble(arg.getValue()));
-        } catch (ParseException e) {
-          e.printStackTrace();
-        }
+        mAxes.getX1Axis().setMax(TextUtils.parseDouble(arg.getValue()));
       } else {
         // do nothing
       }
