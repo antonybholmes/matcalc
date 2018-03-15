@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc;
 
-import java.awt.Component;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
@@ -81,7 +80,7 @@ import org.jebtk.modern.io.OpenRibbonPanel;
 import org.jebtk.modern.io.RecentFilesModel;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.io.SaveAsRibbonPanel;
-import org.jebtk.modern.panel.Card;
+import org.jebtk.modern.panel.CardPanel;
 import org.jebtk.modern.ribbon.QuickAccessButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
@@ -1818,9 +1817,9 @@ ModernSelectionListener, MatrixTransformListener {
     mMatrixTable.getCellSelectionModel().setSelection(0, 0);
   }
 
-  private void setTable(Component c) {
+  private void setTable(JComponent c) {
     if (mProperties.getAsBool("matcalc.ui.table.drop-shadow.enabled")) {
-      setCenterTab(new Card(new ModernComponent(c, ModernWidget.DOUBLE_BORDER)));
+      setCenterTab(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER), ModernWidget.BORDER));
     } else {
       setPanel(c);
     }
