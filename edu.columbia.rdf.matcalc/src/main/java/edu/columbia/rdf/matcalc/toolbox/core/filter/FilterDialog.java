@@ -133,7 +133,7 @@ public class FilterDialog extends ModernDialogHelpWindow
 
     content.setBody(scrollPane);
 
-    setDialogCardContent(content);
+    setCard(content);
   }
 
   /**

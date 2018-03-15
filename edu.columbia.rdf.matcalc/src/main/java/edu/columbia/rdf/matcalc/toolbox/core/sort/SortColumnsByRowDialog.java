@@ -81,7 +81,7 @@ public class SortColumnsByRowDialog extends ModernDialogHelpWindow
     box.add(UI.createVGap(5));
     box.add(mCheckByGroups);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /**

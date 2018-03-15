@@ -89,7 +89,7 @@ public class PowerDialog extends ModernDialogHelpWindow
 
     box.add(new HExpandBox("Power", mAddField));
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /**

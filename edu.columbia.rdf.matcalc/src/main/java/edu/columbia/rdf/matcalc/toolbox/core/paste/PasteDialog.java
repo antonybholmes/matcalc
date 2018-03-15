@@ -75,7 +75,7 @@ public class PasteDialog extends ModernDialogHelpWindow
 
     content.setBody(mChooseFilesPanel);
 
-    setDialogCardContent(content);
+    setCard(content);
   }
 
   @Override

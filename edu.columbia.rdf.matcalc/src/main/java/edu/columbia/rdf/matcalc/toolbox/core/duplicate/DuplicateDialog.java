@@ -81,7 +81,7 @@ public class DuplicateDialog extends ModernDialogHelpWindow
 
     mDuplicatePanel = new DuplicatePanel(mMatrix);
 
-    setDialogCardContent(mDuplicatePanel);
+    setCard(mDuplicatePanel);
   }
 
   /**

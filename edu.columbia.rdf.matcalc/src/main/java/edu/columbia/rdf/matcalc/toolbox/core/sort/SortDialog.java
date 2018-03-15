@@ -133,7 +133,7 @@ public class SortDialog extends ModernDialogHelpWindow
 
     content.setBody(new ModernLineBorderPanel(scrollPane));
 
-    setDialogCardContent(content);
+    setCard(content);
   }
 
   /**

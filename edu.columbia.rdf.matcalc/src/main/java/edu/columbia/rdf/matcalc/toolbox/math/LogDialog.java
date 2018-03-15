@@ -170,7 +170,7 @@ public class LogDialog extends ModernDialogHelpWindow
 
     // panel.add(buttonPanel, BorderLayout.PAGE_END);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /**

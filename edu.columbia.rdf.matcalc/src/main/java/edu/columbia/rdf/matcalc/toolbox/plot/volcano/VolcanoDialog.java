@@ -196,7 +196,7 @@ public class VolcanoDialog extends ModernDialogHelpWindow
     box.add(UI.createVGap(20));
     box.add(checkPlot);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /**

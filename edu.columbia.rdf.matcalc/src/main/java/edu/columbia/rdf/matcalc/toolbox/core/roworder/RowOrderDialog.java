@@ -198,7 +198,7 @@ public class RowOrderDialog extends ModernDialogHelpWindow
 
     content.setFooter(box);
 
-    setDialogCardContent(content);
+    setCard(content);
 
     changeIds();
 

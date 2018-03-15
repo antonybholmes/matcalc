@@ -91,7 +91,7 @@ public class CollapseDialog extends ModernDialogHelpWindow
 
     mCollapsePanel = new CollapsePanel(mMatrix, mGroups);
 
-    setDialogCardContent(mCollapsePanel);
+    setCard(mCollapsePanel);
   }
 
   /**

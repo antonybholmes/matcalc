@@ -267,7 +267,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
 
     content.setFooter(box);
 
-    setDialogCardContent(content);
+    setCard(content);
 
     setSize(600, 500);
 

@@ -175,7 +175,7 @@ public class MatchDialog extends ModernDialogHelpWindow
     // matrixPanel.setBorder(ModernWidget.LARGE_BORDER);
     content.add(matrixPanel);
 
-    setCardContent(content);
+    setCard(content);
 
     mMatchCombo.addClickListener(new MatchEvents());
 

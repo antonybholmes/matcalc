@@ -91,6 +91,6 @@ public class StatsDialog extends ModernDialogTaskWindow {
         new ModernTextBorderPanel(new ModernClipboardNumericalTextField(
             Mathematics.round(mValue, 4), false), 120)));
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 }

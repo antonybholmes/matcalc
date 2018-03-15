@@ -136,7 +136,7 @@ public class HierarchicalClusteringDialog extends ModernDialogHelpWindow
 
     // box.setBorder(ModernWidget.LARGE_BORDER);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /**

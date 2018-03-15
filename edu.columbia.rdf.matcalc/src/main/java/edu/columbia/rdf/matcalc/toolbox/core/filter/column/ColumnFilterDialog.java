@@ -170,7 +170,7 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow
 
     content.setHeader(box);
 
-    setDialogCardContent(content);
+    setCard(content);
 
     changeIds();
 

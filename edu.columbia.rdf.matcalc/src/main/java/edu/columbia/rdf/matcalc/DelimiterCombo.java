@@ -17,13 +17,13 @@ package edu.columbia.rdf.matcalc;
 
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.combobox.ModernComboBox;
+import org.jebtk.modern.combobox.ModernComboBox2;
 
 // TODO: Auto-generated Javadoc
 /**
  * Defines a set of delimiters for parsing files.
  */
-public class DelimiterCombo extends ModernComboBox {
+public class DelimiterCombo extends ModernComboBox2 {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;

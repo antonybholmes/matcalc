@@ -135,7 +135,7 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
 
     content.add(box);
 
-    setDialogCardContent(content);
+    setCard(content);
   }
 
   @Override

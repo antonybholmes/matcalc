@@ -131,6 +131,6 @@ public class SummaryDialog extends ModernDialogTaskWindow {
                 Mathematics.round(MatrixOperations.median(m), 4), false),
             120)));
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 }

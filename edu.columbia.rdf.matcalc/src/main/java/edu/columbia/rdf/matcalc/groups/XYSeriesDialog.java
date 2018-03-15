@@ -283,7 +283,7 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
 
     // panel.add(buttonPanel, BorderLayout.PAGE_END);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /*

@@ -148,7 +148,7 @@ public class ImportDialog extends ModernDialogHelpWindow
     box.add(UI.createVGap(5));
     box.add(mNumericalCheck);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /*

@@ -116,7 +116,7 @@ public class SearchColumnDialog extends ModernDialogHelpWindow
 
     content.setFooter(box);
 
-    setDialogCardContent(content);
+    setCard(content);
   }
 
   /**
