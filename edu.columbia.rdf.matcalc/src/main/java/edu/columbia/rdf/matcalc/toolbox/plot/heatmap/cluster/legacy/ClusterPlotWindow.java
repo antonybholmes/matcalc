@@ -95,6 +95,6 @@ public class ClusterPlotWindow extends HeatMapWindow {
   public FormatPlotPane createFormatPane() {
     return new ClusterPanel(this, mMatrix, mGroups, mRowGroups, mRowCluster,
         mColumnCluster, mZoomModel, mColorMapModel, mColorModel, mScaleModel,
-        getTabsPane().getModel(), mCountGroups, mHistory, mProperties);
+        tabsPane().tabs(), mCountGroups, mHistory, mProperties);
   }
 }

@@ -87,6 +87,6 @@ public class HeatMapPlotWindow extends HeatMapWindow {
   public FormatPlotPane createFormatPane() {
     return new HeatMapPanel(this, mMatrix, mGroups, mRowGroups, mCountGroups,
         mHistory, mZoomModel, mColorMapModel, mColorModel, mScaleModel,
-        getTabsPane().getModel(), mProperties);
+        tabsPane().tabs(), mProperties);
   }
 }

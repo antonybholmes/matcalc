@@ -91,7 +91,7 @@ public abstract class DifferentialExpressionPlotWindow extends HeatMapWindow {
   public FormatPlotPane createFormatPane() {
     return new DifferentialExpressionPanel(this, mMatrix, mGroups,
         mComparisonGroups, mRowGroups, mZoomModel, mColorMapModel, mColorModel,
-        mScaleModel, getTabsPane().getModel(), mCountGroups, mHistory,
+        mScaleModel, tabsPane().tabs(), mCountGroups, mHistory,
         mProperties);
   }
 }

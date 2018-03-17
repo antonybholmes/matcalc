@@ -758,7 +758,7 @@ ModernSelectionListener, MatrixTransformListener {
     if (mProperties.getAsBool("matcalc.ui.right-tabs.enabled")) {
       mGroupPanel = new SegmentTabsPanel(mRightTabsModel, 70, 5);
       mGroupPanel.setBorder(ModernWidget.LEFT_RIGHT_BORDER);
-      getTabsPane().getModel().addRightTab("History", mGroupPanel, 250, 200, 500);
+      tabsPane().tabs().right().add("History", mGroupPanel, 250, 200, 500);
 
 
       createGroupsPanel();

@@ -326,12 +326,12 @@ public abstract class FigureWindow extends ModernRibbonWindow
    * Adds the history pane to the layout if it is not already showing.
    */
   private void addFormatPane() {
-    if (getTabsPane().getModel().getRightTabs().containsTab("Format")) {
+    if (tabsPane().tabs().right().contains("Format")) {
       return;
     }
 
-    getTabsPane().addRightTab("Format",
-        new CloseableHTab("Format", mFormatPane, getTabsPane()),
+    tabsPane().tabs().right().add("Format",
+        new CloseableHTab("Format", mFormatPane, tabsPane()),
         300,
         200,
         500);

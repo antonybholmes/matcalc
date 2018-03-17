@@ -46,7 +46,6 @@ import org.jebtk.modern.clipboard.ClipboardRibbonSection;
 import org.jebtk.modern.contentpane.CenterTab;
 import org.jebtk.modern.contentpane.HTab;
 import org.jebtk.modern.contentpane.ModernHContentPane;
-import org.jebtk.modern.contentpane.SizableContentPane;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -78,6 +77,7 @@ import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarLocation;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.splitpane.ModernVSplitPaneLine;
+import org.jebtk.modern.tabs.SizableTab;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernLabel;
@@ -535,7 +535,7 @@ public class MainVennWindow extends ModernRibbonWindow
 
     // splitPane.setDividerLocation(600);
 
-    mContentPane.getModel().setCenterTab(new CenterTab(splitPane));
+    mContentPane.tabs().setCenterTab(new CenterTab(splitPane));
 
     addGroupsPanel();
 
@@ -550,25 +550,25 @@ public class MainVennWindow extends ModernRibbonWindow
    * Adds the groups panel.
    */
   private void addGroupsPanel() {
-    if (mContentPane.getModel().getLeftTabs().containsTab("Groups")) {
+    if (mContentPane.tabs().left().contains("Groups")) {
       return;
     }
 
-    SizableContentPane sizePane = new SizableContentPane("Groups", mGroupsPanel,
+    SizableTab sizePane = new SizableTab("Groups", mGroupsPanel,
         300, 300, 500);
 
-    mContentPane.getModel().addLeftTab(sizePane);
+    mContentPane.tabs().left().add(sizePane);
   }
 
   /**
    * Adds the history pane to the layout if it is not already showing.
    */
   private void addFormatPane() {
-    if (mContentPane.getModel().getRightTabs().containsTab("Format Plot")) {
+    if (mContentPane.tabs().right().contains("Format Plot")) {
       return;
     }
 
-    mContentPane.getModel().getRightTabs().addTab(new SizableContentPane(
+    mContentPane.tabs().right().add(new SizableTab(
         "Format Plot", new HTab("Format Plot", mFormatPane), 300, 200, 500));
 
   }

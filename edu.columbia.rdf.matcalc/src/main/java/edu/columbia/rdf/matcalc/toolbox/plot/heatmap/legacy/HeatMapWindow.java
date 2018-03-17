@@ -111,9 +111,9 @@ public abstract class HeatMapWindow extends FigureWindow {
   public void setFormatPane(FormatPlotPane formatPane) {
     mFormatPane = formatPane;
 
-    getTabsPane().getModel().getRightTabs().clear();
-    getTabsPane().addRightTab("Format",
-        new CloseableHTab("Format", mFormatPane, getTabsPane()),
+    tabsPane().tabs().right().clear();
+    tabsPane().tabs().right().add("Format",
+        new CloseableHTab("Format", mFormatPane, tabsPane()),
         300,
         200,
         500);

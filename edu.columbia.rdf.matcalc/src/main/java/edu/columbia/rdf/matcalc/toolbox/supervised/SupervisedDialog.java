@@ -274,7 +274,7 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 
     box = VBox.create();
 
-    leftTab().setFooter(mPlotPanel);
+    left().setFooter(mPlotPanel);
 
     getTabsModel().changeTab(0);
   }

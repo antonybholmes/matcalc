@@ -236,9 +236,9 @@ public class Graph2dWindow extends FigureWindow {
    * Adds the history pane to the layout if it is not already showing.
    */
   private void addFormatPane() {
-    if (!getTabsPane().getModel().getRightTabs().containsTab("Format")) {
-      getTabsPane().addRightTab("Format",
-          new CloseableHTab("Format", mFormatPane, getTabsPane()),
+    if (!tabsPane().tabs().right().contains("Format")) {
+      tabsPane().tabs().right().add("Format",
+          new CloseableHTab("Format", mFormatPane, tabsPane()),
           320,
           320,
           600);
@@ -251,7 +251,7 @@ public class Graph2dWindow extends FigureWindow {
    * @return the graph 2 d window
    */
   public Graph2dWindow removeFormatPane() {
-    getTabsPane().getModel().getRightTabs().removeTab("Format");
+    tabsPane().tabs().right().remove("Format");
 
     return this;
   }
