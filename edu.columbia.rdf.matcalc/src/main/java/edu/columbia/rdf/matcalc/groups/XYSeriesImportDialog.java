@@ -37,14 +37,12 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.ExcelDialog;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
-import org.jebtk.modern.button.ButtonsBox;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckBox;
-import org.jebtk.modern.dialog.ModernDialogButton;
 import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
-import org.jebtk.modern.dialog.ModernDialogWindow;
+import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.CrossVectorIcon;
@@ -63,7 +61,7 @@ import org.jebtk.modern.window.ModernWindow;
  *
  * @author Antony Holmes Holmes
  */
-public class XYSeriesImportDialog extends ModernDialogWindow
+public class XYSeriesImportDialog extends ModernDialogTaskWindow
     implements ModernClickListener {
 
   /**
@@ -73,16 +71,6 @@ public class XYSeriesImportDialog extends ModernDialogWindow
 
   /** The m check select all. */
   private CheckBox mCheckSelectAll = new ModernCheckBox("Select All", true);
-
-  /**
-   * The member ok button.
-   */
-  private ModernButton mOkButton = new ModernDialogButton(UI.BUTTON_OK);
-
-  /**
-   * The member close button.
-   */
-  private ModernButton mCloseButton = new ModernDialogButton(UI.BUTTON_CANCEL);
 
   /**
    * The member load button.
@@ -223,9 +211,6 @@ public class XYSeriesImportDialog extends ModernDialogWindow
 
     mClearFilterButton.setVisible(false);
 
-    mOkButton.addClickListener(this);
-    mCloseButton.addClickListener(this);
-
     setSize(640, 480);
 
     setResizable(true);
@@ -255,13 +240,7 @@ public class XYSeriesImportDialog extends ModernDialogWindow
 
     setContent(mContent);
 
-    ButtonsBox buttonPanel = new ButtonsBox();
-    buttonPanel.addLeft(mCheckComplementaryGroup);
-    buttonPanel.addRight(mOkButton);
-    buttonPanel.addRight(ModernPanel.createHGap());
-    buttonPanel.addRight(mCloseButton);
-
-    setButtons(buttonPanel);
+    getButtonBar().addLeft(mCheckComplementaryGroup);
 
   }
 
