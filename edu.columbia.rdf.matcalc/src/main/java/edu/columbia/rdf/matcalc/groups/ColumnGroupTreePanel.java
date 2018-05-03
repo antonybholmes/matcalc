@@ -68,7 +68,6 @@ import org.xml.sax.SAXException;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ColumnGroupTreePanel.
  */

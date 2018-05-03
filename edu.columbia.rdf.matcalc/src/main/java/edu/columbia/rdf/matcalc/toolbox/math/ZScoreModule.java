@@ -26,7 +26,6 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ZScoreModule.
  */

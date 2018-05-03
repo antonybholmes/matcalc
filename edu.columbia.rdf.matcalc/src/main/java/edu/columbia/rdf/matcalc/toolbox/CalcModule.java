@@ -27,7 +27,6 @@ import org.jebtk.modern.window.ModernWindow;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.MatCalcInfo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class CalcModule.
  */

@@ -23,7 +23,6 @@ import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class AxisPlotControl.
  */

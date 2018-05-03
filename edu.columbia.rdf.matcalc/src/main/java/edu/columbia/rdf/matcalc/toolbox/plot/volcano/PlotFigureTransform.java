@@ -23,7 +23,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.PlotMatrixTransform;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Transform the rows of a matrix.
  * 

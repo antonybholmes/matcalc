@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.graphplot.ModernPlotCanvas;
 
-// TODO: Auto-generated Javadoc
 /**
  * The interface CanvasPanel.
  */

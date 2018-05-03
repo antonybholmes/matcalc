@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc;
 
 import org.jebtk.core.Properties;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MatCalcProperties controls the configuraration of the matcalc UI.
  */

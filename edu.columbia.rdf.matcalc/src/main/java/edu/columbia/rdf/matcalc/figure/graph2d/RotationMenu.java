@@ -21,7 +21,6 @@ import org.jebtk.modern.graphics.icons.Raster16Icon;
 import org.jebtk.modern.menu.ModernIconMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class RotationMenu.
  */

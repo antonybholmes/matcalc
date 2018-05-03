@@ -21,7 +21,6 @@ import org.jebtk.graphplot.icons.HeatMap32VectorIcon;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * Simple pane icon.
  * 

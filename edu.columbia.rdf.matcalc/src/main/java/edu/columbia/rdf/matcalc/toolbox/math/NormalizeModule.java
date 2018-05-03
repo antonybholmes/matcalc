@@ -28,7 +28,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcWinModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.NormalizeDialog;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ZScoreModule.
  */

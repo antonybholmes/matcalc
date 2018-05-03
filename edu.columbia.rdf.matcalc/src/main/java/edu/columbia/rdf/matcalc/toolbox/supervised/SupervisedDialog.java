@@ -48,7 +48,6 @@ import edu.columbia.rdf.matcalc.figure.PlotConstants;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapsePanel;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class TTestDialog.
  */

@@ -27,7 +27,6 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.widget.ModernClickWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows users to select which groups are displayed.
  *

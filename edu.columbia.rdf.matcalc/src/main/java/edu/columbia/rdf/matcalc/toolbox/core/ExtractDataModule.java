@@ -41,7 +41,6 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * Merges designated segments together using the merge column. Consecutive rows
  * with the same merge id will be merged together. Coordinates and copy number

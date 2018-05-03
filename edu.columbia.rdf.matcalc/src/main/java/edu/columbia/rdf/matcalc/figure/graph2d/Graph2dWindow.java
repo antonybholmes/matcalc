@@ -46,7 +46,6 @@ import edu.columbia.rdf.matcalc.figure.MarginsRibbonSection;
 import edu.columbia.rdf.matcalc.figure.PlotSizeModel;
 import edu.columbia.rdf.matcalc.figure.PlotSizeRibbonSection;
 
-// TODO: Auto-generated Javadoc
 /**
  * Window for showing 2D graphs such as a scatter plot.
  * 

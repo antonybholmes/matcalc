@@ -50,7 +50,6 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 import edu.columbia.rdf.matcalc.toolbox.supervised.SupervisedModule;
 import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class VolcanoPlotModule.
  */

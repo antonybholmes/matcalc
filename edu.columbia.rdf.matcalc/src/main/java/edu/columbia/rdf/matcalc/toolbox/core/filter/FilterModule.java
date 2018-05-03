@@ -39,7 +39,6 @@ import org.jebtk.modern.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * Can compare a column of values to another list to see what is common and
  * record this in a new column next to the reference column. Useful for doing

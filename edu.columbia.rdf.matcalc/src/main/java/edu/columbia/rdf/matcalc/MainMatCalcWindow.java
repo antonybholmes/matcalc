@@ -106,7 +106,6 @@ import edu.columbia.rdf.matcalc.groups.ColumnGroupTreePanel;
 import edu.columbia.rdf.matcalc.groups.RowGroupTreePanel;
 import edu.columbia.rdf.matcalc.toolbox.Module;
 
-// TODO: Auto-generated Javadoc
 /**
  * Merges designated segments together using the merge column. Consecutive rows
  * with the same merge id will be merged together. Coordinates and copy number

@@ -25,7 +25,6 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow sorting of columns or rows in a table.
  *

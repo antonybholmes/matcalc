@@ -22,7 +22,6 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonSection;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
  *

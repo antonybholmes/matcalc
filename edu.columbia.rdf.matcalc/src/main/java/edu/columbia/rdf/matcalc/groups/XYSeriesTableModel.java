@@ -22,7 +22,6 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.modern.table.ModernTableModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class XYSeriesTableModel.
  */

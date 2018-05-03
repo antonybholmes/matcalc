@@ -32,7 +32,6 @@ import org.jebtk.modern.ribbon.RibbonSize;
 import org.jebtk.modern.text.TextProperty;
 import org.jebtk.modern.widget.ModernClickWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class GridLocationPicker.
  */

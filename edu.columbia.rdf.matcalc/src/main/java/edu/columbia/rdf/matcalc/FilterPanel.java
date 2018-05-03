@@ -22,7 +22,6 @@ import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * For choosing an FDR method.
  *

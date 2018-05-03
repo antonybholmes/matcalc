@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.figure;
 import org.jebtk.core.model.ItemModel;
 import org.jebtk.graphplot.plotbox.PlotBox;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class Graph2dStyleModel.
  */

@@ -28,7 +28,6 @@ import org.jebtk.modern.graphics.color.ColorSwatchButton;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class TickColorPlotControl.
  */

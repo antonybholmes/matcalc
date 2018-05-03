@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.figure;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.modern.combobox.ModernComboBox;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class FigureCombo.
  */

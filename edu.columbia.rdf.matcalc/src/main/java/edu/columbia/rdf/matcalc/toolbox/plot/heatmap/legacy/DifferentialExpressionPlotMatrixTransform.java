@@ -24,7 +24,6 @@ import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Transform the rows of a matrix.
  * 

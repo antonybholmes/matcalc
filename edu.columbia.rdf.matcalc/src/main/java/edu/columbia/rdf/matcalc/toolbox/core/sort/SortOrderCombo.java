@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox.core.sort;
 
 import org.jebtk.modern.combobox.ModernComboBox;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SortOrderCombo.
  */

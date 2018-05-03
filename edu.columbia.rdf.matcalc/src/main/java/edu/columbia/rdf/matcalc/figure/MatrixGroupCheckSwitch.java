@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.figure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.modern.button.ModernCheckSwitch;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MatrixGroupCheckBox.
  */

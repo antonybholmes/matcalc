@@ -33,7 +33,6 @@ import edu.columbia.rdf.matcalc.figure.AxisControl;
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 import edu.columbia.rdf.matcalc.figure.PlotControl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class AxesControlPanel.
  */

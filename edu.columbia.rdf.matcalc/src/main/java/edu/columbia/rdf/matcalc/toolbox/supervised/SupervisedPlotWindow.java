@@ -26,7 +26,6 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressionPlotWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Merges designated segments together using the merge column. Consecutive rows
  * with the same merge id will be merged together. Coordinates and copy number

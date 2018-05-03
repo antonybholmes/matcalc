@@ -24,7 +24,6 @@ import org.jebtk.core.sys.SysUtils;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.help.GuiAppInfo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MainMatCalc.
  */

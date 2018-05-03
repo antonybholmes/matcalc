@@ -26,7 +26,6 @@ import org.jebtk.modern.menu.ModernScrollPopupMenu;
 import org.jebtk.modern.theme.ModernTheme;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow users to select a line style.
  * 

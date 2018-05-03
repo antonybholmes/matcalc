@@ -26,7 +26,6 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow users to optionally enable a filter etc.
  * 

@@ -39,6 +39,7 @@ import org.jebtk.graphplot.plotbox.PlotBoxPanel;
 import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
+import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.collapsepane.AbstractCollapsePane;
@@ -53,6 +54,7 @@ import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarLocation;
 import org.jebtk.modern.tabs.TabsModel;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
+import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.zoom.ZoomModel;
 
@@ -70,7 +72,6 @@ import edu.columbia.rdf.matcalc.figure.TreeControl;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy.ClusterCanvas;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class HeatMapPanel.
  */
@@ -686,7 +687,7 @@ public class HeatMapPanel extends FormatPlotPane
         .setVScrollBarLocation(ScrollBarLocation.FLOATING)
         .setHScrollBarLocation(ScrollBarLocation.FLOATING);
 
-    mParent.setCard(scrollPane);
+    mParent.setCard(new ModernComponent(scrollPane, ModernWidget.DOUBLE_BORDER));
   }
 
   /*

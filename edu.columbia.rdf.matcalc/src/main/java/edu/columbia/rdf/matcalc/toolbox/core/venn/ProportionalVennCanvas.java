@@ -26,7 +26,6 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ProportionalVennCanvas.
  */

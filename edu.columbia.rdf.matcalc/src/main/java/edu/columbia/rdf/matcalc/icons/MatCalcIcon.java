@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.icons;
 import org.jebtk.modern.ColorTheme;
 import org.jebtk.modern.graphics.icons.ModernApplicationIcon;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MatCalcIcon.
  */

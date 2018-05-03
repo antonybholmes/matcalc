@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
 
 import org.jebtk.core.search.SearchStackOperator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class FilterStackElement.
  */

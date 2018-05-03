@@ -32,7 +32,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class HeatMapModule.
  */

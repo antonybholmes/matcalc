@@ -20,7 +20,6 @@ import java.awt.Graphics2D;
 import org.jebtk.modern.graphics.icons.RightPane32VectorIcon;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class History32VectorIcon.
  */

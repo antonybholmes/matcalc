@@ -28,7 +28,6 @@ import org.jebtk.modern.graphics.colormap.ColorMapPanel;
 import org.jebtk.modern.panel.MatrixPanel;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow users to pick a color map for their plot.
  * 

@@ -25,7 +25,6 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.VBoxAutoWidth;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ColumnSorters.
  */

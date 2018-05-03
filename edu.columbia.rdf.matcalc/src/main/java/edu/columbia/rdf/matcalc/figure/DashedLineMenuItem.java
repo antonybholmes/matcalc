@@ -21,7 +21,6 @@ import java.awt.Stroke;
 
 import org.jebtk.modern.menu.ModernMenuItem;
 
-// TODO: Auto-generated Javadoc
 /**
  * Menu item for displaying line styles.
  * 

@@ -33,7 +33,6 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 import edu.columbia.rdf.matcalc.figure.ScaleSpinner;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
  *

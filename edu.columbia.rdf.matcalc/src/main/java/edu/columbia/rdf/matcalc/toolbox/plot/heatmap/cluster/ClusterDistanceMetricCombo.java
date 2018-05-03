@@ -22,7 +22,6 @@ import org.jebtk.math.cluster.MaximumDistanceMetric;
 import org.jebtk.math.cluster.PearsonDistanceMetric;
 import org.jebtk.modern.combobox.ModernComboBox;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClusterDistanceMetricCombo.
  */

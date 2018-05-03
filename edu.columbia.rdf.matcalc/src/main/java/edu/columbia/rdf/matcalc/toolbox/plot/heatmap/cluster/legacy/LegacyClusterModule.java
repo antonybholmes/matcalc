@@ -39,7 +39,6 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.HierarchicalClusteringDialog;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * Legacy cluster module using older heatmap module.
  *

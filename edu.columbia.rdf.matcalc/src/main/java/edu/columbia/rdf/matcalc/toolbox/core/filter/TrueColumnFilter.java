@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter;
 
 import org.jebtk.math.matrix.DataFrame;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TrueColumnFilter.
  */

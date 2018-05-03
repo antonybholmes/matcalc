@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.figure;
 import org.jebtk.graphplot.figure.properties.LegendProperties;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class AxisLinePlotControl.
  */

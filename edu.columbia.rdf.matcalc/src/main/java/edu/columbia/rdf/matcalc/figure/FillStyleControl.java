@@ -34,7 +34,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.graph2d.FillPatternButton;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class FillControl.
  */

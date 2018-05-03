@@ -30,7 +30,6 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 import edu.columbia.rdf.matcalc.MatrixRowAnnotationCombo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class BarChartDialog.
  */

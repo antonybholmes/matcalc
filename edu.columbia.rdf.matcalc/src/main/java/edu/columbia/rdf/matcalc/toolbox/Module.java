@@ -29,7 +29,6 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The module interface dictates the function of a MatCalc module that can
  * extend the functionality of the base MatCalc application. Modules can access

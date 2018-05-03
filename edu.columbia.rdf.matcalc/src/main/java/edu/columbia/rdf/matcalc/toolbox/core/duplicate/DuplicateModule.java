@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.duplicate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.collections.UniqueArrayList;
 import org.jebtk.core.text.Splitter;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UIService;
@@ -33,7 +33,6 @@ import org.jebtk.modern.tooltip.ModernToolTip;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DuplicateModule.
  */
@@ -129,8 +128,7 @@ public class DuplicateModule extends CalcModule implements ModernClickListener {
     for (int i = 0; i < m.getRows(); ++i) {
       String text = m.getText(i, c);
 
-      List<String> tokens = CollectionUtils
-          .uniquePreserveOrder(splitter.text(text));
+      List<String> tokens = new UniqueArrayList<String>(splitter.text(text));
 
       for (String id : tokens) {
         rows.add(i);

@@ -20,7 +20,6 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow users to open from a core matrix file. This is a partial module.
  * Modules for csv, txt, and xlsx files must be loaded to provide the

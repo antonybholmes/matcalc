@@ -31,7 +31,6 @@ import org.jebtk.modern.graphics.icons.Raster32Icon;
 import org.jebtk.modern.menu.ModernIconMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu2;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class Graph2dStyleMenu.
  */

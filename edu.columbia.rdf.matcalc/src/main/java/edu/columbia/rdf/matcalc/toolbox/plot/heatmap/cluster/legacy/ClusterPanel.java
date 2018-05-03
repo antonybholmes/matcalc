@@ -37,7 +37,6 @@ import org.jebtk.modern.zoom.ZoomModel;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPanel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ClusterPanel.
  */

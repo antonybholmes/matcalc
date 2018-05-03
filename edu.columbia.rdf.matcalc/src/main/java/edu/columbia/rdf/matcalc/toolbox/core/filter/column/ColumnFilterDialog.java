@@ -56,7 +56,6 @@ import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.table.ModernRowTable;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow ordering of columns or rows in a table.
  * 

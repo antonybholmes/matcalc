@@ -62,7 +62,6 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleRibbonSection;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ColorStandardizationRibbonSection;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Window for showing 2D graphs such as a scatter plot.
  * 

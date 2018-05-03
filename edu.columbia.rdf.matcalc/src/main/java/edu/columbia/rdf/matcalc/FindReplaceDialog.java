@@ -51,7 +51,6 @@ import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
-// TODO: Auto-generated Javadoc
 /**
  * User can enter an integer option value.
  * 

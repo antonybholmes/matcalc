@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox.core.sort;
 
 import java.util.Comparator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class NaturalSorter implements natural sorting for data so that chr2
  * comes before chr11 rather than vanilla ascii sorting.

@@ -54,7 +54,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MatrixRowFilterDialog.
  */

@@ -25,7 +25,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.FontControl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class XYSeriesPlotControl.
  */

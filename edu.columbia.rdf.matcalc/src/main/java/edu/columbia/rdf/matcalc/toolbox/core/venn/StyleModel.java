@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox.core.venn;
 
 import org.jebtk.core.model.ItemModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class StyleModel.
  */

@@ -28,7 +28,6 @@ import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernLabel;
 
-// TODO: Auto-generated Javadoc
 /**
  * For choosing an FDR method.
  *

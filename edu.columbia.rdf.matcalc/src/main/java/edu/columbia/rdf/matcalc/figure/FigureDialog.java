@@ -26,7 +26,6 @@ import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow users to choose whether to create a new figure or add to an existing
  * figure.

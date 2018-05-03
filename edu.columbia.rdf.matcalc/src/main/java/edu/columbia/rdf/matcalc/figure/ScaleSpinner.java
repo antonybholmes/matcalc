@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ScaleSpinner is a specialized spinner for controlling plot scale
  * values.

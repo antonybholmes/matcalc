@@ -22,7 +22,6 @@ import org.jebtk.core.Indexed;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.table.ModernColumnHeaderTableModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Table model for ordering rows/columns.
  * 

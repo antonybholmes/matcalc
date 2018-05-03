@@ -21,7 +21,6 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.table.ModernTableModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ColumnCombo.
  */

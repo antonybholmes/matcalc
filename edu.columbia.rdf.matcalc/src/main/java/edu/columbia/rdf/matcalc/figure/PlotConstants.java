@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.figure;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class PlotConstants.
  */

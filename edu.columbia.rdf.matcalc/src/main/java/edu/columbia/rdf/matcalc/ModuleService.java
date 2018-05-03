@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import edu.columbia.rdf.matcalc.toolbox.Module;
 
-// TODO: Auto-generated Javadoc
 /**
  * Loads plugin class definitions from file so they can be instantiated. Plugins
  * must be in there own directory, for example annotations, within the main

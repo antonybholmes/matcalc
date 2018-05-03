@@ -36,7 +36,6 @@ import org.jebtk.modern.zoom.ZoomModel;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class PatternDiscoveryPanel.
  */

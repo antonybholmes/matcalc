@@ -25,7 +25,6 @@ import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class StandardizationChooser.
  */

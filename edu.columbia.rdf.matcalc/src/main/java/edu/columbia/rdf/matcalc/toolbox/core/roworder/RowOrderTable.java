@@ -19,7 +19,6 @@ import org.jebtk.modern.table.ModernRowTable;
 import org.jebtk.modern.table.ModernTableCheckboxCellEditor;
 import org.jebtk.modern.table.ModernTableCheckboxCellRenderer;
 
-// TODO: Auto-generated Javadoc
 /**
  * Table model for ordering rows/columns.
  * 

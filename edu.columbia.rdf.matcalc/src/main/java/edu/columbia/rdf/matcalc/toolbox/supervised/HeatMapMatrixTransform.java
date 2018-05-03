@@ -26,7 +26,6 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressionPlotMatrixTransform;
 
-// TODO: Auto-generated Javadoc
 /**
  * Creates a ttest plot of a matrix. Attempts to reuse existing plot if it still
  * exists.

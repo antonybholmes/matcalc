@@ -27,7 +27,6 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
 import org.jebtk.modern.graphics.colormap.ColorMapService;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow users to select a color for an object etc.
  * 

@@ -33,7 +33,6 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MatchDialog.
  */

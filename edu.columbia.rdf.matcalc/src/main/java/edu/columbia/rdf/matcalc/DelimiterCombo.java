@@ -19,7 +19,6 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox2;
 
-// TODO: Auto-generated Javadoc
 /**
  * Defines a set of delimiters for parsing files.
  */

@@ -40,7 +40,6 @@ import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class LogDialog.
  */

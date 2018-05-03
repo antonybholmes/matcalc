@@ -25,7 +25,6 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.text.ModernLabel;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class Graph2dStyleControl.
  */

@@ -27,7 +27,6 @@ import org.jebtk.modern.window.ModernWindow;
 import edu.columbia.rdf.matcalc.colormap.ColorMapControl;
 import edu.columbia.rdf.matcalc.figure.graph2d.XYSeriesPlotControl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class AxisPlotControl.
  */

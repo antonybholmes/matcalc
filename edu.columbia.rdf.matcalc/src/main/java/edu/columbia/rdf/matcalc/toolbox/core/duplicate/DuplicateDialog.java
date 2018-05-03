@@ -21,7 +21,6 @@ import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class DuplicateDialog.
  */
@@ -66,7 +65,7 @@ public class DuplicateDialog extends ModernDialogHelpWindow
    * Setup.
    */
   private void setup() {
-    setSize(320, 160);
+    setSize(400, 200);
 
     UI.centerWindowToScreen(this);
   }

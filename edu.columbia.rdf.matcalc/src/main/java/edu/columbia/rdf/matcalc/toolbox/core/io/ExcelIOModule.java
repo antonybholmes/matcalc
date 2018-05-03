@@ -20,7 +20,6 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow users to open and save Excel files. This module provides file types,
  * but expects other modules to handle opening and saving.

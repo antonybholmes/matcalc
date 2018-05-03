@@ -26,7 +26,6 @@ import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.ImageUtils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class VennCanvas.
  */

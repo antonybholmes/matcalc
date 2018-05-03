@@ -29,7 +29,6 @@ import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ColumnSort.
  */

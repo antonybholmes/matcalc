@@ -19,7 +19,6 @@ import org.jebtk.math.ui.matrix.transform.MatrixTransform;
 import org.jebtk.modern.history.ModernHistoryPanel;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MatCalcHistoryPanel.
  */

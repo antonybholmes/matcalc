@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc;
 
-// TODO: Auto-generated Javadoc
 /**
  * The enum AutoPlotType.
  */

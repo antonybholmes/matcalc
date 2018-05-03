@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
 
 import org.jebtk.core.model.DoubleModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ScaleModel.
  */

@@ -40,7 +40,6 @@ import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
 import edu.columbia.rdf.matcalc.toolbox.supervised.TestCombo;
 import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class VolcanoDialog.
  */

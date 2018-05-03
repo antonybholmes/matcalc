@@ -43,7 +43,6 @@ import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * User can enter an integer option value.
  * 

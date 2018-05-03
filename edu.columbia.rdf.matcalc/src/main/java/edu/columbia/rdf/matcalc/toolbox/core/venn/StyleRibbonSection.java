@@ -26,7 +26,6 @@ import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeRadioButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class StyleRibbonSection.
  */

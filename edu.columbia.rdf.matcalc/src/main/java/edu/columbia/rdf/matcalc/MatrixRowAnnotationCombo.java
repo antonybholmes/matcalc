@@ -20,7 +20,6 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * For choosing an FDR method.
  *

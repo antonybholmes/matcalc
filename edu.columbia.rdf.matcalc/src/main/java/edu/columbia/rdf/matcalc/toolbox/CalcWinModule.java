@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.toolbox;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ZScoreModule.
  */

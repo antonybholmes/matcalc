@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.collapse;
 
-// TODO: Auto-generated Javadoc
 /**
  * The enum CollapseType.
  */

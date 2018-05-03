@@ -20,7 +20,6 @@ import java.awt.Graphics2D;
 
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class BoxWhisker32VectorIcon.
  */

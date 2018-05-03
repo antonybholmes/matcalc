@@ -52,7 +52,6 @@ import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ClusterCanvas.
  */

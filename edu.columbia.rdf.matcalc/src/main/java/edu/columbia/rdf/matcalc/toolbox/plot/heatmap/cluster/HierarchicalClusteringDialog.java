@@ -35,7 +35,6 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 import edu.columbia.rdf.matcalc.figure.PlotConstants;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class HierarchicalClusteringDialog.
  */

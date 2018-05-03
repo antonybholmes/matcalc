@@ -35,7 +35,6 @@ import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class IntensityControl.
  */

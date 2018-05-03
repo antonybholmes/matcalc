@@ -57,7 +57,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allow ordering of columns or rows in a table.
  * 

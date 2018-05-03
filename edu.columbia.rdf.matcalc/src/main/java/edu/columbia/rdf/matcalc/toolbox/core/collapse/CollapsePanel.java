@@ -25,7 +25,6 @@ import org.jebtk.modern.panel.VBox;
 import edu.columbia.rdf.matcalc.GroupPanel;
 import edu.columbia.rdf.matcalc.MatrixRowAnnotationCombo;
 
-// TODO: Auto-generated Javadoc
 /**
  * For choosing an FDR method.
  *

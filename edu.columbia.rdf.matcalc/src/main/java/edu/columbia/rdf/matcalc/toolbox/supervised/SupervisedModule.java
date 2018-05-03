@@ -65,7 +65,6 @@ import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class OneWayAnovaModule.
  */

@@ -53,7 +53,6 @@ import edu.columbia.rdf.matcalc.toolbox.plot.scatter.SmoothedLineGraphModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
 import edu.columbia.rdf.matcalc.toolbox.supervised.SupervisedModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ModuleLoader.
  */

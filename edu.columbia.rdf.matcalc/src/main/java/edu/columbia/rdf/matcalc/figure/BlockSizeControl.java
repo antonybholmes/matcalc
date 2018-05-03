@@ -24,7 +24,6 @@ import org.jebtk.modern.panel.HExpandBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class AspectRatioControl.
  */

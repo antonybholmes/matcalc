@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.venn;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum CircleStyle.
  */

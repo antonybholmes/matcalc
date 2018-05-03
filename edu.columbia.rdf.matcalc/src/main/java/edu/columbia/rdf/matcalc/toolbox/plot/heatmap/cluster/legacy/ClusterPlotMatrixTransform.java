@@ -26,7 +26,6 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotMatrixTransform;
 
-// TODO: Auto-generated Javadoc
 /**
  * Create a cluster plot from a matrix.
  *

@@ -34,7 +34,6 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 import edu.columbia.rdf.matcalc.icons.BoxWhiskerScatter32VectorIcon;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class BoxWhiskerPlotModule.
  */

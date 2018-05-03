@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.filter;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DoesNotStartFilter.
  */

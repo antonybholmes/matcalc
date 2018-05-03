@@ -26,7 +26,6 @@ import org.jebtk.graphplot.figure.heatmap.legacy.MatrixPlotElement;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class HeatMapProperties.
  */

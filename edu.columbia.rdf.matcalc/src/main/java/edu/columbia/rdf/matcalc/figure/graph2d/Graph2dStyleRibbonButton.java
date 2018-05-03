@@ -21,7 +21,6 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.ModernScaleIcon;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class Graph2dStyleRibbonButton.
  */

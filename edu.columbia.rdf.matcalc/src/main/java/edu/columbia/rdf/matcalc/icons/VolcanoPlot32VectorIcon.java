@@ -20,7 +20,6 @@ import java.awt.Graphics2D;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 import org.jebtk.modern.theme.ThemeService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class VolcanoPlot32VectorIcon.
  */

@@ -23,7 +23,6 @@ import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.table.ModernTableCheckboxCellRenderer;
 import org.jebtk.modern.theme.ThemeService;
 
-// TODO: Auto-generated Javadoc
 /**
  * Displays an icon in a table cell.
  * 

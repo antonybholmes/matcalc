@@ -30,7 +30,6 @@ import org.jebtk.modern.window.ModernWindow;
 import edu.columbia.rdf.matcalc.figure.FigureWindow;
 import edu.columbia.rdf.matcalc.figure.FormatPlotPane;
 
-// TODO: Auto-generated Javadoc
 /**
  * Merges designated segments together using the merge column. Consecutive rows
  * with the same merge id will be merged together. Coordinates and copy number

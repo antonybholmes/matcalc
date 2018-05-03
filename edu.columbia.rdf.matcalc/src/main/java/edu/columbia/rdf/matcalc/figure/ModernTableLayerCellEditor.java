@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.figure;
 
 import org.jebtk.modern.table.ModernTableCheckboxCellEditor;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ModernTableLayerCellEditor.
  */

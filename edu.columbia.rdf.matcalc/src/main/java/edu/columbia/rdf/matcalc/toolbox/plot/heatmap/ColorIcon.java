@@ -22,7 +22,6 @@ import java.awt.Rectangle;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * Displays a color bar.
  * 

@@ -22,7 +22,6 @@ import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.menu.ModernIconMenuItem;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class GroupMenuItem.
  */

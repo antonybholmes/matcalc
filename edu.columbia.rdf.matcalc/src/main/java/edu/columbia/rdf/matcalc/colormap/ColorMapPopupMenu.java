@@ -27,7 +27,6 @@ import org.jebtk.modern.menu.ModernScrollPopupMenu;
 import org.jebtk.modern.text.ModernLabel;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ColorPopupMenu.
  */

@@ -31,7 +31,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.VisibleControl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ShapeStyleControl.
  */

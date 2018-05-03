@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc;
 import org.jebtk.math.statistics.FDRType;
 import org.jebtk.modern.combobox.ModernComboBox;
 
-// TODO: Auto-generated Javadoc
 /**
  * For choosing an FDR method.
  *

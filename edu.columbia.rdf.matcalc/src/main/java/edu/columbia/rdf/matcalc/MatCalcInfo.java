@@ -21,7 +21,6 @@ import org.jebtk.modern.help.GuiAppInfo;
 
 import edu.columbia.rdf.matcalc.icons.MatCalcIcon;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MatCalcInfo.
  */
@@ -31,7 +30,7 @@ public class MatCalcInfo extends GuiAppInfo {
    * Instantiates a new mat calc info.
    */
   public MatCalcInfo() {
-    super("MatCalc", new AppVersion(16),
+    super("MatCalc", new AppVersion(17),
         "Copyright (C) 2014-${year} Antony Holmes",
         UIService.getInstance().loadIcon(MatCalcIcon.class, 32),
         UIService.getInstance().loadIcon(MatCalcIcon.class, 128),

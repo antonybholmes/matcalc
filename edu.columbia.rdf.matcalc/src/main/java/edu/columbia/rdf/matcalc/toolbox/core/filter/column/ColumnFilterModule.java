@@ -27,7 +27,6 @@ import org.jebtk.modern.theme.ThemeService;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * Row name.
  *

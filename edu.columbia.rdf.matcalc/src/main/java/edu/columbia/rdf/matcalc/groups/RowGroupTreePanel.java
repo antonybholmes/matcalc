@@ -29,7 +29,6 @@ import org.jebtk.modern.text.ModernSubHeadingLabel;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class RowGroupTreePanel.
  */

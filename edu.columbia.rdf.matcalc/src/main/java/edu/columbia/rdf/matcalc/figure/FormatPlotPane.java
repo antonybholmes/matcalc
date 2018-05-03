@@ -20,7 +20,6 @@ import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabsModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class FormatPlotPane.
  */

@@ -35,7 +35,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.graph2d.RotationButton;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class TickLabelPlotControl.
  */

@@ -29,7 +29,6 @@ import org.jebtk.modern.ribbon.RibbonLargeCheckButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select a how the colors are standardized on a heat map.
  *

@@ -26,7 +26,6 @@ import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * For choosing an FDR method.
  *

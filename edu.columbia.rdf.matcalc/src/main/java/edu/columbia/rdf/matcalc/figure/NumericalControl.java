@@ -22,7 +22,6 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class NumericalControl.
  */

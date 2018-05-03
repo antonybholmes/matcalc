@@ -25,7 +25,6 @@ import org.jebtk.modern.text.ModernSubHeadingLabel;
 import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RadiusControl.
  */

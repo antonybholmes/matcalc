@@ -23,7 +23,6 @@ import org.jebtk.modern.window.ModernWindow;
 import edu.columbia.rdf.matcalc.figure.FillStyleControl;
 import edu.columbia.rdf.matcalc.figure.LineStyleControl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class XYSeriesPlotControl.
  */

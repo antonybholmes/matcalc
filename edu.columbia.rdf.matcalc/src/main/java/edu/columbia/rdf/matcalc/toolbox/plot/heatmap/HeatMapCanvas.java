@@ -51,7 +51,6 @@ import org.jebtk.graphplot.plotbox.PlotBoxRow;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
-// TODO: Auto-generated Javadoc
 /**
  * Generates a heatmap from a data matrix.
  * 

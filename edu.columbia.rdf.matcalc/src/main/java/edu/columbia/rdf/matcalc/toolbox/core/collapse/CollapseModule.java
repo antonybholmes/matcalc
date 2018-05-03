@@ -29,7 +29,6 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * Collapse a file based on a repeated column. The selected column will be
  * reduced to a list of unique values whilst all other columns will be turned

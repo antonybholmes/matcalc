@@ -25,7 +25,6 @@ import edu.columbia.rdf.matcalc.toolbox.core.io.TxtIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.XLSXIOModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.XlsIOModule;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ModuleLoader.
  */

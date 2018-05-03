@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClusterProperties.
  */

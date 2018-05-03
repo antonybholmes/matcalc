@@ -35,7 +35,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.MatCalcWindowCombo;
 import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MatchDialog.
  */

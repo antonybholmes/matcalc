@@ -40,7 +40,6 @@ import org.jebtk.modern.text.ModernTextBorderPanel;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * User can enter an integer option value.
  * 

@@ -20,7 +20,6 @@ import org.jebtk.math.ui.matrix.transform.MatrixTransform;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowService;
 
-// TODO: Auto-generated Javadoc
 /**
  * Create a plot from a matrix.
  * 

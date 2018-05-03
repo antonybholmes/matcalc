@@ -19,7 +19,6 @@ import org.jebtk.core.AppVersion;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.help.GuiAppInfo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class VennInfo.
  */

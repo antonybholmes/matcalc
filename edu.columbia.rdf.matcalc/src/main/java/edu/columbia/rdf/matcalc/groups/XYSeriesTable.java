@@ -22,7 +22,6 @@ import org.jebtk.modern.table.ModernTableColorCellEditor;
 import org.jebtk.modern.table.ModernTableColorCellRenderer;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class XYSeriesTable.
  */

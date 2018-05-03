@@ -26,7 +26,6 @@ import org.jebtk.modern.table.ModernRowTable;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernSubTitleLabel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Display the program settings tree inline within the Ribbon menu.
  * 
