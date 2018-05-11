@@ -37,6 +37,7 @@ import edu.columbia.rdf.matcalc.toolbox.core.venn.VennModule;
 import edu.columbia.rdf.matcalc.toolbox.math.LogModule;
 import edu.columbia.rdf.matcalc.toolbox.math.NormalizeModule;
 import edu.columbia.rdf.matcalc.toolbox.math.PowerModule;
+import edu.columbia.rdf.matcalc.toolbox.math.RoundModule;
 import edu.columbia.rdf.matcalc.toolbox.math.StatsModule;
 import edu.columbia.rdf.matcalc.toolbox.math.ThresholdModule;
 import edu.columbia.rdf.matcalc.toolbox.math.TransposeModule;
@@ -68,6 +69,7 @@ public class BasicModuleLoader extends CoreModuleLoader {
     addModule(ThresholdModule.class);
     addModule(LogModule.class);
     addModule(PowerModule.class);
+    addModule(RoundModule.class);
     addModule(NormalizeModule.class);
     addModule(ZScoreModule.class);
     addModule(StatsModule.class);

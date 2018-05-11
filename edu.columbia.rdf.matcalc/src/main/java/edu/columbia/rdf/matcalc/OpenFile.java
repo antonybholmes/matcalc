@@ -133,8 +133,6 @@ public class OpenFile {
         List<Module> modules = mWindow.getFileModules(ext);
 
         for (Module module : modules) {
-          System.err.println("sdsdf " + module.getName() + " " + ext);
-
           DataFrame m = module.openFile(mWindow,
               file,
               mFileType,

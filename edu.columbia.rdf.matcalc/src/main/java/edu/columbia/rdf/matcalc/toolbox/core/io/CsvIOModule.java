@@ -23,6 +23,7 @@ import org.jebtk.math.matrix.CsvDynamicMatrixParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.io.CsvGuiFileFilter;
+import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
@@ -37,7 +38,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class CsvIOModule extends CalcModule {
 
   /** The Constant FILTER. */
-  private static final GuiFileExtFilter FILTER = new CsvGuiFileFilter();
+  private static final GuiFileExtFilter FILTER = 
+      FileFilterService.instance().getFilter("csv"); //new CsvGuiFileFilter();
 
   /**
    * Instantiates a new csv IO module.

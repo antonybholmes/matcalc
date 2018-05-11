@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.io;
 
-import org.jebtk.math.ui.external.microsoft.ExcelGuiFileFilter;
+import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.toolbox.CalcModule;
@@ -29,7 +29,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class ExcelIOModule extends CalcModule {
 
   /** The Constant FILTER. */
-  private static final GuiFileExtFilter FILTER = new ExcelGuiFileFilter();
+  private static final GuiFileExtFilter FILTER = 
+      FileFilterService.instance().getFilter("excel"); //new ExcelGuiFileFilter();
 
   /**
    * Instantiates a new xlsx IO module.

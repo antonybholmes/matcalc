@@ -26,8 +26,8 @@ import org.jebtk.math.matrix.DoubleMatrixParser;
 import org.jebtk.math.matrix.DynamicMixedMatrixParser;
 import org.jebtk.math.matrix.MixedMatrixParser;
 import org.jebtk.modern.dialog.ModernDialogStatus;
+import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
-import org.jebtk.modern.io.TxtGuiFileFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
@@ -43,7 +43,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class TxtIOModule extends CalcModule {
 
   /** The Constant TXT_FILTER. */
-  private static final GuiFileExtFilter TXT_FILTER = new TxtGuiFileFilter();
+  private static final GuiFileExtFilter TXT_FILTER = 
+      FileFilterService.instance().getFilter("txt");
 
   /**
    * Instantiates a new tsv IO module.

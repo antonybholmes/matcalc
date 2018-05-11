@@ -22,7 +22,7 @@ import java.util.Collection;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.ui.external.microsoft.XlsGuiFileFilter;
+import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
@@ -36,7 +36,8 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 public class XlsIOModule extends XlIOModule {
 
   /** The Constant FILTER. */
-  private static final GuiFileExtFilter FILTER = new XlsGuiFileFilter();
+  private static final GuiFileExtFilter FILTER = 
+      FileFilterService.instance().getFilter("xls"); //new XlsGuiFileFilter();
 
   /**
    * Instantiates a new xlsx IO module.

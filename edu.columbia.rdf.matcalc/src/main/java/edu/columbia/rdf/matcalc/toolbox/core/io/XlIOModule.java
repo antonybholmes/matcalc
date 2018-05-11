@@ -71,8 +71,8 @@ public abstract class XlIOModule extends CalcModule {
         skipLines);
   }
   
-  //@Override
-  //public boolean showIOFilterUI() {
-  //  return false;
-  //}
+  @Override
+  public boolean showIOFilterUI() {
+    return false;
+  }
 }

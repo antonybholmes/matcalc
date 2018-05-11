@@ -24,8 +24,8 @@ import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.external.microsoft.ExcelMatrix;
 import org.jebtk.math.external.microsoft.XLSXMetaData;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.dialog.ModernDialogStatus;
+import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
@@ -40,7 +40,8 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 public class XLSXIOModule extends XlIOModule {
 
   /** The Constant FILTER. */
-  private static final GuiFileExtFilter FILTER = new XlsxGuiFileFilter();
+  private static final GuiFileExtFilter FILTER = 
+      FileFilterService.instance().getFilter("xlsx"); //new XlsxGuiFileFilter();
 
   /**
    * Instantiates a new xlsx IO module.
@@ -131,11 +132,5 @@ public class XLSXIOModule extends XlIOModule {
     Excel.writeXlsx(m, file);
 
     return true;
-  }
-  
-  @Override
-  public boolean showIOFilterUI() {
-    // Respond to file events
-    return false;
   }
 }

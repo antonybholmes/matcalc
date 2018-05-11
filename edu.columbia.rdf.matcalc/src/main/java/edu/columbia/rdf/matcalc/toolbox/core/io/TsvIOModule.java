@@ -22,6 +22,7 @@ import java.util.Collection;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrixParser;
 import org.jebtk.math.matrix.DynamicMixedMatrixParser;
+import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
 import org.jebtk.modern.io.TsvGuiFileFilter;
 
@@ -37,7 +38,8 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class TsvIOModule extends CalcModule {
 
   /** The Constant TXT_FILTER. */
-  private static final GuiFileExtFilter TSV_FILTER = new TsvGuiFileFilter();
+  private static final GuiFileExtFilter TSV_FILTER = 
+      FileFilterService.instance().getFilter("tsv"); //new TsvGuiFileFilter();
 
   /**
    * Instantiates a new tsv IO module.
