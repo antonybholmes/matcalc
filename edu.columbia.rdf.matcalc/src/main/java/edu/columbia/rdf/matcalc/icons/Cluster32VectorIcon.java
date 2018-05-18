@@ -49,7 +49,7 @@ public class Cluster32VectorIcon extends ModernVectorIcon {
    * Instantiates a new cluster32 vector icon.
    */
   public Cluster32VectorIcon() {
-    this(ThemeService.getInstance().colors().getColorHighlight(4));
+    this(ThemeService.getInstance().colors().getTheme(4));
   }
 
   /**

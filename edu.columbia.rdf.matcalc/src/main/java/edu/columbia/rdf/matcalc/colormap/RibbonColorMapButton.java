@@ -137,8 +137,8 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton
      * 
      * try { g2Temp.setPaint(paint);
      * 
-     * g2Temp.fillRoundRect(x, y, w, 16, ModernRoundedWidgetRenderer.ROUNDING,
-     * ModernRoundedWidgetRenderer.ROUNDING); } finally { g2Temp.dispose(); }
+     * g2Temp.fillRoundRect(x, y, w, 16, MaterialService.instance().ints().cornerRadius();,
+     * MaterialService.instance().ints().cornerRadius();); } finally { g2Temp.dispose(); }
      */
 
     /*

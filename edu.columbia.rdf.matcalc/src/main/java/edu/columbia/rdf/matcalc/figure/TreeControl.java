@@ -68,11 +68,11 @@ public class TreeControl extends VBox {
     mPrefix = prefix;
     mProperties = properties;
 
-    mSlider.setValue(properties.getAsInt(prefix + ".width"));
+    mSlider.setValue(properties.getInt(prefix + ".width"));
 
     mCheckVisible = new ColoredPlotControl(parent, "Show",
-        properties.getAsColor(prefix + ".color"),
-        properties.getAsBool(prefix + ".visible"));
+        properties.getColor(prefix + ".color"),
+        properties.getBool(prefix + ".visible"));
 
     add(mCheckVisible);
     add(UI.createVGap(5));
@@ -91,7 +91,7 @@ public class TreeControl extends VBox {
     mSlider.addChangeListener(new ChangeListener() {
       @Override
       public void changed(ChangeEvent e) {
-        mProperties.setProperty(mPrefix + ".width", mSlider.getIntValue());
+        mProperties.set(mPrefix + ".width", mSlider.getIntValue());
       }
     });
 
@@ -99,9 +99,9 @@ public class TreeControl extends VBox {
 
       @Override
       public void clicked(ModernClickEvent e) {
-        mProperties.setProperty(mPrefix + ".visible",
+        mProperties.set(mPrefix + ".visible",
             mCheckVisible.isSelected());
-        mProperties.setProperty(mPrefix + ".color",
+        mProperties.set(mPrefix + ".color",
             mCheckVisible.getSelectedColor());
       }
     });

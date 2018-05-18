@@ -89,7 +89,7 @@ public class OrderRows32VectorIcon extends ModernVectorIcon {
 
     g2.setColor(ModernWidget.BACKGROUND_COLOR);
     g2.fill(gp);
-    g2.setColor(ThemeService.getInstance().colors().getHighlight(6));
+    g2.setColor(ThemeService.getInstance().colors().getGray(6));
     g2.draw(gp);
   }
 }

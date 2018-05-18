@@ -84,9 +84,9 @@ import org.jebtk.modern.panel.CardPanel;
 import org.jebtk.modern.ribbon.QuickAccessButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
-import org.jebtk.modern.splitpane.ModernVSplitPaneLine;
 import org.jebtk.modern.table.ModernSpreadsheetBar;
 import org.jebtk.modern.tabs.IconTabsFolderIcon;
+import org.jebtk.modern.tabs.OrbTabsPanel;
 import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabPanel;
 import org.jebtk.modern.tabs.TabsModel;
@@ -719,7 +719,7 @@ ModernSelectionListener, MatrixTransformListener {
    * @see org.abh.lib.ui.modern.window.ModernWindow#createUi()
    */
   public final void createUi() {
-    if (mProperties.getAsBool("matcalc.ui.files.enabled")) {
+    if (mProperties.getBool("matcalc.ui.files.enabled")) {
       setContentHeader(mDirPanel);
     }
 
@@ -740,13 +740,13 @@ ModernSelectionListener, MatrixTransformListener {
 
 
   private void createLeftTabs() {
-    if (mProperties.getAsBool("matcalc.ui.left-tabs.enabled")) {
+    if (mProperties.getBool("matcalc.ui.left-tabs.enabled")) {
       createFilesTabs();
     }
   }
 
   private void createFilesTabs() {
-    if (mProperties.getAsBool("matcalc.ui.files.enabled")) {
+    if (mProperties.getBool("matcalc.ui.files.enabled")) {
       getIconTabs().addTab("Files",
           new IconTabsFolderIcon(),
           new TabPanel("Files", mFilesPanel));
@@ -754,7 +754,7 @@ ModernSelectionListener, MatrixTransformListener {
   }
 
   private void createRightTabs() {
-    if (mProperties.getAsBool("matcalc.ui.right-tabs.enabled")) {
+    if (mProperties.getBool("matcalc.ui.right-tabs.enabled")) {
       mGroupPanel = new SegmentTabsPanel(mRightTabsModel, 70, 5);
       mGroupPanel.setBorder(ModernWidget.LEFT_RIGHT_BORDER);
       tabsPane().tabs().right().add("History", mGroupPanel, 250, 200, 500);
@@ -773,23 +773,24 @@ ModernSelectionListener, MatrixTransformListener {
    * Creates the groups panel.
    */
   private void createGroupsPanel() {
-    if (mProperties.getAsBool("matcalc.ui.groups.enabled")) {
-      ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
+    if (mProperties.getBool("matcalc.ui.groups.enabled")) {
+      //ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
 
-      splitPane.addComponent(mRowGroupsPanel, 0.3);
-      splitPane.addComponent(mColumnGroupsPanel, 0.5);
-
-
-      //TabsModel groupTabsModel = new TabsModel();
-      //groupTabsModel.addTab("Rows", mRowGroupsPanel);
-      //groupTabsModel.addTab("Columns", mColumnGroupsPanel);
-
-      //SegmentTabsPanel tabsPanel = new SegmentTabsPanel(groupTabsModel, 60);
-
-      //groupTabsModel.changeTab(1);
+      //splitPane.addComponent(mRowGroupsPanel, 0.3);
+      //splitPane.addComponent(mColumnGroupsPanel, 0.5);
 
 
-      mRightTabsModel.addTab("Groups", splitPane);
+      TabsModel groupTabsModel = new TabsModel();
+      groupTabsModel.addTab("Rows", mRowGroupsPanel);
+      groupTabsModel.addTab("Columns", mColumnGroupsPanel);
+
+      OrbTabsPanel tabsPanel = new OrbTabsPanel(groupTabsModel, 24);
+      tabsPanel.topBorder(10);
+      
+      groupTabsModel.changeTab(1);
+
+
+      mRightTabsModel.addTab("Groups", tabsPanel);
     }
   }
 
@@ -810,7 +811,7 @@ ModernSelectionListener, MatrixTransformListener {
    * Adds the history pane to the layout if it is not already showing.
    */
   private void addHistoryPane() {
-    if (mProperties.getAsBool("matcalc.ui.history.enabled")) {
+    if (mProperties.getBool("matcalc.ui.history.enabled")) {
       mRightTabsModel.addTab("History", mHistoryPanel);
     }
 
@@ -1817,7 +1818,7 @@ ModernSelectionListener, MatrixTransformListener {
   }
 
   private void setTable(JComponent c) {
-    if (mProperties.getAsBool("matcalc.ui.table.drop-shadow.enabled")) {
+    if (mProperties.getBool("matcalc.ui.table.drop-shadow.enabled")) {
       setCenterTab(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER), ModernWidget.BORDER));
     } else {
       setPanel(c);

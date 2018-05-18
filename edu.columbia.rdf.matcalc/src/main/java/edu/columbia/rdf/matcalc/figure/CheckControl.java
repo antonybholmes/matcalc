@@ -61,7 +61,7 @@ public class CheckControl extends VBox {
 
     mCheck = new ModernCheckSwitch(name);
 
-    mCheck.setSelected(properties.getAsBool(setting));
+    mCheck.setSelected(properties.getBool(setting));
 
     add(UI.createVGap(5));
     add(mCheck);
@@ -70,7 +70,7 @@ public class CheckControl extends VBox {
     mCheck.addClickListener(new ModernClickListener() {
       @Override
       public void clicked(ModernClickEvent e) {
-        mProperties.setProperty(mSetting, mCheck.isSelected());
+        mProperties.set(mSetting, mCheck.isSelected());
       }
     });
   }

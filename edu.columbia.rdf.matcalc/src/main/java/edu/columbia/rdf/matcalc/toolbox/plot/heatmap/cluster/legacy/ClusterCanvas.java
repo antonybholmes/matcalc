@@ -163,16 +163,16 @@ public class ClusterCanvas extends PlotBoxRow {
     PlotBox rowLabelsBox = new PlotBoxColumn();
 
     DoubleDim aspectRatio = (DoubleDim) properties
-        .getProperty("plot.block-size");
+        .getValue("plot.block-size");
 
-    ColorMap colorMap = (ColorMap) properties.getProperty("plot.colormap");
+    ColorMap colorMap = (ColorMap) properties.getValue("plot.colormap");
 
-    int maxChars = properties.getAsInt("plot.row-label-max-chars");
+    int maxChars = properties.getInt("plot.row-label-max-chars");
 
-    int treeWidthH = properties.getAsInt("plot.tree.hoz.width");
-    boolean treeVisH = properties.getAsBool("plot.tree.hoz.visible");
-    int treeWidthV = properties.getAsInt("plot.tree.vert.width");
-    boolean treeVisV = properties.getAsBool("plot.tree.vert.visible");
+    int treeWidthH = properties.getInt("plot.tree.hoz.width");
+    boolean treeVisH = properties.getBool("plot.tree.hoz.visible");
+    int treeWidthV = properties.getInt("plot.tree.vert.width");
+    boolean treeVisV = properties.getBool("plot.tree.vert.visible");
 
 
     if (rowLabelProperties.showFeatureCounts
@@ -332,7 +332,7 @@ public class ClusterCanvas extends PlotBoxRow {
     // cluster
     //
 
-    boolean heatMapVisible = properties.getAsBool("plot.heatmap.visible");
+    boolean heatMapVisible = properties.getBool("plot.heatmap.visible");
 
     if (heatMapVisible) {
       columnBox = new PlotBoxColumn();
@@ -347,7 +347,7 @@ public class ClusterCanvas extends PlotBoxRow {
 
         if (treeVisH && rowCluster != null) {
           element = new RowHTreeLeftPlotElement(matrix, treeWidthH, aspectRatio,
-              rowCluster, properties.getAsColor("plot.tree.hoz.color"));
+              rowCluster, properties.getColor("plot.tree.hoz.color"));
           // canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
           columnBox.addChild(element);
 
@@ -358,11 +358,11 @@ public class ClusterCanvas extends PlotBoxRow {
       element = new HeatMapPlotElement(matrix, colorMap, aspectRatio);
 
       ((HeatMapPlotElement) element)
-          .setGridColor(properties.getAsColor("plot.grid-color"));
+          .setGridColor(properties.getColor("plot.grid-color"));
       ((HeatMapPlotElement) element)
-          .setOutlineColor(properties.getAsColor("plot.outline-color"));
+          .setOutlineColor(properties.getColor("plot.outline-color"));
       ((HeatMapPlotElement) element)
-          .setBorderColor(properties.getAsColor("plot.border-color"));
+          .setBorderColor(properties.getColor("plot.border-color"));
 
       columnBox.addChild(element);
 
@@ -377,7 +377,7 @@ public class ClusterCanvas extends PlotBoxRow {
 
           element = new RowHTreeRightPlotElement(matrix, treeWidthH,
               aspectRatio, rowCluster,
-              properties.getAsColor("plot.tree.hoz.color"));
+              properties.getColor("plot.tree.hoz.color"));
           // canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
           columnBox.addChild(element);
 
@@ -421,7 +421,7 @@ public class ClusterCanvas extends PlotBoxRow {
 
     PlotBox rowBox = new PlotBoxRow();
 
-    if (properties.getAsBool("plot.show-legend")) {
+    if (properties.getBool("plot.show-legend")) {
       if (columnCluster != null) {
         element = new GroupsHierarchicalPlotElement(matrix, aspectRatio,
             LEGEND_WIDTH, columnCluster, groups);
@@ -435,14 +435,14 @@ public class ClusterCanvas extends PlotBoxRow {
       rowBox.addChild(emptyVBox);
     }
     
-    if (properties.getAsBool("plot.show-colorbar")) {
+    if (properties.getBool("plot.show-colorbar")) {
       element = new ColorBar(colorMap, min, max,
           new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
       rowBox.addChild(element);
       rowLabelsBox.addChild(emptyVBox);
     }
 
-    if (properties.getAsBool("plot.show-summary")) {
+    if (properties.getBool("plot.show-summary")) {
       element = new MatrixSummaryPlotElement(matrix, history, aspectRatio, 400);
       rowBox.addChild(element);
       rowLabelsBox.addChild(emptyVBox);

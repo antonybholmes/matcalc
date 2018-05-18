@@ -120,19 +120,19 @@ public class HeatMapCanvas extends PlotBoxRow {
       GroupProperties groupProperties, Properties properties) {
 
     DoubleDim aspectRatio = (DoubleDim) properties
-        .getProperty("plot.block-size");
+        .getValue("plot.block-size");
 
-    ColorMap colorMap = (ColorMap) properties.getProperty("plot.colormap");
+    ColorMap colorMap = (ColorMap) properties.getValue("plot.colormap");
 
     HeatMapPlotElement heatMapElement = new HeatMapPlotElement(matrix, colorMap,
         aspectRatio);
 
     heatMapElement
-        .setGridColor((Color) properties.getProperty("plot.grid-color"));
+        .setGridColor((Color) properties.getValue("plot.grid-color"));
     heatMapElement
-        .setOutlineColor((Color) properties.getProperty("plot.outline-color"));
+        .setOutlineColor((Color) properties.getValue("plot.outline-color"));
     heatMapElement
-        .setBorderColor((Color) properties.getProperty("plot.border-color"));
+        .setBorderColor((Color) properties.getValue("plot.border-color"));
 
     PlotElement element;
 
@@ -196,7 +196,7 @@ public class HeatMapCanvas extends PlotBoxRow {
     // Vertical labels
     //
 
-    int maxChars = properties.getAsInt("plot.row-label-max-chars");
+    int maxChars = properties.getInt("plot.row-label-max-chars");
 
     //
     // Create space for the column labels
@@ -344,21 +344,21 @@ public class HeatMapCanvas extends PlotBoxRow {
 
     PlotBox rowBox = new PlotBoxRow();
 
-    if ((boolean) properties.getProperty("plot.show-legend")) {
+    if (properties.getBool("plot.show-legend")) {
       element = new GroupsLegendPlotElement(matrix, aspectRatio, LEGEND_WIDTH,
           groups);
       rowBox.addChild(element);
       rowBox.addChild(emptyVBox);
     }
     
-    if ((boolean) properties.getProperty("plot.show-colorbar")) {
+    if (properties.getBool("plot.show-colorbar")) {
       element = new ColorBar(colorMap, min, max,
           new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));
       rowBox.addChild(element);
       rowLabelsBox.addChild(emptyVBox);
     }
 
-    if ((boolean) properties.getProperty("plot.show-legend")) {
+    if (properties.getBool("plot.show-legend")) {
       element = new MatrixSummaryPlotElement(matrix, history, aspectRatio, 400);
       rowBox.addChild(element);
       rowLabelsBox.addChild(emptyVBox);

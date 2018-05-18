@@ -51,8 +51,8 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
    */
   private RibbonLargeButton button = new RibbonLargeButton(
       new Raster24Icon(new RotateVectorIcon(new FilterVectorIcon(
-          ThemeService.getInstance().colors().getHighlight(8),
-          ThemeService.getInstance().colors().getHighlight(6)), -90)),
+          ThemeService.getInstance().colors().getGray(8),
+          ThemeService.getInstance().colors().getGray(6)), -90)),
       "Row Filter", "Filter rows matching a list of values.");
 
   /**

@@ -182,7 +182,7 @@ public class ProportionalVennCanvas extends VennCanvas {
     mP2 = null;
     mP3 = null;
 
-    int r = mProperties.getAsInt("venn.reference.radius");
+    int r = mProperties.getInt("venn.reference.radius");
 
     double maxArea = Math.PI * r * r;
 

@@ -28,7 +28,7 @@ public class ClusterProperties extends HeatMapProperties {
    */
   public ClusterProperties() {
     // Whether to color edges of tree with
-    setProperty("plot.tree.vert.leaf.color", false);
-    setProperty("plot.tree.hoz.leaf.color", false);
+    set("plot.tree.vert.leaf.color", false);
+    set("plot.tree.hoz.leaf.color", false);
   }
 }

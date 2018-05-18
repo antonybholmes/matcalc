@@ -29,12 +29,12 @@ public class MatCalcProperties extends Properties {
    * Instantiates a new mat calc properties.
    */
   public MatCalcProperties() {
-    setProperty("matcalc.ui.groups.enabled", true);
-    setProperty("matcalc.ui.files.enabled", true);
-    setProperty("matcalc.ui.history.enabled", true);
-    setProperty("matcalc.ui.left-tabs.enabled", true);
-    setProperty("matcalc.ui.right-tabs.enabled", true);
-    setProperty("matcalc.ui.table.drop-shadow.enabled", true);
+    set("matcalc.ui.groups.enabled", true);
+    set("matcalc.ui.files.enabled", true);
+    set("matcalc.ui.history.enabled", true);
+    set("matcalc.ui.left-tabs.enabled", true);
+    set("matcalc.ui.right-tabs.enabled", true);
+    set("matcalc.ui.table.drop-shadow.enabled", true);
   }
   
 

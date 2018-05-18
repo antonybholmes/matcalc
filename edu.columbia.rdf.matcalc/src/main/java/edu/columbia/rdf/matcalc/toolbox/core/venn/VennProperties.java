@@ -29,6 +29,6 @@ public class VennProperties extends Properties {
    * Instantiates a new venn properties.
    */
   public VennProperties() {
-    setProperty("venn.reference.radius", 150);
+    set("venn.reference.radius", 150);
   }
 }

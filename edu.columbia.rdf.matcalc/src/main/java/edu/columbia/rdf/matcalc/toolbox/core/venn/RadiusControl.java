@@ -62,7 +62,7 @@ public class RadiusControl extends HBox implements KeyListener {
   @Override
   public void keyPressed(KeyEvent e) {
     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-      mProperties.setProperty("venn.reference.radius", mTextRadius.getAsInt());
+      mProperties.set("venn.reference.radius", mTextRadius.getAsInt());
     }
   }
 

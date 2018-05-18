@@ -54,8 +54,8 @@ public class FilterModule extends CalcModule implements ModernClickListener {
    */
   private RibbonLargeButton mFilterButton = new RibbonLargeButton("Filter",
       new Raster24Icon(new FilterVectorIcon(
-          ThemeService.getInstance().colors().getColorHighlight(8),
-          ThemeService.getInstance().colors().getColorHighlight(6))));
+          ThemeService.getInstance().colors().getTheme(8),
+          ThemeService.getInstance().colors().getTheme(6))));
 
   /**
    * The member window.

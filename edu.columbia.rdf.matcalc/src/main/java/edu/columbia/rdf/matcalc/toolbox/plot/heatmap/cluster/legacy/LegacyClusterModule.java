@@ -135,7 +135,7 @@ public class LegacyClusterModule extends CalcModule
 
     Linkage linkage = dialog.getLinkage();
 
-    properties.setProperty("plot.heatmap.visible", dialog.getShowHeatMap());
+    properties.set("plot.heatmap.visible", dialog.getShowHeatMap());
 
     cluster(m,
         distanceMetric,

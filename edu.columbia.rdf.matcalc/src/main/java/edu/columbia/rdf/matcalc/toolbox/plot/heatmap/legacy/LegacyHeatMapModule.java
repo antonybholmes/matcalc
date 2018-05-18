@@ -143,16 +143,16 @@ public class LegacyHeatMapModule extends CalcModule
 
     if (w < 20 || h < 20) {
       // Don't show grid
-      properties.setProperty("plot.show-grid-color", false);
-      properties.setProperty("plot.show-outline-color", false);
+      properties.set("plot.show-grid-color", false);
+      properties.set("plot.show-outline-color", false);
     }
 
     if (h < 20) {
-      properties.setProperty("plot.show-feature-counts", false);
-      properties.setProperty("plot.show-row-labels", false);
+      properties.set("plot.show-feature-counts", false);
+      properties.set("plot.show-row-labels", false);
     }
 
-    properties.setProperty("plot.block-size", new DoubleDim(w, h));
+    properties.set("plot.block-size", new DoubleDim(w, h));
   }
 
   /**

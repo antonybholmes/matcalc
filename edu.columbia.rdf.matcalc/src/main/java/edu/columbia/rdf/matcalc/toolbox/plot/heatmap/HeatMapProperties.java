@@ -40,38 +40,38 @@ public class HeatMapProperties extends Properties {
    * Instantiates a new heat map properties.
    */
   public HeatMapProperties() {
-    setProperty("plot.row-label-max-chars",
+    set("plot.row-label-max-chars",
         SettingsService.getInstance().getAsInt("plot.row-label-max-chars"));
 
-    setProperty("plot.border-color", Color.BLACK);
-    setProperty("plot.grid-color", ModernWidget.LINE_COLOR);
-    setProperty("plot.outline-color", Color.BLACK);
+    set("plot.border-color", Color.BLACK);
+    set("plot.grid-color", ModernWidget.LINE_COLOR);
+    set("plot.outline-color", Color.BLACK);
 
-    setProperty("plot.border-color-enabled", true);
-    setProperty("plot.show-grid-color", true);
-    setProperty("plot.show-outline-color", true);
-    setProperty("plot.colormap", ColorMap.createBlueWhiteRedMap());
-    setProperty("plot.show-legend", true);
-    setProperty("plot.show-colorbar", true);
-    setProperty("plot.show-summary", true);
-    setProperty("plot.aspect-ratio", new AspectRatio());
-    setProperty("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
-    setProperty("plot.show-row-labels", true);
-    setProperty("plot.show-feature-counts", true);
-    setProperty("plot.color.standardization",
+    set("plot.border-color-enabled", true);
+    set("plot.show-grid-color", true);
+    set("plot.show-outline-color", true);
+    set("plot.colormap", ColorMap.createBlueWhiteRedMap());
+    set("plot.show-legend", true);
+    set("plot.show-colorbar", true);
+    set("plot.show-summary", true);
+    set("plot.aspect-ratio", new AspectRatio());
+    set("plot.block-size", new DoubleDim(MatrixPlotElement.BLOCK_SIZE));
+    set("plot.show-row-labels", true);
+    set("plot.show-feature-counts", true);
+    set("plot.color.standardization",
         ColorNormalizationType.ZSCORE_ROW);
-    setProperty("plot.color.intensity", 0);
-    setProperty("plot.tree.hoz.width", 200);
-    setProperty("plot.tree.hoz.visible", true);
-    setProperty("plot.tree.hoz.color", Color.BLACK);
-    setProperty("plot.tree.vert.width", 200);
-    setProperty("plot.tree.vert.visible", true);
-    setProperty("plot.tree.vert.color", Color.BLACK);
+    set("plot.color.intensity", 0);
+    set("plot.tree.hoz.width", 200);
+    set("plot.tree.hoz.visible", true);
+    set("plot.tree.hoz.color", Color.BLACK);
+    set("plot.tree.vert.width", 200);
+    set("plot.tree.vert.visible", true);
+    set("plot.tree.vert.color", Color.BLACK);
 
     // Whether to color labels by their group color or not
-    setProperty("plot.labels.color-by-group", false);
+    set("plot.labels.color-by-group", false);
 
-    setProperty("plot.heatmap.visible", true);
+    set("plot.heatmap.visible", true);
   }
 
 }

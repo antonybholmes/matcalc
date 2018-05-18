@@ -85,7 +85,7 @@ public class ColorMapPopupMenu extends ModernScrollPopupMenu {
 
     add(new ModernIconMenuItem("More Color Maps...",
         UIService.getInstance().loadIcon("color_wheel", 16))
-            .setBackgroundAnimations("color-menu-fade"));
+            .setAnimations("color-menu-fade"));
 
     update();
   }

@@ -273,7 +273,7 @@ public class HeatMapPanel extends FormatPlotPane
     box = VBox.create();
 
     mCheckShow = new ModernCheckSwitch("Show",
-        properties.getAsBool("plot.heatmap.visible"));
+        properties.getBool("plot.heatmap.visible"));
     mCheckShow.addClickListener(this);
     mCheckShow.setAlignmentY(TOP_ALIGNMENT);
     box.add(mCheckShow);
@@ -284,24 +284,24 @@ public class HeatMapPanel extends FormatPlotPane
     // box2.setBorder(BorderService.getInstance().createLeftBorder(10));
 
     mGridElement = new ColoredPlotControl(parent, "Grid",
-        properties.getAsColor("plot.grid-color"),
-        properties.getAsBool("plot.show-grid-color"));
+        properties.getColor("plot.grid-color"),
+        properties.getBool("plot.show-grid-color"));
     mGridElement.addClickListener(this);
     box.add(mGridElement);
 
     box.add(ModernPanel.createVGap());
 
     mOutlineElement = new ColoredPlotControl(parent, "Outline",
-        properties.getAsColor("plot.outline-color"),
-        properties.getAsBool("plot.show-outline-color"));
+        properties.getColor("plot.outline-color"),
+        properties.getBool("plot.show-outline-color"));
     mOutlineElement.addClickListener(this);
     box.add(mOutlineElement);
 
     box.add(ModernPanel.createVGap());
 
     mBorderElement = new ColoredPlotControl(parent, "Border",
-        properties.getAsColor("plot.border-color"),
-        properties.getAsBool("plot.border-color-enabled"));
+        properties.getColor("plot.border-color"),
+        properties.getBool("plot.border-color-enabled"));
     mBorderElement.addClickListener(this);
     box.add(mBorderElement);
 
@@ -317,7 +317,7 @@ public class HeatMapPanel extends FormatPlotPane
 
     box = VBox.create();
     mAspectRatioElement = new BlockSizeControl(
-        (DoubleDim) properties.getProperty("plot.block-size"));
+        (DoubleDim) properties.getValue("plot.block-size"));
     mAspectRatioElement.addChangeListener(this);
     box.add(mAspectRatioElement);
     box.setBorder(LARGE_BORDER);
@@ -362,8 +362,8 @@ public class HeatMapPanel extends FormatPlotPane
     box = VBox.create();
 
     mRowsElement = new RowLabelControl(parent, matrix, RowLabelPosition.RIGHT,
-        properties.getAsBool("plot.show-feature-counts"),
-        properties.getAsBool("plot.show-row-labels"));
+        properties.getBool("plot.show-feature-counts"),
+        properties.getBool("plot.show-row-labels"));
 
     box.add(mRowsElement);
 
@@ -612,30 +612,30 @@ public class HeatMapPanel extends FormatPlotPane
     columnLabelProperties.position = mColumnLabelPositionElement.getPosition();
 
 
-    mProperties.updateProperty("plot.grid-color",
+    mProperties.update("plot.grid-color",
         mGridElement.getSelectedColor());
-    mProperties.updateProperty("plot.show-grid-color",
+    mProperties.update("plot.show-grid-color",
         mGridElement.isSelected());
 
-    mProperties.updateProperty("plot.outline-color",
+    mProperties.update("plot.outline-color",
         mOutlineElement.getSelectedColor());
-    mProperties.updateProperty("plot.show-outline-color",
+    mProperties.update("plot.show-outline-color",
         mOutlineElement.isSelected());
 
-    mProperties.updateProperty("plot.border-color",
+    mProperties.update("plot.border-color",
         mBorderElement.getSelectedColor());
-    mProperties.updateProperty("plot.show-border-color",
+    mProperties.update("plot.show-border-color",
         mBorderElement.isSelected());
 
     // mProperties.updateProperty("plot.aspect-ratio",
     // mAspectRatioElement.getAspectRatio());
 
-    mProperties.updateProperty("plot.block-size",
+    mProperties.update("plot.block-size",
         mAspectRatioElement.getBlockSize());
 
-    mProperties.updateProperty("plot.colormap", colorMap);
+    mProperties.update("plot.colormap", colorMap);
 
-    mProperties.updateProperty("plot.heatmap.visible", mCheckShow.isSelected());
+    mProperties.update("plot.heatmap.visible", mCheckShow.isSelected());
 
     mCanvas = createCanvas(m,
         groupsOfInterest,

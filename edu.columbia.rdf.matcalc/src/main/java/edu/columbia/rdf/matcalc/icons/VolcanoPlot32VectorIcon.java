@@ -57,22 +57,22 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
     x = x + WIDTH / 2;
     y = y + WIDTH / 2;
 
-    g2.setColor(ThemeService.getInstance().colors().getColorHighlight(3));
+    g2.setColor(ThemeService.getInstance().colors().getTheme(3));
 
     for (double i = Math.PI / 2; i >= 0; i -= 0.3) {
       int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
       int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 1.5);
 
-      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getTheme(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(4));
+      g2.setColor(ThemeService.getInstance().colors().getTheme(4));
       g2.drawOval(x1, y1, SIZE, SIZE);
 
       x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
 
-      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getTheme(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getColorHighlight(4));
+      g2.setColor(ThemeService.getInstance().colors().getTheme(4));
       g2.drawOval(x1, y1, SIZE, SIZE);
     }
 
@@ -80,16 +80,16 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
       int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
       int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH);
 
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getGray(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.setColor(ThemeService.getInstance().colors().getGray(5));
       g2.drawOval(x1, y1, SIZE, SIZE);
 
       x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
 
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getGray(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.setColor(ThemeService.getInstance().colors().getGray(5));
       g2.drawOval(x1, y1, SIZE, SIZE);
 
     }
@@ -98,16 +98,16 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
       int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
       int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 0.7);
 
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getGray(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.setColor(ThemeService.getInstance().colors().getGray(5));
       g2.drawOval(x1, y1, SIZE, SIZE);
 
       x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
 
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getGray(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.setColor(ThemeService.getInstance().colors().getGray(5));
       g2.drawOval(x1, y1, SIZE, SIZE);
     }
 
@@ -115,16 +115,16 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
       int x1 = (int) (x - HALF_WIDTH + Math.sin(i) * HALF_WIDTH);
       int y1 = (int) (y + WIDTH / 2 - SIZE - Math.cos(i) * HALF_WIDTH * 0.5);
 
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getGray(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.setColor(ThemeService.getInstance().colors().getGray(5));
       g2.drawOval(x1, y1, SIZE, SIZE);
 
       x1 = (int) (x + HALF_WIDTH - Math.sin(i) * HALF_WIDTH);
 
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(2));
+      g2.setColor(ThemeService.getInstance().colors().getGray(2));
       g2.fillOval(x1, y1, SIZE, SIZE);
-      g2.setColor(ThemeService.getInstance().colors().getHighlight(5));
+      g2.setColor(ThemeService.getInstance().colors().getGray(5));
       g2.drawOval(x1, y1, SIZE, SIZE);
     }
 
