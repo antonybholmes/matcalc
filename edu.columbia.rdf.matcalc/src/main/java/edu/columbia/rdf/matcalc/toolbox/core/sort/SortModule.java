@@ -25,7 +25,7 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -49,7 +49,7 @@ public class SortModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mSortButton = new RibbonLargeButton("Sort",
-      UIService.getInstance().loadIcon("sort", 24));
+      AssetService.getInstance().loadIcon("sort", 24));
 
   /**
    * The member window.

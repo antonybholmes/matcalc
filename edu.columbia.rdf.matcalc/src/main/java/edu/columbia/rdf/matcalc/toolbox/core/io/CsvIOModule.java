@@ -39,7 +39,7 @@ public class CsvIOModule extends CalcModule {
 
   /** The Constant FILTER. */
   private static final GuiFileExtFilter FILTER = 
-      FileFilterService.instance().getFilter("csv"); //new CsvGuiFileFilter();
+      FileFilterService.getInstance().getFilter("csv"); //new CsvGuiFileFilter();
 
   /**
    * Instantiates a new csv IO module.

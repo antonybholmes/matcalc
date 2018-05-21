@@ -33,7 +33,7 @@ import java.nio.file.Path;
 
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.graphics.icons.FileVectorIcon;
 import org.jebtk.modern.graphics.icons.FolderVectorIcon;
 import org.jebtk.modern.graphics.icons.ModernIcon;
@@ -56,13 +56,13 @@ public class FilesListRenderer extends ModernListCellRenderer {
 
   private static final int ICON_SIZE = 16;
 
-  private static final ModernIcon DIR_ICON = UIService.getInstance()
+  private static final ModernIcon DIR_ICON = AssetService.getInstance()
       .loadIcon(FolderVectorIcon.class, ICON_SIZE);
 
-  private static final ModernIcon XLSX_ICON = UIService.getInstance()
+  private static final ModernIcon XLSX_ICON = AssetService.getInstance()
       .loadIcon("xlsx", ICON_SIZE);
 
-  private static final ModernIcon FILE_ICON = UIService.getInstance()
+  private static final ModernIcon FILE_ICON = AssetService.getInstance()
       .loadIcon(FileVectorIcon.class, ICON_SIZE);
 
   /**

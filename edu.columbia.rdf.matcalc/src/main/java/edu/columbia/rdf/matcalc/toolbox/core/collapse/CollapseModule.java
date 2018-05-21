@@ -20,7 +20,7 @@ import java.text.ParseException;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -43,7 +43,7 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mCollapseButton = new RibbonLargeButton(
-      UIService.getInstance().loadIcon("collapse", 24));
+      AssetService.getInstance().loadIcon("collapse", 24));
 
   /**
    * The member window.

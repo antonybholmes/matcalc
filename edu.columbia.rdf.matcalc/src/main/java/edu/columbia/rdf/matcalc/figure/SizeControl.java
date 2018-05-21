@@ -102,7 +102,7 @@ public class SizeControl extends VBox implements KeyListener {
    * @throws ParseException the parse exception
    */
   private void setSize() throws ParseException {
-    mAxes.setInternalSize(mFieldWidth.getAsInt(), mFieldHeight.getAsInt());
+    mAxes.setInternalSize(mFieldWidth.getInt(), mFieldHeight.getInt());
   }
 
   /*

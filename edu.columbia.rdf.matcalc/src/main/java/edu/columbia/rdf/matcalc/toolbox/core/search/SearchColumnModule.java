@@ -24,7 +24,7 @@ import java.util.TreeSet;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -49,7 +49,7 @@ public class SearchColumnModule extends CalcModule
    * The member match button.
    */
   private RibbonLargeButton mSearchButton = new RibbonLargeButton(
-      "Search Column", UIService.getInstance().loadIcon("search_column", 24));
+      "Search Column", AssetService.getInstance().loadIcon("search_column", 24));
 
   /**
    * The member window.

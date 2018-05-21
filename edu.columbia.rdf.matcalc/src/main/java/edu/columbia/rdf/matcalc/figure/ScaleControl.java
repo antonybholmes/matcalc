@@ -208,7 +208,7 @@ public class ScaleControl extends HBox implements ChangeListener {
   }
 
   // public double getMin() {
-  // return mMinField.getAsDouble();
+  // return mMinField.getDouble();
   // }
 
   /*

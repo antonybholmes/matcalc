@@ -29,7 +29,7 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -70,7 +70,7 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Pie", "Chart",
-        UIService.getInstance().loadIcon("pie_chart", 24), "Pie Chart",
+        AssetService.getInstance().loadIcon("pie_chart", 24), "Pie Chart",
         "Generate a pie chart.");
     button.addClickListener(this);
     // button.setEnabled(false);

@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.venn;
 
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckButton;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -37,13 +37,13 @@ public class StyleRibbonSection extends RibbonSection
 
   /** The m proportional button. */
   private ModernCheckButton mProportionalButton = new RibbonLargeRadioButton(
-      "Proportional", UIService.getInstance().loadIcon("proportional", 24),
+      "Proportional", AssetService.getInstance().loadIcon("proportional", 24),
       "Proportional", "Draw circles proportional to their group size.",
       Ribbon.DEFAULT_BUTTON_SIZE);
 
   /** The m uniform button. */
   private ModernCheckButton mUniformButton = new RibbonLargeRadioButton(
-      "Uniform", UIService.getInstance().loadIcon("uniform", 24), "Uniform",
+      "Uniform", AssetService.getInstance().loadIcon("uniform", 24), "Uniform",
       "Draw all circles the same size.", Ribbon.DEFAULT_BUTTON_SIZE);
 
   /** The m model. */

@@ -36,7 +36,7 @@ import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.ExcelDialog;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckBox;
@@ -75,12 +75,12 @@ public class XYSeriesImportDialog extends ModernDialogTaskWindow
    * The member load button.
    */
   private ModernButton mFilterButton = new ModernDialogFlatButton("Filter...",
-      UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /** The m clear filter button. */
   private ModernButton mClearFilterButton = new ModernDialogFlatButton(
       "Clear Filter",
-      UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(CrossVectorIcon.class, 16));
 
   /** The m groups matrix. */
   private DataFrame mGroupsMatrix;

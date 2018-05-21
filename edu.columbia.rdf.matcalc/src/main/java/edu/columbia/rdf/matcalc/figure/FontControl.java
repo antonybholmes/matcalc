@@ -26,8 +26,8 @@ import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.properties.FontProperties;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernCheckButton;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -61,19 +61,19 @@ public class FontControl extends VBox {
 
   /** The m bold button. */
   private ModernCheckButton mBoldButton = new ModernCheckButton(
-      UIService.getInstance().loadIcon("font_bold", UIService.ICON_SIZE_16));
+      AssetService.getInstance().loadIcon("font_bold", AssetService.ICON_SIZE_16));
 
   /**
    * The italic button.
    */
   private ModernCheckButton mItalicButton = new ModernCheckButton(
-      UIService.getInstance().loadIcon("font_italic", UIService.ICON_SIZE_16));
+      AssetService.getInstance().loadIcon("font_italic", AssetService.ICON_SIZE_16));
 
   /**
    * The underline button.
    */
-  private ModernCheckButton mUnderlineButton = new ModernCheckButton(UIService
-      .getInstance().loadIcon("font_underline", UIService.ICON_SIZE_16));
+  private ModernCheckButton mUnderlineButton = new ModernCheckButton(AssetService
+      .getInstance().loadIcon("font_underline", AssetService.ICON_SIZE_16));
 
   /** The m properties. */
   private FontProperties mProperties;

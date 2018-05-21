@@ -25,7 +25,7 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -63,11 +63,11 @@ public class ColorMapsDialog extends ModernDialogHelpWindow
 
   /** The m add button. */
   private ModernButton mAddButton = new ModernButton("New...",
-      UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
   /** The m delete button. */
   private ModernButton mDeleteButton = new ModernButton(UI.MENU_DELETE,
-      UIService.getInstance().loadIcon("delete", 16));
+      AssetService.getInstance().loadIcon("delete", 16));
 
   /** The m color map. */
   private ColorMap mColorMap;

@@ -60,7 +60,7 @@ import org.jebtk.math.ui.matrix.transform.MatrixTransformCellRenderer;
 import org.jebtk.math.ui.matrix.transform.MatrixTransformListener;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButtonWidget;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
@@ -237,7 +237,7 @@ ModernSelectionListener, MatrixTransformListener {
   private DirPanel mDirPanel;
 
   private static final boolean AUTO_SHOW_FILES_PANE = SettingsService
-      .getInstance().getAsBool("matcalc.files-pane.auto-show");
+      .getInstance().getBool("matcalc.files-pane.auto-show");
 
   private TabsModel mRightTabsModel = new TabsModel();
 
@@ -669,14 +669,14 @@ ModernSelectionListener, MatrixTransformListener {
     // QuickOpen16VectorIcon());
 
     ModernButtonWidget button = new QuickAccessButton(
-        UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage("Open");
     button.setToolTip("Open", "Open a file.");
     button.addClickListener(this);
     addQuickAccessButton(button);
 
     button = new QuickAccessButton(
-        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip("Save", "Save the current table.");
     button.addClickListener(this);

@@ -24,7 +24,7 @@ import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -48,7 +48,7 @@ public class GroupModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mMatchButton = new RibbonLargeButton("Group",
-      UIService.getInstance().loadIcon("group", 24));
+      AssetService.getInstance().loadIcon("group", 24));
 
   /**
    * The member window.

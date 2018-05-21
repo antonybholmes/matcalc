@@ -27,7 +27,7 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.statistics.HistBin;
 import org.jebtk.math.statistics.Statistics;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -68,7 +68,7 @@ public class HistogramModule extends CalcModule implements ModernClickListener {
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Histogram",
-        UIService.getInstance().loadIcon("histogram", 24), "Histogram",
+        AssetService.getInstance().loadIcon("histogram", 24), "Histogram",
         "Generate a histogram.");
     button.addClickListener(this);
     // button.setEnabled(false);

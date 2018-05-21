@@ -45,11 +45,11 @@ public class MatrixGroupCheckBox extends ModernCheckBox {
   private Color mLightColor;
 
   /** The Constant GRAY1. */
-  private static final Color GRAY1 = ThemeService.getInstance().colors()
+  private static final Color GRAY1 = ThemeService.getInstance().getColors()
       .getGray(3);
 
   /** The Constant GRAY2. */
-  private static final Color GRAY2 = ThemeService.getInstance().colors()
+  private static final Color GRAY2 = ThemeService.getInstance().getColors()
       .getGray(5);
 
   /**

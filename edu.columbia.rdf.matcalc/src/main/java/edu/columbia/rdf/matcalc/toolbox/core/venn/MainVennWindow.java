@@ -40,7 +40,7 @@ import org.jebtk.graphplot.Image;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButtonWidget;
 import org.jebtk.modern.clipboard.ClipboardRibbonSection;
 import org.jebtk.modern.contentpane.CenterTab;
@@ -417,14 +417,14 @@ public class MainVennWindow extends ModernRibbonWindow
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
     ModernButtonWidget button = new QuickAccessButton(
-        UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage("Open");
     button.setToolTip(new ModernToolTip("Open", "Open a gene list."));
     button.addClickListener(this);
     addQuickAccessButton(button);
 
     button = new QuickAccessButton(
-        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip(new ModernToolTip("Save", "Save the current gene list."));
     button.addClickListener(this);

@@ -29,7 +29,7 @@ import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.icons.FormatPlot32VectorIcon;
 import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.clipboard.ClipboardRibbonSection;
 import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.dialog.DialogEvent;
@@ -246,7 +246,7 @@ public abstract class FigureWindow extends ModernRibbonWindow
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
     button = new QuickAccessButton(
-        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip(new ModernToolTip("Save", "Save the current image."));
     button.addClickListener(this);

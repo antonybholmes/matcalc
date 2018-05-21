@@ -16,7 +16,7 @@ normalize() * Copyright 2016 Antony Holmes
 package edu.columbia.rdf.matcalc.toolbox.math;
 
 import org.jebtk.math.matrix.utils.MatrixOperations;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -59,16 +59,16 @@ public class NormalizeModule extends CalcWinModule
 
     popup.addMenuItem(new ModernTwoLineMenuItem("Normalize",
         "Normalize values between 0 and 1.",
-        UIService.getInstance().loadIcon("normalize", 32)));
+        AssetService.getInstance().loadIcon("normalize", 32)));
     popup.addMenuItem(new ModernTwoLineMenuItem("Quantile Normalize",
         "Quantile normalize values.",
-        UIService.getInstance().loadIcon("normalize", 32)));
+        AssetService.getInstance().loadIcon("normalize", 32)));
     popup.addMenuItem(new ModernTwoLineMenuItem("Median Ratios",
-        "Median ratios.", UIService.getInstance().loadIcon("normalize", 32)));
+        "Median ratios.", AssetService.getInstance().loadIcon("normalize", 32)));
 
     // The default behaviour is to do a log2 transform.
     RibbonLargeDropDownButton2 button = new RibbonLargeDropDownButton2(
-        "Normalize", UIService.getInstance().loadIcon("normalize", 32), popup);
+        "Normalize", AssetService.getInstance().loadIcon("normalize", 32), popup);
     button.setChangeText(false);
     button.setToolTip("Normalize", "Normalization functions.");
     mWindow.getRibbon().getToolbar("Formulas").getSection("Functions")

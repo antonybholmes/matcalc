@@ -66,7 +66,7 @@ public class ClusterCanvas extends PlotBoxRow {
    * The constant BLOCK_SIZE.
    */
   private static final int BLOCK_SIZE = SettingsService.getInstance()
-      .getAsInt("plot.block-size");
+      .getInt("plot.block-size");
 
   /**
    * The horizontal gap.
@@ -82,23 +82,23 @@ public class ClusterCanvas extends PlotBoxRow {
    * The constant CHAR_WIDTH.
    */
   private static final int CHAR_WIDTH = SettingsService.getInstance()
-      .getAsInt("graphplot.plot.char-width");
+      .getInt("graphplot.plot.char-width");
 
   /**
    * The constant LEGEND_WIDTH.
    */
   private static final int LEGEND_WIDTH = SettingsService.getInstance()
-      .getAsInt("plot.legend-width");
+      .getInt("plot.legend-width");
 
   /**
    * The constant COLOR_BAR_WIDTH.
    */
   private static final int COLOR_BAR_WIDTH = SettingsService.getInstance()
-      .getAsInt("graphplot.plot.color-bar-width");
+      .getInt("graphplot.plot.color-bar-width");
 
   /** The Constant COLOR_BAR_HEIGHT. */
   private static final int COLOR_BAR_HEIGHT = SettingsService.getInstance()
-      .getAsInt("graphplot.plot.color-bar-height");
+      .getInt("graphplot.plot.color-bar-height");
 
   /**
    * Instantiates a new cluster canvas.

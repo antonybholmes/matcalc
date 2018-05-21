@@ -143,7 +143,7 @@ public class HeatMapControl extends Box {
   public HeatMapSettings getProperties() {
     HeatMapSettings properties = new HeatMapSettings();
     properties.show = showHeatMap();
-    properties.aspectRatio = getAspectRatio();
+    properties.aspectRatio = getpectRatio();
     properties.gridColor = getGridColor();
     properties.borderColor = getBorderColor();
 
@@ -155,7 +155,7 @@ public class HeatMapControl extends Box {
    *
    * @return the aspect ratio
    */
-  public AspectRatio getAspectRatio() {
-    return mAspectRatioElement.getAspectRatio();
+  public AspectRatio getpectRatio() {
+    return mAspectRatioElement.getpectRatio();
   }
 }

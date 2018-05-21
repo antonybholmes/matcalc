@@ -39,7 +39,7 @@ public class TsvIOModule extends CalcModule {
 
   /** The Constant TXT_FILTER. */
   private static final GuiFileExtFilter TSV_FILTER = 
-      FileFilterService.instance().getFilter("tsv"); //new TsvGuiFileFilter();
+      FileFilterService.getInstance().getFilter("tsv"); //new TsvGuiFileFilter();
 
   /**
    * Instantiates a new tsv IO module.

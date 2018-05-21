@@ -23,7 +23,7 @@ import org.jebtk.bioinformatics.Affymetrix;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -53,7 +53,7 @@ public class DiffModule extends CalcModule implements ModernClickListener {
    * The member diff button.
    */
   private RibbonLargeButton mDiffButton = new RibbonLargeButton("Diff",
-      UIService.getInstance().loadIcon("diff", 24));
+      AssetService.getInstance().loadIcon("diff", 24));
 
   /**
    * The member window.

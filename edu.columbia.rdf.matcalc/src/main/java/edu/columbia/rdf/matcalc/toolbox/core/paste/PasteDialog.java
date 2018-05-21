@@ -57,7 +57,7 @@ public class PasteDialog extends ModernDialogHelpWindow
     addWindowListener(new WindowWidgetFocusEvents(mOkButton));
 
     mCheckIndex.setSelected(SettingsService.getInstance()
-        .getAsBool("org.matcalc.toolbox.paste.common-index", true));
+        .getBool("org.matcalc.toolbox.paste.common-index", true));
 
     setSize(500, 420);
 

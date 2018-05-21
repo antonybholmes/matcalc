@@ -628,7 +628,7 @@ public class HeatMapPanel extends FormatPlotPane
         mBorderElement.isSelected());
 
     // mProperties.updateProperty("plot.aspect-ratio",
-    // mAspectRatioElement.getAspectRatio());
+    // mAspectRatioElement.getpectRatio());
 
     mProperties.update("plot.block-size",
         mAspectRatioElement.getBlockSize());

@@ -46,7 +46,7 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.ui.external.microsoft.ExcelDialog;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -115,7 +115,7 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
    * The member load button.
    */
   private ModernButton mLoadButton = new ModernDialogFlatButton(
-      UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /**
    * The class KeyEvents.

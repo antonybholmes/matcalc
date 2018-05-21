@@ -16,7 +16,7 @@ normalize() * Copyright 2016 Antony Holmes
 package edu.columbia.rdf.matcalc.toolbox.math;
 
 import org.jebtk.math.matrix.utils.MatrixOperations;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.menu.ModernPopupMenu2;
@@ -60,9 +60,9 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
     ModernPopupMenu2 popup = new ModernPopupMenu2();
 
     popup.addMenuItem(new ModernTwoLineMenuItem("Matrix", "Z-score matrix.",
-        UIService.getInstance().loadIcon("z_score", 32)));
+        AssetService.getInstance().loadIcon("z_score", 32)));
     popup.addMenuItem(new ModernTwoLineMenuItem("Row", "Row z-score.",
-        UIService.getInstance().loadIcon("z_score", 32)));
+        AssetService.getInstance().loadIcon("z_score", 32)));
 
     // The default behaviour is to do a log2 transform.
     RibbonLargeDropDownButton2 button = new RibbonLargeDropDownButton2("Z-score",

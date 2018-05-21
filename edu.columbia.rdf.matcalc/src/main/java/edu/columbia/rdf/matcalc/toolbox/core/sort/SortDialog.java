@@ -23,7 +23,7 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -51,11 +51,11 @@ public class SortDialog extends ModernDialogHelpWindow
 
   /** The m add button. */
   private ModernButton mAddButton = new ModernButton("Add Level",
-      UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
   /** The m clear button. */
   private ModernButton mClearButton = new ModernButton(UI.MENU_CLEAR,
-      UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
+      AssetService.getInstance().loadIcon(RedCrossIcon.class, 16));
 
   /** The m content panel. */
   private ColumnSorters mContentPanel;

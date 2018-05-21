@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.figure;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.table.ModernTableCheckboxCellRenderer;
 import org.jebtk.modern.theme.ThemeService;
@@ -40,14 +40,14 @@ public class ModernTableLayerCellRenderer
   /**
    * The constant VISIBLE_ICON.
    */
-  private final static ModernIcon VISIBLE_ICON = UIService.getInstance()
-      .loadIcon("layer_visible", UIService.ICON_SIZE_16);
+  private final static ModernIcon VISIBLE_ICON = AssetService.getInstance()
+      .loadIcon("layer_visible", AssetService.ICON_SIZE_16);
 
   /**
    * The constant INVISIBLE_ICON.
    */
-  private final static ModernIcon INVISIBLE_ICON = UIService.getInstance()
-      .loadIcon("blank", UIService.ICON_SIZE_16);
+  private final static ModernIcon INVISIBLE_ICON = AssetService.getInstance()
+      .loadIcon("blank", AssetService.ICON_SIZE_16);
 
   /**
    * Instantiates a new modern table layer cell renderer.
@@ -64,20 +64,20 @@ public class ModernTableLayerCellRenderer
    */
   public void drawForegroundAAText(Graphics2D g2) {
 
-    int x = (this.getWidth() - UIService.ICON_SIZE_16) / 2;
-    int y = (this.getHeight() - UIService.ICON_SIZE_16) / 2;
+    int x = (this.getWidth() - AssetService.ICON_SIZE_16) / 2;
+    int y = (this.getHeight() - AssetService.ICON_SIZE_16) / 2;
 
     if (selected) {
-      VISIBLE_ICON.drawIcon(g2, x, y, UIService.ICON_SIZE_16);
+      VISIBLE_ICON.drawIcon(g2, x, y, AssetService.ICON_SIZE_16);
     } else {
-      INVISIBLE_ICON.drawIcon(g2, x, y, UIService.ICON_SIZE_16);
+      INVISIBLE_ICON.drawIcon(g2, x, y, AssetService.ICON_SIZE_16);
     }
 
-    x = (this.getWidth() - UIService.ICON_SIZE_20) / 2;
-    y = (this.getHeight() - UIService.ICON_SIZE_20) / 2;
+    x = (this.getWidth() - AssetService.ICON_SIZE_20) / 2;
+    y = (this.getHeight() - AssetService.ICON_SIZE_20) / 2;
 
     drawRect(g2,
-        ThemeService.getInstance().colors().getTheme(2),
-        new Rectangle(x, y, UIService.ICON_SIZE_20, UIService.ICON_SIZE_20));
+        ThemeService.getInstance().getColors().getTheme(2),
+        new Rectangle(x, y, AssetService.ICON_SIZE_20, AssetService.ICON_SIZE_20));
   }
 }

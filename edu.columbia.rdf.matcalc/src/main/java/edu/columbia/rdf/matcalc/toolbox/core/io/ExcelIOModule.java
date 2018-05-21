@@ -30,7 +30,7 @@ public class ExcelIOModule extends CalcModule {
 
   /** The Constant FILTER. */
   private static final GuiFileExtFilter FILTER = 
-      FileFilterService.instance().getFilter("excel"); //new ExcelGuiFileFilter();
+      FileFilterService.getInstance().getFilter("excel"); //new ExcelGuiFileFilter();
 
   /**
    * Instantiates a new xlsx IO module.

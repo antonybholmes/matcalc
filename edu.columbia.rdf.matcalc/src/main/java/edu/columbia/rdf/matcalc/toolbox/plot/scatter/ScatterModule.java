@@ -26,7 +26,7 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -67,7 +67,7 @@ public class ScatterModule extends CalcModule implements ModernClickListener {
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Scatter Plot",
-        UIService.getInstance().loadIcon("scatter", 24), "Scatter Plot",
+        AssetService.getInstance().loadIcon("scatter", 24), "Scatter Plot",
         "Generate a scatter plot.");
     button.addClickListener(this);
     // button.setEnabled(false);

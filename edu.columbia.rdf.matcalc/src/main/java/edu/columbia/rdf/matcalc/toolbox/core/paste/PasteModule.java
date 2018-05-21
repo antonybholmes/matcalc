@@ -3,7 +3,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.paste;
 import java.nio.file.Path;
 import java.util.List;
 
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -37,7 +37,7 @@ public class PasteModule extends CalcModule implements ModernClickListener {
     ModernClickWidget button;
 
     button = new RibbonLargeButton(
-        UIService.getInstance().loadIcon("paste_files", 24));
+        AssetService.getInstance().loadIcon("paste_files", 24));
     button.setToolTip(
         new ModernToolTip("Paste Files", "Paste multiple files column wise."));
     button.addClickListener(this);

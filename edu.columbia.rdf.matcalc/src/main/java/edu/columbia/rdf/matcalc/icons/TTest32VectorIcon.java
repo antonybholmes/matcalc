@@ -44,7 +44,7 @@ public class TTest32VectorIcon extends ModernVectorIcon {
    * Instantiates a new t test32 vector icon.
    */
   public TTest32VectorIcon() {
-    this(ThemeService.getInstance().colors().getTheme(4));
+    this(ThemeService.getInstance().getColors().getTheme(4));
   }
 
   /**

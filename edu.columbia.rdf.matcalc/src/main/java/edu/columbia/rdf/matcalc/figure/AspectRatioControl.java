@@ -81,7 +81,7 @@ public class AspectRatioControl extends VBox {
    *
    * @return the aspect ratio
    */
-  public AspectRatio getAspectRatio() {
+  public AspectRatio getpectRatio() {
     return new AspectRatio(mXField.getIntValue() / 100.0,
         mYField.getIntValue() / 100.0);
   }

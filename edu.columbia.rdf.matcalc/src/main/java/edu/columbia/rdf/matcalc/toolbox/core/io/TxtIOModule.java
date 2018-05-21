@@ -44,7 +44,7 @@ public class TxtIOModule extends CalcModule {
 
   /** The Constant TXT_FILTER. */
   private static final GuiFileExtFilter TXT_FILTER = 
-      FileFilterService.instance().getFilter("txt");
+      FileFilterService.getInstance().getFilter("txt");
 
   /**
    * Instantiates a new tsv IO module.

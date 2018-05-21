@@ -31,7 +31,7 @@ import org.jebtk.core.stream.Stream;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernDropDownButton;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -60,7 +60,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class SplitModule extends CalcModule implements ModernClickListener {
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance()
+  private static final ModernIcon ICON = AssetService.getInstance()
       .loadIcon("split", 24);
 
   /** The m button. */

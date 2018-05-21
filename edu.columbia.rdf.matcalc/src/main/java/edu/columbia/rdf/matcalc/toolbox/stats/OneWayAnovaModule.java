@@ -19,7 +19,7 @@ import org.apache.commons.math3.distribution.FDistribution;
 import org.jebtk.core.Mathematics;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.Matrix;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -60,7 +60,7 @@ public class OneWayAnovaModule extends CalcModule
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("One-way ANOVA",
-        UIService.getInstance().loadIcon("calculator", 24), "One-way ANOVA",
+        AssetService.getInstance().loadIcon("calculator", 24), "One-way ANOVA",
         "One-way analysis of variance.");
     button.addClickListener(this);
 

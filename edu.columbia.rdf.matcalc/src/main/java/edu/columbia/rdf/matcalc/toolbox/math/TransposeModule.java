@@ -16,7 +16,7 @@ normalize() * Copyright 2016 Antony Holmes
 package edu.columbia.rdf.matcalc.toolbox.math;
 
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -52,7 +52,7 @@ public class TransposeModule extends CalcWinModule
     super.init(window);
 
     RibbonLargeButton button = new RibbonLargeButton(
-        UIService.getInstance().loadIcon("transpose", 24), "Transpose",
+        AssetService.getInstance().loadIcon("transpose", 24), "Transpose",
         "Transpose a matrix.");
     button.addClickListener(this);
     window.getRibbon().getToolbar("Formulas").getSection("Functions")

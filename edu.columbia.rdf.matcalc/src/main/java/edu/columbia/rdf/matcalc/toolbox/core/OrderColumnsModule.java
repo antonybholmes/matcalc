@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.core;
 
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.RunVectorIcon;
@@ -38,7 +38,7 @@ public class OrderColumnsModule extends CalcModule
    * The button.
    */
   private RibbonLargeButton mButton = new RibbonLargeButton(
-      UIService.getInstance().loadIcon(RunVectorIcon.class, 24),
+      AssetService.getInstance().loadIcon(RunVectorIcon.class, 24),
       "Order Columns", "Order columns by groups.");
 
   /**

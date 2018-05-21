@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core;
 
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.TableVectorIcon;
@@ -60,7 +60,7 @@ public class SummaryModule extends CalcModule implements ModernClickListener {
     mWindow = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Summary",
-        UIService.getInstance().loadIcon(TableVectorIcon.class, 24));
+        AssetService.getInstance().loadIcon(TableVectorIcon.class, 24));
     button.setToolTip("Summary",
         "Display a basic statistical summary of the matrix.");
     window.getRibbon().getToolbar("Data").getSection("Tools").add(button);

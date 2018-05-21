@@ -27,7 +27,7 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -99,7 +99,7 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Line",
-        UIService.getInstance().loadIcon("line_graph", 24), "Line",
+        AssetService.getInstance().loadIcon("line_graph", 24), "Line",
         "Generate a line graph.");
     button.setShowText(false);
     button.addClickListener(this);

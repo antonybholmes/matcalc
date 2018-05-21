@@ -41,7 +41,7 @@ public class HeatMapProperties extends Properties {
    */
   public HeatMapProperties() {
     set("plot.row-label-max-chars",
-        SettingsService.getInstance().getAsInt("plot.row-label-max-chars"));
+        SettingsService.getInstance().getInt("plot.row-label-max-chars"));
 
     set("plot.border-color", Color.BLACK);
     set("plot.grid-color", ModernWidget.LINE_COLOR);

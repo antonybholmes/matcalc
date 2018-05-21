@@ -23,7 +23,7 @@ import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -83,7 +83,7 @@ public class LegacyHeatMapModule extends CalcModule
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Heat Map",
-        UIService.getInstance().loadIcon("heatmap", 24), "Heat Map",
+        AssetService.getInstance().loadIcon("heatmap", 24), "Heat Map",
         "Generate a heat map.");
     button.addClickListener(this);
 

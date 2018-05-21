@@ -28,7 +28,7 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.XlsxTxtGuiFileFilter;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.combobox.ModernComboBox;
@@ -102,7 +102,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
    * The add button.
    */
   private ModernButton mAddButton = new ModernDialogFlatButton(
-      UIService.getInstance().loadIcon(PlusVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
   /**
    * The remove button.
@@ -115,13 +115,13 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
    * The clear button.
    */
   private ModernButton mClearButton = new ModernButton(UI.MENU_CLEAR,
-      UIService.getInstance().loadIcon("clear", 16), 80);
+      AssetService.getInstance().loadIcon("clear", 16), 80);
 
   /**
    * The import button.
    */
   private ModernButton importButton = new ModernButton(UI.BUTTON_IMPORT,
-      UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16), 80);
+      AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16), 80);
 
   /**
    * The member new row text field.
@@ -171,7 +171,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
     mM = m;
 
     mCheckMissing.setSelected(SettingsService.getInstance()
-        .getAsBool("matcalc.modules.rowfilter.include-missing"));
+        .getBool("matcalc.modules.rowfilter.include-missing"));
 
     mCheckMissing.addClickListener(new ModernClickListener() {
 

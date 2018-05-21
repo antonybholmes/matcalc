@@ -22,7 +22,7 @@ import java.util.Set;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -54,7 +54,7 @@ public class MatchModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mMatchButton = new RibbonLargeButton(
-      "Match In Files", UIService.getInstance().loadIcon("match", 24));
+      "Match In Files", AssetService.getInstance().loadIcon("match", 24));
 
   /**
    * The member window.

@@ -40,8 +40,8 @@ public class ColumnFilterModule extends CalcModule
    */
   private RibbonLargeButton mButton = new RibbonLargeButton(
       new Raster24Icon(new FilterVectorIcon(
-          ThemeService.getInstance().colors().getGray(8),
-          ThemeService.getInstance().colors().getGray(6))),
+          ThemeService.getInstance().getColors().getGray(8),
+          ThemeService.getInstance().getColors().getGray(6))),
       "Filter Columns", "Filter columns.");
 
   /**

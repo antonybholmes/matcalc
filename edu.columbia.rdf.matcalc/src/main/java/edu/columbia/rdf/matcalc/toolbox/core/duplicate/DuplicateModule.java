@@ -21,7 +21,7 @@ import java.util.List;
 import org.jebtk.core.collections.UniqueArrayList;
 import org.jebtk.core.text.Splitter;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -42,7 +42,7 @@ public class DuplicateModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mDuplicateButton = new RibbonLargeButton(
-      UIService.getInstance().loadIcon("duplicate", 24));
+      AssetService.getInstance().loadIcon("duplicate", 24));
 
   /**
    * The member window.

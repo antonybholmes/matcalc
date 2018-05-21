@@ -19,7 +19,7 @@ import java.text.ParseException;
 
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.combobox.AndOrLogicalComboBox;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -52,7 +52,7 @@ public class ColumnFilter extends HBox implements ModernClickListener {
 
   /** The m delete button. */
   private ModernButton mDeleteButton = new ModernButton(
-      UIService.getInstance().loadIcon(RedCrossIcon.class, 16));
+      AssetService.getInstance().loadIcon(RedCrossIcon.class, 16));
 
   /** The m listeners. */
   private ModernClickListeners mListeners = new ModernClickListeners();
@@ -127,17 +127,17 @@ public class ColumnFilter extends HBox implements ModernClickListener {
   public Filter getFilter() throws ParseException {
     switch (mFilterCombo.getSelectedIndex()) {
     case 0:
-      return new EqualsFilter(mText.getAsDouble());
+      return new EqualsFilter(mText.getDouble());
     case 1:
-      return new DoesNotEqualFilter(mText.getAsDouble());
+      return new DoesNotEqualFilter(mText.getDouble());
     case 2:
-      return new GTFilter(mText.getAsDouble());
+      return new GTFilter(mText.getDouble());
     case 3:
-      return new GEFilter(mText.getAsDouble());
+      return new GEFilter(mText.getDouble());
     case 4:
-      return new LTFilter(mText.getAsDouble());
+      return new LTFilter(mText.getDouble());
     case 5:
-      return new LEFilter(mText.getAsDouble());
+      return new LEFilter(mText.getDouble());
     case 6:
       return new StartsFilter(mText.getText());
     case 7:

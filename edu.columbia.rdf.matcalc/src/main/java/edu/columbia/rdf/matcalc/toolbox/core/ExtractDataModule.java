@@ -28,7 +28,7 @@ false * Copyright (C) 2016, Antony Holmes
 package edu.columbia.rdf.matcalc.toolbox.core;
 
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernDropDownButton;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -53,7 +53,7 @@ public class ExtractDataModule extends CalcModule
     implements ModernClickListener {
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance()
+  private static final ModernIcon ICON = AssetService.getInstance()
       .loadIcon("extract", 24);
 
   /**

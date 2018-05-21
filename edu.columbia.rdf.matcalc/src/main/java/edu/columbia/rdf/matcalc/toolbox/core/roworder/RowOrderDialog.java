@@ -35,7 +35,7 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -84,25 +84,25 @@ public class RowOrderDialog extends ModernDialogHelpWindow
    * The member up button.
    */
   private ModernButton mUpButton = new ModernButton(
-      UIService.getInstance().loadIcon(ArrowUpVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(ArrowUpVectorIcon.class, 16));
 
   /**
    * The member down button.
    */
   private ModernButton mDownButton = new ModernButton(
-      UIService.getInstance().loadIcon(ArrowDownVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(ArrowDownVectorIcon.class, 16));
 
   /**
    * The member alphabetical button.
    */
   private ModernButton mAlphabeticalButton = new ModernButton("Alphabetical",
-      UIService.getInstance().loadIcon("alphabetical", 16));
+      AssetService.getInstance().loadIcon("alphabetical", 16));
 
   /**
    * The member load button.
    */
   private ModernButton mLoadButton = new ModernButton("Load order",
-      UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /**
    * The member columns combo.

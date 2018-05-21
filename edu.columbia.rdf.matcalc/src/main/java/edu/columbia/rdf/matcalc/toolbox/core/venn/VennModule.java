@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.venn;
 
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -36,7 +36,7 @@ public class VennModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mVennButton = new RibbonLargeButton("Venn Diagram",
-      UIService.getInstance().loadIcon(VennIcon.class, 24));
+      AssetService.getInstance().loadIcon(VennIcon.class, 24));
 
   /** The m window. */
   private MainMatCalcWindow mWindow;

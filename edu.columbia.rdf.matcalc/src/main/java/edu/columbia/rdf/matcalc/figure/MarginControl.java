@@ -143,10 +143,10 @@ public class MarginControl extends VBox implements KeyListener {
    * @throws ParseException the parse exception
    */
   private void setMargins() throws ParseException {
-    mLayer.setMargins(mFieldTop.getAsInt(),
-        mFieldLeft.getAsInt(),
-        mFieldBottom.getAsInt(),
-        mFieldRight.getAsInt());
+    mLayer.setMargins(mFieldTop.getInt(),
+        mFieldLeft.getInt(),
+        mFieldBottom.getInt(),
+        mFieldRight.getInt());
   }
 
   /*

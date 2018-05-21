@@ -26,7 +26,7 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -68,7 +68,7 @@ public class ScatterLineModule extends CalcModule
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Scatter Line Graph",
-        UIService.getInstance().loadIcon("scatter_line_graph", 24),
+        AssetService.getInstance().loadIcon("scatter_line_graph", 24),
         "Scatter Line Graph", "Generate a scatter line graph.");
     button.addClickListener(this);
     button.setEnabled(false);

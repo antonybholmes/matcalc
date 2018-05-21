@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc;
 
 import org.jebtk.core.AppVersion;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.help.GuiAppInfo;
 
 import edu.columbia.rdf.matcalc.icons.MatCalcIcon;
@@ -32,8 +32,8 @@ public class MatCalcInfo extends GuiAppInfo {
   public MatCalcInfo() {
     super("MatCalc", new AppVersion(17),
         "Copyright (C) 2014-${year} Antony Holmes",
-        UIService.getInstance().loadIcon(MatCalcIcon.class, 32),
-        UIService.getInstance().loadIcon(MatCalcIcon.class, 128),
+        AssetService.getInstance().loadIcon(MatCalcIcon.class, 32),
+        AssetService.getInstance().loadIcon(MatCalcIcon.class, 128),
         "Matrix calculations and plotting.");
   }
 

@@ -23,7 +23,7 @@ import java.util.Map;
 import org.jebtk.core.collections.UniqueArrayList;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -48,7 +48,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
    * The member match button.
    */
   private RibbonLargeButton mCollapseButton = new RibbonLargeButton("Unique",
-      UIService.getInstance().loadIcon("collapse", 24));
+      AssetService.getInstance().loadIcon("collapse", 24));
 
   /**
    * The member window.

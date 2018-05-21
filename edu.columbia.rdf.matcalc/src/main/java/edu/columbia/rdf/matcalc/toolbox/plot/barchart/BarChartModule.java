@@ -29,7 +29,7 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
@@ -70,7 +70,7 @@ public class BarChartModule extends CalcModule implements ModernClickListener {
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Bar", "Chart",
-        UIService.getInstance().loadIcon("bar_chart", 24), "Bar Chart",
+        AssetService.getInstance().loadIcon("bar_chart", 24), "Bar Chart",
         "Generate a bar chart.");
     button.addClickListener(this);
     // button.setEnabled(false);

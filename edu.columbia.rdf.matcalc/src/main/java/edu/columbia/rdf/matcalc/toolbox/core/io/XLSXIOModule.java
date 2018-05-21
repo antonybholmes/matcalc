@@ -41,7 +41,7 @@ public class XLSXIOModule extends XlIOModule {
 
   /** The Constant FILTER. */
   private static final GuiFileExtFilter FILTER = 
-      FileFilterService.instance().getFilter("xlsx"); //new XlsxGuiFileFilter();
+      FileFilterService.getInstance().getFilter("xlsx"); //new XlsxGuiFileFilter();
 
   /**
    * Instantiates a new xlsx IO module.

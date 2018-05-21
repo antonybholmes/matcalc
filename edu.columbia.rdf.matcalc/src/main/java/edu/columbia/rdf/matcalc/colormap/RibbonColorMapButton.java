@@ -21,7 +21,7 @@ import java.awt.geom.Point2D;
 
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.colormap.ColorMap;
@@ -137,8 +137,8 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton
      * 
      * try { g2Temp.setPaint(paint);
      * 
-     * g2Temp.fillRoundRect(x, y, w, 16, MaterialService.instance().ints().cornerRadius();,
-     * MaterialService.instance().ints().cornerRadius();); } finally { g2Temp.dispose(); }
+     * g2Temp.fillRoundRect(x, y, w, 16, MaterialService.getInstance().getInts().cornerRadius();,
+     * MaterialService.getInstance().getInts().cornerRadius();); } finally { g2Temp.dispose(); }
      */
 
     /*
@@ -157,10 +157,10 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton
     // g2.setColor(LINE_COLOR);
     // g2.drawRect(PADDING, y, w, 16);
 
-    // g2.setColor(ThemeService.getInstance().colors().getHighlight(4));
+    // g2.setColor(ThemeService.getInstance().getColors().getHighlight(4));
     // g2.drawRect(x, y, 32, Resources.ICON_SIZE_16);
 
-    UIService.getInstance().loadIcon(TriangleDownVectorIcon.class, 16)
+    AssetService.getInstance().loadIcon(TriangleDownVectorIcon.class, 16)
         .drawIcon(g2, getWidth() - 16, (getHeight() - 16) / 2, 16);
   }
 

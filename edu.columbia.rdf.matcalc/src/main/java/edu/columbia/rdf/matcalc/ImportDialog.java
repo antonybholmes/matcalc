@@ -59,16 +59,16 @@ public class ImportDialog extends ModernDialogHelpWindow
    */
   private CheckBox mCheckHeader = new ModernCheckSwitch("Header text rows",
       SettingsService.getInstance()
-          .getAsBool("matcalc.import.file.has-header"));
+          .getBool("matcalc.import.file.has-header"));
 
   /** The m check skip. */
   private CheckBox mCheckSkip = new ModernCheckSwitch(
-      "Skip lines starting with", true); // SettingsService.getInstance().getAsBool("matcalc.import.file.skip.lines"));
+      "Skip lines starting with", true); // SettingsService.getInstance().getBool("matcalc.import.file.skip.lines"));
 
   /** The m field skip. */
   private ModernTextField mFieldSkip = new ModernClipboardTextField(
       SettingsService.getInstance()
-          .getAsString("matcalc.import.file.skip.matches"));
+          .getString("matcalc.import.file.skip.matches"));
 
   private CheckBox mNumericalCheck = new ModernCheckSwitch("Numerical", true);
 

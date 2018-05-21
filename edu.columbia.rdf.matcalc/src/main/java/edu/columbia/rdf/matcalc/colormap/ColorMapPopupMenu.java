@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.colormap;
 
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.graphics.color.ColorPopupMenu;
@@ -84,7 +84,7 @@ public class ColorMapPopupMenu extends ModernScrollPopupMenu {
     // add(new ModernMenuDivider());
 
     add(new ModernIconMenuItem("More Color Maps...",
-        UIService.getInstance().loadIcon("color_wheel", 16))
+        AssetService.getInstance().loadIcon("color_wheel", 16))
             .setAnimations("color-menu-fade"));
 
     update();

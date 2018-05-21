@@ -130,7 +130,7 @@ public class ColorMapButton extends ControlDropDownButton
     g2.setColor(LINE_COLOR);
     g2.drawRect(PADDING, y, w, 16);
 
-    // g2.setColor(ThemeService.getInstance().colors().getHighlight(4));
+    // g2.setColor(ThemeService.getInstance().getColors().getHighlight(4));
     // g2.drawRect(x, y, 32, Resources.ICON_SIZE_16);
 
     TRIANGLE_ICON.drawIcon(g2, mRect.getW() - 16, (getHeight() - 16) / 2, 16);

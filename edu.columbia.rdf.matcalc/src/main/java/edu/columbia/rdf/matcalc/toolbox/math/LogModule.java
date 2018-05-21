@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.math;
 
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -37,7 +37,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 public class LogModule extends CalcModule implements ModernClickListener {
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance().loadIcon("log",
+  private static final ModernIcon ICON = AssetService.getInstance().loadIcon("log",
       24);
 
   /**

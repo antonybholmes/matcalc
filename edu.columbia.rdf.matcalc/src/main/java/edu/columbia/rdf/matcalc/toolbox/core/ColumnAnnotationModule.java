@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.core;
 
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -40,7 +40,7 @@ public class ColumnAnnotationModule extends CalcModule
    * The member split button.
    */
   private RibbonLargeButton mButton = new RibbonLargeButton(
-      UIService.getInstance().loadIcon("annotation", 24));
+      AssetService.getInstance().loadIcon("annotation", 24));
 
   /**
    * The member window.

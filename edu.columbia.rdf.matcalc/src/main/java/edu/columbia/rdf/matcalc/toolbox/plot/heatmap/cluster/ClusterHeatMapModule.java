@@ -23,7 +23,7 @@ import org.jebtk.math.cluster.DistanceMetric;
 import org.jebtk.math.cluster.HierarchicalClustering;
 import org.jebtk.math.cluster.Linkage;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -67,7 +67,7 @@ public class ClusterHeatMapModule extends CalcModule
     mParent = window;
 
     RibbonLargeButton button = new RibbonLargeButton("Cluster Heat Map",
-        UIService.getInstance().loadIcon(Cluster32VectorIcon.class, 24),
+        AssetService.getInstance().loadIcon(Cluster32VectorIcon.class, 24),
         "Heat Map", "Generate a cluster heat map.");
     button.addClickListener(this);
 

@@ -20,7 +20,7 @@ import java.text.ParseException;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.ui.matrix.MatrixTransforms;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.input.ModernInputDialog;
@@ -67,13 +67,13 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
 
     popup.addMenuItem(new ModernTwoLineMenuItem("Min",
         "Ensure each cell has a minimum value.",
-        UIService.getInstance().loadIcon("min", 32)));
+        AssetService.getInstance().loadIcon("min", 32)));
     popup.addMenuItem(new ModernTwoLineMenuItem("Min/Max",
         "Threshold all values between min and max.",
-        UIService.getInstance().loadIcon("min_max", 32)));
+        AssetService.getInstance().loadIcon("min_max", 32)));
     popup.addMenuItem(
         new ModernTwoLineMenuItem("Min Shift", "Shift all values to be >= 0.",
-            UIService.getInstance().loadIcon("min_shift", 32)));
+            AssetService.getInstance().loadIcon("min_shift", 32)));
 
     // The default behaviour is to do a log2 transform.
     RibbonLargeDropDownButton2 button = new RibbonLargeDropDownButton2(

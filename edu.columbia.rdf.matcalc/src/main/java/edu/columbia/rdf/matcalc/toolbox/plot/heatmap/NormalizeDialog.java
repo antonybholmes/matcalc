@@ -87,14 +87,14 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
    */
   private void setup() {
     mTextMin.setText(SettingsService.getInstance()
-        .getAsDouble("org.matcalc.figure.heatmap.normalize.min", 0));
+        .getDouble("org.matcalc.figure.heatmap.normalize.min", 0));
     mTextMax.setText(SettingsService.getInstance()
-        .getAsDouble("org.matcalc.figure.heatmap.normalize.max", 1));
+        .getDouble("org.matcalc.figure.heatmap.normalize.max", 1));
 
     new ModernButtonGroup(mRadioFixed, mRadioAuto);
 
     if (SettingsService.getInstance()
-        .getAsBool("org.matcalc.figure.heatmap.normalize.mode.auto", true)) {
+        .getBool("org.matcalc.figure.heatmap.normalize.mode.auto", true)) {
       mRadioAuto.doClick();
     } else {
       mRadioFixed.doClick();
@@ -142,11 +142,11 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
     if (e.getSource().equals(mOkButton)) {
       SettingsService.getInstance().set(
           "org.matcalc.figure.heatmap.normalize.min",
-          mTextMin.getAsDouble());
+          mTextMin.getDouble());
 
       SettingsService.getInstance().set(
           "org.matcalc.figure.heatmap.normalize.max",
-          mTextMax.getAsDouble());
+          mTextMax.getDouble());
 
       SettingsService.getInstance().set(
           "org.matcalc.figure.heatmap.normalize.mode.auto",
@@ -157,11 +157,11 @@ public class NormalizeDialog extends ModernDialogTaskWindow {
   }
 
   public double getMin() {
-    return mTextMin.getAsDouble();
+    return mTextMin.getDouble();
   }
 
   public double getMax() {
-    return mTextMax.getAsDouble();
+    return mTextMax.getDouble();
   }
 
   public boolean getAuto() {

@@ -16,7 +16,7 @@
 package edu.columbia.rdf.matcalc.toolbox.core.venn;
 
 import org.jebtk.core.AppVersion;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.help.GuiAppInfo;
 
 /**
@@ -29,8 +29,8 @@ public class VennInfo extends GuiAppInfo {
    */
   public VennInfo() {
     super("Venn", new AppVersion(2), "Copyright (C) 2016 Antony Holmes",
-        UIService.getInstance().loadIcon(VennIcon.class, 32),
-        UIService.getInstance().loadIcon(VennIcon.class, 128),
+        AssetService.getInstance().loadIcon(VennIcon.class, 32),
+        AssetService.getInstance().loadIcon(VennIcon.class, 128),
         "Create Venn diagrams.");
   }
 
