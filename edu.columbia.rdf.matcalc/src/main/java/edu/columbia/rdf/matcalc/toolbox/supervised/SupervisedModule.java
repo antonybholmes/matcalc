@@ -311,6 +311,9 @@ implements ModernClickListener {
     DataFrame collapsedM = CollapseModule
         .collapse(m, collapseName, g1, g2, collapseType, mParent);
 
+    SortType sortType = dialog.getSortType();
+    
+    
     switch (plotType) {
     case VOLCANO:
       VolcanoPlotModule.volcanoPlot(mParent,
@@ -337,11 +340,11 @@ implements ModernClickListener {
             topGenes,
             testType,
             fdrType,
+            sortType,
             groups,
             rowGroups,
             isLog2,
             log2Data);
-
         break;
       case PAIRWISE:
         statTestPairwise(collapsedM,
@@ -354,13 +357,14 @@ implements ModernClickListener {
             topGenes,
             testType,
             fdrType,
+            sortType,
             groups,
             rowGroups,
             isLog2,
             log2Data);
-
         break;
       default:
+        // One group vs another
         statTest(collapsedM,
             alpha,
             classificationAlpha,
@@ -371,6 +375,7 @@ implements ModernClickListener {
             topGenes,
             testType,
             fdrType,
+            sortType,
             g1,
             g2,
             groups,
@@ -379,7 +384,6 @@ implements ModernClickListener {
             log2Data,
             plotType,
             keepHistory);
-
         break;
       }
     }
@@ -418,6 +422,7 @@ implements ModernClickListener {
       int topGenes,
       TestType test,
       FDRType fdrType,
+      SortType sortType,
       XYSeriesModel allSeries,
       XYSeriesModel rowSeries,
       boolean isLog2Data,
@@ -463,6 +468,7 @@ implements ModernClickListener {
           topGenes,
           test,
           fdrType,
+          sortType,
           s,
           s2,
           XYSeriesModel.create(newGroup),
@@ -485,6 +491,7 @@ implements ModernClickListener {
       int topGenes,
       TestType test,
       FDRType fdrType,
+      SortType sortType,
       XYSeriesModel allSeries,
       XYSeriesModel rowSeries,
       boolean isLog2Data,
@@ -508,6 +515,7 @@ implements ModernClickListener {
               topGenes,
               test,
               fdrType,
+              sortType,
               s,
               s2,
               XYSeriesModel.create(newGroup),
@@ -560,6 +568,7 @@ implements ModernClickListener {
       int topGenes,
       TestType test,
       FDRType fdrType,
+      SortType sortType,
       XYSeries g1,
       XYSeries g2,
       XYSeriesModel groups,
@@ -778,37 +787,43 @@ implements ModernClickListener {
 
     history.addToHistory("Add row classification", classM);
 
-    // DataFrame mclassification = addFlowItem("Add row classification",
-    // new RowDataFrameView(mzscores,
-    // comparison,
-    // ArrayUtils.toObjects(classifications)));
+    //
+    // Sort into up/down categories such as zscores up and zscore down
+    //
 
-    List<Indexed<Integer, Double>> zscoresIndexed = IndexedInt.index(zscores);
-
-    List<Indexed<Integer, Double>> posZScores;
-
-    if (posZ) {
-      posZScores = CollectionUtils.reverseSort(CollectionUtils
-          .subList(zscoresIndexed, MathUtils.ge(zscoresIndexed, minZ)));
-    } else {
-      posZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
-      // Double>>();
+    List<Indexed<Integer, Double>> scoresIndexed;
+    
+    switch(sortType) {
+    case FOLD_CHANGE:
+      scoresIndexed = IndexedInt.index(foldChanges);
+      break;
+    default:
+      scoresIndexed = IndexedInt.index(zscores);
+      break;
     }
 
-    List<Indexed<Integer, Double>> negZScores;
+    List<Indexed<Integer, Double>> posScores;
+
+    if (posZ) {
+      posScores = CollectionUtils.reverseSort(CollectionUtils
+          .subList(scoresIndexed, MathUtils.ge(scoresIndexed, minZ)));
+    } else {
+      posScores = Collections.emptyList();
+    }
+
+    List<Indexed<Integer, Double>> negScores;
 
     if (negZ) {
-      negZScores = CollectionUtils.sort(CollectionUtils.subList(zscoresIndexed,
-          MathUtils.lt(zscoresIndexed, -minZ)));
+      negScores = CollectionUtils.sort(CollectionUtils.subList(scoresIndexed,
+          MathUtils.lt(scoresIndexed, -minZ)));
     } else {
-      negZScores = Collections.emptyList(); // new ArrayList<Indexed<Integer,
-      // Double>>();
+      negScores = Collections.emptyList();
     }
 
     // Filter for top genes if necessary
 
-    List<Integer> ui = Indexed.indices(posZScores);
-    List<Integer> li = Indexed.indices(negZScores);
+    List<Integer> ui = Indexed.indices(posScores);
+    List<Integer> li = Indexed.indices(negScores);
 
     if (topGenes != -1) {
       ui = CollectionUtils.head(ui, topGenes);
@@ -820,13 +835,20 @@ implements ModernClickListener {
     // List<IndexedValue<Integer, Double>> sortedZscores =
     // CollectionUtils.append(posZScores, negZScores);
 
-    // Put the zscores in order
+    // Put the scores in order
 
     List<Integer> indices = CollectionUtils.append(ui, li); // IndexedValue.indices(sortedZscores);
 
     DataFrame mDeltaSorted = DataFrame.copyRows(classM, indices);
 
-    history.addToHistory("Sort by row z-score", mDeltaSorted);
+    switch(sortType) {
+    case FOLD_CHANGE:
+      history.addToHistory("Sort by row fold change", mDeltaSorted);
+      break;
+    default:
+      history.addToHistory("Sort by row z-score", mDeltaSorted);
+      break;
+    }
 
     // DataFrame mDeltaSorted = addFlowItem("Sort by row z-score",
     // new RowFilterMatrixView(mclassification, indices));

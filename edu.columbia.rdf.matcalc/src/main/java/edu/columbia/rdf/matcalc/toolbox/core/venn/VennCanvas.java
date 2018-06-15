@@ -116,7 +116,7 @@ public abstract class VennCanvas extends ModernPlotCanvas {
    */
   public void aaPlot(Graphics2D g2, DrawingContext context) {
 
-    Graphics2D g2Temp = ImageUtils.createAAGraphics(g2);
+    Graphics2D g2Temp = ImageUtils.createAATextGraphics(g2);
 
     try {
       drawPlot(g2Temp, context);

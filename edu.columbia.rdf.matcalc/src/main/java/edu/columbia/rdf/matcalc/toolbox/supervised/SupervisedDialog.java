@@ -167,6 +167,8 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
       0.05, 0.01);
 
   private TestCombo mTestCombo = new TestCombo();
+  
+  private SortCombo mSortCombo = new SortCombo();
 
   private PlotTypePanel mPlotPanel = new PlotTypePanel();
 
@@ -257,6 +259,10 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
     sectionHeader("Test", box);
 
     box.add(mTestCombo);
+    
+    box.add(UI.createVGap(5));
+
+    box.add(new HExpandBox("Sort by", mSortCombo));
 
     midSectionHeader("Correction", box);
 
@@ -484,6 +490,10 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 
   public TestType getTest() {
     return mTestCombo.getTest();
+  }
+  
+  public SortType getSortType() {
+    return mSortCombo.getSortType();
   }
 
   public boolean getKeepHistory() {

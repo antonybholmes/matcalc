@@ -37,10 +37,10 @@ import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.text.Join;
 import org.jebtk.graphplot.Image;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButtonWidget;
 import org.jebtk.modern.clipboard.ClipboardRibbonSection;
 import org.jebtk.modern.contentpane.CenterTab;
@@ -52,9 +52,8 @@ import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.event.ModernSelectionListener;
-import org.jebtk.modern.graphics.CanvasMouseEvent;
 import org.jebtk.modern.graphics.CanvasMouseAdapter;
+import org.jebtk.modern.graphics.CanvasMouseEvent;
 import org.jebtk.modern.graphics.icons.QuickOpenVectorIcon;
 import org.jebtk.modern.graphics.icons.QuickSaveVectorIcon;
 import org.jebtk.modern.help.ModernAboutDialog;
@@ -94,7 +93,7 @@ import org.slf4j.LoggerFactory;
  * The Class MainVennWindow.
  */
 public class MainVennWindow extends ModernRibbonWindow
-    implements ModernClickListener, ModernSelectionListener {
+    implements ModernClickListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -753,17 +752,5 @@ public class MainVennWindow extends ModernRibbonWindow
     RecentFilesService.getInstance().setPwd(file.getParent());
 
     ModernMessageDialog.createFileSavedDialog(this, file);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * org.abh.common.ui.event.ModernSelectionListener#selectionChanged(org.abh.
-   * common.event.ChangeEvent)
-   */
-  @Override
-  public void selectionChanged(ChangeEvent e) {
-
   }
 }

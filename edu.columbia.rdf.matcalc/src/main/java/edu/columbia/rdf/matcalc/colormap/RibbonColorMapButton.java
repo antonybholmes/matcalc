@@ -133,7 +133,7 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton
      */
 
     /*
-     * Graphics2D g2Temp = ImageUtils.createAAGraphics(g2);
+     * Graphics2D g2Temp = ImageUtils.createAATextGraphics(g2);
      * 
      * try { g2Temp.setPaint(paint);
      * 
