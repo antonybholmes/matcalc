@@ -330,7 +330,7 @@ public class Graph2dWindow extends FigureWindow {
         // min /= scale;
         // max /= scale;
 
-        m = MatrixOperations.normalize(m, min, max);
+        m = MatrixOperations.scale(m, min, max);
       }
 
       System.err

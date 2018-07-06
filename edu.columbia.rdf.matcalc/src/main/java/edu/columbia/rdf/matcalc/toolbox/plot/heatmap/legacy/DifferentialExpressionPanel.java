@@ -113,7 +113,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
       // min /= scale;
       // max /= scale;
 
-      ret = MatrixOperations.normalize(ret, norm);
+      ret = MatrixOperations.scale(ret, norm);
 
       // System.err.println("ret " + ret.getColumnNames() + " " +
       // ret.getRowCount());

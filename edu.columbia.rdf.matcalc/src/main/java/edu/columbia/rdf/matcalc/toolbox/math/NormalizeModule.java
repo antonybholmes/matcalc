@@ -94,10 +94,10 @@ public class NormalizeModule extends CalcWinModule
       if (dialog.getStatus() == ModernDialogStatus.OK) {
         if (dialog.getAuto()) {
           mWindow.addToHistory("Normalize",
-              MatrixOperations.normalize(mWindow.getCurrentMatrix()));
+              MatrixOperations.scale(mWindow.getCurrentMatrix()));
         } else {
           mWindow.addToHistory("Normalize",
-              MatrixOperations.normalize(mWindow.getCurrentMatrix(),
+              MatrixOperations.scale(mWindow.getCurrentMatrix(),
                   dialog.getMin(),
                   dialog.getMax()));
         }

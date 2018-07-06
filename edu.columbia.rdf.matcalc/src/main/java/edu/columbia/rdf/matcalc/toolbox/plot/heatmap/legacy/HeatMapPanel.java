@@ -570,7 +570,7 @@ public class HeatMapPanel extends FormatPlotPane
       // min /= scale;
       // max /= scale;
 
-      ret = MatrixOperations.normalize(ret, norm);
+      ret = MatrixOperations.scale(ret, norm);
     }
 
     return ret;
