@@ -18,6 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.filter.row;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.jebtk.core.Range;
@@ -259,8 +260,8 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
             continue;
           }
 
-          for (String name : nameMap) {
-            if (rowName.contains(name)) {
+          for (Entry<String, String> f : nameMap) {
+            if (rowName.contains(f.getKey())) {
               rows.add(i);
               foundNameSet.add(nameMap.get(rowName));
 
@@ -277,8 +278,8 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
             continue;
           }
 
-          for (String name : nameMap) {
-            if (!rowName.contains(name)) {
+          for (Entry<String, String> f : nameMap) {
+            if (!rowName.contains(f.getKey())) {
               rows.add(i);
             }
           }

@@ -158,7 +158,7 @@ public class OpenFile {
   }
 
   /**
-   * Auto open.
+   * Auto open a file without prompting a user to specify parameters.
    *
    * @return true, if successful
    * @throws IOException Signals that an I/O exception has occurred.

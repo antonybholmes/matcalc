@@ -128,13 +128,19 @@ public class ColumnAnnotationModule extends CalcModule
     switch (m.getType()) {
     case NUMBER:
       for (int i = minC; i < c; ++i) {
-        ret.setNumRowAnnotations(m.getText(-1, i), m.columnToDoubleArray(i));
+        ret.setRowAnnotations(m.getText(-1, i), m.columnToDoubleArray(i));
+      }
+
+      break;
+    case TEXT:
+      for (int i = minC; i < c; ++i) {
+        ret.setRowAnnotations(m.getText(-1, i), m.columnToTextArray(i));
       }
 
       break;
     default:
       for (int i = minC; i < c; ++i) {
-        ret.setTextRowAnnotations(m.getText(-1, i), m.columnAsText(i));
+        ret.setRowAnnotations(m.getText(-1, i), m.columnToArray(i));
       }
 
       break;

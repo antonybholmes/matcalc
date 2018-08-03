@@ -26,9 +26,9 @@ import org.jebtk.core.settings.SettingsService;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.XlsxTxtGuiFileFilter;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.combobox.ModernComboBox;
@@ -41,6 +41,7 @@ import org.jebtk.modern.graphics.icons.PlusVectorIcon;
 import org.jebtk.modern.io.FileDialog;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
+import org.jebtk.modern.panel.ModernContentPanel;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
@@ -48,6 +49,7 @@ import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernLabel;
 import org.jebtk.modern.text.ModernTextArea;
+import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
@@ -120,7 +122,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
   /**
    * The import button.
    */
-  private ModernButton importButton = new ModernButton(UI.BUTTON_IMPORT,
+  private ModernButton importButton = new ModernButton(UI.BUTTON_LOAD,
       AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16), 80);
 
   /**
@@ -241,7 +243,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
         .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
         .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
 
-    content.setBody(scrollPane);
+    content.setBody(new ModernContentPanel(scrollPane));
 
     box = VBox.create();
     box.setBorder(ModernWidget.LEFT_BORDER);

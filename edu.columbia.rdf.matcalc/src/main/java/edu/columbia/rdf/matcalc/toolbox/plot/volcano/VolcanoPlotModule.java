@@ -208,16 +208,16 @@ public class VolcanoPlotModule extends CalcModule
       logM = m;
     }
 
-    List<Double> p = SupervisedModule.getP(logM, g1, g2, test);
+    double[] p = SupervisedModule.getP(logM, g1, g2, test);
 
     List<Double> foldChanges = MatrixUtils.logFoldChange(logM, g1, g2);
 
     DataFrame annM = new DataFrame(logM);
-    annM.setNumRowAnnotations("Log2 Fold Change", foldChanges);
+    annM.setRowAnnotations("Log2 Fold Change", foldChanges.toArray());
     parent.addToHistory("Add log2 fold changes", annM);
 
     DataFrame pValuesM = new DataFrame(annM);
-    pValuesM.setNumRowAnnotations("P-value", p);
+    pValuesM.setRowAnnotations("P-value", p);
     parent.addToHistory("Add p-values", pValuesM);
 
     // DataFrame mcollapsed = CollapseModule.collapse(pValuesM,
@@ -233,7 +233,7 @@ public class VolcanoPlotModule extends CalcModule
         fdrType);
 
     DataFrame fdrM = new DataFrame(pValuesM);
-    fdrM.setNumRowAnnotations("FDR", fdr);
+    fdrM.setRowAnnotations("FDR", fdr);
     parent.addToHistory("False discovery rate", fdrM);
 
     // filter by fdr

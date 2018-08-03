@@ -31,6 +31,9 @@
 	<setting name="matcalc.modules.row-order.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Row_Order"/>
 	<setting name="matcalc.modules.volcano.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Volcano_Plots"/>
 	
+	<setting name="matcalc.modules.supervised.max-plot-rows" value="500"/>
+  
+	
 	<setting name="matcalc.color-maps.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Color_Maps"/>
 	<setting name="matcalc.color-map.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Color_Map"/>
 	

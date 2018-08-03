@@ -19,7 +19,6 @@ import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +31,7 @@ import org.jebtk.core.cli.CommandLineArgs;
 import org.jebtk.core.cli.Options;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.PathUtils;
+import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.sys.SysUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroup;
@@ -48,7 +48,9 @@ import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.math.statistics.FDRType;
 import org.jebtk.math.statistics.Statistics;
+import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
+import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.Raster32Icon;
@@ -63,6 +65,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseModule;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
+import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
 
 /**
@@ -78,6 +81,9 @@ implements ModernClickListener {
 
   private static final Logger LOG = LoggerFactory
       .getLogger(SupervisedModule.class);
+
+  private static final int MAX_ROW_COUNT = 
+      SettingsService.getInstance().getInt("matcalc.modules.supervised.max-plot-rows");
 
   /*
    * (non-Javadoc)
@@ -312,8 +318,8 @@ implements ModernClickListener {
         .collapse(m, collapseName, g1, g2, collapseType, mParent);
 
     SortType sortType = dialog.getSortType();
-    
-    
+
+
     switch (plotType) {
     case VOLCANO:
       VolcanoPlotModule.volcanoPlot(mParent,
@@ -618,11 +624,11 @@ implements ModernClickListener {
     // P-values
     //
 
-    List<Double> pValues = getP(log2M, g1, g2, test);
+    double[] pValues = getP(log2M, g1, g2, test);
 
     DataFrame pValuesM = new DataFrame(log2M);
 
-    pValuesM.setNumRowAnnotations("P-value", pValues);
+    pValuesM.setRowAnnotations("P-value", pValues);
 
     // System.err.println("p " + pValues);
     // System.err.println("p2 " +
@@ -641,7 +647,7 @@ implements ModernClickListener {
     // Fold Changes
     //
 
-    List<Double> foldChanges;
+    double[] foldChanges;
 
     if (isLog2Data || log2Data) {
       foldChanges = DoubleMatrix.logFoldChange(pValuesM, g1, g2);
@@ -655,7 +661,7 @@ implements ModernClickListener {
     String name = isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change";
 
     DataFrame foldChangesM = new DataFrame(pValuesM);
-    foldChangesM.setNumRowAnnotations(name, foldChanges);
+    foldChangesM.setRowAnnotations(name, foldChanges);
 
     history.addToHistory(name, foldChangesM);
 
@@ -665,9 +671,9 @@ implements ModernClickListener {
 
     DataFrame meansM = new DataFrame(foldChangesM);
 
-    meansM.setNumRowAnnotations(g1.getName() + " mean",
+    meansM.setRowAnnotations(g1.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g1));
-    meansM.setNumRowAnnotations(g2.getName() + " mean",
+    meansM.setRowAnnotations(g2.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g2));
 
     history.addToHistory("Group Means", meansM);
@@ -713,7 +719,7 @@ implements ModernClickListener {
         fdrType);
 
     DataFrame mfdr = new DataFrame(foldFilterM);
-    mfdr.setNumRowAnnotations("FDR", fdr);
+    mfdr.setRowAnnotations("FDR", fdr);
 
     history.addToHistory("FDR", mfdr);
 
@@ -734,11 +740,11 @@ implements ModernClickListener {
     // new RowFilterMatrixView(mfdr,
     // IndexedValueInt.indices(pValueIndices)));
 
-    List<Double> zscores = DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
+    double[] zscores = DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
 
     DataFrame zscoresM = new DataFrame(fdrFilteredM);
 
-    zscoresM.setNumRowAnnotations("Z-score", zscores);
+    zscoresM.setRowAnnotations("Z-score", zscores);
     history.addToHistory("Z-score", zscoresM);
 
     // DataFrame mzscores = addFlowItem("Add row z-scores",
@@ -750,10 +756,12 @@ implements ModernClickListener {
     // and
     // a zscore > 1
 
-    List<String> classifications = new ArrayList<String>();
-
+    
     Matrix im = zscoresM.getMatrix();
 
+    String[] classifications = new String[im.getRows()];
+
+    
     for (int i = 0; i < im.getRows(); ++i) {
       String classification = "not_expressed";
 
@@ -775,7 +783,7 @@ implements ModernClickListener {
         }
       }
 
-      classifications.add(classification);
+      classifications[i] = classification;
     }
 
     String comparison = g1.getName() + "_vs_" + g2.getName() + " (p <= "
@@ -783,7 +791,7 @@ implements ModernClickListener {
 
     DataFrame classM = new DataFrame(zscoresM);
 
-    classM.setTextRowAnnotations(comparison, classifications);
+    classM.setRowAnnotations(comparison, classifications);
 
     history.addToHistory("Add row classification", classM);
 
@@ -792,7 +800,7 @@ implements ModernClickListener {
     //
 
     List<Indexed<Integer, Double>> scoresIndexed;
-    
+
     switch(sortType) {
     case FOLD_CHANGE:
       scoresIndexed = IndexedInt.index(foldChanges);
@@ -875,9 +883,29 @@ implements ModernClickListener {
         .add(new CountGroup("down", ui.size(), indices.size() - 1));
 
     if (plotType != PlotType.NONE) {
-      mParent.addToHistory(new HeatMapMatrixTransform(mParent, mNormalized,
-          groups, comparisonGroups, rowGroups, countGroups,
-          mParent.getTransformationHistory(), new ClusterProperties()));
+      boolean plot = true;
+
+      if (mNormalized.getRows() > MAX_ROW_COUNT) {
+        // Warn users that they are going to make a huge plot
+        ModernDialogStatus status = ModernMessageDialog.createDialog(mParent, 
+            MessageDialogType.WARNING_OK_CANCEL,
+            "You are trying to plot more than " + MAX_ROW_COUNT + " rows.",
+            "Are you sure you want to create this plot?");
+
+        if (status == ModernDialogStatus.CANCEL) {
+          plot = false;
+        }
+      }
+
+      if (plot) {
+        ClusterProperties p = new ClusterProperties();
+        
+        LegacyHeatMapModule.scaleLargeMatrixImage(m, p);
+        
+        mParent.addToHistory(new HeatMapMatrixTransform(mParent, mNormalized,
+            groups, comparisonGroups, rowGroups, countGroups,
+            mParent.getTransformationHistory(), p));
+      }
     }
 
     // Add a reference at the end so that it is easy for users to find
@@ -924,11 +952,11 @@ implements ModernClickListener {
     // P-values
     //
 
-    List<Double> pValues = getP(m, g1, g2, test);
+    double[] pValues = getP(m, g1, g2, test);
 
     DataFrame pValuesM = new DataFrame(m);
 
-    pValuesM.setNumRowAnnotations("P-value", pValues);
+    pValuesM.setRowAnnotations("P-value", pValues);
 
     //System.err.println("p " + pValues);
     // System.err.println("p2 " +
@@ -945,7 +973,7 @@ implements ModernClickListener {
     // Fold Changes
     //
 
-    List<Double> foldChanges;
+    double[] foldChanges;
 
     if (isLog2Data) {
       foldChanges = DoubleMatrix.logFoldChange(pValuesM, g1, g2);
@@ -958,7 +986,7 @@ implements ModernClickListener {
 
     DataFrame foldChangesM = new DataFrame(pValuesM);
 
-    foldChangesM.setNumRowAnnotations(isLog2Data ? "Log2 Fold Change" : "Fold Change", foldChanges);
+    foldChangesM.setRowAnnotations(isLog2Data ? "Log2 Fold Change" : "Fold Change", foldChanges);
 
     //
     // Group means
@@ -966,9 +994,9 @@ implements ModernClickListener {
 
     DataFrame meansM = new DataFrame(foldChangesM);
 
-    meansM.setNumRowAnnotations(g1.getName() + " mean",
+    meansM.setRowAnnotations(g1.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g1));
-    meansM.setNumRowAnnotations(g2.getName() + " mean",
+    meansM.setRowAnnotations(g2.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g2));
 
     //
@@ -1007,7 +1035,7 @@ implements ModernClickListener {
         fdrType);
 
     DataFrame mfdr = new DataFrame(foldFilterM);
-    mfdr.setNumRowAnnotations("FDR", fdr);
+    mfdr.setRowAnnotations("FDR", fdr);
 
     // DataFrame mfdr = addFlowItem("False discovery rate",
     // new RowDataFrameView(mcollapsed,
@@ -1024,11 +1052,11 @@ implements ModernClickListener {
     // new RowFilterMatrixView(mfdr,
     // IndexedValueInt.indices(pValueIndices)));
 
-    List<Double> zscores = DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
+    double[] zscores = DoubleMatrix.diffGroupZScores(fdrFilteredM, g1, g2);
 
     DataFrame zscoresM = new DataFrame(fdrFilteredM);
 
-    zscoresM.setNumRowAnnotations("Z-score", zscores);
+    zscoresM.setRowAnnotations("Z-score", zscores);
 
     // DataFrame mzscores = addFlowItem("Add row z-scores",
     // new RowDataFrameView(mfdrfiltered,
@@ -1039,10 +1067,12 @@ implements ModernClickListener {
     // and
     // a zscore > 1
 
-    List<String> classifications = new ArrayList<String>();
-
+    
     Matrix im = zscoresM.getMatrix();
 
+    String[] classifications = new String[im.getRows()];
+
+    
     for (int i = 0; i < im.getRows(); ++i) {
       String classification = "not_expressed";
 
@@ -1064,7 +1094,7 @@ implements ModernClickListener {
         }
       }
 
-      classifications.add(classification);
+      classifications[i] = classification;
     }
 
     String comparison = g1.getName() + "_vs_" + g2.getName() + " (p <= "
@@ -1072,7 +1102,7 @@ implements ModernClickListener {
 
     DataFrame classM = new DataFrame(zscoresM);
 
-    classM.setTextRowAnnotations(comparison, classifications);
+    classM.setRowAnnotations(comparison, classifications);
 
     // DataFrame mclassification = addFlowItem("Add row classification",
     // new RowDataFrameView(mzscores,
@@ -1143,11 +1173,11 @@ implements ModernClickListener {
     return mDeltaSorted;
   }
 
-  public static List<Double> getP(DataFrame m,
+  public static double[] getP(DataFrame m,
       XYSeries g1,
       XYSeries g2,
       TestType test) {
-    List<Double> pValues;
+    double[] pValues;
 
     switch (test) {
     case MANN_WHITNEY:

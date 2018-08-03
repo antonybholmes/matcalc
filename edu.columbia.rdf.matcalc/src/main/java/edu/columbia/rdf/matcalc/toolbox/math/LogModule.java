@@ -124,8 +124,6 @@ public class LogModule extends CalcModule implements ModernClickListener {
    */
   @Override
   public void clicked(ModernClickEvent e) {
-    System.err.println("sdfdsf " + e.getMessage());
-    
     if (e.getMessage().equals("Log 10")) {
       mWindow.addToHistory("log10",
           "log10",
