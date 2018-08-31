@@ -664,7 +664,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
     }
 
     DataFrame groupsMatrix = Excel.convertToMatrix(file,
-        true,
+        1,
         TextUtils.emptyList(),
         0,
         TextUtils.TAB_DELIMITER);

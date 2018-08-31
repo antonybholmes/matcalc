@@ -1773,12 +1773,12 @@ ModernSelectionListener, MatrixTransformListener {
    * abh. lib.event.ChangeEvent)
    */
   @Override
-  public void selectionAdded(ChangeEvent e) {
-    selectionRemoved(e);
+  public void selectionRemoved(ChangeEvent e) {
+    selectionAdded(e);
   }
   
   @Override
-  public void selectionRemoved(ChangeEvent e) {
+  public void selectionAdded(ChangeEvent e) {
     if (mHistoryPanel.getSelectedIndex() == -1) {
       return;
     }

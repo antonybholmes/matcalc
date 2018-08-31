@@ -216,6 +216,6 @@ public class ImportDialog extends ModernDialogHelpWindow
   }
 
   public boolean isNumerical() {
-    return mTextColsCheck.isSelected() ? mNumericalCheck.isSelected() : false;
+    return mNumericalCheck.isSelected(); //mTextColsCheck.isSelected() ? mNumericalCheck.isSelected() : false;
   }
 }

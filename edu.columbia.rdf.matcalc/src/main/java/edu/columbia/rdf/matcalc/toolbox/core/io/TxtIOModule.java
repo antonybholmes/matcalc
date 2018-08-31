@@ -99,10 +99,10 @@ public class TxtIOModule extends CalcModule {
     return autoOpenFile(window,
         file,
         dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
-        dialog.getHasHeader() ? 1 : 0,
-        dialog.getRowAnnotations(),
-        dialog.getDelimiter(),
-        dialog.getSkipLines());
+            dialog.getHasHeader() ? 1 : 0,
+                dialog.getRowAnnotations(),
+                dialog.getDelimiter(),
+                dialog.getSkipLines());
   }
 
   @Override
@@ -121,21 +121,18 @@ public class TxtIOModule extends CalcModule {
         return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
       }
     } else {
-      if (headers > 0) {
-        if (type == FileType.NUMERICAL) {
-          return new DoubleMatrixParser(true, skipLines, rowAnnotations,
-              delimiter).parse(file);
-        } else {
-          return new MixedMatrixParser(true, skipLines, rowAnnotations,
-              delimiter).parse(file);
-        }
+      //if (headers > 0) {
+      if (type == FileType.NUMERICAL) {
+        return new DoubleMatrixParser(headers, skipLines, rowAnnotations,
+            delimiter).parse(file);
       } else {
-        return new DynamicMixedMatrixParser(skipLines, rowAnnotations,
-            delimiter).parse(file); // return
-                                    // DataFrame.parseDynamicMatrix(file,
-                                    // hasHeader,
-                                    // rowAnnotations, '\t');
+        return new MixedMatrixParser(headers, skipLines, rowAnnotations,
+            delimiter).parse(file);
       }
+      //} else {
+      //  return new DynamicMixedMatrixParser(skipLines, rowAnnotations,
+      //      delimiter).parse(file);
+      //}
     }
   }
 

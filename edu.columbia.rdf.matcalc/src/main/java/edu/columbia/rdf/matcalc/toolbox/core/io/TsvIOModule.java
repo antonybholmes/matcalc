@@ -75,7 +75,7 @@ public class TsvIOModule extends CalcModule {
       Collection<String> skipLines) throws IOException {
 
     if (headers > 0) {
-      return new DoubleMatrixParser(true, skipLines, rowAnnotations, delimiter)
+      return new DoubleMatrixParser(headers, skipLines, rowAnnotations, delimiter)
           .parse(file);
     } else {
       return new DynamicMixedMatrixParser(skipLines, rowAnnotations, delimiter)

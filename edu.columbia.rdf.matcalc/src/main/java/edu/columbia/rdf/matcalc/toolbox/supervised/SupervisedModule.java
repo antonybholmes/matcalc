@@ -140,7 +140,7 @@ implements ModernClickListener {
 
     Path dir = PathUtils.getDir(file);
 
-    DataFrame m = new DoubleMatrixParser(true, TextUtils.EMPTY_LIST, 1, TextUtils.TAB_DELIMITER)
+    DataFrame m = new DoubleMatrixParser(1, TextUtils.EMPTY_LIST, 1, TextUtils.TAB_DELIMITER)
         .parse(file);
 
     List<XYSeries> groups = XYSeries.loadJson(groupFile);
