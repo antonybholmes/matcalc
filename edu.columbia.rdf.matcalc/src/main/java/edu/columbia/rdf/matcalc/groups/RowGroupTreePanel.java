@@ -25,7 +25,6 @@ import org.jebtk.core.tree.TreeRootNode;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.text.ModernSubHeadingLabel;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 
@@ -76,14 +75,13 @@ public class RowGroupTreePanel extends ColumnGroupTreePanel {
   }
 
   /*
-   * (non-Javadoc)
-   * 
-   * @see edu.columbia.rdf.apps.matcalc.ColumnGroupTreePanel#createTree()
-   */
   @Override
   protected void createTree(Collection<XYSeries> groups, boolean clear) {
 
     TreeRootNode<XYSeries> root;
+    
+    System.err.println("SDfsdf" + groups.size());
+    System.err.println(mMatrix.getRowNames());
 
     if (clear) {
       root = new TreeRootNode<XYSeries>();
@@ -96,6 +94,8 @@ public class RowGroupTreePanel extends ColumnGroupTreePanel {
       TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(),
           group);
 
+      System.err.println(mMatrix.getRowNames());
+      
       for (int i : XYSeries.findRowIndices(mMatrix, group)) {
         TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(
             mMatrix.getRowName(i));
@@ -107,5 +107,40 @@ public class RowGroupTreePanel extends ColumnGroupTreePanel {
     }
 
     mTree.setRoot(root);
+  }
+  */
+  
+  @Override
+  protected void createTree(XYSeries group, boolean clear) {
+
+    TreeRootNode<XYSeries> root;
+
+    if (clear) {
+      root = new TreeRootNode<XYSeries>();
+      mTree.setRoot(root);
+    } else {
+      root = mTree.getRoot();
+    }
+
+    TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(),
+        group);
+
+    for (int i : XYSeries.findRowIndices(mMatrix, group)) {
+
+      TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(
+          mMatrix.getColumnName(i));
+
+      // Don't render the children, the parent will. This is
+      // because we allow dragging and we don't want users to
+      // drag the children around
+      childNode.setVisible(false);
+
+      groupNode.addChild(childNode);
+    }
+
+    // Cannot inherit children
+    groupNode.setExpanded(false);
+
+    root.addChild(groupNode);
   }
 }

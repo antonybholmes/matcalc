@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.groups;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
@@ -31,9 +30,6 @@ import javax.xml.transform.TransformerException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
-import org.jebtk.core.json.Json;
-import org.jebtk.core.json.JsonParser;
-import org.jebtk.core.text.RegexUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.core.tree.TreeRootNode;
@@ -44,8 +40,8 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.ui.external.microsoft.ExcelUI;
 import org.jebtk.math.ui.matrix.AllMatrixGroupGuiFileFilter;
-import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.contentpane.VTabToolbar;
 import org.jebtk.modern.dialog.MessageDialogType;
@@ -387,6 +383,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
       return;
     }
 
+    System.err.println("add group" + getClass());
+    
     addGroup(dialog.getGroup());
   }
 
@@ -560,9 +558,11 @@ public class ColumnGroupTreePanel extends ModernComponent {
     }
 
     for (XYSeries group : groups) {
+      /*
       TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(),
           group);
 
+      
       for (int i : XYSeries.findColumnIndices(mMatrix, group)) {
         TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(
             mMatrix.getColumnName(i));
@@ -579,7 +579,12 @@ public class ColumnGroupTreePanel extends ModernComponent {
       groupNode.setExpanded(false);
 
       root.addChild(groupNode);
+      */
+      
+      createTree(group, false);
     }
+    
+    
 
   }
 
