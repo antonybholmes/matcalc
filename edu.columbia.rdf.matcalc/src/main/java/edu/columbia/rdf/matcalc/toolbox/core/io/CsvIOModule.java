@@ -22,7 +22,6 @@ import java.util.Collection;
 import org.jebtk.math.matrix.CsvDynamicMatrixParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.io.CsvGuiFileFilter;
 import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
 

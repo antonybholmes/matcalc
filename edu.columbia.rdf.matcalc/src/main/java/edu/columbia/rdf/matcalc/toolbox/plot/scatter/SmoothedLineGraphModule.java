@@ -16,7 +16,6 @@
 package edu.columbia.rdf.matcalc.toolbox.plot.scatter;
 
 import java.awt.Color;
-import java.text.ParseException;
 
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.cli.CommandLineArg;

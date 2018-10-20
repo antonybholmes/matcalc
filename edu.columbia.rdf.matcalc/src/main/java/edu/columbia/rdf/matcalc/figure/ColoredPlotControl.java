@@ -21,7 +21,6 @@ import javax.swing.Box;
 
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.graphics.color.ColorSwatchButton;
 import org.jebtk.modern.graphics.color.ColorSwatchButton2;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.widget.ModernTwoStateWidget;

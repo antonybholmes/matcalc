@@ -17,7 +17,6 @@ package edu.columbia.rdf.matcalc.groups;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.List;
 
 import org.jebtk.core.tree.TreeNode;

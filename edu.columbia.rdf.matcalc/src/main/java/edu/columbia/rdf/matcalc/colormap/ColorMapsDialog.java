@@ -22,10 +22,10 @@ import java.util.List;
 import javax.swing.Box;
 
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;

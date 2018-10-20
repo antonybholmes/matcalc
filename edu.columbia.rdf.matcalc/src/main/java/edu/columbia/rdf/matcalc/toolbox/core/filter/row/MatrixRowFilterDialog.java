@@ -49,7 +49,6 @@ import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernLabel;
 import org.jebtk.modern.text.ModernTextArea;
-import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;

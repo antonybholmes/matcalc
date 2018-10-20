@@ -47,7 +47,7 @@ import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
-import org.jebtk.core.io.Temp;
+import org.jebtk.core.io.TmpService;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
@@ -58,9 +58,9 @@ import org.jebtk.math.ui.matrix.MatrixTableModel;
 import org.jebtk.math.ui.matrix.transform.MatrixTransform;
 import org.jebtk.math.ui.matrix.transform.MatrixTransformCellRenderer;
 import org.jebtk.math.ui.matrix.transform.MatrixTransformListener;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButtonWidget;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
@@ -128,6 +128,9 @@ ModernSelectionListener, MatrixTransformListener {
    */
   public static final String CREATE_GROUPS_MESSAGE = 
       "You must load or create some groups.";
+  
+  public static final String CREATE_ROW_GROUPS_MESSAGE = 
+      "You must load or create some row groups.";
 
   /**
    * The member input file.
@@ -1760,7 +1763,7 @@ ModernSelectionListener, MatrixTransformListener {
    */
   @Override
   public void close() {
-    Temp.deleteTempFiles();
+    TmpService.getInstance().deleteTempFiles();
 
     super.close();
   }
@@ -1966,6 +1969,12 @@ ModernSelectionListener, MatrixTransformListener {
   public static void createGroupWarningDialog(ModernWindow window) {
     ModernMessageDialog.createDialog(window,
         MainMatCalcWindow.CREATE_GROUPS_MESSAGE,
+        MessageDialogType.WARNING);
+  }
+  
+  public static void createRowGroupWarningDialog(ModernWindow window) {
+    ModernMessageDialog.createDialog(window,
+        MainMatCalcWindow.CREATE_ROW_GROUPS_MESSAGE,
         MessageDialogType.WARNING);
   }
 

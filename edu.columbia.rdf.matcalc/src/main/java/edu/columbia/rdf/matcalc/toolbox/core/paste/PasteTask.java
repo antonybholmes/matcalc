@@ -19,7 +19,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.core.collections.CountMap;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.Io;
-import org.jebtk.core.io.Temp;
+import org.jebtk.core.io.TmpService;
 import org.jebtk.core.stream.Stream;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.io.RecentFilesService;
@@ -157,8 +157,8 @@ public class PasteTask extends SwingWorker<Void, Void> {
     // free the memory
     keyList.clear();
 
-    Path tmp1 = Temp.generateTempFile("txt");
-    Path tmp2 = Temp.generateTempFile("txt");
+    Path tmp1 = TmpService.getInstance().newTmpFile("txt");
+    Path tmp2 = TmpService.getInstance().newTmpFile("txt");
 
     // write out the first file largely intact
 

@@ -16,8 +16,8 @@
 package edu.columbia.rdf.matcalc.toolbox.core.sort;
 
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.UI;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;

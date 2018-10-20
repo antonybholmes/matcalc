@@ -20,8 +20,8 @@ import java.awt.LinearGradientPaint;
 import java.awt.geom.Point2D;
 
 import org.jebtk.core.geom.IntDim;
-import org.jebtk.modern.UI;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.UI;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.colormap.ColorMap;

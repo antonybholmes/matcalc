@@ -25,14 +25,12 @@ import org.jebtk.core.collections.ArrayListMultiMap;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.ListMultiMap;
 import org.jebtk.core.io.FileUtils;
-import org.jebtk.core.io.Io;
-import org.jebtk.core.io.Temp;
+import org.jebtk.core.io.TmpService;
 import org.jebtk.core.stream.Stream;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.AssetService;
-import org.jebtk.modern.button.ModernDropDownButton;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -283,14 +281,14 @@ public class SplitModule extends CalcModule implements ModernClickListener {
 
             DataFrame m = matrices.get(i);
 
-            Path tmp = Temp.createTempFile(id + ".txt");
+            Path tmp = TmpService.getInstance().newTmpFile(id + ".txt");
 
             DataFrame.writeDataFrame(m, tmp);
 
             files.add(tmp);
           }
 
-          Io.createZip(file, files);
+          FileUtils.zip(file, files);
 
           ModernMessageDialog.createFileSavedDialog(mWindow, file);
         }
