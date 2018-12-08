@@ -40,7 +40,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class HomeModule extends CalcModule {
+public class ClipboardModule extends CalcModule {
 
   /*
    * (non-Javadoc)
@@ -49,7 +49,7 @@ public class HomeModule extends CalcModule {
    */
   @Override
   public String getName() {
-    return "Home";
+    return "Clipboard";
   }
 
   /*
@@ -61,7 +61,6 @@ public class HomeModule extends CalcModule {
    */
   @Override
   public void init(MainMatCalcWindow window) {
-    // Force creation of toolbar so it appears first
-    window.getRibbon().getHomeToolbar();
+    window.getRibbon().getHomeToolbar().add(new ClipboardRibbonSection(window.getRibbon()));
   }
 }

@@ -15,10 +15,10 @@
  */
 package edu.columbia.rdf.matcalc;
 
+import edu.columbia.rdf.matcalc.toolbox.core.ClipboardModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ColumnAnnotationModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ExtractDataModule;
 import edu.columbia.rdf.matcalc.toolbox.core.GroupModule;
-import edu.columbia.rdf.matcalc.toolbox.core.HomeModule;
 import edu.columbia.rdf.matcalc.toolbox.core.OrderColumnsModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SplitModule;
 import edu.columbia.rdf.matcalc.toolbox.core.SummaryModule;
@@ -63,7 +63,7 @@ public class BasicModuleLoader extends CoreModuleLoader {
    * Instantiates a new module loader.
    */
   public BasicModuleLoader() {
-    addModule(HomeModule.class);
+    addModule(ClipboardModule.class);
     
     addModule(TransposeModule.class);
     addModule(ThresholdModule.class);
@@ -82,7 +82,7 @@ public class BasicModuleLoader extends CoreModuleLoader {
 
     addModule(SearchColumnModule.class);
     addModule(MatchModule.class);
-    addModule(OrderColumnsModule.class);
+    
 
     addModule(SummaryModule.class);
     addModule(CollapseModule.class);
@@ -93,8 +93,8 @@ public class BasicModuleLoader extends CoreModuleLoader {
     addModule(ColumnAnnotationModule.class);
 
     addModule(RowOrderModule.class);
-    addModule(ColumnFilterModule.class);
-
+    addModule(OrderColumnsModule.class);
+    
     addModule(VennModule.class);
 
     addModule(PasteModule.class);

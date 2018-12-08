@@ -69,7 +69,7 @@ public class OrderColumnsModule extends CalcModule
 
     mButton.addClickListener(this);
 
-    mWindow.getRibbon().getToolbar("Data").getSection("Filter").add(mButton);
+    mWindow.getRibbon().getToolbar("Data").getSection("Sort").add(mButton);
   }
 
   /*

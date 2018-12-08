@@ -52,7 +52,7 @@ public class ImportDialog extends ModernDialogHelpWindow
   /**
    * The member spinner.
    */
-  private ModernCompactSpinner mSpinner;
+  private ModernCompactSpinner mTextColsSpinner;
 
   /**
    * The member check header.
@@ -78,7 +78,7 @@ public class ImportDialog extends ModernDialogHelpWindow
   /** The m delimiter combo. */
   private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
 
-  private ModernCompactSpinner mRowSpinner;
+  private ModernCompactSpinner mHeaderRowsSpinner;
 
   /**
    * Instantiates a new row annotation dialog.
@@ -88,14 +88,23 @@ public class ImportDialog extends ModernDialogHelpWindow
    * @param isExcel the is excel
    * @param delimiter the delimiter
    */
-  public ImportDialog(ModernWindow parent, int rowAnnotations, boolean isExcel,
-      String delimiter, boolean isNumerical) {
+  public ImportDialog(ModernWindow parent, int headers,
+      int rowAnnotations, 
+      boolean isExcel,
+      String delimiter, 
+      boolean isNumerical) {
     super(parent, "matcalc.import.help.url");
 
     setTitle("Import");
+    
+    mCheckHeader.setSelected(headers > 0);
+    mHeaderRowsSpinner = new ModernCompactSpinner(0, 100, headers);
 
-    mSpinner = new ModernCompactSpinner(0, 100, rowAnnotations);
-    mRowSpinner = new ModernCompactSpinner(0, 100, 1);
+    mTextColsCheck.setSelected(rowAnnotations > 0);
+    mTextColsSpinner = new ModernCompactSpinner(0, 100, rowAnnotations);
+    
+    
+    
     mDelimiterCombo.setDelimiter(delimiter);
     mNumericalCheck.setSelected(isNumerical);
 
@@ -129,7 +138,7 @@ public class ImportDialog extends ModernDialogHelpWindow
 
     Box box = VBox.create();
 
-    box.add(new HExpandBox(mCheckHeader, mRowSpinner));
+    box.add(new HExpandBox(mCheckHeader, mHeaderRowsSpinner));
 
     if (!isExcel) {
       box.add(UI.createVGap(5));
@@ -142,7 +151,7 @@ public class ImportDialog extends ModernDialogHelpWindow
     box.add(UI.createVGap(5));
 
     // Text columns is more intuitive terminology than row annotations
-    box.add(new HExpandBox(mTextColsCheck, mSpinner));
+    box.add(new HExpandBox(mTextColsCheck, mTextColsSpinner));
 
     box.add(UI.createVGap(5));
     box.add(mNumericalCheck);
@@ -179,7 +188,7 @@ public class ImportDialog extends ModernDialogHelpWindow
    * @return the row annotations
    */
   public int getRowAnnotations() {
-    return mTextColsCheck.isSelected() ? mSpinner.getIntValue() : 0;
+    return mTextColsCheck.isSelected() ? mTextColsSpinner.getIntValue() : 0;
   }
 
   /**
@@ -194,7 +203,7 @@ public class ImportDialog extends ModernDialogHelpWindow
 
   public int getColAnnotations() {
     // If there are row annotations, there must be a header
-    return mCheckHeader.isSelected() ? mRowSpinner.getIntValue() : 0;
+    return mCheckHeader.isSelected() ? mHeaderRowsSpinner.getIntValue() : 0;
   }
 
   /**

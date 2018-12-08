@@ -334,8 +334,6 @@ public class ClusterCanvas extends PlotBoxRow {
 
     boolean heatMapVisible = properties.getBool("plot.heatmap.visible");
 
-    System.err.println("vis " + heatMapVisible + " " + aspectRatio + " " + matrix.getShape());
-    
     if (heatMapVisible) {
       columnBox = new PlotBoxColumn();
 

@@ -48,8 +48,7 @@ public class SortModule extends CalcModule implements ModernClickListener {
   /**
    * The member match button.
    */
-  private RibbonLargeButton mSortButton = new RibbonLargeButton("Sort",
-      AssetService.getInstance().loadIcon("sort", 24));
+  private RibbonLargeButton mSortButton = new RibbonLargeButton(AssetService.getInstance().loadIcon("sort", 24));
 
   /**
    * The member window.
@@ -79,7 +78,7 @@ public class SortModule extends CalcModule implements ModernClickListener {
 
     mSortButton.setToolTip(new ModernToolTip("Sort", "Sort columns."));
 
-    window.getRibbon().getToolbar("Data").getSection("Sort").add(mSortButton);
+    window.getRibbon().getToolbar("Data").getSection("Sort", true).add(mSortButton);
 
     mSortButton.addClickListener(this);
 

@@ -50,7 +50,7 @@ public abstract class XlIOModule extends CalcModule {
       String delimiter,
       Collection<String> skipLines) throws IOException {
 
-    ImportDialog dialog = new ImportDialog(window, 0, true,
+    ImportDialog dialog = new ImportDialog(window, headers, rowAnnotations, true,
         TextUtils.TAB_DELIMITER, false);
 
     dialog.setVisible(true);

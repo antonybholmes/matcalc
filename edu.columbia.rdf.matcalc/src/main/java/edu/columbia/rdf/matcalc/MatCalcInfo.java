@@ -30,7 +30,7 @@ public class MatCalcInfo extends GuiAppInfo {
    * Instantiates a new mat calc info.
    */
   public MatCalcInfo() {
-    super("MatCalc", new AppVersion(17),
+    super("MatCalc", new AppVersion(20),
         "Copyright (C) 2014-${year} Antony Holmes",
         AssetService.getInstance().loadIcon(MatCalcIcon.class, 32),
         AssetService.getInstance().loadIcon(MatCalcIcon.class, 128),

@@ -19,6 +19,7 @@ import java.util.List;
 
 import javax.swing.Box;
 
+import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.math.matrix.DataFrame;
@@ -301,9 +302,9 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 
       List<Integer> i1 = MatrixGroup.findColumnIndices(mMatrix, g1);
 
-      if (i1.size() < 3) {
+      if (i1.size() < 2) {
         ModernMessageDialog.createWarningDialog(mParent,
-            "There must be at least 3 samples in " + g1.getName());
+            TextUtils.cat("There must be at least 2 samples in ", g1.getName(), "."));
 
         return;
       }
@@ -312,9 +313,9 @@ public class SupervisedDialog extends ModernDialogMultiCardWindow {
 
       List<Integer> i2 = MatrixGroup.findColumnIndices(mMatrix, g2);
 
-      if (i2.size() < 3) {
+      if (i2.size() < 2) {
         ModernMessageDialog.createWarningDialog(mParent,
-            "There must be at least 3 samples in " + g2.getName());
+            TextUtils.cat("There must be at least 2 samples in ", g2.getName(), "."));
 
         return;
       }

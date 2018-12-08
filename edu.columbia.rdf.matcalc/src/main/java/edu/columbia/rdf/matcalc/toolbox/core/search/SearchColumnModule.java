@@ -48,8 +48,7 @@ public class SearchColumnModule extends CalcModule
   /**
    * The member match button.
    */
-  private RibbonLargeButton mSearchButton = new RibbonLargeButton(
-      "Search Column", AssetService.getInstance().loadIcon("search_column", 24));
+  private RibbonLargeButton mSearchButton = new RibbonLargeButton(AssetService.getInstance().loadIcon("search_column", 24));
 
   /**
    * The member window.

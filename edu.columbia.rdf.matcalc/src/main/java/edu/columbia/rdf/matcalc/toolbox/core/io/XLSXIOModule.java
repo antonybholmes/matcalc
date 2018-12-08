@@ -74,7 +74,7 @@ public class XLSXIOModule extends XlIOModule {
 
     rowAnnotations = metaData.estimateRowAnnotations();
 
-    ImportDialog dialog = new ImportDialog(window, rowAnnotations, true,
+    ImportDialog dialog = new ImportDialog(window, headers, rowAnnotations, true,
         delimiter, metaData.isNumerical(rowAnnotations));
 
     dialog.setVisible(true);

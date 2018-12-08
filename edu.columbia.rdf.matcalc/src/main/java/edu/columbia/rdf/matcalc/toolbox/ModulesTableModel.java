@@ -54,7 +54,7 @@ public class ModulesTableModel extends ModernColumnHeaderTableModel {
    * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnCount()
    */
   @Override
-  public int getColumnCount() {
+  public int getColCount() {
     return HEADER.length;
   }
 

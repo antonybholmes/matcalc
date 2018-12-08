@@ -608,8 +608,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
     TreeNode<XYSeries> groupNode = new TreeNode<XYSeries>(group.getName(),
         group);
 
-    for (int i : XYSeries.findColumnIndices(mMatrix, group)) {
-
+    for (int i : XYSeries.findColumnIndices(mMatrix, group)) {      
       TreeNode<XYSeries> childNode = new TreeNode<XYSeries>(
           mMatrix.getColumnName(i));
 

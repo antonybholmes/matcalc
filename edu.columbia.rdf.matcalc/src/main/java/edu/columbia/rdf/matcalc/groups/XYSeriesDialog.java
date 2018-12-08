@@ -315,9 +315,9 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
       Pattern regex;
 
       if (mRegexCheck.isSelected()) {
-        regex = RegexUtils.compile(t, !mCheckCaseSensitive.isSelected());
+        regex = RegexUtils.compile(t, mCheckCaseSensitive.isSelected());
       } else {
-        regex = RegexUtils.literal(t, !mCheckCaseSensitive.isSelected()); // =
+        regex = RegexUtils.literal(t, mCheckCaseSensitive.isSelected()); // =
                                                                           // ".*"
                                                                           // + t
                                                                           // +

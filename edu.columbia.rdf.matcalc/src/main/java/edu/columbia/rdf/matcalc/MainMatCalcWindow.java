@@ -375,8 +375,6 @@ ModernSelectionListener, MatrixTransformListener {
         e1.printStackTrace();
       } catch (ParserConfigurationException e1) {
         e1.printStackTrace();
-      } catch (ParseException e1) {
-        e1.printStackTrace();
       } catch (ClassNotFoundException e1) {
         e1.printStackTrace();
       } catch (InstantiationException e1) {
@@ -853,8 +851,6 @@ ModernSelectionListener, MatrixTransformListener {
         e1.printStackTrace();
       } catch (InvalidFormatException e1) {
         e1.printStackTrace();
-      } catch (ParseException e1) {
-        e1.printStackTrace();
       } catch (ClassNotFoundException e1) {
         e1.printStackTrace();
       } catch (InstantiationException e1) {
@@ -882,8 +878,6 @@ ModernSelectionListener, MatrixTransformListener {
       } catch (ParserConfigurationException e1) {
         e1.printStackTrace();
       } catch (InvalidFormatException e1) {
-        e1.printStackTrace();
-      } catch (ParseException e1) {
         e1.printStackTrace();
       } catch (ClassNotFoundException e1) {
         e1.printStackTrace();
@@ -1195,7 +1189,7 @@ ModernSelectionListener, MatrixTransformListener {
    *           exception
    */
   private void browseForFile() throws IOException, SAXException,
-  ParserConfigurationException, InvalidFormatException, ParseException,
+  ParserConfigurationException, InvalidFormatException,
   ClassNotFoundException, InstantiationException, IllegalAccessException,
   FontFormatException, UnsupportedLookAndFeelException {
     browseForFile(RecentFilesService.getInstance().getPwd());
@@ -1218,7 +1212,7 @@ ModernSelectionListener, MatrixTransformListener {
    *           exception
    */
   private void browseForFile(Path pwd) throws IOException, SAXException,
-  ParserConfigurationException, InvalidFormatException, ParseException,
+  ParserConfigurationException, InvalidFormatException,
   ClassNotFoundException, InstantiationException, IllegalAccessException,
   FontFormatException, UnsupportedLookAndFeelException {
     openFiles(FileDialog.openFiles(this, pwd, mOpenFileFilters));

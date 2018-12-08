@@ -15,6 +15,7 @@
  */
 package edu.columbia.rdf.matcalc;
 
+import edu.columbia.rdf.matcalc.toolbox.core.HomeModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ViewModule;
 import edu.columbia.rdf.matcalc.toolbox.core.ZoomModule;
 import edu.columbia.rdf.matcalc.toolbox.core.io.CsvIOModule;
@@ -34,7 +35,7 @@ public class CoreModuleLoader extends ModuleLoader {
    * Instantiates a new module loader.
    */
   public CoreModuleLoader() {
-    //addModule(HomeModule.class);
+    addModule(HomeModule.class);
     
     addModule(MatrixIOModule.class);
     addModule(ExcelIOModule.class);

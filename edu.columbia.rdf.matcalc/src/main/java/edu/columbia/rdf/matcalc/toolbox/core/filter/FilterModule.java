@@ -52,8 +52,7 @@ public class FilterModule extends CalcModule implements ModernClickListener {
   /**
    * The member match button.
    */
-  private RibbonLargeButton mFilterButton = new RibbonLargeButton("Filter",
-      new Raster24Icon(new FilterVectorIcon(
+  private RibbonLargeButton mFilterButton = new RibbonLargeButton(new Raster24Icon(new FilterVectorIcon(
           ThemeService.getInstance().getColors().getTheme(8),
           ThemeService.getInstance().getColors().getTheme(6))));
 
@@ -86,7 +85,7 @@ public class FilterModule extends CalcModule implements ModernClickListener {
     mFilterButton.setToolTip(
         new ModernToolTip("Filter", "Filter rows in columns."));
 
-    window.getRibbon().getToolbar("Data").getSection("Filter")
+    window.getRibbon().getToolbar("Data").getSection("Filter", true)
         .add(mFilterButton);
 
     mFilterButton.addClickListener(this);

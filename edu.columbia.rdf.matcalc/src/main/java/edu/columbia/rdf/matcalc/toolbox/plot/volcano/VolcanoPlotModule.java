@@ -30,7 +30,7 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.icons.ShapeStyle;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DynamicDoubleMatrix;
+import org.jebtk.math.matrix.DoubleWorksheet;
 import org.jebtk.math.matrix.Matrix;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.math.matrix.utils.MatrixOperations;
@@ -307,7 +307,7 @@ public class VolcanoPlotModule extends CalcModule
     // No Signal
     //
 
-    Matrix foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+    Matrix foldM1 = new DoubleWorksheet(log2FoldChanges.size(), 2);
 
     c = 0;
 
@@ -342,7 +342,7 @@ public class VolcanoPlotModule extends CalcModule
     // Down
     //
 
-    foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+    foldM1 = new DoubleWorksheet(log2FoldChanges.size(), 2);
 
     c = 0;
 
@@ -373,7 +373,7 @@ public class VolcanoPlotModule extends CalcModule
     // up
     //
 
-    foldM1 = new DynamicDoubleMatrix(log2FoldChanges.size(), 2);
+    foldM1 = new DoubleWorksheet(log2FoldChanges.size(), 2);
 
     c = 0;
 

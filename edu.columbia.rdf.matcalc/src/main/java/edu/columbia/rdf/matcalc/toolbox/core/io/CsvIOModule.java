@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
 
-import org.jebtk.math.matrix.CsvDynamicMatrixParser;
+import org.jebtk.math.matrix.CSVWorksheetParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.io.FileFilterService;
@@ -75,7 +75,7 @@ public class CsvIOModule extends CalcModule {
     if (headers > 0) {
       return new CsvMatrixParser(true, rowAnnotations).parse(file);
     } else {
-      return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
+      return new CSVWorksheetParser(rowAnnotations).parse(file);
     }
   }
 

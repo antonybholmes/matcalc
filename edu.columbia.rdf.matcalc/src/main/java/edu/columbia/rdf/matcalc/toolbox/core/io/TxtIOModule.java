@@ -19,11 +19,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
 
-import org.jebtk.math.matrix.CsvDynamicMatrixParser;
+import org.jebtk.math.matrix.CSVWorksheetParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrixParser;
-import org.jebtk.math.matrix.MixedMatrixParser;
+import org.jebtk.math.matrix.MixedWorksheetParser;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
@@ -86,7 +86,7 @@ public class TxtIOModule extends CalcModule {
     boolean numerical = OpenFile
         .guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
 
-    ImportDialog dialog = new ImportDialog(window, rowAnnotations, false,
+    ImportDialog dialog = new ImportDialog(window, headers, rowAnnotations, false,
         delimiter, numerical);
 
     dialog.setVisible(true);
@@ -117,7 +117,7 @@ public class TxtIOModule extends CalcModule {
       if (headers > 0) {
         return new CsvMatrixParser(true, rowAnnotations).parse(file);
       } else {
-        return new CsvDynamicMatrixParser(rowAnnotations).parse(file);
+        return new CSVWorksheetParser(rowAnnotations).parse(file);
       }
     } else {
       //if (headers > 0) {
@@ -125,7 +125,10 @@ public class TxtIOModule extends CalcModule {
         return new DoubleMatrixParser(headers, skipLines, rowAnnotations,
             delimiter).parse(file);
       } else {
-        return new MixedMatrixParser(headers, skipLines, rowAnnotations,
+        //return new MixedMatrixParser(headers, skipLines, rowAnnotations,
+        //    delimiter).parse(file);
+        
+        return new MixedWorksheetParser(headers, skipLines, rowAnnotations,
             delimiter).parse(file);
       }
       //} else {

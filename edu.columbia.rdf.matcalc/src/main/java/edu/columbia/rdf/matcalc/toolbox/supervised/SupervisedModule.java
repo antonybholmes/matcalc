@@ -22,13 +22,13 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.jebtk.core.Indexed;
 import org.jebtk.core.IndexedInt;
-import org.jebtk.core.cli.CommandLineArg;
-import org.jebtk.core.cli.CommandLineArgs;
-import org.jebtk.core.cli.Options;
+import org.jebtk.core.cli.ArgParser;
+import org.jebtk.core.cli.Args;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.settings.SettingsService;
@@ -113,26 +113,26 @@ implements ModernClickListener {
     FDRType fdrType = FDRType.BENJAMINI_HOCHBERG;
     boolean isLog2Data = true;
 
-    Options options = new Options()
+    Args options = new Args()
         .add('f', "file", true)
         .add('m', "mode", true)
         .add('g', "group-file", true)
         .add('p', "prefix", true);
 
-    CommandLineArgs cmdArgs = CommandLineArgs.parse(options, args);
+    ArgParser cmdArgs = new ArgParser(options).parse(args);
 
 
-    for (CommandLineArg cmdArg : cmdArgs) {
-      switch (cmdArg.getShortName()) {
-      case 'f':
-        file = PathUtils.getPath(cmdArg.getValue());
-      case 'm':
-        mode = cmdArg.getValue();
+    for (Entry<String, List<String>> item : cmdArgs) {
+      switch (item.getKey()) {
+      case "file":
+        file = PathUtils.getPath(item.getValue().get(0));
+      case "mode":
+        mode = item.getValue().get(0);
         break;
-      case 'g':
-        groupFile = PathUtils.getPath(cmdArg.getValue());
-      case 'p':
-        prefix = cmdArg.getValue();
+      case "group-file":
+        groupFile = PathUtils.getPath(item.getValue().get(0));
+      case "prefix":
+        prefix = item.getValue().get(0);
       }
     }
 

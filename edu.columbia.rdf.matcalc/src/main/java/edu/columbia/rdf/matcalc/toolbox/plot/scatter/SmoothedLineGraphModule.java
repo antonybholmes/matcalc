@@ -16,9 +16,10 @@
 package edu.columbia.rdf.matcalc.toolbox.plot.scatter;
 
 import java.awt.Color;
+import java.util.Map.Entry;
 
 import org.jebtk.core.ColorUtils;
-import org.jebtk.core.cli.CommandLineArg;
+import org.jebtk.core.cli.ArgParser;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.ColorCycle;
 import org.jebtk.graphplot.PlotFactory;
@@ -72,19 +73,19 @@ public class SmoothedLineGraphModule extends CalcModule
     plot();
 
     for (String a : args) {
-      CommandLineArg arg = CommandLineArg.parsePosixArg(a);
+      Entry<String, String> arg = ArgParser.parsePosixArg(a);
 
-      if (arg.getLongName().equals("switch-tab")) {
+      if (arg.getKey().equals("switch-tab")) {
         mParent.getRibbon().changeTab("Plot");
-      } else if (arg.getLongName().equals("x-axis-name")) {
+      } else if (arg.getKey().equals("x-axis-name")) {
         mAxes.getX1Axis().getTitle().setText(arg.getValue());
-      } else if (arg.getLongName().equals("y-axis-name")) {
+      } else if (arg.getKey().equals("y-axis-name")) {
         mAxes.getY1Axis().getTitle().setText(arg.getValue());
-      } else if (arg.getLongName().equals("show-legend")) {
+      } else if (arg.getKey().equals("show-legend")) {
         mAxes.getLegend().setVisible(true);
-      } else if (arg.getLongName().equals("x-min")) {
+      } else if (arg.getKey().equals("x-min")) {
         mAxes.getX1Axis().setMin(TextUtils.parseDouble(arg.getValue()));
-      } else if (arg.getLongName().equals("x-max")) {
+      } else if (arg.getKey().equals("x-max")) {
         mAxes.getX1Axis().setMax(TextUtils.parseDouble(arg.getValue()));
       } else {
         // do nothing
