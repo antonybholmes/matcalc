@@ -33,12 +33,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class ScatterLineModule.
  */
-public class ScatterLineModule extends CalcModule
+public class ScatterLineModule extends Module
     implements ModernClickListener {
 
   /**

@@ -102,7 +102,7 @@ public class MatrixGroupCheckBox extends ModernCheckBox {
    * Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int iconX = mInternalRect.getX() + 1;
     int iconY = (getHeight() - 16) / 2;
     int y2 = (getHeight() - 10) / 2;

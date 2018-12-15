@@ -25,12 +25,12 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class OneWayAnovaModule.
  */
-public class OneWayAnovaModule extends CalcModule
+public class OneWayAnovaModule extends Module
     implements ModernClickListener {
 
   /**
@@ -242,7 +242,7 @@ public class OneWayAnovaModule extends CalcModule
     ret.set(2, 0, totalSS);
     ret.set(2, 1, totalDegFree);
 
-    mParent.addToHistory("ANOVA", ret);
+    mParent.history().addToHistory("ANOVA", ret);
   }
 
 }

@@ -46,14 +46,14 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.icons.VolcanoPlot32VectorIcon;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.supervised.SupervisedModule;
 import edu.columbia.rdf.matcalc.toolbox.supervised.TestType;
 
 /**
  * The class VolcanoPlotModule.
  */
-public class VolcanoPlotModule extends CalcModule
+public class VolcanoPlotModule extends Module
     implements ModernClickListener {
 
   /**
@@ -196,13 +196,13 @@ public class VolcanoPlotModule extends CalcModule
     groups.add(g1);
     groups.add(g2);
 
-    DataFrame columnFilteredM = parent.addToHistory("Keep group columns",
+    DataFrame columnFilteredM = parent.history().addToHistory("Keep group columns",
         DataFrame.copyInnerColumns(m, groups));
 
     DataFrame logM;
 
     if (logData) {
-      logM = parent.addToHistory("log2(1 + data)",
+      logM = parent.history().addToHistory("log2(1 + data)",
           MatrixOperations.log2(MatrixOperations.add(columnFilteredM, 1)));
     } else {
       logM = m;
@@ -214,11 +214,11 @@ public class VolcanoPlotModule extends CalcModule
 
     DataFrame annM = new DataFrame(logM);
     annM.setRowAnnotations("Log2 Fold Change", foldChanges.toArray());
-    parent.addToHistory("Add log2 fold changes", annM);
+    parent.history().addToHistory("Add log2 fold changes", annM);
 
     DataFrame pValuesM = new DataFrame(annM);
     pValuesM.setRowAnnotations("P-value", p);
-    parent.addToHistory("Add p-values", pValuesM);
+    parent.history().addToHistory("Add p-values", pValuesM);
 
     // DataFrame mcollapsed = CollapseModule.collapse(pValuesM,
     // collapseName,
@@ -227,14 +227,14 @@ public class VolcanoPlotModule extends CalcModule
     // collapseType,
     // mParent);
 
-    // mParent.addToHistory("Collapse rows", mcollapsed);
+    // mParent.history().addToHistory("Collapse rows", mcollapsed);
 
     double[] fdr = Statistics.fdr(pValuesM.getRowAnnotationValues("P-value"),
         fdrType);
 
     DataFrame fdrM = new DataFrame(pValuesM);
     fdrM.setRowAnnotations("FDR", fdr);
-    parent.addToHistory("False discovery rate", fdrM);
+    parent.history().addToHistory("False discovery rate", fdrM);
 
     // filter by fdr
     // List<IndexedValue<Integer, Double>> pValueIndices =
@@ -414,8 +414,8 @@ public class VolcanoPlotModule extends CalcModule
 
     axes.setMargins(100);
 
-    parent.addToHistory(new VolcanoPlotMatrixTransform(parent, fdrM, figure));
+    parent.history().addToHistory(new VolcanoPlotMatrixTransform(parent, fdrM, figure));
 
-    parent.addToHistory("Results", fdrM);
+    parent.history().addToHistory("Results", fdrM);
   }
 }

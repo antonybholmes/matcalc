@@ -29,13 +29,13 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 
 /**
  * The class HeatMapModule.
  */
-public class LegacyHeatMapModule extends CalcModule
+public class LegacyHeatMapModule extends Module
     implements ModernClickListener {
 
   /**
@@ -110,7 +110,7 @@ public class LegacyHeatMapModule extends CalcModule
 
     scaleLargeMatrixImage(m, p);
 
-    mParent.addToHistory(new HeatMapPlotMatrixTransform(mParent, m, groups,
+    mParent.history().addToHistory(new HeatMapPlotMatrixTransform(mParent, m, groups,
         rowGroups, countsGroup, history, p));
   }
 

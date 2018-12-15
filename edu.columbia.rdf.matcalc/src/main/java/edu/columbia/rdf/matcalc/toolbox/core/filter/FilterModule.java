@@ -37,7 +37,7 @@ import org.jebtk.modern.theme.ThemeService;
 import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Can compare a column of values to another list to see what is common and
@@ -47,7 +47,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class FilterModule extends CalcModule implements ModernClickListener {
+public class FilterModule extends Module implements ModernClickListener {
 
   /**
    * The member match button.
@@ -235,6 +235,6 @@ public class FilterModule extends CalcModule implements ModernClickListener {
 
     DataFrame.copyRows(m, rows, ret);
 
-    mWindow.addToHistory("Filter matrix", ret);
+    mWindow.history().addToHistory("Filter matrix", ret);
   }
 }

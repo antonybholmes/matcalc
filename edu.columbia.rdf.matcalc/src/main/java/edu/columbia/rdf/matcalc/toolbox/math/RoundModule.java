@@ -24,12 +24,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class LogModule.
  */
-public class RoundModule extends CalcModule implements ModernClickListener {
+public class RoundModule extends Module implements ModernClickListener {
 
   /**
    * The member window.
@@ -80,6 +80,6 @@ public class RoundModule extends CalcModule implements ModernClickListener {
 
   @Override
   public void clicked(ModernClickEvent e) {
-    mWindow.addToHistory("Round", round(mWindow, mWindow.getCurrentMatrix()));
+    mWindow.history().addToHistory("Round", round(mWindow, mWindow.getCurrentMatrix()));
   }
 }

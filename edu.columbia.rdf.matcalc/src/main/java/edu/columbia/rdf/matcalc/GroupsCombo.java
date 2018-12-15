@@ -15,7 +15,9 @@
  */
 package edu.columbia.rdf.matcalc;
 
-import org.jebtk.graphplot.figure.series.XYSeriesGroup;
+import java.util.List;
+
+import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
@@ -34,7 +36,7 @@ public class GroupsCombo extends ModernComboBox {
    *
    * @param groups the groups
    */
-  public GroupsCombo(XYSeriesGroup groups) {
+  public GroupsCombo(List<XYSeries> groups) {
     for (MatrixGroup group : groups) {
       addMenuItem(new GroupMenuItem(group));
     }

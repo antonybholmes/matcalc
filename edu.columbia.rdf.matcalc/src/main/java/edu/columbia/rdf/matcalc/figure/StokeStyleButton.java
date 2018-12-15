@@ -104,7 +104,7 @@ public class StokeStyleButton extends ControlDropDownButton
    * Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int x = PADDING;
 
     int y = getHeight() / 2;

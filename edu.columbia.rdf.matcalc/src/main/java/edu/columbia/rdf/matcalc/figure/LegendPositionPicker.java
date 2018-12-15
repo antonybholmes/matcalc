@@ -233,7 +233,7 @@ public class LegendPositionPicker extends ModernClickWidget
    * @see
    * org.abh.common.ui.ui.ModernWidget#drawForegroundAA(java.awt.Graphics2D)
    */
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int x = PADDING;
     int y = PADDING;
 

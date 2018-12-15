@@ -109,7 +109,7 @@ public class RibbonColorMapButton extends RibbonLargeDropDownButton
    * awt. Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int x = PADDING;
 
     int y = (getHeight() - MAP_SIZE.getH()) / 2;

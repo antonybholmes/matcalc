@@ -26,14 +26,14 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.icons.OrderRows32VectorIcon;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Row name.
  *
  * @author Antony Holmes Holmes
  */
-public class RowOrderModule extends CalcModule implements ModernClickListener {
+public class RowOrderModule extends Module implements ModernClickListener {
 
   /**
    * The button.
@@ -103,6 +103,6 @@ public class RowOrderModule extends CalcModule implements ModernClickListener {
 
     DataFrame ret = DataFrame.copyRows(m, rows);
 
-    mWindow.addToHistory("Row order", ret);
+    mWindow.history().addToHistory("Row order", ret);
   }
 }

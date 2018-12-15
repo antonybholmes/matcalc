@@ -34,7 +34,7 @@ public class PasteDialog extends ModernDialogHelpWindow
   private static final long serialVersionUID = 1L;
 
   /** Assume first column is common between files */
-  private CheckBox mCheckIndex = new ModernCheckSwitch("Common index", true);
+  private CheckBox mCheckIndex = new ModernCheckSwitch("Header", true);
 
   // private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
 

@@ -56,7 +56,7 @@ public class GroupMenuItem extends ModernIconMenuItem {
    * Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int x = PADDING;
     int y = (mRect.getH() - AssetService.ICON_SIZE_16) / 2;
 

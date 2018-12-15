@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.core;
 import org.jebtk.modern.window.WindowRibbonSection;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Can compare a column of values to another list to see what is common and
@@ -28,7 +28,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class ViewModule extends CalcModule {
+public class ViewModule extends Module {
 
   /*
    * (non-Javadoc)

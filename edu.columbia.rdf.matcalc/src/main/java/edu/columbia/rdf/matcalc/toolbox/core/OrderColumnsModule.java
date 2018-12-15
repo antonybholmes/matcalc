@@ -24,14 +24,14 @@ import org.jebtk.modern.graphics.icons.RunVectorIcon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Order columns by groups
  *
  * @author Antony Holmes Holmes
  */
-public class OrderColumnsModule extends CalcModule
+public class OrderColumnsModule extends Module
     implements ModernClickListener {
 
   /**
@@ -102,6 +102,6 @@ public class OrderColumnsModule extends CalcModule
 
     DataFrame ret = DataFrame.copyColumns(m, groups);
 
-    mWindow.addToHistory("Order columns", ret);
+    mWindow.history().addToHistory("Order columns", ret);
   }
 }

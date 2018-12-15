@@ -112,9 +112,68 @@ public class History {
     }
 
     if (mKeep) {
-      mWindow.addToHistory(selectedIndex, transform);
+      //mWindow.history().addToHistory(selectedIndex, transform);
+      mWindow.getHistoryPanel().addItem(transform, selectedIndex).apply();
     }
 
     return transform.getMatrix();
   }
+  
+  /*
+  public DataFrame addToHistory(String name, DataFrame matrix) {
+    if (matrix == null) {
+      return null;
+    }
+
+    return addToHistory(name, name, matrix);
+  }
+
+  public DataFrame addToHistory(String name,
+      String description,
+      DataFrame matrix) {
+    if (matrix == null) {
+      return null;
+    }
+
+    return addToHistory(new MatrixTransform(this, name, description, matrix));
+  }
+
+  public DataFrame addToHistory(String name,
+      DataFrame matrix,
+      int selectedIndex) {
+    if (matrix == null) {
+      return null;
+    }
+
+    return addToHistory(name, name, matrix, selectedIndex);
+  }
+
+  public DataFrame addToHistory(String name,
+      String description,
+      DataFrame matrix,
+      int selectedIndex) {
+    if (matrix == null) {
+      return null;
+    }
+
+    return addToHistory(selectedIndex,
+        new MatrixTransform(this, name, description, matrix));
+  }
+
+  public DataFrame addToHistory(MatrixTransform transform) {
+    return addToHistory(getHistoryIndex(), transform);
+  }
+
+  public DataFrame addToHistory(int selectedIndex, MatrixTransform transform) {
+    if (transform == null) {
+      return null;
+    }
+
+    transform.addMatrixTransformListener(this);
+
+    mHistoryPanel.addItem(transform, selectedIndex).apply();
+
+    return transform.getMatrix();
+  }
+  */
 }

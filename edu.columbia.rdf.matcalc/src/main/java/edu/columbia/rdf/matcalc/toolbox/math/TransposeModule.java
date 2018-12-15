@@ -22,12 +22,12 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcWinModule;
+import edu.columbia.rdf.matcalc.toolbox.WinModule;
 
 /**
  * The class ZScoreModule.
  */
-public class TransposeModule extends CalcWinModule
+public class TransposeModule extends WinModule
     implements ModernClickListener {
 
   /*
@@ -69,7 +69,7 @@ public class TransposeModule extends CalcWinModule
    */
   @Override
   public void clicked(ModernClickEvent e) {
-    mWindow.addToHistory("Transpose",
+    mWindow.history().addToHistory("Transpose",
         "Transpose",
         (DataFrame) mWindow.getCurrentMatrix().transpose());
   }

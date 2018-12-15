@@ -24,7 +24,7 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Allow user to change which columns are annotation or not.
@@ -33,7 +33,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class ColumnAnnotationModule extends CalcModule
+public class ColumnAnnotationModule extends Module
     implements ModernClickListener {
 
   /**
@@ -146,6 +146,6 @@ public class ColumnAnnotationModule extends CalcModule
       break;
     }
 
-    mWindow.addToHistory("Adjust matrix", ret);
+    mWindow.history().addToHistory("Adjust matrix", ret);
   }
 }

@@ -30,7 +30,7 @@ package edu.columbia.rdf.matcalc.toolbox.core;
 import org.jebtk.modern.clipboard.ClipboardRibbonSection;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Merges designated segments together using the merge column. Consecutive rows
@@ -40,7 +40,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class ClipboardModule extends CalcModule {
+public class ClipboardModule extends Module {
 
   /*
    * (non-Javadoc)

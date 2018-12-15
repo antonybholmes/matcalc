@@ -25,14 +25,14 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.theme.ThemeService;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Row name.
  *
  * @author Antony Holmes Holmes
  */
-public class ColumnFilterModule extends CalcModule
+public class ColumnFilterModule extends Module
     implements ModernClickListener {
 
   /**
@@ -103,6 +103,6 @@ public class ColumnFilterModule extends CalcModule
 
     DataFrame ret = DataFrame.copyInnerColumns(m, dialog.getColumns());
 
-    mWindow.addToHistory("Filter columns", ret);
+    mWindow.history().addToHistory("Filter columns", ret);
   }
 }

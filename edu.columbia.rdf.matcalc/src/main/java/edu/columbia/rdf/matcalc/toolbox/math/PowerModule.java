@@ -27,12 +27,12 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class LogModule.
  */
-public class PowerModule extends CalcModule implements ModernClickListener {
+public class PowerModule extends Module implements ModernClickListener {
 
   /**
    * The member window.
@@ -125,13 +125,13 @@ public class PowerModule extends CalcModule implements ModernClickListener {
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getMessage().equals("m^x")) {
-      mWindow.addToHistory("m^x",
+      mWindow.history().addToHistory("m^x",
           power(mWindow, mWindow.getCurrentMatrix(), 2));
     } else if (e.getMessage().equals("x^m")) {
-      mWindow.addToHistory("x^m",
+      mWindow.history().addToHistory("x^m",
           power(mWindow, 2, mWindow.getCurrentMatrix()));
     } else {
-      mWindow.addToHistory("e^m", em(mWindow.getCurrentMatrix()));
+      mWindow.history().addToHistory("e^m", em(mWindow.getCurrentMatrix()));
     }
   }
 }

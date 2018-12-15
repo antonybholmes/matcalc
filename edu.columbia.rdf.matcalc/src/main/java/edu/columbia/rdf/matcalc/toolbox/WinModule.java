@@ -20,7 +20,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * The class ZScoreModule.
  */
-public abstract class CalcWinModule extends CalcModule {
+public abstract class WinModule extends Module {
 
   /**
    * The member window.

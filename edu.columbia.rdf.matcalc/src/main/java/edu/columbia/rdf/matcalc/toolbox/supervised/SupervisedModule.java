@@ -61,7 +61,7 @@ import org.slf4j.LoggerFactory;
 import edu.columbia.rdf.matcalc.History;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.icons.DiffExp32VectorIcon;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseModule;
 import edu.columbia.rdf.matcalc.toolbox.core.collapse.CollapseType;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
@@ -71,7 +71,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.volcano.VolcanoPlotModule;
 /**
  * The class OneWayAnovaModule.
  */
-public class SupervisedModule extends CalcModule
+public class SupervisedModule extends Module
 implements ModernClickListener {
 
   /**
@@ -902,7 +902,7 @@ implements ModernClickListener {
         
         LegacyHeatMapModule.scaleLargeMatrixImage(m, p);
         
-        mParent.addToHistory(new HeatMapMatrixTransform(mParent, mNormalized,
+        mParent.history().addToHistory(new HeatMapMatrixTransform(mParent, mNormalized,
             groups, comparisonGroups, rowGroups, countGroups,
             mParent.getTransformationHistory(), p));
       }
@@ -910,7 +910,7 @@ implements ModernClickListener {
 
     // Add a reference at the end so that it is easy for users to find
     // the matrix they probably want the most
-    mParent.addToHistory("Results", mDeltaSorted);
+    mParent.history().addToHistory("Results", mDeltaSorted);
   }
 
 

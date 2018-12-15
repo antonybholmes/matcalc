@@ -24,12 +24,12 @@ import org.jebtk.modern.menu.ModernTwoLineMenuItem;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class ZScoreModule.
  */
-public class ZScoreModule extends CalcModule implements ModernClickListener {
+public class ZScoreModule extends Module implements ModernClickListener {
 
   /**
    * The member window.
@@ -85,13 +85,13 @@ public class ZScoreModule extends CalcModule implements ModernClickListener {
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getMessage().equals("Matrix")) {
-      mWindow.addToHistory("z-score",
+      mWindow.history().addToHistory("z-score",
           "z-score",
           MatrixOperations.zscore(mWindow.getCurrentMatrix())); // new
                                                                 // ZScoreMatrixTransform(this,
                                                                 // getCurrentMatrix()));
     } else if (e.getMessage().equals("Row z-score")) {
-      mWindow.addToHistory("Row z-score",
+      mWindow.history().addToHistory("Row z-score",
           "Row z-score",
           MatrixOperations.rowZscore(mWindow.getCurrentMatrix())); // addFlowItem(new
                                                                    // ZScoreRowsMatrixTransform(this,

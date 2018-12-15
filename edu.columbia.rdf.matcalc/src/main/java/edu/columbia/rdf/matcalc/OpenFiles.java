@@ -18,18 +18,18 @@ import org.jebtk.math.external.microsoft.XLSXMetaData;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.io.RecentFilesService;
 
-import edu.columbia.rdf.matcalc.toolbox.Module;
+import edu.columbia.rdf.matcalc.toolbox.core.io.IOModule;
 
 /**
  * The Class OpenFile.
  */
-public class OpenFile {
+public class OpenFiles {
 
   /** The m window. */
   private MainMatCalcWindow mWindow;
 
   /** The m open mode. */
-  private OpenMode mOpenMode = OpenMode.NEW_WINDOW;
+  private OpenMode mOpenMode = OpenMode.CURRENT_WINDOW;
 
   private FileType mFileType = FileType.MIXED;
 
@@ -46,17 +46,7 @@ public class OpenFile {
   private Collection<String> mSkipLines = Collections.emptyList();
 
   /** The m files. */
-  private Collection<Path> mFiles;
-
-  /**
-   * Instantiates a new open file.
-   *
-   * @param window the window
-   * @param file the file
-   */
-  public OpenFile(MainMatCalcWindow window, Path file) {
-    this(window, CollectionUtils.asList(file));
-  }
+  //private Collection<Path> mFiles;
 
   /**
    * Instantiates a new open file.
@@ -64,28 +54,8 @@ public class OpenFile {
    * @param window the window
    * @param files the files
    */
-  public OpenFile(MainMatCalcWindow window, Collection<Path> files) {
+  public OpenFiles(MainMatCalcWindow window) {
     mWindow = window;
-    mFiles = files;
-  }
-
-  /**
-   * Instantiates a new open file.
-   *
-   * @param openFile the open file
-   * @param file the file
-   */
-  public OpenFile(OpenFile openFile, Path file) {
-    this(openFile, CollectionUtils.asList(file));
-  }
-
-  /**
-   * Instantiates a new open file.
-   *
-   * @param openFile the open file
-   */
-  public OpenFile(OpenFile openFile) {
-    this(openFile, openFile.mFiles);
   }
 
   /**
@@ -94,9 +64,8 @@ public class OpenFile {
    * @param openFile the open file
    * @param files the files
    */
-  public OpenFile(OpenFile openFile, Collection<Path> files) {
+  public OpenFiles(OpenFiles openFile) {
     mWindow = openFile.mWindow;
-    mFiles = files;
     mHeaders = openFile.mHeaders;
     mRowAnnotations = openFile.mRowAnnotations;
     mSkipLines = openFile.mSkipLines;
@@ -104,36 +73,45 @@ public class OpenFile {
     mFileType = openFile.mFileType;
   }
 
-  public OpenFile(OpenFile openFile, Path file, MainMatCalcWindow window) {
-    this(openFile, file);
+  public OpenFiles(OpenFiles openFile, MainMatCalcWindow window) {
+    this(openFile);
 
     mWindow = window;
   }
 
+  public boolean open(Path file) throws IOException {
+    return open(CollectionUtils.asList(file));
+  }
+  
   /**
    * Open.
    *
    * @return true, if successful
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public boolean open() throws IOException {
+  public boolean open(Collection<Path> files) throws IOException {
+    if (CollectionUtils.isNullOrEmpty(files)) {
+      return false;
+    }
+    
     boolean status = false;
 
-    for (Path file : mFiles) {
+    for (Path file : files) {
+      
       if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
         MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
         window.setVisible(true);
 
-        new OpenFile(this, file, window).open();
+        new OpenFiles(this, window).open(file);
 
         status |= false;
       } else {
         String ext = PathUtils.getFileExt(file);
 
-        List<Module> modules = mWindow.getFileModules(ext);
+        List<IOModule> modules = mWindow.getFileModules(ext);
 
-        for (Module module : modules) {
-          DataFrame m = module.openFile(mWindow,
+        for (IOModule module : modules) {
+          DataFrame m = module.open(mWindow,
               file,
               mFileType,
               mHeaders,
@@ -142,7 +120,7 @@ public class OpenFile {
               mSkipLines);
 
           if (m != null) {
-            mWindow.openMatrix(file, m);
+            mWindow.openMatrices().open(file, m);
 
             RecentFilesService.getInstance().add(file);
 
@@ -156,6 +134,10 @@ public class OpenFile {
 
     return status;
   }
+  
+  public boolean read(Path file) throws IOException {
+    return read(CollectionUtils.asList(file));
+  }
 
   /**
    * Auto open a file without prompting a user to specify parameters.
@@ -163,27 +145,28 @@ public class OpenFile {
    * @return true, if successful
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public boolean autoOpen() throws IOException {
+  public boolean read(Collection<Path> files) throws IOException {
+    if (CollectionUtils.isNullOrEmpty(files)) {
+      return false;
+    }
+    
     boolean status = false;
 
-    for (Path file : mFiles) {
+    for (Path file : files) {
       if (mWindow.mFilesModel.size() > 0 && mOpenMode == OpenMode.NEW_WINDOW) {
         MainMatCalcWindow window = new MainMatCalcWindow(mWindow.getAppInfo());
         window.setVisible(true);
 
-        OpenFile of = new OpenFile(this, file);
-        of.mWindow = new MainMatCalcWindow(mWindow.getAppInfo());
-
-        of.autoOpen();
+        new OpenFiles(this, new MainMatCalcWindow(mWindow.getAppInfo())).read(file);
 
         status |= false;
       } else {
         String ext = PathUtils.getFileExt(file);
 
-        List<Module> modules = mWindow.mOpenFileModuleMap.get(ext);
+        List<IOModule> modules = mWindow.mOpenFileModuleMap.get(ext);
 
-        for (Module module : modules) {
-          DataFrame m = module.autoOpenFile(mWindow,
+        for (IOModule module : modules) {
+          DataFrame m = module.read(mWindow,
               file,
               mFileType,
               mHeaders,
@@ -192,7 +175,7 @@ public class OpenFile {
               mSkipLines);
 
           if (m != null) {
-            mWindow.openMatrix(file, m);
+            mWindow.openMatrices().open(file, m);
 
             status |= true;
 
@@ -211,14 +194,18 @@ public class OpenFile {
    * @param openMode the open mode
    * @return the open file
    */
-  public OpenFile openMode(OpenMode openMode) {
-    OpenFile of = new OpenFile(this);
+  public OpenFiles openMode(OpenMode openMode) {
+    OpenFiles of = new OpenFiles(this);
     of.mOpenMode = openMode;
     return of;
   }
+  
+  public OpenFiles newWindow() {
+    return openMode(OpenMode.NEW_WINDOW);
+  }
 
-  public OpenFile type(FileType type) {
-    OpenFile of = new OpenFile(this);
+  public OpenFiles type(FileType type) {
+    OpenFiles of = new OpenFiles(this);
     of.mFileType = type;
     return of;
   }
@@ -229,8 +216,8 @@ public class OpenFile {
    * @param headers the headers
    * @return the open file
    */
-  public OpenFile headers(int headers) {
-    OpenFile of = new OpenFile(this);
+  public OpenFiles headers(int headers) {
+    OpenFiles of = new OpenFiles(this);
     of.mHeaders = headers;
     return of;
   }
@@ -240,7 +227,7 @@ public class OpenFile {
    *
    * @return the open file
    */
-  public OpenFile noHeader() {
+  public OpenFiles noHeader() {
     return headers(0);
   }
 
@@ -251,8 +238,8 @@ public class OpenFile {
    * 
    * @return
    */
-  public OpenFile rowAnnotations(int headers) {
-    OpenFile of = new OpenFile(this);
+  public OpenFiles rowAnnotations(int headers) {
+    OpenFiles of = new OpenFiles(this);
     of.mRowAnnotations = headers;
     return of;
   }
@@ -263,13 +250,13 @@ public class OpenFile {
    * @param delimiter the delimiter
    * @return the open file
    */
-  public OpenFile delimiter(String delimiter) {
-    OpenFile of = new OpenFile(this);
+  public OpenFiles delimiter(String delimiter) {
+    OpenFiles of = new OpenFiles(this);
     of.mDelimiter = delimiter;
     return of;
   }
 
-  public OpenFile skipLines(String skip) {
+  public OpenFiles skipLines(String skip) {
     return skipLines(CollectionUtils.asList(skip));
   }
 
@@ -280,8 +267,8 @@ public class OpenFile {
    * @param skipLines the characters that can be skipped.
    * @return the open file
    */
-  public OpenFile skipLines(Collection<String> skipLines) {
-    OpenFile of = new OpenFile(this);
+  public OpenFiles skipLines(Collection<String> skipLines) {
+    OpenFiles of = new OpenFiles(this);
     of.mSkipLines = skipLines;
     return of;
   }
@@ -346,7 +333,8 @@ public class OpenFile {
   }
 
   /**
-   * Guess if file contains only numbers.
+   * Guess if matrix contains only numbers since we get a speed up for
+   * using numerical matrices.
    * 
    * @param file
    * @return

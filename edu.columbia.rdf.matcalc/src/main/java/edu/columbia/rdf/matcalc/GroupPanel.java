@@ -15,10 +15,11 @@
  */
 package edu.columbia.rdf.matcalc;
 
+import java.util.List;
+
 import javax.swing.Box;
 
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.combobox.ModernComboBox;
@@ -58,14 +59,14 @@ public class GroupPanel extends HBox {
   /**
    * The member groups.
    */
-  private XYSeriesGroup mGroups;
+  private List<XYSeries> mGroups;
 
   /**
    * Instantiates a new group panel.
    *
    * @param groups the groups
    */
-  public GroupPanel(XYSeriesGroup groups) {
+  public GroupPanel(List<XYSeries> groups) {
     mGroups = groups;
 
     group1Combo = new GroupsCombo(groups);
@@ -74,7 +75,7 @@ public class GroupPanel extends HBox {
     group1Combo.setSelectedIndex(0);
     group2Combo.setSelectedIndex(1);
 
-    ModernLabel label = new ModernAutoSizeLabel("Groups");
+    ModernLabel label = new ModernAutoSizeLabel("Compare");
     label.setAlignmentY(TOP_ALIGNMENT);
 
     add(label);
@@ -108,7 +109,7 @@ public class GroupPanel extends HBox {
    * @return the group1
    */
   public XYSeries getGroup1() {
-    if (mGroups == null || mGroups.getCount() == 0) {
+    if (mGroups == null || mGroups.size() == 0) {
       return null;
     }
 
@@ -121,7 +122,7 @@ public class GroupPanel extends HBox {
    * @return the group2
    */
   public XYSeries getGroup2() {
-    if (mGroups == null || mGroups.getCount() == 0) {
+    if (mGroups == null || mGroups.size() == 0) {
       return null;
     }
 

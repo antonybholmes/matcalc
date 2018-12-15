@@ -106,7 +106,7 @@ public class FilesListRenderer extends ModernListCellRenderer {
    * java. awt.Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int iconX = PADDING;
 
     int iconY = (getHeight() - ICON_SIZE) / 2;

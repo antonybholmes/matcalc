@@ -25,13 +25,13 @@ import org.jebtk.modern.menu.ModernTwoLineMenuItem;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcWinModule;
+import edu.columbia.rdf.matcalc.toolbox.WinModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.NormalizeDialog;
 
 /**
  * The class ZScoreModule.
  */
-public class NormalizeModule extends CalcWinModule
+public class NormalizeModule extends WinModule
     implements ModernClickListener {
 
   /*
@@ -93,20 +93,20 @@ public class NormalizeModule extends CalcWinModule
 
       if (dialog.getStatus() == ModernDialogStatus.OK) {
         if (dialog.getAuto()) {
-          mWindow.addToHistory("Normalize",
+          mWindow.history().addToHistory("Normalize",
               MatrixOperations.scale(mWindow.getCurrentMatrix()));
         } else {
-          mWindow.addToHistory("Normalize",
+          mWindow.history().addToHistory("Normalize",
               MatrixOperations.scale(mWindow.getCurrentMatrix(),
                   dialog.getMin(),
                   dialog.getMax()));
         }
       }
     } else if (e.getMessage().equals("Quantile Normalize")) {
-      mWindow.addToHistory("Quantile Normalized",
+      mWindow.history().addToHistory("Quantile Normalized",
           MatrixOperations.quantileNormalize(mWindow.getCurrentMatrix()));
     } else if (e.getMessage().equals("Median Ratios")) {
-      mWindow.addToHistory("Median Ratios",
+      mWindow.history().addToHistory("Median Ratios",
           MatrixOperations.medianRatio(mWindow.getCurrentMatrix()));
     } else {
       // Do nothing

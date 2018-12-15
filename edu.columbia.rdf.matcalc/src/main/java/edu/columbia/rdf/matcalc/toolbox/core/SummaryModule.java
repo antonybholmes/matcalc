@@ -22,7 +22,7 @@ import org.jebtk.modern.graphics.icons.TableVectorIcon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Split table into multiple tables by grouping column values and then create a
@@ -31,7 +31,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class SummaryModule extends CalcModule implements ModernClickListener {
+public class SummaryModule extends Module implements ModernClickListener {
 
   /**
    * The member window.

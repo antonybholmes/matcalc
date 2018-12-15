@@ -58,7 +58,7 @@ public class DashedLineMenuItem extends ModernMenuItem {
    * Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     g2.setColor(Color.BLACK);
     g2.setStroke(mStroke);
 

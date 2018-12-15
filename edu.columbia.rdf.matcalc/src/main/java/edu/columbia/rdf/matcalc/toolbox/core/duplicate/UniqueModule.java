@@ -32,7 +32,7 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Collapse a file based on a repeated column. The selected column will be
@@ -42,7 +42,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class UniqueModule extends CalcModule implements ModernClickListener {
+public class UniqueModule extends Module implements ModernClickListener {
 
   /**
    * The member match button.
@@ -188,7 +188,7 @@ public class UniqueModule extends CalcModule implements ModernClickListener {
     // System.err.println("size " + ret.getColumnCount() + " " +
     // ret.getRowCount());
 
-    // mWindow.addToHistory("Duplicate rows", m);
-    mWindow.addToHistory("Duplicate rows", ret);
+    // mWindow.history().addToHistory("Duplicate rows", m);
+    mWindow.history().addToHistory("Duplicate rows", ret);
   }
 }

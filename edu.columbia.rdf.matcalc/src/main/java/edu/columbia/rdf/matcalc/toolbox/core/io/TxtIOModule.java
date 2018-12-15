@@ -23,7 +23,7 @@ import org.jebtk.math.matrix.CSVWorksheetParser;
 import org.jebtk.math.matrix.CsvMatrixParser;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.DoubleMatrixParser;
-import org.jebtk.math.matrix.MixedWorksheetParser;
+import org.jebtk.math.matrix.MixedMatrixParser;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
@@ -31,15 +31,14 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.OpenFile;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.OpenFiles;
 
 /**
  * Allow users to open and save Text files.
  *
  * @author Antony Holmes Holmes
  */
-public class TxtIOModule extends CalcModule {
+public class TxtIOModule extends IOModule {
 
   /** The Constant TXT_FILTER. */
   private static final GuiFileExtFilter TXT_FILTER = 
@@ -70,7 +69,7 @@ public class TxtIOModule extends CalcModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame openFile(final MainMatCalcWindow window,
+  public DataFrame open(final MainMatCalcWindow window,
       final Path file,
       FileType type,
       int headers,
@@ -78,12 +77,12 @@ public class TxtIOModule extends CalcModule {
       String delimiter,
       Collection<String> skipMatches) throws IOException {
 
-    rowAnnotations = OpenFile
+    rowAnnotations = OpenFiles
         .estimateRowAnnotations(file, headers, skipMatches);
 
-    delimiter = OpenFile.guessDelimiter(file, skipMatches);
+    delimiter = OpenFiles.guessDelimiter(file, skipMatches);
 
-    boolean numerical = OpenFile
+    boolean numerical = OpenFiles
         .guessNumerical(file, headers, delimiter, rowAnnotations, skipMatches);
 
     ImportDialog dialog = new ImportDialog(window, headers, rowAnnotations, false,
@@ -95,7 +94,7 @@ public class TxtIOModule extends CalcModule {
       return null;
     }
 
-    return autoOpenFile(window,
+    return read(window,
         file,
         dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
             dialog.getHasHeader() ? 1 : 0,
@@ -105,7 +104,7 @@ public class TxtIOModule extends CalcModule {
   }
 
   @Override
-  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+  public DataFrame read(final MainMatCalcWindow window,
       final Path file,
       FileType type,
       int headers,
@@ -125,11 +124,11 @@ public class TxtIOModule extends CalcModule {
         return new DoubleMatrixParser(headers, skipLines, rowAnnotations,
             delimiter).parse(file);
       } else {
-        //return new MixedMatrixParser(headers, skipLines, rowAnnotations,
-        //    delimiter).parse(file);
-        
-        return new MixedWorksheetParser(headers, skipLines, rowAnnotations,
+        return new MixedMatrixParser(headers, skipLines, rowAnnotations,
             delimiter).parse(file);
+        
+        //return new MixedWorksheetParser(headers, skipLines, rowAnnotations,
+        //    delimiter).parse(file);
       }
       //} else {
       //  return new DynamicMixedMatrixParser(skipLines, rowAnnotations,
@@ -145,7 +144,7 @@ public class TxtIOModule extends CalcModule {
    * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
    */
   @Override
-  public boolean saveFile(final MainMatCalcWindow window,
+  public boolean write(final MainMatCalcWindow window,
       final Path file,
       final DataFrame m) throws IOException {
     DataFrame.writeDataFrame(m, file);

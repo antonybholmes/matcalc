@@ -27,7 +27,7 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Collapse a file based on a repeated column. The selected column will be
@@ -37,7 +37,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class CollapseModule extends CalcModule implements ModernClickListener {
+public class CollapseModule extends Module implements ModernClickListener {
 
   /**
    * The member match button.
@@ -118,8 +118,8 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
         dialog.getCollapseType(),
         mWindow);
 
-    // mWindow.addToHistory("Duplicate rows", m);
-    // mWindow.addToHistory("Collapse rows", mcollapsed);
+    // mWindow.history().addToHistory("Duplicate rows", m);
+    // mWindow.history().addToHistory("Collapse rows", mcollapsed);
   }
 
   /**
@@ -161,14 +161,14 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
       break;
     case MAX_MEAN:
       ret = MatrixOperations.addRowMeans(m);
-      window.addToHistory("Add Mean", ret);
+      window.history().addToHistory("Add Mean", ret);
       ret = MatrixOperations.collapseMaxMean(m, rowAnnotationCollapseName); // new
                                                                             // CollapseMaxMeanMatrixView(m,
                                                                             // rowAnnotationCollapseName);
       break;
     case MAX_MEDIAN:
       ret = MatrixOperations.addRowMedians(m);
-      window.addToHistory("Add Median", ret);
+      window.history().addToHistory("Add Median", ret);
       ret = MatrixOperations.collapseMaxMedian(ret, rowAnnotationCollapseName); // return
                                                                                 // new
                                                                                 // CollapseMaxMedianMatrixView(m,
@@ -176,7 +176,7 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
       break;
     case MAX_TSTAT:
       ret = MatrixOperations.addTStat(m, group1, group2);
-      window.addToHistory("Add T-Stats", ret);
+      window.history().addToHistory("Add T-Stats", ret);
       ret = MatrixOperations.collapseMaxTStat(ret, rowAnnotationCollapseName); // return
                                                                                // new
                                                                                // CollapseTTestMatrixView(m,
@@ -186,7 +186,7 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
       break;
     case MAX_IQR:
       ret = MatrixOperations.addIQR(m);
-      window.addToHistory("Add IQR", ret);
+      window.history().addToHistory("Add IQR", ret);
       ret = MatrixOperations.collapseMaxIQR(ret, rowAnnotationCollapseName); // return
                                                                              // new
                                                                              // CollapseTTestMatrixView(m,
@@ -196,7 +196,7 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
       break;
     case MAX_QUART_COEFF_DISP:
       ret = MatrixOperations.addQuartCoeffDisp(m);
-      window.addToHistory("Add QuartCoeffDisp", ret);
+      window.history().addToHistory("Add QuartCoeffDisp", ret);
       ret = MatrixOperations.collapseMaxQuartCoeffDisp(ret,
           rowAnnotationCollapseName); // return new
                                       // CollapseTTestMatrixView(m,
@@ -208,7 +208,7 @@ public class CollapseModule extends CalcModule implements ModernClickListener {
       break;
     }
 
-    window.addToHistory("Collapse rows", ret);
+    window.history().addToHistory("Collapse rows", ret);
 
     return ret;
   }

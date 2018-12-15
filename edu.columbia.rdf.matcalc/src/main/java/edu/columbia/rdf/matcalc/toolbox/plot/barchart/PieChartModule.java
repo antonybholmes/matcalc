@@ -36,12 +36,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class PieChartModule.
  */
-public class PieChartModule extends CalcModule implements ModernClickListener {
+public class PieChartModule extends Module implements ModernClickListener {
 
   /**
    * The member parent.
@@ -154,7 +154,7 @@ public class PieChartModule extends CalcModule implements ModernClickListener {
     // inc));
     // axes.getY1Axis().getTitle().setText("Count");
 
-    // mWindow.addToHistory(new PieChartMatrixTransform(mWindow, m, canvas));
+    // mWindow.history().addToHistory(new PieChartMatrixTransform(mWindow, m, canvas));
 
     Graph2dWindow window = new Graph2dWindow(mParent, figure);
 

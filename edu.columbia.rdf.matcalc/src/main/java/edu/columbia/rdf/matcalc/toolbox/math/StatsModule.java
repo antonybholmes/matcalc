@@ -26,14 +26,14 @@ import org.jebtk.modern.menu.ModernPopupMenu2;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Row name.
  *
  * @author Antony Holmes Holmes
  */
-public class StatsModule extends CalcModule implements ModernClickListener {
+public class StatsModule extends Module implements ModernClickListener {
   /**
    * The member window.
    */
@@ -161,7 +161,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
     DataFrame m = mWindow.getCurrentMatrix();
 
     if (m != null) {
-      mWindow.addToHistory("Row sums", MatrixOperations.addRowSums(m));
+      mWindow.history().addToHistory("Row sums", MatrixOperations.addRowSums(m));
     }
   }
 
@@ -169,7 +169,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
     DataFrame m = mWindow.getCurrentMatrix();
 
     if (m != null) {
-      mWindow.addToHistory("Row means", MatrixOperations.addRowMeans(m));
+      mWindow.history().addToHistory("Row means", MatrixOperations.addRowMeans(m));
     }
   }
 
@@ -177,7 +177,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
     DataFrame m = mWindow.getCurrentMatrix();
 
     if (m != null) {
-      mWindow.addToHistory("Row medians", MatrixOperations.addRowMedians(m));
+      mWindow.history().addToHistory("Row medians", MatrixOperations.addRowMedians(m));
     }
   }
 
@@ -185,7 +185,7 @@ public class StatsModule extends CalcModule implements ModernClickListener {
     DataFrame m = mWindow.getCurrentMatrix();
 
     if (m != null) {
-      mWindow.addToHistory("Row modes", MatrixOperations.addRowModes(m));
+      mWindow.history().addToHistory("Row modes", MatrixOperations.addRowModes(m));
     }
   }
 }

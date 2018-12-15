@@ -29,14 +29,14 @@ import org.jebtk.modern.menu.ModernTwoLineMenuItem;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Row name.
  *
  * @author Antony Holmes Holmes
  */
-public class ThresholdModule extends CalcModule implements ModernClickListener {
+public class ThresholdModule extends Module implements ModernClickListener {
   /**
    * The member window.
    */
@@ -97,20 +97,20 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
     DataFrame m = mWindow.getCurrentMatrix();
 
     if (e.getMessage().equals("Min")) {
-      mWindow.addToHistory("Minimum Threshold",
+      mWindow.history().addToHistory("Minimum Threshold",
           MatrixTransforms.minThreshold(mWindow, m, 1));
     } else if (e.getMessage().equals("Min/Max")) {
-      mWindow.addToHistory("Minimum Threshold",
+      mWindow.history().addToHistory("Minimum Threshold",
           MatrixTransforms.minMaxThreshold(mWindow, m, 1, 10000)); // addFlowItem(new
                                                                    // MinMaxMatrixTransform(this,
                                                                    // getCurrentMatrix(),
                                                                    // 1,
                                                                    // 10000));
     } else if (e.getMessage().equals("Min Shift")) {
-      minShift(); // mWindow.addToHistory("Min Shift",
+      minShift(); // mWindow.history().addToHistory("Min Shift",
                   // MatrixTransforms.subtract(mWindow, m, 1));
     } else if (e.getMessage().equals("Median Shift")) {
-      mWindow.addToHistory("Median Shift",
+      mWindow.history().addToHistory("Median Shift",
           MatrixOperations.divide(m, MatrixOperations.median(m))); // .collapseMaxMedian(m,
                                                                    // rowAnnotation)MatrixTransforms.medianShift(mWindow,
                                                                    // m));
@@ -145,6 +145,6 @@ public class ThresholdModule extends CalcModule implements ModernClickListener {
     DataFrame ret = MatrixOperations.add(MatrixOperations.subtract(m, min),
         add);
 
-    mWindow.addToHistory("Minimum Threshold", ret);
+    mWindow.history().addToHistory("Minimum Threshold", ret);
   }
 }

@@ -11,36 +11,37 @@
 	<setting name="matcalc.import.file.skip.matches" value="#,@,$" />
 	
 	<setting name="matcalc.help.type" value="web" />
-	<setting name="matcalc.help.url" value="https://github.com/lab-rdf/matcalc/wiki" />
+	<setting name="matcalc.help.url" value="https://github.com/antonybholmes/matcalc/wiki" />
 	
-	<setting name="matcalc.import.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Import"/>
-	<setting name="matcalc.groups.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Groups"/>
-	<setting name="matcalc.ttest.help.url" value="https://github.com/lab-rdf/matcalc/wiki/T-Test"/>
-	<setting name="matcalc.search-column.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Search_Column"/>
-	<setting name="matcalc.match-in-files.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Match_In_Files"/>
-	<setting name="matcalc.cluster.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Cluster"/>
-	<setting name="matcalc.filter.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Filter"/>
-	<setting name="matcalc.filter.rows.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Filter_Rows"/>
-	<setting name="matcalc.filter.columns.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Filter_Columns"/>
-	<setting name="matcalc.sort.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Sort"/>
-	<setting name="matcalc.modules.math.log.url" value="https://github.com/lab-rdf/matcalc/wiki/Logarithms"/>
-	<setting name="matcalc.modules.math.power.url" value="https://github.com/lab-rdf/matcalc/wiki/Power"/>
-	<setting name="matcalc.modules.collapse.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Collapse_Rows"/>
-	<setting name="matcalc.modules.duplicate.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Duplicate_Rows"/>
-	<setting name="matcalc.modules.sort-col-by-row.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Sort_Columns_By_Row"/>
-	<setting name="matcalc.modules.row-order.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Row_Order"/>
-	<setting name="matcalc.modules.volcano.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Volcano_Plots"/>
+	<setting name="matcalc.import.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Import"/>
+	<setting name="matcalc.groups.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Groups"/>
+	<setting name="matcalc.ttest.help.url" value="https://github.com/antonybholmes/matcalc/wiki/T-Test"/>
+	<setting name="matcalc.kmeans.help.url" value="https://github.com/antonybholmes/matcalc/wiki/K-means"/>
+	<setting name="matcalc.search-column.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Search_Column"/>
+	<setting name="matcalc.match-in-files.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Match_In_Files"/>
+	<setting name="matcalc.cluster.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Cluster"/>
+	<setting name="matcalc.filter.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Filter"/>
+	<setting name="matcalc.filter.rows.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Filter_Rows"/>
+	<setting name="matcalc.filter.columns.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Filter_Columns"/>
+	<setting name="matcalc.sort.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Sort"/>
+	<setting name="matcalc.modules.math.log.url" value="https://github.com/antonybholmes/matcalc/wiki/Logarithms"/>
+	<setting name="matcalc.modules.math.power.url" value="https://github.com/antonybholmes/matcalc/wiki/Power"/>
+	<setting name="matcalc.modules.collapse.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Collapse_Rows"/>
+	<setting name="matcalc.modules.duplicate.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Duplicate_Rows"/>
+	<setting name="matcalc.modules.sort-col-by-row.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Sort_Columns_By_Row"/>
+	<setting name="matcalc.modules.row-order.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Row_Order"/>
+	<setting name="matcalc.modules.volcano.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Volcano_Plots"/>
 	
 	<setting name="matcalc.modules.supervised.max-plot-rows" value="500"/>
   
 	
-	<setting name="matcalc.color-maps.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Color_Maps"/>
-	<setting name="matcalc.color-map.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Color_Map"/>
+	<setting name="matcalc.color-maps.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Color_Maps"/>
+	<setting name="matcalc.color-map.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Color_Map"/>
 	
-	<setting name="matcalc.data-extraction.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Data_Extraction"/>
-	<setting name="matcalc.split.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Split"/>
+	<setting name="matcalc.data-extraction.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Data_Extraction"/>
+	<setting name="matcalc.split.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Split"/>
 	
-	<setting name="matcalc.toolbox.paste.help.url" value="https://github.com/lab-rdf/matcalc/wiki/Paste"/>
+	<setting name="matcalc.toolbox.paste.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Paste"/>
 	
 	<!-- If the user changes directory, auto show the files pane -->
 	<setting name="matcalc.files-pane.auto-show" value="true"/>

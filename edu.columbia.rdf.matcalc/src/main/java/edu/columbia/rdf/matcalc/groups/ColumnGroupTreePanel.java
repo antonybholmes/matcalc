@@ -60,6 +60,8 @@ import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.tree.ModernTree;
 import org.jebtk.modern.tree.ModernTreeEvent;
 import org.jebtk.modern.tree.TreeEventListener;
+import org.jebtk.modern.widget.ButtonStyle;
+import org.jebtk.modern.widget.ModernClickWidget;
 import org.xml.sax.SAXException;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -82,20 +84,20 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * The member load button.
    */
-  private ModernButton mLoadButton = new ModernButton(
-      AssetService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
+  private ModernClickWidget mLoadButton = new ModernButton(
+      AssetService.getInstance().loadIcon(FolderBwVectorIcon.class, 16)).setButtonStyle(ButtonStyle.CIRCLE);
 
   /**
    * The member save button.
    */
-  private ModernButton mSaveButton = new ModernButton(
-      AssetService.getInstance().loadIcon(SaveBwVectorIcon.class, 16));
+  private ModernClickWidget mSaveButton = new ModernButton(
+      AssetService.getInstance().loadIcon(SaveBwVectorIcon.class, 16)).setButtonStyle(ButtonStyle.CIRCLE);
 
   /**
    * The member add button.
    */
-  private ModernButton mAddButton = new ModernButton(
-      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
+  private ModernClickWidget mAddButton = new ModernButton(
+      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16)).setButtonStyle(ButtonStyle.CIRCLE);
 
   /** The m import button. */
   private ModernButton mImportButton = new ModernButton("Import");
@@ -103,8 +105,8 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * The member remove button.
    */
-  private ModernButton mRemoveButton = new ModernButton(
-      AssetService.getInstance().loadIcon("trash_bw", 16));
+  private ModernClickWidget mRemoveButton = new ModernButton(
+      AssetService.getInstance().loadIcon("trash_bw", 16)).setButtonStyle(ButtonStyle.CIRCLE);
 
   // private ModernButton clearButton =
   // new ModernButton(UIResources.getInstance().loadIcon("clear", 16));
@@ -267,7 +269,6 @@ public class ColumnGroupTreePanel extends ModernComponent {
     @Override
     public void treeNodeDragged(ModernTreeEvent e) {
       // TODO Auto-generated method stub
-
     }
 
     /*

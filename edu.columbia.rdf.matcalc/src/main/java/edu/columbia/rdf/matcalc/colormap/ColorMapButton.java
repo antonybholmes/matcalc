@@ -100,7 +100,7 @@ public class ColorMapButton extends ControlDropDownButton
    * awt. Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int x = PADDING;
 
     int y = (getHeight() - 16) / 2;

@@ -32,12 +32,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 import edu.columbia.rdf.matcalc.icons.BoxWhisker32VectorIcon;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class BoxWhiskerPlotModule.
  */
-public class BoxWhiskerPlotModule extends CalcModule
+public class BoxWhiskerPlotModule extends Module
     implements ModernClickListener {
 
   /**

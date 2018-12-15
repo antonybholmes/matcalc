@@ -33,7 +33,7 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Annotate a table as to whether some values can be found in a particular
@@ -42,7 +42,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class SearchColumnModule extends CalcModule
+public class SearchColumnModule extends Module
     implements ModernClickListener {
 
   /**
@@ -192,6 +192,6 @@ public class SearchColumnModule extends CalcModule
       }
     }
 
-    mWindow.addToHistory("Search Column	", ret);
+    mWindow.history().addToHistory("Search Column	", ret);
   }
 }

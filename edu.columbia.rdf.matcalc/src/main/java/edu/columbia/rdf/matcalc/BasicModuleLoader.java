@@ -42,6 +42,7 @@ import edu.columbia.rdf.matcalc.toolbox.math.StatsModule;
 import edu.columbia.rdf.matcalc.toolbox.math.ThresholdModule;
 import edu.columbia.rdf.matcalc.toolbox.math.TransposeModule;
 import edu.columbia.rdf.matcalc.toolbox.math.ZScoreModule;
+import edu.columbia.rdf.matcalc.toolbox.ml.KMeansModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.barchart.BarChartModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.barchart.HistogramModule;
 import edu.columbia.rdf.matcalc.toolbox.plot.barchart.StackedBarChartModule;
@@ -114,5 +115,7 @@ public class BasicModuleLoader extends CoreModuleLoader {
     addModule(VolcanoPlotModule.class);
 
     addModule(SupervisedModule.class);
+    
+    addModule(KMeansModule.class);
   }
 }

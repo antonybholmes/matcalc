@@ -21,7 +21,7 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Annotate a table as to whether some values can be found in a particular
@@ -30,7 +30,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class VennModule extends CalcModule implements ModernClickListener {
+public class VennModule extends Module implements ModernClickListener {
 
   /**
    * The member match button.

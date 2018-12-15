@@ -29,12 +29,12 @@ import org.jebtk.modern.ribbon.RibbonLargeOptionalDropDownButton2;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class LogModule.
  */
-public class LogModule extends CalcModule implements ModernClickListener {
+public class LogModule extends Module implements ModernClickListener {
 
   /** The Constant ICON. */
   private static final ModernIcon ICON = AssetService.getInstance().loadIcon("log",
@@ -125,14 +125,13 @@ public class LogModule extends CalcModule implements ModernClickListener {
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getMessage().equals("Log 10")) {
-      mWindow.addToHistory("log10",
+      mWindow.history().addToHistory("log10",
           "log10",
           log10(mWindow, mWindow.getCurrentMatrix(), 1));
     } else if (e.getMessage().equals("Ln")) {
-      mWindow
-          .addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1));
+      mWindow.history().addToHistory("ln", "ln", ln(mWindow, mWindow.getCurrentMatrix(), 1));
     } else {
-      mWindow.addToHistory("log2",
+      mWindow.history().addToHistory("log2",
           "log2",
           log2(mWindow, mWindow.getCurrentMatrix(), 1));
     }

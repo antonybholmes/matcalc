@@ -36,12 +36,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class BarChartModule.
  */
-public class BarChartModule extends CalcModule implements ModernClickListener {
+public class BarChartModule extends Module implements ModernClickListener {
 
   /**
    * The member parent.

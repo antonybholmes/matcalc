@@ -31,12 +31,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The Class DuplicateModule.
  */
-public class DuplicateModule extends CalcModule implements ModernClickListener {
+public class DuplicateModule extends Module implements ModernClickListener {
 
   /**
    * The member match button.
@@ -160,6 +160,6 @@ public class DuplicateModule extends CalcModule implements ModernClickListener {
       }
     }
 
-    mWindow.addToHistory("Duplicate rows", ret);
+    mWindow.history().addToHistory("Duplicate rows", ret);
   }
 }

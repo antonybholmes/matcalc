@@ -32,12 +32,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 import edu.columbia.rdf.matcalc.icons.Cluster32VectorIcon;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class ClusterHeatMapModule.
  */
-public class ClusterHeatMapModule extends CalcModule
+public class ClusterHeatMapModule extends Module
     implements ModernClickListener {
 
   /**

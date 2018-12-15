@@ -15,9 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
-public class PasteModule extends CalcModule implements ModernClickListener {
+public class PasteModule extends Module implements ModernClickListener {
 
   public final static Logger LOG = LoggerFactory.getLogger(PasteModule.class);
 

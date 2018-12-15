@@ -38,14 +38,14 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.theme.ThemeService;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Row name.
  *
  * @author Antony Holmes Holmes
  */
-public class RowFilterModule extends CalcModule implements ModernClickListener {
+public class RowFilterModule extends Module implements ModernClickListener {
 
   /**
    * The button.
@@ -159,7 +159,7 @@ public class RowFilterModule extends CalcModule implements ModernClickListener {
       ret = DataFrame.copyRows(m, rows);
     }
 
-    mWindow.addToHistory("Row Filter", ret);
+    mWindow.history().addToHistory("Row Filter", ret);
   }
 
   /**

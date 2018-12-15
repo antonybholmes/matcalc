@@ -35,12 +35,12 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * The class LineGraphModule.
  */
-public class LineGraphModule extends CalcModule implements ModernClickListener {
+public class LineGraphModule extends Module implements ModernClickListener {
 
   /**
    * The member parent.
@@ -167,7 +167,7 @@ public class LineGraphModule extends CalcModule implements ModernClickListener {
     // inc));
     // mAxes.getY1Axis().getTitle().setText("Count");
 
-    // mWindow.addToHistory(new BarChartMatrixTransform(mWindow, m, canvas));
+    // mWindow.history().addToHistory(new BarChartMatrixTransform(mWindow, m, canvas));
 
     // Graph2dWindow window = new Graph2dWindow(mParent, subFigure);
     Graph2dWindow window = new Graph2dWindow(mParent, figure);

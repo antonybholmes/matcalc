@@ -34,7 +34,7 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.icons.Cluster32VectorIcon;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ClusterProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.HierarchicalClusteringDialog;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
@@ -44,7 +44,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
  *
  * @author Antony Holmes Holmes
  */
-public class LegacyClusterModule extends CalcModule
+public class LegacyClusterModule extends Module
     implements ModernClickListener {
 
   /**
@@ -206,7 +206,7 @@ public class LegacyClusterModule extends CalcModule
      * 
      * DataFrame m3 = AnnotatableMatrix.copyInnerColumns(m2, columnOrder);
      * 
-     * mWindow.addToHistory("Cluster ordered matrix", m3);
+     * mWindow.history().addToHistory("Cluster ordered matrix", m3);
      * 
      * // So we can plot each row using a color //RowStandardizeMatrixView
      * normalizedMatrix = new RowStandardizeMatrixView(m);
@@ -221,7 +221,7 @@ public class LegacyClusterModule extends CalcModule
      * 
      * List<String> history = mWindow.getTransformationHistory();
      * 
-     * mWindow.addToHistory(new ClusterPlotMatrixTransform(mWindow, m3,
+     * mWindow.history().addToHistory(new ClusterPlotMatrixTransform(mWindow, m3,
      * XYSeriesModel.create(mWindow.getGroups()),
      * XYSeriesModel.create(mWindow.getRowGroups()), rowCluster, columnCluster,
      * CountGroups.defaultGroup(m), history, properties));
@@ -294,7 +294,7 @@ public class LegacyClusterModule extends CalcModule
       m3 = m2;
     }
 
-    window.addToHistory("Cluster ordered matrix", m3);
+    window.history().addToHistory("Cluster ordered matrix", m3);
 
     // So we can plot each row using a color
     // RowStandardizeMatrixView normalizedMatrix = new
@@ -318,7 +318,7 @@ public class LegacyClusterModule extends CalcModule
     // System.err.println("c " + i + " " + m3.getColumnName(i));
     // }
 
-    window.addToHistory(new ClusterPlotMatrixTransform(window, m3,
+    window.history().addToHistory(new ClusterPlotMatrixTransform(window, m3,
         XYSeriesModel.create(window.getGroups()),
         XYSeriesModel.create(window.getRowGroups()), rowCluster, columnCluster,
         CountGroups.defaultGroup(m3), history, properties));

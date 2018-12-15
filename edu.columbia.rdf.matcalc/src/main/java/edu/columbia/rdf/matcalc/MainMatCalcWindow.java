@@ -105,6 +105,7 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 import edu.columbia.rdf.matcalc.groups.ColumnGroupTreePanel;
 import edu.columbia.rdf.matcalc.groups.RowGroupTreePanel;
 import edu.columbia.rdf.matcalc.toolbox.Module;
+import edu.columbia.rdf.matcalc.toolbox.core.io.IOModule;
 
 /**
  * Merges designated segments together using the merge column. Consecutive rows
@@ -149,7 +150,7 @@ ModernSelectionListener, MatrixTransformListener {
   private SaveAsRibbonPanel mSaveAsPanel = new SaveAsRibbonPanel();
 
   /** The m matrices. */
-  private List<DataFrame> mMatrices = new ArrayList<DataFrame>();
+  List<DataFrame> mMatrices = new ArrayList<DataFrame>();
 
   // private ModernListModel<MatrixTransform> transformModel =
   // new ModernListModel<MatrixTransform>();
@@ -204,16 +205,16 @@ ModernSelectionListener, MatrixTransformListener {
       new ArrayList<GuiFileExtFilter>();
 
   /** Modules associated with opening files with a given extension. */
-  protected IterMap<String, List<Module>> mOpenFileModuleMap = 
-      DefaultHashMap.create(new ArrayListCreator<Module>());
+  protected IterMap<String, List<IOModule>> mOpenFileModuleMap = 
+      DefaultHashMap.create(new ArrayListCreator<IOModule>());
 
   /** The m save file filters. */
   private List<GuiFileExtFilter> mSaveFileFilters = 
       new ArrayList<GuiFileExtFilter>();
 
   /** The m save file module map. */
-  private Map<String, List<Module>> mSaveFileModuleMap = 
-      DefaultHashMap.create(new ArrayListCreator<Module>());
+  private Map<String, List<IOModule>> mSaveFileModuleMap = 
+      DefaultHashMap.create(new ArrayListCreator<IOModule>());
 
   // private ModernScrollPane mTableScrollPane;
 
@@ -464,7 +465,7 @@ ModernSelectionListener, MatrixTransformListener {
       e.printStackTrace();
     }
 
-    openMatrix(m);
+    openMatrices().open(m);
   }
 
   /**
@@ -563,6 +564,7 @@ ModernSelectionListener, MatrixTransformListener {
 
       System.err.println("Loading plugin " + name);
 
+      // Modules are registered to a window
       module = ModuleService.getInstance().instance(name); //(Module) plugin.getPluginClass().newInstance();
 
       mModules.add(module);
@@ -612,27 +614,30 @@ ModernSelectionListener, MatrixTransformListener {
    * @param module A file module.
    */
   private void addIOModule(Module module) {
-    for (GuiFileExtFilter filter : module.getOpenFileFilters()) {
+    if (!(module instanceof IOModule)) {
+      return;
+    }
+    
+    IOModule iomod = (IOModule) module;
+    
+    for (GuiFileExtFilter filter : iomod.getOpenFileFilters()) {
+      
       // Only show file filter in UI selection tools when requested, otherwise
       // register module as an IO listener.
-      if (module.showIOFilterUI()) {
-        mOpenFileFilters.add(filter);
-      }
+      mOpenFileFilters.add(filter);
       
       // Track what this module can
       for (String ext : filter.getExtensions()) {
-        mOpenFileModuleMap.get(ext).add(module);
+        mOpenFileModuleMap.get(ext).add(iomod);
       }
     }
 
-    for (GuiFileExtFilter filter : module.getSaveFileFilters()) {
-      if (module.showIOFilterUI()) {
-        mSaveFileFilters.add(filter);
-      }
+    for (GuiFileExtFilter filter : iomod.getSaveFileFilters()) {
+      mSaveFileFilters.add(filter);
 
       // Track what this module can
       for (String ext : filter.getExtensions()) {
-        mSaveFileModuleMap.get(ext).add(module);
+        mSaveFileModuleMap.get(ext).add(iomod);
       }
     }
 
@@ -985,106 +990,7 @@ ModernSelectionListener, MatrixTransformListener {
     return new History(this);
   }
 
-  /**
-   * Adds the to history.
-   *
-   * @param name the name
-   * @param matrix the matrix
-   * @return the annotation matrix
-   */
-  public DataFrame addToHistory(String name, DataFrame matrix) {
-    if (matrix == null) {
-      return null;
-    }
-
-    return addToHistory(name, name, matrix);
-  }
-
-  /**
-   * Adds the to history.
-   *
-   * @param name the name
-   * @param description the description
-   * @param matrix the matrix
-   * @return the annotation matrix
-   */
-  public DataFrame addToHistory(String name,
-      String description,
-      DataFrame matrix) {
-    if (matrix == null) {
-      return null;
-    }
-
-    return addToHistory(new MatrixTransform(this, name, description, matrix));
-  }
-
-  /**
-   * Adds the to history.
-   *
-   * @param name the name
-   * @param matrix the matrix
-   * @param selectedIndex the selected index
-   * @return the annotation matrix
-   */
-  public DataFrame addToHistory(String name,
-      DataFrame matrix,
-      int selectedIndex) {
-    if (matrix == null) {
-      return null;
-    }
-
-    return addToHistory(name, name, matrix, selectedIndex);
-  }
-
-  /**
-   * Adds the to history.
-   *
-   * @param name the name
-   * @param description the description
-   * @param matrix the matrix
-   * @param selectedIndex the selected index
-   * @return the annotation matrix
-   */
-  public DataFrame addToHistory(String name,
-      String description,
-      DataFrame matrix,
-      int selectedIndex) {
-    if (matrix == null) {
-      return null;
-    }
-
-    return addToHistory(selectedIndex,
-        new MatrixTransform(this, name, description, matrix));
-  }
-
-  /**
-   * Add a pipeline step to the workflow.
-   *
-   * @param transform the transform
-   * @return the annotation matrix
-   */
-  public DataFrame addToHistory(MatrixTransform transform) {
-    return addToHistory(getHistoryIndex(), transform);
-  }
-
-  /**
-   * Adds the to history.
-   *
-   * @param transform the transform
-   * @param selectedIndex the selected index
-   * @return the annotation matrix
-   */
-  public DataFrame addToHistory(int selectedIndex, MatrixTransform transform) {
-    if (transform == null) {
-      return null;
-    }
-
-    transform.addMatrixTransformListener(this);
-
-    mHistoryPanel.addItem(transform, selectedIndex).apply();
-
-    return transform.getMatrix();
-  }
+  
 
   public DataFrame selectHistory(int selectedIndex) {
     mHistoryPanel.setSelectedIndex(selectedIndex);
@@ -1241,182 +1147,44 @@ ModernSelectionListener, MatrixTransformListener {
    * @throws IOException
    */
   public void openFiles(Collection<Path> files) throws IOException {
-    new OpenFile(this, files).open();
+    openFiles().open(files);
+  }
+  
+  public OpenFiles openFiles() {
+    return new OpenFiles(this);
+  }
+
+  public OpenMatrices openMatrices() {
+    return new OpenMatrices(this);
   }
 
   /**
-   * Creates a new MatCalc window and opens the matrix in it.
-   *
-   * @param m the m
-   */
-  public void openMatrixInNewWindow(DataFrame m) {
-    MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
-
-    window.openMatrix(m);
-
-    window.setVisible(true);
-
-  }
-
-  /**
-   * Create a new MatCalc window and open the matrices in it.
-   *
-   * @param matrices the matrices
-   */
-  public void openMatricesInNewWindow(List<DataFrame> matrices) {
-    MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
-
-    window.openMatrices(matrices);
-
-    window.setVisible(true);
-
-  }
-
-  public boolean openMatrix(Path file, DataFrame m) {
-    boolean status = false;
-
-    if (m != null) {
-      openMatrix(m);
-      status = true;
-    }
-
-    if (status) {
-      mFilesModel.add(file);
-
-      setSubTitle(PathUtils.getName(file));
-    }
-
-    return status;
-  }
-
-  /**
-   * Open matrix.
-   *
-   * @param m the m
-   */
-  public void openMatrix(DataFrame m) {
-    openMatrix(m, OpenMode.CURRENT_WINDOW);
-  }
-
-  /**
-   * Load a matrix into the main window. If there is a currently loaded matrix,
-   * a new window will be created. To add a matrix to the existing history of
-   * this window, use addToHistory().
-   *
-   * @param m the m
-   * @param openMode the open mode
-   */
-  public void openMatrix(DataFrame m, OpenMode openMode) {
-    if (mMatrices.size() > 0 && openMode == OpenMode.NEW_WINDOW) {
-      MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
-
-      window.openMatrix(m);
-
-      window.setVisible(true);
-    } else {
-      mMatrices.add(m);
-
-      if (m.getName().length() > 0) {
-        setSubTitle(m.getName());
-      } else {
-        setSubTitle("Load matrix");
-      }
-
-      addToHistory(getSubTitle(), m);
-    }
-  }
-
-  /**
-   * Open matrices.
-   *
-   * @param matrices the matrices
-   */
-  public void openMatrices(List<DataFrame> matrices) {
-    openMatrices(matrices, OpenMode.CURRENT_WINDOW);
-  }
-
-  /**
-   * Open matrices.
-   *
-   * @param matrices the matrices
-   * @param openMode the open mode
-   */
-  public void openMatrices(List<DataFrame> matrices, OpenMode openMode) {
-    if (mMatrices.size() > 0 && openMode == OpenMode.NEW_WINDOW) {
-      MainMatCalcWindow window = new MainMatCalcWindow(getAppInfo());
-
-      window.openMatrices(matrices, openMode);
-
-      window.setVisible(true);
-    } else {
-
-      for (DataFrame matrix : matrices) {
-        openMatrix(matrix, openMode);
-      }
-
-      /*
-       * mMatrices.addAll(matrices);
-       * 
-       * DataFrame m = matrices.get(0);
-       * 
-       * if (m.getName().length() > 0) { setSubTitle(m.getName()); } else {
-       * 
-       * if (matrices.size() > 1) { setSubTitle("Load matrices"); } else {
-       * setSubTitle("Load matrix"); } }
-       */
-
-      // createGroupsPanel(m);
-
-      // addToHistory(getSubTitle(), m);
-    }
-  }
-
-
-  /**
-   * Export.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
-   * @throws TranscoderException the transcoder exception
-   */
-  private void export() throws IOException, TranscoderException {
-    export(RecentFilesService.getInstance().getPwd());
-  }
-
-  /**
-   * Export.
-   *
-   * @param pwd the working directory
-   * @throws IOException Signals that an I/O exception has occurred.
-   * @throws TranscoderException the transcoder exception
-   */
-  private void export(Path pwd) throws IOException, TranscoderException {
-    DataFrame matrix = getCurrentMatrix();
-
-    if (matrix == null) {
-      ModernMessageDialog.createWarningDialog(this,
-          "Please open an expression file.");
-
-      return;
-    }
-
-    exportMatrix(pwd);
-  }
-
-  /**
-   * Export matrix.
+   * Save a file in the current directory.
    *
    * @param pwd the pwd
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws TranscoderException the transcoder exception
    */
-  private void exportMatrix(Path pwd) throws IOException, TranscoderException {
-    DataFrame matrix = getCurrentMatrix();
+  public void export() throws IOException, TranscoderException {
+    export(RecentFilesService.getInstance().getPwd());
+  }
+  
+  /**
+   * Save a file in a directory.
+   * 
+   * @param pwd
+   * @throws IOException
+   * @throws TranscoderException
+   */
+  public void export(Path pwd) throws IOException, TranscoderException {
+    if (getCurrentMatrix() == null) {
+      ModernMessageDialog.createWarningDialog(this,
+          "Please open an expression file.");
 
-    if (matrix == null) {
       return;
     }
-
-    Path file = null;
+    
+    
 
     /*
      * if (mInputFiles.size() > 0) { file = FileDialog.save(this).filter(new
@@ -1427,6 +1195,8 @@ ModernSelectionListener, MatrixTransformListener {
      * EstGuiFileFilter()).getFile(pwd); }
      */
 
+    Path file;
+    
     if (mFilesModel.size() > 0) {
       file = FileDialog.save(this).filter(mSaveFileFilters)
           .setDefaultFilter("txt") // PathUtils.getFileExt(mInputFile))
@@ -1444,53 +1214,54 @@ ModernSelectionListener, MatrixTransformListener {
     if (FileUtils.exists(file)) {
       ModernMessageDialog
       .createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
-    } else {
-      save(file);
     }
+    
+    save(file);
   }
 
   /**
-   * Save.
+   * Save a file and alert the user.
    *
    * @param file the file
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void save(Path file) throws IOException {
-    DataFrame matrix = getCurrentMatrix();
-
+  public void save(Path file) throws IOException {
+    if (write(file)) {
+      mFilesModel.add(file);
+      ModernMessageDialog.createFileSavedDialog(this, file);
+    }
+  }
+  
+  /**
+   * Write file to disk without creating a notification dialog. This method
+   * is intended for API calls.
+   * 
+   * @param file
+   * @return
+   * @throws IOException
+   */
+  public boolean write(Path file) throws IOException {
+    return write(file, getCurrentMatrix());
+  }
+  
+  public boolean write(Path file, DataFrame matrix) throws IOException {
+    if (matrix == null) {
+      return false;
+    }
+    
     String ext = PathUtils.getFileExt(file);
 
     boolean status = false;
 
-    List<Module> modules = mSaveFileModuleMap.get(ext);
+    List<IOModule> modules = mSaveFileModuleMap.get(ext);
 
-    for (Module module : modules) {
+    for (IOModule module : modules) {
       if (module != null) {
-        status |= module.saveFile(this, file, matrix);
+        status |= module.write(this, file, matrix);
       }
     }
-
-    /*
-     * if (ext.equals("gct")) { GctMatrix.writeGctMatrix(matrix, file);
-     * RecentFilesService.getInstance().add(file); } else if (ext.equals("est"))
-     * { // Use version 2 as more flexible DataFrame.writeEstMatrixV2(matrix,
-     * file); RecentFilesService.getInstance().add(file); } else if
-     * (ext.equals("xlsx")) { Excel.writeXlsx(matrix, file);
-     * RecentFilesService.getInstance().add(file); } else { // txt
-     * DataFrame.writeDataMatrix(matrix, file);
-     * RecentFilesService.getInstance().add(file); }
-     */
-
-    // Set the sub title to indicate to the user that they saved the
-    // file
-
-    if (status) {
-      mFilesModel.add(file);
-
-      // setSubTitle(PathUtils.getName(file));
-
-      ModernMessageDialog.createFileSavedDialog(this, file);
-    }
+    
+    return status;
   }
 
   /**
@@ -1981,7 +1752,7 @@ ModernSelectionListener, MatrixTransformListener {
     return mZoomModel;
   }
 
-  public List<Module> getFileModules(String ext) {
+  public List<IOModule> getFileModules(String ext) {
     return mOpenFileModuleMap.get(ext);
   }
 }

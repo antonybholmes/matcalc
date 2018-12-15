@@ -34,7 +34,7 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Can compare a column of values to another list to see what is common and
@@ -44,7 +44,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class SortColumnsByRowModule extends CalcModule
+public class SortColumnsByRowModule extends Module
     implements ModernClickListener {
 
   /**
@@ -242,6 +242,6 @@ public class SortColumnsByRowModule extends CalcModule
 
     DataFrame.copyColumns(m, columns, ret);
 
-    mWindow.addToHistory("Sort matrix", ret);
+    mWindow.history().addToHistory("Sort matrix", ret);
   }
 }

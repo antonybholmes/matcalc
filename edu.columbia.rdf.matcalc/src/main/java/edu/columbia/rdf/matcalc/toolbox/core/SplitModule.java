@@ -46,7 +46,7 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.OpenMode;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Split table into multiple tables by grouping column values and then create a
@@ -55,7 +55,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class SplitModule extends CalcModule implements ModernClickListener {
+public class SplitModule extends Module implements ModernClickListener {
 
   /** The Constant ICON. */
   private static final ModernIcon ICON = AssetService.getInstance()
@@ -297,7 +297,7 @@ public class SplitModule extends CalcModule implements ModernClickListener {
 
     if (openMatrices) {
       // We elect to open the matrices into matcalc
-      mWindow.openMatrices(matrices, OpenMode.CURRENT_WINDOW);
+      mWindow.openMatrices().open(matrices);
     }
   }
 }

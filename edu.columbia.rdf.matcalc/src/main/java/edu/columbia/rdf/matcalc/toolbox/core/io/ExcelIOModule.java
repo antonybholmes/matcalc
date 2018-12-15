@@ -18,15 +18,13 @@ package edu.columbia.rdf.matcalc.toolbox.core.io;
 import org.jebtk.modern.io.FileFilterService;
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
-
 /**
  * Allow users to open and save Excel files. This module provides file types,
  * but expects other modules to handle opening and saving.
  *
  * @author Antony Holmes Holmes
  */
-public class ExcelIOModule extends CalcModule {
+public class ExcelIOModule extends IOModule {
 
   /** The Constant FILTER. */
   private static final GuiFileExtFilter FILTER = 

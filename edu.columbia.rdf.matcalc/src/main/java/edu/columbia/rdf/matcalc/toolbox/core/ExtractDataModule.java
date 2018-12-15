@@ -38,7 +38,7 @@ import org.jebtk.modern.menu.ModernTwoLineMenuItem;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Merges designated segments together using the merge column. Consecutive rows
@@ -48,7 +48,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class ExtractDataModule extends CalcModule
+public class ExtractDataModule extends Module
     implements ModernClickListener {
 
   /** The Constant ICON. */
@@ -122,9 +122,9 @@ public class ExtractDataModule extends CalcModule
   @Override
   public final void clicked(ModernClickEvent e) {
     if (e.getMessage().equals("Numerical")) {
-      mWindow.addToHistory("Extract numerical data", extractNumerical());
+      mWindow.history().addToHistory("Extract numerical data", extractNumerical());
     } else if (e.getMessage().equals("Text")) {
-      mWindow.addToHistory("Extract text data", extractText());
+      mWindow.history().addToHistory("Extract text data", extractText());
     } else {
       // Do nothing
     }

@@ -26,14 +26,13 @@ import org.jebtk.modern.dialog.ModernDialogStatus;
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.ImportDialog;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
 /**
  * Allow users to open and save Excel files.
  *
  * @author Antony Holmes Holmes
  */
-public abstract class XlIOModule extends CalcModule {
+public abstract class XlIOModule extends IOModule {
 
   /*
    * (non-Javadoc)
@@ -42,7 +41,7 @@ public abstract class XlIOModule extends CalcModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame openFile(final MainMatCalcWindow window,
+  public DataFrame open(final MainMatCalcWindow window,
       final Path file,
       FileType type,
       int headers,
@@ -62,17 +61,12 @@ public abstract class XlIOModule extends CalcModule {
     headers = dialog.getHasHeader() ? 1 : 0;
     rowAnnotations = dialog.getRowAnnotations();
 
-    return super.openFile(window,
+    return super.open(window,
         file,
         type,
         headers,
         rowAnnotations,
         delimiter,
         skipLines);
-  }
-  
-  @Override
-  public boolean showIOFilterUI() {
-    return false;
   }
 }

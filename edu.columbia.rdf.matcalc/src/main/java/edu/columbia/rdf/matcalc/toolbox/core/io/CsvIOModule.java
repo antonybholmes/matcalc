@@ -27,14 +27,13 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 
 import edu.columbia.rdf.matcalc.FileType;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
 
 /**
  * Allow users to open and save Text files.
  *
  * @author Antony Holmes Holmes
  */
-public class CsvIOModule extends CalcModule {
+public class CsvIOModule extends IOModule {
 
   /** The Constant FILTER. */
   private static final GuiFileExtFilter FILTER = 
@@ -65,7 +64,7 @@ public class CsvIOModule extends CalcModule {
    * java.nio.file.Path, boolean, int)
    */
   @Override
-  public DataFrame autoOpenFile(final MainMatCalcWindow window,
+  public DataFrame read(final MainMatCalcWindow window,
       final Path file,
       FileType type,
       int headers,
@@ -86,7 +85,7 @@ public class CsvIOModule extends CalcModule {
    * java.nio.file.Path, org.abh.common.math.matrix.DataFrame)
    */
   @Override
-  public boolean saveFile(final MainMatCalcWindow window,
+  public boolean write(final MainMatCalcWindow window,
       final Path file,
       final DataFrame m) throws IOException {
     DataFrame.writeDataFrame(m, file);

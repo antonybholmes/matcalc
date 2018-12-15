@@ -33,7 +33,7 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.tooltip.ModernToolTip;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Can compare a column of values to another list to see what is common and
@@ -43,7 +43,7 @@ import edu.columbia.rdf.matcalc.toolbox.CalcModule;
  * @author Antony Holmes Holmes
  *
  */
-public class DiffModule extends CalcModule implements ModernClickListener {
+public class DiffModule extends Module implements ModernClickListener {
   /**
    * The constant NO_MATCH.
    */
@@ -158,7 +158,7 @@ public class DiffModule extends CalcModule implements ModernClickListener {
       }
     }
 
-    mWindow.addToHistory("Diff", ret);
+    mWindow.history().addToHistory("Diff", ret);
   }
 
   /**
