@@ -42,7 +42,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.LegacyHeatMapModule;
 /**
  * Legacy cluster module using older heatmap module.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class LegacyClusterModule extends Module
     implements ModernClickListener {

@@ -31,7 +31,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * Allow users to open and save Text files.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class TsvIOModule extends IOModule {
 

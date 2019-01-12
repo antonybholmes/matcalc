@@ -27,7 +27,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * Annotate a table as to whether some values can be found in a particular
  * column.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class VennModule extends Module implements ModernClickListener {

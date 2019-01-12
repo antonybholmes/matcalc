@@ -25,7 +25,7 @@ import org.jebtk.modern.widget.ModernWidget;
 /**
  * Displays a color bar.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ColorIcon extends ModernVectorIcon {

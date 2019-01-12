@@ -30,7 +30,7 @@ import edu.columbia.rdf.matcalc.PlotMatrixTransform;
 /**
  * Transform the rows of a matrix.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {

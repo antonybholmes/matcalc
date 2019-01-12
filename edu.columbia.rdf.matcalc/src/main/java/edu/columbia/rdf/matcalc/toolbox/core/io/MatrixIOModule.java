@@ -23,7 +23,7 @@ import org.jebtk.modern.io.GuiFileExtFilter;
  * Modules for csv, txt, and xlsx files must be loaded to provide the
  * functionality of this module.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class MatrixIOModule extends IOModule {

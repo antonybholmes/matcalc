@@ -119,8 +119,9 @@ public class XYSeriesTableModel extends ModernTableModel {
    * @param column the column
    * @return the column annotations
    */
-  public List<? extends Object> getColumnAnnotations(int column) {
-    return CollectionUtils.asList(COLUMNS[column]);
+  @Override
+  public String getColumnName(int column) {
+    return COLUMNS[column];
   }
 
   /**

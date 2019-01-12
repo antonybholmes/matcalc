@@ -142,9 +142,9 @@ public class DuplicateModule extends Module implements ModernClickListener {
 
     // first copy the annotations
 
-    for (String name : m.getRowAnnotationNames()) {
+    for (String name : m.getIndex().getNames()) {
       for (int i = 0; i < rows.size(); ++i) {
-        ret.setRowAnnotation(name, i, m.getRowAnnotation(name, rows.get(i)));
+        ret.getIndex().setAnnotation(name, i, m.getIndex().getAnnotation(name, rows.get(i)));
       }
     }
 

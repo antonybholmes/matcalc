@@ -28,7 +28,7 @@ import edu.columbia.rdf.matcalc.MatrixRowAnnotationCombo;
 /**
  * For choosing an FDR method.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class CollapsePanel extends VBox {
 

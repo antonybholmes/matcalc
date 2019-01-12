@@ -35,7 +35,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * Overlap segments.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class PasteTask extends SwingWorker<Void, Void> {
 

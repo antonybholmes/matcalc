@@ -29,7 +29,7 @@ import org.jebtk.modern.text.ModernSubTitleLabel;
 /**
  * Display the program settings tree inline within the Ribbon menu.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ModulesRibbonPanel extends RibbonPanelProductInfo {

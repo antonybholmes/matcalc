@@ -39,7 +39,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * as the index, it will create two groups, male and female and track now many
  * names occur in each group.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class GroupModule extends Module implements ModernClickListener {

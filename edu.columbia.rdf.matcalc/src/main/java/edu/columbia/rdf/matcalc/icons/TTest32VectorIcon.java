@@ -25,7 +25,7 @@ import org.jebtk.modern.widget.ModernWidget;
 /**
  * Simple pane icon.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class TTest32VectorIcon extends ModernVectorIcon {

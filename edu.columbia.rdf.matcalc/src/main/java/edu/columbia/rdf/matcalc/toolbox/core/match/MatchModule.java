@@ -40,7 +40,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * record this in a new column next to the reference column. Useful for doing
  * overlaps and keeping data in a specific order in a table.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class MatchModule extends Module implements ModernClickListener {
@@ -136,9 +136,9 @@ public class MatchModule extends Module implements ModernClickListener {
 
     DataFrame copyM = window.getCurrentMatrix();
 
-    List<String> ids = copyM.columnAsText(inputDialog.getMatchColumn());
+    String[] ids = copyM.columnToText(inputDialog.getMatchColumn());
 
-    List<String> values = copyM.columnAsText(inputDialog.getReplaceColumn());
+    String[] values = copyM.columnToText(inputDialog.getReplaceColumn());
 
     Map<String, Set<String>> idMap = CollectionUtils
         .createMapSet(TextUtils.toLowerCase(ids), values);

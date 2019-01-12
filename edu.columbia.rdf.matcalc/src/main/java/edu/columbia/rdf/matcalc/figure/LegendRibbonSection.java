@@ -29,7 +29,7 @@ import org.jebtk.modern.ribbon.RibbonSection;
 /**
  * Allows user to select a color map.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class LegendRibbonSection extends RibbonSection {

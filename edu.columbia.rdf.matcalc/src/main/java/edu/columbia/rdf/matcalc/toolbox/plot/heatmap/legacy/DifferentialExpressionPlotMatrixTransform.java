@@ -27,7 +27,7 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 /**
  * Transform the rows of a matrix.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public abstract class DifferentialExpressionPlotMatrixTransform

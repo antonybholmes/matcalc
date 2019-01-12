@@ -54,7 +54,7 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
 /**
  * Generates a heatmap from a data matrix.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class HeatMapCanvas extends PlotBoxRow {

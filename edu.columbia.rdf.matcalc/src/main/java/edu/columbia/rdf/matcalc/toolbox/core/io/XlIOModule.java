@@ -30,7 +30,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * Allow users to open and save Excel files.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public abstract class XlIOModule extends IOModule {
 
@@ -45,11 +45,11 @@ public abstract class XlIOModule extends IOModule {
       final Path file,
       FileType type,
       int headers,
-      int rowAnnotations,
+      int indexCols,
       String delimiter,
       Collection<String> skipLines) throws IOException {
 
-    ImportDialog dialog = new ImportDialog(window, headers, rowAnnotations, true,
+    ImportDialog dialog = new ImportDialog(window, headers, indexCols, true,
         TextUtils.TAB_DELIMITER, false);
 
     dialog.setVisible(true);
@@ -59,13 +59,13 @@ public abstract class XlIOModule extends IOModule {
     }
 
     headers = dialog.getHasHeader() ? 1 : 0;
-    rowAnnotations = dialog.getRowAnnotations();
+    indexCols = dialog.getIndexCols();
 
     return super.open(window,
         file,
         type,
         headers,
-        rowAnnotations,
+        indexCols,
         delimiter,
         skipLines);
   }

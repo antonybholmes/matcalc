@@ -213,11 +213,11 @@ public class VolcanoPlotModule extends Module
     List<Double> foldChanges = MatrixUtils.logFoldChange(logM, g1, g2);
 
     DataFrame annM = new DataFrame(logM);
-    annM.setRowAnnotations("Log2 Fold Change", foldChanges.toArray());
+    annM.getIndex().setAnnotation("Log2 Fold Change", foldChanges.toArray());
     parent.history().addToHistory("Add log2 fold changes", annM);
 
     DataFrame pValuesM = new DataFrame(annM);
-    pValuesM.setRowAnnotations("P-value", p);
+    pValuesM.getIndex().setAnnotation("P-value", p);
     parent.history().addToHistory("Add p-values", pValuesM);
 
     // DataFrame mcollapsed = CollapseModule.collapse(pValuesM,
@@ -229,11 +229,11 @@ public class VolcanoPlotModule extends Module
 
     // mParent.history().addToHistory("Collapse rows", mcollapsed);
 
-    double[] fdr = Statistics.fdr(pValuesM.getRowAnnotationValues("P-value"),
+    double[] fdr = Statistics.fdr(pValuesM.getIndex().getValues("P-value"),
         fdrType);
 
     DataFrame fdrM = new DataFrame(pValuesM);
-    fdrM.setRowAnnotations("FDR", fdr);
+    fdrM.getIndex().setAnnotation("FDR", fdr);
     parent.history().addToHistory("False discovery rate", fdrM);
 
     // filter by fdr
@@ -243,10 +243,10 @@ public class VolcanoPlotModule extends Module
     // DataFrame mfdrfiltered = addFlowItem("False discovery filter",
     // new RowFilterMatrixView(mfdr, IndexedValueInt.indices(pValueIndices)));
 
-    double[] fdrAnnotation = fdrM.getRowAnnotationValues("FDR");
+    double[] fdrAnnotation = fdrM.getIndex().getValues("FDR");
 
     double[] pFoldChangeAnnotation = fdrM
-        .getRowAnnotationValues("Log2 Fold Change");
+        .getIndex().getValues("Log2 Fold Change");
 
     // need to convert p-values to -log10
 

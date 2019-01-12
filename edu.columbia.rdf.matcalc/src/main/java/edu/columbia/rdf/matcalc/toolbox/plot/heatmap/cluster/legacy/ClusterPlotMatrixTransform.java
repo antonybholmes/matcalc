@@ -29,7 +29,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotMatrixTra
 /**
  * Create a cluster plot from a matrix.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class ClusterPlotMatrixTransform extends HeatMapPlotMatrixTransform {
 

@@ -45,7 +45,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * with the same merge id will be merged together. Coordinates and copy number
  * will be adjusted but genes, cytobands etc are not.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ExtractDataModule extends Module

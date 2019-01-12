@@ -39,7 +39,7 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 /**
  * User can select how many annotations there are.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class ImportDialog extends ModernDialogHelpWindow
     implements ModernClickListener {
@@ -52,12 +52,12 @@ public class ImportDialog extends ModernDialogHelpWindow
   /**
    * The member spinner.
    */
-  private ModernCompactSpinner mTextColsSpinner;
+  private ModernCompactSpinner mIndexColsSpinner;
 
   /**
    * The member check header.
    */
-  private CheckBox mCheckHeader = new ModernCheckSwitch("Header text rows",
+  private CheckBox mCheckHeader = new ModernCheckSwitch("Header rows",
       SettingsService.getInstance()
           .getBool("matcalc.import.file.has-header"));
 
@@ -72,24 +72,26 @@ public class ImportDialog extends ModernDialogHelpWindow
 
   private CheckBox mNumericalCheck = new ModernCheckSwitch("Numerical", true);
 
-  private CheckBox mTextColsCheck = new ModernCheckSwitch("Header text columns",
+  private CheckBox mIndexColsCheck = new ModernCheckSwitch("Index columns",
       true);
+  
 
   /** The m delimiter combo. */
   private DelimiterCombo mDelimiterCombo = new DelimiterCombo();
 
-  private ModernCompactSpinner mHeaderRowsSpinner;
+  private ModernCompactSpinner mHeaderSpinner;
 
   /**
    * Instantiates a new row annotation dialog.
    *
    * @param parent the parent
-   * @param rowAnnotations the row annotations
+   * @param indexCols the row annotations
    * @param isExcel the is excel
    * @param delimiter the delimiter
    */
-  public ImportDialog(ModernWindow parent, int headers,
-      int rowAnnotations, 
+  public ImportDialog(ModernWindow parent, 
+      int headers,
+      int indexCols, 
       boolean isExcel,
       String delimiter, 
       boolean isNumerical) {
@@ -98,10 +100,10 @@ public class ImportDialog extends ModernDialogHelpWindow
     setTitle("Import");
     
     mCheckHeader.setSelected(headers > 0);
-    mHeaderRowsSpinner = new ModernCompactSpinner(0, 100, headers);
+    mHeaderSpinner = new ModernCompactSpinner(0, 100, headers);
 
-    mTextColsCheck.setSelected(rowAnnotations > 0);
-    mTextColsSpinner = new ModernCompactSpinner(0, 100, rowAnnotations);
+    mIndexColsCheck.setSelected(indexCols > 0);
+    mIndexColsSpinner = new ModernCompactSpinner(0, 100, indexCols);
     
     
     
@@ -138,7 +140,7 @@ public class ImportDialog extends ModernDialogHelpWindow
 
     Box box = VBox.create();
 
-    box.add(new HExpandBox(mCheckHeader, mHeaderRowsSpinner));
+    box.add(new HExpandBox(mCheckHeader, mHeaderSpinner));
 
     if (!isExcel) {
       box.add(UI.createVGap(5));
@@ -151,7 +153,7 @@ public class ImportDialog extends ModernDialogHelpWindow
     box.add(UI.createVGap(5));
 
     // Text columns is more intuitive terminology than row annotations
-    box.add(new HExpandBox(mTextColsCheck, mTextColsSpinner));
+    box.add(new HExpandBox(mIndexColsCheck, mIndexColsSpinner));
 
     box.add(UI.createVGap(5));
     box.add(mNumericalCheck);
@@ -187,8 +189,8 @@ public class ImportDialog extends ModernDialogHelpWindow
    *
    * @return the row annotations
    */
-  public int getRowAnnotations() {
-    return mTextColsCheck.isSelected() ? mTextColsSpinner.getIntValue() : 0;
+  public int getIndexCols() {
+    return mIndexColsCheck.isSelected() ? mIndexColsSpinner.getIntValue() : 0;
   }
 
   /**
@@ -198,12 +200,12 @@ public class ImportDialog extends ModernDialogHelpWindow
    */
   public boolean getHasHeader() {
     // If there are row annotations, there must be a header
-    return getColAnnotations() > 0;
+    return getHeaders() > 0;
   }
 
-  public int getColAnnotations() {
+  public int getHeaders() {
     // If there are row annotations, there must be a header
-    return mCheckHeader.isSelected() ? mHeaderRowsSpinner.getIntValue() : 0;
+    return mCheckHeader.isSelected() ? mHeaderSpinner.getIntValue() : 0;
   }
 
   /**

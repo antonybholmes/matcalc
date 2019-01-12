@@ -58,7 +58,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * Allows a matrix group to be edited.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class XYSeriesImportDialog extends ModernDialogTaskWindow
     implements ModernClickListener {
@@ -387,7 +387,7 @@ public class XYSeriesImportDialog extends ModernDialogTaskWindow
       return;
     }
 
-    List<String> ids = Excel.getTextFromFile(file, true);
+    String[] ids = Excel.getTextFromFile(file, true);
 
     // Unselect all
 

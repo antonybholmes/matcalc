@@ -25,7 +25,7 @@ import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 /**
  * Help icon.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class GraphVectorIcon extends ModernVectorIcon {

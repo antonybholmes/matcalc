@@ -26,7 +26,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * Control which conservation scores are shown.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class PasteDialog extends ModernDialogHelpWindow

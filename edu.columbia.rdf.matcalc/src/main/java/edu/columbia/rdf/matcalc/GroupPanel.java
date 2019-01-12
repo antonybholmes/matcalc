@@ -32,7 +32,7 @@ import org.jebtk.modern.text.ModernLabel;
 /**
  * For choosing an FDR method.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class GroupPanel extends HBox {
 

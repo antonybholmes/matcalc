@@ -15,8 +15,6 @@
  */
 package edu.columbia.rdf.matcalc.toolbox;
 
-import java.util.List;
-
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.table.ModernTableModel;
@@ -58,19 +56,19 @@ public class ColumnsCombo extends ModernComboBox {
   public void setMatrix(DataFrame m) {
     clear();
 
-    for (String name : m.getRowAnnotationNames()) {
+    for (String name : m.getIndex().getNames()) {
       addScrollMenuItem(name);
     }
 
-    List<String> names = m.getColumnNames();
+    String[] names = m.getColumnNames();
 
     int maxC = Math.min(m.getCols(), MAX_COLUMNS);
 
     for (int i = 0; i < maxC; ++i) {
       String name = ModernTableModel.getAutoColumnHeading(i);
 
-      if (i < names.size()) {
-        name += " - " + names.get(i);
+      if (i < names.length) {
+        name += " - " + names[i];
       }
 
       addScrollMenuItem(name);

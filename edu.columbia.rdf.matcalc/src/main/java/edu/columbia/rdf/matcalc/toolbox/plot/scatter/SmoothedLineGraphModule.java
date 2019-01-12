@@ -16,10 +16,10 @@
 package edu.columbia.rdf.matcalc.toolbox.plot.scatter;
 
 import java.awt.Color;
-import java.util.Map.Entry;
 
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.cli.ArgParser;
+import org.jebtk.core.cli.Args;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.ColorCycle;
 import org.jebtk.graphplot.PlotFactory;
@@ -42,6 +42,16 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  */
 public class SmoothedLineGraphModule extends Module
     implements ModernClickListener {
+  
+  private static final Args ARGS = new Args();
+  
+  static {
+    ARGS.add('s', "switch-tab");
+    ARGS.add('x', "x-axis-name", true);
+    ARGS.add('y', "y-axis-name", true);
+    ARGS.add('a', "x-max", true);
+    ARGS.add('i', "x-min", true);
+  }
 
   /**
    * The member parent.
@@ -62,35 +72,38 @@ public class SmoothedLineGraphModule extends Module
   public String getName() {
     return "Line Graph";
   }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * edu.columbia.rdf.apps.matcalc.modules.CalcModule#run(java.lang.String[])
-   */
-  public void run(String... args) {
+  
+  @Override
+  public Args getArgs() {
+    return ARGS;
+  }
+  
+  
+  @Override
+  public void run(ArgParser ap) {
     plot();
 
-    for (String a : args) {
-      Entry<String, String> arg = ArgParser.parsePosixArg(a);
-
-      if (arg.getKey().equals("switch-tab")) {
-        mParent.getRibbon().changeTab("Plot");
-      } else if (arg.getKey().equals("x-axis-name")) {
-        mAxes.getX1Axis().getTitle().setText(arg.getValue());
-      } else if (arg.getKey().equals("y-axis-name")) {
-        mAxes.getY1Axis().getTitle().setText(arg.getValue());
-      } else if (arg.getKey().equals("show-legend")) {
-        mAxes.getLegend().setVisible(true);
-      } else if (arg.getKey().equals("x-min")) {
-        mAxes.getX1Axis().setMin(TextUtils.parseDouble(arg.getValue()));
-      } else if (arg.getKey().equals("x-max")) {
-        mAxes.getX1Axis().setMax(TextUtils.parseDouble(arg.getValue()));
-      } else {
-        // do nothing
-      }
+    if (ap.contains("switch-tab")) {
+      mParent.getRibbon().changeTab("Plot");
     }
+    
+    if (ap.contains("x-axis-name")) {
+      mAxes.getX1Axis().getTitle().setText(ap.getArg("x-axis-name"));
+    }
+    
+    if (ap.contains("y-axis-name")) {
+      mAxes.getY1Axis().getTitle().setText(ap.getArg("y-axis-name"));
+    }
+    
+    if (ap.contains("x-min")) {
+      mAxes.getX1Axis().setMin(ap.getDouble("x-min"));
+    }
+    
+    if (ap.contains("x-max")) {
+      mAxes.getX1Axis().setMax(ap.getDouble("x-max"));
+    }
+    
+    mAxes.getLegend().setVisible(ap.contains("show-legend"));
   }
 
   /*

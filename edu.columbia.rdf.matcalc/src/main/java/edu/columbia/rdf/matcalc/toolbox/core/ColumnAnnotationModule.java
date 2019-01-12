@@ -30,7 +30,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * Allow user to change which columns are annotation or not.
  * 
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ColumnAnnotationModule extends Module
@@ -105,7 +105,7 @@ public class ColumnAnnotationModule extends Module
 
     DataFrame m = mWindow.getCurrentMatrix();
 
-    int minC = -m.getRowAnnotationNames().size();
+    int minC = -m.getIndex().getNames().size();
 
     // First copy the columns and turn them into annotations
     DataFrame ret;
@@ -123,24 +123,24 @@ public class ColumnAnnotationModule extends Module
     DataFrame.copyColumns(m, c, ret);
 
     // Copy existing row annotations
-    // DataFrame.copyRowAnnotations(m, ret);
+    // DataFrame.copyIndex(m, ret);
 
     switch (m.getType()) {
     case NUMBER:
       for (int i = minC; i < c; ++i) {
-        ret.setRowAnnotations(m.getText(-1, i), m.columnToDoubleArray(i));
+        ret.getIndex().setAnnotation(m.getText(-1, i), m.columnToDouble(i));
       }
 
       break;
     case TEXT:
       for (int i = minC; i < c; ++i) {
-        ret.setRowAnnotations(m.getText(-1, i), m.columnToTextArray(i));
+        ret.getIndex().setAnnotation(m.getText(-1, i), m.columnToText(i));
       }
 
       break;
     default:
       for (int i = minC; i < c; ++i) {
-        ret.setRowAnnotations(m.getText(-1, i), m.columnToArray(i));
+        ret.getIndex().setAnnotation(m.getText(-1, i), m.columnToObject(i));
       }
 
       break;

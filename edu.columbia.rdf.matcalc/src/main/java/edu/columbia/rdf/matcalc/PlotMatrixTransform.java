@@ -23,7 +23,7 @@ import org.jebtk.modern.window.WindowService;
 /**
  * Create a plot from a matrix.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public abstract class PlotMatrixTransform extends MatrixTransform {

@@ -29,7 +29,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
 /**
  * Order columns by groups
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class OrderColumnsModule extends Module
     implements ModernClickListener {

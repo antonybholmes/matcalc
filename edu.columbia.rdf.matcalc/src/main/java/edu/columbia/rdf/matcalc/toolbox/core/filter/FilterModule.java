@@ -44,7 +44,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * record this in a new column next to the reference column. Useful for doing
  * overlaps and keeping data in a specific order in a table.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class FilterModule extends Module implements ModernClickListener {
@@ -231,7 +231,7 @@ public class FilterModule extends Module implements ModernClickListener {
 
     DataFrame ret = DataFrame.createDataFrame(rows.size(), m.getCols());
 
-    DataFrame.copyColumnAnnotations(m, ret);
+    DataFrame.copyColumnHeaders(m, ret);
 
     DataFrame.copyRows(m, rows, ret);
 

@@ -29,7 +29,7 @@ public class OpenFiles {
   private MainMatCalcWindow mWindow;
 
   /** The m open mode. */
-  private OpenMode mOpenMode = OpenMode.CURRENT_WINDOW;
+  private OpenMode mOpenMode = OpenMode.NEW_WINDOW;
 
   private FileType mFileType = FileType.MIXED;
 
@@ -37,7 +37,7 @@ public class OpenFiles {
   private int mHeaders = 1;
 
   /** The m row annotations. */
-  private int mRowAnnotations = 0;
+  private int mIndexes = 0;
 
   /** The m delimiter. */
   private String mDelimiter = TextUtils.TAB_DELIMITER;
@@ -67,7 +67,7 @@ public class OpenFiles {
   public OpenFiles(OpenFiles openFile) {
     mWindow = openFile.mWindow;
     mHeaders = openFile.mHeaders;
-    mRowAnnotations = openFile.mRowAnnotations;
+    mIndexes = openFile.mIndexes;
     mSkipLines = openFile.mSkipLines;
     mOpenMode = openFile.mOpenMode;
     mFileType = openFile.mFileType;
@@ -115,7 +115,7 @@ public class OpenFiles {
               file,
               mFileType,
               mHeaders,
-              mRowAnnotations,
+              mIndexes,
               mDelimiter,
               mSkipLines);
 
@@ -170,7 +170,7 @@ public class OpenFiles {
               file,
               mFileType,
               mHeaders,
-              mRowAnnotations,
+              mIndexes,
               mDelimiter,
               mSkipLines);
 
@@ -234,13 +234,13 @@ public class OpenFiles {
   /**
    * Specify the number of row annotations.
    *
-   * @param headers the number of row annotations.
+   * @param indexes the number of row annotations.
    * 
    * @return
    */
-  public OpenFiles rowAnnotations(int headers) {
+  public OpenFiles indexes(int indexes) {
     OpenFiles of = new OpenFiles(this);
-    of.mRowAnnotations = headers;
+    of.mIndexes = indexes;
     return of;
   }
 

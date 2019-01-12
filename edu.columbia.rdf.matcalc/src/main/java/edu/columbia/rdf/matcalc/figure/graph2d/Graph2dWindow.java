@@ -49,7 +49,7 @@ import edu.columbia.rdf.matcalc.figure.PlotSizeRibbonSection;
 /**
  * Window for showing 2D graphs such as a scatter plot.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class Graph2dWindow extends FigureWindow {

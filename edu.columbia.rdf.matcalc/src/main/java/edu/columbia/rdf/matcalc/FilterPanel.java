@@ -25,7 +25,7 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
 /**
  * For choosing an FDR method.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class FilterPanel extends VBox {
 

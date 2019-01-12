@@ -29,7 +29,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * Allow users to select a line style.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class StokeStyleButton extends ControlDropDownButton

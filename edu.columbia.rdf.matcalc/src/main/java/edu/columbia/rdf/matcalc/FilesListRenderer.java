@@ -44,7 +44,7 @@ import org.jebtk.modern.list.ModernListCellRenderer;
 /**
  * Renders a file as a list item.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class FilesListRenderer extends ModernListCellRenderer {

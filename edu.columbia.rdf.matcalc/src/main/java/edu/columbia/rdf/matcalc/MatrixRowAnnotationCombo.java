@@ -23,7 +23,7 @@ import org.jebtk.modern.widget.ModernWidget;
 /**
  * For choosing an FDR method.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class MatrixRowAnnotationCombo extends ModernComboBox {
 
@@ -38,7 +38,7 @@ public class MatrixRowAnnotationCombo extends ModernComboBox {
    * @param matrix the matrix
    */
   public MatrixRowAnnotationCombo(DataFrame matrix) {
-    for (String name : matrix.getRowAnnotationNames()) {
+    for (String name : matrix.getIndex().getNames()) {
       addMenuItem(name);
     }
 

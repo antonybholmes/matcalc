@@ -109,7 +109,7 @@ implements ModernClickListener {
     if (m == null) {
       return;
     }
-    
+
     KMeansDialog dialog = new KMeansDialog(mParent);
 
     dialog.setVisible(true);
@@ -117,61 +117,70 @@ implements ModernClickListener {
     if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
       return;
     }
-    
+
     int k = dialog.getK();
     boolean zscore = dialog.getZScore();
     boolean sort = dialog.getSort();
-    
-    
+
+
     DataFrame zm;
-    
+
     if (zscore) {
       zm = MatrixOperations.rowZscore(m);
       mParent.history().addToHistory("Z-score", zm);
     } else {
       zm = m;
     }
-    
+
     int rows = m.getRows();
     int cols = m.getCols();
-    
+
     List<RowPoints> points = new ArrayList<RowPoints>(rows);
-    
+
     for (int i = 0; i < rows; ++i) {
       RowPoints c = new RowPoints(i, cols);
-      
-      zm.rowToDoubleArray(i, c.mData);
-      
+
+      zm.rowToDouble(i, c.mData);
+
       points.add(c);
     }
-    
+
     KMeansPlusPlusClusterer<RowPoints> kmeans = 
         new KMeansPlusPlusClusterer<RowPoints>(k);
-    
+
     List<CentroidCluster<RowPoints>> clusters = kmeans.cluster(points);
-    
-    int[] cids = new int[rows];
-    
+
+    String[] cids = new String[rows];
+
     // Assign an arbitrary number to the cluster
     int cid = 1;
-    
+
     for (CentroidCluster<RowPoints> cluster : clusters) {
       for (RowPoints p : cluster.getPoints()) {
-        cids[p.mId] = cid; 
+        cids[p.mId] = "C" + cid; 
       }
-      
+
       ++cid;
     }
 
     DataFrame cm = new DataFrame(zm);
-    cm.setRowAnnotations("Cluster", cids);
+    cm.getIndex().setAnnotation("Cluster", cids);
     mParent.history().addToHistory("K-means", cm);
-    
-    if (sort) {
-      int[] indices = ArrayUtils.argsort(cids);
+
+    if (dialog.getRename()) {
+      // Allow user to rename/order clusters
       
-      DataFrame sm = DataFrame.copyRows(cm, indices);
-      mParent.history().addToHistory("Sorted K-means", sm);
+      // Need to select column
+      mParent.getMatrixTable().getColumnModel().getSelectionModel().set(cm.getIndex().size() - 1);
+      
+      mParent.runModule("Rename");
+    } else {
+      if (sort) {
+        int[] indices = ArrayUtils.argsort(cids);
+
+        DataFrame sm = DataFrame.copyRows(cm, indices);
+        mParent.history().addToHistory("Sorted K-means", sm);
+      }
     }
   }
 }

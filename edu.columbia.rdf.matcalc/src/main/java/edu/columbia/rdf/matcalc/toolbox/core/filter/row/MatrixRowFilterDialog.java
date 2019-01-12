@@ -406,17 +406,17 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
   private void changeIds() {
     clearIds();
 
-    int numRowAnnotations = mM.getRowAnnotationNames().size();
+    int numRowAnnotations = mM.getIndex().getNames().size();
 
     if (mColumnsCombo.getSelectedIndex() < numRowAnnotations) {
       // filter on row annotation
 
-      loadIds(mM.getRowAnnotationText(mColumnsCombo.getText()));
+      loadIds(mM.getIndex().getText(mColumnsCombo.getText()));
     } else {
       // filter on column
 
       loadIds(mM
-          .columnAsText(mColumnsCombo.getSelectedIndex() - numRowAnnotations));
+          .columnToText(mColumnsCombo.getSelectedIndex() - numRowAnnotations));
     }
   }
 
@@ -425,7 +425,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
    *
    * @param ids the ids
    */
-  private void loadIds(List<String> ids) {
+  private void loadIds(String[] ids) {
     /*
      * for (String id : ids) { mModel.addValue(id); }
      */

@@ -147,8 +147,8 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
 
     DataFrame ret = DataFrame.createNumericalMatrix(m);
 
-    // DataFrame.copyColumnAnnotations(m, ret);
-    // DataFrame.copyRowAnnotations(m, ret);
+    // DataFrame.copyColumnHeaders(m, ret);
+    // DataFrame.copyIndex(m, ret);
 
     // We normalize the comparison groups separately to the the others
     List<List<Integer>> comparisonIndices = MatrixGroup.findColumnIndices(m,

@@ -18,6 +18,8 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.jebtk.core.cli.ArgParser;
+import org.jebtk.core.cli.Args;
 import org.jebtk.graphplot.PlotFactory;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Figure;
@@ -45,6 +47,12 @@ public class HeatMapModule extends Module implements ModernClickListener {
    * The member parent.
    */
   private MainMatCalcWindow mParent;
+  
+  private static final Args ARGS = new Args();
+  
+  static {
+    ARGS.add('p', "plot");
+  }
 
   /** The maps. */
   private static ColorMap[] MAPS = {
@@ -66,20 +74,19 @@ public class HeatMapModule extends Module implements ModernClickListener {
     return "Heat Map";
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.matcalc.toolbox.CalcModule#run(java.lang.String[])
-   */
   @Override
-  public void run(String... args) {
-    for (String arg : args) {
-      if (arg.contains("plot")) {
-        try {
-          plot();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+  public Args getArgs() {
+    return ARGS;
+  }
+  
+  
+  @Override
+  public void run(ArgParser ap) {
+    if (ap.contains("plot")) {
+      try {
+        plot();
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     }
   }

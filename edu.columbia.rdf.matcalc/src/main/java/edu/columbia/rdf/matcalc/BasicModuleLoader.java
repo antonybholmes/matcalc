@@ -29,6 +29,7 @@ import edu.columbia.rdf.matcalc.toolbox.core.filter.column.ColumnFilterModule;
 import edu.columbia.rdf.matcalc.toolbox.core.filter.row.RowFilterModule;
 import edu.columbia.rdf.matcalc.toolbox.core.match.MatchModule;
 import edu.columbia.rdf.matcalc.toolbox.core.paste.PasteModule;
+import edu.columbia.rdf.matcalc.toolbox.core.rename.RenameModule;
 import edu.columbia.rdf.matcalc.toolbox.core.roworder.RowOrderModule;
 import edu.columbia.rdf.matcalc.toolbox.core.search.SearchColumnModule;
 import edu.columbia.rdf.matcalc.toolbox.core.sort.SortColumnsByRowModule;
@@ -80,6 +81,7 @@ public class BasicModuleLoader extends CoreModuleLoader {
     addModule(FilterModule.class);
     addModule(RowFilterModule.class);
     addModule(ColumnFilterModule.class);
+    
 
     addModule(SearchColumnModule.class);
     addModule(MatchModule.class);
@@ -117,5 +119,7 @@ public class BasicModuleLoader extends CoreModuleLoader {
     addModule(SupervisedModule.class);
     
     addModule(KMeansModule.class);
+    
+    addModule(RenameModule.class);
   }
 }

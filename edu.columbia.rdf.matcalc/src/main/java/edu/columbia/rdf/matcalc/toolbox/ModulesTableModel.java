@@ -17,16 +17,15 @@ package edu.columbia.rdf.matcalc.toolbox;
 
 import java.util.List;
 
-import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
-import org.jebtk.modern.table.ModernColumnHeaderTableModel;
+import org.jebtk.modern.table.ModernTableModel;
 
 /**
  * Loads.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
-public class ModulesTableModel extends ModernColumnHeaderTableModel {
+public class ModulesTableModel extends ModernTableModel {
 
   /**
    * The constant HEADER.
@@ -46,26 +45,6 @@ public class ModulesTableModel extends ModernColumnHeaderTableModel {
    */
   public ModulesTableModel(List<Module> modules) {
     mModules = modules;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnCount()
-   */
-  @Override
-  public int getColCount() {
-    return HEADER.length;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.abh.lib.ui.modern.dataview.ModernDataModel#getRowCount()
-   */
-  @Override
-  public int getRowCount() {
-    return mModules.size();
   }
 
   /*
@@ -91,15 +70,18 @@ public class ModulesTableModel extends ModernColumnHeaderTableModel {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
-   */
   @Override
-  public final List<String> getColumnAnnotationText(int column) {
-    return CollectionUtils.asList(HEADER[column]);
+  public int getRowCount() {
+    return mModules.size();
   }
 
+  @Override
+  public int getColCount() {
+    return HEADER.length;
+  }
+  
+  @Override
+  public String getColumnName(int col) {
+    return HEADER[col];
+  }
 }

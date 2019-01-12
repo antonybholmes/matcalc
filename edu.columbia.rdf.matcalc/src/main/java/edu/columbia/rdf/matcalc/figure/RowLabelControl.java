@@ -92,7 +92,7 @@ public class RowLabelControl extends VBox implements ModernClickListener {
 
     add(UI.createVGap(5));
 
-    for (String name : matrix.getRowAnnotationNames()) {
+    for (String name : matrix.getIndex().getNames()) {
       ModernTwoStateWidget checkAnnotation = new ModernCheckSwitch(name, true);
 
       add(checkAnnotation);

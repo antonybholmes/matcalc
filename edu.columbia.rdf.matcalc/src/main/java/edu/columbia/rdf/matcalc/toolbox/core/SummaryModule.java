@@ -28,7 +28,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * Split table into multiple tables by grouping column values and then create a
  * zip of the results.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class SummaryModule extends Module implements ModernClickListener {

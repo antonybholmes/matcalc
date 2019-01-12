@@ -225,9 +225,9 @@ public class OneWayAnovaModule extends Module
     ret.setColumnName(3, "F");
     ret.setColumnName(4, "P>F");
 
-    ret.setRowAnnotation("Source", 0, "Columns");
-    ret.setRowAnnotation("Source", 1, "Error");
-    ret.setRowAnnotation("Source", 2, "Total");
+    ret.getIndex().setAnnotation("Source", 0, "Columns");
+    ret.getIndex().setAnnotation("Source", 1, "Error");
+    ret.getIndex().setAnnotation("Source", 2, "Total");
 
     ret.set(0, 0, treatSS);
     ret.set(0, 1, treatDegFree);

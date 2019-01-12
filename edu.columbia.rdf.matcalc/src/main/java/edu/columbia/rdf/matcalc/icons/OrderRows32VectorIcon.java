@@ -26,7 +26,7 @@ import org.jebtk.modern.widget.ModernWidget;
 /**
  * Download arrow vector icon.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class OrderRows32VectorIcon extends ModernVectorIcon {

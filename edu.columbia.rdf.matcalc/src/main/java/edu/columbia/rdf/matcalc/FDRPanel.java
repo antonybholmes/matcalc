@@ -29,7 +29,7 @@ import org.jebtk.modern.widget.ModernWidget;
 /**
  * For choosing an FDR method.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class FDRPanel extends VBox {
 

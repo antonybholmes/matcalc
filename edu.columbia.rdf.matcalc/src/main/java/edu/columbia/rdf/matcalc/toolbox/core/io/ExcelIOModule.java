@@ -22,7 +22,7 @@ import org.jebtk.modern.io.GuiFileExtFilter;
  * Allow users to open and save Excel files. This module provides file types,
  * but expects other modules to handle opening and saving.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class ExcelIOModule extends IOModule {
 

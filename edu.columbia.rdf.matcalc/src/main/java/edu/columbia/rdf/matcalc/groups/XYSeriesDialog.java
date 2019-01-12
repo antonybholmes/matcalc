@@ -40,6 +40,7 @@ import javax.swing.Box;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.text.Join;
 import org.jebtk.core.text.RegexUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.series.XYSeries;
@@ -70,7 +71,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * Allows a matrix group to be edited.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class XYSeriesDialog extends ModernDialogHelpWindow {
 
@@ -351,9 +352,9 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
       return;
     }
 
-    List<String> ids = Excel.getTextFromFile(file, true);
+    String[] ids = Excel.getTextFromFile(file, true);
 
-    String text = TextUtils.commaJoin(ids);
+    String text = Join.onComma().values(ids).toString();
 
     text = text.replaceAll("\\(", "\\\\(");
     text = text.replaceAll("\\)", "\\\\)");

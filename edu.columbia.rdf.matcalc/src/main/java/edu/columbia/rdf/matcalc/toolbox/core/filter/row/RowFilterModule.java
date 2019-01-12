@@ -43,7 +43,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
 /**
  * Row name.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class RowFilterModule extends Module implements ModernClickListener {
 
@@ -191,23 +191,23 @@ public class RowFilterModule extends Module implements ModernClickListener {
       final List<String> names,
       List<Integer> rows,
       List<String> missingNames) {
-    List<String> ids;
+    String[] ids;
 
-    int numRowAnnotations = m.getRowAnnotationNames().size();
+    int numRowAnnotations = m.getIndex().getNames().size();
 
     if (column < numRowAnnotations) {
       // The ids we want to search are from row annotations rather than
       // the matrix itself
-      ids = m.getRowAnnotationText(columnText);
+      ids = m.getIndex().getText(columnText);
     } else {
-      ids = m.columnAsText(column - numRowAnnotations);
+      ids = m.columnToText(column - numRowAnnotations);
     }
 
     if (!caseSensitive) {
       ids = TextUtils.toLowerCase(ids);
     }
 
-    int rowCount = ids.size();
+    int rowCount = ids.length;
 
     //
     // A lookup set so we can quickly see if a row matches what we are
@@ -233,7 +233,7 @@ public class RowFilterModule extends Module implements ModernClickListener {
     if (exactMatch) {
       if (inList) {
         for (int i = 0; i < rowCount; ++i) {
-          String rowName = ids.get(i);
+          String rowName = ids[i];
 
           if (rowName != null && nameMap.containsKey(rowName)) {
             rows.add(i);
@@ -242,7 +242,7 @@ public class RowFilterModule extends Module implements ModernClickListener {
         }
       } else {
         for (int i = 0; i < rowCount; ++i) {
-          String rowName = ids.get(i);
+          String rowName = ids[i];
 
           if (rowName != null && !nameMap.containsKey(rowName)) {
             rows.add(i);
@@ -254,7 +254,7 @@ public class RowFilterModule extends Module implements ModernClickListener {
 
       if (inList) {
         for (int i = 0; i < rowCount; ++i) {
-          String rowName = ids.get(i);
+          String rowName = ids[i];
 
           if (rowName == null) {
             continue;
@@ -272,7 +272,7 @@ public class RowFilterModule extends Module implements ModernClickListener {
       } else {
         // for (int i = 0; i < rowCount; ++i) {
         for (int i : Range.create(rowCount)) {
-          String rowName = ids.get(i);
+          String rowName = ids[i];
 
           if (rowName == null) {
             continue;

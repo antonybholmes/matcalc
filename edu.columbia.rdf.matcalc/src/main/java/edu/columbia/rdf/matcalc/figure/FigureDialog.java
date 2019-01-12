@@ -30,7 +30,7 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
  * Allow users to choose whether to create a new figure or add to an existing
  * figure.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class FigureDialog extends ModernDialogTaskWindow {

@@ -31,7 +31,7 @@ import org.jebtk.modern.text.ModernAutoSizeLabel;
 /**
  * Allows user to select a color map.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class PlotSizeRibbonSection extends RibbonSection {

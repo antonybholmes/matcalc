@@ -21,7 +21,7 @@ import org.jebtk.modern.combobox.ModernComboBox;
 /**
  * For choosing an FDR method.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class FDRComboBox extends ModernComboBox {
 

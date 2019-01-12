@@ -20,15 +20,15 @@ import java.util.Map;
 
 import org.jebtk.core.Indexed;
 import org.jebtk.core.collections.CollectionUtils;
-import org.jebtk.modern.table.ModernColumnHeaderTableModel;
+import org.jebtk.modern.table.ModernTableModel;
 
 /**
  * Table model for ordering rows/columns.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
-public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
+public class ColumnFilterTableModel extends ModernTableModel {
 
   /**
    * The constant HEADER.
@@ -100,11 +100,11 @@ public class ColumnFilterTableModel extends ModernColumnHeaderTableModel {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.lib.ui.modern.dataview.ModernDataModel#getColumnAnnotations(int)
+   * org.abh.lib.ui.modern.dataview.ModernDataModel#getColumn().getAnnotations(int)
    */
   @Override
-  public final List<String> getColumnAnnotationText(int column) {
-    return CollectionUtils.asList(HEADER[column]);
+  public final String getColumnName(int column) {
+    return HEADER[column];
   }
 
   /*

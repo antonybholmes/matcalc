@@ -24,7 +24,7 @@ import org.jebtk.modern.menu.ModernMenuItem;
 /**
  * Menu item for displaying line styles.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class DashedLineMenuItem extends ModernMenuItem {

@@ -30,7 +30,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * Allow users to select a color for an object etc.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ColorMapButton extends ControlDropDownButton

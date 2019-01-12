@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -80,7 +81,6 @@ import org.jebtk.modern.io.OpenRibbonPanel;
 import org.jebtk.modern.io.RecentFilesModel;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.io.SaveAsRibbonPanel;
-import org.jebtk.modern.panel.CardPanel;
 import org.jebtk.modern.ribbon.QuickAccessButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
@@ -112,7 +112,7 @@ import edu.columbia.rdf.matcalc.toolbox.core.io.IOModule;
  * with the same merge id will be merged together. Coordinates and copy number
  * will be adjusted but genes, cytobands etc are not.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class MainMatCalcWindow extends ModernRibbonWindow
@@ -582,7 +582,7 @@ ModernSelectionListener, MatrixTransformListener {
    * @throws IOException 
    */
   public boolean runModule(String module, String... args) throws IOException {
-    System.err.println("run module " + module + " " + args);
+    System.err.println("run module " + module + " " + Arrays.toString(args));
 
     if (mModuleMap.containsKey(module)) {
       mModuleMap.get(module).run(args);
@@ -1356,7 +1356,7 @@ ModernSelectionListener, MatrixTransformListener {
    * String name = isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change";
    * 
    * DataFrame mfoldchanges = new AnnotatableMatrix(mlog2);
-   * mfoldchanges.setRowAnnotations(name, foldChanges); addToHistory(name,
+   * mfoldchanges.getIndex().setAnnotation(name, foldChanges); addToHistory(name,
    * mfoldchanges);
    * 
    * //DataFrame mfoldchanges = addFlowItem(isLog2Data || log2Data ?
@@ -1368,7 +1368,7 @@ ModernSelectionListener, MatrixTransformListener {
    * g2);
    * 
    * DataFrame mzscores = new AnnotatableMatrix(mfoldchanges);
-   * mzscores.setRowAnnotations("Z-score", zscores);
+   * mzscores.getIndex().setAnnotation("Z-score", zscores);
    * 
    * addToHistory("Add row z-scores", mzscores);
    * 
@@ -1480,7 +1480,7 @@ ModernSelectionListener, MatrixTransformListener {
    * ColorCycle colorCycle = new ColorCycle();
    * 
    * for (int i = 0; i < m.getRowCount(); ++i) { XYSeries series = new
-   * XYSeries(m.getRowAnnotationText(rowAnnotationName, i));
+   * XYSeries(m.getIndex().getText(rowAnnotationName, i));
    * 
    * series.getFillStyle().setColor(colorCycle.next());
    * 
@@ -1592,7 +1592,9 @@ ModernSelectionListener, MatrixTransformListener {
 
   private void setTable(JComponent c) {
     if (mProperties.getBool("matcalc.ui.table.drop-shadow.enabled")) {
-      setCenterTab(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER), ModernWidget.BORDER));
+      //setCenterTab(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER), ModernWidget.BORDER));
+      
+      setCard(new ModernComponent(c, ModernWidget.DOUBLE_BORDER));
     } else {
       setPanel(c);
     }
@@ -1750,6 +1752,10 @@ ModernSelectionListener, MatrixTransformListener {
    */
   public ZoomModel getZoomModel() {
     return mZoomModel;
+  }
+  
+  public MatrixTable getMatrixTable() {
+    return mMatrixTable;
   }
 
   public List<IOModule> getFileModules(String ext) {

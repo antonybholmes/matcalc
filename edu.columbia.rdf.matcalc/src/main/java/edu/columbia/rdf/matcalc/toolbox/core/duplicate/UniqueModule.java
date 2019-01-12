@@ -39,7 +39,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * reduced to a list of unique values whilst all other columns will be turned
  * into semi-colon separated lists of values.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class UniqueModule extends Module implements ModernClickListener {
@@ -136,19 +136,19 @@ public class UniqueModule extends Module implements ModernClickListener {
 
     // first copy the annotations
 
-    for (String name : m.getRowAnnotationNames()) {
+    for (String name : m.getIndex().getNames()) {
       for (int i = 0; i < ids.size(); ++i) {
         List<Integer> indices = rows.get(ids.get(i));
 
         List<String> items = new UniqueArrayList<String>(indices.size());
 
         for (int k : indices) {
-          items.add(m.getRowAnnotationText(name, k));
+          items.add(m.getIndex().getText(name, k));
         }
 
         String text = TextUtils.scJoin(items);
 
-        ret.setRowAnnotation(name, i, text);
+        ret.getIndex().setAnnotation(name, i, text);
       }
     }
 

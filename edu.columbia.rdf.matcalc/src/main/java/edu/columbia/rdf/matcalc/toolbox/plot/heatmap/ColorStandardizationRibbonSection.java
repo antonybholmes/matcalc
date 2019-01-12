@@ -32,7 +32,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * Allows user to select a how the colors are standardized on a heat map.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class ColorStandardizationRibbonSection extends RibbonSection
     implements ModernClickListener, ChangeListener {

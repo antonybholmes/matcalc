@@ -25,7 +25,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * record this in a new column next to the reference column. Useful for doing
  * overlaps and keeping data in a specific order in a table.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ZoomModule extends Module {

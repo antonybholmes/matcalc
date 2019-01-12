@@ -31,7 +31,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
 /**
  * Row name.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class RowOrderModule extends Module implements ModernClickListener {
 

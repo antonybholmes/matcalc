@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.jebtk.core.NameProperty;
+import org.jebtk.core.cli.ArgParser;
+import org.jebtk.core.cli.Args;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.matrix.DataFrame;
@@ -54,6 +56,10 @@ public abstract class Module implements NameProperty {
   public void init(MainMatCalcWindow window) {
     // Do nothing
   }
+  
+  public Args args() {
+    return null;
+  }
 
   /**
    * Should run itself.
@@ -61,11 +67,17 @@ public abstract class Module implements NameProperty {
    * @param args the args
    * @throws IOException 
    */
-  public void run(String... args) throws IOException {
+  public final void run(String... args) throws IOException {
+    Args pa = args();
+    
+    ArgParser ap = new ArgParser(pa).parse(args);
+    
+    run(ap);
+  }
+
+  public void run(ArgParser ap) throws IOException {
     // Do nothing
   }
-  
-  
 
   /**
    * Show a standard error telling user to load a file.
@@ -111,5 +123,10 @@ public abstract class Module implements NameProperty {
 
       return null;
     }
+  }
+
+  public Args getArgs() {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

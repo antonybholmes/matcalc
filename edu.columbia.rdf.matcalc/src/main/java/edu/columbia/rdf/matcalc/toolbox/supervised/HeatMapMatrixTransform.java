@@ -30,7 +30,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.DifferentialExpressi
  * Creates a ttest plot of a matrix. Attempts to reuse existing plot if it still
  * exists.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class HeatMapMatrixTransform

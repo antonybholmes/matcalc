@@ -88,7 +88,7 @@ public class HistogramModule extends Module implements ModernClickListener {
 
     Axes axes = subFigure.currentAxes();
 
-    HistBin[] hist = Statistics.histogram(m.columnToDoubleArray(0), 1);
+    HistBin[] hist = Statistics.histogram(m.columnToDouble(0), 1);
 
     ColorCycle colorCycle = new ColorCycle();
 

@@ -60,7 +60,7 @@ import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
 /**
  * Allow ordering of columns or rows in a table.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class RowOrderDialog extends ModernDialogHelpWindow
     implements ModernClickListener {
@@ -405,18 +405,18 @@ public class RowOrderDialog extends ModernDialogHelpWindow
    * Change ids.
    */
   private void changeIds() {
-    int numRowAnnotations = mM.getRowAnnotationNames().size();
+    int numRowAnnotations = mM.getIndex().getNames().size();
 
     if (mColumnsCombo.getSelectedIndex() < numRowAnnotations) {
       // filter on row annotation
 
       loadIds(
-          IndexedInt.index(mM.getRowAnnotationText(mColumnsCombo.getText())));
+          IndexedInt.index(mM.getIndex().getText(mColumnsCombo.getText())));
     } else {
       // filter on column
 
       loadIds(IndexedInt.index(mM
-          .columnAsText(mColumnsCombo.getSelectedIndex() - numRowAnnotations)));
+          .columnToText(mColumnsCombo.getSelectedIndex() - numRowAnnotations)));
     }
 
   }

@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.jebtk.core.Properties;
+import org.jebtk.core.cli.ArgParser;
+import org.jebtk.core.cli.Args;
 import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
@@ -38,6 +40,12 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 public class LegacyHeatMapModule extends Module
     implements ModernClickListener {
 
+  private static final Args ARGS = new Args();
+  
+  static {
+    ARGS.add('p', "plot");
+  }
+  
   /**
    * The member parent.
    */
@@ -52,21 +60,20 @@ public class LegacyHeatMapModule extends Module
   public String getName() {
     return "Heat Map";
   }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.matcalc.toolbox.CalcModule#run(java.lang.String[])
-   */
+  
   @Override
-  public void run(String... args) {
-    for (String arg : args) {
-      if (arg.contains("plot")) {
-        try {
-          plot();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+  public Args getArgs() {
+    return ARGS;
+  }
+  
+  
+  @Override
+  public void run(ArgParser ap) {
+    if (ap.contains("plot")) {
+      try {
+        plot();
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     }
   }

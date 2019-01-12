@@ -31,7 +31,7 @@ import org.jebtk.modern.widget.ModernWidget;
 /**
  * Allow users to pick a color map for their plot.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ColorMapChooser extends ModernWidget {

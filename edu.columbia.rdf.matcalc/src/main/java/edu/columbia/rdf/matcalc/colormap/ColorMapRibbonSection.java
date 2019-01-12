@@ -36,7 +36,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 /**
  * Allows user to select a color map.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ColorMapRibbonSection extends RibbonSection {

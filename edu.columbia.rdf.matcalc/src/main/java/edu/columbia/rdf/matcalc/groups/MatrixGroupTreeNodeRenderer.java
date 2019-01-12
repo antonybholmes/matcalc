@@ -40,7 +40,7 @@ import org.jebtk.modern.tree.Tree;
 /**
  * Basic renderer for displaying directories and files within the map database.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class MatrixGroupTreeNodeRenderer
     extends ModernTreeIconTextNodeRenderer {

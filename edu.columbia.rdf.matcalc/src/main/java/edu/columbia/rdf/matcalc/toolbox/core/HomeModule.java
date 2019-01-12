@@ -27,8 +27,6 @@ false * Copyright (C) 2016, Antony Holmes
  */
 package edu.columbia.rdf.matcalc.toolbox.core;
 
-import org.jebtk.modern.clipboard.ClipboardRibbonSection;
-
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.Module;
 
@@ -37,7 +35,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * with the same merge id will be merged together. Coordinates and copy number
  * will be adjusted but genes, cytobands etc are not.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class HomeModule extends Module {

@@ -46,7 +46,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * User can enter an integer option value.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class SummaryDialog extends ModernDialogTaskWindow {

@@ -34,7 +34,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * reduced to a list of unique values whilst all other columns will be turned
  * into semi-colon separated lists of values.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class CollapseModule extends Module implements ModernClickListener {

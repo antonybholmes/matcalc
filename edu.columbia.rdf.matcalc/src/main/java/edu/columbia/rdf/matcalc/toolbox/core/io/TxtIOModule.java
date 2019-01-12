@@ -36,7 +36,7 @@ import edu.columbia.rdf.matcalc.OpenFiles;
 /**
  * Allow users to open and save Text files.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class TxtIOModule extends IOModule {
 
@@ -98,7 +98,7 @@ public class TxtIOModule extends IOModule {
         file,
         dialog.isNumerical() ? FileType.NUMERICAL : FileType.MIXED,
             dialog.getHasHeader() ? 1 : 0,
-                dialog.getRowAnnotations(),
+                dialog.getIndexCols(),
                 dialog.getDelimiter(),
                 dialog.getSkipLines());
   }

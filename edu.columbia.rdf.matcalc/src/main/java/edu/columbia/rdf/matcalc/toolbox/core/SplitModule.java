@@ -45,14 +45,13 @@ import org.jebtk.modern.menu.ModernTwoLineMenuItem;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.OpenMode;
 import edu.columbia.rdf.matcalc.toolbox.Module;
 
 /**
  * Split table into multiple tables by grouping column values and then create a
  * zip of the results.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class SplitModule extends Module implements ModernClickListener {

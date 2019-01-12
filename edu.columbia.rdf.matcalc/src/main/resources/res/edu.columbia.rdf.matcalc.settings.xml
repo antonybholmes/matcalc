@@ -17,6 +17,7 @@
 	<setting name="matcalc.groups.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Groups"/>
 	<setting name="matcalc.ttest.help.url" value="https://github.com/antonybholmes/matcalc/wiki/T-Test"/>
 	<setting name="matcalc.kmeans.help.url" value="https://github.com/antonybholmes/matcalc/wiki/K-means"/>
+	<setting name="matcalc.rename.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Rename"/>
 	<setting name="matcalc.search-column.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Search_Column"/>
 	<setting name="matcalc.match-in-files.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Match_In_Files"/>
 	<setting name="matcalc.cluster.help.url" value="https://github.com/antonybholmes/matcalc/wiki/Cluster"/>

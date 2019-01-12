@@ -22,7 +22,7 @@ import org.jebtk.modern.table.ModernTableCheckboxCellRenderer;
 /**
  * Table model for ordering rows/columns.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class RowOrderTable extends ModernRowTable {

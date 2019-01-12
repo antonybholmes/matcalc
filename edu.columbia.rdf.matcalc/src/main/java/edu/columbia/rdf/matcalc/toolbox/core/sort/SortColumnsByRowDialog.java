@@ -28,7 +28,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * Allow sorting of columns or rows in a table.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class SortColumnsByRowDialog extends ModernDialogHelpWindow
     implements ModernClickListener {

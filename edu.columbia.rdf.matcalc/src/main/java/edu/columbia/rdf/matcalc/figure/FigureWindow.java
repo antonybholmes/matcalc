@@ -65,7 +65,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 /**
  * Window for showing 2D graphs such as a scatter plot.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public abstract class FigureWindow extends ModernRibbonWindow

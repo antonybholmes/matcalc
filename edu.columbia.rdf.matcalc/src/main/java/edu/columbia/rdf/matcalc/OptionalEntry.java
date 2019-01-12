@@ -29,7 +29,7 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
 /**
  * Allow users to optionally enable a filter etc.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class OptionalEntry extends HBox {

@@ -26,7 +26,7 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 /**
  * Transform the rows of a matrix.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class PlotFigureTransform extends PlotMatrixTransform {

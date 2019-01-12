@@ -30,7 +30,7 @@ import org.jebtk.modern.widget.ModernClickWidget;
 /**
  * Allows users to select which groups are displayed.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class MatrixGroupControl extends VBox implements ModernClickListener {
 

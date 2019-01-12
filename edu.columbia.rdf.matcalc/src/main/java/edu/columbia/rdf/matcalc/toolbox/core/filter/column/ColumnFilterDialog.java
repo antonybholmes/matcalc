@@ -59,7 +59,7 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * Allow ordering of columns or rows in a table.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ColumnFilterDialog extends ModernDialogHelpWindow
@@ -369,7 +369,7 @@ public class ColumnFilterDialog extends ModernDialogHelpWindow
     // BufferedReader reader = FileUtils.newBufferedReader(file);
     // String line;
 
-    List<String> ids = Excel.getTextFromFile(file, true);
+    String[] ids = Excel.getTextFromFile(file, true);
 
     /*
      * try { // Skip header reader.readLine();

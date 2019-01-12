@@ -35,7 +35,7 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 /**
  * Allow users to open and save Excel files.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class XLSXIOModule extends XlIOModule {
 
@@ -66,16 +66,16 @@ public class XLSXIOModule extends XlIOModule {
       final Path file,
       FileType type,
       int headers,
-      int rowAnnotations,
+      int indexCols,
       String delimiter,
       Collection<String> skipLines) throws IOException {
 
     XLSXMetaData metaData = new XLSXMetaData(file);
 
-    rowAnnotations = metaData.estimateRowAnnotations();
+    indexCols = metaData.estimateIndexCols();
 
-    ImportDialog dialog = new ImportDialog(window, headers, rowAnnotations, true,
-        delimiter, metaData.isNumerical(rowAnnotations));
+    ImportDialog dialog = new ImportDialog(window, headers, indexCols, true,
+        delimiter, metaData.isNumerical(indexCols));
 
     dialog.setVisible(true);
 
@@ -84,13 +84,13 @@ public class XLSXIOModule extends XlIOModule {
     }
 
     headers = dialog.getHasHeader() ? 1 : 0;
-    rowAnnotations = dialog.getRowAnnotations();
+    indexCols = dialog.getIndexCols();
 
     return read(window,
         file,
         type,
         headers,
-        rowAnnotations,
+        indexCols,
         delimiter,
         skipLines);
   }
@@ -106,14 +106,14 @@ public class XLSXIOModule extends XlIOModule {
       final Path file,
       FileType type,
       int headers,
-      int rowAnnotations,
+      int indexCols,
       String delimiter,
       Collection<String> skipLines) throws IOException {
     try {
       // return Excel.convertXlsxToMatrix(file,
       // hasHeader,
-      // rowAnnotations);
-      return ExcelMatrix.xlsxAsMatrix(file, headers > 0, rowAnnotations);
+      // indexCols);
+      return ExcelMatrix.xlsxAsMatrix(file, headers > 0, indexCols);
     } catch (InvalidFormatException e) {
       throw new IOException(e.getMessage());
     }

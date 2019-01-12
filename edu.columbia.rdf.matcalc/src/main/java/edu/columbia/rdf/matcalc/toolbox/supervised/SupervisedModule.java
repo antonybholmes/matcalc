@@ -85,6 +85,16 @@ implements ModernClickListener {
   private static final int MAX_ROW_COUNT = 
       SettingsService.getInstance().getInt("matcalc.modules.supervised.max-plot-rows");
 
+  private static final Args ARGS = new Args();
+  
+  static {
+    ARGS.add('p', "plot");
+    ARGS.add('f', "file", true);
+    ARGS.add('m', "mode", true);
+    ARGS.add('g', "group-file", true);
+    ARGS.add('p', "prefix", true);
+  }
+  
   /*
    * (non-Javadoc)
    * 
@@ -94,9 +104,14 @@ implements ModernClickListener {
   public String getName() {
     return "Supervised";
   }
+  
+  @Override
+  public Args getArgs() {
+    return ARGS;
+  }
 
   @Override
-  public void run(String... args) throws IOException {
+  public void run(ArgParser ap) throws IOException {
     String mode = "ttest";
     Path file = null;
     Path groupFile = null;
@@ -113,16 +128,7 @@ implements ModernClickListener {
     FDRType fdrType = FDRType.BENJAMINI_HOCHBERG;
     boolean isLog2Data = true;
 
-    Args options = new Args()
-        .add('f', "file", true)
-        .add('m', "mode", true)
-        .add('g', "group-file", true)
-        .add('p', "prefix", true);
-
-    ArgParser cmdArgs = new ArgParser(options).parse(args);
-
-
-    for (Entry<String, List<String>> item : cmdArgs) {
+    for (Entry<String, List<String>> item : ap) {
       switch (item.getKey()) {
       case "file":
         file = PathUtils.getPath(item.getValue().get(0));
@@ -628,11 +634,11 @@ implements ModernClickListener {
 
     DataFrame pValuesM = new DataFrame(log2M);
 
-    pValuesM.setRowAnnotations("P-value", pValues);
+    pValuesM.getIndex().setAnnotation("P-value", pValues);
 
     // System.err.println("p " + pValues);
     // System.err.println("p2 " +
-    // Arrays.toString(pValuesM.getRowAnnotationValues("P-value")));
+    // Arrays.toString(pValuesM.getIndex().getValues("P-value")));
 
     // Set the p-values of genes with bad names to NaN so they can be
     // excluded from analysis
@@ -661,7 +667,7 @@ implements ModernClickListener {
     String name = isLog2Data || log2Data ? "Log2 Fold Change" : "Fold Change";
 
     DataFrame foldChangesM = new DataFrame(pValuesM);
-    foldChangesM.setRowAnnotations(name, foldChanges);
+    foldChangesM.getIndex().setAnnotation(name, foldChanges);
 
     history.addToHistory(name, foldChangesM);
 
@@ -671,9 +677,9 @@ implements ModernClickListener {
 
     DataFrame meansM = new DataFrame(foldChangesM);
 
-    meansM.setRowAnnotations(g1.getName() + " mean",
+    meansM.getIndex().setAnnotation(g1.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g1));
-    meansM.setRowAnnotations(g2.getName() + " mean",
+    meansM.getIndex().setAnnotation(g2.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g2));
 
     history.addToHistory("Group Means", meansM);
@@ -715,11 +721,11 @@ implements ModernClickListener {
     // collapseType,
     // mParent);
 
-    double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"),
+    double[] fdr = Statistics.fdr(foldFilterM.getIndex().getValues("P-value"),
         fdrType);
 
     DataFrame mfdr = new DataFrame(foldFilterM);
-    mfdr.setRowAnnotations("FDR", fdr);
+    mfdr.getIndex().setAnnotation("FDR", fdr);
 
     history.addToHistory("FDR", mfdr);
 
@@ -744,7 +750,7 @@ implements ModernClickListener {
 
     DataFrame zscoresM = new DataFrame(fdrFilteredM);
 
-    zscoresM.setRowAnnotations("Z-score", zscores);
+    zscoresM.getIndex().setAnnotation("Z-score", zscores);
     history.addToHistory("Z-score", zscoresM);
 
     // DataFrame mzscores = addFlowItem("Add row z-scores",
@@ -769,8 +775,8 @@ implements ModernClickListener {
         classification = "not_moving";
       }
 
-      double zscore = zscoresM.getRowAnnotationValue("Z-score", i);
-      double p = zscoresM.getRowAnnotationValue("FDR", i);
+      double zscore = zscoresM.getIndex().getValue("Z-score", i);
+      double p = zscoresM.getIndex().getValue("FDR", i);
 
       // if (p <= 0.05) {
       if (p <= classificationAlpha) {
@@ -791,7 +797,7 @@ implements ModernClickListener {
 
     DataFrame classM = new DataFrame(zscoresM);
 
-    classM.setRowAnnotations(comparison, classifications);
+    classM.getIndex().setAnnotation(comparison, classifications);
 
     history.addToHistory("Add row classification", classM);
 
@@ -956,11 +962,11 @@ implements ModernClickListener {
 
     DataFrame pValuesM = new DataFrame(m);
 
-    pValuesM.setRowAnnotations("P-value", pValues);
+    pValuesM.getIndex().setAnnotation("P-value", pValues);
 
     //System.err.println("p " + pValues);
     // System.err.println("p2 " +
-    // Arrays.toString(pValuesM.getRowAnnotationValues("P-value")));
+    // Arrays.toString(pValuesM.getIndex().getValues("P-value")));
 
     // Set the p-values of genes with bad names to NaN so they can be
     // excluded from analysis
@@ -986,7 +992,7 @@ implements ModernClickListener {
 
     DataFrame foldChangesM = new DataFrame(pValuesM);
 
-    foldChangesM.setRowAnnotations(isLog2Data ? "Log2 Fold Change" : "Fold Change", foldChanges);
+    foldChangesM.getIndex().setAnnotation(isLog2Data ? "Log2 Fold Change" : "Fold Change", foldChanges);
 
     //
     // Group means
@@ -994,9 +1000,9 @@ implements ModernClickListener {
 
     DataFrame meansM = new DataFrame(foldChangesM);
 
-    meansM.setRowAnnotations(g1.getName() + " mean",
+    meansM.getIndex().setAnnotation(g1.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g1));
-    meansM.setRowAnnotations(g2.getName() + " mean",
+    meansM.getIndex().setAnnotation(g2.getName() + " mean",
         DoubleMatrix.means(foldChangesM, g2));
 
     //
@@ -1031,11 +1037,11 @@ implements ModernClickListener {
     // collapseType,
     // mParent);
 
-    double[] fdr = Statistics.fdr(foldFilterM.getRowAnnotationValues("P-value"),
+    double[] fdr = Statistics.fdr(foldFilterM.getIndex().getValues("P-value"),
         fdrType);
 
     DataFrame mfdr = new DataFrame(foldFilterM);
-    mfdr.setRowAnnotations("FDR", fdr);
+    mfdr.getIndex().setAnnotation("FDR", fdr);
 
     // DataFrame mfdr = addFlowItem("False discovery rate",
     // new RowDataFrameView(mcollapsed,
@@ -1056,7 +1062,7 @@ implements ModernClickListener {
 
     DataFrame zscoresM = new DataFrame(fdrFilteredM);
 
-    zscoresM.setRowAnnotations("Z-score", zscores);
+    zscoresM.getIndex().setAnnotation("Z-score", zscores);
 
     // DataFrame mzscores = addFlowItem("Add row z-scores",
     // new RowDataFrameView(mfdrfiltered,
@@ -1080,8 +1086,8 @@ implements ModernClickListener {
         classification = "not_moving";
       }
 
-      double zscore = zscoresM.getRowAnnotationValue("Z-score", i);
-      double p = zscoresM.getRowAnnotationValue("FDR", i);
+      double zscore = zscoresM.getIndex().getValue("Z-score", i);
+      double p = zscoresM.getIndex().getValue("FDR", i);
 
       // if (p <= 0.05) {
       if (p <= classificationAlpha) {
@@ -1102,7 +1108,7 @@ implements ModernClickListener {
 
     DataFrame classM = new DataFrame(zscoresM);
 
-    classM.setRowAnnotations(comparison, classifications);
+    classM.getIndex().setAnnotation(comparison, classifications);
 
     // DataFrame mclassification = addFlowItem("Add row classification",
     // new RowDataFrameView(mzscores,

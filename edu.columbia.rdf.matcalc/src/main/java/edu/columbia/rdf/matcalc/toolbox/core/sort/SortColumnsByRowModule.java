@@ -41,7 +41,7 @@ import edu.columbia.rdf.matcalc.toolbox.Module;
  * record this in a new column next to the reference column. Useful for doing
  * overlaps and keeping data in a specific order in a table.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class SortColumnsByRowModule extends Module
@@ -238,7 +238,7 @@ public class SortColumnsByRowModule extends Module
   private void output(DataFrame m, List<Integer> columns) {
     DataFrame ret = DataFrame.createDataFrame(m.getRows(), m.getCols());
 
-    DataFrame.copyRowAnnotations(m, ret);
+    DataFrame.copyIndex(m, ret);
 
     DataFrame.copyColumns(m, columns, ret);
 
