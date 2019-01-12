@@ -501,7 +501,7 @@ ModernSelectionListener, MatrixTransformListener {
 
     mHistoryPanel.addSelectionListener(this);
 
-    JComponent content = (JComponent) getWindowContentPanel();
+    JComponent content = (JComponent) getWindowPanel();
 
     content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
         KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK),
