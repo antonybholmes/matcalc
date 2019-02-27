@@ -51,7 +51,6 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
-import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -61,6 +60,7 @@ import org.jebtk.modern.input.ModernInputExtPanel;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.VBox;
+import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernClipboardTextField;
 import org.jebtk.modern.text.ModernTextBorderPanel;
@@ -115,7 +115,7 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   /**
    * The member load button.
    */
-  private ModernButton mLoadButton = new ModernDialogFlatButton(
+  private ModernButton mLoadButton = new RibbonButton(
       AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /**

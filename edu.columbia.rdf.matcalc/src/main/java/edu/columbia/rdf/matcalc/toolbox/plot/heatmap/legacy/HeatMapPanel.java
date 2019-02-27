@@ -126,7 +126,6 @@ public class HeatMapPanel extends FormatPlotPane
    */
   protected ColoredPlotControl mColumnsElement;
 
-
   /** The m check show. */
   private ModernTwoStateWidget mCheckShow;
 
@@ -148,7 +147,9 @@ public class HeatMapPanel extends FormatPlotPane
   /**
    * The member groups element.
    */
-  protected GroupsPlotControl mGroupsElement;
+  protected GroupsPlotControl mColumnGroupsElement;
+
+  protected GroupsPlotControl mRowGroupsElement;
 
   /**
    * The member history.
@@ -327,13 +328,12 @@ public class HeatMapPanel extends FormatPlotPane
     mScaleElement = new ScaleControl(scaleModel);
     box.add(mScaleElement);
     box.add(UI.createVGap(10));
-    box.add(new CheckControl(parent, "Legend", properties,
-        "plot.show-legend"));
+    box.add(new CheckControl(parent, "Legend", properties, "plot.show-legend"));
     box.add(new CheckControl(parent, "Color Bar", properties,
         "plot.show-colorbar"));
-    box.add(new CheckControl(parent, "Summary", properties,
-        "plot.show-summary"));
-    
+    box.add(
+        new CheckControl(parent, "Summary", properties, "plot.show-summary"));
+
     box.setBorder(LARGE_BORDER);
     rightPanel.addTab(PlotConstants.LABEL_LEGEND, box, true);
 
@@ -416,8 +416,11 @@ public class HeatMapPanel extends FormatPlotPane
 
     box = VBox.create();
 
-    mGroupsElement = new GroupsPlotControl(parent, Color.BLACK, properties);
-    box.add(mGroupsElement);
+    mColumnGroupsElement = new GroupsPlotControl(parent, Color.BLACK,
+        properties);
+    box.add(mColumnGroupsElement);
+
+    mRowGroupsElement = new GroupsPlotControl(parent, Color.BLACK, properties);
 
     // Ability to switch on groups is only available to unclustered
     // data
@@ -438,7 +441,7 @@ public class HeatMapPanel extends FormatPlotPane
     mGroupTabsModel.addTab("Columns", rightPanel); // new
                                                    // ModernScrollPane(rightPanel).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER));
 
-    mGroupsElement.addClickListener(this);
+    mColumnGroupsElement.addClickListener(this);
     // standardizationChooser.addClickListener(this);
     // mIntensityElement.addClickListener(this);
     mColumnLabelPositionElement.addClickListener(this);
@@ -611,27 +614,20 @@ public class HeatMapPanel extends FormatPlotPane
 
     columnLabelProperties.position = mColumnLabelPositionElement.getPosition();
 
-
-    mProperties.update("plot.grid-color",
-        mGridElement.getSelectedColor());
-    mProperties.update("plot.show-grid-color",
-        mGridElement.isSelected());
+    mProperties.update("plot.grid-color", mGridElement.getSelectedColor());
+    mProperties.update("plot.show-grid-color", mGridElement.isSelected());
 
     mProperties.update("plot.outline-color",
         mOutlineElement.getSelectedColor());
-    mProperties.update("plot.show-outline-color",
-        mOutlineElement.isSelected());
+    mProperties.update("plot.show-outline-color", mOutlineElement.isSelected());
 
-    mProperties.update("plot.border-color",
-        mBorderElement.getSelectedColor());
-    mProperties.update("plot.show-border-color",
-        mBorderElement.isSelected());
+    mProperties.update("plot.border-color", mBorderElement.getSelectedColor());
+    mProperties.update("plot.show-border-color", mBorderElement.isSelected());
 
     // mProperties.updateProperty("plot.aspect-ratio",
     // mAspectRatioElement.getpectRatio());
 
-    mProperties.update("plot.block-size",
-        mAspectRatioElement.getBlockSize());
+    mProperties.update("plot.block-size", mAspectRatioElement.getBlockSize());
 
     mProperties.update("plot.colormap", colorMap);
 
@@ -667,8 +663,9 @@ public class HeatMapPanel extends FormatPlotPane
       ColumnLabelProperties columnLabelProperties) {
     return new ClusterCanvas(m, mRowCluster, mColumnCluster, groupsOfInterest,
         rowGroupsOfInterest, mCountGroups, mHistory, norm.getMin(),
-        norm.getMax(), rowLabelProperties, columnLabelProperties,
-        mGroupsElement.getProperties(), mProperties);
+        norm.getMax(), rowLabelProperties, mRowGroupsElement.getProperties(),
+        columnLabelProperties, mColumnGroupsElement.getProperties(),
+        mProperties);
   }
 
   /**
@@ -687,7 +684,8 @@ public class HeatMapPanel extends FormatPlotPane
         .setVScrollBarLocation(ScrollBarLocation.FLOATING)
         .setHScrollBarLocation(ScrollBarLocation.FLOATING);
 
-    mParent.setCard(new ModernComponent(scrollPane, ModernWidget.DOUBLE_BORDER));
+    mParent
+        .setCard(new ModernComponent(scrollPane, ModernWidget.DOUBLE_BORDER));
   }
 
   /*

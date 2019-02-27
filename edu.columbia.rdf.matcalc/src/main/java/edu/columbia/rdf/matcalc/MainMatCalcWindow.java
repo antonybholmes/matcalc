@@ -1214,9 +1214,9 @@ ModernSelectionListener, MatrixTransformListener {
     if (FileUtils.exists(file)) {
       ModernMessageDialog
       .createFileReplaceDialog(this, file, new ExportCallBack(file, pwd));
+    } else {
+      save(file);
     }
-    
-    save(file);
   }
 
   /**

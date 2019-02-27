@@ -13,52 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.matcalc.toolbox.core.filter.row;
+package edu.columbia.rdf.matcalc.toolbox.core.rename;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.Box;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.jebtk.core.settings.SettingsService;
+import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.Excel;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.XlsxTxtGuiFileFilter;
 import org.jebtk.modern.AssetService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
-import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.OpenFolderVectorIcon;
-import org.jebtk.modern.graphics.icons.PlusVectorIcon;
 import org.jebtk.modern.io.FileDialog;
 import org.jebtk.modern.io.RecentFilesService;
-import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernContentPanel;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
-import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.text.ModernClipboardTextArea;
-import org.jebtk.modern.text.ModernLabel;
 import org.jebtk.modern.text.ModernTextArea;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
-import edu.columbia.rdf.matcalc.toolbox.ColumnsCombo;
-
 /**
  * The class MatrixRowFilterDialog.
  */
-public class MatrixRowFilterDialog extends ModernDialogHelpWindow
+public class RenameDialog extends ModernDialogHelpWindow
     implements ModernClickListener {
 
   /**
@@ -83,27 +76,14 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
    * The member check exact.
    */
   private ModernTwoStateWidget mCheckExact = new ModernCheckSwitch(
-      "Match entire cell contents", false);
-
-  /**
-   * The member check in list.
-   */
-  private ModernTwoStateWidget mCheckInList = new ModernCheckSwitch(
-      "Find in list", true);
-
-  /** The m check missing. */
-  private ModernTwoStateWidget mCheckMissing = new ModernCheckSwitch(
-      "Include missing entries");
+      "Match entire cell contents", true);
 
   /** The m check case. */
   private ModernTwoStateWidget mCheckCase = new ModernCheckSwitch(
       "Case sensitive");
-
-  /**
-   * The add button.
-   */
-  private ModernButton mAddButton = new RibbonButton(
-      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
+  
+  private ModernTwoStateWidget mCheckSort = new ModernCheckSwitch(
+      "Sort by group", true);
 
   /**
    * The remove button.
@@ -124,39 +104,6 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
   private ModernButton importButton = new ModernButton(UI.BUTTON_LOAD,
       AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16), 80);
 
-  /**
-   * The member new row text field.
-   */
-  // private ModernTextField mNewRowTextField = new ModernTextField();
-
-  /**
-   * The member columns combo.
-   */
-  private ModernComboBox mColumnsCombo;
-
-  /**
-   * The member m.
-   */
-  private DataFrame mM;
-
-  /**
-   * The class TypeChangeEvents.
-   */
-  private class TypeChangeEvents implements ModernClickListener {
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.lib.ui.modern.event.ModernClickListener#clicked(org.abh.lib.ui.
-     * modern .event.ModernClickEvent)
-     */
-    @Override
-    public void clicked(ModernClickEvent e) {
-      changeIds();
-    }
-
-  }
 
   /**
    * Instantiates a new matrix row filter dialog.
@@ -164,42 +111,17 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
    * @param parent the parent
    * @param m the m
    */
-  public MatrixRowFilterDialog(ModernWindow parent, DataFrame m) {
-    super(parent, "matcalc.filter.rows.help.url");
-
-    setAutoDispose(false);
-
-    mM = m;
-
-    mCheckMissing.setSelected(SettingsService.getInstance()
-        .getBool("matcalc.modules.rowfilter.include-missing"));
-
-    mCheckMissing.addClickListener(new ModernClickListener() {
-
-      @Override
-      public void clicked(ModernClickEvent e) {
-        SettingsService.getInstance().update(
-            "matcalc.modules.rowfilter.include-missing",
-            mCheckMissing.isSelected());
-      }
-    });
-
-    mColumnsCombo = new ColumnsCombo(m);
+  public RenameDialog(ModernWindow parent) {
+    super(parent, "matcalc.rename.help.url");
 
     setup();
-
-    mColumnsCombo.setSelectedIndex(0);
-
-    mColumnsCombo.addClickListener(new TypeChangeEvents());
-
-    changeIds();
   }
 
   /**
    * Setup.
    */
   private void setup() {
-    setTitle("Row Filter");
+    setTitle("Rename In Column");
 
     // mRowList.setModel(mModel);
 
@@ -228,16 +150,12 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
      * )); mAddButton.addClickListener(this); panel.add(mAddButton);
      */
 
-    Box box = HBox.create();
-    box.add(new ModernLabel("Column", 80));
-    UI.setSize(mColumnsCombo, 300, ModernWidget.WIDGET_HEIGHT);
-    box.add(mColumnsCombo);
-    box.setBorder(ModernPanel.LARGE_BORDER);
-    content.setHeader(box);
 
     // content.setBody(new ModernLineBorderPanel(new
     // ModernScrollPane(mRowList)));
 
+    Box box;
+    
     ModernScrollPane scrollPane = new ModernScrollPane(mIdTextBox)
         .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER)
         .setVerticalScrollBarPolicy(ScrollBarPolicy.ALWAYS);
@@ -258,12 +176,9 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
     box.setBorder(ModernWidget.TOP_BORDER);
     box.add(UI.createVGap(10));
     box.add(mCheckExact);
-    box.add(UI.createVGap(5));
-    box.add(mCheckInList);
+  
     box.add(UI.createVGap(5));
     box.add(mCheckCase);
-    box.add(UI.createVGap(5));
-    box.add(mCheckMissing);
 
     content.setFooter(box);
 
@@ -299,9 +214,7 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
    */
   @Override
   public void clicked(ModernClickEvent e) {
-    if (e.getSource().equals(mAddButton)) {
-      // addId();
-    } else if (e.getSource().equals(importButton)) {
+    if (e.getSource().equals(importButton)) {
       try {
         importIds();
       } catch (IOException e1) {
@@ -401,26 +314,6 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
   }
 
   /**
-   * Change ids.
-   */
-  private void changeIds() {
-    clearIds();
-
-    int numRowAnnotations = mM.getIndex().getNames().size();
-
-    if (mColumnsCombo.getSelectedIndex() < numRowAnnotations) {
-      // filter on row annotation
-
-      loadIds(mM.getIndex().getText(mColumnsCombo.getText()));
-    } else {
-      // filter on column
-
-      loadIds(mM
-          .columnToText(mColumnsCombo.getSelectedIndex() - numRowAnnotations));
-    }
-  }
-
-  /**
    * Load ids.
    *
    * @param ids the ids
@@ -434,24 +327,6 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
   }
 
   /**
-   * Gets the column text.
-   *
-   * @return the column text
-   */
-  public String getColumnText() {
-    return mColumnsCombo.getText();
-  }
-
-  /**
-   * Gets the column.
-   *
-   * @return the column
-   */
-  public int getColumn() {
-    return mColumnsCombo.getSelectedIndex();
-  }
-
-  /**
    * Gets the exact match.
    *
    * @return the exact match
@@ -462,29 +337,43 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
 
   /**
    * Gets the names.
+   * @param searchTermToReplacementMap 
+   * @param nameToSearchTermMap 
+   * @param names 
    *
    * @return the names
    */
-  public List<String> getNames() {
-    return mIdTextBox.getLines(); // CollectionUtils.toList(mModel);
-  }
-
-  /**
-   * Gets the in list.
-   *
-   * @return the in list
-   */
-  public boolean getInList() {
-    return mCheckInList.isSelected();
-  }
-
-  /**
-   * Gets the include missing.
-   *
-   * @return the include missing
-   */
-  public boolean getIncludeMissing() {
-    return mCheckMissing.isSelected();
+  public void getNames(List<String> names, 
+      Map<String, String> nameToSearchTermMap,
+      Map<String, String> searchTermToNameMap, 
+      Map<String, String> searchTermToReplacementMap) {
+    
+    List<String> lines = mIdTextBox.getLines();
+    
+    for (String line : lines) {
+      line = line.replace(':', TextUtils.TAB_DELIMITER_CHAR)
+          .replace(';', TextUtils.TAB_DELIMITER_CHAR)
+          .replace(',', TextUtils.TAB_DELIMITER_CHAR)
+          .replace(':', TextUtils.TAB_DELIMITER_CHAR);
+      
+      List<String> tokens = TextUtils.tabSplit(line);
+      
+      String name = tokens.get(0);
+      String replacement = tokens.get(1);
+      
+      String searchTerm;
+      
+      if (getCaseSensitive()) {
+        searchTerm = name;
+      } else {
+        searchTerm = name.toLowerCase();
+      }
+      
+      names.add(name);
+      nameToSearchTermMap.put(name, searchTerm);
+      searchTermToNameMap.put(searchTerm, name);
+      searchTermToReplacementMap.put(searchTerm, replacement);
+    }
   }
 
   /**
@@ -494,5 +383,13 @@ public class MatrixRowFilterDialog extends ModernDialogHelpWindow
    */
   public boolean getCaseSensitive() {
     return mCheckCase.isSelected();
+  }
+
+  /**
+   * Returns true if items should be sorted by their rename label
+   * @return
+   */
+  public boolean getSort() {
+    return mCheckSort.isSelected();
   }
 }

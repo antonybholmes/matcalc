@@ -90,7 +90,7 @@ public class ZScoreModule extends Module implements ModernClickListener {
           MatrixOperations.zscore(mWindow.getCurrentMatrix())); // new
                                                                 // ZScoreMatrixTransform(this,
                                                                 // getCurrentMatrix()));
-    } else if (e.getMessage().equals("Row z-score")) {
+    } else if (e.getMessage().equals("Row")) {
       mWindow.history().addToHistory("Row z-score",
           "Row z-score",
           MatrixOperations.rowZscore(mWindow.getCurrentMatrix())); // addFlowItem(new

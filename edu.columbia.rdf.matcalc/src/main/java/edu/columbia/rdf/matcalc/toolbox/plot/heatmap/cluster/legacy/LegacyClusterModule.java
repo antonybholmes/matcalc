@@ -22,10 +22,12 @@ import org.jebtk.core.Properties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.cluster.Cluster;
+import org.jebtk.math.cluster.DistanceMatrix;
 import org.jebtk.math.cluster.DistanceMetric;
 import org.jebtk.math.cluster.HierarchicalClustering;
 import org.jebtk.math.cluster.Linkage;
 import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.Matrix;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -227,6 +229,21 @@ public class LegacyClusterModule extends Module
      * CountGroups.defaultGroup(m), history, properties));
      */
   }
+  
+  public static DistanceMatrix createDistanceMatrix(Matrix m,
+      DistanceMetric d) {
+    int c = m.getCols();
+
+    DistanceMatrix distance = new DistanceMatrix(c); // DoubleMatrix(s, s);
+
+    for (int i = 0; i < c; ++i) {
+      for (int j = 0; j < c; ++j) {
+        distance.set(i, j, (double) d.columnDistance(m, i, j));
+      }
+    }
+
+    return distance;
+  }
 
   /**
    * Cluster.
@@ -264,8 +281,16 @@ public class LegacyClusterModule extends Module
     }
 
     if (clusterColumns) {
+      // Create the distance matrix
       columnCluster = HierarchicalClustering
           .columnCluster(m, linkage, distanceMetric, optimalLeafOrder);
+      
+      // Provide distance matrix to user
+      DataFrame df = new DataFrame(createDistanceMatrix(m, distanceMetric));
+      df.setRowNames(m.getColumnNames());
+      df.setColumnNames(m.getColumnNames());
+      
+      window.history().addToHistory("Distance matrix", df);
     }
 
     if (rowCluster == null && columnCluster == null) {

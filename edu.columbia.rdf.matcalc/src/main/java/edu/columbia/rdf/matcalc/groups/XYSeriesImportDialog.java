@@ -40,7 +40,6 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckBox;
-import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -51,6 +50,7 @@ import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
+import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
@@ -74,11 +74,11 @@ public class XYSeriesImportDialog extends ModernDialogTaskWindow
   /**
    * The member load button.
    */
-  private ModernButton mFilterButton = new ModernDialogFlatButton("Filter...",
+  private ModernButton mFilterButton = new RibbonButton("Filter...",
       AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /** The m clear filter button. */
-  private ModernButton mClearFilterButton = new ModernDialogFlatButton(
+  private ModernButton mClearFilterButton = new RibbonButton(
       "Clear Filter",
       AssetService.getInstance().loadIcon(CrossVectorIcon.class, 16));
 

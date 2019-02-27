@@ -18,7 +18,6 @@ package edu.columbia.rdf.matcalc.figure.graph2d;
 import org.jebtk.graphplot.icons.Graph2dStyleMultiIcon24;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.graphics.icons.ModernScaleIcon;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 /**
@@ -76,6 +75,8 @@ public class Graph2dStyleRibbonButton extends RibbonLargeDropDownButton2 {
     super(new Graph2dStyleMultiIcon24(), new Graph2dStyleMenu());
 
     addClickListener(new ClickEvents());
+    
+    mCompactIcon = mIcon;
   }
 
   /**
@@ -86,6 +87,6 @@ public class Graph2dStyleRibbonButton extends RibbonLargeDropDownButton2 {
   private void setIcon(int index) {
     ((Graph2dStyleMultiIcon24) mIcon).setIcon(index);
 
-    mCompactIcon = new ModernScaleIcon(mIcon, 24);
+    //mCompactIcon = mIcon; //new RasterIcon(mIcon, 24);
   }
 }

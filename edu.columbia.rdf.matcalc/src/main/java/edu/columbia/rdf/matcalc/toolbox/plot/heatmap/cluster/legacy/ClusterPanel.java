@@ -120,7 +120,7 @@ public class ClusterPanel extends HeatMapPanel {
 
     return new ClusterCanvas(m, mRowCluster, mColumnCluster, groupsOfInterest,
         rowGroupsOfInterest, mCountGroups, mHistory, norm.getMin(),
-        norm.getMax(), rowLabelProperties, columnLabelProperties,
-        mGroupsElement.getProperties(), mProperties);
+        norm.getMax(), rowLabelProperties, mRowGroupsElement.getProperties(), columnLabelProperties,
+        mColumnGroupsElement.getProperties(), mProperties);
   }
 }

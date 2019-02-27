@@ -4,13 +4,12 @@ import java.nio.file.Path;
 import java.util.List;
 
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.Ribbon;
-import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.tooltip.ModernToolTip;
-import org.jebtk.modern.widget.ModernClickWidget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,14 +33,11 @@ public class PasteModule extends Module implements ModernClickListener {
 
     Ribbon ribbon = window.getRibbon();
 
-    ModernClickWidget button;
-
-    button = new RibbonLargeButton(
+    ModernButton button = ribbon.getToolbar("Data").getSection("Tools").createButton(
         AssetService.getInstance().loadIcon("paste_files", 24));
     button.setToolTip(
         new ModernToolTip("Paste Files", "Paste multiple files column wise."));
     button.addClickListener(this);
-    ribbon.getToolbar("Data").getSection("Tools").add(button);
   }
 
   @Override
