@@ -143,7 +143,7 @@ public class LimitsPlotControl extends VBox {
    * Update.
    */
   private void update() {
-    mMinTextField.setText(Double.toString(mAxis.getMin()));
-    mMaxTextField.setText(Double.toString(mAxis.getMax()));
+    mMinTextField.setText(Double.toString(mAxis.getLimits().getMin()));
+    mMaxTextField.setText(Double.toString(mAxis.getLimits().getMax()));
   }
 }

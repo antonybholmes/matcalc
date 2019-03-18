@@ -96,11 +96,11 @@ public class SmoothedLineGraphModule extends Module
     }
     
     if (ap.contains("x-min")) {
-      mAxes.getX1Axis().setMin(ap.getDouble("x-min"));
+      mAxes.getX1Axis().getLimits().setMin(ap.getDouble("x-min"));
     }
     
     if (ap.contains("x-max")) {
-      mAxes.getX1Axis().setMax(ap.getDouble("x-max"));
+      mAxes.getX1Axis().getLimits().setMax(ap.getDouble("x-max"));
     }
     
     mAxes.getLegend().setVisible(ap.contains("show-legend"));
