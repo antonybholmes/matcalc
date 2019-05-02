@@ -29,7 +29,7 @@ public class MatCalcInfo extends GuiAppInfo {
    * Instantiates a new mat calc info.
    */
   public MatCalcInfo() {
-    super("MatCalc", new AppVersion(24),
+    super("MatCalc", new AppVersion(25),
         "Copyright (C) 2014-${year} Antony Holmes",
         new MatCalcIcon(),
         "Matrix calculations and plotting.");
