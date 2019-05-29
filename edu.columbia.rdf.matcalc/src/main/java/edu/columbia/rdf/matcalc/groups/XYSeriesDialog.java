@@ -57,13 +57,12 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.color.ColorSwatchButton;
 import org.jebtk.modern.graphics.icons.OpenFolderVectorIcon;
 import org.jebtk.modern.input.ModernInputExtPanel;
+import org.jebtk.modern.input.ModernInputPanel;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
-import org.jebtk.modern.text.ModernClipboardTextField;
-import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
@@ -100,7 +99,7 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
   /**
    * The member name field.
    */
-  private ModernTextField mNameField = new ModernClipboardTextField("Group");
+  private ModernInputPanel mNameField = new ModernInputPanel("Group");
 
   /**
    * The member search field.
@@ -245,7 +244,9 @@ public class XYSeriesDialog extends ModernDialogHelpWindow {
 
     Box box2 = HBox.create();
     box2.add(new ModernAutoSizeLabel("Name", 100));
-    box2.add(new ModernTextBorderPanel(mNameField, 300));
+    
+    UI.setSize(mNameField, 300, ModernWidget.WIDGET_HEIGHT);
+    box2.add(mNameField);
     box.add(box2);
     box.add(UI.createVGap(5));
     box2 = HBox.create();
