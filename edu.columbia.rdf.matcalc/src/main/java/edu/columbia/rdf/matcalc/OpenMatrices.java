@@ -112,7 +112,7 @@ public class OpenMatrices {
 
       window.setVisible(true);
 
-      new OpenMatrices(this, window).open(matrices);
+      new OpenMatrices(window).open(matrices);
     } else {
       for (DataFrame m : matrices) {
 
