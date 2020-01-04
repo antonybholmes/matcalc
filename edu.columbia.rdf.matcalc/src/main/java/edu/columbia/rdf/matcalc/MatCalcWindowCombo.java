@@ -17,9 +17,9 @@ package edu.columbia.rdf.matcalc;
 
 import java.awt.Dimension;
 
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowService;
 

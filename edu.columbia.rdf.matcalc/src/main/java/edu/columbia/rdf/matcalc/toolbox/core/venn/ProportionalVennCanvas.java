@@ -23,8 +23,8 @@ import java.util.List;
 import org.jebtk.bioinformatics.ui.groups.GroupsModel;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.DrawingContext;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The Class ProportionalVennCanvas.

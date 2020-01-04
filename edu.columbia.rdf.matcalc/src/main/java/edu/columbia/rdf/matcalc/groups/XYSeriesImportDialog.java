@@ -36,6 +36,7 @@ import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.ui.external.microsoft.ExcelDialog;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
@@ -52,7 +53,6 @@ import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
 /**

@@ -18,9 +18,9 @@ package edu.columbia.rdf.matcalc.figure;
 import org.jebtk.graphplot.figure.heatmap.legacy.RowLabelPosition;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernRadioButton;
+import org.jebtk.modern.button.ModernTwoStateWidget;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.VBox;
-import org.jebtk.modern.widget.ModernTwoStateWidget;
 
 /**
  * The class RowLabelPositionControl.

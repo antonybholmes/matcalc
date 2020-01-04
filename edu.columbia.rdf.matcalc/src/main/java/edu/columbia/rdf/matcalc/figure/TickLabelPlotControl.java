@@ -23,6 +23,7 @@ import java.util.List;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.properties.TickMarkProperties;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -30,7 +31,6 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.text.ModernTextField;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.figure.graph2d.RotationButton;

@@ -19,11 +19,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import org.jebtk.core.Properties;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.text.ModernNumericalTextField;
 import org.jebtk.modern.text.ModernSubHeadingLabel;
 import org.jebtk.modern.text.ModernTextBorderPanel;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The Class RadiusControl.

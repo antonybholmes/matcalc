@@ -17,8 +17,8 @@ package edu.columbia.rdf.matcalc.icons;
 
 import java.awt.Graphics2D;
 
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.icons.LeftPane32VectorIcon;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The class Groups32VectorIcon.

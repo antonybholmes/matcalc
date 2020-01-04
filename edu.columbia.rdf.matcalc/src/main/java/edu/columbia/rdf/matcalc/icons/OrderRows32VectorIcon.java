@@ -19,9 +19,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 
 import org.jebtk.core.ColorUtils;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 import org.jebtk.modern.theme.ThemeService;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * Download arrow vector icon.

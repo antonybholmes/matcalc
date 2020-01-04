@@ -27,6 +27,7 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.properties.FontProperties;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckButton;
 import org.jebtk.modern.combobox.ModernComboBox;
@@ -38,7 +39,6 @@ import org.jebtk.modern.graphics.color.ColorSwatchButton;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
 /**

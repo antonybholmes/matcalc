@@ -16,11 +16,11 @@
 package edu.columbia.rdf.matcalc.toolbox.core.duplicate;
 
 import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.panel.HExpandBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.text.ModernTextField;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * For choosing an FDR method.

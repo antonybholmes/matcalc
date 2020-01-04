@@ -26,6 +26,7 @@ import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.MatrixCellRef;
 import org.jebtk.math.ui.matrix.MatrixTable;
 import org.jebtk.modern.ModernComponent;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
@@ -47,7 +48,6 @@ import org.jebtk.modern.tabs.TabsViewPanel;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.text.ModernTextField;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 

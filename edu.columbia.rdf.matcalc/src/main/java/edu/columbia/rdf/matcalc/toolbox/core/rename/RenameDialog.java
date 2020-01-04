@@ -28,9 +28,11 @@ import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.ui.external.microsoft.XlsxTxtGuiFileFilter;
 import org.jebtk.modern.AssetService;
 import org.jebtk.modern.ModernComponent;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
+import org.jebtk.modern.button.ModernTwoStateWidget;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -44,8 +46,6 @@ import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernTextArea;
-import org.jebtk.modern.widget.ModernTwoStateWidget;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
 /**

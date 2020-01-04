@@ -23,8 +23,8 @@ import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.AspectRatio;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.figure.heatmap.legacy.MatrixPlotElement;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.colormap.ColorMap;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The class HeatMapProperties.

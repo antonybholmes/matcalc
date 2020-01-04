@@ -22,9 +22,9 @@ import java.text.ParseException;
 import javax.swing.Box;
 
 import org.jebtk.modern.button.ModernCheckSwitch;
+import org.jebtk.modern.button.ModernTwoStateWidget;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
-import org.jebtk.modern.widget.ModernTwoStateWidget;
 
 /**
  * Allow users to optionally enable a filter etc.

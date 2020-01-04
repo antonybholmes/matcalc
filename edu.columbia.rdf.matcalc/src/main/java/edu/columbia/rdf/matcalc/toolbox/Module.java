@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox;
 import java.io.IOException;
 import java.util.Map;
 
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 import org.jebtk.core.cli.ArgParser;
 import org.jebtk.core.cli.Args;
 import org.jebtk.core.collections.CollectionUtils;
@@ -34,7 +34,7 @@ import edu.columbia.rdf.matcalc.MatCalcInfo;
 /**
  * The class CalcModule.
  */
-public abstract class Module implements NameProperty {
+public abstract class Module implements NameGetter {
 
   /**
    * The constant LOAD_MATRIX_MESSAGE.

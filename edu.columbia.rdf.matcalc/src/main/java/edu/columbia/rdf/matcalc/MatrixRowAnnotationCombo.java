@@ -16,9 +16,9 @@
 package edu.columbia.rdf.matcalc;
 
 import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * For choosing an FDR method.

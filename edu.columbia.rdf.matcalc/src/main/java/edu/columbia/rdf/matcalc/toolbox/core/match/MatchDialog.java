@@ -18,6 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.match;
 import javax.swing.Box;
 
 import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -27,7 +28,6 @@ import org.jebtk.modern.panel.MatrixPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernLabelBold;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.WindowService;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 

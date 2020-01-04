@@ -16,9 +16,9 @@
 package edu.columbia.rdf.matcalc.figure.graph2d;
 
 import org.jebtk.core.Mathematics;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogFlatDropDownButton;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The class RotationButton.

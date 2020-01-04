@@ -15,9 +15,9 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.collapse;
 
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.combobox.ModernComboBox;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The class CollapseCombo.

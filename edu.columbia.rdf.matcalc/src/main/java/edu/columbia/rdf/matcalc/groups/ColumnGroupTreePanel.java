@@ -42,7 +42,9 @@ import org.jebtk.math.ui.external.microsoft.ExcelUI;
 import org.jebtk.math.ui.matrix.AllMatrixGroupGuiFileFilter;
 import org.jebtk.modern.AssetService;
 import org.jebtk.modern.ModernComponent;
+import org.jebtk.modern.button.ButtonStyle;
 import org.jebtk.modern.button.ModernButton;
+import org.jebtk.modern.button.ModernClickWidget;
 import org.jebtk.modern.contentpane.VTabToolbar;
 import org.jebtk.modern.dialog.MessageDialogType;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -60,8 +62,6 @@ import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.tree.ModernTree;
 import org.jebtk.modern.tree.ModernTreeEvent;
 import org.jebtk.modern.tree.TreeEventListener;
-import org.jebtk.modern.widget.ButtonStyle;
-import org.jebtk.modern.widget.ModernClickWidget;
 import org.xml.sax.SAXException;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;

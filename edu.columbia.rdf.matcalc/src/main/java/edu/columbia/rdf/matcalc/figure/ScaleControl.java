@@ -22,6 +22,7 @@ import javax.swing.Box;
 
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -31,7 +32,6 @@ import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernLabel;
 import org.jebtk.modern.text.ModernNumericalLabel;
-import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.ScaleModel;
 

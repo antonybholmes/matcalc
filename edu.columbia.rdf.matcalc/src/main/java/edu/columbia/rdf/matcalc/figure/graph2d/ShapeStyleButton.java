@@ -17,11 +17,11 @@ package edu.columbia.rdf.matcalc.figure.graph2d;
 
 import org.jebtk.graphplot.icons.ShapeStyle;
 import org.jebtk.graphplot.icons.ShapeStyleMultiIcon16;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.dialog.ModernDialogFlatDropDownIconButton;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The class ShapeStyleButton.
