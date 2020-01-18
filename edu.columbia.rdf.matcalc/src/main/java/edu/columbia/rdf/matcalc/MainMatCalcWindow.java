@@ -675,14 +675,18 @@ ModernSelectionListener, MatrixTransformListener {
     // QuickOpen16VectorIcon());
 
     ModernButtonWidget button = new QuickAccessButton(
-        AssetService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickOpenVectorIcon.class, 
+            ModernWidget.TEXT_COLOR,
+            16));
     button.setClickMessage("Open");
     button.setToolTip("Open", "Open a file.");
     button.addClickListener(this);
     addQuickAccessButton(button);
 
     button = new QuickAccessButton(
-        AssetService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickSaveVectorIcon.class, 
+            ModernWidget.TEXT_COLOR,
+            16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip("Save", "Save the current table.");
     button.addClickListener(this);

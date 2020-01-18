@@ -70,7 +70,7 @@ public class ColorMapRibbonSection extends RibbonSection {
   private ScaleModel mScaleModel;
 
   /** The m color map button. */
-  private RibbonColorMapButton mColorMapButton;
+  private RibbonColorMapButton2 mColorMapButton;
 
   /**
    * Instantiates a new color map ribbon section.
@@ -88,7 +88,7 @@ public class ColorMapRibbonSection extends RibbonSection {
 
     mScaleSpinner = new ScaleSpinner(scaleModel.get());
 
-    mColorMapButton = new RibbonColorMapButton(parent);
+    mColorMapButton = new RibbonColorMapButton2(parent);
 
     add(mColorMapButton);
 
