@@ -22,7 +22,7 @@ import javax.swing.Box;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckBox;
-import org.jebtk.modern.combobox.ModernComboBox;
+import org.jebtk.modern.combobox.ModernComboBox2;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
@@ -44,12 +44,12 @@ public class GroupPanel extends HBox {
   /**
    * The group1 combo.
    */
-  private ModernComboBox group1Combo;
+  private ModernComboBox2 group1Combo;
 
   /**
    * The group2 combo.
    */
-  private ModernComboBox group2Combo;
+  private ModernComboBox2 group2Combo;
 
   /**
    * The check equal variance.

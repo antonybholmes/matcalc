@@ -82,12 +82,11 @@ import org.jebtk.modern.io.OpenRibbonPanel;
 import org.jebtk.modern.io.RecentFilesModel;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.io.SaveAsRibbonPanel;
+import org.jebtk.modern.panel.ModernBorderPanel;
 import org.jebtk.modern.ribbon.QuickAccessButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.table.ModernSpreadsheetBar;
-import org.jebtk.modern.tabs.IconTabsFolderIcon;
-import org.jebtk.modern.tabs.OrbTabsPanel;
 import org.jebtk.modern.tabs.SegmentTabsPanel;
 import org.jebtk.modern.tabs.TabPanel;
 import org.jebtk.modern.tabs.TabsModel;
@@ -182,7 +181,7 @@ ModernSelectionListener, MatrixTransformListener {
   /**
    * The member group panel.
    */
-  private ModernComponent mGroupPanel;
+  //private ModernComponent mGroupPanel;
 
   /**
    * The member matrix table.
@@ -243,10 +242,10 @@ ModernSelectionListener, MatrixTransformListener {
   private static final boolean AUTO_SHOW_FILES_PANE = SettingsService
       .getInstance().getBool("matcalc.files-pane.auto-show");
 
-  private TabsModel mRightTabsModel = new TabsModel();
+  //private TabsModel mRightTabsModel = new TabsModel();
 
   private MatCalcProperties mProperties = new MatCalcProperties();
-
+  
   /**
    * The class MouseEvents.
    */
@@ -757,24 +756,25 @@ ModernSelectionListener, MatrixTransformListener {
 
   private void createFilesTabs() {
     if (mProperties.getBool("matcalc.ui.files.enabled")) {
-      getIconTabs().addTab("Files",
-          new IconTabsFolderIcon(),
+      getIconTabs().addTab("Files", 
+          AssetService.getInstance().loadIcon("files", 24),
           new TabPanel("Files", mFilesPanel));
     }
   }
 
   private void createRightTabs() {
     if (mProperties.getBool("matcalc.ui.right-tabs.enabled")) {
-      mGroupPanel = new SegmentTabsPanel(mRightTabsModel, 70, 5);
-      mGroupPanel.setBorder(ModernWidget.LEFT_RIGHT_BORDER);
-      tabsPane().tabs().right().add("History", mGroupPanel, 250, 200, 500);
-
+      //mGroupPanel = new SegmentTabsPanel(mRightTabsModel, 70, 5);
+      //mGroupPanel.setBorder(ModernWidget.LEFT_RIGHT_BORDER);
+      //tabsPane().tabs().right().add("History", mGroupPanel, 250, 200, 500);
 
       createGroupsPanel();
-      addHistoryPane();
+      createHistoryPane();
+      
+      getIconTabsRight().changeTab(0);
 
       // Show the column groups by default
-      mRightTabsModel.changeTab(0);
+      //mRightTabsModel.changeTab(0);
     }
   }
 
@@ -794,48 +794,34 @@ ModernSelectionListener, MatrixTransformListener {
       groupTabsModel.addTab("Rows", mRowGroupsPanel);
       groupTabsModel.addTab("Columns", mColumnGroupsPanel);
 
-      OrbTabsPanel tabsPanel = new OrbTabsPanel(groupTabsModel, 24);
+      SegmentTabsPanel tabsPanel = new SegmentTabsPanel(groupTabsModel, 70, 5);
       tabsPanel.topBorder(10);
       
       groupTabsModel.changeTab(1);
+      
+      
+      getIconTabsRight().addTab("Groups", 
+          AssetService.getInstance().loadIcon("groups", 24),
+          new TabPanel("Groups", tabsPanel));
 
-
-      mRightTabsModel.addTab("Groups", tabsPanel);
+      //mRightTabsModel.addTab("Groups", tabsPanel);
     }
   }
 
   /**
-   * Adds the group pane to the layout if it is not already showing.
-   */
-  /*
-   * private void addGroupsPane() { if (mInputFiles.size() == 0) { return; }
-   * 
-   * if (mContentPane.getModel().getLeftTabs().containsTab("Groups")) { return;
-   * }
-   * 
-   * mContentPane.getModel().addLeft(new SizableContentPane("Groups",
-   * mGroupPanel, 250, 200, 500)); }
-   */
-
-  /**
    * Adds the history pane to the layout if it is not already showing.
    */
-  private void addHistoryPane() {
+  private void createHistoryPane() {
     if (mProperties.getBool("matcalc.ui.history.enabled")) {
-      mRightTabsModel.addTab("History", mHistoryPanel);
+      
+      getIconTabsRight().addTab("History", 
+          AssetService.getInstance().loadIcon("history", 24),
+          new TabPanel("History", mHistoryPanel));
+      
+      
+      
+      //mRightTabsModel.addTab("History", mHistoryPanel);
     }
-
-    //    if (getTabsPane().getModel().getRightTabs().containsTab("History")) {
-    //      return;
-    //    }
-    //
-    //    ModernVSplitPaneLine splitPane = new ModernVSplitPaneLine();
-    //
-    //    splitPane.addComponent(mGroupPanel, 0.4);
-    //    splitPane.addComponent(mHistoryPanel, 0.5);
-    //
-    //    getTabsPane().getModel()
-    //        .addRightTab("History", new HTab("Groups", splitPane), 250, 200, 500);
   }
 
   /*
@@ -1598,7 +1584,9 @@ ModernSelectionListener, MatrixTransformListener {
     if (mProperties.getBool("matcalc.ui.table.drop-shadow.enabled")) {
       //setCenterTab(new CardPanel(new ModernComponent(c, ModernWidget.DOUBLE_BORDER), ModernWidget.BORDER));
       
-      setCard(new ModernComponent(c, ModernWidget.DOUBLE_BORDER));
+      //setCard(new ModernComponent(c, ModernWidget.DOUBLE_BORDER));
+      
+      setCenterTab(new ModernBorderPanel(c, ModernWidget.DOUBLE_BORDER));
     } else {
       setPanel(c);
     }

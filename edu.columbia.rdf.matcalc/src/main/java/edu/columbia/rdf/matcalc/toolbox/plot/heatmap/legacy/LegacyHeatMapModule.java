@@ -150,7 +150,8 @@ public class LegacyHeatMapModule extends Module
 
     if (w < 20 || h < 20) {
       // Don't show grid
-      properties.set("plot.show-grid-color", false);
+      properties.set("plot.grid.rows.show", false);
+      properties.set("plot.grid.columns.show", false);
       properties.set("plot.show-outline-color", false);
     }
 

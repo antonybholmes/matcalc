@@ -116,19 +116,15 @@ public class ClusterCanvas extends PlotBoxRow {
    * @param columnGroupProperties the group properties
    * @param properties the properties
    */
-  public ClusterCanvas(DataFrame matrix, 
-      XYSeriesGroup groups,
-      XYSeriesGroup rowGroups, 
-      CountGroups countGroups, 
-      List<String> history,
-      double min, double max, 
-      RowLabelProperties rowLabelProperties,
+  public ClusterCanvas(DataFrame matrix, XYSeriesGroup groups,
+      XYSeriesGroup rowGroups, CountGroups countGroups, List<String> history,
+      double min, double max, RowLabelProperties rowLabelProperties,
       GroupProperties rowGroupProperties,
       ColumnLabelProperties columnLabelProperties,
-      GroupProperties columnGroupProperties,
-      Properties properties) {
+      GroupProperties columnGroupProperties, Properties properties) {
     this(matrix, null, null, groups, rowGroups, countGroups, history, min, max,
-        rowLabelProperties, rowGroupProperties, columnLabelProperties, columnGroupProperties, properties);
+        rowLabelProperties, rowGroupProperties, columnLabelProperties,
+        columnGroupProperties, properties);
   }
 
   /**
@@ -151,11 +147,9 @@ public class ClusterCanvas extends PlotBoxRow {
   public ClusterCanvas(DataFrame matrix, Cluster rowCluster,
       Cluster columnCluster, XYSeriesGroup groups, XYSeriesGroup rowGroups,
       CountGroups countGroups, List<String> history, double min, double max,
-      RowLabelProperties rowLabelProperties,
-      GroupProperties rowGroupProperties, 
+      RowLabelProperties rowLabelProperties, GroupProperties rowGroupProperties,
       ColumnLabelProperties columnLabelProperties,
-      GroupProperties columnGroupProperties, 
-      Properties properties) {
+      GroupProperties columnGroupProperties, Properties properties) {
 
     PlotBox emptyVBox = new PlotBoxEmpty(VERTICAL_GAP);
     PlotBox emptyHBox = new PlotBoxEmpty(HOZ_GAP);
@@ -171,8 +165,7 @@ public class ClusterCanvas extends PlotBoxRow {
 
     PlotBox rowLabelsBox = new PlotBoxColumn();
 
-    DoubleDim aspectRatio = (DoubleDim) properties
-        .getValue("plot.block-size");
+    DoubleDim aspectRatio = (DoubleDim) properties.getValue("plot.block-size");
 
     ColorMap colorMap = (ColorMap) properties.getValue("plot.colormap");
 
@@ -182,12 +175,12 @@ public class ClusterCanvas extends PlotBoxRow {
     boolean treeVisH = properties.getBool("plot.tree.hoz.visible");
     int treeWidthV = properties.getInt("plot.tree.vert.width");
     boolean treeVisV = properties.getBool("plot.tree.vert.visible");
-    
+
     RowGroupColorBarPlotElement rowColorBar = null;
-    
+
     if (rowGroups.size() > 0) {
-      rowColorBar = new RowGroupColorBarPlotElement(matrix, aspectRatio, rowGroups,
-        rowGroupProperties);
+      rowColorBar = new RowGroupColorBarPlotElement(matrix, aspectRatio,
+          rowGroups, rowGroupProperties);
     }
 
     if (rowLabelProperties.showFeatureCounts
@@ -251,21 +244,24 @@ public class ClusterCanvas extends PlotBoxRow {
 
     PlotBox columnLabelsBox = element;
 
-    // Now we build the plot
+    //
+    // Cluster tree
+    //
 
     if (columnCluster != null) {
       columnBox = new PlotBoxColumn();
       columnBox.addChild(emptyHBox);
 
-      if (treeVisH && rowCluster != null) {
-        columnBox.addChild(new PlotBoxEmpty(treeWidthH, -1));
-        columnBox.addChild(emptyHBox);
-      }
-
-      if (rowLabelProperties.show
-          && rowLabelProperties.position == RowLabelPosition.LEFT) {
-        columnBox.addChild(rowLabelsSpaceBox);
-        columnBox.addChild(emptyHBox);
+      if (rowLabelProperties.position == RowLabelPosition.LEFT) {
+        if (rowLabelProperties.show) {
+          columnBox.addChild(rowLabelsSpaceBox);
+          columnBox.addChild(emptyHBox);
+        }
+      } else {
+        if (treeVisH && rowCluster != null) {
+          columnBox.addChild(new PlotBoxEmpty(treeWidthH, -1));
+          columnBox.addChild(emptyHBox);
+        }
       }
 
       if (treeVisV && columnCluster != null) {
@@ -289,15 +285,16 @@ public class ClusterCanvas extends PlotBoxRow {
 
       columnBox.addChild(emptyHBox);
 
-      if (rowLabelProperties.show
-          && rowLabelProperties.position == RowLabelPosition.LEFT) {
-        columnBox.addChild(rowLabelsSpaceBox);
-        columnBox.addChild(emptyHBox);
-      }
-
-      if (treeVisH && rowCluster != null) {
-        columnBox.addChild(new PlotBoxEmpty(treeWidthH, -1));
-        columnBox.addChild(emptyHBox);
+      if (rowLabelProperties.position == RowLabelPosition.LEFT) {
+        if (rowLabelProperties.show) {
+          columnBox.addChild(rowLabelsSpaceBox);
+          columnBox.addChild(emptyHBox);
+        }
+      } else {
+        if (treeVisH && rowCluster != null) {
+          columnBox.addChild(new PlotBoxEmpty(treeWidthH, -1));
+          columnBox.addChild(emptyHBox);
+        }
       }
 
       element = new GroupColorBarPlotElement(matrix, aspectRatio, groups,
@@ -318,20 +315,21 @@ public class ClusterCanvas extends PlotBoxRow {
       columnBox = new PlotBoxColumn();
       columnBox.addChild(emptyHBox);
 
-      if (rowLabelProperties.show) {
-        if (rowLabelProperties.position == RowLabelPosition.LEFT) {
+      if (rowLabelProperties.position == RowLabelPosition.LEFT) {
+        if (rowLabelProperties.show) {
           columnBox.addChild(rowLabelsSpaceBox);
           columnBox.addChild(emptyHBox);
-        } else {
-          if (treeVisH && rowCluster != null) {
-            columnBox.addChild(new PlotBoxEmpty(treeWidthH, -1));
+        }
+      } else {
+        if (treeVisH && rowCluster != null) {
+          columnBox.addChild(new PlotBoxEmpty(treeWidthH, -1));
+          columnBox.addChild(emptyHBox);
+
+          if (rowGroups.size() > 0) {
+            columnBox.addChild(
+                new PlotBoxEmpty(rowColorBar.getPreferredSize().width, -1));
+
             columnBox.addChild(emptyHBox);
-            
-            if (rowGroups.size() > 0) {
-              columnBox.addChild(new PlotBoxEmpty(rowColorBar.getPreferredSize().width, -1));
-              
-              columnBox.addChild(emptyHBox);
-            }
           }
         }
       }
@@ -367,10 +365,10 @@ public class ClusterCanvas extends PlotBoxRow {
           columnBox.addChild(element);
 
           columnBox.addChild(emptyHBox);
-          
+
           if (rowGroups.size() > 0) {
             columnBox.addChild(rowColorBar);
-            
+
             columnBox.addChild(emptyHBox);
           }
         }
@@ -379,7 +377,9 @@ public class ClusterCanvas extends PlotBoxRow {
       element = new HeatMapPlotElement(matrix, colorMap, aspectRatio);
 
       ((HeatMapPlotElement) element)
-          .setGridColor(properties.getColor("plot.grid-color"));
+          .setGridRowColor(properties.getColor("plot.grid.rows.color"));
+      ((HeatMapPlotElement) element)
+          .setGridColColor(properties.getColor("plot.grid.columns.color"));
       ((HeatMapPlotElement) element)
           .setOutlineColor(properties.getColor("plot.outline-color"));
       ((HeatMapPlotElement) element)
@@ -389,7 +389,7 @@ public class ClusterCanvas extends PlotBoxRow {
 
       if (rowLabelProperties.position == RowLabelPosition.RIGHT) {
         columnBox.addChild(emptyHBox);
-        
+
         columnBox.addChild(rowLabelsBox);
       } else {
         // If labels are on the right, then tree appears on the left
@@ -402,8 +402,6 @@ public class ClusterCanvas extends PlotBoxRow {
               properties.getColor("plot.tree.hoz.color"));
           // canvas.setCanvasSize(new Dimension(rowTreeProperties.width, -1));
           columnBox.addChild(element);
-          
-          
 
           // columnBox.addChild(emptyHBox);
         }
@@ -458,7 +456,7 @@ public class ClusterCanvas extends PlotBoxRow {
       rowBox.addChild(element);
       rowBox.addChild(emptyVBox);
     }
-    
+
     if (properties.getBool("plot.show-colorbar")) {
       element = new ColorBar(colorMap, min, max,
           new IntDim(COLOR_BAR_WIDTH, COLOR_BAR_HEIGHT));

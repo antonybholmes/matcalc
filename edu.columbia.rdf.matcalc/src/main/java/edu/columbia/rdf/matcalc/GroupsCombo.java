@@ -21,12 +21,12 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.MatrixGroup;
 import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.combobox.ModernComboBox;
+import org.jebtk.modern.combobox.ModernComboBox2;
 
 /**
  * The Class GroupsCombo.
  */
-public class GroupsCombo extends ModernComboBox {
+public class GroupsCombo extends ModernComboBox2 {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;

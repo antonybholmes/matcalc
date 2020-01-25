@@ -39,7 +39,6 @@ import org.jebtk.graphplot.plotbox.PlotBoxPanel;
 import org.jebtk.math.cluster.Cluster;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
-import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -104,7 +103,7 @@ public class HeatMapPanel extends FormatPlotPane
   /**
    * The member grid element.
    */
-  protected ColoredPlotControl mGridElement;
+  //protected ColoredPlotControl mGridElement;
 
   /**
    * The member outline element.
@@ -193,6 +192,10 @@ public class HeatMapPanel extends FormatPlotPane
   protected Cluster mColumnCluster;
 
   private ModernRibbonWindow mParent;
+
+  private ColoredPlotControl mGridColElement;
+
+  private ColoredPlotControl mGridRowElement;
 
   /**
    * Instantiates a new heat map panel.
@@ -284,11 +287,19 @@ public class HeatMapPanel extends FormatPlotPane
     // Box box2 = VBox.create();
     // box2.setBorder(BorderService.getInstance().createLeftBorder(10));
 
-    mGridElement = new ColoredPlotControl(parent, "Grid",
-        properties.getColor("plot.grid-color"),
-        properties.getBool("plot.show-grid-color"));
-    mGridElement.addClickListener(this);
-    box.add(mGridElement);
+    mGridRowElement = new ColoredPlotControl(parent, "Grid Rows",
+        properties.getColor("plot.grid.rows.color"),
+        properties.getBool("plot.grid.rows.show"));
+    mGridRowElement.addClickListener(this);
+    box.add(mGridRowElement);
+
+    box.add(ModernPanel.createVGap());
+    
+    mGridColElement = new ColoredPlotControl(parent, "Grid Columns",
+        properties.getColor("plot.grid.columns.color"),
+        properties.getBool("plot.grid.columns.show"));
+    mGridColElement.addClickListener(this);
+    box.add(mGridColElement);
 
     box.add(ModernPanel.createVGap());
 
@@ -614,8 +625,12 @@ public class HeatMapPanel extends FormatPlotPane
 
     columnLabelProperties.position = mColumnLabelPositionElement.getPosition();
 
-    mProperties.update("plot.grid-color", mGridElement.getSelectedColor());
-    mProperties.update("plot.show-grid-color", mGridElement.isSelected());
+
+    mProperties.update("plot.grid.rows.color", mGridRowElement.getSelectedColor());
+    mProperties.update("plot.grid.rows.show", mGridRowElement.isSelected());
+    
+    mProperties.update("plot.grid.columns.color", mGridColElement.getSelectedColor());
+    mProperties.update("plot.grid.columns.show", mGridColElement.isSelected());
 
     mProperties.update("plot.outline-color",
         mOutlineElement.getSelectedColor());
@@ -684,8 +699,10 @@ public class HeatMapPanel extends FormatPlotPane
         .setVScrollBarLocation(ScrollBarLocation.FLOATING)
         .setHScrollBarLocation(ScrollBarLocation.FLOATING);
 
-    mParent
-        .setCard(new ModernComponent(scrollPane, ModernWidget.DOUBLE_BORDER));
+    //mParent
+    //    .setCard(new ModernComponent(scrollPane, ModernWidget.BORDER));
+    
+    mParent.setCenterTab(new ModernPanel(scrollPane, ModernWidget.DOUBLE_BORDER));
   }
 
   /*

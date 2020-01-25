@@ -44,12 +44,17 @@ public class HeatMapProperties extends Properties {
         SettingsService.getInstance().getInt("plot.row-label-max-chars"));
 
     set("plot.border-color", Color.BLACK);
-    set("plot.grid-color", ModernWidget.LINE_COLOR);
-    set("plot.outline-color", Color.BLACK);
+    
+    set("plot.outline-color", ModernWidget.LINE_COLOR);
+    
+    set("plot.grid.rows.show", true);
+    set("plot.grid.rows.color", Color.BLACK);
+    set("plot.grid.columns.show", true);
+    set("plot.grid.columns.color", Color.BLACK);
 
     set("plot.border-color-enabled", true);
-    set("plot.show-grid-color", true);
-    set("plot.show-outline-color", true);
+    
+    set("plot.show-outline-color", false);
     set("plot.colormap", ColorMap.createBlueWhiteRedMap());
     set("plot.show-legend", true);
     set("plot.show-colorbar", true);
