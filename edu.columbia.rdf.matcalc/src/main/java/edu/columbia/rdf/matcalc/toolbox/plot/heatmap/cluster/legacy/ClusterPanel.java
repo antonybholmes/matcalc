@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 import java.util.List;
 
 import org.jebtk.core.MinMax;
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.legacy.ColumnLabelProperties;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
@@ -70,7 +70,7 @@ public class ClusterPanel extends HeatMapPanel {
       Cluster columnCluster, ZoomModel zoomModel, ColorMapModel colorMapModel,
       ColorNormalizationModel colorStandardizationModel,
       ScaleModel intensityModel, TabsModel contentModel,
-      CountGroups countGroups, List<String> history, Properties properties) {
+      CountGroups countGroups, List<String> history, Props properties) {
     super(window, matrix, rowCluster, columnCluster, groups, rowGroups,
         countGroups, history, zoomModel, colorMapModel,
         colorStandardizationModel, intensityModel, contentModel, properties);

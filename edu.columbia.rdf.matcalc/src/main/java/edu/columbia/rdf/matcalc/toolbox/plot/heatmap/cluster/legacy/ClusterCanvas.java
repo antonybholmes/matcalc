@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.core.settings.SettingsService;
@@ -121,7 +121,7 @@ public class ClusterCanvas extends PlotBoxRow {
       double min, double max, RowLabelProperties rowLabelProperties,
       GroupProperties rowGroupProperties,
       ColumnLabelProperties columnLabelProperties,
-      GroupProperties columnGroupProperties, Properties properties) {
+      GroupProperties columnGroupProperties, Props properties) {
     this(matrix, null, null, groups, rowGroups, countGroups, history, min, max,
         rowLabelProperties, rowGroupProperties, columnLabelProperties,
         columnGroupProperties, properties);
@@ -149,7 +149,7 @@ public class ClusterCanvas extends PlotBoxRow {
       CountGroups countGroups, List<String> history, double min, double max,
       RowLabelProperties rowLabelProperties, GroupProperties rowGroupProperties,
       ColumnLabelProperties columnLabelProperties,
-      GroupProperties columnGroupProperties, Properties properties) {
+      GroupProperties columnGroupProperties, Props properties) {
 
     PlotBox emptyVBox = new PlotBoxEmpty(VERTICAL_GAP);
     PlotBox emptyHBox = new PlotBoxEmpty(HOZ_GAP);
@@ -165,9 +165,9 @@ public class ClusterCanvas extends PlotBoxRow {
 
     PlotBox rowLabelsBox = new PlotBoxColumn();
 
-    DoubleDim aspectRatio = (DoubleDim) properties.getValue("plot.block-size");
+    DoubleDim aspectRatio = (DoubleDim) properties.get("plot.block-size");
 
-    ColorMap colorMap = (ColorMap) properties.getValue("plot.colormap");
+    ColorMap colorMap = (ColorMap) properties.get("plot.colormap");
 
     int maxChars = properties.getInt("plot.row-label-max-chars");
 

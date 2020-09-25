@@ -15,12 +15,12 @@
  */
 package edu.columbia.rdf.matcalc;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 
 /**
  * The Class MatCalcProperties controls the configuraration of the matcalc UI.
  */
-public class MatCalcProperties extends Properties {
+public class MatCalcProperties extends Props {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;

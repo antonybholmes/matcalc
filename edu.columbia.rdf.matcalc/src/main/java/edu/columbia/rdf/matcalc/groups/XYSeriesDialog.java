@@ -64,7 +64,6 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
-import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.window.ModernWindow;
 
 /**

@@ -20,6 +20,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 
 import org.jebtk.core.ColorUtils;
+import org.jebtk.core.Props;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 
 /**
@@ -63,7 +64,7 @@ public class GraphVectorIcon extends ModernVectorIcon {
       int y,
       int w,
       int h,
-      Object... params) {
+      Props props) {
     double wf = w * SCALE;
     double o = w * OFFSET;
     double xf = x + (w - wf) / 2.0;

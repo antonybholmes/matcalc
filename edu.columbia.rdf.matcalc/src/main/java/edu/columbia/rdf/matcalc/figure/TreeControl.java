@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.figure;
 
 import javax.swing.Box;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.modern.BorderService;
@@ -48,7 +48,7 @@ public class TreeControl extends VBox {
   private ColoredPlotControl mCheckVisible;
 
   /** The m properties. */
-  private Properties mProperties;
+  private Props mProperties;
 
   /** The m prefix. */
   private String mPrefix;
@@ -63,7 +63,7 @@ public class TreeControl extends VBox {
   // private ModernCompactSpinner mSpinner =
   // new ModernCompactSpinner(1, 10, 3);
 
-  public TreeControl(ModernWindow parent, Properties properties,
+  public TreeControl(ModernWindow parent, Props properties,
       String prefix) {
     mPrefix = prefix;
     mProperties = properties;

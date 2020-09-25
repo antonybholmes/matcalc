@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy;
 
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.DataFrame;
@@ -53,7 +53,7 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
   /**
    * The member properties.
    */
-  protected Properties mProperties;
+  protected Props mProperties;
 
   /** The m count groups. */
   protected CountGroups mCountGroups;
@@ -71,7 +71,7 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
    */
   public HeatMapPlotMatrixTransform(MainMatCalcWindow parent,
       DataFrame inputMatrix, XYSeriesModel groups, XYSeriesModel rowGroups,
-      CountGroups countGroups, List<String> history, Properties properties) {
+      CountGroups countGroups, List<String> history, Props properties) {
     this(parent, "Create Heat Map Plot", inputMatrix, groups, rowGroups,
         countGroups, history, properties);
   }
@@ -90,7 +90,7 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
    */
   public HeatMapPlotMatrixTransform(ModernRibbonWindow parent, String name,
       DataFrame inputMatrix, XYSeriesModel groups, XYSeriesModel rowGroups,
-      CountGroups countGroups, List<String> history, Properties properties) {
+      CountGroups countGroups, List<String> history, Props properties) {
     super(parent, name, inputMatrix);
 
     mGroups = groups;

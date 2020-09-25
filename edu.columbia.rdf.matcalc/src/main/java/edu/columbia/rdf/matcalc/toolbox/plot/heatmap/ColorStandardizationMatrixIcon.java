@@ -18,6 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import org.jebtk.core.Props;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.modern.graphics.icons.TableVectorIcon;
 
@@ -54,8 +55,8 @@ public class ColorStandardizationMatrixIcon extends TableVectorIcon {
       int y,
       int w,
       int h,
-      Object... params) {
-    super.drawIcon(g2, x, y, w, h, params);
+      Props props) {
+    super.drawIcon(g2, x, y, w, h, props);
 
     double wf = w * WIDTH_SCALE;
     double hf = wf * HEIGHT_SCALE - 1;

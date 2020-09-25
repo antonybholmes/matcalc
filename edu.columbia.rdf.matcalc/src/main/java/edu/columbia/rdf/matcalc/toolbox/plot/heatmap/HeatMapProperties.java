@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap;
 
 import java.awt.Color;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.AspectRatio;
@@ -29,7 +29,7 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
 /**
  * The class HeatMapProperties.
  */
-public class HeatMapProperties extends Properties {
+public class HeatMapProperties extends Props {
 
   /**
    * The constant serialVersionUID.

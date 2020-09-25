@@ -17,6 +17,7 @@ package edu.columbia.rdf.matcalc.icons;
 
 import java.awt.Graphics2D;
 
+import org.jebtk.core.Props;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 import org.jebtk.modern.theme.ThemeService;
 
@@ -53,7 +54,7 @@ public class VolcanoPlot32VectorIcon extends ModernVectorIcon {
       int y,
       int w,
       int h,
-      Object... params) {
+      Props props) {
     x = x + WIDTH / 2;
     y = y + WIDTH / 2;
 

@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy;
 
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesGroup;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
@@ -54,7 +54,7 @@ public abstract class DifferentialExpressionPlotMatrixTransform
   public DifferentialExpressionPlotMatrixTransform(ModernRibbonWindow parent,
       String name, DataFrame inputMatrix, XYSeriesModel groups,
       XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups,
-      CountGroups countGroups, List<String> history, Properties properties) {
+      CountGroups countGroups, List<String> history, Props properties) {
     super(parent, name, inputMatrix, groups, rowGroups, countGroups, history,
         properties);
 

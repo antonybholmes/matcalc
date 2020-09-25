@@ -19,6 +19,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 
 import org.jebtk.core.ColorUtils;
+import org.jebtk.core.Props;
 import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 import org.jebtk.modern.theme.ThemeService;
@@ -54,7 +55,7 @@ public class OrderColumns32VectorIcon extends ModernVectorIcon {
       int y,
       int w,
       int h,
-      Object... params) {
+      Props props) {
     x = x + (w - WIDTH) / 2;
     y = y + (h - WIDTH) / 2;
 

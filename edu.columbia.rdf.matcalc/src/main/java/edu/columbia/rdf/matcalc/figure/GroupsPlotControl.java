@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.figure;
 
 import java.awt.Color;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.legacy.GroupProperties;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -83,7 +83,7 @@ public class GroupsPlotControl extends VBox {
    * @param properties the properties
    */
   public GroupsPlotControl(ModernWindow parent, Color color,
-      Properties properties) {
+      Props properties) {
 
     /*
      * if (labelOption) { mLabelColorButton = new ColorSwatchButton(parent,

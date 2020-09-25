@@ -15,12 +15,12 @@
  */
 package edu.columbia.rdf.matcalc.toolbox.core.venn;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 
 /**
  * The Class VennProperties.
  */
-public class VennProperties extends Properties {
+public class VennProperties extends Props {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;

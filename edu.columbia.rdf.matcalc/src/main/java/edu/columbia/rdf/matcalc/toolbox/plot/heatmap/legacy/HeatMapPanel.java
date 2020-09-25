@@ -21,7 +21,7 @@ import java.util.List;
 import javax.swing.Box;
 
 import org.jebtk.core.MinMax;
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.geom.DoubleDim;
@@ -163,7 +163,7 @@ public class HeatMapPanel extends FormatPlotPane
   /**
    * The member properties.
    */
-  protected Properties mProperties;
+  protected Props mProperties;
 
   /**
    * The member color map model.
@@ -218,7 +218,7 @@ public class HeatMapPanel extends FormatPlotPane
       CountGroups countGroups, List<String> history, ZoomModel zoomModel,
       ColorMapModel colorMapModel,
       ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
-      TabsModel contentModel, Properties properties) {
+      TabsModel contentModel, Props properties) {
     this(parent, matrix, null, null, groupsModel, rowGroupsModel, countGroups,
         history, zoomModel, colorMapModel, colorStandardizationModel,
         scaleModel, contentModel, properties);
@@ -247,7 +247,7 @@ public class HeatMapPanel extends FormatPlotPane
       XYSeriesModel rowGroupsModel, CountGroups countGroups,
       List<String> history, ZoomModel zoomModel, ColorMapModel colorMapModel,
       ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
-      TabsModel contentModel, Properties properties) {
+      TabsModel contentModel, Props properties) {
     mParent = parent;
     // mContent = contentModel;
 
@@ -329,7 +329,7 @@ public class HeatMapPanel extends FormatPlotPane
 
     box = VBox.create();
     mAspectRatioElement = new BlockSizeControl(
-        (DoubleDim) properties.getValue("plot.block-size"));
+        (DoubleDim) properties.get("plot.block-size"));
     mAspectRatioElement.addChangeListener(this);
     box.add(mAspectRatioElement);
     box.setBorder(LARGE_BORDER);

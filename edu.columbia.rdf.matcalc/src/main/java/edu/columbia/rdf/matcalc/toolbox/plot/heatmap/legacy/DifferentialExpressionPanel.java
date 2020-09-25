@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jebtk.core.MinMax;
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationModel;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
@@ -71,7 +71,7 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
       XYSeriesModel rowGroups, ZoomModel zoomModel, ColorMapModel colorMapModel,
       ColorNormalizationModel colorStandardizationModel,
       ScaleModel intensityModel, TabsModel contentModel,
-      CountGroups countGroups, List<String> history, Properties properties) {
+      CountGroups countGroups, List<String> history, Props properties) {
     super(parent, matrix, groups, rowGroups, countGroups, history, zoomModel,
         colorMapModel, colorStandardizationModel, intensityModel, contentModel,
         properties);

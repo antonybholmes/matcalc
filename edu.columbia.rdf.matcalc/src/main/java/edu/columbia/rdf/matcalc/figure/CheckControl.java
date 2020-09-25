@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.matcalc.figure;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -38,7 +38,7 @@ public class CheckControl extends VBox {
   private CheckBox mCheck;
 
   /** The m properties. */
-  private Properties mProperties;
+  private Props mProperties;
 
   /** The m setting. */
   private String mSetting;
@@ -54,7 +54,7 @@ public class CheckControl extends VBox {
   // private ModernCompactSpinner mSpinner =
   // new ModernCompactSpinner(1, 10, 3);
 
-  public CheckControl(ModernWindow parent, String name, Properties properties,
+  public CheckControl(ModernWindow parent, String name, Props properties,
       String setting) {
     mSetting = setting;
     mProperties = properties;

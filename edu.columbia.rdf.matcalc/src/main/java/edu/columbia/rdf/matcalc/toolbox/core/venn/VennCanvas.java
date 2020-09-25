@@ -19,7 +19,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 import org.jebtk.bioinformatics.ui.groups.GroupsModel;
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.graphplot.ModernPlotCanvas;
@@ -41,7 +41,7 @@ public abstract class VennCanvas extends ModernPlotCanvas {
   protected GroupsModel mGroups;
 
   /** The m properties. */
-  protected Properties mProperties = new VennProperties();
+  protected Props mProperties = new VennProperties();
 
   /**
    * The Class ChangeEvents.
@@ -94,7 +94,7 @@ public abstract class VennCanvas extends ModernPlotCanvas {
    *
    * @return the properties
    */
-  public Properties getProperties() {
+  public Props getProperties() {
     return mProperties;
   }
 
@@ -104,7 +104,7 @@ public abstract class VennCanvas extends ModernPlotCanvas {
    * @see org.graphplot.ModernPlotCanvas#plot(java.awt.Graphics2D,
    * org.abh.common.ui.graphics.DrawingContext)
    */
-  public void plot(Graphics2D g2, DrawingContext context, Object... params) {
+  public void plot(Graphics2D g2, DrawingContext context, Props props) {
     aaPlot(g2, context);
   }
 

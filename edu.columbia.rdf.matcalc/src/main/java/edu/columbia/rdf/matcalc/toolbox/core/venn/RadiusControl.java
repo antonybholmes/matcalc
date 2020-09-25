@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.core.venn;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.text.ModernNumericalTextField;
@@ -34,7 +34,7 @@ public class RadiusControl extends HBox implements KeyListener {
   private static final long serialVersionUID = 1L;
 
   /** The m properties. */
-  private Properties mProperties;
+  private Props mProperties;
 
   /** The m text radius. */
   private ModernNumericalTextField mTextRadius = new ModernNumericalTextField(
@@ -45,7 +45,7 @@ public class RadiusControl extends HBox implements KeyListener {
    *
    * @param properties the properties
    */
-  public RadiusControl(Properties properties) {
+  public RadiusControl(Props properties) {
     mProperties = properties;
 
     add(new ModernSubHeadingLabel("Radius"));

@@ -18,6 +18,7 @@ package edu.columbia.rdf.matcalc.icons;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import org.jebtk.core.Props;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 
 /**
@@ -48,7 +49,7 @@ public class BoxWhisker32VectorIcon extends ModernVectorIcon {
       int y,
       int w,
       int h,
-      Object... params) {
+      Props props) {
 
     int x1 = x + (w - WIDTH) / 2;
     int y1 = y + (h - HEIGHT) / 2;

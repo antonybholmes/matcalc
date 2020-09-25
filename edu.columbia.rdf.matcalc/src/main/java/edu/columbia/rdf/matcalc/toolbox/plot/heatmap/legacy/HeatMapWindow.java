@@ -17,7 +17,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy;
 
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalization;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
@@ -53,7 +53,7 @@ public abstract class HeatMapWindow extends FigureWindow {
   /**
    * The member properties.
    */
-  protected Properties mProperties; // = new HeatMapProperties();
+  protected Props mProperties; // = new HeatMapProperties();
 
   /** The m history. */
   protected List<String> mHistory;
@@ -80,7 +80,7 @@ public abstract class HeatMapWindow extends FigureWindow {
    */
   public HeatMapWindow(ModernWindow window, DataFrame matrix,
       XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
-      List<String> history, Properties properties) {
+      List<String> history, Props properties) {
     super(window, null);
 
     setMatrix(matrix);

@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy;
 import java.io.IOException;
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.core.cli.ArgParser;
 import org.jebtk.core.cli.Args;
 import org.jebtk.core.geom.DoubleDim;
@@ -113,7 +113,7 @@ public class LegacyHeatMapModule extends Module
 
     List<String> history = mParent.getTransformationHistory();
 
-    Properties p = new HeatMapProperties();
+    Props p = new HeatMapProperties();
 
     scaleLargeMatrixImage(m, p);
 
@@ -143,7 +143,7 @@ public class LegacyHeatMapModule extends Module
    * @param m
    * @param properties
    */
-  public static void scaleLargeMatrixImage(DataFrame m, Properties properties) {
+  public static void scaleLargeMatrixImage(DataFrame m, Props properties) {
 
     double w = scale(m.getCols());
     double h = scale(m.getRows());

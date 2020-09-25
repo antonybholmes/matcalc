@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.cluster.Cluster;
@@ -75,7 +75,7 @@ public class ClusterPlotWindow extends HeatMapWindow {
   public ClusterPlotWindow(ModernWindow window, DataFrame matrix,
       XYSeriesModel groups, XYSeriesModel rowGroups, Cluster rowCluster,
       Cluster columnCluster, CountGroups countGroups, List<String> history,
-      Properties properties) {
+      Props properties) {
     super(window, matrix, groups, rowGroups, countGroups, history, properties);
 
     mRowCluster = rowCluster;

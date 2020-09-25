@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.core.geom.DoubleDim;
 import org.jebtk.core.geom.IntDim;
 import org.jebtk.core.settings.SettingsService;
@@ -117,22 +117,22 @@ public class HeatMapCanvas extends PlotBoxRow {
       XYSeriesGroup rowGroups, CountGroups countGroups, List<String> history,
       double min, double max, RowLabelProperties rowLabelProperties,
       ColumnLabelProperties columnLabelProperties,
-      GroupProperties groupProperties, Properties properties) {
+      GroupProperties groupProperties, Props properties) {
 
     DoubleDim aspectRatio = (DoubleDim) properties
-        .getValue("plot.block-size");
+        .get("plot.block-size");
 
-    ColorMap colorMap = (ColorMap) properties.getValue("plot.colormap");
+    ColorMap colorMap = (ColorMap) properties.get("plot.colormap");
 
     HeatMapPlotElement heatMapElement = new HeatMapPlotElement(matrix, colorMap,
         aspectRatio);
 
     heatMapElement
-        .setGridColor((Color) properties.getValue("plot.grid-color"));
+        .setGridColor((Color) properties.get("plot.grid-color"));
     heatMapElement
-        .setOutlineColor((Color) properties.getValue("plot.outline-color"));
+        .setOutlineColor((Color) properties.get("plot.outline-color"));
     heatMapElement
-        .setBorderColor((Color) properties.getValue("plot.border-color"));
+        .setBorderColor((Color) properties.get("plot.border-color"));
 
     PlotElement element;
 

@@ -17,6 +17,7 @@ package edu.columbia.rdf.matcalc.icons;
 
 import java.awt.Graphics2D;
 
+import org.jebtk.core.Props;
 import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.icons.RightPane32VectorIcon;
 
@@ -38,8 +39,8 @@ public class History32VectorIcon extends RightPane32VectorIcon {
       int y,
       int w,
       int h,
-      Object... params) {
-    super.drawIcon(g2, x, y, w, h, params);
+      Props props) {
+    super.drawIcon(g2, x, y, w, h, props);
 
     x = x + (w - WIDTH) / 2 + WIDTH - PANE_WIDTH + 2;
     y = y + (h - HEIGHT) / 2 + BAR_HEIGHT + 2;

@@ -18,7 +18,7 @@ package edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy;
 import java.io.IOException;
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.cluster.Cluster;
@@ -116,7 +116,7 @@ public class LegacyClusterModule extends Module
       return;
     }
 
-    Properties properties = new ClusterProperties();
+    Props properties = new ClusterProperties();
 
     LegacyHeatMapModule.scaleLargeMatrixImage(m, properties);
 
@@ -166,7 +166,7 @@ public class LegacyClusterModule extends Module
       boolean clusterRows,
       boolean clusterColumns,
       boolean optimalLeafOrder,
-      Properties properties) throws IOException {
+      Props properties) throws IOException {
 
     cluster(mWindow,
         m,
@@ -266,7 +266,7 @@ public class LegacyClusterModule extends Module
       boolean clusterRows,
       boolean clusterColumns,
       boolean optimalLeafOrder,
-      Properties properties) throws IOException {
+      Props properties) throws IOException {
 
     if (m == null) {
       return null;
