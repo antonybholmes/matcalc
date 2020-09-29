@@ -162,7 +162,11 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
   /**
    * The member properties.
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
   protected Props mProps;
+=======
+  protected Props mProperties;
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
 
   /**
    * The member color map model.
@@ -212,12 +216,24 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
    * @param contentModel              the content model
    * @param Props                     the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
   public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groupsModel,
       XYSeriesModel rowGroupsModel, CountGroups countGroups, List<String> history, ZoomModel zoomModel,
       ColorMapModel colorMapModel, ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
       TabsModel contentModel, Props properties) {
     this(parent, matrix, null, null, groupsModel, rowGroupsModel, countGroups, history, zoomModel, colorMapModel,
         colorStandardizationModel, scaleModel, contentModel, properties);
+=======
+  public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix,
+      XYSeriesModel groupsModel, XYSeriesModel rowGroupsModel,
+      CountGroups countGroups, List<String> history, ZoomModel zoomModel,
+      ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
+      TabsModel contentModel, Props properties) {
+    this(parent, matrix, null, null, groupsModel, rowGroupsModel, countGroups,
+        history, zoomModel, colorMapModel, colorStandardizationModel,
+        scaleModel, contentModel, properties);
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
   }
 
   /**
@@ -238,10 +254,19 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
    * @param contentModel              the content model
    * @param Props                     the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
   public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix, Cluster rowCluster, Cluster columnCluster,
       XYSeriesModel groupsModel, XYSeriesModel rowGroupsModel, CountGroups countGroups, List<String> history,
       ZoomModel zoomModel, ColorMapModel colorMapModel, ColorNormalizationModel colorStandardizationModel,
       ScaleModel scaleModel, TabsModel contentModel, Props properties) {
+=======
+  public HeatMapPanel(ModernRibbonWindow parent, DataFrame matrix,
+      Cluster rowCluster, Cluster columnCluster, XYSeriesModel groupsModel,
+      XYSeriesModel rowGroupsModel, CountGroups countGroups,
+      List<String> history, ZoomModel zoomModel, ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel, ScaleModel scaleModel,
+      TabsModel contentModel, Props properties) {
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
     mParent = parent;
     // mContent = contentModel;
 
@@ -317,7 +342,12 @@ public class HeatMapPanel extends FormatPlotPane implements ModernClickListener,
     rightPanel.addTab(PlotConstants.LABEL_HEATMAP, box, true);
 
     box = VBox.create();
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
     mAspectRatioElement = new BlockSizeControl((DoubleDim) properties.get("plot.block-size"));
+=======
+    mAspectRatioElement = new BlockSizeControl(
+        (DoubleDim) properties.get("plot.block-size"));
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPanel.java
     mAspectRatioElement.addChangeListener(this);
     box.add(mAspectRatioElement);
     box.setBorder(LARGE_BORDER);

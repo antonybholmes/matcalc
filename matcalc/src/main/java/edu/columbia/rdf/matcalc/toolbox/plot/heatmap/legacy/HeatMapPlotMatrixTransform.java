@@ -53,7 +53,11 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
   /**
    * The member properties.
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotMatrixTransform.java
   protected Props mProps;
+=======
+  protected Props mProperties;
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotMatrixTransform.java
 
   /** The m count groups. */
   protected CountGroups mCountGroups;
@@ -69,9 +73,17 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
    * @param history     the history
    * @param Props       the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotMatrixTransform.java
   public HeatMapPlotMatrixTransform(MainMatCalcWindow parent, DataFrame inputMatrix, XYSeriesModel groups,
       XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Props properties) {
     this(parent, "Create Heat Map Plot", inputMatrix, groups, rowGroups, countGroups, history, properties);
+=======
+  public HeatMapPlotMatrixTransform(MainMatCalcWindow parent,
+      DataFrame inputMatrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Props properties) {
+    this(parent, "Create Heat Map Plot", inputMatrix, groups, rowGroups,
+        countGroups, history, properties);
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotMatrixTransform.java
   }
 
   /**
@@ -86,8 +98,14 @@ public class HeatMapPlotMatrixTransform extends PlotMatrixTransform {
    * @param history     the history
    * @param Props       the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotMatrixTransform.java
   public HeatMapPlotMatrixTransform(ModernRibbonWindow parent, String name, DataFrame inputMatrix, XYSeriesModel groups,
       XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Props properties) {
+=======
+  public HeatMapPlotMatrixTransform(ModernRibbonWindow parent, String name,
+      DataFrame inputMatrix, XYSeriesModel groups, XYSeriesModel rowGroups,
+      CountGroups countGroups, List<String> history, Props properties) {
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotMatrixTransform.java
     super(parent, name, inputMatrix);
 
     mGroups = groups;

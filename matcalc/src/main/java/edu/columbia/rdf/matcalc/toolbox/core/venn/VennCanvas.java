@@ -41,7 +41,11 @@ public abstract class VennCanvas extends ModernPlotCanvas {
   protected GroupsModel mGroups;
 
   /** The m properties. */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennCanvas.java
   protected Props mProps = new VennProps();
+=======
+  protected Props mProperties = new VennProperties();
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennCanvas.java
 
   /**
    * The Class ChangeEvents.
@@ -95,7 +99,11 @@ public abstract class VennCanvas extends ModernPlotCanvas {
    * @return the properties
    */
   public Props getProperties() {
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennCanvas.java
     return mProps;
+=======
+    return mProperties;
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennCanvas.java
   }
 
   /*
@@ -104,7 +112,11 @@ public abstract class VennCanvas extends ModernPlotCanvas {
    * @see org.graphplot.ModernPlotCanvas#plot(java.awt.Graphics2D,
    * org.abh.common.ui.graphics.DrawingContext)
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennCanvas.java
   public void plot(Graphics2D g2, DrawingContext context, Props params) {
+=======
+  public void plot(Graphics2D g2, DrawingContext context, Props props) {
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennCanvas.java
     aaPlot(g2, context);
   }
 

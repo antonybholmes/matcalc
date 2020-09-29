@@ -66,12 +66,24 @@ public class DifferentialExpressionPanel extends HeatMapPanel {
    * @param history                   the history
    * @param Props                     the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/DifferentialExpressionPanel.java
   public DifferentialExpressionPanel(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groups,
       XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, ZoomModel zoomModel, ColorMapModel colorMapModel,
       ColorNormalizationModel colorStandardizationModel, ScaleModel intensityModel, TabsModel contentModel,
       CountGroups countGroups, List<String> history, Props properties) {
     super(parent, matrix, groups, rowGroups, countGroups, history, zoomModel, colorMapModel, colorStandardizationModel,
         intensityModel, contentModel, properties);
+=======
+  public DifferentialExpressionPanel(ModernRibbonWindow parent,
+      DataFrame matrix, XYSeriesModel groups, XYSeriesGroup comparisonGroups,
+      XYSeriesModel rowGroups, ZoomModel zoomModel, ColorMapModel colorMapModel,
+      ColorNormalizationModel colorStandardizationModel,
+      ScaleModel intensityModel, TabsModel contentModel,
+      CountGroups countGroups, List<String> history, Props properties) {
+    super(parent, matrix, groups, rowGroups, countGroups, history, zoomModel,
+        colorMapModel, colorStandardizationModel, intensityModel, contentModel,
+        properties);
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/DifferentialExpressionPanel.java
 
     mComparisonGroups = comparisonGroups;
   }

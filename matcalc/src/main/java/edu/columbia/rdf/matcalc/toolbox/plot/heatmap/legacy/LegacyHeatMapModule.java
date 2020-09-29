@@ -109,7 +109,11 @@ public class LegacyHeatMapModule extends Module implements ModernClickListener {
 
     List<String> history = mParent.getTransformationHistory();
 
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/LegacyHeatMapModule.java
     Props p = new HeatMapProps();
+=======
+    Props p = new HeatMapProperties();
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/LegacyHeatMapModule.java
 
     scaleLargeMatrixImage(m, p);
 

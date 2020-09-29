@@ -44,7 +44,16 @@ public class BoxWhisker32VectorIcon extends ModernVectorIcon {
    * java.awt.Rectangle)
    */
   @Override
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/icons/BoxWhisker32VectorIcon.java
   public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Props params) {
+=======
+  public void drawIcon(Graphics2D g2,
+      int x,
+      int y,
+      int w,
+      int h,
+      Props props) {
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/icons/BoxWhisker32VectorIcon.java
 
     int x1 = x + (w - WIDTH) / 2;
     int y1 = y + (h - HEIGHT) / 2;

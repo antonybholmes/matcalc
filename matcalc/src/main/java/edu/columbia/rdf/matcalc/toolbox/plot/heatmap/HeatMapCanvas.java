@@ -107,19 +107,39 @@ public class HeatMapCanvas extends PlotBoxRow {
    * @param groupProps       the group properties
    * @param Props            the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/HeatMapCanvas.java
   public HeatMapCanvas(DataFrame matrix, XYSeriesGroup groups, XYSeriesGroup rowGroups, CountGroups countGroups,
       List<String> history, double min, double max, RowLabelProps rowLabelProperties,
       ColumnLabelProps columnLabelProperties, GroupProps groupProperties, Props properties) {
 
     DoubleDim aspectRatio = (DoubleDim) properties.get("plot.block-size");
+=======
+  public HeatMapCanvas(DataFrame matrix, XYSeriesGroup groups,
+      XYSeriesGroup rowGroups, CountGroups countGroups, List<String> history,
+      double min, double max, RowLabelProperties rowLabelProperties,
+      ColumnLabelProperties columnLabelProperties,
+      GroupProperties groupProperties, Props properties) {
+
+    DoubleDim aspectRatio = (DoubleDim) properties
+        .get("plot.block-size");
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/HeatMapCanvas.java
 
     ColorMap colorMap = (ColorMap) properties.get("plot.colormap");
 
     HeatMapPlotElement heatMapElement = new HeatMapPlotElement(matrix, colorMap, aspectRatio);
 
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/HeatMapCanvas.java
     heatMapElement.setGridColor((Color) properties.get("plot.grid-color"));
     heatMapElement.setOutlineColor((Color) properties.get("plot.outline-color"));
     heatMapElement.setBorderColor((Color) properties.get("plot.border-color"));
+=======
+    heatMapElement
+        .setGridColor((Color) properties.get("plot.grid-color"));
+    heatMapElement
+        .setOutlineColor((Color) properties.get("plot.outline-color"));
+    heatMapElement
+        .setBorderColor((Color) properties.get("plot.border-color"));
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/HeatMapCanvas.java
 
     PlotElement element;
 

@@ -34,7 +34,11 @@ public class RadiusControl extends HBox implements KeyListener {
   private static final long serialVersionUID = 1L;
 
   /** The m properties. */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/RadiusControl.java
   private Props mProps;
+=======
+  private Props mProperties;
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/RadiusControl.java
 
   /** The m text radius. */
   private ModernNumericalTextField mTextRadius = new ModernNumericalTextField("150");
@@ -45,7 +49,11 @@ public class RadiusControl extends HBox implements KeyListener {
    * @param Props the properties
    */
   public RadiusControl(Props properties) {
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/RadiusControl.java
     mProps = properties;
+=======
+    mProperties = properties;
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/RadiusControl.java
 
     add(new ModernSubHeadingLabel("Radius"));
     add(new ModernTextBorderPanel(mTextRadius, ModernWidget.STANDARD_SIZE));

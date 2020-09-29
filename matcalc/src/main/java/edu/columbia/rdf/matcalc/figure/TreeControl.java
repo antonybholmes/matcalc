@@ -48,7 +48,11 @@ public class TreeControl extends VBox {
   private ColoredPlotControl mCheckVisible;
 
   /** The m properties. */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/TreeControl.java
   private Props mProps;
+=======
+  private Props mProperties;
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/TreeControl.java
 
   /** The m prefix. */
   private String mPrefix;
@@ -63,7 +67,12 @@ public class TreeControl extends VBox {
   // private ModernCompactSpinner mSpinner =
   // new ModernCompactSpinner(1, 10, 3);
 
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/TreeControl.java
   public TreeControl(ModernWindow parent, Props properties, String prefix) {
+=======
+  public TreeControl(ModernWindow parent, Props properties,
+      String prefix) {
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/TreeControl.java
     mPrefix = prefix;
     mProps = properties;
 

@@ -56,10 +56,19 @@ public class ClusterPlotMatrixTransform extends HeatMapPlotMatrixTransform {
    * @param history       the history
    * @param Props         the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterPlotMatrixTransform.java
   public ClusterPlotMatrixTransform(ModernRibbonWindow parent, DataFrame matrix, XYSeriesModel groups,
       XYSeriesModel rowGroups, Cluster rowCluster, Cluster columnCluster, CountGroups countGroups, List<String> history,
       Props properties) {
     super(parent, "Create Hierarchical Cluster Plot", matrix, groups, rowGroups, countGroups, history, properties);
+=======
+  public ClusterPlotMatrixTransform(ModernRibbonWindow parent, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, Cluster rowCluster,
+      Cluster columnCluster, CountGroups countGroups, List<String> history,
+      Props properties) {
+    super(parent, "Create Hierarchical Cluster Plot", matrix, groups, rowGroups,
+        countGroups, history, properties);
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterPlotMatrixTransform.java
 
     mRowCluster = rowCluster;
     mColumnCluster = columnCluster;

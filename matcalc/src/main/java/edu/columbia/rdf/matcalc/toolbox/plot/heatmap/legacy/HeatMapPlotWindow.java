@@ -51,9 +51,17 @@ public class HeatMapPlotWindow extends HeatMapWindow {
    * @param history     the history
    * @param Props       the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotWindow.java
   public HeatMapPlotWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
       CountGroups countGroups, List<String> history, Props properties) {
     this(window, "Heat Map", matrix, groups, rowGroups, countGroups, history, properties);
+=======
+  public HeatMapPlotWindow(ModernWindow window, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Props properties) {
+    this(window, "Heat Map", matrix, groups, rowGroups, countGroups, history,
+        properties);
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotWindow.java
   }
 
   /**
@@ -68,8 +76,14 @@ public class HeatMapPlotWindow extends HeatMapWindow {
    * @param history     the history
    * @param Props       the properties
    */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotWindow.java
   public HeatMapPlotWindow(ModernWindow window, String name, DataFrame matrix, XYSeriesModel groups,
       XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Props properties) {
+=======
+  public HeatMapPlotWindow(ModernWindow window, String name, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Props properties) {
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapPlotWindow.java
     super(window, matrix, groups, rowGroups, countGroups, history, properties);
 
     setFormatPane(createFormatPane());

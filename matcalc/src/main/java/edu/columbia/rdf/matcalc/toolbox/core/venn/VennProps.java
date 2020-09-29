@@ -20,7 +20,11 @@ import org.jebtk.core.Props;
 /**
  * The Class VennProperties.
  */
+<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennProps.java
 public class VennProps extends Props {
+=======
+public class VennProperties extends Props {
+>>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/core/venn/VennProperties.java
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
