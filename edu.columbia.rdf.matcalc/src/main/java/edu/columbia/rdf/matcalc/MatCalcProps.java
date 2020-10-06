@@ -20,11 +20,7 @@ import org.jebtk.core.Props;
 /**
  * The Class MatCalcProps controls the configuraration of the matcalc UI.
  */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/MatCalcProps.java
 public class MatCalcProps extends Props {
-=======
-public class MatCalcProperties extends Props {
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/MatCalcProperties.java
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;

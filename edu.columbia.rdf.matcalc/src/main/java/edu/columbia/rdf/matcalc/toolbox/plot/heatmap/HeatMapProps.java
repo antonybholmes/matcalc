@@ -29,11 +29,7 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
 /**
  * The class HeatMapProperties.
  */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/HeatMapProps.java
 public class HeatMapProps extends Props {
-=======
-public class HeatMapProperties extends Props {
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/HeatMapProperties.java
 
   /**
    * The constant serialVersionUID.

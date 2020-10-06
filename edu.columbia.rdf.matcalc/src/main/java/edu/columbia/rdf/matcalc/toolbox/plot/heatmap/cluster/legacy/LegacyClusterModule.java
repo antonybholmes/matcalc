@@ -111,11 +111,7 @@ public class LegacyClusterModule extends Module implements ModernClickListener {
       return;
     }
 
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/LegacyClusterModule.java
     Props props = new ClusterProps();
-=======
-    Props properties = new ClusterProperties();
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/LegacyClusterModule.java
 
     LegacyHeatMapModule.scaleLargeMatrixImage(m, props);
 
@@ -153,29 +149,10 @@ public class LegacyClusterModule extends Module implements ModernClickListener {
    * @param Props            the properties
    * @throws IOException Signals that an I/O exception has occurred.
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/LegacyClusterModule.java
   public void cluster(DataFrame m, DistanceMetric distanceMetric, Linkage linkage, boolean clusterRows,
       boolean clusterColumns, boolean optimalLeafOrder, Props properties) throws IOException {
 
     cluster(mWindow, m, distanceMetric, linkage, clusterRows, clusterColumns, optimalLeafOrder, properties);
-=======
-  public void cluster(DataFrame m,
-      DistanceMetric distanceMetric,
-      Linkage linkage,
-      boolean clusterRows,
-      boolean clusterColumns,
-      boolean optimalLeafOrder,
-      Props properties) throws IOException {
-
-    cluster(mWindow,
-        m,
-        distanceMetric,
-        linkage,
-        clusterRows,
-        clusterColumns,
-        optimalLeafOrder,
-        properties);
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/LegacyClusterModule.java
 
     /*
      * if (m == null) { return; }
@@ -257,19 +234,8 @@ public class LegacyClusterModule extends Module implements ModernClickListener {
    * @return the annotation matrix
    * @throws IOException Signals that an I/O exception has occurred.
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/LegacyClusterModule.java
   public static DataFrame cluster(MainMatCalcWindow window, DataFrame m, DistanceMetric distanceMetric, Linkage linkage,
       boolean clusterRows, boolean clusterColumns, boolean optimalLeafOrder, Props properties) throws IOException {
-=======
-  public static DataFrame cluster(MainMatCalcWindow window,
-      DataFrame m,
-      DistanceMetric distanceMetric,
-      Linkage linkage,
-      boolean clusterRows,
-      boolean clusterColumns,
-      boolean optimalLeafOrder,
-      Props properties) throws IOException {
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/LegacyClusterModule.java
 
     if (m == null) {
       return null;

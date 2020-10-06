@@ -19,7 +19,7 @@ import javax.swing.Box;
 
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.VBox;
@@ -40,10 +40,10 @@ public class SortColumnsByRowDialog extends ModernDialogHelpWindow implements Mo
   /**
    * The model.
    */
-  private CheckBox mCheckByGroups = new ModernCheckBox("Sort within groups");
+  private CheckBox mCheckByGroups = new ModernCheckSwitch("Sort within groups");
 
   /** The m check asc. */
-  private CheckBox mCheckAsc = new ModernCheckBox("Ascending", true);
+  private CheckBox mCheckAsc = new ModernCheckSwitch("Ascending", true);
 
   /**
    * Instantiates a new sort column groups by row dialog.
@@ -64,7 +64,7 @@ public class SortColumnsByRowDialog extends ModernDialogHelpWindow implements Mo
 
     createUi();
 
-    setSize(400, 200);
+    setSize(420, 240);
 
     UI.centerWindowToScreen(this);
   }
@@ -80,6 +80,7 @@ public class SortColumnsByRowDialog extends ModernDialogHelpWindow implements Mo
     box.add(mCheckByGroups);
 
     setCard(box);
+    // addBlock(box);
   }
 
   /**

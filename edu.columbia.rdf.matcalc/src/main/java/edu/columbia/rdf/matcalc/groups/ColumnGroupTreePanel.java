@@ -42,7 +42,6 @@ import org.jebtk.math.ui.external.microsoft.ExcelUI;
 import org.jebtk.math.ui.matrix.AllMatrixGroupGuiFileFilter;
 import org.jebtk.modern.AssetService;
 import org.jebtk.modern.ModernComponent;
-import org.jebtk.modern.button.ButtonStyle;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernClickWidget;
 import org.jebtk.modern.contentpane.VTabToolbar;
@@ -85,19 +84,19 @@ public class ColumnGroupTreePanel extends ModernComponent {
    * The member load button.
    */
   private ModernClickWidget mLoadButton = new ModernButton(
-      AssetService.getInstance().loadIcon(FolderBwVectorIcon.class, 16)).setButtonStyle(ButtonStyle.CIRCLE);
+      AssetService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
 
   /**
    * The member save button.
    */
   private ModernClickWidget mSaveButton = new ModernButton(
-      AssetService.getInstance().loadIcon(SaveBwVectorIcon.class, 16)).setButtonStyle(ButtonStyle.CIRCLE);
+      AssetService.getInstance().loadIcon(SaveBwVectorIcon.class, 16));
 
   /**
    * The member add button.
    */
-  private ModernClickWidget mAddButton = new ModernButton(AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16))
-      .setButtonStyle(ButtonStyle.CIRCLE);
+  private ModernClickWidget mAddButton = new ModernButton(
+      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
   /** The m import button. */
   private ModernButton mImportButton = new ModernButton("Import");
@@ -105,8 +104,7 @@ public class ColumnGroupTreePanel extends ModernComponent {
   /**
    * The member remove button.
    */
-  private ModernClickWidget mRemoveButton = new ModernButton(AssetService.getInstance().loadIcon("trash_bw", 16))
-      .setButtonStyle(ButtonStyle.CIRCLE);
+  private ModernClickWidget mRemoveButton = new ModernButton(AssetService.getInstance().loadIcon("trash_bw", 16));
 
   // private ModernButton clearButton =
   // new ModernButton(UIResources.getInstance().loadIcon("clear", 16));

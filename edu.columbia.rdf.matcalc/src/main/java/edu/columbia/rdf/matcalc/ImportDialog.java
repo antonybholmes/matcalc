@@ -107,7 +107,7 @@ public class ImportDialog extends ModernDialogHelpWindow implements ModernClickL
    * Setup.
    */
   private void setup() {
-    setSize(480, 300);
+    setSize(480, 320);
 
     mCheckSkip.setEnabled(false);
 

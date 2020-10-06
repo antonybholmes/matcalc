@@ -65,22 +65,11 @@ public class ClusterPanel extends HeatMapPanel {
    * @param history                   the history
    * @param Props                     the properties
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterPanel.java
   public ClusterPanel(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
       Cluster rowCluster, Cluster columnCluster, ZoomModel zoomModel, ColorMapModel colorMapModel,
       ColorNormalizationModel colorStandardizationModel, ScaleModel intensityModel, TabsModel contentModel,
       CountGroups countGroups, List<String> history, Props properties) {
     super(window, matrix, rowCluster, columnCluster, groups, rowGroups, countGroups, history, zoomModel, colorMapModel,
-=======
-  public ClusterPanel(ModernRibbonWindow window, DataFrame matrix,
-      XYSeriesModel groups, XYSeriesModel rowGroups, Cluster rowCluster,
-      Cluster columnCluster, ZoomModel zoomModel, ColorMapModel colorMapModel,
-      ColorNormalizationModel colorStandardizationModel,
-      ScaleModel intensityModel, TabsModel contentModel,
-      CountGroups countGroups, List<String> history, Props properties) {
-    super(window, matrix, rowCluster, columnCluster, groups, rowGroups,
-        countGroups, history, zoomModel, colorMapModel,
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterPanel.java
         colorStandardizationModel, intensityModel, contentModel, properties);
   }
 

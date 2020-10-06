@@ -53,11 +53,7 @@ public abstract class HeatMapWindow extends FigureWindow {
   /**
    * The member properties.
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapWindow.java
   protected Props mProps; // = new HeatMapProperties();
-=======
-  protected Props mProperties; // = new HeatMapProperties();
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapWindow.java
 
   /** The m history. */
   protected List<String> mHistory;
@@ -82,14 +78,8 @@ public abstract class HeatMapWindow extends FigureWindow {
    * @param history     the history
    * @param Props       the properties
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapWindow.java
   public HeatMapWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
       CountGroups countGroups, List<String> history, Props properties) {
-=======
-  public HeatMapWindow(ModernWindow window, DataFrame matrix,
-      XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
-      List<String> history, Props properties) {
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/legacy/HeatMapWindow.java
     super(window, null);
 
     setMatrix(matrix);

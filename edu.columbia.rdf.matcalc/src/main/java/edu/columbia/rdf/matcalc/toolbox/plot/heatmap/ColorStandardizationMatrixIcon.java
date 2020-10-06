@@ -48,18 +48,8 @@ public class ColorStandardizationMatrixIcon extends TableVectorIcon {
    * Graphics2D, java.awt.Rectangle)
    */
   @Override
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/ColorStandardizationMatrixIcon.java
   public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Props params) {
     super.drawIcon(g2, x, y, w, h, params);
-=======
-  public void drawIcon(Graphics2D g2,
-      int x,
-      int y,
-      int w,
-      int h,
-      Props props) {
-    super.drawIcon(g2, x, y, w, h, props);
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/ColorStandardizationMatrixIcon.java
 
     double wf = w * WIDTH_SCALE;
     double hf = wf * HEIGHT_SCALE - 1;

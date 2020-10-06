@@ -72,15 +72,8 @@ public class ClusterPlotWindow extends HeatMapWindow {
    * @param history       the history
    * @param Props         the properties
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterPlotWindow.java
   public ClusterPlotWindow(ModernWindow window, DataFrame matrix, XYSeriesModel groups, XYSeriesModel rowGroups,
       Cluster rowCluster, Cluster columnCluster, CountGroups countGroups, List<String> history, Props properties) {
-=======
-  public ClusterPlotWindow(ModernWindow window, DataFrame matrix,
-      XYSeriesModel groups, XYSeriesModel rowGroups, Cluster rowCluster,
-      Cluster columnCluster, CountGroups countGroups, List<String> history,
-      Props properties) {
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterPlotWindow.java
     super(window, matrix, groups, rowGroups, countGroups, history, properties);
 
     mRowCluster = rowCluster;

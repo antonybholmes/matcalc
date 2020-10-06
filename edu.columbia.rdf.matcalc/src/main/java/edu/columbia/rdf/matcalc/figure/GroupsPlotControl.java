@@ -18,11 +18,7 @@ package edu.columbia.rdf.matcalc.figure;
 import java.awt.Color;
 
 import org.jebtk.core.Props;
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/GroupsPlotControl.java
 import org.jebtk.graphplot.figure.heatmap.legacy.GroupProps;
-=======
-import org.jebtk.graphplot.figure.heatmap.legacy.GroupProperties;
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/GroupsPlotControl.java
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.button.ModernTwoStateWidget;
@@ -84,12 +80,7 @@ public class GroupsPlotControl extends VBox {
    * @param color  the color
    * @param Props  the properties
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/GroupsPlotControl.java
   public GroupsPlotControl(ModernWindow parent, Color color, Props properties) {
-=======
-  public GroupsPlotControl(ModernWindow parent, Color color,
-      Props properties) {
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/figure/GroupsPlotControl.java
 
     /*
      * if (labelOption) { mLabelColorButton = new ColorSwatchButton(parent, color);

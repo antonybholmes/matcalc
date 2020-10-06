@@ -51,19 +51,10 @@ public class SupervisedPlotWindow extends DifferentialExpressionPlotWindow {
    * @param history          the history
    * @param Props            the properties
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/supervised/SupervisedPlotWindow.java
   public SupervisedPlotWindow(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups,
       XYSeriesGroup comparisonGroups, XYSeriesModel rowGroups, CountGroups countGroups, List<String> history,
       Props properties) {
     super(window, "Supervised Classification", matrix, groups, comparisonGroups, rowGroups, countGroups, history,
         properties);
-=======
-  public SupervisedPlotWindow(ModernRibbonWindow window, DataFrame matrix,
-      XYSeriesModel groups, XYSeriesGroup comparisonGroups,
-      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history,
-      Props properties) {
-    super(window, "Supervised Classification", matrix, groups, comparisonGroups,
-        rowGroups, countGroups, history, properties);
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/supervised/SupervisedPlotWindow.java
   }
 }

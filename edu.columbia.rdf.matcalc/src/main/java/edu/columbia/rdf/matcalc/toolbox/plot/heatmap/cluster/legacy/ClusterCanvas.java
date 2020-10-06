@@ -111,23 +111,11 @@ public class ClusterCanvas extends PlotBoxRow {
    * @param columnGroupProps the group properties
    * @param Props            the properties
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterCanvas.java
   public ClusterCanvas(DataFrame matrix, XYSeriesGroup groups, XYSeriesGroup rowGroups, CountGroups countGroups,
       List<String> history, double min, double max, RowLabelProps rowLabelProperties, GroupProps rowGroupProperties,
       ColumnLabelProps columnLabelProperties, GroupProps columnGroupProperties, Props properties) {
     this(matrix, null, null, groups, rowGroups, countGroups, history, min, max, rowLabelProperties, rowGroupProperties,
         columnLabelProperties, columnGroupProperties, properties);
-=======
-  public ClusterCanvas(DataFrame matrix, XYSeriesGroup groups,
-      XYSeriesGroup rowGroups, CountGroups countGroups, List<String> history,
-      double min, double max, RowLabelProperties rowLabelProperties,
-      GroupProperties rowGroupProperties,
-      ColumnLabelProperties columnLabelProperties,
-      GroupProperties columnGroupProperties, Props properties) {
-    this(matrix, null, null, groups, rowGroups, countGroups, history, min, max,
-        rowLabelProperties, rowGroupProperties, columnLabelProperties,
-        columnGroupProperties, properties);
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterCanvas.java
   }
 
   /**
@@ -147,19 +135,10 @@ public class ClusterCanvas extends PlotBoxRow {
    * @param columnGroupProps the group properties
    * @param Props            the properties
    */
-<<<<<<< HEAD:matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterCanvas.java
   public ClusterCanvas(DataFrame matrix, Cluster rowCluster, Cluster columnCluster, XYSeriesGroup groups,
       XYSeriesGroup rowGroups, CountGroups countGroups, List<String> history, double min, double max,
       RowLabelProps rowLabelProperties, GroupProps rowGroupProperties, ColumnLabelProps columnLabelProperties,
       GroupProps columnGroupProperties, Props properties) {
-=======
-  public ClusterCanvas(DataFrame matrix, Cluster rowCluster,
-      Cluster columnCluster, XYSeriesGroup groups, XYSeriesGroup rowGroups,
-      CountGroups countGroups, List<String> history, double min, double max,
-      RowLabelProperties rowLabelProperties, GroupProperties rowGroupProperties,
-      ColumnLabelProperties columnLabelProperties,
-      GroupProperties columnGroupProperties, Props properties) {
->>>>>>> 0c6b302bf0a6d2eac18dbec9d0d2195af92c4605:edu.columbia.rdf.matcalc/src/main/java/edu/columbia/rdf/matcalc/toolbox/plot/heatmap/cluster/legacy/ClusterCanvas.java
 
     PlotBox emptyVBox = new PlotBoxEmpty(VERTICAL_GAP);
     PlotBox emptyHBox = new PlotBoxEmpty(HOZ_GAP);
