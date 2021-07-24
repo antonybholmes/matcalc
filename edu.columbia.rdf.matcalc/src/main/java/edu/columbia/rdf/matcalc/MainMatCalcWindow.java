@@ -569,6 +569,8 @@ public class MainMatCalcWindow extends ModernRibbonWindow
     System.err.println("run module " + module + " " + Arrays.toString(args));
 
     if (mModuleMap.containsKey(module)) {
+      System.err.println("feeble " + module + " " +mModuleMap.get(module).getName());
+      
       mModuleMap.get(module).run(args);
 
       return true;

@@ -67,6 +67,7 @@ public class LegacyHeatMapModule extends Module implements ModernClickListener {
 
   @Override
   public void run(ArgParser ap) {
+    System.err.println("hatmap" + ap.getArgs() +  " " + ap.contains("plot"));
     if (ap.contains("plot")) {
       try {
         plot();

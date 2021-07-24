@@ -71,7 +71,9 @@ public abstract class Module implements NameGetter {
     Args pa = args();
 
     ArgParser ap = new ArgParser(pa).parse(args);
-
+    
+    System.err.println("run mod");
+    
     run(ap);
   }
 

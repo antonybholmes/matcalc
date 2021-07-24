@@ -79,6 +79,7 @@ public class HeatMapModule extends Module implements ModernClickListener {
 
   @Override
   public void run(ArgParser ap) {
+    
     if (ap.contains("plot")) {
       try {
         plot();
